@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "eb0aae1b-b10f-40d3-a012-a8852bc85a3f",
+		"_postman_id": "f086ff5a-ef67-44c1-b231-50a2eb592a0b",
 		"name": "API Test for petstore-versioning",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -56,11 +56,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/gateway/Petstore_Versioning/1.0.8/pet",
+					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -113,11 +114,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -167,11 +169,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -234,11 +237,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/gateway/Petstore_Versioning/1.0.9/pet",
+					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -291,11 +295,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -345,11 +350,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",

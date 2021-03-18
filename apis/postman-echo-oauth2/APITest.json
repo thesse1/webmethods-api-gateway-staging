@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bfe3f1ea-82a4-4395-9d4e-8bc0f02f316e",
+		"_postman_id": "7fa10bd4-fc59-4ce2-b519-4d3f51fca820",
 		"name": "API Test for postman-echo-oauth2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -57,11 +57,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/invoke/pub.apigateway.oauth2/getAccessToken",
+					"raw": "https://{{ip}}:{{port}}/invoke/pub.apigateway.oauth2/getAccessToken",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"invoke",
 						"pub.apigateway.oauth2",
@@ -132,11 +133,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/gateway/PostmanEcho_OAuth2/1.0/post",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_OAuth2/1.0/post",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_OAuth2",
@@ -199,11 +201,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/PostmanEcho_OAuth2/1.0/get?foo=bar",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_OAuth2/1.0/get?foo=bar",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_OAuth2",
@@ -268,11 +271,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/PostmanEcho_OAuth2/1.0/delete",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_OAuth2/1.0/delete",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_OAuth2",

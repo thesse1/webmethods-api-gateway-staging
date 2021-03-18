@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fb55bb50-cc03-41ec-a852-280d97b67b0a",
+		"_postman_id": "b3f2c0d6-de8e-4e8e-a34f-5f3c1280ca34",
 		"name": "API Test for postman-echo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -56,11 +56,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/gateway/PostmanEcho/1.0/post",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/post",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
@@ -113,11 +114,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/PostmanEcho/1.0/get?foo=bar",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/get?foo=bar",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
@@ -172,11 +174,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/gateway/PostmanEcho/1.0/delete",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/delete",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ff3cacc1-4c7c-40c0-a3ed-1089cce84b35",
+		"_postman_id": "e6a6a2c2-ed5f-4f79-934b-0b54ef362f5f",
 		"name": "API Test for multiple-tenants",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -59,11 +59,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Tenant1_Petstore/1.0/pet",
+							"raw": "https://{{ip}}:{{port}}/gateway/Tenant1_Petstore/1.0/pet",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Tenant1_Petstore",
@@ -125,11 +126,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Tenant2_Petstore/1.0/pet",
+							"raw": "https://{{ip}}:{{port}}/gateway/Tenant2_Petstore/1.0/pet",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Tenant2_Petstore",
@@ -195,11 +197,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Tenant1_PostmanEcho/1.0/post",
+							"raw": "https://{{ip}}:{{port}}/gateway/Tenant1_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Tenant1_PostmanEcho",
@@ -265,11 +268,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Tenant2_PostmanEcho/1.0/post",
+							"raw": "https://{{ip}}:{{port}}/gateway/Tenant2_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Tenant2_PostmanEcho",
@@ -336,11 +340,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Common_Petstore/1.0/pet",
+							"raw": "https://{{ip}}:{{port}}/gateway/Common_Petstore/1.0/pet",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Common_Petstore",
@@ -402,11 +407,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Common_Petstore/1.0/pet",
+							"raw": "https://{{ip}}:{{port}}/gateway/Common_Petstore/1.0/pet",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Common_Petstore",
@@ -472,11 +478,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Common_PostmanEcho/1.0/post",
+							"raw": "https://{{ip}}:{{port}}/gateway/Common_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Common_PostmanEcho",
@@ -542,11 +549,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}/gateway/Common_PostmanEcho/1.0/post",
+							"raw": "https://{{ip}}:{{port}}/gateway/Common_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"gateway",
 								"Common_PostmanEcho",
