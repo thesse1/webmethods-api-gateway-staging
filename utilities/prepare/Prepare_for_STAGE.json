@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ba469849-7929-47df-b3f0-00aead84fa1b",
+		"_postman_id": "6fb4ee94-de9b-4ffa-bb4f-a3075f166664",
 		"name": "Prepare_for_STAGE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -60,11 +60,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/rest/apigateway/applications",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"apigateway",
@@ -105,11 +106,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/rest/apigateway/applications/{{applicationId}}",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"apigateway",
@@ -160,11 +162,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/rest/apigateway/applications/{{applicationId}}",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"apigateway",
@@ -218,11 +221,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/rest/apigateway/apis",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"apigateway",
@@ -282,11 +286,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}/rest/apigateway/apis/{{apiId}}",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"apigateway",
@@ -348,11 +353,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}/rest/apigateway/apis/{{apiId}}",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"apigateway",
