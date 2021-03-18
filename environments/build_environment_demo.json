@@ -11,7 +11,13 @@
   	{
       "enabled": true,
       "key": "ip",
-      "value": "daehgcs51571.hycloud.softwareag.com:11000",
+      "value": "daehgcs51571.hycloud.softwareag.com",
+      "type": "text"
+    },
+  	{
+      "enabled": true,
+      "key": "port",
+      "value": "11000",
       "type": "text"
     },
     {

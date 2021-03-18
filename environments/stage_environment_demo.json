@@ -5,13 +5,19 @@
     {
       "enabled": true,
       "key": "ip",
-      "value": "daehgcs51574.hycloud.softwareag.com:11000",
+      "value": "daehgcs51574.hycloud.softwareag.com",
       "type": "text"
     },
   	{
       "enabled": true,
       "key": "hostname",
       "value": "daehgcs51574.hycloud.softwareag.com",
+      "type": "text"
+    },
+  	{
+      "enabled": true,
+      "key": "port",
+      "value": "11000",
       "type": "text"
     },
     {

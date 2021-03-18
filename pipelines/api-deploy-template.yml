@@ -61,16 +61,18 @@ steps:
 - bash: |
    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.build_environment}}`"
+   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.build_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname and insecureflag'
+  displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname, port and insecureflag'
 
 - bash: |
    echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.target_environment}}`"
    echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.target_environment}}`"
    echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.target_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.target_type}} configuration, extract ip, hostname and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.target_type}} configuration, extract ip, hostname, port and insecureflag'
 
 - script: |
     newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
@@ -132,8 +134,8 @@ steps:
           --output $(Build.BuildId)_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user $(exporter_user):$(exporter_password) \
-          --resolve $(build_environment_hostname):443:$(build_environment_ip) \
-          https://$(build_environment_hostname)/rest/apigateway/archive
+          --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
+          https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Export the Deployable from API Gateway BUILD'
   env:
