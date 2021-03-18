@@ -334,20 +334,19 @@ The following parameters can/must be provided for this pipeline:
 When queuing a build pipeline, you can select the specific commit that should be checked out on the build agent, i.e., the configuration of the API Gateway assets to be imported to the BUILD environment. You have to provide the commit's full SHA which can be found out like this:
 - In the repository history identify the selected commit and click on ``More Actions...``
 
-![More_Actions.png](/.attachments/More_Actions-63455b48-8066-45ea-9fab-bd7ad4407410.png)
+![GitHub Logo](/images/More_Actions.png)
 
 - Select ``Copy full SHA``
 
-![Copy_full_SHA.png](/.attachments/Copy_full_SHA-9cec9af2-65bb-494f-8337-bacf8ef059b3.png)
+![GitHub Logo](/images/Copy_full_SHA.png)
 
 - Go back to the pipeline and click on ``Queue``. Paste the value from the clipboard into the Commit form entry field
 
-![Paste.png](/.attachments/Paste-5c389c97-0daa-43e0-bbf5-9694ff5e3786.png)
+![GitHub Logo](/images/Paste.png)
 
-![SHA_pasted.png](/.attachments/SHA_pasted-c1337145-31e0-4e3d-9c23-ff89af52e8e1.png)
+![GitHub Logo](/images/SHA_pasted.png)
 
 > Note: It will not work with the commit ID displayed in the UI. You have to use the "full SHA".
-
 
 ### Drop-down list for apiProject and target_type
 
