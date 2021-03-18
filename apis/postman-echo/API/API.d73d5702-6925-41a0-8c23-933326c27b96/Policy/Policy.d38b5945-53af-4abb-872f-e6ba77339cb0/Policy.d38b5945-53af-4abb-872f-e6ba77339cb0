@@ -1,0 +1,37 @@
+{
+  "id" : "d38b5945-53af-4abb-872f-e6ba77339cb0",
+  "names" : [ {
+    "value" : "Default Policy for API PostmanEcho",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "6efb6e08-a976-40bb-aa31-e11c8be8b534",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "0e1c4bfe-71ec-4658-90bb-cff4d81222a6",
+      "order" : "0"
+    } ],
+    "stageKey" : "IAM"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "9f0a6436-fd9e-46ff-ab2d-76188523583b",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "systemPolicy" : false,
+  "active" : false,
+  "global" : false
+}

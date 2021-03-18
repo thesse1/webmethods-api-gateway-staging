@@ -1,0 +1,23 @@
+{
+  "applicationID" : "eb94a48d-f262-4cc9-a264-84a37f65e458",
+  "name" : "MyPostmanEchoApp_OAuth2_STAGE",
+  "description" : "This application should be used on STAGE environment for testing",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "0dcf3e556f22399bf79b74b8e47311acd8f6edba5ddfd49d804fa7da68ab511c"
+    }
+  },
+  "creationDate" : "2021-02-04 15:43:18 GMT",
+  "lastModified" : "2021-02-12 09:50:39 GMT",
+  "lastUpdated" : 1615908825828,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ "ff06307c-e891-4f77-8c26-cb1bb2d4fe69" ],
+  "subscription" : false
+}

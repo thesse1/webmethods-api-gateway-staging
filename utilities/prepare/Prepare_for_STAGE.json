@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "ba469849-7929-47df-b3f0-00aead84fa1b",
+		"name": "Prepare_for_STAGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all Applications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let applications = apiResponse.applications;\r",
+							"if (applications === null || applications.length === 0) {\r",
+							"    postman.setNextRequest(\"Get all APIs\");\r",
+							"} else {\r",
+							"    let applicationsToBeDeleted = applications.filter(function(application, index, arr){ \r",
+							"        return !application.name.endsWith(\"_STAGE\");\r",
+							"    });\r",
+							"    if (applicationsToBeDeleted.length === 0) {\r",
+							"        let applicationsToBeUnsuspended = applications.filter(function(application, index, arr){ \r",
+							"            return (application.isSuspended === true);\r",
+							"        });\r",
+							"        if (applicationsToBeUnsuspended.length === 0) {\r",
+							"            postman.setNextRequest(\"Get all APIs\");\r",
+							"        } else {\r",
+							"            pm.globals.set(\"applicationId\", applicationsToBeUnsuspended[0].id);\r",
+							"            postman.setNextRequest(\"Unsuspend one Application\");\r",
+							"        }\r",
+							"    } else {\r",
+							"        pm.globals.set(\"applicationId\", applicationsToBeDeleted[0].id);\r",
+							"        postman.setNextRequest(\"Delete one Application\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}/rest/apigateway/applications",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"rest",
+						"apigateway",
+						"applications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Application",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"Get all Applications\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}/rest/apigateway/applications/{{applicationId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"rest",
+						"apigateway",
+						"applications",
+						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unsuspend one Application",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"Get all Applications\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"isSuspended\": false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}/rest/apigateway/applications/{{applicationId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"rest",
+						"apigateway",
+						"applications",
+						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all APIs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apis = JSON.parse(responseBody).apiResponse;\r",
+							"if (apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiIds = apis.map(api => api.api.id);\r",
+							"    let apiId = apiIds.pop();\r",
+							"    let apiIdsString = JSON.stringify(apiIds);\r",
+							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"    pm.globals.set(\"apiId\", apiId);\r",
+							"    postman.setNextRequest(\"Get one API\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}/rest/apigateway/apis",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"rest",
+						"apigateway",
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let api = JSON.parse(responseBody).apiResponse.api;\r",
+							"if (api === null || api.apiDefinition === null) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    api.apiDefinition.tags = api.apiDefinition.tags || [];\r",
+							"    api.apiDefinition.tags.push({\"name\":\"BuildId:{{buildId}}\"});\r",
+							"    api.apiDefinition.tags.push({\"name\":\"BuildNumber:{{buildNumber}}\"});\r",
+							"    api.apiDefinition.tags.push({\"name\":\"PipelineName:{{definitionName}}\"});\r",
+							"//    api.apiDefinition.tags.push({\"name\":\"PipelineVersion:{{definitionVersion}}\"});\r",
+							"    api.apiDefinition.apiTags = api.apiDefinition.apiTags || [];\r",
+							"    api.apiDefinition.apiTags.push(\"BuildId:{{buildId}}\");\r",
+							"    api.apiDefinition.apiTags.push(\"BuildNumber:{{buildNumber}}\");\r",
+							"    api.apiDefinition.apiTags.push(\"PipelineName:{{definitionName}}\");\r",
+							"//    api.apiDefinition.apiTags.push(\"PipelineVersion:{{definitionVersion}}\");\r",
+							"    let apiString = JSON.stringify(api);\r",
+							"    pm.globals.set(\"api\", apiString);\r",
+							"    postman.setNextRequest(\"Update one API\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}/rest/apigateway/apis/{{apiId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"{{apiId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update one API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiIds = JSON.parse(pm.globals.get(\"apiIds\"));\r",
+							"if (apiIds === null || apiIds.length === 0) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiId = apiIds.pop();\r",
+							"    let apiIdsString = JSON.stringify(apiIds);\r",
+							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"    pm.globals.set(\"apiId\", apiId);\r",
+							"    postman.setNextRequest(\"Get one API\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{api}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}/rest/apigateway/apis/{{apiId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"{{apiId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{preparer_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{preparer_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

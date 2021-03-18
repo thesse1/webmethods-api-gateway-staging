@@ -1,0 +1,23 @@
+{
+  "applicationID" : "b5a89c36-58a7-4ff6-8f1f-62c8de8c354e",
+  "name" : "MySwaggerPetstoreApp_PROD",
+  "description" : "This application should be used on PROD environment",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "a3670c60ee2a44157f7e570218d5ad239cf33416b3986ac27aa391818f7d328e"
+    }
+  },
+  "creationDate" : "2020-12-08 09:47:21 GMT",
+  "lastModified" : "2021-02-12 09:44:51 GMT",
+  "lastUpdated" : 1614866742105,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}

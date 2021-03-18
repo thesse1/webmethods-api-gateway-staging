@@ -1,0 +1,31 @@
+{
+  "id" : "92241b73-0efe-439a-b4a7-4d062c2c39b0",
+  "names" : [ {
+    "value" : "Data Masking",
+    "locale" : "en"
+  } ],
+  "templateKey" : "responseDataMasking",
+  "parameters" : [ {
+    "templateKey" : "sameForTransactionalLogging",
+    "values" : [ "true" ]
+  }, {
+    "templateKey" : "applyForPayload",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "jpathMasking",
+    "parameters" : [ {
+      "templateKey" : "maskingCriteria",
+      "parameters" : [ {
+        "templateKey" : "action",
+        "values" : [ "$.photoUrls" ]
+      }, {
+        "templateKey" : "maskingType",
+        "values" : [ "mask" ]
+      }, {
+        "templateKey" : "maskValue",
+        "values" : [ "********" ]
+      } ]
+    } ]
+  } ],
+  "active" : false
+}

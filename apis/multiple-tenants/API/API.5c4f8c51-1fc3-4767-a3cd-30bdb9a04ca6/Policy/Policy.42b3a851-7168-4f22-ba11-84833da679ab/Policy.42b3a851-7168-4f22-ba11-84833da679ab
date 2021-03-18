@@ -1,0 +1,43 @@
+{
+  "id" : "42b3a851-7168-4f22-ba11-84833da679ab",
+  "names" : [ {
+    "value" : "Default Policy for API Mandant1_Petstore",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "622f848a-78b4-4e58-956b-f590049e99da",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "3994b90e-22af-4575-bde9-325d5a540328",
+      "order" : "0"
+    } ],
+    "stageKey" : "LMT"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "acaeae7b-a87d-4525-b187-eb7b3ec4cfbb",
+      "order" : "0"
+    } ],
+    "stageKey" : "IAM"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "c15b9237-73ee-4371-86fd-1306e2849d4f",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "systemPolicy" : false,
+  "active" : false,
+  "global" : false
+}

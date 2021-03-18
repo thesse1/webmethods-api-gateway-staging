@@ -1,0 +1,37 @@
+{
+  "id" : "cda6b52a-7715-4f02-977a-d9ad74442957",
+  "type" : "OAUTH2",
+  "authServerAlias" : "local",
+  "name" : "MyPostmanEchoApp_OAuth2_Strategy_DEV",
+  "description" : "",
+  "clientId" : "f64b97de-eda5-44ac-8e8f-8294722f189d",
+  "dcrConfig" : {
+    "allowedGrantTypes" : [ "client_credentials" ],
+    "applicationType" : "web",
+    "clientType" : "CONFIDENTIAL",
+    "clientId" : "f64b97de-eda5-44ac-8e8f-8294722f189d",
+    "clientSecret" : "b844d097-c634-48da-985f-5938593a5c17",
+    "clientName" : "MyPostmanEchoApp_OAuth2_Strategy_DEV",
+    "clientVersion" : "1.0",
+    "expirationInterval" : "3600",
+    "refreshCount" : "0",
+    "scopes" : [ "postman-echo" ],
+    "redirectUris" : [ ]
+  },
+  "clientRegistration" : {
+    "clientId" : "f64b97de-eda5-44ac-8e8f-8294722f189d",
+    "name" : "MyPostmanEchoApp_OAuth2_Strategy_DEV",
+    "version" : "1.0",
+    "type" : "confidential",
+    "tokenLifetime" : 3600,
+    "tokenRefreshLimit" : 0,
+    "clientSecret" : "********************************",
+    "enabled" : true,
+    "redirectUris" : [ ],
+    "clScopes" : [ "postman-echo" ],
+    "authCodeAllowed" : false,
+    "implicitAllowed" : false,
+    "clientCredentialsAllowed" : true,
+    "resourceOwnerAllowed" : false
+  }
+}

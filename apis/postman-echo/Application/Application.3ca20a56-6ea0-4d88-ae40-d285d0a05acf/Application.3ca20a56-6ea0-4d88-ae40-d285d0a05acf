@@ -1,0 +1,23 @@
+{
+  "applicationID" : "3ca20a56-6ea0-4d88-ae40-d285d0a05acf",
+  "name" : "MyPostmanEchoApp_DEV",
+  "description" : "This application should be used on DEV environment for testing",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "ec4ceffc97ebc5e601b9a20393f6cce2444c30eb3dd11625f936d6cdfe5b07ff"
+    }
+  },
+  "creationDate" : "2021-02-03 16:31:28 GMT",
+  "lastModified" : "2021-02-05 17:17:36 GMT",
+  "lastUpdated" : 1612545456468,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}
