@@ -2,7 +2,8 @@
 
 trigger: none
 
-pool: 'K8S-Linux-dSecure'
+pool:
+  vmImage: ubuntu-latest
 
 # To do: Add apiProject as pipeline parameters (vs. pipeline variable)
 # parameters:
