@@ -53,7 +53,6 @@ This repository provides assets/scripts for implementing the CI/CD solution for 
 The repository has the following folders:
   - apis: Contains projects with the API Gateway assets exported from DEV environment along with the definition of the projects' asset sets and API tests (Postman collections)
   - bin: Windows batch script that exports a defined set of API Gateway assets from DEV environment and stores the asset definition in file system
-  - deployment: Artifacts for the deployment of API Gateway DEV, BUILD, STAGE and PROD environments
   - environments: Postman environment definitions for API Gateway DEV, BUILD, STAGE and PROD environments
   - pipelines: Contains the Azure DevOps pipelines for deploying API Gateway assets on DEV (for roll-back), STAGE and PROD environments
   - utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment and for preparing the API Gateway assets on BUILD for the target environment
