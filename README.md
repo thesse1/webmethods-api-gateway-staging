@@ -265,7 +265,7 @@ All pipelines must be triggered manually by clicking on `Queue`. No triggers are
 
 > Note: Only one API Gateway Staging pipeline may run at one point in time. Parallel running builds might interfere while using the BUILD environment at the same time. Before starting an API Gateway Staging pipeline, make sure that there is no API Gateway Staging pipeline currently executing. If you want to promote an API to STAGE and PROD, use the wm_test_apigw_staging_deploy_to_stage_and_prod pipeline instead of queuing a STAGE build and a PROD build in one go.
 
-Azure DevOps Server 2019 offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
+The API Gateway Staging solution was developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
 
 ### wm_test_apigw_staging_deploy_to_stage
 
