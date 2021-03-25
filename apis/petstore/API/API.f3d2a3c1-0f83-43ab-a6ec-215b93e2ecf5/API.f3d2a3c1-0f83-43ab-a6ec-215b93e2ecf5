@@ -141,6 +141,9 @@
           "operationId" : "getUserByName",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -205,6 +208,9 @@
           "operationId" : "updateUser",
           "consumes" : [ "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -254,6 +260,9 @@
           "description" : "This can only be done by the logged in user.",
           "operationId" : "deleteUser",
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -302,6 +311,9 @@
           "operationId" : "findPetsByStatus",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -402,6 +414,10 @@
           "consumes" : [ "multipart/form-data" ],
           "produces" : [ "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -496,6 +512,9 @@
           "operationId" : "loginUser",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -505,6 +524,9 @@
             "type" : "string",
             "required" : true
           }, {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -642,6 +664,9 @@
           "operationId" : "findPetsByTags",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -792,6 +817,10 @@
           "operationId" : "getPetById",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -857,6 +886,10 @@
           "operationId" : "updatePetWithForm",
           "consumes" : [ "application/x-www-form-urlencoded" ],
           "parameters" : [ {
+            "schema" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -900,6 +933,9 @@
           "summary" : "Deletes a pet",
           "operationId" : "deletePet",
           "parameters" : [ {
+            "schema" : {
+              "type" : "string"
+            },
             "in" : "header",
             "parameterSchema" : {
               "type" : "string"
@@ -908,6 +944,10 @@
             "type" : "string",
             "required" : false
           }, {
+            "schema" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -958,6 +998,10 @@
           "operationId" : "getOrderById",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
+            "schema" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1023,6 +1067,10 @@
           "description" : "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
           "operationId" : "deleteOrder",
           "parameters" : [ {
+            "schema" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1124,7 +1172,7 @@
   "apiName" : "SwaggerPetstore",
   "apiVersion" : "1.0",
   "apiDescription" : "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-  "maturityState" : "Beta",
+  "maturityState" : "Experimental",
   "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
@@ -1135,7 +1183,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-17 07:22:07 GMT",
-  "lastModified" : "2021-03-17 16:41:24 GMT",
+  "lastModified" : "2021-03-25 08:07:15 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"
