@@ -77,13 +77,13 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : {
-              "application/json" : {
+              "application/xml" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Pet"
                 },
                 "examples" : { }
               },
-              "application/xml" : {
+              "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Pet"
                 },
@@ -114,13 +114,13 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : {
-              "application/json" : {
+              "application/xml" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Pet"
                 },
                 "examples" : { }
               },
-              "application/xml" : {
+              "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Pet"
                 },
@@ -141,29 +141,26 @@
           "operationId" : "getUserByName",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "in" : "path",
             "name" : "username",
+            "in" : "path",
             "description" : "The name that needs to be fetched. Use user1 for testing. ",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           } ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/User"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/User"
                   },
@@ -208,17 +205,14 @@
           "operationId" : "updateUser",
           "consumes" : [ "application/json" ],
           "parameters" : [ {
-            "in" : "path",
             "name" : "username",
+            "in" : "path",
             "description" : "name that need to be updated",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           } ],
           "responses" : {
             "400" : {
@@ -260,17 +254,14 @@
           "description" : "This can only be done by the logged in user.",
           "operationId" : "deleteUser",
           "parameters" : [ {
-            "in" : "path",
             "name" : "username",
+            "in" : "path",
             "description" : "The name that needs to be deleted",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           } ],
           "responses" : {
             "400" : {
@@ -311,30 +302,27 @@
           "operationId" : "findPetsByStatus",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "in" : "query",
             "name" : "status",
+            "in" : "query",
             "description" : "Status values that need to be considered for filter",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           } ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "type" : "gateway",
                     "schema" : "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Pet\"}}"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "type" : "gateway",
                     "schema" : "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Pet\"}}"
@@ -414,20 +402,16 @@
           "consumes" : [ "multipart/form-data" ],
           "produces" : [ "application/json" ],
           "parameters" : [ {
-            "in" : "path",
             "name" : "petId",
+            "in" : "path",
             "description" : "ID of pet to update",
             "required" : true,
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
-            "parameterSchema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
+            "type" : "integer",
             "format" : "int64",
-            "type" : "integer"
+            "parameterSchema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           } ],
           "responses" : {
             "200" : {
@@ -512,42 +496,36 @@
           "operationId" : "loginUser",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "in" : "query",
             "name" : "username",
+            "in" : "query",
             "description" : "The user name for login",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           }, {
-            "in" : "query",
             "name" : "password",
+            "in" : "query",
             "description" : "The password for login in clear text",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           } ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "type" : "gateway",
                     "schema" : "{\"type\":\"string\"}"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "type" : "gateway",
                     "schema" : "{\"type\":\"string\"}"
@@ -664,30 +642,27 @@
           "operationId" : "findPetsByTags",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "in" : "query",
             "name" : "tags",
+            "in" : "query",
             "description" : "Tags to filter by",
             "required" : true,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           } ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "type" : "gateway",
                     "schema" : "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Pet\"}}"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "type" : "gateway",
                     "schema" : "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Pet\"}}"
@@ -734,13 +709,13 @@
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/Order"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/Order"
                   },
@@ -817,32 +792,28 @@
           "operationId" : "getPetById",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "in" : "path",
             "name" : "petId",
+            "in" : "path",
             "description" : "ID of pet to return",
             "required" : true,
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
-            "parameterSchema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
+            "type" : "integer",
             "format" : "int64",
-            "type" : "integer"
+            "parameterSchema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           } ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/Pet"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/Pet"
                   },
@@ -886,20 +857,16 @@
           "operationId" : "updatePetWithForm",
           "consumes" : [ "application/x-www-form-urlencoded" ],
           "parameters" : [ {
-            "in" : "path",
             "name" : "petId",
+            "in" : "path",
             "description" : "ID of pet that needs to be updated",
             "required" : true,
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
-            "parameterSchema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
+            "type" : "integer",
             "format" : "int64",
-            "type" : "integer"
+            "parameterSchema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           } ],
           "responses" : {
             "405" : {
@@ -933,31 +900,24 @@
           "summary" : "Deletes a pet",
           "operationId" : "deletePet",
           "parameters" : [ {
-            "in" : "header",
             "name" : "api_key",
+            "in" : "header",
             "required" : false,
-            "schema" : {
-              "type" : "string"
-            },
+            "type" : "string",
             "parameterSchema" : {
               "type" : "string"
-            },
-            "type" : "string"
+            }
           }, {
-            "in" : "path",
             "name" : "petId",
+            "in" : "path",
             "description" : "Pet id to delete",
             "required" : true,
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
-            "parameterSchema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
+            "type" : "integer",
             "format" : "int64",
-            "type" : "integer"
+            "parameterSchema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           } ],
           "responses" : {
             "400" : {
@@ -998,32 +958,28 @@
           "operationId" : "getOrderById",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "in" : "path",
             "name" : "orderId",
+            "in" : "path",
             "description" : "ID of pet that needs to be fetched",
             "required" : true,
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
-            "parameterSchema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
+            "type" : "integer",
             "format" : "int64",
-            "type" : "integer"
+            "parameterSchema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           } ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
               "content" : {
-                "application/json" : {
+                "application/xml" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/Order"
                   },
                   "examples" : { }
                 },
-                "application/xml" : {
+                "application/json" : {
                   "schema" : {
                     "$ref" : "#/components/schemas/Order"
                   },
@@ -1067,20 +1023,16 @@
           "description" : "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
           "operationId" : "deleteOrder",
           "parameters" : [ {
-            "in" : "path",
             "name" : "orderId",
+            "in" : "path",
             "description" : "ID of the order that needs to be deleted",
             "required" : true,
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
-            "parameterSchema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
+            "type" : "integer",
             "format" : "int64",
-            "type" : "integer"
+            "parameterSchema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           } ],
           "responses" : {
             "400" : {
@@ -1123,7 +1075,7 @@
       "url" : "http://swagger.io"
     } ],
     "servers" : [ {
-      "url" : "https://apigw-staging-1.10.61.132.55.xip.io/gateway/SwaggerPetstore/1.0.8",
+      "url" : "https://petstore.swagger.io/v2",
       "variables" : { }
     } ],
     "components" : {
@@ -1165,15 +1117,15 @@
   },
   "nativeEndpoint" : [ {
     "passSecurityHeaders" : true,
-    "uri" : "https://apigw-staging-1.10.61.132.55.xip.io/gateway/SwaggerPetstore/1.0.8",
+    "uri" : "https://petstore.swagger.io/v2",
     "connectionTimeoutDuration" : 0,
     "alias" : false
   } ],
   "apiName" : "SwaggerPetstore",
   "apiVersion" : "1.0",
   "apiDescription" : "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-  "maturityState" : "Beta",
-  "isActive" : false,
+  "maturityState" : "Experimental",
+  "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
   "policies" : [ "479e023e-526e-4bd7-a423-fbf092368e13" ],
@@ -1183,7 +1135,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-17 07:22:07 GMT",
-  "lastModified" : "2021-03-17 07:24:28 GMT",
+  "lastModified" : "2021-03-25 08:07:15 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"

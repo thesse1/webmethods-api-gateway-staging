@@ -174,9 +174,6 @@
           "operationId" : "getUserByName",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -261,9 +258,6 @@
           "consumes" : [ "application/json" ],
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -327,9 +321,6 @@
           "operationId" : "deleteUser",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -391,9 +382,6 @@
           "operationId" : "findPetsByStatus",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -401,10 +389,10 @@
             "name" : "status",
             "description" : "Status values that need to be considered for filter",
             "type" : "string",
+            "collectionFormat" : "multi",
             "items" : {
               "type" : "string"
             },
-            "collectionFormat" : "multi",
             "required" : true
           } ],
           "responses" : {
@@ -524,10 +512,6 @@
           "consumes" : [ "multipart/form-data" ],
           "produces" : [ "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -641,9 +625,6 @@
           "operationId" : "loginUser",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -653,9 +634,6 @@
             "type" : "string",
             "required" : true
           }, {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -823,9 +801,6 @@
           "operationId" : "findPetsByTags",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -833,10 +808,10 @@
             "name" : "tags",
             "description" : "Tags to filter by",
             "type" : "string",
+            "collectionFormat" : "multi",
             "items" : {
               "type" : "string"
             },
-            "collectionFormat" : "multi",
             "required" : true
           } ],
           "responses" : {
@@ -1019,10 +994,6 @@
           "operationId" : "getPetById",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1112,10 +1083,6 @@
           "consumes" : [ "application/x-www-form-urlencoded" ],
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1171,9 +1138,6 @@
           "operationId" : "deletePet",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "header",
             "parameterSchema" : {
               "type" : "string"
@@ -1182,10 +1146,6 @@
             "type" : "string",
             "required" : false
           }, {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1252,10 +1212,6 @@
           "operationId" : "getOrderById",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1341,10 +1297,6 @@
           "operationId" : "deleteOrder",
           "produces" : [ "application/json", "application/xml" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
