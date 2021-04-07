@@ -3,6 +3,7 @@
 trigger: none
 
 pool:
+  name: 'Azure Pipelines'
   vmImage: '$(agent_pool_common)'
 
 # To do: Add apiProject as pipeline parameters (vs. pipeline variable)
