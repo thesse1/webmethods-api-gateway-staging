@@ -93,7 +93,7 @@ steps:
     --env-var importer_password=$(importer_password) \
     --env-var initializer_user=$(initializer_user) \
     --env-var initializer_password=$(initializer_password) \
-    --env-var scopes='`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json`' \
+    --env-var scopes=`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json` \
     --env-var file_Loc=$(Build.BuildId)_import.zip -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -159,7 +159,7 @@ steps:
     --env-var importer_password=$(importer_password) \
     --env-var initializer_user=$(initializer_user) \
     --env-var initializer_password=$(initializer_password) \
-    --env-var scopes='`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json`' \
+    --env-var scopes=`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json` \
     --env-var file_Loc=$(Build.BuildId)_export.zip -e environments/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
