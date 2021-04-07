@@ -43,21 +43,6 @@ steps:
     TEST_CONDITION: ${{parameters.test_condition}}
   displayName: Check for required parameters
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_import.zip'
-    replaceExistingArchive: true
-    verbose: true
-  displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.apiProject}}'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_import.zip'
-    artifactName: 'BUILD_import'
-
 - bash: |
    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.build_environment}}`"
@@ -74,93 +59,32 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.target_type}} configuration, extract ip, hostname, port and insecureflag'
 
-- script: |
-    newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
-    --env-var preparer_user=$(preparer_user) \
-    --env-var preparer_password=$(preparer_password) \
-    -e environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Delete all APIs, applications, scopes and aliases on API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_ip)
+- task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-download.ArtifactoryGenericDownload@3
+  displayName: 'Artifactory Build Download'
+  inputs:
+    connection: '$(artifactoryService)'
+    fileSpec: |
+      {
+          "files": [
+              {
+                  "pattern": "$(artifactoryFolder)/apigw-staging-test/$(Build.BuildId)_export.zip",
+                  "target": "$(System.DefaultWorkingDirectory)/"
+              }
+          ]
+      }
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/apigw-staging-test/$(Build.BuildId)_export.zip'
+    artifactName: '${{parameters.target_type}}_import'
 
 - script: |
     newman run utilities/import/ImportAPI.json --reporters cli \
     --env-var importer_user=$(importer_user) \
     --env-var importer_password=$(importer_password) \
-    --env-var file_Loc=$(Build.BuildId)_import.zip -e environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Import the Deployable To API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_ip)
-
-- script: |
-    newman run apis/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export apis/${{parameters.apiProject}}/junitReport.xml \
-    -e environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Run tests on API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_ip)
-  condition: and(succeeded(), ${{parameters.test_condition}})
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/junitReport.xml'
-    artifactName: 'test_results'
-  condition: ${{parameters.test_condition}}
-
-- script: |
-    newman run utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
-    --env-var preparer_user=$(preparer_user) \
-    --env-var preparer_password=$(preparer_password) \
-    --env-var buildId=$(Build.BuildId) \
-    --env-var buildNumber=$(Build.BuildNumber) \
-    --env-var definitionName=$(Build.DefinitionName) \
-    --env-var definitionVersion=$(Build.DefinitionVersion) \
-    -e environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Prepare assets: Delete all non-${{parameters.target_type}} applications on API Gateway BUILD, unsuspend all remaining applications, add build details as tags to APIs'
-  env:
-    no_proxy: $(build_environment_ip)
-  condition: and(succeeded(), ${{parameters.prep_condition}})
-
-- bash: |
-   curl $(build_environment_insecureflag) \
-          -d @"apis/${{parameters.apiProject}}/export_payload.json" \
-          --output $(Build.BuildId)_export.zip \
-          -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
-          --user $(exporter_user):$(exporter_password) \
-          --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
-          https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Export the Deployable from API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_hostname)
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export.zip'
-    artifactName: 'BUILD_export_${{parameters.target_type}}_import'
-
-- script: |
-    newman run utilities/import/ImportAPI.json --reporters cli \
-    --env-var importer_user=$(importer_user) \
-    --env-var importer_password=$(importer_password) \
-    --env-var file_Loc=$(Build.BuildId)_export.zip -e environments/${{parameters.target_environment}} \
+    --env-var file_Loc=$(System.DefaultWorkingDirectory)/apigw-staging-test/$(Build.BuildId)_export.zip -e environments/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_type}}'
   env:
     no_proxy: $(target_environment_ip)
-
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit' 
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/junitReport.xml'
-    testRunTitle: 'QA environment test results for ${{parameters.apiProject}}'
-    publishRunAttachments: false
-  condition: always()

@@ -1,0 +1,22 @@
+{
+  "applicationID" : "429c121e-e72d-45e8-abbf-1542cf31d42a",
+  "name" : "Petstore_Versioning_App_STAGE",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "3e6aae6b217f553214bf0919817a874881246a9b39e13848f3555e56b291a1a4"
+    }
+  },
+  "creationDate" : "2021-04-07 10:36:38 GMT",
+  "lastModified" : "2021-04-07 10:38:05 GMT",
+  "lastUpdated" : 1617791885083,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}

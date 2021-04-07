@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "368fb9b5-69dd-424c-8176-44828db4efd6",
-		"name": "APIGatewayDeployment",
+		"_postman_id": "1f1d470b-72d5-46c9-9824-864183445e6c",
+		"name": "API Gateway API Deployment",
 		"description": "This Collection deploys the API to API Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},

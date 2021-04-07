@@ -1,0 +1,23 @@
+{
+  "applicationID" : "7fb297dc-e24e-46fa-be04-0c9bc974fc22",
+  "name" : "MyPostmanEchoApp_PROD",
+  "description" : "This application should be used on PROD environment",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "ca368bd8e4342ef3053203e4da0f118b5b31a420100a1fa53dfffc0f8d060102"
+    }
+  },
+  "creationDate" : "2021-02-03 16:33:01 GMT",
+  "lastModified" : "2021-02-05 17:25:33 GMT",
+  "lastUpdated" : 1616429826629,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}

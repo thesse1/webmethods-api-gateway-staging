@@ -10,6 +10,9 @@ IF NOT "%1"=="" (
     IF "%1"=="--api_name" (
         SET PROJECT_NAME=%2
         SHIFT
+    ) ELSE IF "%1"=="--environment" (
+        SET ENVIRONMENT=%2
+        SHIFT
     )
     IF "%1"=="--apigateway_url" (
         SET GATEWAY_URL=%2
@@ -27,32 +30,63 @@ IF NOT "%1"=="" (
     GOTO :loop
 )
 
-IF "%ACTION%" == "--import" (
-goto import
+IF "%ACTION%" == "--importapi" (
+    goto importapi
+) ELSE IF "%ACTION%" == "--exportapi" (
+    goto exportapi
+) ELSE IF "%ACTION%" == "--importconfig" (
+    goto importconfig
+) ELSE IF "%ACTION%" == "--exportconfig" (
+    goto exportconfig
 ) ELSE (
- goto export
+  echo "Action %ACTION% does not exist"
+  goto :EOF
 )
 
-:import
-IF EXIST %CURRENT_DIR%\apis\%PROJECT_NAME% (
- powershell Compress-Archive -Path %CURRENT_DIR%\apis\%PROJECT_NAME%\* -DestinationPath %CURRENT_DIR%\%PROJECT_NAME%.zip -Force
- curl -k -i -X POST %GATEWAY_URL%/rest/apigateway/archive?overwrite=* -H "Content-Type: application/zip" -H "Accept:application/json" --data-binary @"%CURRENT_DIR%\%PROJECT_NAME%.zip" --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD%
+:importapi
+IF EXIST %CURRENT_DIR%\apis\%PROJECT_NAME%\assets (
+ powershell Compress-Archive -Path %CURRENT_DIR%\apis\%PROJECT_NAME%\assets\* -DestinationPath %CURRENT_DIR%\%PROJECT_NAME%.zip -Force
+ curl -k -i -X POST %GATEWAY_URL%/rest/apigateway/archive?overwrite=*,aliases -H "Content-Type: application/zip" -H "Accept:application/json" --data-binary @"%CURRENT_DIR%\%PROJECT_NAME%.zip" --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD%
  del "%CURRENT_DIR%\%PROJECT_NAME%.zip"
  goto :EOF
 ) ELSE (
-  echo "Folder %CURRENT_DIR%\apis\%PROJECT_NAME% does not exist"
+  echo "Folder %CURRENT_DIR%\apis\%PROJECT_NAME%\assets does not exist"
   echo "API with name %PROJECT_NAME% does not exist"
   goto :EOF
 )
 
-:export
-IF EXIST %CURRENT_DIR%\apis\%PROJECT_NAME% (
+:exportapi
+IF EXIST %CURRENT_DIR%\apis\%PROJECT_NAME%\assets (
  curl %GATEWAY_URL%/rest/apigateway/archive -k -d @"%CURRENT_DIR%\apis\%PROJECT_NAME%\export_payload.json" --output %CURRENT_DIR%\%PROJECT_NAME%.zip --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD% -H "x-HTTP-Method-Override: GET" -H "Content-Type:application/json"
- powershell Expand-Archive -Path %CURRENT_DIR%\%PROJECT_NAME%.zip -DestinationPath %CURRENT_DIR%\apis\%PROJECT_NAME% -Force
+ powershell Expand-Archive -Path %CURRENT_DIR%\%PROJECT_NAME%.zip -DestinationPath %CURRENT_DIR%\apis\%PROJECT_NAME%\assets -Force
 del "%CURRENT_DIR%\%PROJECT_NAME%.zip"
 goto :EOF
 ) ELSE (
-  echo "Folder %CURRENT_DIR%\apis\%PROJECT_NAME% does not exist"
+  echo "Folder %CURRENT_DIR%\apis\%PROJECT_NAME%\assets does not exist"
   echo "API with name %PROJECT_NAME% does not exist"
+  goto :EOF
+)
+
+:importconfig
+IF EXIST %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets (
+ powershell Compress-Archive -Path %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets\* -DestinationPath %CURRENT_DIR%\%ENVIRONMENT%.zip -Force
+ curl -k -i -X POST %GATEWAY_URL%/rest/apigateway/archive?overwrite=* -H "Content-Type: application/zip" -H "Accept:application/json" --data-binary @"%CURRENT_DIR%\%ENVIRONMENT%.zip" --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD%
+ del "%CURRENT_DIR%\%ENVIRONMENT%.zip"
+ goto :EOF
+) ELSE (
+  echo "Folder %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets does not exist"
+  echo "Environment with name %ENVIRONMENT% does not exist"
+  goto :EOF
+)
+
+:exportconfig
+IF EXIST %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets (
+ curl %GATEWAY_URL%/rest/apigateway/archive -k -d @"%CURRENT_DIR%\configuration\%ENVIRONMENT%\export_payload.json" --output %CURRENT_DIR%\%ENVIRONMENT%.zip --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD% -H "x-HTTP-Method-Override: GET" -H "Content-Type:application/json"
+ powershell Expand-Archive -Path %CURRENT_DIR%\%ENVIRONMENT%.zip -DestinationPath %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets -Force
+del "%CURRENT_DIR%\%ENVIRONMENT%.zip"
+goto :EOF
+) ELSE (
+  echo "Folder %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets does not exist"
+  echo "Environment with name %ENVIRONMENT% does not exist"
   goto :EOF
 )

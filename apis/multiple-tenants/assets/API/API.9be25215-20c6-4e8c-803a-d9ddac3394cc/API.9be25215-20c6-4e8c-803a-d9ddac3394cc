@@ -1,0 +1,866 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "description" : "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
+      "version" : "1.0",
+      "title" : "Postman Echo",
+      "termsOfService" : "http://exmple.com/license/"
+    },
+    "serviceRegistryDisplayName" : "Mandant1_PostmanEcho_1.0",
+    "schemes" : [ ],
+    "security" : [ ],
+    "paths" : {
+      "/auth/hawk" : {
+        "get" : {
+          "summary" : "Hawk Auth",
+          "description" : "This endpoint is a Hawk Authentication protected endpoint. [Hawk authentication](https://github.com/hueniverse/hawk) is a widely used protocol for protecting API endpoints. One of Hawk's main goals is to enable HTTP authentication for services that do not use TLS (although it can be used in conjunction with TLS as well).\n\nIn order to use this endpoint, select the \"Hawk Auth\" helper inside Postman, and set the following values:\n\nHawk Auth ID: `dh37fgj492je`\n\nHawk Auth Key: `werxhqb98rpaxn39848xru",
+          "operationId" : "AuthHawkGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "AuthHawkGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/auth/hawk",
+        "enabled" : true
+      },
+      "/encoding/utf8" : {
+        "get" : {
+          "summary" : "Get UTF8 Encoded Response",
+          "description" : "If a response of an endpoint requires to send data beyond the basic English / ASCII character set, the `charset` parameter in the `Content-Type` response header defines the character encoding policy.\n\nThis endpoint returns an `UTF8` character encoded response body with text in various languages such as Greek, Latin, East Asian, etc. Postman can interpret the character encoding and use appropriate methods to display the character set in responses.",
+          "operationId" : "EncodingUtf8Get",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "EncodingUtf8Get"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/encoding/utf8",
+        "enabled" : true
+      },
+      "/basic-auth" : {
+        "get" : {
+          "summary" : "Basic Auth",
+          "description" : "This endpoint simulates a **basic-auth** protected endpoint. \nThe endpoint accepts a default username and password and returns a status code of `200 ok` only if the same is provided. \nOtherwise it will return a status code `401 unauthorized`.\n\n> Username: `postman`\n> \n> Password: `password`\n\nTo use this endpoint, send a request with the header `Authorization: Basic cG9zdG1hbjpwYXNzd29yZA==`. \nThe cryptic latter half of the header value is a base64 encoded concatenation of the default username an",
+          "operationId" : "BasicAuthGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "BasicAuthGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/basic-auth",
+        "enabled" : true
+      },
+      "/post" : {
+        "post" : {
+          "summary" : "POST Request",
+          "description" : "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of th",
+          "operationId" : "PostPost",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "PostPost"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/post",
+        "enabled" : true
+      },
+      "/response-headers" : {
+        "get" : {
+          "summary" : "Response Headers",
+          "description" : "This endpoint causes the server to send custom set of response headers. Providing header values as part of the URL parameters of a `GET` request to this endpoint returns the same as part of response header.\n\nTo send your own set of headers, simply add or replace the the URL parameters with your own set.",
+          "operationId" : "ResponseHeadersGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ {
+            "name" : "Content-Type",
+            "in" : "query",
+            "required" : false,
+            "parameterSchema" : { }
+          }, {
+            "name" : "test",
+            "in" : "query",
+            "required" : false,
+            "parameterSchema" : { }
+          } ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "ResponseHeadersGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/response-headers",
+        "enabled" : true
+      },
+      "/delay/3" : {
+        "get" : {
+          "summary" : "Delay Response",
+          "description" : "Using this endpoint one can configure how long it takes for the server to come back with a response. Appending a number to the URL defines the time (in seconds) the server will wait before responding.\n\nNote that a maximum delay of 10 seconds is accepted by the server.",
+          "operationId" : "Delay3Get",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "Delay3Get"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/delay/3",
+        "enabled" : true
+      },
+      "/headers" : {
+        "get" : {
+          "summary" : "Request Headers",
+          "description" : "A `GET` request to this endpoint returns the list of all request headers as part of the response JSON.\nIn Postman, sending your own set of headers through the [Headers tab](https://www.getpostman.com/docs/requests#headers?source=echo-collection-app-onboarding) will reveal the headers as part of the response.",
+          "operationId" : "HeadersGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "HeadersGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/headers",
+        "enabled" : true
+      },
+      "/gzip" : {
+        "get" : {
+          "summary" : "GZip Compressed Response",
+          "description" : "This endpoint returns the response using [gzip compression algoritm](https://en.wikipedia.org/wiki/Gzip).\nThe uncompressed response is a JSON string containing the details of the request sent by the client. For this endpoint to work, one should request with `Accept-encoding` header containing `gzip` as part of its value. Postman supports gzip, deflate and SDCH decoding and automatically sends them as part of the request.\n\nHTTP Compression allows the server to send responses in a compressed forma",
+          "operationId" : "GzipGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "GzipGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/gzip",
+        "enabled" : true
+      },
+      "/cookies/set" : {
+        "get" : {
+          "summary" : "Set Cookies",
+          "description" : "The cookie setter endpoint accepts a list of cookies and their values as part of URL parameters of a `GET` request. These cookies are saved and can be subsequently retrieved or deleted. The response of this request returns a JSON with all cookies listed.\n\nTo set your own set of cookies, simply replace the URL parameters \"foo1=bar1&foo2=bar2\" with your own set of key-value pairs.",
+          "operationId" : "CookiesSetGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ {
+            "name" : "foo1",
+            "in" : "query",
+            "required" : false,
+            "parameterSchema" : { }
+          }, {
+            "name" : "foo2",
+            "in" : "query",
+            "required" : false,
+            "parameterSchema" : { }
+          } ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "CookiesSetGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/cookies/set",
+        "enabled" : true
+      },
+      "/delete" : {
+        "delete" : {
+          "summary" : "DELETE Request",
+          "description" : "The HTTP `DELETE` method is used to delete resources on a server. The exact\nuse of `DELETE` requests depends on the server implementation. In general, \n`DELETE` requests support both, Query String parameters as well as a Request \nBody.\n\nThis endpoint accepts an HTTP `DELETE` request and provides debug information\nsuch as the HTTP headers, Query String arguments, and the Request Body.",
+          "operationId" : "DeleteDelete",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "DeleteDelete"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/delete",
+        "enabled" : true
+      },
+      "/get" : {
+        "get" : {
+          "summary" : "GET Request",
+          "description" : "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested.",
+          "operationId" : "GetGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ {
+            "name" : "test",
+            "in" : "query",
+            "required" : false,
+            "parameterSchema" : { }
+          } ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "GetGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/get",
+        "enabled" : true
+      },
+      "/patch" : {
+        "patch" : {
+          "summary" : "PATCH Request",
+          "description" : "The HTTP `PATCH` method is used to update resources on a server. The exact\nuse of `PATCH` requests depends on the server in question. There are a number\nof server implementations which handle `PATCH` differently. Technically, \n`PATCH` supports both Query String parameters and a Request Body.\n\nThis endpoint accepts an HTTP `PATCH` request and provides debug information\nsuch as the HTTP headers, Query String arguments, and the Request Body.",
+          "operationId" : "PatchPatch",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "PatchPatch"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/patch",
+        "enabled" : true
+      },
+      "/deflate" : {
+        "get" : {
+          "summary" : "Deflate Compressed Response",
+          "description" : "This endpoint returns the response using [deflate compression algoritm](https://en.wikipedia.org/wiki/DEFLATE). \nThe uncompressed response is a JSON string containing the details of the request sent by the client. For this endpoint to work, one should request with `Accept-encoding` header containing `deflate` as part of its value. Postman supports gzip, deflate and SDCH decoding and automatically sends them as part of the request.\n\nHTTP Compression allows the server to send responses in a compre",
+          "operationId" : "DeflateGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "DeflateGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/deflate",
+        "enabled" : true
+      },
+      "/oauth1" : {
+        "get" : {
+          "summary" : "OAuth1.0 Verify Signature",
+          "description" : "OAuth1.0a is a specification that defines a protocol that can be used by one\nservice to access \"protected\" resources (endpoints) on another service. A\nmajor part of OAuth1.0 is HTTP Request Signing. This endpoint allows you to \ncheck whether the request calculation works properly in the client. \n\nThe endpoint supports the HTTP ``Authorization`` header. In case the signature\nverification fails, the endpoint provides the four debug values,\n\n* ``base_uri``\n* ``normalized_param_string``\n* ``base_str",
+          "operationId" : "Oauth1Get",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "Oauth1Get"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/oauth1",
+        "enabled" : true
+      },
+      "/stream/10" : {
+        "get" : {
+          "summary" : "Streamed Response",
+          "description" : "This endpoint allows one to recieve streaming http response using [chunked transfer encoding](https://en.wikipedia.org/wiki/Chunked_transfer_encoding) of a configurable length.\n\nA streaming response does not wait for the entire response to be generated on server before flushing it out. This implies that for a fairly large response, parts of it can be streamed to the requestee as and when it is generated on server. The client can then take actions of processing this partially received data.",
+          "operationId" : "Stream10Get",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "Stream10Get"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/stream/10",
+        "enabled" : true
+      },
+      "/cookies/delete" : {
+        "get" : {
+          "summary" : "Delete Cookies",
+          "description" : "One or more cookies that has been set for this domain can be deleted by providing the cookie names as part of the URL parameter. The response of this request is a JSON containing the list of currently set cookies.",
+          "operationId" : "CookiesDeleteGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ {
+            "name" : "foo1",
+            "in" : "query",
+            "required" : false,
+            "parameterSchema" : { }
+          } ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "CookiesDeleteGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/cookies/delete",
+        "enabled" : true
+      },
+      "/put" : {
+        "put" : {
+          "summary" : "PUT Request",
+          "description" : "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n",
+          "operationId" : "PutPut",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "PutPut"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/put",
+        "enabled" : true
+      },
+      "/status/200" : {
+        "get" : {
+          "summary" : "Response Status Code",
+          "description" : "This endpoint allows one to instruct the server which status code to respond with.\n\nEvery response is accompanied by a status code. The status code provides a summary of the nature of response sent by the server. For example, a status code of `200` means everything is okay with the response and a code of `404` implies that the requested URL does not exist on server. \nA list of all valid HTTP status code can be found at the [List of Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_",
+          "operationId" : "Status200Get",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "Status200Get"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/status/200",
+        "enabled" : true
+      },
+      "/cookies" : {
+        "get" : {
+          "summary" : "Get Cookies",
+          "description" : "Use this endpoint to get a list of all cookies that are stored with respect to this domain. Whatever key-value pairs that has been previously set by calling the \"Set Cookies\" endpoint, will be returned as response JSON.",
+          "operationId" : "CookiesGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "CookiesGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/cookies",
+        "enabled" : true
+      },
+      "/digest-auth" : {
+        "get" : {
+          "summary" : "DigestAuth Request",
+          "description" : "Performing a simple `GET` request to this endpoint returns status code `401 Unauthorized` with `WWW-Authenticate` header containing information to successfully authenticate subsequent requests.\nThe `WWW-Authenticate` header must be processed to extract `realm` and `nonce` values to hash subsequent requests.\n\nWhen this request is executed within Postman, the script attached with this request does the hard work of extracting realm and nonce from the header and set it as [global variables](https://",
+          "operationId" : "DigestAuthGet",
+          "produces" : [ "application/json; charset=utf-8" ],
+          "responses" : {
+            "200" : {
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{\"type\":\"object\"}"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "DigestAuthGet"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/digest-auth",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : { },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "https://postman-echo.com",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : {
+        "headers" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"accept\":{\"type\":\"string\"},\"accept-encoding\":{\"type\":\"string\"},\"accept-language\":{\"type\":\"string\"},\"cache-control\":{\"type\":\"string\"},\"host\":{\"type\":\"string\"},\"my-sample-header\":{\"type\":\"string\"},\"postman-token\":{\"type\":\"string\"},\"user-agent\":{\"type\":\"string\"},\"x-forwarded-port\":{\"type\":\"string\"},\"x-forwarded-proto\":{\"type\":\"string\"}}}"
+        },
+        "Cookies2" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"foo2\":{\"type\":\"string\"}}}"
+        },
+        "Cookies1" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"foo1\":{\"type\":\"string\"},\"foo2\":{\"type\":\"string\"}}}"
+        },
+        "Cookies3" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"Cookies2\":{\"type\":\"object\"},\"cookies\":{\"type\":\"object\"}}}"
+        },
+        "CookiesResponse" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"cookies\":{\"type\":\"object\"}}}"
+        },
+        "Success" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"message\":{\"type\":\"string\"},\"status\":{\"type\":\"string\"}}}"
+        },
+        "cookies" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\"}"
+        },
+        "sampledelayresponse" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"delay\":{\"type\":\"string\"}}}"
+        },
+        "200" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"authenticated\":{\"type\":\"boolean\"}}}"
+        },
+        "my-sample-header" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"headers\":{\"type\":\"object\"}}}"
+        },
+        "Responseheaders" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"Content-Type\":{\"type\":\"string\"},\"test\":{\"type\":\"string\"}}}"
+        },
+        "Cookies" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"cookies\":{\"type\":\"object\"}}}"
+        },
+        "2002" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"status\":{\"type\":\"integer\",\"format\":\"int32\"}}}"
+        }
+      },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "https://postman-echo.com",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "Tenant1_PostmanEcho",
+  "apiVersion" : "1.0",
+  "apiDescription" : "Postman Echo is service for Tenant1 you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
+  "maturityState" : "Beta",
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "Administrator",
+  "policies" : [ "367a831f-c37b-410f-9ea5-38303f9ccfb2" ],
+  "referencedFiles" : {
+    "postman-echo-openapi.json" : "{\n    \"openapi\": \"3.0.0\",\n    \"info\": {\n        \"version\": \"1.0\",\n        \"title\": \"Postman Echo\",\n        \"description\": \"Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\\n\\nThe documentation for the endpoints as well as example responses can be found at [https:\\/\\/echo.getpostman.com](https:\\/\\/echo.getpostman.com?source=echo-collection-app-onboarding)\",\n        \"termsOfService\": \"http:\\/\\/exmple.com\\/license\\/\"\n    },\n    \"servers\": [ {\n        \"url\": \"https://postman-echo.com\"\n    } ],\n    \"paths\": {\n        \"\\/digest-auth\": {\n            \"get\": {\n                \"summary\": \"DigestAuth Request\",\n                \"description\": \"Performing a simple `GET` request to this endpoint returns status code `401 Unauthorized` with `WWW-Authenticate` header containing information to successfully authenticate subsequent requests.\\nThe `WWW-Authenticate` header must be processed to extract `realm` and `nonce` values to hash subsequent requests.\\n\\nWhen this request is executed within Postman, the script attached with this request does the hard work of extracting realm and nonce from the header and set it as [global variables](https:\\/\\/\",\n                \"operationId\": \"DigestAuthGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/basic-auth\": {\n            \"get\": {\n                \"summary\": \"Basic Auth\",\n                \"description\": \"This endpoint simulates a **basic-auth** protected endpoint. \\nThe endpoint accepts a default username and password and returns a status code of `200 ok` only if the same is provided. \\nOtherwise it will return a status code `401 unauthorized`.\\n\\n> Username: `postman`\\n> \\n> Password: `password`\\n\\nTo use this endpoint, send a request with the header `Authorization: Basic cG9zdG1hbjpwYXNzd29yZA==`. \\nThe cryptic latter half of the header value is a base64 encoded concatenation of the default username an\",\n                \"operationId\": \"BasicAuthGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/oauth1\": {\n            \"get\": {\n                \"summary\": \"OAuth1.0 Verify Signature\",\n                \"description\": \"OAuth1.0a is a specification that defines a protocol that can be used by one\\nservice to access \\\"protected\\\" resources (endpoints) on another service. A\\nmajor part of OAuth1.0 is HTTP Request Signing. This endpoint allows you to \\ncheck whether the request calculation works properly in the client. \\n\\nThe endpoint supports the HTTP ``Authorization`` header. In case the signature\\nverification fails, the endpoint provides the four debug values,\\n\\n* ``base_uri``\\n* ``normalized_param_string``\\n* ``base_str\",\n                \"operationId\": \"Oauth1Get\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/auth\\/hawk\": {\n            \"get\": {\n                \"summary\": \"Hawk Auth\",\n                \"description\": \"This endpoint is a Hawk Authentication protected endpoint. [Hawk authentication](https:\\/\\/github.com\\/hueniverse\\/hawk) is a widely used protocol for protecting API endpoints. One of Hawk's main goals is to enable HTTP authentication for services that do not use TLS (although it can be used in conjunction with TLS as well).\\n\\nIn order to use this endpoint, select the \\\"Hawk Auth\\\" helper inside Postman, and set the following values:\\n\\nHawk Auth ID: `dh37fgj492je`\\n\\nHawk Auth Key: `werxhqb98rpaxn39848xru\",\n                \"operationId\": \"AuthHawkGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/cookies\\/set\": {\n            \"get\": {\n                \"summary\": \"Set Cookies\",\n                \"description\": \"The cookie setter endpoint accepts a list of cookies and their values as part of URL parameters of a `GET` request. These cookies are saved and can be subsequently retrieved or deleted. The response of this request returns a JSON with all cookies listed.\\n\\nTo set your own set of cookies, simply replace the URL parameters \\\"foo1=bar1&foo2=bar2\\\" with your own set of key-value pairs.\",\n                \"operationId\": \"CookiesSetGet\",\n                \"deprecated\": 0,\n                \"parameters\": [\n                    {\n                        \"name\": \"foo1\",\n                        \"in\": \"query\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"name\": \"foo2\",\n                        \"in\": \"query\",\n                        \"description\": \"\"\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/cookies\\/delete\": {\n            \"get\": {\n                \"summary\": \"Delete Cookies\",\n                \"description\": \"One or more cookies that has been set for this domain can be deleted by providing the cookie names as part of the URL parameter. The response of this request is a JSON containing the list of currently set cookies.\",\n                \"operationId\": \"CookiesDeleteGet\",\n                \"deprecated\": 0,\n                \"parameters\": [\n                    {\n                        \"name\": \"foo1\",\n                        \"in\": \"query\",\n                        \"description\": \"\"\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/cookies\": {\n            \"get\": {\n                \"summary\": \"Get Cookies\",\n                \"description\": \"Use this endpoint to get a list of all cookies that are stored with respect to this domain. Whatever key-value pairs that has been previously set by calling the \\\"Set Cookies\\\" endpoint, will be returned as response JSON.\",\n                \"operationId\": \"CookiesGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/headers\": {\n            \"get\": {\n                \"summary\": \"Request Headers\",\n                \"description\": \"A `GET` request to this endpoint returns the list of all request headers as part of the response JSON.\\nIn Postman, sending your own set of headers through the [Headers tab](https:\\/\\/www.getpostman.com\\/docs\\/requests#headers?source=echo-collection-app-onboarding) will reveal the headers as part of the response.\",\n                \"operationId\": \"HeadersGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/response-headers\": {\n            \"get\": {\n                \"summary\": \"Response Headers\",\n                \"description\": \"This endpoint causes the server to send custom set of response headers. Providing header values as part of the URL parameters of a `GET` request to this endpoint returns the same as part of response header.\\n\\nTo send your own set of headers, simply add or replace the the URL parameters with your own set.\",\n                \"operationId\": \"ResponseHeadersGet\",\n                \"deprecated\": 0,\n                \"parameters\": [\n                    {\n                        \"name\": \"Content-Type\",\n                        \"in\": \"query\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"name\": \"test\",\n                        \"in\": \"query\",\n                        \"description\": \"\"\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/get\": {\n            \"get\": {\n                \"summary\": \"GET Request\",\n                \"description\": \"The HTTP `GET` request method is meant to retrieve data from a server. The data\\nis identified by a unique URI (Uniform Resource Identifier). \\n\\nA `GET` request can pass parameters to the server using \\\"Query String \\nParameters\\\". For example, in the following request,\\n\\n> http:\\/\\/example.com\\/hi\\/there?hand=wave\\n\\nThe parameter \\\"hand\\\" has the value \\\"wave\\\".\\n\\nThis endpoint echoes the HTTP headers, request parameters and the complete\\nURI requested.\",\n                \"operationId\": \"GetGet\",\n                \"deprecated\": 0,\n                \"parameters\": [\n                    {\n                        \"name\": \"test\",\n                        \"in\": \"query\",\n                        \"description\": \"\"\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/post\": {\n            \"post\": {\n                \"summary\": \"POST Request\",\n                \"description\": \"The HTTP `POST` request method is meant to transfer data to a server \\n(and elicit a response). What data is returned depends on the implementation\\nof the server.\\n\\nA `POST` request can pass parameters to the server using \\\"Query String \\nParameters\\\", as well as the Request Body. For example, in the following request,\\n\\n> POST \\/hi\\/there?hand=wave\\n>\\n> <request-body>\\n\\nThe parameter \\\"hand\\\" has the value \\\"wave\\\". The request body can be in multiple\\nformats. These formats are defined by the MIME type of th\",\n                \"operationId\": \"PostPost\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/put\": {\n            \"put\": {\n                \"summary\": \"PUT Request\",\n                \"description\": \"The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \\ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\\nof the server.\\n\\nA `PUT` request can pass parameters to the server using \\\"Query String \\nParameters\\\", as well as the Request Body. For example, in the following \\nraw HTTP request,\\n\\n> PUT \\/hi\\/there?hand=wave\\n>\\n> <request-body>\\n\\n\\n\",\n                \"operationId\": \"PutPut\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/patch\": {\n            \"patch\": {\n                \"summary\": \"PATCH Request\",\n                \"description\": \"The HTTP `PATCH` method is used to update resources on a server. The exact\\nuse of `PATCH` requests depends on the server in question. There are a number\\nof server implementations which handle `PATCH` differently. Technically, \\n`PATCH` supports both Query String parameters and a Request Body.\\n\\nThis endpoint accepts an HTTP `PATCH` request and provides debug information\\nsuch as the HTTP headers, Query String arguments, and the Request Body.\",\n                \"operationId\": \"PatchPatch\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/delete\": {\n            \"delete\": {\n                \"summary\": \"DELETE Request\",\n                \"description\": \"The HTTP `DELETE` method is used to delete resources on a server. The exact\\nuse of `DELETE` requests depends on the server implementation. In general, \\n`DELETE` requests support both, Query String parameters as well as a Request \\nBody.\\n\\nThis endpoint accepts an HTTP `DELETE` request and provides debug information\\nsuch as the HTTP headers, Query String arguments, and the Request Body.\",\n                \"operationId\": \"DeleteDelete\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/status\\/200\": {\n            \"get\": {\n                \"summary\": \"Response Status Code\",\n                \"description\": \"This endpoint allows one to instruct the server which status code to respond with.\\n\\nEvery response is accompanied by a status code. The status code provides a summary of the nature of response sent by the server. For example, a status code of `200` means everything is okay with the response and a code of `404` implies that the requested URL does not exist on server. \\nA list of all valid HTTP status code can be found at the [List of Status Codes](https:\\/\\/en.wikipedia.org\\/wiki\\/List_of_HTTP_status_\",\n                \"operationId\": \"Status200Get\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/stream\\/10\": {\n            \"get\": {\n                \"summary\": \"Streamed Response\",\n                \"description\": \"This endpoint allows one to recieve streaming http response using [chunked transfer encoding](https:\\/\\/en.wikipedia.org\\/wiki\\/Chunked_transfer_encoding) of a configurable length.\\n\\nA streaming response does not wait for the entire response to be generated on server before flushing it out. This implies that for a fairly large response, parts of it can be streamed to the requestee as and when it is generated on server. The client can then take actions of processing this partially received data.\",\n                \"operationId\": \"Stream10Get\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/delay\\/3\": {\n            \"get\": {\n                \"summary\": \"Delay Response\",\n                \"description\": \"Using this endpoint one can configure how long it takes for the server to come back with a response. Appending a number to the URL defines the time (in seconds) the server will wait before responding.\\n\\nNote that a maximum delay of 10 seconds is accepted by the server.\",\n                \"operationId\": \"Delay3Get\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/encoding\\/utf8\": {\n            \"get\": {\n                \"summary\": \"Get UTF8 Encoded Response\",\n                \"description\": \"If a response of an endpoint requires to send data beyond the basic English \\/ ASCII character set, the `charset` parameter in the `Content-Type` response header defines the character encoding policy.\\n\\nThis endpoint returns an `UTF8` character encoded response body with text in various languages such as Greek, Latin, East Asian, etc. Postman can interpret the character encoding and use appropriate methods to display the character set in responses.\",\n                \"operationId\": \"EncodingUtf8Get\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/gzip\": {\n            \"get\": {\n                \"summary\": \"GZip Compressed Response\",\n                \"description\": \"This endpoint returns the response using [gzip compression algoritm](https:\\/\\/en.wikipedia.org\\/wiki\\/Gzip).\\nThe uncompressed response is a JSON string containing the details of the request sent by the client. For this endpoint to work, one should request with `Accept-encoding` header containing `gzip` as part of its value. Postman supports gzip, deflate and SDCH decoding and automatically sends them as part of the request.\\n\\nHTTP Compression allows the server to send responses in a compressed forma\",\n                \"operationId\": \"GzipGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"\\/deflate\": {\n            \"get\": {\n                \"summary\": \"Deflate Compressed Response\",\n                \"description\": \"This endpoint returns the response using [deflate compression algoritm](https:\\/\\/en.wikipedia.org\\/wiki\\/DEFLATE). \\nThe uncompressed response is a JSON string containing the details of the request sent by the client. For this endpoint to work, one should request with `Accept-encoding` header containing `deflate` as part of its value. Postman supports gzip, deflate and SDCH decoding and automatically sends them as part of the request.\\n\\nHTTP Compression allows the server to send responses in a compre\",\n                \"operationId\": \"DeflateGet\",\n                \"deprecated\": 0,\n                \"parameters\": [],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"\",\n                        \"content\": {\n                            \"application\\/json; charset=utf-8\": {\n                                \"schema\": {\n                                    \"$href\": \"#\\/components\\/schemas\\/200\"\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    },\n    \"components\": {\n        \"schemas\": {\n            \"200\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"authenticated\": {\n                        \"description\": \"\",\n                        \"type\": \"boolean\"\n                    }\n                }\n            },\n            \"Success\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"status\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"message\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"Cookies\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"cookies\": {\n                        \"description\": \"\",\n                        \"type\": \"\"\n                    }\n                }\n            },\n            \"cookies\": {\n                \"type\": \"object\"\n            },\n            \"Cookies1\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"foo1\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"foo2\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"CookiesResponse\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"cookies\": {\n                        \"description\": \"\",\n                        \"type\": \"\"\n                    }\n                }\n            },\n            \"Cookies2\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"foo2\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"Cookies3\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"Cookies2\": {\n                        \"description\": \"\",\n                        \"type\": \"object\"\n                    },\n                    \"cookies\": {\n                        \"description\": \"\",\n                        \"type\": \"\"\n                    }\n                }\n            },\n            \"my-sample-header\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"headers\": {\n                        \"description\": \"\",\n                        \"type\": \"\"\n                    }\n                }\n            },\n            \"headers\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"host\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"accept\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"accept-encoding\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"accept-language\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"cache-control\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"my-sample-header\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"postman-token\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"user-agent\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"x-forwarded-port\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"x-forwarded-proto\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"Responseheaders\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"Content-Type\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    },\n                    \"test\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"2002\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"status\": {\n                        \"description\": \"\",\n                        \"type\": \"integer\"\n                    }\n                }\n            },\n            \"sampledelayresponse\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"delay\": {\n                        \"description\": \"\",\n                        \"type\": \"string\"\n                    }\n                }\n            }\n        }\n    }\n}\n"
+  },
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2021-03-12 09:51:50 GMT",
+  "lastModified" : "2021-03-17 07:05:32 GMT",
+  "systemVersion" : 1,
+  "gatewayEndpoints" : { },
+  "id" : "9be25215-20c6-4e8c-803a-d9ddac3394cc"
+}

@@ -1,0 +1,22 @@
+{
+  "applicationID" : "aa83a664-5a5c-4249-a007-eb018a0c431e",
+  "name" : "Tenant1_App_STAGE",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "6810c1d84db2188aa2546c924857476cfc14f2ef741fd1927a2fffb9c80ef207"
+    }
+  },
+  "creationDate" : "2021-03-12 08:33:36 GMT",
+  "lastModified" : "2021-03-17 07:18:19 GMT",
+  "lastUpdated" : 1616429731952,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}

@@ -1,0 +1,22 @@
+{
+  "applicationID" : "a8132055-d35d-4e64-aaaf-aafcf323459f",
+  "name" : "Tenant2_App_DEV",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "d371d8c19ee27dce3327a3de3fdc5433a38503d770e592de2c055d36a6f5d15e"
+    }
+  },
+  "creationDate" : "2021-03-12 08:46:58 GMT",
+  "lastModified" : "2021-03-17 07:15:49 GMT",
+  "lastUpdated" : 1616429720761,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}

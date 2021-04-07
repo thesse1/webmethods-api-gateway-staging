@@ -1,0 +1,40 @@
+# Pipeline for apig staging
+
+trigger: none
+
+pool: '$(agent_pool_common)'
+
+# To do: Add apiProject as pipeline parameters (vs. pipeline variable)
+# parameters:
+# - name: apiProject
+#   type: string
+#   default: 'petstore'
+
+variables:
+- group: wm_test_apigw_staging
+
+steps:
+- checkout: self
+  submodules: "true"
+  persistCredentials: "true"
+
+- bash: |
+    echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_DEV"
+  condition: and(succeeded(), eq(variables['target_type'], 'DEV'))
+
+- bash: |
+    echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_STAGE"
+  condition: and(succeeded(), eq(variables['target_type'], 'STAGE'))
+
+- bash: |
+    echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_PROD"
+  condition: and(succeeded(), eq(variables['target_type'], 'PROD'))
+
+- template: /pipelines/api-build-and-deploy-template.yml  # Template reference
+  parameters:
+    apiProject: $(apiProject)
+    build_environment: $(environment_build)
+    target_environment: $(target_environment)
+    target_type: $(target_type)
+    prep_condition: in(variables['target_type'], 'STAGE', 'PROD')
+    test_condition: in(variables['target_type'], 'STAGE', 'PROD')

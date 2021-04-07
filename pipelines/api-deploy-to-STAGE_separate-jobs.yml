@@ -1,0 +1,42 @@
+# Pipeline for apig staging
+
+trigger: none
+
+# To do: Add apiProject as pipeline parameters (vs. pipeline variable)
+# parameters:
+# - name: apiProject
+#   type: string
+#   default: 'petstore'
+
+variables:
+- group: wm_test_apigw_staging
+
+jobs:
+- job: Build
+  pool: '$(agent_pool_build)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_environment: $(environment_stage)
+      target_type: STAGE
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+
+- job: Deploy
+  pool: '$(agent_pool_stage)'
+  steps:
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_environment: $(environment_stage)
+      target_type: STAGE
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  dependsOn: Build
+  condition: succeeded()
