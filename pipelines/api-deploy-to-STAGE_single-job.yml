@@ -2,7 +2,8 @@
 
 trigger: none
 
-pool: '$(agent_pool_common)'
+pool:
+  vmImage: '$(agent_pool_common)'
 
 # To do: Add apiProject as pipeline parameters (vs. pipeline variable)
 # parameters:
