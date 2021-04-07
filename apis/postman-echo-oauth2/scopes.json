@@ -1,1 +1,2 @@
-[ { "name": "postman-echo", "description": "postman-echo scope definition" } ]
+[ { "name": "postman-echo",
+    "description": "postman-echo scope definition" } ]
