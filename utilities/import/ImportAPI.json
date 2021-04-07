@@ -7,80 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "ImportAPI",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{{importer_password}}",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "{{importer_user}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/zip"
-					},
-					{
-						"key": "Host",
-						"value": "{{hostname}}"
-					}
-				],
-				"body": {
-					"mode": "file",
-					"file": {
-						"src": "{{file_Loc}}"
-					}
-				},
-				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles ",
-					"protocol": "https",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"rest",
-						"apigateway",
-						"archive"
-					],
-					"query": [
-						{
-							"key": "overwrite",
-							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles "
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Get local OAuth2 Authorization Server alias",
 			"event": [
 				{
@@ -91,7 +17,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
+							"console.log(\"scopes Postman variable: \" + pm.variables.get(\"scopes\"));\r",
+							"\r",
 							"let scopes = JSON.parse(pm.variables.get(\"scopes\"));\r",
+							"\r",
+							"console.log(\"Parsed scopes Postman variable: \" + JSON.stringify(scopes));\r",
+							"\r",
 							"let alias = JSON.parse(responseBody).alias;\r",
 							"if (alias === undefined || alias === null || scopes === undefined || scopes === null || scopes.length === undefined || scopes.length === null || scopes.length === 0) {\r",
 							"    postman.setNextRequest(null);\r",
@@ -242,6 +173,80 @@
 						"apigateway",
 						"alias",
 						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ImportAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{importer_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{importer_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/zip"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "{{file_Loc}}"
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles ",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"archive"
+					],
+					"query": [
+						{
+							"key": "overwrite",
+							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles "
+						}
 					]
 				}
 			},
