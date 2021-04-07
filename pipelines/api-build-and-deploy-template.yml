@@ -87,9 +87,12 @@ steps:
 
 - script: |
     cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
+    echo
     newman run utilities/import/ImportAPI.json --reporters cli \
     --env-var importer_user=$(importer_user) \
     --env-var importer_password=$(importer_password) \
+    --env-var initializer_user=$(initializer_user) \
+    --env-var initializer_password=$(initializer_password) \
     --env-var scopes=`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json` \
     --env-var file_Loc=$(Build.BuildId)_import.zip -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
@@ -149,9 +152,14 @@ steps:
     artifactName: 'BUILD_export_${{parameters.target_type}}_import'
 
 - script: |
+    cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
+    echo
     newman run utilities/import/ImportAPI.json --reporters cli \
     --env-var importer_user=$(importer_user) \
     --env-var importer_password=$(importer_password) \
+    --env-var initializer_user=$(initializer_user) \
+    --env-var initializer_password=$(initializer_password) \
+    --env-var scopes=`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json` \
     --env-var file_Loc=$(Build.BuildId)_export.zip -e environments/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
