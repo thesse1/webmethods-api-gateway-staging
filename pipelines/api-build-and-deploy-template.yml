@@ -86,9 +86,11 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - script: |
+    cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
     newman run utilities/import/ImportAPI.json --reporters cli \
     --env-var importer_user=$(importer_user) \
     --env-var importer_password=$(importer_password) \
+    --env-var scopes=`cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json` \
     --env-var file_Loc=$(Build.BuildId)_import.zip -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
