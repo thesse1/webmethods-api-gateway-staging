@@ -58,6 +58,129 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let alias = JSON.parse(responseBody).alias;\r",
+							"if (alias === undefined || alias === null) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    alias.tokenGeneratorConfig = alias.tokenGeneratorConfig || {};\r",
+							"    alias.tokenGeneratorConfig.accessTokenExpInterval = 600;\r",
+							"    alias.tokenGeneratorConfig.authCodeExpInterval = 60;\r",
+							"    let aliasString = JSON.stringify(alias);\r",
+							"    pm.globals.set(\"alias\", aliasString);\r",
+							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{alias}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
