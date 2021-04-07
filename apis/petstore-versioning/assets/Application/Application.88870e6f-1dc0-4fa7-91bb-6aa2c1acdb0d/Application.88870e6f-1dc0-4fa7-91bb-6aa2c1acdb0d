@@ -1,6 +1,7 @@
 {
   "applicationID" : "88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d",
   "name" : "Petstore_Versioning_App_PROD",
+  "description" : "This application should be used on PROD environment",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],
@@ -10,8 +11,8 @@
     }
   },
   "creationDate" : "2021-04-07 10:36:55 GMT",
-  "lastModified" : "2021-04-07 10:38:02 GMT",
-  "lastUpdated" : 1617791882472,
+  "lastModified" : "2021-04-07 13:36:28 GMT",
+  "lastUpdated" : 1617802588647,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",

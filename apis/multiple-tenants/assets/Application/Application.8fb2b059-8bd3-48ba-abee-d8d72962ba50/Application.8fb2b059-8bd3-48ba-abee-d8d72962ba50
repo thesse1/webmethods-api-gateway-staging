@@ -1,6 +1,7 @@
 {
   "applicationID" : "8fb2b059-8bd3-48ba-abee-d8d72962ba50",
   "name" : "Tenant2_App_PROD",
+  "description" : "This application should be used on PROD environment",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],
@@ -10,8 +11,8 @@
     }
   },
   "creationDate" : "2021-03-12 08:47:52 GMT",
-  "lastModified" : "2021-03-17 07:18:22 GMT",
-  "lastUpdated" : 1616429724529,
+  "lastModified" : "2021-04-07 13:36:12 GMT",
+  "lastUpdated" : 1617802572409,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",
