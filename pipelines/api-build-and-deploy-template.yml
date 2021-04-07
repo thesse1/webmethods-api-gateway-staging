@@ -86,16 +86,11 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - script: |
-    cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
-    jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
-    echo
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
 - script: |
-    cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
-    echo
     newman run utilities/import/ImportAPI.json --reporters cli \
     --env-var importer_user=$(importer_user) \
     --env-var importer_password=$(importer_password) \
@@ -160,9 +155,6 @@ steps:
     artifactName: 'BUILD_export_${{parameters.target_type}}_import'
 
 - script: |
-    cat $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
-    jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json
-    echo
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
