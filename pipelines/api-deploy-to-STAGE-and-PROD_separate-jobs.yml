@@ -13,7 +13,9 @@ variables:
 
 jobs:
 - job: Build_for_STAGE
-  pool: '$(agent_pool_build)'
+  pool:
+    name: '$(agent_pool_build)'
+    vmImage: '$(agent_pool_vmImage)'
   steps:
   - checkout: self
     submodules: "true"
@@ -28,7 +30,9 @@ jobs:
       test_condition: ${{true}}
 
 - job: Deploy_to_STAGE
-  pool: '$(agent_pool_stage)'
+  pool:
+    name: '$(agent_pool_stage)'
+    vmImage: '$(agent_pool_vmImage)'
   steps:
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
@@ -42,7 +46,9 @@ jobs:
   condition: succeeded()
 
 - job: Build_for_PROD
-  pool: '$(agent_pool_build)'
+  pool:
+    name: '$(agent_pool_build)'
+    vmImage: '$(agent_pool_vmImage)'
   steps:
   - checkout: self
     submodules: "true"
@@ -59,7 +65,9 @@ jobs:
   condition: succeeded()
 
 - job: Deploy_to_PROD
-  pool: '$(agent_pool_prod)'
+  pool:
+    name: '$(agent_pool_prod)'
+    vmImage: '$(agent_pool_vmImage)'
   steps:
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:

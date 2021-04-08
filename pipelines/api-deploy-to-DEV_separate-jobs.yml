@@ -13,7 +13,9 @@ variables:
 
 jobs:
 - job: Build
-  pool: '$(agent_pool_build)'
+  pool:
+    name: '$(agent_pool_build)'
+    vmImage: '$(agent_pool_vmImage)'
   steps:
   - checkout: self
     submodules: "true"
@@ -28,7 +30,9 @@ jobs:
       test_condition: ${{false}}
 
 - job: Deploy
-  pool: '$(agent_pool_dev)'
+  pool:
+    name: '$(agent_pool_dev)'
+    vmImage: '$(agent_pool_vmImage)'
   steps:
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
