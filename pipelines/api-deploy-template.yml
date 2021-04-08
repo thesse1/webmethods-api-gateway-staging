@@ -76,7 +76,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/apigw-staging-test/$(Build.BuildId)_export.zip'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export.zip'
     artifactName: '${{parameters.target_type}}_import'
 
 - script: |
