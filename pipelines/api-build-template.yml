@@ -139,7 +139,7 @@ steps:
 - bash: |
    curl $(build_environment_insecureflag) \
           -d @"apis/${{parameters.apiProject}}/export_payload.json" \
-          --output $(Build.BuildId)_export.zip \
+          --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user $(exporter_user):$(exporter_password) \
           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
@@ -151,7 +151,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export.zip'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip'
     artifactName: 'BUILD_export_for_${{parameters.target_type}}'
 
 - task: PublishTestResults@2

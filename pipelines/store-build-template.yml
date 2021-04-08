@@ -67,7 +67,7 @@ steps:
       {
         "files": [
           {
-            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export.zip",
+            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
             "target": "$(artifactoryFolder)/apigw-staging-test/"
           }
         ]
