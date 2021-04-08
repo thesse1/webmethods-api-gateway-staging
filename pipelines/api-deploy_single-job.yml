@@ -32,7 +32,16 @@ steps:
     echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_PROD"
   condition: and(succeeded(), eq(variables['target_type'], 'PROD'))
 
-- template: /pipelines/api-build-and-deploy-template.yml  # Template reference
+- template: /pipelines/api-build-template.yml  # Template reference
+  parameters:
+    apiProject: $(apiProject)
+    build_environment: $(environment_build)
+    target_environment: $(target_environment)
+    target_type: $(target_type)
+    prep_condition: in(variables['target_type'], 'STAGE', 'PROD')
+    test_condition: in(variables['target_type'], 'STAGE', 'PROD')
+
+- template: /pipelines/api-deploy-template.yml  # Template reference
   parameters:
     apiProject: $(apiProject)
     build_environment: $(environment_build)

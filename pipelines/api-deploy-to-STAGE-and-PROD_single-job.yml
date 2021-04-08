@@ -20,7 +20,7 @@ steps:
   submodules: "true"
   persistCredentials: "true"
 
-- template: /pipelines/api-build-and-deploy-template.yml  # Template reference
+- template: /pipelines/api-build-template.yml  # Template reference
   parameters:
     apiProject: $(apiProject)
     build_environment: $(environment_build)
@@ -29,7 +29,25 @@ steps:
     prep_condition: ${{true}}
     test_condition: ${{true}}
 
-- template: /pipelines/api-build-and-deploy-template.yml  # Template reference
+- template: /pipelines/api-deploy-template.yml  # Template reference
+  parameters:
+    apiProject: $(apiProject)
+    build_environment: $(environment_build)
+    target_environment: $(environment_stage)
+    target_type: STAGE
+    prep_condition: ${{true}}
+    test_condition: ${{true}}
+
+- template: /pipelines/api-build-template.yml  # Template reference
+  parameters:
+    apiProject: $(apiProject)
+    build_environment: $(environment_build)
+    target_environment: $(environment_prod)
+    target_type: PROD
+    prep_condition: ${{true}}
+    test_condition: ${{true}}
+
+- template: /pipelines/api-deploy-template.yml  # Template reference
   parameters:
     apiProject: $(apiProject)
     build_environment: $(environment_build)
