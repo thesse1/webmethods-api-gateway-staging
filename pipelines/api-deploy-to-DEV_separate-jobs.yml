@@ -28,12 +28,28 @@ jobs:
       target_type: DEV
       prep_condition: ${{false}}
       test_condition: ${{false}}
+  - template: /pipelines/store-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_environment: $(environment_dev)
+      target_type: DEV
+      prep_condition: ${{false}}
+      test_condition: ${{false}}
 
 - job: Deploy
   pool:
     name: '$(agent_pool_dev)'
     vmImage: '$(agent_pool_vmImage)'
   steps:
+  - template: /pipelines/retrieve-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_environment: $(environment_dev)
+      target_type: DEV
+      prep_condition: ${{false}}
+      test_condition: ${{false}}
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
