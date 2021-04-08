@@ -163,7 +163,7 @@ steps:
         "files": [
           {
             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export.zip",
-            "target": "example-repo-local"
+            "target": "$(artifactoryFolder)/apigw-staging-test/"
           }
         ]
       }
