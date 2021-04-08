@@ -163,7 +163,7 @@ steps:
         "files": [
           {
             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export.zip",
-            "target": "$(artifactoryFolder)/apigw-staging-test/"
+            "target": "$(artifactoryFolder)/"
           }
         ]
       }
