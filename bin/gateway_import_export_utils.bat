@@ -57,10 +57,12 @@ IF EXIST %CURRENT_DIR%\apis\%PROJECT_NAME%\assets (
 
 :exportapi
 IF EXIST %CURRENT_DIR%\apis\%PROJECT_NAME%\assets (
- curl %GATEWAY_URL%/rest/apigateway/archive -k -d @"%CURRENT_DIR%\apis\%PROJECT_NAME%\export_payload.json" --output %CURRENT_DIR%\%PROJECT_NAME%.zip --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD% -H "x-HTTP-Method-Override: GET" -H "Content-Type:application/json"
- powershell Expand-Archive -Path %CURRENT_DIR%\%PROJECT_NAME%.zip -DestinationPath %CURRENT_DIR%\apis\%PROJECT_NAME%\assets -Force
-del "%CURRENT_DIR%\%PROJECT_NAME%.zip"
-goto :EOF
+  rmdir "%CURRENT_DIR%\apis\%PROJECT_NAME%\assets" /s /q
+  mkdir "%CURRENT_DIR%\apis\%PROJECT_NAME%\assets"
+  curl %GATEWAY_URL%/rest/apigateway/archive -k -d @"%CURRENT_DIR%\apis\%PROJECT_NAME%\export_payload.json" --output %CURRENT_DIR%\%PROJECT_NAME%.zip --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD% -H "x-HTTP-Method-Override: GET" -H "Content-Type:application/json"
+  powershell Expand-Archive -Path %CURRENT_DIR%\%PROJECT_NAME%.zip -DestinationPath %CURRENT_DIR%\apis\%PROJECT_NAME%\assets -Force
+  del "%CURRENT_DIR%\%PROJECT_NAME%.zip"
+  goto :EOF
 ) ELSE (
   echo "Folder %CURRENT_DIR%\apis\%PROJECT_NAME%\assets does not exist"
   echo "API with name %PROJECT_NAME% does not exist"
