@@ -83,9 +83,11 @@ IF EXIST %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets (
 
 :exportconfig
 IF EXIST %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets (
- curl %GATEWAY_URL%/rest/apigateway/archive -k -d @"%CURRENT_DIR%\configuration\%ENVIRONMENT%\export_payload.json" --output %CURRENT_DIR%\%ENVIRONMENT%.zip --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD% -H "x-HTTP-Method-Override: GET" -H "Content-Type:application/json"
- powershell Expand-Archive -Path %CURRENT_DIR%\%ENVIRONMENT%.zip -DestinationPath %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets -Force
-del "%CURRENT_DIR%\%ENVIRONMENT%.zip"
+  rmdir "%CURRENT_DIR%\configuration\%ENVIRONMENT%\assets" /s /q
+  mkdir "%CURRENT_DIR%\configuration\%ENVIRONMENT%\assets"
+  curl %GATEWAY_URL%/rest/apigateway/archive -k -d @"%CURRENT_DIR%\configuration\%ENVIRONMENT%\export_payload.json" --output %CURRENT_DIR%\%ENVIRONMENT%.zip --user %GATEWAY_USERNAME%:%GATEWAY_PASSWORD% -H "x-HTTP-Method-Override: GET" -H "Content-Type:application/json"
+  powershell Expand-Archive -Path %CURRENT_DIR%\%ENVIRONMENT%.zip -DestinationPath %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets -Force
+  del "%CURRENT_DIR%\%ENVIRONMENT%.zip"
 goto :EOF
 ) ELSE (
   echo "Folder %CURRENT_DIR%\configuration\%ENVIRONMENT%\assets does not exist"
