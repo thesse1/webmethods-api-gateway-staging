@@ -257,7 +257,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles ",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -271,7 +271,7 @@
 					"query": [
 						{
 							"key": "overwrite",
-							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles "
+							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes"
 						}
 					]
 				}
