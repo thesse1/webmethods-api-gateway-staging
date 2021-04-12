@@ -142,7 +142,9 @@
 							"pm.test(\"Response contains OAuth2 scopes\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.alias.scopes).to.exist;\r",
-							"});"
+							"});\r",
+							"\r",
+							"console.log(\"OAuth2 scopes set to: \" + JSON.stringify(pm.response.json().alias.scopes));"
 						],
 						"type": "text/javascript"
 					}
