@@ -282,7 +282,6 @@
 							"    console.log(\"ID: \" + api.id);\r",
 							"    console.log(\"Name: \" + api.apiName);\r",
 							"    console.log(\"Version: \" + api.apiVersion);\r",
-							"    console.log(\"Adding tags: \" + \"BuildId:{{buildId}}, BuildNumber:{{buildNumber}}, PipelineName:{{definitionName}}\");\r",
 							"\r",
 							"    postman.setNextRequest(\"Update one API\");\r",
 							"}"
