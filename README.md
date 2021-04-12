@@ -336,7 +336,7 @@ More manipulations or tests (e.g., enforcement of API standards) can be added la
 
 Finally, the manipulated API Gateway assets will be exported from the BUILD environment and imported on the target environment (DEV, STAGE or PROD).
 
-> Note: If the imported assets already exist on the target environment (i.e., assets with same IDs), they will be overwritten for the following asset types: APIs, policies, policy actions, applications, users, groups and teams. Existing aliases (and assets of any other types, like configuration items) will not be overwritten, so we can configure different alias values and other settings on different environments.
+> Note: If the imported assets already exist on the target environment (i.e., assets with same IDs), they will be overwritten for the following asset types: APIs, policies, policy actions, applications, scope mappings, users, groups and teams. Existing aliases (and assets of any other types, like configuration items) will not be overwritten, so we can configure different alias values and other settings on different environments.
 
 Every pipeline will publish the following artifacts:
 - BUILD_import: The API Gateway asset archive (ZIP file) containing the assets initially imported on the BUILD environment
