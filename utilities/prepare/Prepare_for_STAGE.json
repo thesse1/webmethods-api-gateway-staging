@@ -6,6 +6,70 @@
 	},
 	"item": [
 		{
+			"name": "Get and Validate all Policy Actions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"Get all Applications\");\r",
+							"\r",
+							"let policyActions = JSON.parse(responseBody).policyAction;\r",
+							"if (policyActions === undefined || policyActions === null || policyActions.length === 0) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"} else {\r",
+							"    for (i in policyActions) {\r",
+							"        if (![\"GlobalLogInvocationPolicyAction\"].includes(policyActions[i].id)) {\r",
+							"            if (policyActions[i].templateKey === \"logInvocation\") {\r",
+							"                console.log(\"Log Invocation policy not allowed on API level\");\r",
+							"                console.log(\"ID: \" + policyActions[i].id);\r",
+							"                console.log(\"Name: \" + policyActions[i].names[0].value);\r",
+							"\r",
+							"                pm.test(\"No local Log Invocation policies\", function () {\r",
+							"                    pm.expect(policyActions[i].templateKey).not.to.be.equal(\"logInvocation\");\r",
+							"                });\r",
+							"\r",
+							"                postman.setNextRequest(null);\r",
+							"                break;\r",
+							"            }\r",
+							"        }\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/policyActions",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"policyActions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get all Applications",
 			"event": [
 				{
