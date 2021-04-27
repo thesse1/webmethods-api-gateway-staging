@@ -408,7 +408,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get All Strategies\");\r",
+							"postman.setNextRequest(\"Get all Strategies\");\r",
 							"\r",
 							"let apiResponse=JSON.parse(responseBody);\r",
 							"let aliases = apiResponse.alias;\r",
@@ -513,7 +513,7 @@
 			"response": []
 		},
 		{
-			"name": "Get All Strategies",
+			"name": "Get all Strategies",
 			"event": [
 				{
 					"listen": "test",
@@ -580,7 +580,7 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get All Strategies\");"
+							"postman.setNextRequest(\"Get all Strategies\");"
 						],
 						"type": "text/javascript"
 					}
