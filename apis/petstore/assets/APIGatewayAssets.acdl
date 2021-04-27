@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-04-08T16:45:19"/>
+    <buildInfo name="BuildTimestamp" value="2021-04-27T15:24:03"/>
     <asset name="API.f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5" displayName="SwaggerPetstore[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.19912a40-9fd6-420d-b3bd-92e2c6c630e4</dependsOn>
@@ -13,6 +13,7 @@
     </asset>
     <asset name="Policy.479e023e-526e-4bd7-a423-fbf092368e13" displayName="Policy For API SwaggerPetstore[1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.326314e4-d0fc-4890-96ba-d17e8eebfc80</dependsOn>
         <dependsOn>APIGateway:PolicyAction.a486bfd1-59e8-4ef3-8fc6-14e2b14e88ba</dependsOn>
         <dependsOn>APIGateway:PolicyAction.c7aa28d6-70f5-4fb1-8d8b-804970d504be</dependsOn>
         <dependsOn>APIGateway:PolicyAction.eabb4119-8d77-4b38-ac97-9a1c36c316be</dependsOn>
@@ -26,6 +27,9 @@
         <property name="value for Simple alias PetStore_Routing_Alias" many="false" isSecure="false" displayName="value for Simple alias PetStore_Routing_Alias">
             <value>https://petstore.swagger.io/v2</value>
         </property>
+    </asset>
+    <asset name="PolicyAction.326314e4-d0fc-4890-96ba-d17e8eebfc80" displayName="Policy Action [Log Invocation] -&gt; Policy For API SwaggerPetstore[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.eabb4119-8d77-4b38-ac97-9a1c36c316be" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API SwaggerPetstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
