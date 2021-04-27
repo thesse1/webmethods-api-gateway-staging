@@ -580,7 +580,7 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Strategies\");"
+							"postman.setNextRequest(\"Get All Strategies\");"
 						],
 						"type": "text/javascript"
 					}

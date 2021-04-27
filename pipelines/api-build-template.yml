@@ -81,7 +81,7 @@ steps:
     -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Delete all APIs, applications, scopes and aliases on API Gateway BUILD'
+  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
   env:
     no_proxy: $(build_environment_ip)
 
