@@ -640,7 +640,7 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Create the API Deployable from the flat representation for API project xxx | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
-| Delete all APIs, applications, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /utilities/prepare |
+| Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /utilities/prepare |
 | Import the Deployable To API Gateway BUILD | Executing the ImportAPI.json Postman collection in /utilities/import |
 | Run tests on API Gateway BUILD (if test_condition is ${{true}}) | Executing the APITest.json Postman collection in the API project's root folder |
 | Prepare assets: Delete all non-STAGE/PROD applications on API Gateway BUILD, unsuspend all remaining applications, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_STAGE.json or Prepare_for_PROD.json Postman collection in /utilities/prepare |
