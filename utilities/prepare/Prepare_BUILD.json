@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8bc71799-15fd-44bb-9b7b-26633d4a2912",
+		"_postman_id": "5c748340-2603-4abc-83c0-1016c62c5077",
 		"name": "Prepare_BUILD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -408,7 +408,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(null);\r",
+							"postman.setNextRequest(\"Get All Strategies\");\r",
 							"\r",
 							"let apiResponse=JSON.parse(responseBody);\r",
 							"let aliases = apiResponse.alias;\r",
@@ -507,6 +507,106 @@
 						"apigateway",
 						"alias",
 						"{{aliasId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Strategies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let strategies = apiResponse.strategies;\r",
+							"if (strategies === undefined || strategies === null || strategies.length === 0) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    pm.globals.set(\"strategyId\", strategies[0].id);\r",
+							"\r",
+							"    console.log(\"Delete strategy\");\r",
+							"    console.log(\"ID: \" + strategies[0].id);\r",
+							"    console.log(\"Name: \" + strategies[0].name);\r",
+							"    console.log(\"Decription: \" + strategies[0].description);\r",
+							"\r",
+							"    postman.setNextRequest(\"Delete one Strategy\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Strategy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"Get all Strategies\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies",
+						"{{strategyId}}"
 					]
 				}
 			},
