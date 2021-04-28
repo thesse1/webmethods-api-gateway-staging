@@ -16,26 +16,21 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Applications\");\r",
-							"\r",
 							"let policyActions = JSON.parse(responseBody).policyAction;\r",
 							"if (policyActions === undefined || policyActions === null || policyActions.length === 0) {\r",
-							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"} else {\r",
 							"    for (i in policyActions) {\r",
-							"        if (![\"GlobalLogInvocationPolicyAction\"].includes(policyActions[i].id)) {\r",
-							"            if (policyActions[i].templateKey === \"logInvocation\") {\r",
-							"                console.log(\"Log Invocation policy not allowed on API level\");\r",
-							"                console.log(\"ID: \" + policyActions[i].id);\r",
-							"                console.log(\"Name: \" + policyActions[i].names[0].value);\r",
+							"        if ((policyActions[i].templateKey === \"logInvocation\") && (policyActions[i].id !== \"GlobalLogInvocationPolicyAction\")) {\r",
+							"            console.log(\"Log Invocation policy not allowed on API level\");\r",
+							"            console.log(\"ID: \" + policyActions[i].id);\r",
+							"            console.log(\"Name: \" + policyActions[i].names[0].value);\r",
 							"\r",
-							"                pm.test(\"No local Log Invocation policies\", function () {\r",
-							"                    pm.expect(policyActions[i].templateKey).not.to.be.equal(\"logInvocation\");\r",
-							"                });\r",
+							"            pm.test(\"No local Log Invocation policies\", function () {\r",
+							"                pm.expect(policyActions[i].templateKey).not.to.be.equal(\"logInvocation\");\r",
+							"            });\r",
 							"\r",
-							"                postman.setNextRequest(null);\r",
-							"                break;\r",
-							"            }\r",
+							"            postman.setNextRequest(null);\r",
+							"            break;\r",
 							"        }\r",
 							"    }\r",
 							"}"
@@ -64,6 +59,73 @@
 						"rest",
 						"apigateway",
 						"policyActions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get and Validate all Applications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let applications = apiResponse.applications;\r",
+							"if (applications === undefined || applications === null || applications.length === 0) {\r",
+							"} else {\r",
+							"    for (i in applications) {\r",
+							"        if (!(applications[i].name.endsWith(\"_CONFIG\") || applications[i].name.endsWith(\"_DEV\")\r",
+							"                || applications[i].name.endsWith(\"_STAGE\") || applications[i].name.endsWith(\"_PROD\"))) {\r",
+							"            console.log(\"Application name must end with _ plus environment name\");\r",
+							"            console.log(\"ID: \" + applications[i].id);\r",
+							"            console.log(\"Name: \" + applications[i].name);\r",
+							"            console.log(\"Version: \" + applications[i].version);\r",
+							"            console.log(\"Description: \" + applications[i].description);\r",
+							"\r",
+							"            pm.test(\"Application name end with _ plus environment name\", function () {\r",
+							"                pm.expect.fail(\"Application name does not end with _ plus environment name: \" + applications[i].name);\r",
+							"            });\r",
+							"\r",
+							"            postman.setNextRequest(null);\r",
+							"            break;\r",
+							"        }\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"applications"
 					]
 				}
 			},
