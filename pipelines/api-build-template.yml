@@ -131,7 +131,7 @@ steps:
     -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Validate and prepare assets: Validate policy actions, delete all non-${{parameters.target_type}}, unsuspend all remaining applications, add build details as tags to APIs'
+  displayName: 'Validate and prepare assets: Validate policy actions, application names and API groupings, delete all non-${{parameters.target_type}}, unsuspend all remaining applications, add build details as tags to APIs'
   env:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.prep_condition}})
