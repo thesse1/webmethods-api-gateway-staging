@@ -1475,6 +1475,7 @@
   "apiVersion" : "1.0.8",
   "apiDescription" : "This is a sample server Petstore server, version 1.0.8.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
   "maturityState" : "Beta",
+  "apiGroups" : [ "Sales and Ordering" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
@@ -1485,7 +1486,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2020-04-08 16:06:04 GMT",
-  "lastModified" : "2021-04-07 10:37:19 GMT",
+  "lastModified" : "2021-04-29 08:18:59 GMT",
   "nextVersion" : "4bd552e3-064f-444a-bc77-7560059c9955",
   "systemVersion" : 1,
   "mockService" : {

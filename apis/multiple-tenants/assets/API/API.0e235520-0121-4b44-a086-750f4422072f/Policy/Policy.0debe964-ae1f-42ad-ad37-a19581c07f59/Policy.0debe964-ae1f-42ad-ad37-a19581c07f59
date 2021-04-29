@@ -49,7 +49,7 @@
     "stageKey" : "responseProcessing"
   } ],
   "policyScope" : "SERVICE",
+  "global" : false,
   "active" : false,
-  "systemPolicy" : false,
-  "global" : false
+  "systemPolicy" : false
 }
