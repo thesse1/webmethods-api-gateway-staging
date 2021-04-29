@@ -1,0 +1,6 @@
+[
+    {
+        "name": "prod-scope",
+        "description": "OAuth2 demo scope on PROD"
+    }
+]
