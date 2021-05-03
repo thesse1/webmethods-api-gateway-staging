@@ -1,25 +1,50 @@
-{
-  "a593c88b-4e0a-4e4e-85ec-7e19d90ca332": {
+[
+  {
+    "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
     "DEV": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV",
+      "name" : "PetStore_Routing_Alias_1_0_8",
+      "description" : "Petstore alias for API version 1.0.8 on DEV",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
     "STAGE": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE",
+      "name" : "PetStore_Routing_Alias_1_0_8",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
     "PROD": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD",
+      "name" : "PetStore_Routing_Alias_1_0_8",
+      "description" : "Petstore alias for API version 1.0.8 on PROD",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  },
+  {
+    "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
+    "DEV": {
+      "name" : "PetStore_Routing_Alias_1_0_9",
+      "description" : "Petstore alias for API version 1.0.9 on DEV",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "STAGE": {
+      "name" : "PetStore_Routing_Alias_1_0_9",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD": {
+      "name" : "PetStore_Routing_Alias_1_0_9",
+      "description" : "Petstore alias for API version 1.0.9 on PROD",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     }
   }
-}
+]
