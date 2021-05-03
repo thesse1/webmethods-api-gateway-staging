@@ -120,6 +120,13 @@ steps:
     artifactName: 'test_results'
   condition: ${{parameters.test_condition}}
 
+# To do: Replace STAGE by ${{parameters.target_type}}
+
+- script: |
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: .STAGE}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Prepare list of aliases to be updated'
+
 - script: |
     newman run utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
     --env-var preparer_user=$(preparer_user) \
@@ -128,6 +135,7 @@ steps:
     --env-var buildNumber=$(Build.BuildNumber) \
     --env-var definitionName=$(Build.DefinitionName) \
     --env-var definitionVersion=$(Build.DefinitionVersion) \
+    --env-var aliases='$(aliases)' \
     -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'

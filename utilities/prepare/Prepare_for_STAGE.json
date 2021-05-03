@@ -132,6 +132,216 @@
 			"response": []
 		},
 		{
+			"name": "Get all Aliases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let aliasesString = pm.variables.get(\"aliases\");\r",
+							"\r",
+							"console.log(\"aliases Postman variable: \" + aliasesString);\r",
+							"\r",
+							"let oldaliases = JSON.parse(responseBody).alias;\r",
+							"\r",
+							"if (aliasesString === undefined || aliasesString === null || aliasesString === \"\") {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"} else {\r",
+							"    let aliases = JSON.parse(aliasesString);\r",
+							"\r",
+							"    console.log(\"Parsed aliases Postman variable: \" + JSON.stringify(aliases));\r",
+							"\r",
+							"    if (aliases.length === 0) {\r",
+							"        postman.setNextRequest(\"Get all Applications\");\r",
+							"    } else {\r",
+							"        postman.setNextRequest(\"Update one Alias\");\r",
+							"\r",
+							"        for (var i=0; i<aliases.length; i++) {\r",
+							"            let aliasId = aliases[i].id;\r",
+							"\r",
+							"            console.log(\"Alias ID to be checked: \" + aliasId);\r",
+							"\r",
+							"            let matchingaliases = oldaliases.filter(alias => alias.id === aliasId);\r",
+							"\r",
+							"            console.log(\"Matching aliases: \" + matchingaliases);\r",
+							"\r",
+							"            if (matchingaliases.length === 0) { // No alias found\r",
+							"                console.log(\"No matching alias found!\");\r",
+							"                console.log(\"ID: \" + aliases[i].id);\r",
+							"                console.log(\"Name: \" + aliases[i].content.name);\r",
+							"                console.log(\"Description: \" + aliases[i].content.description);\r",
+							"\r",
+							"                pm.test(\"Alias to be updated must exist\", function () {\r",
+							"                    pm.expect(matchingaliases.length).to.be.equal(1);\r",
+							"                });\r",
+							"\r",
+							"                postman.setNextRequest(null);\r",
+							"                break;\r",
+							"            } else if (matchingaliases.length === 1) { // One alias found\r",
+							"                console.log(\"Found!\");\r",
+							"\r",
+							"                if (matchingaliases[0].name !== aliases[i].content.name) {\r",
+							"                    console.log(\"Names do not match!\");\r",
+							"                    console.log(\"ID: \" + aliases[i].id);\r",
+							"                    console.log(\"Name: \" + aliases[i].content.name);\r",
+							"                    console.log(\"Description: \" + aliases[i].content.description);\r",
+							"\r",
+							"                    pm.test(\"Alias to be updated must have the same name\", function () {\r",
+							"                        pm.expect(matchingaliases[0].name).to.be.equal(aliases[i].content.name);\r",
+							"                    });\r",
+							"\r",
+							"                    postman.setNextRequest(null);\r",
+							"                    break;\r",
+							"                }\r",
+							"            } else { // More than one alias found\r",
+							"                console.log(\"More than one matching alias found!\");\r",
+							"                console.log(\"ID: \" + aliases[i].id);\r",
+							"                console.log(\"Name: \" + aliases[i].content.name);\r",
+							"                console.log(\"Description: \" + aliases[i].content.description);\r",
+							"\r",
+							"                pm.test(\"Alias to be updated must exist\", function () {\r",
+							"                    pm.expect(matchingaliases.length).to.be.equal(1);\r",
+							"                });\r",
+							"\r",
+							"                postman.setNextRequest(null);\r",
+							"                break;\r",
+							"            }\r",
+							"        }\r",
+							"\r",
+							"        let alias = aliases.pop();\r",
+							"        let aliasId = alias.id;\r",
+							"        let aliasContent = alias.content;\r",
+							"\r",
+							"        let aliasesString = JSON.stringify(aliases);\r",
+							"        let aliasContentString = JSON.stringify(aliasContent);\r",
+							"\r",
+							"        pm.globals.set(\"aliases\", aliasesString);\r",
+							"        pm.globals.set(\"aliasContent\", aliasContentString);\r",
+							"        pm.globals.set(\"aliasId\", aliasId);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update one Alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let aliasesString = pm.variables.get(\"aliases\");\r",
+							"\r",
+							"console.log(\"aliases Postman variable: \" + aliasesString);\r",
+							"\r",
+							"if (aliasesString === undefined || aliasesString === null || aliasesString === \"\") {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"} else {\r",
+							"    let aliases = JSON.parse(aliasesString);\r",
+							"\r",
+							"    console.log(\"Parsed aliases Postman variable: \" + JSON.stringify(aliases));\r",
+							"\r",
+							"    if (aliases.length === 0) {\r",
+							"        postman.setNextRequest(\"Get all Applications\");\r",
+							"    } else {\r",
+							"        let alias = aliases.pop();\r",
+							"        let aliasId = alias.id;\r",
+							"        let aliasContent = alias.content;\r",
+							"\r",
+							"        let aliasesString = JSON.stringify(aliases);\r",
+							"        let aliasContentString = JSON.stringify(aliasContent);\r",
+							"\r",
+							"        pm.globals.set(\"aliases\", aliasesString);\r",
+							"        pm.globals.set(\"aliasContent\", aliasContentString);\r",
+							"        pm.globals.set(\"aliasId\", aliasId);\r",
+							"        \r",
+							"        postman.setNextRequest(\"Update one Alias\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{aliasContent}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/{{aliasId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"{{aliasId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get all Applications",
 			"event": [
 				{
