@@ -1,0 +1,25 @@
+{
+  "a593c88b-4e0a-4e4e-85ec-7e19d90ca332": {
+    "DEV": {
+      "name" : "PetStore_Routing_Alias",
+      "description" : "Petstore alias on DEV",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "STAGE": {
+      "name" : "PetStore_Routing_Alias",
+      "description" : "Petstore alias on STAGE",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD": {
+      "name" : "PetStore_Routing_Alias",
+      "description" : "Petstore alias on PROD",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  }
+}
