@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-04-29T10:15:24"/>
+    <buildInfo name="BuildTimestamp" value="2021-05-04T16:37:06"/>
     <asset name="API.0e235520-0121-4b44-a086-750f4422072f" displayName="Common_Petstore[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.88e36e10-f2db-4cf6-9bb0-3883f7a7c053</dependsOn>
@@ -31,12 +31,19 @@
     </asset>
     <asset name="PolicyAction.48f49f10-ec87-4088-b1fd-120cbcdb4d01" displayName="Policy Action [Context-based Routing] -&gt; Policy For API Common_Petstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332</dependsOn>
         <dependsOn>APIGateway:Application.88e36e10-f2db-4cf6-9bb0-3883f7a7c053</dependsOn>
         <dependsOn>APIGateway:Application.8fb2b059-8bd3-48ba-abee-d8d72962ba50</dependsOn>
         <dependsOn>APIGateway:Application.a8132055-d35d-4e64-aaaf-aafcf323459f</dependsOn>
         <dependsOn>APIGateway:Application.aa83a664-5a5c-4249-a007-eb018a0c431e</dependsOn>
         <dependsOn>APIGateway:Application.bf204106-1ecc-4d55-aded-6be9ea6a0e25</dependsOn>
         <dependsOn>APIGateway:Application.f044873f-6316-41a9-aed7-ceefa85d87b0</dependsOn>
+    </asset>
+    <asset name="Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332" displayName="PetStore_Routing_Alias" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="value for Simple alias PetStore_Routing_Alias" many="false" isSecure="false" displayName="value for Simple alias PetStore_Routing_Alias">
+            <value>https://petstore.swagger.io/v2</value>
+        </property>
     </asset>
     <asset name="Application.8fb2b059-8bd3-48ba-abee-d8d72962ba50" displayName="Tenant2_App_PROD" isDeployable="true">
         <implementation.generic type="Application"/>
@@ -66,6 +73,25 @@
     </asset>
     <asset name="PolicyAction.da92a487-4242-41d7-9ecd-d3008a61a770" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Tenant2_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
+    </asset>
+    <asset name="Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd" displayName="PostmanEcho_Routing_Alias" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="Endpoint URI for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Endpoint URI for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>https://postman-echo.com</value>
+        </property>
+        <property name="Optimization technique for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Optimization technique for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>None</value>
+        </property>
+        <property name="Connection timeout for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Connection timeout for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Read timeout for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Read timeout for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Pass WS-Security Headers for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Pass WS-Security Headers for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>false</value>
+        </property>
     </asset>
     <asset name="PolicyAction.5eb27b99-d038-46dc-b633-fe954dcce797" displayName="Policy Action [Log Invocation] -&gt; Policy For API Tenant2_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
@@ -113,6 +139,7 @@
     </asset>
     <asset name="PolicyAction.23704840-0402-421a-b8a2-a420a8ed504a" displayName="Policy Action [Context-based Routing] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
         <dependsOn>APIGateway:Application.88e36e10-f2db-4cf6-9bb0-3883f7a7c053</dependsOn>
         <dependsOn>APIGateway:Application.8fb2b059-8bd3-48ba-abee-d8d72962ba50</dependsOn>
         <dependsOn>APIGateway:Application.a8132055-d35d-4e64-aaaf-aafcf323459f</dependsOn>
@@ -148,6 +175,7 @@
     </asset>
     <asset name="PolicyAction.0d886580-5918-49df-9996-c29a4e6b1a0d" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Tenant1_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
     </asset>
     <asset name="PolicyAction.6f1ec152-997b-498c-8c59-9ee10e274c43" displayName="Policy Action [Log Invocation] -&gt; Policy For API Tenant1_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
@@ -189,6 +217,7 @@
     </asset>
     <asset name="PolicyAction.622f848a-78b4-4e58-956b-f590049e99da" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Tenant1_Petstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332</dependsOn>
     </asset>
     <asset name="PolicyAction.3994b90e-22af-4575-bde9-325d5a540328" displayName="Policy Action [Log Invocation] -&gt; Policy For API Tenant1_Petstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
@@ -251,6 +280,7 @@
     </asset>
     <asset name="PolicyAction.2f287710-e9ac-402c-80fa-7bbfa6195643" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Tenant2_Petstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332</dependsOn>
     </asset>
     <asset name="PolicyAction.c80ec7d3-6c44-4a93-8b58-bdd89d4a4e83" displayName="Policy Action [Log Invocation] -&gt; Policy For API Tenant2_Petstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
