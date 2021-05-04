@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-04-29T11:15:38"/>
+    <buildInfo name="BuildTimestamp" value="2021-05-04T16:31:52"/>
     <asset name="API.a5610e16-9843-4dce-aba7-95f74aa12155" displayName="PostmanEcho_Missing_ApiGroup[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Policy.f89f2fbe-3ec5-403a-ac40-4778e094e756</dependsOn>
@@ -13,6 +13,25 @@
     </asset>
     <asset name="PolicyAction.f7d2bbcb-ded6-4396-b360-5306859f3f4d" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API PostmanEcho_Missing_ApiGroup[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
+    </asset>
+    <asset name="Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd" displayName="PostmanEcho_Routing_Alias" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="Endpoint URI for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Endpoint URI for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>https://postman-echo.com</value>
+        </property>
+        <property name="Optimization technique for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Optimization technique for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>None</value>
+        </property>
+        <property name="Connection timeout for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Connection timeout for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Read timeout for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Read timeout for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Pass WS-Security Headers for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Pass WS-Security Headers for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>false</value>
+        </property>
     </asset>
     <asset name="PolicyAction.0ab94007-da99-42ad-808f-9fd6dc432007" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API PostmanEcho_Missing_ApiGroup[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
