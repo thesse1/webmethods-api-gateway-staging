@@ -120,15 +120,13 @@ steps:
     artifactName: 'test_results'
   condition: ${{parameters.test_condition}}
 
-# To do: Replace STAGE by ${{parameters.target_type}}
-
 - script: |
-    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: .STAGE}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: .${{parameters.target_type}}}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
 - script: |
-    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: .STAGE}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
+    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: .${{parameters.target_type}}}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
 
