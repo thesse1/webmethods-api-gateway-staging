@@ -225,7 +225,7 @@
 							"    console.log(\"Parsed globalAliases Postman variable: \" + JSON.stringify(globalAliases));\r",
 							"\r",
 							"    if (globalAliases.length > 0) {\r",
-							"        for (var i=0; i<aliases.length; i++) { // Check aliases\r",
+							"        for (var i=0; i<globalAliases.length; i++) { // Check aliases\r",
 							"            let aliasId = globalAliases[i].id;\r",
 							"\r",
 							"            console.log(\"Alias ID to be checked: \" + aliasId);\r",
