@@ -125,7 +125,12 @@ steps:
 - script: |
     echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: .STAGE}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Prepare list of aliases to be updated'
+  displayName: 'Prepare list of project-specific aliases to be updated'
+
+- script: |
+    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: .STAGE}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Prepare list of global aliases to be updated'
 
 - script: |
     newman run utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
@@ -136,6 +141,7 @@ steps:
     --env-var definitionName=$(Build.DefinitionName) \
     --env-var definitionVersion=$(Build.DefinitionVersion) \
     --env-var aliases='$(aliases)' \
+    --env-var globalAliases='$(globalAliases)' \
     -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
