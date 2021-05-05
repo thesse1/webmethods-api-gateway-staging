@@ -13,7 +13,7 @@ jobs:
   variables:
   - group: wm_test_apigw_staging_build
   pool:
-    name: '$(agent_pool_build)'
+    name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
   steps:
   - checkout: self
@@ -22,7 +22,7 @@ jobs:
   - template: /pipelines/api-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
+      build_environment: $(environment)
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
@@ -37,7 +37,7 @@ jobs:
   variables:
   - group: wm_test_apigw_staging_stage
   pool:
-    name: '$(agent_pool_target)'
+    name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
   steps:
   - template: /pipelines/retrieve-build-template.yml  # Template reference
@@ -49,7 +49,7 @@ jobs:
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      target_environment: $(environment_target)
+      target_environment: $(environment)
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
