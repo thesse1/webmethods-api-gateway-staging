@@ -34,7 +34,8 @@ steps:
 - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-download.ArtifactoryGenericDownload@3
   displayName: 'Artifactory Build Download'
   inputs:
-    connection: '$(artifactoryService)'
+#    connection: '$(artifactoryService)'
+    connection: 'apigatewaystagingartifactory'
     fileSpec: |
       {
           "files": [

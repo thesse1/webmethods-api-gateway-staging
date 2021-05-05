@@ -34,7 +34,8 @@ steps:
 - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
   displayName: 'Artifactory Build Upload'
   inputs:
-    artifactoryService: '$(artifactoryService)'
+#    artifactoryService: '$(artifactoryService)'
+    artifactoryService: 'apigatewaystagingartifactory'
     fileSpec: |
       {
         "files": [
