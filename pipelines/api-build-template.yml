@@ -85,7 +85,7 @@ steps:
   env:
     no_proxy: $(build_environment_ip)
 
-- script: |
+- bash: |
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
@@ -120,12 +120,12 @@ steps:
     artifactName: 'test_results'
   condition: ${{parameters.test_condition}}
 
-- script: |
+- bash: |
     echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: .${{parameters.target_type}}}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
-- script: |
+- bash: |
     echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: .${{parameters.target_type}}}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
