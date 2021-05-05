@@ -855,6 +855,7 @@
   "apiVersion" : "1.0",
   "apiDescription" : "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
   "maturityState" : "Beta",
+  "apiGroups" : [ "General" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
@@ -865,7 +866,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-05 06:06:38 GMT",
-  "lastModified" : "2021-05-05 06:09:16 GMT",
+  "lastModified" : "2021-05-05 09:03:23 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "6831e46d-9f45-4096-a2cc-84dca749fbd4"
