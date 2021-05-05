@@ -32,15 +32,13 @@ jobs:
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(environment_prod)
       target_type: PROD
       prep_condition: ${{true}}
       test_condition: ${{true}}
 
 - job: Deploy
   variables:
-  - group: wm_test_apigw_staging_stage
+  - group: wm_test_apigw_staging_prod
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -48,15 +46,13 @@ jobs:
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      target_environment: $(environment)
       target_type: PROD
       prep_condition: ${{true}}
       test_condition: ${{true}}
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(environment_prod)
+      target_environment: $(environment)
       target_type: PROD
       prep_condition: ${{true}}
       test_condition: ${{true}}
