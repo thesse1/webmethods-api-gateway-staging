@@ -8,11 +8,10 @@ trigger: none
 #   type: string
 #   default: 'petstore'
 
-variables:
-- group: wm_test_apigw_staging
-
 jobs:
 - job: Build
+  variables:
+  - group: wm_test_apigw_staging_build
   pool:
     name: '$(agent_pool_build)'
     vmImage: '$(agent_pool_vmImage)'
@@ -24,37 +23,33 @@ jobs:
     parameters:
       apiProject: $(apiProject)
       build_environment: $(environment_build)
-      target_environment: $(environment_stage)
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(environment_stage)
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
 
 - job: Deploy
+  variables:
+  - group: wm_test_apigw_staging_stage
   pool:
-    name: '$(agent_pool_stage)'
+    name: '$(agent_pool_target)'
     vmImage: '$(agent_pool_vmImage)'
   steps:
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(environment_stage)
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(environment_stage)
+      target_environment: $(environment_target)
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
