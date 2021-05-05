@@ -10,7 +10,7 @@
       "authMode" : "NEW",
       "httpAuthCredentials" : {
         "userName" : "PostmanEcho_DEV",
-        "password" : "MyPassword_DEV"
+        "password" : "TXlQYXNzd29yZF9ERVY="
       }
     },
     "STAGE": {
@@ -22,7 +22,7 @@
       "authMode" : "NEW",
       "httpAuthCredentials" : {
         "userName" : "PostmanEcho_STAGE",
-        "password" : "MyPassword_STAGE"
+        "password" : "TXlQYXNzd29yZF9TVEFHRQ=="
       }
     },
     "PROD": {
@@ -34,7 +34,7 @@
       "authMode" : "NEW",
       "httpAuthCredentials" : {
         "userName" : "PostmanEcho_PROD",
-        "password" : "MyPassword_PROD"
+        "password" : "TXlQYXNzd29yZF9QUk9E"
       }
     }
   }
