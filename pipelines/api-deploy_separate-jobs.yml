@@ -9,73 +9,74 @@ trigger: none
 #   default: 'petstore'
 
 variables:
-- group: wm_test_apigw_staging
+- group: wm_test_apigw_staging_artifactory
 
 jobs:
-- job: Build
+- job: Prepare
+  variables:
+  - group: wm_test_apigw_staging_build
   pool:
-    name: '$(agent_pool_build)'
+    name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
   steps:
   - checkout: self
     submodules: "true"
     persistCredentials: "true"
   - bash: |
-      echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_DEV"
-      echo "##vso[task.setvariable variable=agent_pool_target]$AGENT_POOL_DEV"
+      echo "##vso[task.setvariable variable=variable_group_target]wm_test_apigw_staging_dev"
+      echo "##vso[task.setvariable variable=variable_group_security_alias_creds_target]wm_test_apigw_staging_security_alias_creds_dev"
     condition: and(succeeded(), eq(variables['target_type'], 'DEV'))
   - bash: |
-      echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_STAGE"
-      echo "##vso[task.setvariable variable=agent_pool_target]$AGENT_POOL_STAGE"
+      echo "##vso[task.setvariable variable=variable_group_target]wm_test_apigw_staging_stage"
+      echo "##vso[task.setvariable variable=variable_group_security_alias_creds_target]wm_test_apigw_staging_security_alias_creds_stage"
     condition: and(succeeded(), eq(variables['target_type'], 'STAGE'))
   - bash: |
-      echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_PROD"
-      echo "##vso[task.setvariable variable=agent_pool_target]$AGENT_POOL_PROD"
+      echo "##vso[task.setvariable variable=variable_group_target]wm_test_apigw_staging_prod"
+      echo "##vso[task.setvariable variable=variable_group_security_alias_creds_target]wm_test_apigw_staging_security_alias_creds_prod"
     condition: and(succeeded(), eq(variables['target_type'], 'PROD'))
+
+- job: Build
+  variables:
+  - group: wm_test_apigw_staging_build
+  - group: $(variable_group_security_alias_creds_target)
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
   - template: /pipelines/api-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(target_environment)
+      build_environment: $(environment)
       target_type: $(target_type)
       prep_condition: in(variables['target_type'], 'STAGE', 'PROD')
       test_condition: in(variables['target_type'], 'STAGE', 'PROD')
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(target_environment)
       target_type: $(target_type)
       prep_condition: in(variables['target_type'], 'STAGE', 'PROD')
       test_condition: in(variables['target_type'], 'STAGE', 'PROD')
 
 - job: Deploy
+  variables:
+  - group: '$(variable_group_target)'
   pool:
-    name: '$(agent_pool_target)'
+    name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
   steps:
-  - bash: |
-      echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_DEV"
-    condition: and(succeeded(), eq(variables['target_type'], 'DEV'))
-  - bash: |
-      echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_STAGE"
-    condition: and(succeeded(), eq(variables['target_type'], 'STAGE'))
-  - bash: |
-      echo "##vso[task.setvariable variable=target_environment]$ENVIRONMENT_PROD"
-    condition: and(succeeded(), eq(variables['target_type'], 'PROD'))
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(target_environment)
       target_type: $(target_type)
       prep_condition: in(variables['target_type'], 'STAGE', 'PROD')
       test_condition: in(variables['target_type'], 'STAGE', 'PROD')
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_environment: $(target_environment)
+      target_environment: $(environment)
       target_type: $(target_type)
       prep_condition: in(variables['target_type'], 'STAGE', 'PROD')
       test_condition: in(variables['target_type'], 'STAGE', 'PROD')
