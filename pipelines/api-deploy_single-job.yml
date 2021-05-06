@@ -37,7 +37,6 @@ jobs:
       target_type: DEV
       prep_condition: ${{false}}
       test_condition: ${{false}}
-  dependsOn: Build_for_DEV
   condition: eq(variables['target_type'], 'DEV')
 
 - job: Build_and_deploy_to_STAGE
@@ -65,7 +64,6 @@ jobs:
       target_type: STAGE
       prep_condition: ${{true}}
       test_condition: ${{true}}
-  dependsOn: Build_for_STAGE
   condition: eq(variables['target_type'], 'STAGE')
 
 - job: Build_and_deploy_to_PROD
@@ -93,5 +91,4 @@ jobs:
       target_type: PROD
       prep_condition: ${{true}}
       test_condition: ${{true}}
-  dependsOn: Build_for_PROD
   condition: eq(variables['target_type'], 'PROD')
