@@ -1,9 +1,0 @@
-# Pipeline template for apig staging preparation
-
-variables:
-- group: wm_test_apigw_staging_dev
-
-steps:
-- bash: |
-    echo "##vso[task.setvariable variable=target_environment]$(environment)
-    echo "##vso[task.setvariable variable=agent_pool_target]$(agent_pool)
