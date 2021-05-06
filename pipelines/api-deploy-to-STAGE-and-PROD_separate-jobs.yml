@@ -15,6 +15,7 @@ jobs:
 - job: Build_for_STAGE
   variables:
   - group: wm_test_apigw_staging_build
+  - group: wm_test_apigw_staging_security_alias_creds_stage
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -62,6 +63,7 @@ jobs:
 - job: Build_for_PROD
   variables:
   - group: wm_test_apigw_staging_build
+  - group: wm_test_apigw_staging_security_alias_creds_prod
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
