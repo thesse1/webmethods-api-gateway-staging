@@ -22,12 +22,7 @@ jobs:
   - checkout: self
     submodules: "true"
     persistCredentials: "true"
-  - template: /pipelines/prepare-template_dev.yml  # Template reference
-    condition: and(succeeded(), eq(variables['target_type'], 'DEV'))
   - template: /pipelines/prepare-template_stage.yml  # Template reference
-    condition: and(succeeded(), eq(variables['target_type'], 'STAGE'))
-  - template: /pipelines/prepare-template_prod.yml  # Template reference
-    condition: and(succeeded(), eq(variables['target_type'], 'PROD'))
   - template: /pipelines/api-build-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
