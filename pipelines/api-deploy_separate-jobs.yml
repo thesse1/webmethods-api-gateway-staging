@@ -68,11 +68,11 @@ jobs:
 - job: Deploy
   variables:
   - ${{ if eq(variables['target_type'], 'DEV') }}:
-    - group: wm_test_apigw_dev
+    - group: wm_test_apigw_staging_dev
   - ${{ if eq(variables['target_type'], 'STAGE') }}:
-    - group: wm_test_apigw_stage
+    - group: wm_test_apigw_staging_stage
   - ${{ if eq(variables['target_type'], 'PROD') }}:
-    - group: wm_test_apigw_prod
+    - group: wm_test_apigw_staging_prod
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
