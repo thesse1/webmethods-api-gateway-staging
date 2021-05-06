@@ -33,7 +33,8 @@
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "replaceByVariable" : "postman_echo_credentials"
+        "userName" : "PostmanEcho_PROD",
+        "password" : "TXlQYXNzd29yZF9QUk9E"
       }
     }
   }

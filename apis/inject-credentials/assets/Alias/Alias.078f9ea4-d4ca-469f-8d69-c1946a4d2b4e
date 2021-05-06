@@ -1,0 +1,13 @@
+{
+  "id" : "078f9ea4-d4ca-469f-8d69-c1946a4d2b4e",
+  "name" : "PostmanEcho_Security_Alias_Inject_Credentials",
+  "description" : "PostmanEcho security alias with injected credentials on DEV",
+  "type" : "httpTransportSecurityAlias",
+  "owner" : "Administrator",
+  "authType" : "HTTP_BASIC",
+  "authMode" : "NEW",
+  "httpAuthCredentials" : {
+    "userName" : "PostmanEcho_DEV",
+    "password" : "KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKio="
+  }
+}
