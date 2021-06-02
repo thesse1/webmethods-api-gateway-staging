@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19b32c4a-2935-410d-b72d-759b06182454",
+		"_postman_id": "1b73b27d-619f-4b13-8231-7e546b189f27",
 		"name": "Initialize_STAGE-EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"webAppUrl\": null,\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

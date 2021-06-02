@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4d503acb-d2f0-4db1-bcb6-d2a4aaced153",
+		"_postman_id": "c1242617-596f-4fb6-8279-38a165436b54",
 		"name": "Initialize_PROD-EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"webAppUrl\": null,\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
