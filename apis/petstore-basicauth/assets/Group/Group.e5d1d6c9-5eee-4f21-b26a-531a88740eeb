@@ -1,0 +1,9 @@
+{
+  "id" : "e5d1d6c9-5eee-4f21-b26a-531a88740eeb",
+  "name" : "testgroup_02",
+  "owner" : "Administrator",
+  "description" : "",
+  "type" : "local",
+  "systemDefined" : false,
+  "userIds" : [ "db4f4f95-6678-4272-a245-160f2cae0b36" ]
+}

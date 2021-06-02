@@ -34,13 +34,13 @@ steps:
 - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-download.ArtifactoryGenericDownload@3
   displayName: 'Artifactory Build Download'
   inputs:
-#    connection: '$(artifactoryService)'
-    connection: 'apigatewaystagingartifactory'
+    connection: '$(artifactoryService)'
+#    connection: 'apigatewaystagingartifactory'
     fileSpec: |
       {
           "files": [
               {
-                  "pattern": "$(artifactoryFolder)/apigw-staging-test/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
+                  "pattern": "$(artifactoryFolder)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
                   "target": "$(System.DefaultWorkingDirectory)/",
                   "flat": "true"
               }

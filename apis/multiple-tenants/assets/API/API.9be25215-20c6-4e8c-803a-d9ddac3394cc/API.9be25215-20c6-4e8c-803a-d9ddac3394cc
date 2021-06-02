@@ -855,7 +855,7 @@
   "apiVersion" : "1.0",
   "apiDescription" : "Postman Echo is service for Tenant1 you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
   "maturityState" : "Beta",
-  "apiGroups" : [ "General" ],
+  "apiGroups" : [ "External" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
@@ -866,7 +866,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-12 09:51:50 GMT",
-  "lastModified" : "2021-05-04 14:42:28 GMT",
+  "lastModified" : "2021-05-20 09:50:14 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "9be25215-20c6-4e8c-803a-d9ddac3394cc"

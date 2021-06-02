@@ -107,12 +107,14 @@ steps:
   condition: ${{parameters.test_condition}}
 
 - bash: |
-    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: .${{parameters.target_type}}} | if .content.httpAuthCredentials.replaceByVariable == "postman_echo_credentials" then .content.httpAuthCredentials = {userName: "$(postman_echo_credentials_userName)", password: "$(postman_echo_credentials_password)"} else . end]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
+#    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"} | if .content.httpAuthCredentials.replaceByVariable == "postman_echo_credentials" then .content.httpAuthCredentials = {userName: "$(postman_echo_credentials_userName)", password: "$(postman_echo_credentials_password)"} else . end]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
 - bash: |
-    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: .${{parameters.target_type}}} | if .content.httpAuthCredentials.replaceByVariable == "postman_echo_credentials" then .content.httpAuthCredentials = {userName: "$(postman_echo_credentials_userName)", password: "$(postman_echo_credentials_password)"} else . end]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
+    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
+#    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"} | if .content.httpAuthCredentials.replaceByVariable == "postman_echo_credentials" then .content.httpAuthCredentials = {userName: "$(postman_echo_credentials_userName)", password: "$(postman_echo_credentials_password)"} else . end]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
 
@@ -129,7 +131,7 @@ steps:
     -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-${{parameters.target_type}}, unsuspend all remaining applications, add build details as tags to APIs'
+  displayName: 'Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-${{parameters.target_type}} applications, unsuspend all remaining applications, add build details as tags to APIs'
   env:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.prep_condition}})

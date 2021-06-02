@@ -1,0 +1,70 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "version" : "1.0",
+      "title" : "Ping"
+    },
+    "serviceRegistryDisplayName" : "Ping_1.0",
+    "schemes" : [ ],
+    "security" : [ ],
+    "paths" : {
+      "/ping" : {
+        "get" : {
+          "responses" : { },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "requestBody"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "ping",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : { },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "http://localhost:5555/invoke/wm.server:ping",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : { },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "http://localhost:5555/invoke/wm.server:ping",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "Ping",
+  "apiVersion" : "1.0",
+  "maturityState" : "Beta",
+  "apiGroups" : [ "Internal", "External" ],
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "Administrator",
+  "policies" : [ "4956a703-0ffd-4736-ae1f-25bb8ed1f702" ],
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2021-05-18 12:46:12 GMT",
+  "lastModified" : "2021-05-18 12:46:20 GMT",
+  "systemVersion" : 1,
+  "gatewayEndpoints" : { },
+  "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
+}

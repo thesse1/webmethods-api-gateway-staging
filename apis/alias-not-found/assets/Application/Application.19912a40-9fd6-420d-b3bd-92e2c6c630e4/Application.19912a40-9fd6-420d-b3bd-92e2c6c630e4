@@ -1,7 +1,7 @@
 {
   "applicationID" : "19912a40-9fd6-420d-b3bd-92e2c6c630e4",
   "name" : "MySwaggerPetstoreApp_DEV",
-  "description" : "This application should be used on DEV environment for testing",
+  "description" : "This application should be used on DEV environments for testing",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],
@@ -12,7 +12,7 @@
   },
   "creationDate" : "2020-12-08 09:29:00 GMT",
   "lastModified" : "2021-02-12 09:44:34 GMT",
-  "lastUpdated" : 1619531574966,
+  "lastUpdated" : 1621515082349,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",

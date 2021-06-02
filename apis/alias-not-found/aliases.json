@@ -1,23 +1,23 @@
 [
   {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-    "DEV": {
+    "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on DEV",
+      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE": {
+    "STAGE-INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD": {
+    "PROD-INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on PROD",
+      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -25,23 +25,23 @@
   },
   {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV": {
+    "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on DEV",
+      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE": {
+    "STAGE-INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD": {
+    "PROD-INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on PROD",
+      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"

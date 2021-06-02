@@ -1,40 +1,40 @@
 [
   {
     "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
-    "DEV": {
+    "DEV-EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on DEV",
+      "description" : "PostmanEcho security alias on DEV-EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_DEV",
-        "password" : "TXlQYXNzd29yZF9ERVY="
+        "userName" : "PostmanEcho_DEV-EXT",
+        "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
       }
     },
-    "STAGE": {
+    "STAGE-EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on STAGE",
+      "description" : "PostmanEcho security alias on STAGE-EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_STAGE",
-        "password" : "TXlQYXNzd29yZF9TVEFHRQ=="
+        "userName" : "PostmanEcho_STAGE-EXT",
+        "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
       }
     },
-    "PROD": {
+    "PROD-EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on PROD",
+      "description" : "PostmanEcho security alias on PROD-EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_PROD",
-        "password" : "TXlQYXNzd29yZF9QUk9E"
+        "userName" : "PostmanEcho_PROD-EXT",
+        "password" : "TXlQYXNzd29yZF9QUk9ELUVYVA=="
       }
     }
   }

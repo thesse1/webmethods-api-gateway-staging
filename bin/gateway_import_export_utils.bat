@@ -1,5 +1,7 @@
 @echo OFF
 
+set no_proxy=*
+
 set CURRENT_DIR=%~dp0..
 
 set ACTION=%1

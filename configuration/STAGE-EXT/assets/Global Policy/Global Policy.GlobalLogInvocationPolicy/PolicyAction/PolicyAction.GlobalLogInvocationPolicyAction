@@ -1,0 +1,34 @@
+{
+  "id" : "GlobalLogInvocationPolicyAction",
+  "names" : [ {
+    "value" : "Log Invocation",
+    "locale" : "en"
+  } ],
+  "templateKey" : "logInvocation",
+  "parameters" : [ {
+    "templateKey" : "storeRequestPayload",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "storeResponsePayload",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "storeAsZip",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "logGenerationFrequency",
+    "values" : [ "Always" ]
+  }, {
+    "templateKey" : "destination",
+    "parameters" : [ {
+      "templateKey" : "destinationType",
+      "values" : [ "GATEWAY" ]
+    } ]
+  }, {
+    "templateKey" : "storeRequestHeaders",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "storeResponseHeaders",
+    "values" : [ "false" ]
+  } ],
+  "active" : false
+}

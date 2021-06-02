@@ -1,7 +1,7 @@
 {
   "applicationID" : "d883ae49-80f8-4dc2-b525-2ae85c89cd4f",
   "name" : "MyPostmanEchoApp_OAuth2_DEV",
-  "description" : "This application should be used on DEV environment for testing",
+  "description" : "This application should be used on DEV environments for testing",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],
@@ -12,7 +12,7 @@
   },
   "creationDate" : "2021-02-04 15:40:02 GMT",
   "lastModified" : "2021-02-12 09:49:53 GMT",
-  "lastUpdated" : 1618229560530,
+  "lastUpdated" : 1621436852856,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",

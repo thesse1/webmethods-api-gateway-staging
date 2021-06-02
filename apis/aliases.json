@@ -1,23 +1,23 @@
 [
   {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
-    "DEV": {
+    "DEV-INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV",
+      "description" : "Petstore alias on DEV-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE": {
+    "STAGE-INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE",
+      "description" : "Petstore alias on STAGE-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD": {
+    "PROD-INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD",
+      "description" : "Petstore alias on PROD-INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -25,9 +25,9 @@
   },
   {
     "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
-    "DEV": {
+    "DEV-EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on DEV",
+      "description" : "PostmanEcho alias on DEV-EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -39,9 +39,9 @@
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "STAGE": {
+    "STAGE-EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on STAGE",
+      "description" : "PostmanEcho alias on STAGE-EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -53,9 +53,9 @@
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "PROD": {
+    "PROD-EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on PROD",
+      "description" : "PostmanEcho alias on PROD-EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",

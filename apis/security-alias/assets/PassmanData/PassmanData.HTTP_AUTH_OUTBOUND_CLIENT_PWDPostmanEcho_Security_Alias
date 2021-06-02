@@ -1,7 +1,7 @@
 {
   "id" : "HTTP_AUTH_OUTBOUND_CLIENT_PWDPostmanEcho_Security_Alias",
-  "pw" : "mCo/HjlHTPF4ycfTteIYmw==",
+  "pw" : "K1eLzDEUdNnzHbAvp9pdzRYfQpmXF6MZ",
   "encryptorId" : "EntrustPbePlus",
-  "saltString" : "EAQE1LWnEie0Q8jju8a0wQ==",
+  "saltString" : "3UnXYZ1KPxad/j5GVDGFMQ==",
   "iterationCount" : 2048
 }

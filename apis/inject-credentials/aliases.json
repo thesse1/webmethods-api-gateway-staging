@@ -1,9 +1,9 @@
 [
   {
     "id" : "078f9ea4-d4ca-469f-8d69-c1946a4d2b4e",
-    "DEV": {
+    "DEV-INT": {
       "name" : "PostmanEcho_Security_Alias_Inject_Credentials",
-      "description" : "PostmanEcho security alias with injected credentials on DEV",
+      "description" : "PostmanEcho security alias with injected credentials on DEV-INT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
@@ -12,9 +12,9 @@
         "replaceByVariable" : "postman_echo_credentials"
       }
     },
-    "STAGE": {
+    "STAGE-INT": {
       "name" : "PostmanEcho_Security_Alias_Inject_Credentials",
-      "description" : "PostmanEcho security alias with injected credentials on STAGE",
+      "description" : "PostmanEcho security alias with injected credentials on STAGE-INT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
@@ -23,9 +23,9 @@
         "replaceByVariable" : "postman_echo_credentials"
       }
     },
-    "PROD": {
+    "PROD-INT": {
       "name" : "PostmanEcho_Security_Alias_Inject_Credentials",
-      "description" : "PostmanEcho security alias with injected credentials on PROD",
+      "description" : "PostmanEcho security alias with injected credentials on PROD-INT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",

@@ -34,14 +34,14 @@ steps:
 - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
   displayName: 'Artifactory Build Upload'
   inputs:
-#    artifactoryService: '$(artifactoryService)'
-    artifactoryService: 'apigatewaystagingartifactory'
+    artifactoryService: '$(artifactoryService)'
+#    artifactoryService: 'apigatewaystagingartifactory'
     fileSpec: |
       {
         "files": [
           {
             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
-            "target": "$(artifactoryFolder)/apigw-staging-test/"
+            "target": "$(artifactoryFolder)/"
           }
         ]
       }

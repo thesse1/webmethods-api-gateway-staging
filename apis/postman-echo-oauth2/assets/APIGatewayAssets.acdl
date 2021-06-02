@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-05-04T16:53:33"/>
-    <asset name="GatewayScope.69fb0cfe-d549-4572-92d9-cb1131d45e61" displayName="local:postman-echo" isDeployable="true">
-        <implementation.generic type="GatewayScope"/>
-        <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
-    </asset>
+    <buildInfo name="BuildTimestamp" value="2021-05-19T17:12:01"/>
     <asset name="API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf" displayName="PostmanEcho_OAuth2[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.a2d57c08-9b06-47ec-baf1-a74db893d023</dependsOn>
@@ -108,5 +104,9 @@
     </asset>
     <asset name="RegisteredApplication.d883ae49-80f8-4dc2-b525-2ae85c89cd4f" displayName="RegisteredApplication [ MyPostmanEchoApp_OAuth2_DEV ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="GatewayScope.69fb0cfe-d549-4572-92d9-cb1131d45e61" displayName="local:postman-echo" isDeployable="true">
+        <implementation.generic type="GatewayScope"/>
+        <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
     </asset>
 </asset_composite>
