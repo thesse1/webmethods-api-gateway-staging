@@ -15,7 +15,7 @@ jobs:
 - job: Build_for_CONFIG
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_config
+#  - group: wm_test_apigw_staging_security_alias_creds_config
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -64,7 +64,7 @@ jobs:
 - job: Build_for_DEV_INT
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_dev_int
+#  - group: wm_test_apigw_staging_security_alias_creds_dev_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -113,7 +113,7 @@ jobs:
 - job: Build_for_DEV_EXT
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_dev_ext
+#  - group: wm_test_apigw_staging_security_alias_creds_dev_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -162,7 +162,7 @@ jobs:
 - job: Build_for_STAGE_INT
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_stage_int
+#  - group: wm_test_apigw_staging_security_alias_creds_stage_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -211,7 +211,7 @@ jobs:
 - job: Build_for_STAGE_EXT
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_stage_ext
+#  - group: wm_test_apigw_staging_security_alias_creds_stage_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -260,7 +260,7 @@ jobs:
 - job: Build_for_PROD_INT
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_prod_int
+#  - group: wm_test_apigw_staging_security_alias_creds_prod_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -309,7 +309,7 @@ jobs:
 - job: Build_for_PROD_EXT
   variables:
   - group: wm_test_apigw_staging_build
-  - group: wm_test_apigw_staging_security_alias_creds_prod_ext
+#  - group: wm_test_apigw_staging_security_alias_creds_prod_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -358,7 +358,7 @@ jobs:
 - job: Build_and_deploy_to_CONFIG
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_config
+#  - group: wm_test_apigw_staging_security_alias_creds_config
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -385,7 +385,7 @@ jobs:
 - job: Build_and_deploy_to_DEV_INT
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_dev_int
+#  - group: wm_test_apigw_staging_security_alias_creds_dev_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -412,7 +412,7 @@ jobs:
 - job: Build_and_deploy_to_DEV_EXT
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_dev_ext
+#  - group: wm_test_apigw_staging_security_alias_creds_dev_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -439,7 +439,7 @@ jobs:
 - job: Build_and_deploy_to_STAGE_INT
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_stage_int
+#  - group: wm_test_apigw_staging_security_alias_creds_stage_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -466,7 +466,7 @@ jobs:
 - job: Build_and_deploy_to_STAGE_EXT
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_stage_ext
+#  - group: wm_test_apigw_staging_security_alias_creds_stage_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -493,7 +493,7 @@ jobs:
 - job: Build_and_deploy_to_PROD_INT
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_prod_int
+#  - group: wm_test_apigw_staging_security_alias_creds_prod_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -520,7 +520,7 @@ jobs:
 - job: Build_and_deploy_to_PROD_EXT
   variables:
   - group: wm_test_apigw_staging_common
-  - group: wm_test_apigw_staging_security_alias_creds_prod_ext
+#  - group: wm_test_apigw_staging_security_alias_creds_prod_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
