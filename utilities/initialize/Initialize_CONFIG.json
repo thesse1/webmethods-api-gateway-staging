@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "84869f40-4d8f-4fd1-a657-4ef05d327c30",
+		"_postman_id": "671cae71-c0bb-42e5-bc06-f3ba6220c736",
 		"name": "Initialize_CONFIG",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"webAppUrl\": null,\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
