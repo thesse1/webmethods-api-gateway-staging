@@ -1,0 +1,25 @@
+{
+  "id" : "fa90e072-af0a-4621-ac6a-333b83f54ac4",
+  "names" : [ {
+    "value" : "Identify & Authorize Application",
+    "locale" : "en"
+  } ],
+  "templateKey" : "evaluatePolicy",
+  "parameters" : [ {
+    "templateKey" : "logicalConnector",
+    "values" : [ "OR" ]
+  }, {
+    "templateKey" : "allowAnonymous",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "IdentificationRule",
+    "parameters" : [ {
+      "templateKey" : "applicationLookup",
+      "values" : [ "open" ]
+    }, {
+      "templateKey" : "identificationType",
+      "values" : [ "jwtClaims" ]
+    } ]
+  } ],
+  "active" : false
+}

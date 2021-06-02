@@ -1,0 +1,21 @@
+{
+  "applicationID" : "50b997ea-2099-4750-b9f0-c6c0ab68a259",
+  "name" : "Invalid_App_Name_INVALID",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "77e201ac70863ff86198c7d865b6b31530c67500e4a5ae882e862beb3c57ae8e"
+    }
+  },
+  "creationDate" : "2021-04-28 10:38:03 GMT",
+  "lastUpdated" : 1621516638732,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}

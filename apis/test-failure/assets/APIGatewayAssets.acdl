@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2021-05-20T18:04:34"/>
+    <asset name="API.96c0ee50-1598-4d84-910f-42ddbf3d9b23" displayName="Petstore_Test_Failure[1.0]" isDeployable="true">
+        <implementation.generic type="API"/>
+        <dependsOn>APIGateway:Application.1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d</dependsOn>
+        <dependsOn>APIGateway:Policy.82b07bba-9376-4f99-92c8-b928b4a7971f</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d</dependsOn>
+    </asset>
+    <asset name="Policy.82b07bba-9376-4f99-92c8-b928b4a7971f" displayName="Policy For API Petstore_Test_Failure[1.0]" isDeployable="true">
+        <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.674289ca-76c0-4793-84d3-7df7b4621176</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.6be07cbe-d5d2-466c-95b0-0ef81ee3aa73</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.a43fbab5-e38e-4556-b631-d67c1688b927</dependsOn>
+    </asset>
+    <asset name="PolicyAction.a43fbab5-e38e-4556-b631-d67c1688b927" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Petstore_Test_Failure[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332</dependsOn>
+    </asset>
+    <asset name="Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332" displayName="PetStore_Routing_Alias" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="value for Simple alias PetStore_Routing_Alias" many="false" isSecure="false" displayName="value for Simple alias PetStore_Routing_Alias">
+            <value>https://petstore.swagger.io/v2</value>
+        </property>
+    </asset>
+    <asset name="PolicyAction.674289ca-76c0-4793-84d3-7df7b4621176" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API Petstore_Test_Failure[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.6be07cbe-d5d2-466c-95b0-0ef81ee3aa73" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Petstore_Test_Failure[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="Application.1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d" displayName="TestApplication_DEV" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.96c0ee50-1598-4d84-910f-42ddbf3d9b23</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEY1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d" displayName="API_ACCESS_KEY1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d" displayName="RegisteredApplication [ TestApplication_DEV ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+</asset_composite>

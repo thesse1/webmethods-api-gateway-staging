@@ -19,12 +19,6 @@
     "stageKey" : "routing"
   }, {
     "enforcements" : [ {
-      "enforcementObjectId" : "6f1ec152-997b-498c-8c59-9ee10e274c43",
-      "order" : "0"
-    } ],
-    "stageKey" : "LMT"
-  }, {
-    "enforcements" : [ {
       "enforcementObjectId" : "d229f4e2-0015-4b44-9e16-da942a74b8f8",
       "order" : "0"
     } ],
@@ -37,7 +31,7 @@
     "stageKey" : "transport"
   } ],
   "policyScope" : "SERVICE",
-  "active" : false,
   "systemPolicy" : false,
-  "global" : false
+  "global" : false,
+  "active" : false
 }

@@ -1,0 +1,9 @@
+{
+  "id" : "GLOBAL_GATEWAY_ENDPOINT",
+  "alias" : "GLOBAL_GATEWAY_ENDPOINT",
+  "urlPath" : "api/${apiName}/${apiVersion}",
+  "portList" : [ ],
+  "association" : "1",
+  "apiId" : "GLOBAL_GATEWAY_ENDPOINT_API_ID",
+  "package" : "WmAPIGateway"
+}

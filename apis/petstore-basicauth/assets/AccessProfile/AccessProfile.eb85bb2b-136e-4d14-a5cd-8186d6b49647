@@ -1,0 +1,8 @@
+{
+  "id" : "eb85bb2b-136e-4d14-a5cd-8186d6b49647",
+  "name" : "testteam_03",
+  "description" : "",
+  "privilege" : [ ],
+  "groupIds" : [ "bcb1b2ba-ef21-40c6-9e4b-f133b4df76db" ],
+  "systemDefined" : false
+}

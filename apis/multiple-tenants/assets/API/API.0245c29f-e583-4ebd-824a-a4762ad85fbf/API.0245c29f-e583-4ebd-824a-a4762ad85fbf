@@ -161,14 +161,16 @@
           "operationId" : "ResponseHeadersGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
-            "name" : "Content-Type",
             "in" : "query",
+            "name" : "Content-Type",
             "required" : false,
+            "schema" : { },
             "parameterSchema" : { }
           }, {
-            "name" : "test",
             "in" : "query",
+            "name" : "test",
             "required" : false,
+            "schema" : { },
             "parameterSchema" : { }
           } ],
           "responses" : {
@@ -316,14 +318,16 @@
           "operationId" : "CookiesSetGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
-            "name" : "foo1",
             "in" : "query",
+            "name" : "foo1",
             "required" : false,
+            "schema" : { },
             "parameterSchema" : { }
           }, {
-            "name" : "foo2",
             "in" : "query",
+            "name" : "foo2",
             "required" : false,
+            "schema" : { },
             "parameterSchema" : { }
           } ],
           "responses" : {
@@ -399,9 +403,10 @@
           "operationId" : "GetGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
-            "name" : "test",
             "in" : "query",
+            "name" : "test",
             "required" : false,
+            "schema" : { },
             "parameterSchema" : { }
           } ],
           "responses" : {
@@ -585,9 +590,10 @@
           "operationId" : "CookiesDeleteGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
-            "name" : "foo1",
             "in" : "query",
+            "name" : "foo1",
             "required" : false,
+            "schema" : { },
             "parameterSchema" : { }
           } ],
           "responses" : {
@@ -849,6 +855,7 @@
   "apiVersion" : "1.0",
   "apiDescription" : "Postman Echo is service for Tenant1 and for Tenant2 you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
   "maturityState" : "Beta",
+  "apiGroups" : [ "External" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
@@ -859,7 +866,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-12 09:43:24 GMT",
-  "lastModified" : "2021-03-17 07:12:23 GMT",
+  "lastModified" : "2021-05-20 09:49:52 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "0245c29f-e583-4ebd-824a-a4762ad85fbf"

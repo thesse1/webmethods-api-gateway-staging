@@ -7,7 +7,7 @@
   "templateKey" : "entryProtocolPolicy",
   "parameters" : [ {
     "templateKey" : "protocol",
-    "values" : [ "https" ]
+    "values" : [ "http", "https" ]
   } ],
   "active" : false
 }

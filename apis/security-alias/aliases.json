@@ -1,0 +1,41 @@
+[
+  {
+    "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
+    "DEV-EXT": {
+      "name" : "PostmanEcho_Security_Alias",
+      "description" : "PostmanEcho security alias on DEV-EXT",
+      "type" : "httpTransportSecurityAlias",
+      "owner" : "Administrator",
+      "authType" : "HTTP_BASIC",
+      "authMode" : "NEW",
+      "httpAuthCredentials" : {
+        "userName" : "PostmanEcho_DEV-EXT",
+        "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
+      }
+    },
+    "STAGE-EXT": {
+      "name" : "PostmanEcho_Security_Alias",
+      "description" : "PostmanEcho security alias on STAGE-EXT",
+      "type" : "httpTransportSecurityAlias",
+      "owner" : "Administrator",
+      "authType" : "HTTP_BASIC",
+      "authMode" : "NEW",
+      "httpAuthCredentials" : {
+        "userName" : "PostmanEcho_STAGE-EXT",
+        "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
+      }
+    },
+    "PROD-EXT": {
+      "name" : "PostmanEcho_Security_Alias",
+      "description" : "PostmanEcho security alias on PROD-EXT",
+      "type" : "httpTransportSecurityAlias",
+      "owner" : "Administrator",
+      "authType" : "HTTP_BASIC",
+      "authMode" : "NEW",
+      "httpAuthCredentials" : {
+        "userName" : "PostmanEcho_PROD-EXT",
+        "password" : "TXlQYXNzd29yZF9QUk9ELUVYVA=="
+      }
+    }
+  }
+]

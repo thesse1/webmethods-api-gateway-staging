@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "617b7343-0d3e-404b-8821-1bfb9db80c3a",
+		"_postman_id": "31f656b8-8a03-41a2-ac5c-3a3688aab233",
 		"name": "API Gateway API Deployment",
 		"description": "This Collection deploys the API to API Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -257,7 +257,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes",
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -271,7 +271,7 @@
 					"query": [
 						{
 							"key": "overwrite",
-							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes"
+							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases"
 						}
 					]
 				}

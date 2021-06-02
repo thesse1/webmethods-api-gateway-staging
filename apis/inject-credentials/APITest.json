@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "46673e75-780b-427c-879e-edddea1248d7",
+		"name": "API Test for inject-credentials",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PostEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo in payload is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+							"});\r",
+							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVWOk15UGFzc3dvcmRfREVW\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias_Inject_Credentials/1.0/post",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Security_Alias_Inject_Credentials",
+						"1.0",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo query parameter is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
+							"});\r",
+							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVWOk15UGFzc3dvcmRfREVW\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias_Inject_Credentials/1.0/get?foo=bar",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Security_Alias_Inject_Credentials",
+						"1.0",
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVWOk15UGFzc3dvcmRfREVW\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias_Inject_Credentials/1.0/delete",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Security_Alias_Inject_Credentials",
+						"1.0",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

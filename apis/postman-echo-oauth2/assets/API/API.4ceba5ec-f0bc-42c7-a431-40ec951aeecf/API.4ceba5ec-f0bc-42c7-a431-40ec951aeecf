@@ -161,11 +161,13 @@
           "operationId" : "ResponseHeadersGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
+            "schema" : { },
             "in" : "query",
             "parameterSchema" : { },
             "name" : "Content-Type",
             "required" : false
           }, {
+            "schema" : { },
             "in" : "query",
             "parameterSchema" : { },
             "name" : "test",
@@ -316,11 +318,13 @@
           "operationId" : "CookiesSetGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
+            "schema" : { },
             "in" : "query",
             "parameterSchema" : { },
             "name" : "foo1",
             "required" : false
           }, {
+            "schema" : { },
             "in" : "query",
             "parameterSchema" : { },
             "name" : "foo2",
@@ -399,6 +403,7 @@
           "operationId" : "GetGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
+            "schema" : { },
             "in" : "query",
             "parameterSchema" : { },
             "name" : "test",
@@ -585,6 +590,7 @@
           "operationId" : "CookiesDeleteGet",
           "produces" : [ "application/json; charset=utf-8" ],
           "parameters" : [ {
+            "schema" : { },
             "in" : "query",
             "parameterSchema" : { },
             "name" : "foo1",
@@ -849,6 +855,7 @@
   "apiVersion" : "1.0",
   "apiDescription" : "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
   "maturityState" : "Beta",
+  "apiGroups" : [ "External" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "Administrator",
@@ -859,7 +866,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-02-04 15:38:35 GMT",
-  "lastModified" : "2021-02-05 07:18:07 GMT",
+  "lastModified" : "2021-05-19 15:11:30 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "4ceba5ec-f0bc-42c7-a431-40ec951aeecf"

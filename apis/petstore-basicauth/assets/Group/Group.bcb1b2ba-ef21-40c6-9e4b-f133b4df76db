@@ -1,0 +1,8 @@
+{
+  "id" : "bcb1b2ba-ef21-40c6-9e4b-f133b4df76db",
+  "name" : "testgroup_03",
+  "owner" : "Administrator",
+  "type" : "local",
+  "systemDefined" : false,
+  "userIds" : [ "2682ccb0-3be4-47b3-9e2e-e252e4d1e773" ]
+}

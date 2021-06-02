@@ -9,7 +9,7 @@
     "templateKey" : "routeTo",
     "parameters" : [ {
       "templateKey" : "endpointUri",
-      "values" : [ "https://postman-echo.com/${sys:resource_path}" ]
+      "values" : [ "${PostmanEcho_Routing_Alias}/${sys:resource_path}" ]
     }, {
       "templateKey" : "method",
       "values" : [ "CUSTOM" ]
@@ -26,7 +26,7 @@
       "templateKey" : "routeTo",
       "parameters" : [ {
         "templateKey" : "endpointUri",
-        "values" : [ "https://postman-echo.com/${sys:resource_path}?tenant=Tenant1" ]
+        "values" : [ "${PostmanEcho_Routing_Alias}/${sys:resource_path}?tenant=Tenant1" ]
       }, {
         "templateKey" : "method",
         "values" : [ "CUSTOM" ]
@@ -80,7 +80,7 @@
       "templateKey" : "routeTo",
       "parameters" : [ {
         "templateKey" : "endpointUri",
-        "values" : [ "https://postman-echo.com/${sys:resource_path}?tenant=Tenant2" ]
+        "values" : [ "${PostmanEcho_Routing_Alias}/${sys:resource_path}?tenant=Tenant2" ]
       }, {
         "templateKey" : "method",
         "values" : [ "CUSTOM" ]

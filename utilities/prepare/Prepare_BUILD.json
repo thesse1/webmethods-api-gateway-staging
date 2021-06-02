@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5c748340-2603-4abc-83c0-1016c62c5077",
+		"_postman_id": "f4d1f0fa-7c5d-4db5-8390-537411cf1670",
 		"name": "Prepare_BUILD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -551,6 +551,11 @@
 						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
 					}
 				],
 				"url": {
@@ -593,6 +598,11 @@
 						"key": "Accept",
 						"type": "text",
 						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
 					}
 				],
 				"url": {

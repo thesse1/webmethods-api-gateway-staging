@@ -1,0 +1,21 @@
+{
+  "applicationID" : "1de806e5-5bcb-4318-bbfd-2e1c7b4a3e9d",
+  "name" : "TestApplication_DEV",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "c74f075c21e4b247a9e78c406d40523c20141e17023eeecd90bb837706644233"
+    }
+  },
+  "creationDate" : "2021-04-29 12:24:10 GMT",
+  "lastUpdated" : 1621526600469,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "subscription" : false
+}
