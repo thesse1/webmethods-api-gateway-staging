@@ -1122,7 +1122,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
 ## Pipelines for API Gateway configurations
 
-The API Gateway Staging solution includes eight Azure DevOps build pipelines for deploying API Gateway configurations from the Azure DevOps repository to CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, PROD-INT and PROD-EXT environments. In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on the target environment.
+The API Gateway Staging solution includes eight Azure DevOps build pipelines for deploying API Gateway configurations from the Azure DevOps repository to CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments. In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on the target environment.
 
 Every pipeline will publish the following artifact:
 - CONFIG_configuration, BUILD_configuration etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, BUILD etc.
@@ -1132,7 +1132,7 @@ These artifacts will be stored by Azure DevOps for some time. They will enable a
 After importing the API Gateway assets, the configuration pipelines will execute some steps for initializing the API Gateway:
 - Configuration of environment-specific loadbalancer URL
 - Configuration of environment-specific proxy
-- Configuration of environment-specific OAuth2 and JWT configuration parameters in the local Authoritzation Server and JWT Provider alias
+- Configuration of environment-specific OAuth2 and JWT configuration parameters in the local Authorization Server and JWT Provider alias
   - OAuth2 authorization code and access token expiration interval
   - JWT issuer, signing algorithm, token expiration interval, keystore alias and key alias
 
