@@ -10,12 +10,194 @@ trigger: none
 
 variables:
 - group: wm_test_apigw_staging_artifactory
+- group: wm_test_apigw_staging_aliases
 
 jobs:
+- job: Build_and_deploy_to_CONFIG
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: CONFIG
+      prep_condition: ${{false}}
+      test_condition: ${{false}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_config)
+      target_type: CONFIG
+      prep_condition: ${{false}}
+      test_condition: ${{false}}
+  condition: and(eq(variables['target_type'], 'CONFIG'), eq(variables['useArtifactory'], 'false'))
+
+- job: Build_and_deploy_to_DEV_INT
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: DEV-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_dev_int)
+      target_type: DEV-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: and(eq(variables['target_type'], 'DEV-INT'), eq(variables['useArtifactory'], 'false'))
+
+- job: Build_and_deploy_to_DEV_EXT
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: DEV-EXT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_dev_ext)
+      target_type: DEV-EXT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: and(eq(variables['target_type'], 'DEV-EXT'), eq(variables['useArtifactory'], 'false'))
+
+- job: Build_and_deploy_to_STAGE_INT
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: STAGE-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_stage_int)
+      target_type: STAGE-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: and(eq(variables['target_type'], 'STAGE-INT'), eq(variables['useArtifactory'], 'false'))
+
+- job: Build_and_deploy_to_STAGE_EXT
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: STAGE-EXT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_stage_ext)
+      target_type: STAGE-EXT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: and(eq(variables['target_type'], 'STAGE-EXT'), eq(variables['useArtifactory'], 'false'))
+
+- job: Build_and_deploy_to_PROD_INT
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: PROD-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_prod_int)
+      target_type: PROD-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: and(eq(variables['target_type'], 'PROD-INT'), eq(variables['useArtifactory'], 'false'))
+
+- job: Build_and_deploy_to_PROD_EXT
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: PROD-EXT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_prod_ext)
+      target_type: PROD-EXT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: and(eq(variables['target_type'], 'PROD-EXT'), eq(variables['useArtifactory'], 'false'))
+
 - job: Build_for_CONFIG
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_config
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -64,7 +246,6 @@ jobs:
 - job: Build_for_DEV_INT
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_dev_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -113,7 +294,6 @@ jobs:
 - job: Build_for_DEV_EXT
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_dev_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -162,7 +342,6 @@ jobs:
 - job: Build_for_STAGE_INT
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_stage_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -211,7 +390,6 @@ jobs:
 - job: Build_for_STAGE_EXT
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_stage_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -260,7 +438,6 @@ jobs:
 - job: Build_for_PROD_INT
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_prod_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -309,7 +486,6 @@ jobs:
 - job: Build_for_PROD_EXT
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_prod_ext
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -354,192 +530,3 @@ jobs:
       test_condition: ${{true}}
   dependsOn: Build_for_PROD_EXT
   condition: succeeded()
-
-- job: Build_and_deploy_to_CONFIG
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_config
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: CONFIG
-      prep_condition: ${{false}}
-      test_condition: ${{false}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_config)
-      target_type: CONFIG
-      prep_condition: ${{false}}
-      test_condition: ${{false}}
-  condition: and(eq(variables['target_type'], 'CONFIG'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_DEV_INT
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_dev_int
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: DEV-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_dev_int)
-      target_type: DEV-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: and(eq(variables['target_type'], 'DEV-INT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_DEV_EXT
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_dev_ext
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: DEV-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_dev_ext)
-      target_type: DEV-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: and(eq(variables['target_type'], 'DEV-EXT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_STAGE_INT
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_stage_int
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_stage_int)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: and(eq(variables['target_type'], 'STAGE-INT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_STAGE_EXT
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_stage_ext
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: STAGE-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_stage_ext)
-      target_type: STAGE-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: and(eq(variables['target_type'], 'STAGE-EXT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_PROD_INT
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_prod_int
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_prod_int)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: and(eq(variables['target_type'], 'PROD-INT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_PROD_EXT
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_prod_ext
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: PROD-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_prod_ext)
-      target_type: PROD-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: and(eq(variables['target_type'], 'PROD-EXT'), eq(variables['useArtifactory'], 'false'))

@@ -10,12 +10,38 @@ trigger: none
 
 variables:
 - group: wm_test_apigw_staging_artifactory
+- group: wm_test_apigw_staging_aliases
 
 jobs:
+- job: Build_and_deploy
+  variables:
+  - group: wm_test_apigw_staging_common
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-build-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      build_environment: $(environment_build)
+      target_type: PROD-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  - template: /pipelines/api-deploy-template.yml  # Template reference
+    parameters:
+      apiProject: $(apiProject)
+      target_environment: $(environment_prod_int)
+      target_type: PROD-INT
+      prep_condition: ${{true}}
+      test_condition: ${{true}}
+  condition: eq(variables['useArtifactory'], 'false')
+
 - job: Build
   variables:
   - group: wm_test_apigw_staging_build
-#  - group: wm_test_apigw_staging_security_alias_creds_prod_int
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -60,30 +86,3 @@ jobs:
       test_condition: ${{true}}
   dependsOn: Build
   condition: succeeded()
-
-- job: Build_and_deploy
-  variables:
-  - group: wm_test_apigw_staging_common
-#  - group: wm_test_apigw_staging_security_alias_creds_prod_int
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_prod_int)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-  condition: eq(variables['useArtifactory'], 'false')

@@ -49,10 +49,10 @@ steps:
 
 - script: |
     newman run utilities/import/ImportConfig.json --reporters cli \
-    --env-var importer_user=$(importer_user) \
-    --env-var importer_password=$(importer_password) \
-    --env-var initializer_user=$(initializer_user) \
-    --env-var initializer_password=$(initializer_password) \
+    --env-var importer_user='$(importer_user)' \
+    --env-var importer_password='$(importer_password)' \
+    --env-var initializer_user='$(initializer_user)' \
+    --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(Build.BuildId)_configuration.zip -e environments/${{parameters.environment}} \
     $(environment_insecureflag)
@@ -63,8 +63,8 @@ steps:
 
 - script: |
     newman run utilities/initialize/Initialize_${{parameters.type}}.json --reporters cli \
-    --env-var initializer_user=$(initializer_user) \
-    --env-var initializer_password=$(initializer_password) \
+    --env-var initializer_user='$(initializer_user)' \
+    --env-var initializer_password='$(initializer_password)' \
     --env-var file_Loc=$(Build.BuildId)_configuration.zip -e environments/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'

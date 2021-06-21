@@ -62,8 +62,8 @@ steps:
 
 - script: |
     newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
-    --env-var preparer_user=$(preparer_user) \
-    --env-var preparer_password=$(preparer_password) \
+    --env-var preparer_user='$(preparer_user)' \
+    --env-var preparer_password='$(preparer_password)' \
     -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -78,10 +78,10 @@ steps:
 
 - script: |
     newman run utilities/import/ImportAPI.json --reporters cli \
-    --env-var importer_user=$(importer_user) \
-    --env-var importer_password=$(importer_password) \
-    --env-var initializer_user=$(initializer_user) \
-    --env-var initializer_password=$(initializer_password) \
+    --env-var importer_user='$(importer_user)' \
+    --env-var importer_password='$(importer_password)' \
+    --env-var initializer_user='$(initializer_user)' \
+    --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(Build.BuildId)_import.zip -e environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
@@ -106,26 +106,31 @@ steps:
     artifactName: 'test_results'
   condition: ${{parameters.test_condition}}
 
+- task: FileTransform@1
+  displayName: 'Replace alias values using pipeline variables'
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/**/'
+    targetFiles: '**/aliases.json'
+    fileType: json
+
 - bash: |
     echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
-#    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"} | if .content.httpAuthCredentials.replaceByVariable == "postman_echo_credentials" then .content.httpAuthCredentials = {userName: "$(postman_echo_credentials_userName)", password: "$(postman_echo_credentials_password)"} else . end]' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
 - bash: |
     echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
-#    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"} | if .content.httpAuthCredentials.replaceByVariable == "postman_echo_credentials" then .content.httpAuthCredentials = {userName: "$(postman_echo_credentials_userName)", password: "$(postman_echo_credentials_password)"} else . end]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
 
 - script: |
     newman run utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
-    --env-var preparer_user=$(preparer_user) \
-    --env-var preparer_password=$(preparer_password) \
+    --env-var preparer_user='$(preparer_user)' \
+    --env-var preparer_password='$(preparer_password)' \
     --env-var buildId=$(Build.BuildId) \
-    --env-var buildNumber=$(Build.BuildNumber) \
-    --env-var definitionName=$(Build.DefinitionName) \
-    --env-var definitionVersion=$(Build.DefinitionVersion) \
+    --env-var buildNumber='$(Build.BuildNumber)' \
+    --env-var definitionName='$(Build.DefinitionName)' \
+    --env-var definitionVersion='$(Build.DefinitionVersion)' \
     --env-var aliases='$(aliases)' \
     --env-var globalAliases='$(globalAliases)' \
     -e environments/${{parameters.build_environment}} \
@@ -141,7 +146,7 @@ steps:
           -d @"apis/${{parameters.apiProject}}/export_payload.json" \
           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
-          --user $(exporter_user):$(exporter_password) \
+          --user '$(exporter_user)':'$(exporter_password)' \
           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
           https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
