@@ -1,3 +1,5 @@
+[[_TOC_]]
+
 # About API Gateway Staging
 
 The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central CONFIG environment, add them to the Azure DevOps repository (Git) and automatically promote them to DEV, STAGE and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _STAGE or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to STAGE and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, STAGE or PROD).
@@ -8,7 +10,7 @@ This solution is based on https://github.com/thesse1/webmethods-api-gateway-devo
 
 ## Some background
 
-As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change and those changes have to be propagated to other external products like API Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is a key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
+As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change, and those changes have to be propagated to other external products like API Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is a key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
 
 ![GitHub Logo](/images/api.png)
 
@@ -75,7 +77,7 @@ The repository content can be committed to the Azure DevOps repository (Git), it
 
 ## Develop and test APIs using API Gateway
 
-The most common use case for an API Developer is to develop APIs in their local development environments or the central CONFIG environment and then export them to a flat file representation such that they can be integrated to any VCS. Also developers need to import their APIs from a VCS (flat file representation) to their local development environments for further updates.
+The most common use case for an API Developer is to develop APIs in their local development environments or the central CONFIG environment and then export them to a flat file representation such that they can be integrated to any VCS. Also, developers need to import their APIs from a VCS (flat file representation) to their local development environments for further updates.
 
 The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central CONFIG environment to their VCS local repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, CONFIG, BUILD, DEV, STAGE or PROD.
 
@@ -108,7 +110,7 @@ The batch script can also be used for importing and exporting general API Gatewa
 | Parameter | README |
 | ------ | ------ |
 | importconfig or exportconfig |  To import or export from/to the flat file representation |
-| environment | The type fo the environment to import or export (CONFIG, BUILD, STAGE or PROD) |
+| environment | The type of the environment to import or export (CONFIG, BUILD, STAGE or PROD) |
 | apigateway_url |  API Gateway URL to import to or export from |
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportconfig and --importconfig option |
 | password | The API Gateway user password |
@@ -165,7 +167,7 @@ This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2e
 }
 ```
 
-This example showcases HTTP Basic Authentication for the the Petstore demo API. The following user, group and team are authorized to use the API: testuser_01, testgroup_02 (with testuser_02) and testteam_03 (assigned to testgroup_03 with testuser_03). API Gateway will not automatically include the authorized user, group and team in the export. Therefore, testuser_01, testgroup_02 and testteam_03 must be included in export_payload.json explicitly. The dependant assets (testuser_02, testgroup_03 and testuser_03) will be included automatically.
+This example showcases HTTP Basic Authentication for the Petstore demo API. The following user, group and team are authorized to use the API: testuser_01, testgroup_02 (with testuser_02) and testteam_03 (assigned to testgroup_03 with testuser_03). API Gateway will not automatically include the authorized user, group and team in the export. Therefore, testuser_01, testgroup_02 and testteam_03 must be included in export_payload.json explicitly. The dependent assets (testuser_02, testgroup_03 and testuser_03) will be included automatically.
 
 ### petstore-versioning
 
@@ -284,7 +286,7 @@ This API is using OAuth2 for inbound authentication. Therefore, the developer mu
 }
 ```
 
-This API is using JSON Web Tokens (JWT) for inbound authentication. It is configured to authorize requests with JWTs issued to the user testuser_jwt. The user itselft must be included explicitly in the export set.
+This API is using JSON Web Tokens (JWT) for inbound authentication. It is configured to authorize requests with JWTs issued to the user testuser_jwt. The user itself must be included explicitly in the export set.
 
 ### ping
 
@@ -410,8 +412,8 @@ Examples:
 ### Global aliases.json file
 
 ```
-[
-  {
+{
+  "petstore-routing-alias": {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias",
@@ -435,7 +437,7 @@ Examples:
       "value" : "https://petstore.swagger.io/v2"
     }
   },
-  {
+  "postman-echo-routing-alias": {
     "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
     "DEV-EXT": {
       "name" : "PostmanEcho_Routing_Alias",
@@ -480,7 +482,7 @@ Examples:
       "truststoreAlias" : ""
     }
   }
-]
+}
 ```
 
 The global aliases.json file in the apis folder contains alias values for the respective DEV, STAGE and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
@@ -488,8 +490,8 @@ The global aliases.json file in the apis folder contains alias values for the re
 ### petstore-versioning
 
 ```
-[
-  {
+{
+  "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
@@ -513,7 +515,7 @@ The global aliases.json file in the apis folder contains alias values for the re
       "value" : "https://petstore.swagger.io/v2"
     }
   },
-  {
+  "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
@@ -537,7 +539,7 @@ The global aliases.json file in the apis folder contains alias values for the re
       "value" : "https://petstore.swagger.io/v2"
     }
   }
-]
+}
 ```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases used only by the two API versions in this API project.
@@ -545,8 +547,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 ### security-alias
 
 ```
-[
-  {
+{
+  "postman-echo-security-alias": {
     "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
     "DEV-EXT": {
       "name" : "PostmanEcho_Security_Alias",
@@ -585,7 +587,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       }
     }
   }
-]
+}
 ```
 
 This file contains environment-specific values for the PostmanEcho_Security_Alias HTTP Transport security alias used only by the PostmanEcho_Security_Alias API in this API project.
@@ -595,8 +597,8 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
 ### incorrect-alias-name
 
 ```
-[
-  {
+{
+  "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_8_XXX",
@@ -620,7 +622,7 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
       "value" : "https://petstore.swagger.io/v2"
     }
   },
-  {
+  "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_9_XXX",
@@ -644,7 +646,7 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
       "value" : "https://petstore.swagger.io/v2"
     }
   }
-]
+}
 ```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases with incorrect names not matching with the names in the original alias definitions. The build pipeline will detect this and return with an error message.
@@ -652,8 +654,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 ### duplicate-alias
 
 ```
-[
-  {
+{
+  "petstore-routing-alias": {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias",
@@ -677,7 +679,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "value" : "https://petstore.swagger.io/v2"
     }
   }
-]
+}
 ```
 
 This file contains environment-specific values for the PetStore_Routing_Alias alias which is already overwritten by the global aliases.json file in the apis root folder. The build pipeline will detect this and return with an error message.
@@ -685,8 +687,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
 ### alias-not-found
 
 ```
-[
-  {
+{
+  "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
@@ -710,7 +712,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
       "value" : "https://petstore.swagger.io/v2"
     }
   },
-  {
+  "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
@@ -734,10 +736,29 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
       "value" : "https://petstore.swagger.io/v2"
     }
   }
-]
+}
 ```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases which are not included in this API project. The build pipeline will detect this and return with an error message.
+
+## Overwrite alias values with pipeline variables
+
+All alias values defined in the global aliases.json file or in API-specific aliases.json files in the API projects can be replaced during pipeline execution by pipeline variables. These pipeline variables can be defined and set when queueing the pipeline or in variable groups. Every API deployment pipeline imports the wm_test_apigw_staging_aliases variable group which can be used for assembling the variables used for replacing alias values. Names of these variables must represent the full JSON path of the value to be replaced in its aliases.json file. For every variable following this naming convention, the pipeline will automatically replace the corresponding value in its aliases.json file by the value of the replacement variable.
+
+For example,
+ - the value of the variable petstore-routing-alias.DEV-INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV-INT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable postman-echo-routing-alias.STAGE-EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on STAGE-EXT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable petstore-routing-alias-108.PROD-INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD-INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
+ - the value of the variable postman-echo-security-alias.STAGE-EXT.httpAuthCredentials.userName will automatically replace the user name stored in the PostmanEcho_Security_Alias on STAGE-EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+
+Overwriting alias values with pipeline variables was mainly developed for replacing secret alias values like passwords in security aliases.
+
+For example,
+ - the value of the variable postman-echo-security-alias.PROD-EXT.httpAuthCredentials.password will automatically replace the password stored in the PostmanEcho_Security_Alias on PROD-EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+
+Replacement values for secret alias values like passwords can and should be stored in secret variables.
+
+> Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form, so the value of the (secret) replacement variable must also be provided in base-64-encoded form.
 
 ## export_payload.json export query for API Gateway configurations
 
@@ -833,6 +854,8 @@ The apis folder contains sample API projects with the following test collections
 
 The petstore test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. It contains tests validating the response code and the petId returned in the response body.
 
+> Note: As of 15.06.2021, we have detected a malfunction in the native Petstore API breaking the GET and DELETE requests defined in the APITest.json Postman test collection for Petstore APIs: The GET and DELETE requests will intermittently (ca. 50% of the time) fail to address the pet by id. We have therefore manipulated all APITest.json Postman test collections for Petstore APIs skipping the GET and DELETE requests and only running the POST requests. The original versions of the test collections are retained as APITest_full_test.json.
+
 ### petstore-basicauth
 
 The petstore-basicauth test collection invokes POST, GET and DELETE requests for testuser_01, testuser_02 (member of testgroup_02) and testuser_03 (member of testgroup_03, assigned to testteam_03).
@@ -883,7 +906,7 @@ For a deployment to DEV, STAGE and PROD, the pipeline will now validate and mani
 - All policy actions will be scanned for unwanted API-level Log Invocation policies
 - All applications with names not ending with _DEV, _STAGE, _TEST or _PROD, respectively, will be removed
 - The remaining applications will be unsuspended (if necessary) to make sure they can be used on the target environment
-- Aliases will be overwritten with the values retrieved from the global aliases.jsob file or the local API project's aliases.json file
+- Aliases will be overwritten with the values retrieved from the global aliases.json file or the local API project's aliases.json file (perhaps after value replacement via pipeline variables)
 - It will be assured that all APIs are assigned to the Internal API group or the External API group, respectively
 - Three API tags will be added to every API indicating the build ID, the build name and the pipeline name. These tags can later be used in the API Gateway UI on the target environments to understand when and how (and by whom) every API was promoted to the environment
 - For a deployment to STAGE or PROD, API mocking will be disabled
@@ -900,7 +923,7 @@ Every pipeline will publish the following artifacts:
 - CONFIG_import, DEV-INT_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, DEV-INT etc. These artifacts should be identical with BUILD_export_for_CONFIG, BUILD_export_for_DEV-INT etc.
 - test_results: The results of the Postman tests in junitReport.xml form
 
-These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bugfixing of pipeline builds.
+These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
 
 In addition to that, the test results are published into the Azure DevOps test results framework.
 
@@ -1026,7 +1049,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The API developer needs to ensure that the change that was made does not cause regressions. For this, the user needs to run the set of function/regression tests over his change in Postman REST client before the change gets propagated to the next stage.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the the local development environment or the central CONFIG environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central CONFIG environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1066,7 +1089,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the the local development environment or the central CONFIG environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central CONFIG environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1098,7 +1121,7 @@ Let's consider this example:
 
   - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder which will later hold the asset definitions exported from the local development environment or the central CONFIG environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the the local development environment or the central CONFIG environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
+  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central CONFIG environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1127,7 +1150,7 @@ The API Gateway Staging solution includes eight Azure DevOps build pipelines for
 Every pipeline will publish the following artifact:
 - CONFIG_configuration, BUILD_configuration etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, BUILD etc.
 
-These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bugfixing of pipeline builds.
+These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
 
 After importing the API Gateway assets, the configuration pipelines will execute some steps for initializing the API Gateway:
 - Configuration of environment-specific loadbalancer URL
@@ -1238,8 +1261,9 @@ The pipeline templates execute the following major steps:
 | Create the API Deployable from the flat representation for API project xxx | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /utilities/prepare |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable To API Gateway BUILD | Executing the ImportAPI.json Postman collection in /utilities/import |
+| Import the Deployable to API Gateway BUILD | Executing the ImportAPI.json Postman collection in /utilities/import |
 | Run tests on API Gateway BUILD (if test_condition is ${{true}}) | Executing the APITest.json Postman collection in the API project's root folder |
+| Replace alias values using pipeline variables | Using FileTransform@1 Azure DevOps standard task for replacing the values in all aliases.json files |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in apis root folder using jq |
 | Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/STAGE/PROD applications, unsuspend all remaining applications, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT.json Postman collection in /utilities/prepare |
@@ -1250,7 +1274,7 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable To API Gateway CONFIG/DEV/STAGE/PROD | Executing the ImportAPI.json Postman collection in /utilities/import |
+| Import the Deployable to API Gateway CONFIG/DEV/STAGE/PROD | Executing the ImportAPI.json Postman collection in /utilities/import |
 
 ### store-build-template.yml
 
@@ -1285,7 +1309,7 @@ The pipeline template executes the following major steps:
 | ------ | ------ |
 | Create the API Deployable from the flat representation for CONFIG/BUILD/DEV/STAGE/PROD configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Prepare list of scopes to be imported | Parse scopes.json in API Gateway configuration root folder using jq |
-| Import the Deployable To API Gateway CONFIG/BUILD/DEV/STAGE/PROD | Executing the ImportConfig.json Postman collection in /utilities/import |
+| Import the Deployable to API Gateway CONFIG/BUILD/DEV/STAGE/PROD | Executing the ImportConfig.json Postman collection in /utilities/import |
 | Initialize API Gateway CONFIG/BUILD/DEV/STAGE/PROD | Executing the Initialize_CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT.json Postman collection in /utilities/initialize |
 
 ## Variable groups
@@ -1328,13 +1352,21 @@ This variable group is used by the pipelines for API projects (basic versions - 
 
 ### wm_test_apigw_staging_artifactory
 
-This variable group is used by the pipelines for API projects. The value of the useArtifactory variable decides whether they are executed in the basic version (not needing Arficatory) or the extended version (using Artifactory for transporting the deployable from the build job to the deploy job). The artifactoryService and artifactoryFolder variables are only used in the extended versions when Artifactory is used.
+This variable group is used by the pipelines for API projects. The value of the useArtifactory variable decides whether they are executed in the basic version (not needing Artifactory) or the extended version (using Artifactory for transporting the deployable from the build job to the deploy job). The artifactoryService and artifactoryFolder variables are only used in the extended versions when Artifactory is used, but artifactoryService must still point at an Artifactory service connection in Azure, even if it is not used in the pipeline.
 
 | Variable | README |
 | ------ | ------ |
 | useArtifactory | true or false |
 | artifactoryService | Name of the Artifactory service connection in Azure |
 | artifactoryFolder | Name of the Artifactory base-folder (repository) |
+
+### wm_test_apigw_staging_aliases
+
+This variable group is used by the pipelines for API projects. It is a container for variables used in the replacement of alias values. Variable names must follow the naming convention described above in section [Overwrite alias values with pipeline variables](#overwrite-alias-values-with-pipeline-variables).
+
+| Variable | README |
+| ------ | ------ |
+| {top-level attribute with a symbolic name of the alias in aliases.json file}.{target environment}.{name of the alias value to be replaced} | Replacement value |
 
 ## Environment configurations
 
