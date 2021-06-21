@@ -1,5 +1,5 @@
-[
-  {
+{
+  "petstore-routing-alias": {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
     "DEV-INT": {
       "name" : "PetStore_Routing_Alias",
@@ -23,4 +23,4 @@
       "value" : "https://petstore.swagger.io/v2"
     }
   }
-]
+}

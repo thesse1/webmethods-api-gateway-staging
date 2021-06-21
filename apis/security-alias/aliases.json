@@ -1,5 +1,5 @@
-[
-  {
+{
+  "postman-echo-security-alias": {
     "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
     "DEV-EXT": {
       "name" : "PostmanEcho_Security_Alias",
@@ -38,4 +38,4 @@
       }
     }
   }
-]
+}

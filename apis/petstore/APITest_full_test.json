@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "46673e75-780b-427c-879e-edddea1248d7",
-		"name": "API Test for inject-credentials",
+		"_postman_id": "12f8dbf6-f0b4-4407-b58b-224660596fcc",
+		"name": "API Test for petstore",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "PostEcho",
+			"name": "PostPet",
 			"event": [
 				{
 					"listen": "test",
@@ -15,13 +15,9 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"foo in payload is bar\", function () {\r",
+							"pm.test(\"Pet ID is 123\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
-							"});\r",
-							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVWOk15UGFzc3dvcmRfREVW\");\r",
+							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -43,11 +39,16 @@
 						"key": "Host",
 						"value": "{{hostname}}",
 						"type": "text"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+					"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -55,7 +56,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias_Inject_Credentials/1.0/post",
+					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -63,16 +64,16 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"PostmanEcho_Security_Alias_Inject_Credentials",
+						"SwaggerPetstore",
 						"1.0",
-						"post"
+						"pet"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GetEcho",
+			"name": "GetPet",
 			"event": [
 				{
 					"listen": "test",
@@ -81,13 +82,9 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"foo query parameter is bar\", function () {\r",
+							"pm.test(\"Pet ID is 123\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
-							"});\r",
-							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVWOk15UGFzc3dvcmRfREVW\");\r",
+							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -106,13 +103,18 @@
 						"value": "keep-alive"
 					},
 					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					},
+					{
 						"key": "Host",
 						"value": "{{hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias_Inject_Credentials/1.0/get?foo=bar",
+					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -120,22 +122,17 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"PostmanEcho_Security_Alias_Inject_Credentials",
+						"SwaggerPetstore",
 						"1.0",
-						"get"
-					],
-					"query": [
-						{
-							"key": "foo",
-							"value": "bar"
-						}
+						"pet",
+						"123"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DeleteEcho",
+			"name": "DeletePet",
 			"event": [
 				{
 					"listen": "test",
@@ -143,10 +140,6 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVWOk15UGFzc3dvcmRfREVW\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -165,13 +158,18 @@
 						"value": "keep-alive"
 					},
 					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					},
+					{
 						"key": "Host",
 						"value": "{{hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias_Inject_Credentials/1.0/delete",
+					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -179,33 +177,14 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"PostmanEcho_Security_Alias_Inject_Credentials",
+						"SwaggerPetstore",
 						"1.0",
-						"delete"
+						"pet",
+						"123"
 					]
 				}
 			},
 			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
 		}
 	]
 }

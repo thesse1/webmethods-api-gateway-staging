@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "e8dfb482-89a3-407a-ac2d-9364a9b94c21",
-		"name": "API Test for incorrect-alias-name",
+		"_postman_id": "c3e5dbda-a43d-4ba1-a27f-c5ca34414cb3",
+		"name": "API Test for internal-external",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "PostPet 1.0.8",
+			"name": "PostPet",
 			"event": [
 				{
 					"listen": "test",
@@ -18,9 +18,7 @@
 							"pm.test(\"Pet ID is 123\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id).to.eql(123);\r",
-							"});\r",
-							"\r",
-							"postman.setNextRequest(\"PostPet 1.0.9\"); // workaround because Petstore API is not working correctly"
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -44,7 +42,7 @@
 					},
 					{
 						"key": "x-gateway-apikey",
-						"value": "b20ef48f-c53f-4567-ba70-3addc82eae0e",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
 						"type": "text"
 					}
 				],
@@ -58,7 +56,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet",
+					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -66,8 +64,8 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"Petstore_Versioning",
-						"1.0.8",
+						"SwaggerPetstore",
+						"1.0",
 						"pet"
 					]
 				}
@@ -75,7 +73,7 @@
 			"response": []
 		},
 		{
-			"name": "GetPet 1.0.8",
+			"name": "GetPet",
 			"event": [
 				{
 					"listen": "test",
@@ -106,7 +104,7 @@
 					},
 					{
 						"key": "x-gateway-apikey",
-						"value": "b20ef48f-c53f-4567-ba70-3addc82eae0e",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
 						"type": "text"
 					},
 					{
@@ -116,7 +114,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -124,8 +122,8 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"Petstore_Versioning",
-						"1.0.8",
+						"SwaggerPetstore",
+						"1.0",
 						"pet",
 						"123"
 					]
@@ -134,7 +132,7 @@
 			"response": []
 		},
 		{
-			"name": "DeletePet 1.0.8",
+			"name": "DeletePet",
 			"event": [
 				{
 					"listen": "test",
@@ -161,7 +159,7 @@
 					},
 					{
 						"key": "x-gateway-apikey",
-						"value": "b20ef48f-c53f-4567-ba70-3addc82eae0e",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
 						"type": "text"
 					},
 					{
@@ -171,7 +169,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -179,8 +177,8 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"Petstore_Versioning",
-						"1.0.8",
+						"SwaggerPetstore",
+						"1.0",
 						"pet",
 						"123"
 					]
@@ -189,7 +187,7 @@
 			"response": []
 		},
 		{
-			"name": "PostPet 1.0.9",
+			"name": "PostEcho",
 			"event": [
 				{
 					"listen": "test",
@@ -198,12 +196,10 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"Pet ID is 123\", function () {\r",
+							"pm.test(\"foo in payload is bar\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id).to.eql(123);\r",
-							"});\r",
-							"\r",
-							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
+							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -227,13 +223,13 @@
 					},
 					{
 						"key": "x-gateway-apikey",
-						"value": "b20ef48f-c53f-4567-ba70-3addc82eae0e",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -241,7 +237,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/post",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -249,16 +245,16 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"Petstore_Versioning",
-						"1.0.9",
-						"pet"
+						"PostmanEcho",
+						"1.0",
+						"post"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GetPet 1.0.9",
+			"name": "GetEcho",
 			"event": [
 				{
 					"listen": "test",
@@ -267,9 +263,9 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"Pet ID is 123\", function () {\r",
+							"pm.test(\"foo query parameter is bar\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id).to.eql(123);\r",
+							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -289,7 +285,7 @@
 					},
 					{
 						"key": "x-gateway-apikey",
-						"value": "b20ef48f-c53f-4567-ba70-3addc82eae0e",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
 						"type": "text"
 					},
 					{
@@ -299,7 +295,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/get?foo=bar",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -307,17 +303,22 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"Petstore_Versioning",
-						"1.0.9",
-						"pet",
-						"123"
+						"PostmanEcho",
+						"1.0",
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DeletePet 1.0.9",
+			"name": "DeleteEcho",
 			"event": [
 				{
 					"listen": "test",
@@ -344,7 +345,7 @@
 					},
 					{
 						"key": "x-gateway-apikey",
-						"value": "b20ef48f-c53f-4567-ba70-3addc82eae0e",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
 						"type": "text"
 					},
 					{
@@ -354,7 +355,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/delete",
 					"protocol": "https",
 					"host": [
 						"{{ip}}"
@@ -362,10 +363,9 @@
 					"port": "{{port}}",
 					"path": [
 						"gateway",
-						"Petstore_Versioning",
-						"1.0.9",
-						"pet",
-						"123"
+						"PostmanEcho",
+						"1.0",
+						"delete"
 					]
 				}
 			},

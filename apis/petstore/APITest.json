@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "12f8dbf6-f0b4-4407-b58b-224660596fcc",
+		"_postman_id": "94d00273-5a8d-4c27-9533-2285a919b8cf",
 		"name": "API Test for petstore",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,9 @@
 							"pm.test(\"Pet ID is 123\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id).to.eql(123);\r",
-							"});"
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript"
 					}

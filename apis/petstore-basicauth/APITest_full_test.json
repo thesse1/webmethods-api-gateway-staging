@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4766a170-450a-4f2b-8bf1-7019bd6e456e",
+		"_postman_id": "3e45529c-90b9-412a-afbb-f3568465d904",
 		"name": "API Test for petstore-basicauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,7 @@
 			"name": "testuser_01",
 			"item": [
 				{
-					"name": "PostPet_01",
+					"name": "PostPet",
 					"event": [
 						{
 							"listen": "test",
@@ -21,9 +21,7 @@
 									"pm.test(\"Pet ID is 123\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.id).to.eql(123);\r",
-									"});\r",
-									"\r",
-									"postman.setNextRequest(\"PostPet_02\"); // workaround because Petstore API is not working correctly"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -88,7 +86,7 @@
 					"response": []
 				},
 				{
-					"name": "GetPet_01",
+					"name": "GetPet",
 					"event": [
 						{
 							"listen": "test",
@@ -157,7 +155,7 @@
 					"response": []
 				},
 				{
-					"name": "DeletePet_01",
+					"name": "DeletePet",
 					"event": [
 						{
 							"listen": "test",
@@ -227,7 +225,7 @@
 			"name": "testgroup_02",
 			"item": [
 				{
-					"name": "PostPet_02",
+					"name": "PostPet",
 					"event": [
 						{
 							"listen": "test",
@@ -239,9 +237,7 @@
 									"pm.test(\"Pet ID is 123\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.id).to.eql(123);\r",
-									"});\r",
-									"\r",
-									"postman.setNextRequest(\"PostPet_03\"); // workaround because Petstore API is not working correctly"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -306,7 +302,7 @@
 					"response": []
 				},
 				{
-					"name": "GetPet_02",
+					"name": "GetPet",
 					"event": [
 						{
 							"listen": "test",
@@ -375,7 +371,7 @@
 					"response": []
 				},
 				{
-					"name": "DeletePet_02",
+					"name": "DeletePet",
 					"event": [
 						{
 							"listen": "test",
@@ -445,7 +441,7 @@
 			"name": "testteam_03",
 			"item": [
 				{
-					"name": "PostPet_03",
+					"name": "PostPet",
 					"event": [
 						{
 							"listen": "test",
@@ -457,9 +453,7 @@
 									"pm.test(\"Pet ID is 123\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.id).to.eql(123);\r",
-									"});\r",
-									"\r",
-									"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -524,7 +518,7 @@
 					"response": []
 				},
 				{
-					"name": "GetPet_03",
+					"name": "GetPet",
 					"event": [
 						{
 							"listen": "test",
@@ -593,7 +587,7 @@
 					"response": []
 				},
 				{
-					"name": "DeletePet_03",
+					"name": "DeletePet",
 					"event": [
 						{
 							"listen": "test",
