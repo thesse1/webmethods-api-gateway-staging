@@ -27,6 +27,8 @@ The solution supports two instances each for DEV, STAGE and PROD for hosting int
 
 ![GitHub Logo](/images/devops_flow.png)
 
+> Note: The solution only supports additive promotion of new assets or asset changes. It does not support the promotion of asset deletions. Assets can be deleted directly on the target environment (in the API Gateway UI or through the respectice API Gateway asset management REST API).
+
 ## webMethods API Gateway assets and configurations
 
 The following API Gateway assets and configurations can be moved across API Gateway stages:
@@ -1327,7 +1329,7 @@ These variable groups are used by the pipelines for API Gateway configurations a
 | importer_password | The API Gateway password for the importer user |
 | preparer_user | User for preparing assets on API Gateway BUILD, e.g., Preparer. The user must have the "Manage APIs", "Activate / Deactivate APIs", "Manage applications", "Manage aliases" and "Manage scope mapping" privileges |
 | preparer_password | The API Gateway password for the preparer user |
-| initializer_user | User for initializing the API Gateway, e.g., Initializer. The user must have the "Manage general administration configurations" privilege |
+| initializer_user | User for initializing the API Gateway, e.g., Initializer. The user must have the "Manage general administration configurations" and "Manage aliases" privileges |
 | initializer_password | The API Gateway password for the initializer user |
 
 ### wm_test_apigw_staging_common
@@ -1437,3 +1439,9 @@ These environment variables are used in the utilities Postman collections and in
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 
 The separate configuration of IP address and hostname is necessary in order to support cases in which the agent might not be able to find the API Gateway server by its hostname.
+
+## Postman collections
+
+The following Postman collections are executed automatically against the BUILD and the Target environment (using Newman) in the deployment and configuration pipeline templates:
+
+![GitHub Logo](/images/Pipelines_Utilities.png)
