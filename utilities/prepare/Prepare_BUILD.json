@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f4d1f0fa-7c5d-4db5-8390-537411cf1670",
+		"_postman_id": "7147ee0f-3e20-4e30-b9d5-d72ff2aaad74",
 		"name": "Prepare_BUILD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -77,7 +77,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Applications\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -254,7 +258,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all APIs\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all APIs\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -361,7 +369,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Scopes\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Scopes\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -476,7 +488,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Aliases\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Aliases\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -585,7 +601,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Strategies\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Strategies\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}

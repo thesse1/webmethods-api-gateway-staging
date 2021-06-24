@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2f314728-7ea9-4187-82c9-4f1085323df9",
+		"_postman_id": "5117da9d-2930-42c8-8208-8a0df915b53f",
 		"name": "Prepare_for_DEV-EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -553,7 +553,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Applications\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -600,7 +604,11 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Applications\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 200) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}

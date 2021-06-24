@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2a6d3da9-01b1-4cb7-a5d0-04151836c6c2",
+		"_postman_id": "e335f31b-c3c9-4c6e-88cf-e9f4645125b7",
 		"name": "Prepare_for_STAGE-EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -553,7 +553,11 @@
 							"    pm.response.to.have.status(204);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Applications\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -600,7 +604,11 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"Get all Applications\");"
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 200) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
