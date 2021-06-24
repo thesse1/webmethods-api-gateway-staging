@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-05-20T12:34:04"/>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2021-06-23T16:52:03"/>
     <asset name="API.d9dde2b3-481a-4660-9d92-f0d46d0d630e" displayName="PostmanEcho_Mocking[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.3f5b0c72-2416-4468-8369-8a1d201a1049</dependsOn>
@@ -22,7 +22,7 @@
     <asset name="PolicyAction.0f9ec52f-6cc9-43bb-9e15-99ddf49e7639" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API PostmanEcho_Mocking[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="PolicyAction.6d175b6e-debb-4879-9ad5-b8f6c23215a7" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API PostmanEcho_Mocking[1.0]" isDeployable="true">
+    <asset name="PolicyAction.6d175b6e-debb-4879-9ad5-b8f6c23215a7" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API PostmanEcho_Mocking[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.fd424a25-0a7f-4d47-b875-5e0dbf674452" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API PostmanEcho_Mocking[1.0]" isDeployable="true">

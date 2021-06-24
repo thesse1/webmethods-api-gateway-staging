@@ -11,13 +11,18 @@
     }
   },
   "creationDate" : "2021-02-04 15:40:02 GMT",
-  "lastModified" : "2021-02-12 09:49:53 GMT",
-  "lastUpdated" : 1621436852856,
+  "lastModified" : "2021-06-23 14:01:04 GMT",
+  "lastUpdated" : 1624456864042,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",
   "properties" : { },
   "isSuspended" : false,
   "authStrategyIds" : [ "cda6b52a-7715-4f02-977a-d9ad74442957" ],
-  "subscription" : false
+  "primaryNode" : {
+    "hostId" : "c246199d-44bc-4253-8396-db33c4d58b8d",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
 }

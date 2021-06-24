@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-06-01T09:19:26"/>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2021-06-23T16:53:53"/>
+    <asset name="User.f162fb3b-2429-48fb-983b-3fb7f7a15cae" displayName="testuser_01" isDeployable="true">
+        <implementation.generic type="User"/>
+    </asset>
     <asset name="Group.e5d1d6c9-5eee-4f21-b26a-531a88740eeb" displayName="testgroup_02" isDeployable="true">
         <implementation.generic type="Group"/>
         <dependsOn>APIGateway:User.db4f4f95-6678-4272-a245-160f2cae0b36</dependsOn>
     </asset>
     <asset name="User.db4f4f95-6678-4272-a245-160f2cae0b36" displayName="testuser_02" isDeployable="true">
-        <implementation.generic type="User"/>
-    </asset>
-    <asset name="User.f162fb3b-2429-48fb-983b-3fb7f7a15cae" displayName="testuser_01" isDeployable="true">
         <implementation.generic type="User"/>
     </asset>
     <asset name="API.131ee26d-056a-432b-b30d-5e6ec4bb4a6a" displayName="Petstore_BasicAuth[1.0.8]" isDeployable="true">
@@ -33,7 +33,7 @@
             <value>https://petstore.swagger.io/v2</value>
         </property>
     </asset>
-    <asset name="PolicyAction.ab9a8555-3c55-4e34-82aa-c710b84af379" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API Petstore_BasicAuth[1.0.8]" isDeployable="true">
+    <asset name="PolicyAction.ab9a8555-3c55-4e34-82aa-c710b84af379" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Petstore_BasicAuth[1.0.8]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.982d732a-bb2c-4bff-b65b-946f3d5dd8df" displayName="Policy Action [Authorize User] -&gt; Policy For API Petstore_BasicAuth[1.0.8]" isDeployable="true">

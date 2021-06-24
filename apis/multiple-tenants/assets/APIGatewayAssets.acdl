@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.5" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-05-20T11:54:06"/>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2021-06-23T16:54:33"/>
     <asset name="API.328ae890-452f-43f1-9501-b708c7afc83f" displayName="Tenant2_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.8fb2b059-8bd3-48ba-abee-d8d72962ba50</dependsOn>
@@ -39,7 +39,7 @@
             <value>false</value>
         </property>
     </asset>
-    <asset name="PolicyAction.b35494ce-ae9d-410b-9ead-646f00940d90" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API Tenant2_PostmanEcho[1.0]" isDeployable="true">
+    <asset name="PolicyAction.b35494ce-ae9d-410b-9ead-646f00940d90" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Tenant2_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.5afc0d20-05d4-403c-b5a4-d35b9fcfa0e0" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Tenant2_PostmanEcho[1.0]" isDeployable="true">
@@ -74,15 +74,18 @@
         <dependsOn>APIGateway:PolicyAction.43aacf0d-c81e-453b-9def-64972f94ad09</dependsOn>
         <dependsOn>APIGateway:PolicyAction.dcc41506-39f3-4e44-8aa1-f056e465a92d</dependsOn>
     </asset>
-    <asset name="PolicyAction.23704840-0402-421a-b8a2-a420a8ed504a" displayName="Policy Action [Context-based Routing] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
+    <asset name="PolicyAction.23704840-0402-421a-b8a2-a420a8ed504a" displayName="Policy Action [Conditional Routing] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
         <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
-        <dependsOn>APIGateway:Application.88e36e10-f2db-4cf6-9bb0-3883f7a7c053</dependsOn>
-        <dependsOn>APIGateway:Application.8fb2b059-8bd3-48ba-abee-d8d72962ba50</dependsOn>
-        <dependsOn>APIGateway:Application.a8132055-d35d-4e64-aaaf-aafcf323459f</dependsOn>
-        <dependsOn>APIGateway:Application.aa83a664-5a5c-4249-a007-eb018a0c431e</dependsOn>
-        <dependsOn>APIGateway:Application.bf204106-1ecc-4d55-aded-6be9ea6a0e25</dependsOn>
-        <dependsOn>APIGateway:Application.f044873f-6316-41a9-aed7-ceefa85d87b0</dependsOn>
+    </asset>
+    <asset name="PolicyAction.43aacf0d-c81e-453b-9def-64972f94ad09" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.dcc41506-39f3-4e44-8aa1-f056e465a92d" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="RegisteredApplication.8fb2b059-8bd3-48ba-abee-d8d72962ba50" displayName="RegisteredApplication [ Tenant2_App_PROD ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.88e36e10-f2db-4cf6-9bb0-3883f7a7c053" displayName="Tenant1_App_DEV" isDeployable="true">
         <implementation.generic type="Application"/>
@@ -111,7 +114,7 @@
         <implementation.generic type="PolicyAction"/>
         <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
     </asset>
-    <asset name="PolicyAction.d229f4e2-0015-4b44-9e16-da942a74b8f8" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API Tenant1_PostmanEcho[1.0]" isDeployable="true">
+    <asset name="PolicyAction.d229f4e2-0015-4b44-9e16-da942a74b8f8" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Tenant1_PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.38872a43-337f-450d-a5a3-a5e7b1a14f92" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Tenant1_PostmanEcho[1.0]" isDeployable="true">
@@ -173,15 +176,6 @@
         <implementation.generic type="PassmanData"/>
     </asset>
     <asset name="RegisteredApplication.a8132055-d35d-4e64-aaaf-aafcf323459f" displayName="RegisteredApplication [ Tenant2_App_DEV ]" isDeployable="true">
-        <implementation.generic type="RegisteredApplication"/>
-    </asset>
-    <asset name="PolicyAction.43aacf0d-c81e-453b-9def-64972f94ad09" displayName="Policy Action [Identify &amp; Authorize Application] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
-        <implementation.generic type="PolicyAction"/>
-    </asset>
-    <asset name="PolicyAction.dcc41506-39f3-4e44-8aa1-f056e465a92d" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Common_PostmanEcho[1.0]" isDeployable="true">
-        <implementation.generic type="PolicyAction"/>
-    </asset>
-    <asset name="RegisteredApplication.8fb2b059-8bd3-48ba-abee-d8d72962ba50" displayName="RegisteredApplication [ Tenant2_App_PROD ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="PassmanData.API_ACCESS_KEY8fb2b059-8bd3-48ba-abee-d8d72962ba50" displayName="API_ACCESS_KEY8fb2b059-8bd3-48ba-abee-d8d72962ba50" isDeployable="true">

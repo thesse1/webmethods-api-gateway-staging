@@ -1,7 +1,7 @@
 {
   "id" : "ab9a8555-3c55-4e34-82aa-c710b84af379",
   "names" : [ {
-    "value" : "Identify & Authorize Application",
+    "value" : "Identify & Authorize",
     "locale" : "en"
   } ],
   "templateKey" : "evaluatePolicy",

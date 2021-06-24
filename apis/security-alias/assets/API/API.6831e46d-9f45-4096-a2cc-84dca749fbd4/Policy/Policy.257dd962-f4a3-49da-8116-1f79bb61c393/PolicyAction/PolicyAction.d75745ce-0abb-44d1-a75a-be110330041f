@@ -1,7 +1,7 @@
 {
   "id" : "d75745ce-0abb-44d1-a75a-be110330041f",
   "names" : [ {
-    "value" : "Outbound Authentication - Transport",
+    "value" : "Outbound Auth - Transport",
     "locale" : "en"
   } ],
   "templateKey" : "outboundTransportAuthentication",

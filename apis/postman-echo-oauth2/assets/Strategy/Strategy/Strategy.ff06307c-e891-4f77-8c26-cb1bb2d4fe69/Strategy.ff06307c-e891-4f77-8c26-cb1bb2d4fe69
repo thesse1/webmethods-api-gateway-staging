@@ -19,6 +19,7 @@
     "redirectUris" : [ ]
   },
   "clientRegistration" : {
+    "shell" : false,
     "clientId" : "870cd829-61e6-445f-a5a6-2ddf2878ebac",
     "name" : "MyPostmanEchoApp_OAuth2_Strategy_STAGE",
     "version" : "1.0",

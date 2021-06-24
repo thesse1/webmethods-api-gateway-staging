@@ -2,6 +2,8 @@
   "id" : "db4f4f95-6678-4272-a245-160f2cae0b36",
   "loginId" : "testuser_02",
   "caller" : "Administrator",
+  "firstName" : "",
+  "lastName" : "",
   "hashedPassword" : "{sha-256_v2}BKCTrq8YOOT8sXI19LL5q2MIFstDOIBTn8vfJtGG4lSUw5zEoe80HDAxMDAw",
   "type" : "local",
   "emailAddresses" : [ ],
