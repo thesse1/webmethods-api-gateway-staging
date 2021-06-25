@@ -37,6 +37,8 @@ steps:
     TEST_CONDITION: ${{parameters.test_condition}}
   displayName: Check for required parameters
 
+- bash: echo "##vso[build.updatebuildnumber]$(Build.BuildNumber)-$(apiProject)"
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/assets'
