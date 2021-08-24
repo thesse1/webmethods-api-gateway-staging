@@ -1,6 +1,5 @@
 {
   "configId" : "elasticsearchDestinationConfig",
-  "userName" : "Administrator",
   "internalPorts" : { },
   "properties" : {
     "hostName" : "localhost",

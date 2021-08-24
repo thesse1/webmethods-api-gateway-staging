@@ -1,6 +1,6 @@
 {
   "configId" : "gatewayDestinationConfig",
-  "userName" : "Administrator",
+  "userName" : "thomas.hesse@softwareag.com",
   "internalPorts" : { },
   "properties" : {
     "sendAuditlogAliasManagementEvent" : "true",
@@ -19,7 +19,7 @@
     "sendErrorEvent" : "true",
     "sendAuditlogGroupManagementEvent" : "true",
     "sendAuditlogRuleManagementEvent" : "true",
-    "metricsPublishInterval" : "5",
+    "metricsPublishInterval" : "50",
     "sendAuditlogAccessProfileManagementEvent" : "true",
     "sendAuditlogAPIManagementEvent" : "true",
     "sendAuditlogPromotionManagementEvent" : "true"
