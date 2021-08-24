@@ -1,0 +1,16 @@
+# Pipeline template for apig staging
+
+steps:
+- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)'
+  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)'
+
+- bash: |
+    git config --global user.email '$(Build.RequestedForEmail)'
+    git config --global user.name '$(Build.RequestedFor)'
+  displayName: "Set Git user e-mail and name"
+
+- bash: |
+    git add .
+    git commit -m '$(commit-message)'
+    git push origin 'HEAD:$(Build.SourceBranchName)'
+  displayName: "Git add, commit and push"

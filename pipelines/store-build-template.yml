@@ -1,34 +1,19 @@
 # Pipeline template for apig staging
 
 parameters:
-  apiProject: ''
   target_type: ''
-  prep_condition: ''
-  test_condition: ''
 
 steps:
+- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
+  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
+
 - bash: |
-    if [ -z "$APIPROJECT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
     if [ -z "$TARGET_TYPE" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"target_type\""
       echo "##vso[task.complete result=Failed;]"
     fi
-    if [ -z "$PREP_CONDITION" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"prep_condition\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TEST_CONDITION" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"test_condition\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
   env:
-    APIPROJECT: ${{parameters.apiProject}}
     TARGET_TYPE: ${{parameters.target_type}}
-    PREP_CONDITION: ${{parameters.prep_condition}}
-    TEST_CONDITION: ${{parameters.test_condition}}
   displayName: Check for required parameters
 
 - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2

@@ -1,0 +1,152 @@
+# Pipeline for apig staging
+
+trigger: none
+
+# To do: Add target_type as pipeline parameter (vs. pipeline variable)
+# parameters:
+# - name: target_type
+#   type: string
+#   default: 'DEV-INT'
+
+variables:
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
+    tenant: playground
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
+    tenant: realworld
+
+jobs:
+- job: Configure_CONFIG
+  variables:
+  - template: /${{variables.tenant}}/variables/CONFIG/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: CONFIG
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'CONFIG')
+
+- job: Configure_BUILD
+  variables:
+  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: BUILD
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'BUILD')
+
+- job: Configure_DEV_INT
+  variables:
+  - template: /${{variables.tenant}}/variables/DEV-INT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: DEV-INT
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'DEV-INT')
+
+- job: Configure_DEV_EXT
+  variables:
+  - template: /${{variables.tenant}}/variables/DEV-EXT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: DEV-EXT
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'DEV-EXT')
+
+- job: Configure_STAGE_INT
+  variables:
+  - template: /${{variables.tenant}}/variables/STAGE-INT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: STAGE-INT
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'STAGE-INT')
+
+- job: Configure_STAGE_EXT
+  variables:
+  - template: /${{variables.tenant}}/variables/STAGE-EXT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: STAGE-EXT
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'STAGE-EXT')
+
+- job: Configure_PROD_INT
+  variables:
+  - template: /${{variables.tenant}}/variables/PROD-INT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: PROD-INT
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'PROD-INT')
+
+- job: Configure_PROD_EXT
+  variables:
+  - template: /${{variables.tenant}}/variables/PROD-EXT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-configure-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: PROD-EXT
+      tenant: $(tenant)
+  condition: eq(variables['target_type'], 'PROD-EXT')

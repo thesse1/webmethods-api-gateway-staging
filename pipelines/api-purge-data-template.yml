@@ -1,0 +1,48 @@
+# Pipeline template for apig configuring
+
+parameters:
+  environment: ''
+  type: ''
+  tenant: ''
+
+steps:
+- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
+  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
+
+- bash: |
+    if [ -z "$ENVIRONMENT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"environment\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+    if [ -z "$TYPE" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"type\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+    if [ -z "$TENANT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+  env:
+    ENVIRONMENT: ${{parameters.environment}}
+    TYPE: ${{parameters.type}}
+    TENANT: ${{parameters.tenant}}
+  displayName: Check for required parameters
+
+- bash: |
+   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
+
+- script: |
+    newman run utilities/purge/PurgeData.json --reporters cli \
+    --env-var purger_user='$(purger_user)' \
+    --env-var purger_password='$(purger_password)' \
+    -e ${{parameters.tenant}}/environments/${{parameters.environment}} \
+    $(environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Purge Data on API Gateway ${{parameters.type}}'
+  env:
+    no_proxy: $(environment_ip)

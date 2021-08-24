@@ -1,0 +1,38 @@
+# Pipeline for apig staging
+
+trigger: none
+
+# To do: Add apiProject and commit-message as pipeline parameters (vs. pipeline variable)
+# parameters:
+# - name: apiProject
+#   type: string
+#   default: 'petstore'
+# - name: commit-message
+#   type: string
+
+variables:
+- name: tenant
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
+    value: playground
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
+    value: realworld
+- template: /${{variables.tenant}}/variables/CONFIG/variables-template.yml
+
+pool:
+  name: '$(agent_pool)'
+  vmImage: '$(agent_pool_vmImage)'
+
+steps:
+- checkout: self
+  submodules: "true"
+  persistCredentials: "true"
+  clean: "true"
+
+- template: /pipelines/api-export-api-template.yml  # Template reference
+  parameters:
+    apiProject: $(apiProject)
+    source_environment: $(environment)
+    source_type: CONFIG
+    tenant: $(tenant)
+
+- template: /pipelines/commit-template.yml  # Template reference

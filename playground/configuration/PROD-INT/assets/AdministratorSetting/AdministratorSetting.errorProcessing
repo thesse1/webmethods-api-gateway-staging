@@ -1,0 +1,9 @@
+{
+  "configId" : "errorProcessing",
+  "internalPorts" : { },
+  "properties" : {
+    "sendNativeProviderFault" : "false",
+    "defaultErrorMessage" : "API Gateway encountered an error. Error Message: $ERROR_MESSAGE. Request Details: Service - $SERVICE, Operation - $OPERATION, Invocation Time:$TIME, Date:$DATE,  Client IP - $CLIENT_IP, User - $USER and Application:$CONSUMER_APPLICATION",
+    "fallbackErrorMessage" : "API Gateway encountered an error. Error Message: $ERROR_MESSAGE. Request Details: Service - $SERVICE, Operation - $OPERATION, Invocation Time:$TIME, Date:$DATE,  Client IP - $CLIENT_IP, User - $USER and Application:$CONSUMER_APPLICATION"
+  }
+}

@@ -1,0 +1,145 @@
+# Pipeline for apig staging
+
+trigger: none
+
+variables:
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
+    tenant: playground
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
+    tenant: realworld
+
+jobs:
+- job: Purge_Data_on_CONFIG
+  variables:
+  - template: /${{variables.tenant}}/variables/CONFIG/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: CONFIG
+      tenant: $(tenant)
+
+- job: Purge_Data_on_BUILD
+  variables:
+  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: BUILD
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_CONFIG
+
+- job: Purge_Data_on_DEV_INT
+  variables:
+  - template: /${{variables.tenant}}/variables/DEV-INT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: DEV-INT
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_BUILD
+
+- job: Purge_Data_on_DEV_EXT
+  variables:
+  - template: /${{variables.tenant}}/variables/DEV-EXT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: DEV-EXT
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_DEV_INT
+
+- job: Purge_Data_on_STAGE_INT
+  variables:
+  - template: /${{variables.tenant}}/variables/STAGE-INT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: STAGE-INT
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_DEV_EXT
+
+- job: Purge_Data_on_STAGE_EXT
+  variables:
+  - template: /${{variables.tenant}}/variables/STAGE-EXT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: STAGE-EXT
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_STAGE_INT
+
+- job: Purge_Data_on_PROD_INT
+  variables:
+  - template: /${{variables.tenant}}/variables/PROD-INT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: PROD-INT
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_STAGE_EXT
+
+- job: Purge_Data_on_PROD_EXT
+  variables:
+  - template: /${{variables.tenant}}/variables/PROD-EXT/variables-template.yml
+  pool:
+    name: '$(agent_pool)'
+    vmImage: '$(agent_pool_vmImage)'
+  steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+  - template: /pipelines/api-purge-data-template.yml  # Template reference
+    parameters:
+      environment: $(environment)
+      type: PROD-EXT
+      tenant: $(tenant)
+  dependsOn: Purge_Data_on_PROD_INT

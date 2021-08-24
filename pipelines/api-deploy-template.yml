@@ -6,8 +6,12 @@ parameters:
   target_type: ''
   prep_condition: ''
   test_condition: ''
+  tenant: ''
 
 steps:
+- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and target_type '${{parameters.target_type}}'
+  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and target_type '${{parameters.target_type}}'
+
 - bash: |
     if [ -z "$APIPROJECT" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
@@ -29,19 +33,24 @@ steps:
       echo "##vso[task.logissue type=error;]Missing template parameter \"test_condition\""
       echo "##vso[task.complete result=Failed;]"
     fi
+    if [ -z "$TENANT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
   env:
     APIPROJECT: ${{parameters.apiProject}}
     TARGET_ENVIRONMENT: ${{parameters.target_environment}}
     TARGET_TYPE: ${{parameters.target_type}}
     PREP_CONDITION: ${{parameters.prep_condition}}
     TEST_CONDITION: ${{parameters.test_condition}}
+    TENANT: ${{parameters.tenant}}
   displayName: Check for required parameters
 
 - bash: |
-   echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.target_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.target_type}} configuration, extract ip, hostname, port and insecureflag'
 
@@ -51,7 +60,7 @@ steps:
     artifactName: '${{parameters.target_type}}_import'
 
 - bash: |
-    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.apiProject}}/scopes.json`"
+    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/scopes.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
@@ -62,7 +71,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip -e environments/${{parameters.target_environment}} \
+    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip -e ${{parameters.tenant}}/environments/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_type}}'
