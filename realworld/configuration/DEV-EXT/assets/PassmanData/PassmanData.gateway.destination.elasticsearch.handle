@@ -1,0 +1,7 @@
+{
+  "id" : "gateway.destination.elasticsearch.handle",
+  "pw" : "IQsAUAuEZqg=",
+  "encryptorId" : "EntrustPbePlus",
+  "saltString" : "BLYxlkTGZUzBR/mrRUai8Q==",
+  "iterationCount" : 2048
+}

@@ -1,0 +1,26 @@
+{
+  "configId" : "gatewayDestinationConfig",
+  "internalPorts" : { },
+  "properties" : {
+    "sendAuditlogAliasManagementEvent" : "true",
+    "sendAuditlogAccessControlListManagementEvent" : "true",
+    "sendLifecycleEvent" : "true",
+    "sendAuditlogPackageManagementEvent" : "true",
+    "sendAuditlogRuntimeDataManagementEvent" : "true",
+    "sendAuditlogPolicyManagementEvent" : "true",
+    "sendAuditlogPlanManagementEvent" : "true",
+    "sendAuditlogApprovalManagementEvent" : "true",
+    "sendAuditlogUserManagementEvent" : "true",
+    "sendPerformanceMetrics" : "true",
+    "sendAuditlogApplicationManagementEvent" : "true",
+    "sendAuditlogAdministrationEvent" : "true",
+    "sendPolicyViolationEvent" : "true",
+    "sendErrorEvent" : "true",
+    "sendAuditlogGroupManagementEvent" : "true",
+    "sendAuditlogRuleManagementEvent" : "true",
+    "metricsPublishInterval" : "5",
+    "sendAuditlogAccessProfileManagementEvent" : "true",
+    "sendAuditlogAPIManagementEvent" : "true",
+    "sendAuditlogPromotionManagementEvent" : "true"
+  }
+}
