@@ -5,7 +5,7 @@
     "locale" : "English"
   } ],
   "descriptions" : [ {
-    "value" : "BUILD2: This is a system policy, which has log invocation policy and filters associated to log request or response payloads to a specified destination. These transactions are monitored and logged across all APIs in API Gateway",
+    "value" : "BUILD: This is a system policy, which has log invocation policy and filters associated to log request or response payloads to a specified destination. These transactions are monitored and logged across all APIs in API Gateway",
     "locale" : "English"
   } ],
   "scope" : {
