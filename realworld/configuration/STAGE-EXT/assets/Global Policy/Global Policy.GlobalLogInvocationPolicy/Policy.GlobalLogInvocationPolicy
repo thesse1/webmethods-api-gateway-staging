@@ -5,7 +5,7 @@
     "locale" : "English"
   } ],
   "descriptions" : [ {
-    "value" : "STAGE-EXT: This is a system policy, which has log invocation policy and filters associated to log request or response payloads to a specified destination. These transactions are monitored and logged across all APIs in API Gateway",
+    "value" : "REAL STAGE-EXT: This is a system policy, which has log invocation policy and filters associated to log request or response payloads to a specified destination. These transactions are monitored and logged across all APIs in API Gateway",
     "locale" : "English"
   } ],
   "scope" : {
@@ -43,7 +43,7 @@
     "stageKey" : "LMT"
   } ],
   "policyScope" : "GLOBAL",
-  "active" : true,
   "global" : true,
+  "active" : true,
   "systemPolicy" : true
 }
