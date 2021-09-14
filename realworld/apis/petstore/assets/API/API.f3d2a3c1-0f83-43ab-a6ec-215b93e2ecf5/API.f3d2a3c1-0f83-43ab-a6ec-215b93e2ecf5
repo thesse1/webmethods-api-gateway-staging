@@ -1171,7 +1171,7 @@
   } ],
   "apiName" : "SwaggerPetstore",
   "apiVersion" : "1.0",
-  "apiDescription" : "REAL: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+  "apiDescription" : "TOUCH: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
   "maturityState" : "Experimental",
   "apiGroups" : [ "Internal" ],
   "isActive" : true,
@@ -1185,7 +1185,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-17 07:22:07 GMT",
-  "lastModified" : "2021-09-08 13:23:15 GMT",
+  "lastModified" : "2021-09-14 14:18:23 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"

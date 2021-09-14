@@ -13,12 +13,6 @@
   },
   "policyEnforcements" : [ {
     "enforcements" : [ {
-      "enforcementObjectId" : "745dd7ef-ea50-4a73-b404-e0a94e9c2564",
-      "order" : "0"
-    } ],
-    "stageKey" : "requestPayloadProcessing"
-  }, {
-    "enforcements" : [ {
       "enforcementObjectId" : "c7aa28d6-70f5-4fb1-8d8b-804970d504be",
       "order" : "0"
     } ],
@@ -37,7 +31,7 @@
     "stageKey" : "transport"
   } ],
   "policyScope" : "SERVICE",
-  "active" : false,
   "global" : false,
+  "active" : false,
   "systemPolicy" : false
 }
