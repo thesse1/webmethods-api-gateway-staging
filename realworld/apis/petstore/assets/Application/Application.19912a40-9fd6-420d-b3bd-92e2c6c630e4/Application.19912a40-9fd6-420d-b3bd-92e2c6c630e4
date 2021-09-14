@@ -1,0 +1,28 @@
+{
+  "applicationID" : "19912a40-9fd6-420d-b3bd-92e2c6c630e4",
+  "name" : "MySwaggerPetstoreApp_DEV",
+  "description" : "This application should be used on DEV environments for testing",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "72612a183f4a8980815ef51b4591c0a9f06a89965ad8a077bc93626fbf839a76"
+    }
+  },
+  "creationDate" : "2020-12-08 09:29:00 GMT",
+  "lastModified" : "2021-06-25 10:46:22 GMT",
+  "lastUpdated" : 1631097872555,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "c779d804-dfde-486f-a6a5-9f2eb17b7036",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

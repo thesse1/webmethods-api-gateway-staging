@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2021-07-06T14:26:05"/>
+    <asset name="API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf" displayName="PostmanEcho_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="API"/>
+        <dependsOn>APIGateway:Application.a2d57c08-9b06-47ec-baf1-a74db893d023</dependsOn>
+        <dependsOn>APIGateway:Application.d883ae49-80f8-4dc2-b525-2ae85c89cd4f</dependsOn>
+        <dependsOn>APIGateway:Application.eb94a48d-f262-4cc9-a264-84a37f65e458</dependsOn>
+        <dependsOn>APIGateway:Policy.6a9146f1-c16a-46e2-b3a5-b503b58fb78c</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.a2d57c08-9b06-47ec-baf1-a74db893d023</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.d883ae49-80f8-4dc2-b525-2ae85c89cd4f</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.eb94a48d-f262-4cc9-a264-84a37f65e458</dependsOn>
+    </asset>
+    <asset name="Policy.6a9146f1-c16a-46e2-b3a5-b503b58fb78c" displayName="Policy For API PostmanEcho_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.05234b85-7fc0-4f0b-aad6-7a779c700548</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.21e011ca-19ab-40b5-adff-f636bb5df753</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.75c65986-6bc0-48fb-8f2c-9bb94818f589</dependsOn>
+    </asset>
+    <asset name="PolicyAction.21e011ca-19ab-40b5-adff-f636bb5df753" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API PostmanEcho_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd</dependsOn>
+    </asset>
+    <asset name="Alias.97c5a4c8-e253-4fed-bd57-dd6dae1450fd" displayName="PostmanEcho_Routing_Alias" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="Endpoint URI for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Endpoint URI for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>https://postman-echo.com</value>
+        </property>
+        <property name="Optimization technique for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Optimization technique for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>None</value>
+        </property>
+        <property name="Connection timeout for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Connection timeout for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Read timeout for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Read timeout for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Pass WS-Security Headers for Endpoint alias PostmanEcho_Routing_Alias" many="false" isSecure="false" displayName="Pass WS-Security Headers for Endpoint alias PostmanEcho_Routing_Alias">
+            <value>false</value>
+        </property>
+    </asset>
+    <asset name="PolicyAction.75c65986-6bc0-48fb-8f2c-9bb94818f589" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API PostmanEcho_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.05234b85-7fc0-4f0b-aad6-7a779c700548" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API PostmanEcho_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="Application.eb94a48d-f262-4cc9-a264-84a37f65e458" displayName="MyPostmanEchoApp_OAuth2_STAGE" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYeb94a48d-f262-4cc9-a264-84a37f65e458</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.eb94a48d-f262-4cc9-a264-84a37f65e458</dependsOn>
+        <dependsOn>APIGateway:Strategy.ff06307c-e891-4f77-8c26-cb1bb2d4fe69</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEYeb94a48d-f262-4cc9-a264-84a37f65e458" displayName="API_ACCESS_KEYeb94a48d-f262-4cc9-a264-84a37f65e458" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="Strategy.ff06307c-e891-4f77-8c26-cb1bb2d4fe69" displayName="MyPostmanEchoApp_OAuth2_Strategy_STAGE" isDeployable="true">
+        <implementation.generic type="Strategy"/>
+        <dependsOn>APIGateway:PassmanData.870cd829-61e6-445f-a5a6-2ddf2878ebac-clientSecret</dependsOn>
+    </asset>
+    <asset name="PassmanData.870cd829-61e6-445f-a5a6-2ddf2878ebac-clientSecret" displayName="870cd829-61e6-445f-a5a6-2ddf2878ebac-clientSecret" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.eb94a48d-f262-4cc9-a264-84a37f65e458" displayName="RegisteredApplication [ MyPostmanEchoApp_OAuth2_STAGE ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="Application.a2d57c08-9b06-47ec-baf1-a74db893d023" displayName="MyPostmanEchoApp_OAuth2_PROD" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYa2d57c08-9b06-47ec-baf1-a74db893d023</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.a2d57c08-9b06-47ec-baf1-a74db893d023</dependsOn>
+        <dependsOn>APIGateway:Strategy.93f6fe80-6447-427d-832d-9c4ce63e6a79</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEYa2d57c08-9b06-47ec-baf1-a74db893d023" displayName="API_ACCESS_KEYa2d57c08-9b06-47ec-baf1-a74db893d023" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="Strategy.93f6fe80-6447-427d-832d-9c4ce63e6a79" displayName="MyPostmanEchoApp_OAuth2_Strategy_PROD" isDeployable="true">
+        <implementation.generic type="Strategy"/>
+        <dependsOn>APIGateway:PassmanData.eef7d058-2bcd-444c-97d0-4416b1506518-clientSecret</dependsOn>
+    </asset>
+    <asset name="PassmanData.eef7d058-2bcd-444c-97d0-4416b1506518-clientSecret" displayName="eef7d058-2bcd-444c-97d0-4416b1506518-clientSecret" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.a2d57c08-9b06-47ec-baf1-a74db893d023" displayName="RegisteredApplication [ MyPostmanEchoApp_OAuth2_PROD ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="Application.d883ae49-80f8-4dc2-b525-2ae85c89cd4f" displayName="MyPostmanEchoApp_OAuth2_DEV" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYd883ae49-80f8-4dc2-b525-2ae85c89cd4f</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.d883ae49-80f8-4dc2-b525-2ae85c89cd4f</dependsOn>
+        <dependsOn>APIGateway:Strategy.cda6b52a-7715-4f02-977a-d9ad74442957</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEYd883ae49-80f8-4dc2-b525-2ae85c89cd4f" displayName="API_ACCESS_KEYd883ae49-80f8-4dc2-b525-2ae85c89cd4f" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="Strategy.cda6b52a-7715-4f02-977a-d9ad74442957" displayName="MyPostmanEchoApp_OAuth2_Strategy_DEV" isDeployable="true">
+        <implementation.generic type="Strategy"/>
+        <dependsOn>APIGateway:PassmanData.f64b97de-eda5-44ac-8e8f-8294722f189d-clientSecret</dependsOn>
+    </asset>
+    <asset name="PassmanData.f64b97de-eda5-44ac-8e8f-8294722f189d-clientSecret" displayName="f64b97de-eda5-44ac-8e8f-8294722f189d-clientSecret" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.d883ae49-80f8-4dc2-b525-2ae85c89cd4f" displayName="RegisteredApplication [ MyPostmanEchoApp_OAuth2_DEV ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="GatewayScope.69fb0cfe-d549-4572-92d9-cb1131d45e61" displayName="local:postman-echo" isDeployable="true">
+        <implementation.generic type="GatewayScope"/>
+        <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
+    </asset>
+</asset_composite>

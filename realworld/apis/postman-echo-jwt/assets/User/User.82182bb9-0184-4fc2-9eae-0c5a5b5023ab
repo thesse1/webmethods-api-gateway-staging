@@ -1,0 +1,14 @@
+{
+  "id" : "82182bb9-0184-4fc2-9eae-0c5a5b5023ab",
+  "loginId" : "testuser_jwt",
+  "caller" : "Administrator",
+  "firstName" : "",
+  "lastName" : "",
+  "hashedPassword" : "{sha-256_v2}d3dB5JsBIkBoDCFRfEoVTp/NJm1ZC3NSoocmclKxFqV2483K6Zg9KzAxMDAw",
+  "type" : "local",
+  "emailAddresses" : [ ],
+  "allowDigestAuth" : false,
+  "active" : true,
+  "systemDefined" : false,
+  "language" : ""
+}

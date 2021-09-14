@@ -1,0 +1,43 @@
+{
+  "id" : "479e023e-526e-4bd7-a423-fbf092368e13",
+  "names" : [ {
+    "value" : "Default Policy for API SwaggerPetstore",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "745dd7ef-ea50-4a73-b404-e0a94e9c2564",
+      "order" : "0"
+    } ],
+    "stageKey" : "requestPayloadProcessing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "c7aa28d6-70f5-4fb1-8d8b-804970d504be",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "eabb4119-8d77-4b38-ac97-9a1c36c316be",
+      "order" : "0"
+    } ],
+    "stageKey" : "IAM"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "a486bfd1-59e8-4ef3-8fc6-14e2b14e88ba",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "active" : false,
+  "global" : false,
+  "systemPolicy" : false
+}

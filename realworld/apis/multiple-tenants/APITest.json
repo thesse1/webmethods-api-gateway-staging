@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "9dc9e665-c5b8-4bde-abfc-0a5f71ab59c9",
+		"name": "API Test for multiple-tenants",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Separate APIs per tenant",
+			"item": [
+				{
+					"name": "PostEcho tenant 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "f0d32f9d-e22e-4c43-9b23-49cd29b8aa46",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/gateway/Tenant1_PostmanEcho/1.0/post",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"gateway",
+								"Tenant1_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostEcho tenant 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant2\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "d8da2f5b-504b-405d-a66b-6129117e4b3f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/gateway/Tenant2_PostmanEcho/1.0/post",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"gateway",
+								"Tenant2_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "One API for multiple tenants",
+			"item": [
+				{
+					"name": "PostEcho tenant 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "f0d32f9d-e22e-4c43-9b23-49cd29b8aa46",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"gateway",
+								"Common_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostEcho tenant 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant2\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "d8da2f5b-504b-405d-a66b-6129117e4b3f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"gateway",
+								"Common_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

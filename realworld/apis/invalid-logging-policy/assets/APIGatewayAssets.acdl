@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2021-06-23T16:50:00"/>
+    <asset name="API.ee520a86-e1d9-4bb0-baca-6d02a351e5d6" displayName="PostmanEcho_Invalid_LoggingPolicy[1.0]" isDeployable="true">
+        <implementation.generic type="API"/>
+        <dependsOn>APIGateway:Policy.2dc2a0d2-52a5-476f-9d6e-994df22d3481</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.EmptyRegisteredApplication</dependsOn>
+    </asset>
+    <asset name="Policy.2dc2a0d2-52a5-476f-9d6e-994df22d3481" displayName="Policy For API PostmanEcho_Invalid_LoggingPolicy[1.0]" isDeployable="true">
+        <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.8c05f651-50ff-4881-b27e-4a2701c25923</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.e226832a-dfae-4715-8d0f-cfd2e8053545</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.fa2b8172-84f3-4824-a458-2bd1a24d4e55</dependsOn>
+    </asset>
+    <asset name="PolicyAction.8c05f651-50ff-4881-b27e-4a2701c25923" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API PostmanEcho_Invalid_LoggingPolicy[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.e226832a-dfae-4715-8d0f-cfd2e8053545" displayName="Policy Action [Log Invocation] -&gt; Policy For API PostmanEcho_Invalid_LoggingPolicy[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.fa2b8172-84f3-4824-a458-2bd1a24d4e55" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API PostmanEcho_Invalid_LoggingPolicy[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="RegisteredApplication.EmptyRegisteredApplication" displayName="RegisteredApplication [ EmptyRegisteredApplication ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+</asset_composite>

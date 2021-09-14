@@ -1,0 +1,15 @@
+{
+  "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
+  "name" : "PostmanEcho_Routing_Alias",
+  "description" : "PostmanEcho alias on CONFIG",
+  "type" : "endpoint",
+  "owner" : "Administrator",
+  "endPointURI" : "https://postman-echo.com",
+  "connectionTimeout" : 100,
+  "readTimeout" : 100,
+  "suspendDurationOnFailure" : 0,
+  "optimizationTechnique" : "None",
+  "passSecurityHeaders" : false,
+  "keystoreAlias" : "",
+  "truststoreAlias" : ""
+}

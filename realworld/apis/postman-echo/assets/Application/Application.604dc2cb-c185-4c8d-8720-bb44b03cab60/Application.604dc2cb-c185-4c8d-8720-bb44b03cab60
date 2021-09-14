@@ -1,0 +1,28 @@
+{
+  "applicationID" : "604dc2cb-c185-4c8d-8720-bb44b03cab60",
+  "name" : "MyPostmanEchoApp_STAGE",
+  "description" : "This application should be used on STAGE environments for testing",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "2ba9a4ab2d87e6bf2203d7d9b1bfd6f354921f7bba067495b86953039d1ef21c"
+    }
+  },
+  "creationDate" : "2021-02-03 16:31:52 GMT",
+  "lastModified" : "2021-06-23 14:01:32 GMT",
+  "lastUpdated" : 1624456892183,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "c246199d-44bc-4253-8396-db33c4d58b8d",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}
