@@ -1,6 +1,6 @@
 {
   "id": "f313be5f-2640-22f7-36b6-3e79bba3c9e2",
-  "name": "BuildEnvironment Demo",
+  "name": "BuildEnvironment",
 	"values": [
 		{
 			"key": "hostname",

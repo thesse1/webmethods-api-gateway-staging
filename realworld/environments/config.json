@@ -1,6 +1,6 @@
 {
 	"id": "ef10b3bc-a7c7-42ed-8d14-662cf6356bba",
-	"name": "ConfigEnvironment Demo",
+	"name": "ConfigEnvironment",
 	"values": [
 		{
 			"key": "hostname",
