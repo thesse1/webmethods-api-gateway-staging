@@ -80,11 +80,9 @@ The repository has the following top-level folders:
 
 The folders playground and realworld have the following sub-folders:
   - apis: Contains projects with the API Gateway assets exported from CONFIG environment along with the definition of the projects' asset sets and API tests (Postman collections)
-																																					 
   - configuration: Contains folders with the API Gateway configuration assets exported from CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments along with the definition of the exported asset sets
   - environments: Postman environment definitions for API Gateway CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments
   - variables: Azure DevOps variable templates with tenant-specific variables or references to tenant-specific variable groups
-																																																																						  
 
 The repository content can be committed to the Azure DevOps repository (Git), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository can be imported back to a local development environment, to the central CONFIG environment or promoted to DEV, STAGE or PROD.
 
@@ -1142,8 +1140,6 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder.
 
-																										   
-  
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
   - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_test_apigw_staging_deploy_to_dev_int or dev_ext pipeline.
@@ -1236,16 +1232,12 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | commit-message | The change will be committed with this commit message |
-													   
-
-																									   
 
 ## Pipeline for log purging
 
 The API Gateway Staging solution includes one Azure DevOps build pipeline (for each tenant) for automatically purging the API Gateway logs stored in the internal Elasticsearch database on all environments (CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT). It will purge
  - all logs (except for audit logs) older than 28 days: transactionalEvents, monitorEvents, errorEvents, performanceMetrics, threatProtectionEvents, lifecycleEvents, policyViolationEvents, applicationlogs, mediatorTraceSpan
  - all audit logs older than Jan. 1st of the preceding calendar year: auditlogs. (This is implementing the requirement to purge all audit data on the end of the following calendar year.)
-																																																		  
 
 The pipeline is configured twice - for both tenants. The pipeline wm_test_apigw_staging_purge_data operates on the playground environments; the pipeline wm_apigw_staging_purge_data (without "test_") operates on the real world environments.
 
@@ -1254,9 +1246,6 @@ The pipeline is configured twice - for both tenants. The pipeline wm_test_apigw_
 This pipeline can be configured to run in defined iterations, e.g., once every day:
 
 ![GitHub Logo](/images/run_schedule.png)
-				   
-																			
-																																																		  
 
 Please note that the "Only schedule builds if the source or pipeline has changed" option should be disabled. Otherwise the pipeline would only run after changes in the repository.
 
@@ -1496,7 +1485,6 @@ The pipeline template needs the following parameters to be set in the calling pi
 
 | Parameter | README |
 | ------ | ------ |
-																																					
 | environment | Name of the environment definition file in /{tenant}/environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type (CONFIG, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT) |
 
@@ -1506,9 +1494,6 @@ The pipeline template executes the following major steps:
 
 | Step | README |
 | ------ | ------ |
-																																													
-																											   
-																																			  
 | Purge Data on API Gateway CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT | Executing the PurgeData.json Postman collection in /utilities/purge |
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
