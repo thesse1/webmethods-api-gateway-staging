@@ -1,0 +1,40 @@
+{
+  "id" : "9e27cba5-b0e7-42d7-abfd-7666a87ae8e0",
+  "names" : [ {
+    "value" : "Monitor Performance",
+    "locale" : "en"
+  } ],
+  "templateKey" : "monitorServicePerformance",
+  "parameters" : [ {
+    "templateKey" : "destination",
+    "parameters" : [ {
+      "templateKey" : "destinationType",
+      "values" : [ "GATEWAY" ]
+    } ]
+  }, {
+    "templateKey" : "alertInterval",
+    "values" : [ "10" ]
+  }, {
+    "templateKey" : "alertIntervalUnit",
+    "values" : [ "minutes" ]
+  }, {
+    "templateKey" : "alertFrequency",
+    "values" : [ "once" ]
+  }, {
+    "templateKey" : "alertMessage",
+    "values" : [ "API down!" ]
+  }, {
+    "templateKey" : "monitorRules",
+    "parameters" : [ {
+      "templateKey" : "monitorRuleName",
+      "values" : [ "availability" ]
+    }, {
+      "templateKey" : "monitorRuleOperator",
+      "values" : [ "GT" ]
+    }, {
+      "templateKey" : "value",
+      "values" : [ "0.9" ]
+    } ]
+  } ],
+  "active" : false
+}
