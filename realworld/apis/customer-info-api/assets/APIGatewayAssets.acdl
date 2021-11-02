@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-11-02T17:40:18"/>
+    <buildInfo name="BuildTimestamp" value="2021-11-02T18:13:04"/>
     <asset name="API.94bc77f4-dc70-4377-8cd4-f0da99381c07" displayName="CustomerInfoAPI[v1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:AccessControlList.3f9c9776-118c-469f-a45e-0c7d9f5cf8c5</dependsOn>
-        <dependsOn>APIGateway:File.966645d9-7e3d-4f50-ad3e-2c9178da8b91</dependsOn>
         <dependsOn>APIGateway:Policy.9c0c3ea2-70d1-4534-8082-99bce8ae40e8</dependsOn>
-        <dependsOn>APIGateway:RegisteredApplication.EmptyRegisteredApplication</dependsOn>
     </asset>
     <asset name="Policy.9c0c3ea2-70d1-4534-8082-99bce8ae40e8" displayName="Policy For API CustomerInfoAPI[v1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
@@ -45,12 +43,6 @@
     <asset name="PolicyAction.3d56bf22-c2ba-45dc-924c-23cedd35950e" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API CustomerInfoAPI[v1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="File.966645d9-7e3d-4f50-ad3e-2c9178da8b91" displayName="To Be Checked on Documentation.txt" isDeployable="true">
-        <implementation.generic type="File"/>
-    </asset>
-    <asset name="RegisteredApplication.EmptyRegisteredApplication" displayName="RegisteredApplication [ EmptyRegisteredApplication ]" isDeployable="true">
-        <implementation.generic type="RegisteredApplication"/>
-    </asset>
     <asset name="AccessControlList.3f9c9776-118c-469f-a45e-0c7d9f5cf8c5" displayName="AccessControlList for asset : CustomerInfoAPI" isDeployable="true">
         <implementation.generic type="AccessControlList"/>
         <dependsOn>APIGateway:AccessProfile.Administrators</dependsOn>
@@ -58,26 +50,6 @@
     </asset>
     <asset name="AccessProfile.Administrators" displayName="Administrators" isDeployable="true">
         <implementation.generic type="AccessProfile"/>
-        <dependsOn>APIGateway:Group.API-Gateway-Administrators</dependsOn>
-        <dependsOn>APIGateway:Group.Administrators</dependsOn>
-    </asset>
-    <asset name="Group.Administrators" displayName="Administrators" isDeployable="true">
-        <implementation.generic type="Group"/>
-        <dependsOn>APIGateway:User.Administrator</dependsOn>
-    </asset>
-    <asset name="User.Administrator" displayName="Administrator" isDeployable="true">
-        <implementation.generic type="User"/>
-    </asset>
-    <asset name="Group.API-Gateway-Administrators" displayName="API-Gateway-Administrators" isDeployable="true">
-        <implementation.generic type="Group"/>
-        <dependsOn>APIGateway:User.45ff6450-8805-4fbf-990d-fd87bca31816</dependsOn>
-        <dependsOn>APIGateway:User.b65e5844-a8b8-4387-93ae-eeec0b7dc27f</dependsOn>
-    </asset>
-    <asset name="User.b65e5844-a8b8-4387-93ae-eeec0b7dc27f" displayName="erik.becker@softwareag.com" isDeployable="true">
-        <implementation.generic type="User"/>
-    </asset>
-    <asset name="User.45ff6450-8805-4fbf-990d-fd87bca31816" displayName="theo.straeten@softwareag.com" isDeployable="true">
-        <implementation.generic type="User"/>
     </asset>
     <asset name="AccessProfile.Default" displayName="Default" isDeployable="true">
         <implementation.generic type="AccessProfile"/>

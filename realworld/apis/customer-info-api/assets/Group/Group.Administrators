@@ -1,9 +1,0 @@
-{
-  "id" : "Administrators",
-  "name" : "Administrators",
-  "owner" : "Default",
-  "description" : "",
-  "type" : "local",
-  "systemDefined" : true,
-  "userIds" : [ "Administrator" ]
-}

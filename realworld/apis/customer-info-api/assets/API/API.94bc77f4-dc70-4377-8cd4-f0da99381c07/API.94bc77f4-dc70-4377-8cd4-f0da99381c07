@@ -475,12 +475,11 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-11-02 09:55:22 GMT",
-  "lastModified" : "2021-11-02 10:21:31 GMT",
+  "lastModified" : "2021-11-02 17:56:46 GMT",
   "systemVersion" : 1,
   "mockService" : {
     "enableMock" : false
   },
-  "apiDocuments" : [ "966645d9-7e3d-4f50-ad3e-2c9178da8b91" ],
   "gatewayEndpoints" : {
     "ShortVersion" : "Customer"
   },
