@@ -1,6 +1,5 @@
 {
   "configId" : "gatewayDestinationConfig",
-  "userName" : "thomas.hesse@softwareag.com",
   "internalPorts" : { },
   "properties" : {
     "sendAuditlogAliasManagementEvent" : "true",
