@@ -15,11 +15,27 @@ variables:
     tenant: playground
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
     tenant: realworld
+  ${{ if endsWith(variables['Build.DefinitionName'], 'config') }}:
+    sourceType: CONFIG
+  ${{ if endsWith(variables['Build.DefinitionName'], 'build') }}:
+    sourceType: BUILD
+  ${{ if endsWith(variables['Build.DefinitionName'], 'dev_int') }}:
+    sourceType: DEV-INT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'dev_ext') }}:
+    sourceType: DEV-EXT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'stage_int') }}:
+    sourceType: STAGE-INT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'stage_ext') }}:
+    sourceType: STAGE-EXT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'prod_int') }}:
+    sourceType: PROD-INT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
+    sourceType: PROD-EXT
 
 jobs:
-- job: Export_from_CONFIG
+- job: Export_config_from_API_Gateway
   variables:
-  - template: /${{variables.tenant}}/variables/CONFIG/variables-template.yml
+  - template: /${{variables.tenant}}/variables/${{variables.sourceType}}/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -31,140 +47,6 @@ jobs:
   - template: /pipelines/api-export-config-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: CONFIG
+      type: $(sourceType)
       tenant: $(tenant)
   - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'CONFIG')
-
-- job: Export_from_BUILD
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: BUILD
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'BUILD')
-
-- job: Export_from_DEV_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/DEV-INT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: DEV-INT
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'DEV-INT')
-
-- job: Export_from_DEV_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/DEV-EXT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: DEV-EXT
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'DEV-EXT')
-
-- job: Export_from_STAGE_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/STAGE-INT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: STAGE-INT
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'STAGE-INT')
-
-- job: Export_from_STAGE_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/STAGE-EXT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: STAGE-EXT
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'STAGE-EXT')
-
-- job: Export_from_PROD_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/PROD-INT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: PROD-INT
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'PROD-INT')
-
-- job: Export_from_PROD_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/PROD-EXT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-  - template: /pipelines/api-export-config-template.yml  # Template reference
-    parameters:
-      environment: $(environment)
-      type: PROD-EXT
-      tenant: $(tenant)
-  - template: /pipelines/commit-template.yml  # Template reference
-  condition: eq(variables['source_type'], 'PROD-EXT')

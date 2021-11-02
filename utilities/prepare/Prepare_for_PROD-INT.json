@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "31259641-df75-458f-bc19-a8c0e4460ed6",
+		"_postman_id": "498953a4-abc1-4694-8494-ce4490a50cad",
 		"name": "Prepare_for_PROD-INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -169,7 +169,9 @@
 							"        for (var i=0; i<aliases.length; i++) { // Check aliases\r",
 							"            if (aliases[i] != undefined && aliases[i] != null\r",
 							"                && aliases[i].id != undefined && aliases[i].id != null\r",
-							"                && aliases[i].content != undefined && aliases[i].content != null) {\r",
+							"                && aliases[i].content != undefined && aliases[i].content != null\r",
+							"                && aliases[i].content.name != undefined && aliases[i].content.name != null) {\r",
+							"\r",
 							"                let aliasId = aliases[i].id;\r",
 							"\r",
 							"//                console.log(\"Alias ID to be checked: \" + aliasId);\r",
@@ -241,6 +243,27 @@
 							"                    postman.setNextRequest(null);\r",
 							"                    break;\r",
 							"                }\r",
+							"            } else {\r",
+							"\t\t\t\tif (aliases[i] === undefined || aliases[i] === null) {\r",
+							"\t\t\t\t\tconsole.log(\"Missing alias definition!\");\r",
+							"\t\t\t\t} else if (aliases[i].id === undefined || aliases[i].id === null) {\r",
+							"\t\t\t\t\tconsole.log(\"Missing alias ID!\");\r",
+							"\t\t\t\t\tconsole.log(\"Alias: \" + JSON.stringify(aliases[i]));\r",
+							"\t\t\t\t} else if (aliases[i].content === undefined || aliases[i].content === null) { // no value defined for this alias on this stage, not an error case!\r",
+							"\t\t\t\t\tcontinue; // Just skip this alias\r",
+							"\t\t\t\t} else if (aliases[i].content.name === undefined || aliases[i].content.name === null) {\r",
+							"\t\t\t\t\tconsole.log(\"Missing alias name!\");\r",
+							"\t\t\t\t\tconsole.log(\"ID: \" + aliases[i].id);\r",
+							"\t\t\t\t\tconsole.log(\"Alias: \" + JSON.stringify(aliases[i]));\r",
+							"\t\t\t\t}\r",
+							"\r",
+							"                pm.test(\"Consistent alias definition with id and name\", function () {\r",
+							"                    pm.expect.fail(\"Inconsistent alias definition: Missing alias or missing id or missing content.name\");\r",
+							"                });\r",
+							"\r",
+							"                remainingAliases = null;\r",
+							"                postman.setNextRequest(null);\r",
+							"                break;\r",
 							"            }\r",
 							"        }\r",
 							"    }\r",
@@ -255,7 +278,9 @@
 							"        for (var i=0; i<globalAliases.length; i++) { // Check aliases\r",
 							"            if (globalAliases[i] != undefined && globalAliases[i] != null\r",
 							"                && globalAliases[i].id != undefined && globalAliases[i].id != null\r",
-							"                && globalAliases[i].content != undefined && globalAliases[i].content != null) {\r",
+							"                && globalAliases[i].content != undefined && globalAliases[i].content != null\r",
+							"                && globalAliases[i].content.name != undefined && globalAliases[i].content.name != null) {\r",
+							"\r",
 							"                let aliasId = globalAliases[i].id;\r",
 							"\r",
 							"//                console.log(\"Alias ID to be checked: \" + aliasId);\r",
@@ -279,7 +304,7 @@
 							"\r",
 							"//                console.log(\"Matching aliases: \" + JSON.stringify(matchingaliases));\r",
 							"\r",
-							"                if (matchingaliases.length === 0) { // No alias found\r",
+							"                if (matchingaliases.length === 0) { // No alias found, no error for global aliases\r",
 							"//                    console.log(\"Not found!\");\r",
 							"                } else if (matchingaliases.length === 1) { // One alias found\r",
 							"//                    console.log(\"Found!\");\r",
@@ -295,18 +320,18 @@
 							"                        });\r",
 							"\r",
 							"                        remainingAliases = null;\r",
-							"                        aliasIds.push(aliases[i].id);\r",
 							"                        postman.setNextRequest(null);\r",
 							"                        break;\r",
 							"                    } else {\r",
 							"                        remainingAliases.push(globalAliases[i]);\r",
+							"                        aliasIds.push(globalAliases[i].id);\r",
 							"                        postman.setNextRequest(\"Update one Alias\");\r",
 							"                    }\r",
 							"                } else { // More than one alias found\r",
 							"                    console.log(\"More than one matching alias found!\");\r",
-							"                    console.log(\"ID: \" + aliases[i].id);\r",
-							"                    console.log(\"Name: \" + aliases[i].content.name);\r",
-							"                    console.log(\"Description: \" + aliases[i].content.description);\r",
+							"                    console.log(\"ID: \" + globalAliases[i].id);\r",
+							"                    console.log(\"Name: \" + globalAliases[i].content.name);\r",
+							"                    console.log(\"Description: \" + globalAliases[i].content.description);\r",
 							"\r",
 							"                    pm.test(\"Alias to be updated must exist\", function () {\r",
 							"                        pm.expect(matchingaliases.length).to.be.equal(1);\r",
@@ -316,6 +341,27 @@
 							"                    postman.setNextRequest(null);\r",
 							"                    break;\r",
 							"                }\r",
+							"            } else {\r",
+							"\t\t\t\tif (globalAliases[i] === undefined || globalAliases[i] === null) {\r",
+							"\t\t\t\t\tconsole.log(\"Missing alias definition!\");\r",
+							"\t\t\t\t} else if (globalAliases[i].id === undefined || globalAliases[i].id === null) {\r",
+							"\t\t\t\t\tconsole.log(\"Missing alias ID!\");\r",
+							"\t\t\t\t\tconsole.log(\"Alias: \" + JSON.stringify(globalAliases[i]));\r",
+							"\t\t\t\t} else if (globalAliases[i].content === undefined || globalAliases[i].content === null) { // no value defined for this alias on this stage, not an error case!\r",
+							"\t\t\t\t\tcontinue; // Just skip this alias\r",
+							"\t\t\t\t} else if (globalAliases[i].content.name === undefined || globalAliases[i].content.name === null) {\r",
+							"\t\t\t\t\tconsole.log(\"Missing alias name!\");\r",
+							"\t\t\t\t\tconsole.log(\"ID: \" + globalAliases[i].id);\r",
+							"\t\t\t\t\tconsole.log(\"Alias: \" + JSON.stringify(globalAliases[i]));\r",
+							"\t\t\t\t}\r",
+							"\r",
+							"                pm.test(\"Consistent alias definition with id and name\", function () {\r",
+							"                    pm.expect.fail(\"Inconsistent alias definition: Missing alias or missing id or missing content.name\");\r",
+							"                });\r",
+							"\r",
+							"                remainingAliases = null;\r",
+							"                postman.setNextRequest(null);\r",
+							"                break;\r",
 							"            }\r",
 							"        }\r",
 							"    }\r",
@@ -476,7 +522,7 @@
 							"let apiResponse=JSON.parse(responseBody);\r",
 							"let applications = apiResponse.applications;\r",
 							"if (applications === undefined || applications === null || applications.length === 0) {\r",
-							"    postman.setNextRequest(\"Get all APIs\");\r",
+							"    postman.setNextRequest(\"Get all Strategies\");\r",
 							"} else {\r",
 							"    let applicationsToBeDeleted = applications.filter(function(application, index, arr){ \r",
 							"        return !application.name.endsWith(\"_PROD\");\r",
@@ -486,7 +532,7 @@
 							"            return (application.isSuspended === true);\r",
 							"        });\r",
 							"        if (applicationsToBeUnsuspended.length === 0) {\r",
-							"            postman.setNextRequest(\"Get all APIs\");\r",
+							"            postman.setNextRequest(\"Get all Strategies\");\r",
 							"        } else {\r",
 							"            pm.globals.set(\"applicationId\", applicationsToBeUnsuspended[0].id);\r",
 							"\r",
@@ -648,6 +694,160 @@
 						"apigateway",
 						"applications",
 						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Strategies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let strategies = apiResponse.strategies;\r",
+							"if (strategies === undefined || strategies === null || strategies.length === 0) {\r",
+							"    postman.setNextRequest(\"Get all APIs\"); //es ist nichts zu tun, keine strategies vorhanden\r",
+							"} else {\r",
+							"    //strategies[0] wird hier behandelt, alle weiteren m�ssen an den n�chsten request weitergereicht werden.\r",
+							"    let remainingStrategies = [];\r",
+							"    for (var i=1; i<strategies.length; i++) { \r",
+							"        remainingStrategies.push(strategies[i])\r",
+							"    }    \r",
+							"    pm.globals.set(\"remainingStrategies\", JSON.stringify(remainingStrategies))\r",
+							"    \r",
+							"    console.log(\"Sanitize strategy - remove dcrConfig.ClientId and dcrConfig.clientSecret\");\r",
+							"    console.log(\"ID: \" + strategies[0].id);\r",
+							"    console.log(\"Name: \" + strategies[0].name);\r",
+							"    console.log(\"Decription: \" + strategies[0].description);        \r",
+							"    delete strategies[0].dcrConfig.clientId;\r",
+							"    delete strategies[0].dcrConfig.clientSecret;\r",
+							"\r",
+							"    pm.globals.set(\"strategyContent\", JSON.stringify(strategies[0]));\r",
+							"    pm.globals.set(\"strategyId\", strategies[0].id)\r",
+							"    \r",
+							"    postman.setNextRequest(\"Update one Strategy\");\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update one Strategy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let strategies = JSON.parse(pm.variables.get(\"remainingStrategies\"));\r",
+							"\r",
+							"if (strategies === undefined || strategies === null || strategies.length === 0) {\r",
+							"    postman.setNextRequest(\"Get all APIs\"); //es ist nichts (mehr) zu tun, alle strategies wurden abgearbeitet\r",
+							"} else {\r",
+							"    //strategies[0] wird hier behandelt, alle weiteren m�ssen an den n�chsten request weitergereicht werden.\r",
+							"    let remainingStrategies = [];\r",
+							"    for (var i=1; i<strategies.length; i++) { \r",
+							"        remainingStrategies.push(strategies[i])\r",
+							"    }    \r",
+							"    pm.globals.set(\"remainingStrategies\", JSON.stringify(remainingStrategies))\r",
+							"    \r",
+							"    console.log(\"Sanitize strategy - remove dcrConfig.ClientId and dcrConfig.clientSecret\");\r",
+							"    console.log(\"ID: \" + strategies[0].id);\r",
+							"    console.log(\"Name: \" + strategies[0].name);\r",
+							"    console.log(\"Decription: \" + strategies[0].description);        \r",
+							"    delete strategies[0].dcrConfig.clientId;\r",
+							"    delete strategies[0].dcrConfig.clientSecret;\r",
+							"\r",
+							"    pm.globals.set(\"strategyContent\", JSON.stringify(strategies[0]));\r",
+							"    pm.globals.set(\"strategyId\", strategies[0].id)\r",
+							"    \r",
+							"    postman.setNextRequest(\"Update one Strategy\");\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{strategyContent}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies",
+						"{{strategyId}}"
 					]
 				}
 			},

@@ -17,12 +17,28 @@ variables:
     value: playground
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
     value: realworld
+- name: targetType
+  ${{ if endsWith(variables['Build.DefinitionName'], 'config') }}:
+    value: CONFIG
+  ${{ if endsWith(variables['Build.DefinitionName'], 'dev_int') }}:
+    value: DEV-INT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'dev_ext') }}:
+    value: DEV-EXT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'stage_int') }}:
+    value: STAGE-INT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'stage_ext') }}:
+    value: STAGE-EXT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'prod_int') }}:
+    value: PROD-INT
+  ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
+    value: PROD-EXT
 - template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
 - template: /${{variables.tenant}}/variables/variables-aliases-template.yml
 
 jobs:
-- job: Build_and_deploy_to_CONFIG
+- job: Build_and_deploy_to_API_Gateway
   variables:
+  - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
   - template: /${{variables.tenant}}/variables/variables-common-template.yml
   pool:
     name: '$(agent_pool)'
@@ -35,189 +51,21 @@ jobs:
     parameters:
       apiProject: $(apiProject)
       build_environment: $(environment_build)
-      target_type: CONFIG
-      prep_condition: ${{false}}
-      test_condition: ${{false}}
+      target_type: $(targetType)
+      prep_condition: ${{true}}
+      test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
       tenant: $(tenant)
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
-      target_environment: $(environment_config)
-      target_type: CONFIG
-      prep_condition: ${{false}}
-      test_condition: ${{false}}
+      target_environment: $(environment)
+      target_type: $(targetType)
+      prep_condition: ${{true}}
+      test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
       tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'CONFIG'), eq(variables['useArtifactory'], 'false'))
+  condition: eq(variables['useArtifactory'], 'false')
 
-- job: Build_and_deploy_to_DEV_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: DEV-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_dev_int)
-      target_type: DEV-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'DEV-INT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_DEV_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: DEV-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_dev_ext)
-      target_type: DEV-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'DEV-EXT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_STAGE_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_stage_int)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'STAGE-INT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_STAGE_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: STAGE-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_stage_ext)
-      target_type: STAGE-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'STAGE-EXT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_PROD_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_prod_int)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'PROD-INT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_and_deploy_to_PROD_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: PROD-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_prod_ext)
-      target_type: PROD-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: and(eq(variables['target_type'], 'PROD-EXT'), eq(variables['useArtifactory'], 'false'))
-
-- job: Build_for_CONFIG
+- job: Build
   variables:
   - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
   pool:
@@ -231,18 +79,18 @@ jobs:
     parameters:
       apiProject: $(apiProject)
       build_environment: $(environment)
-      target_type: CONFIG
-      prep_condition: ${{false}}
-      test_condition: ${{false}}
+      target_type: $(targetType)
+      prep_condition: ${{true}}
+      test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
       tenant: $(tenant)
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
-      target_type: CONFIG
-  condition: and(eq(variables['target_type'], 'CONFIG'), eq(variables['useArtifactory'], 'true'))
+      target_type: $(targetType)
+  condition: eq(variables['useArtifactory'], 'true')
 
-- job: Deploy_to_CONFIG
+- job: Deploy_to_API_Gateway
   variables:
-  - template: /${{variables.tenant}}/variables/CONFIG/variables-template.yml
+  - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -252,296 +100,14 @@ jobs:
     persistCredentials: "true"
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
-      target_type: CONFIG
+      target_type: $(targetType)
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
       target_environment: $(environment)
-      target_type: CONFIG
-      prep_condition: ${{false}}
-      test_condition: ${{false}}
-      tenant: $(tenant)
-  dependsOn: Build_for_CONFIG
-  condition: succeeded()
-
-- job: Build_for_DEV_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment)
-      target_type: DEV-INT
+      target_type: $(targetType)
       prep_condition: ${{true}}
-      test_condition: ${{true}}
+      test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
       tenant: $(tenant)
-  - template: /pipelines/store-build-template.yml  # Template reference
-    parameters:
-      target_type: DEV-INT
-  condition: and(eq(variables['target_type'], 'DEV-INT'), eq(variables['useArtifactory'], 'true'))
-
-- job: Deploy_to_DEV_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/DEV-INT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/retrieve-build-template.yml  # Template reference
-    parameters:
-      target_type: DEV-INT
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: DEV-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_for_DEV_INT
-  condition: succeeded()
-
-- job: Build_for_DEV_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment)
-      target_type: DEV-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/store-build-template.yml  # Template reference
-    parameters:
-      target_type: DEV-EXT
-  condition: and(eq(variables['target_type'], 'DEV-EXT'), eq(variables['useArtifactory'], 'true'))
-
-- job: Deploy_to_DEV_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/DEV-EXT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/retrieve-build-template.yml  # Template reference
-    parameters:
-      target_type: DEV-EXT
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: DEV-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_for_DEV_EXT
-  condition: succeeded()
-
-- job: Build_for_STAGE_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/store-build-template.yml  # Template reference
-    parameters:
-      target_type: STAGE-INT
-  condition: and(eq(variables['target_type'], 'STAGE-INT'), eq(variables['useArtifactory'], 'true'))
-
-- job: Deploy_to_STAGE_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/STAGE-INT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/retrieve-build-template.yml  # Template reference
-    parameters:
-      target_type: STAGE-INT
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_for_STAGE_INT
-  condition: succeeded()
-
-- job: Build_for_STAGE_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment)
-      target_type: STAGE-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/store-build-template.yml  # Template reference
-    parameters:
-      target_type: STAGE-EXT
-  condition: and(eq(variables['target_type'], 'STAGE-EXT'), eq(variables['useArtifactory'], 'true'))
-
-- job: Deploy_to_STAGE_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/STAGE-EXT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/retrieve-build-template.yml  # Template reference
-    parameters:
-      target_type: STAGE-EXT
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: STAGE-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_for_STAGE_EXT
-  condition: succeeded()
-
-- job: Build_for_PROD_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/store-build-template.yml  # Template reference
-    parameters:
-      target_type: PROD-INT
-  condition: and(eq(variables['target_type'], 'PROD-INT'), eq(variables['useArtifactory'], 'true'))
-
-- job: Deploy_to_PROD_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/PROD-INT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/retrieve-build-template.yml  # Template reference
-    parameters:
-      target_type: PROD-INT
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_for_PROD_INT
-  condition: succeeded()
-
-- job: Build_for_PROD_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment)
-      target_type: PROD-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/store-build-template.yml  # Template reference
-    parameters:
-      target_type: PROD-EXT
-  condition: and(eq(variables['target_type'], 'PROD-EXT'), eq(variables['useArtifactory'], 'true'))
-
-- job: Deploy_to_PROD_EXT
-  variables:
-  - template: /${{variables.tenant}}/variables/PROD-EXT/variables-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/retrieve-build-template.yml  # Template reference
-    parameters:
-      target_type: PROD-EXT
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: PROD-EXT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_for_PROD_EXT
+  dependsOn: Build
   condition: succeeded()

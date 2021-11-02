@@ -1,0 +1,48 @@
+{
+  "petstore-routing-alias-108": {
+    "DEV-INT": {
+      "name" : "PetStore_Routing_Alias_1_0_8",
+      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "STAGE-INT": {
+      "name" : "PetStore_Routing_Alias_1_0_8",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD-INT": {
+      "name" : "PetStore_Routing_Alias_1_0_8",
+      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  },
+  "petstore-routing-alias-109": {
+    "DEV-INT": {
+      "name" : "PetStore_Routing_Alias_1_0_9",
+      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "STAGE-INT": {
+      "name" : "PetStore_Routing_Alias_1_0_9",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD-INT": {
+      "name" : "PetStore_Routing_Alias_1_0_9",
+      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  }
+}
