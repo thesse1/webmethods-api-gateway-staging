@@ -2,6 +2,10 @@
   "types": [
     "api"
   ],
+  "includeOptions": {
+    "includeUsers" : false,
+    "includeGroups" : false
+  },
   "scope": [
     {
       "attributeName": "id",
