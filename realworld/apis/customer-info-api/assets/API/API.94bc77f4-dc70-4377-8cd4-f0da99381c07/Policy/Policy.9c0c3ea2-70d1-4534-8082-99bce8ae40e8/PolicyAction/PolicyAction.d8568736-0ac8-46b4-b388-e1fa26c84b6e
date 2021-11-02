@@ -1,0 +1,28 @@
+{
+  "id" : "d8568736-0ac8-46b4-b388-e1fa26c84b6e",
+  "names" : [ {
+    "value" : "Validate API Specification",
+    "locale" : "en"
+  } ],
+  "templateKey" : "validateAPISpec",
+  "parameters" : [ {
+    "templateKey" : "schemaValidationFlag",
+    "values" : [ "true" ]
+  }, {
+    "templateKey" : "validateQueryParams",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "validatePathParams",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "validateCookieParams",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "validateContentTypes",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "headersValidationFlag",
+    "values" : [ "false" ]
+  } ],
+  "active" : false
+}

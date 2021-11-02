@@ -1,0 +1,488 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "description" : "This API provides access to customer data from CRM and Order Management System.",
+      "version" : "v1.0",
+      "title" : "CustomerInfoAPI"
+    },
+    "serviceRegistryDisplayName" : "CustomerInfoAPI_v1.0",
+    "schemes" : [ ],
+    "security" : [ {
+      "requirements" : {
+        "oAuth2Token" : [ ]
+      }
+    }, {
+      "requirements" : {
+        "jwtClaims" : [ ]
+      }
+    } ],
+    "paths" : {
+      "/customer/{accountNumber}" : {
+        "get" : {
+          "operationId" : "customeraccountNumber_GET_2",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "schema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "in" : "path",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "accountNumber",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customeraccountNumber_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "501" : {
+              "description" : "Internal Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"customer\":{\"account_number\":\"gRdOXMR\",\"name\":\"S\",\"rating\":\"mwCAtHLGnfyE\",\"sf_account_id\":\"aq\",\"industry\":\"DllHjqqeC\",\"type\":\"dFssVaXMkCRky\",\"annual_revenue\":1.8359893608910203E9}}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "501" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "customeraccountNumber_GET_2"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/customer/{accountNumber}",
+        "enabled" : true
+      },
+      "/customer/{accountNumber}/orders" : {
+        "get" : {
+          "operationId" : "customeraccountNumberorders_GET_3",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "schema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "in" : "path",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "accountNumber",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customeraccountNumberorders_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "501" : {
+              "description" : "Internal Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"orders\":[{\"account_number\":\"HmHb\",\"order_item\":[{\"product\":{\"name\":\"jNOobSrFiSJ\",\"description\":\"vkm\",\"id\":\"NVPprBf\",\"list_price\":3.213953806677858E8},\"quantity\":1030825322,\"position\":\"dRrfjgUlGlkI\"}],\"customer_reference\":\"VM\",\"order_datetime\":\"FpbpRsonkAK\",\"id\":\"h\"}]}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "501" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "customeraccountNumberorders_GET_3"
+          }
+        },
+        "post" : {
+          "operationId" : "customeraccountNumberorders_POST_3",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "schema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "in" : "path",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "accountNumber",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customeraccountNumberorders_POST_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "501" : {
+              "description" : "Internal Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"order\":{\"account_number\":\"cLEIkItWxH\",\"order_item\":[{\"product\":{\"name\":\"R\",\"description\":\"YKMKUgppCvV\",\"id\":\"F\",\"list_price\":8.755715736655186E8},\"quantity\":959662873,\"position\":\"TVgsl\"}],\"customer_reference\":\"Wiq\",\"order_datetime\":\"PUNhBeFaV\",\"id\":\"te\"}}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "501" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Order"
+                },
+                "examples" : { }
+              }
+            },
+            "name" : "customeraccountNumberorders_POST_3"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/customer/{accountNumber}/orders",
+        "enabled" : true
+      },
+      "/customer" : {
+        "get" : {
+          "operationId" : "customer_GET_1",
+          "produces" : [ "application/json" ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customer_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "501" : {
+              "description" : "Internal Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"customer\":[{\"account_number\":\"Y\",\"name\":\"dT\",\"rating\":\"BFXW\",\"sf_account_id\":\"amSTsNKWOWi\",\"industry\":\"dTNv\",\"type\":\"LNT\",\"annual_revenue\":1.7731202245713037E8}]}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "501" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "customer_GET_1"
+          }
+        },
+        "post" : {
+          "operationId" : "customer_POST_1",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customer_POST_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "501" : {
+              "description" : "Internal Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"customer\":{\"account_number\":\"nsKlnQiBG\",\"name\":\"pRpoQIIXrCuK\",\"rating\":\"HdNfItIaV\",\"sf_account_id\":\"ADUtyjSvQrWFX\",\"industry\":\"koMWIftEbeqA\",\"type\":\"UKCMOBECEV\",\"annual_revenue\":1.583976142341253E9}}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "501" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Customer"
+                },
+                "examples" : { }
+              }
+            },
+            "name" : "customer_POST_1"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/customer",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : { },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "https://nestlepovdev.int-aws-de.webmethods.io/integration/restv2/development/fl454a1949e578c6702e73b8/CustomerInfoAPI",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : {
+        "Order" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"account_number\",\"customer_reference\",\"order_item\"],\"type\":\"object\",\"properties\":{\"account_number\":{\"type\":\"string\"},\"customer_reference\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"order_datetime\":{\"type\":\"string\"},\"order_item\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/OrderItem\"}}}}"
+        },
+        "Customer" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"account_number\",\"annual_revenue\",\"industry\",\"name\",\"rating\",\"type\"],\"type\":\"object\",\"properties\":{\"account_number\":{\"type\":\"string\"},\"annual_revenue\":{\"type\":\"number\",\"format\":\"double\"},\"industry\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"rating\":{\"type\":\"string\"},\"sf_account_id\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}"
+        },
+        "customer_POST_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"customer\"],\"type\":\"object\",\"properties\":{\"customer\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Customer\"}}}"
+        },
+        "OrderItem" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"product\",\"quantity\"],\"type\":\"object\",\"properties\":{\"position\":{\"type\":\"string\"},\"product\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Product\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"}}}"
+        },
+        "customeraccountNumberorders_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"orders\"],\"type\":\"object\",\"properties\":{\"orders\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Order\"}}}}"
+        },
+        "Product" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"description\",\"id\",\"list_price\",\"name\"],\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"list_price\":{\"type\":\"number\",\"format\":\"double\"},\"name\":{\"type\":\"string\"}}}"
+        },
+        "customer_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"customer\"],\"type\":\"object\",\"properties\":{\"customer\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Customer\"}}}}"
+        },
+        "customeraccountNumber_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"customer\"],\"type\":\"object\",\"properties\":{\"customer\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Customer\"}}}"
+        },
+        "customeraccountNumberorders_POST_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"order\"],\"type\":\"object\",\"properties\":{\"order\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/Order\"}}}"
+        }
+      },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "https://nestlepovdev.int-aws-de.webmethods.io/integration/restv2/development/fl454a1949e578c6702e73b8/CustomerInfoAPI",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "CustomerInfoAPI",
+  "apiVersion" : "v1.0",
+  "apiDescription" : "This API provides access to customer data from CRM and Order Management System.",
+  "maturityState" : "In Design",
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "theo.straeten@softwareag.com",
+  "policies" : [ "9c0c3ea2-70d1-4534-8082-99bce8ae40e8" ],
+  "referencedFiles" : {
+    "CustomerInfoAPI_OpenAPI.json" : "{\n  \"openapi\" : \"3.0.1\",\n  \"info\" : {\n    \"title\" : \"CustomerInfoAPI\",\n    \"description\" : \"This API provides access to customer data from CRM and Order Management System.\",\n    \"version\" : \"v1.0\"\n  },\n  \"servers\" : [ {\n    \"url\" : \"http://nestlepovpro.gateway.webmethodscloud.de/gateway/CustomerInfoAPI/v1.0\"\n  } ],\n  \"security\" : [ {\n    \"oAuth2Token\" : [ ]\n  }, {\n    \"jwtClaims\" : [ ]\n  } ],\n  \"paths\" : {\n    \"/customer/{accountNumber}\" : {\n      \"summary\" : \"/customer/{accountNumber}\",\n      \"get\" : {\n        \"operationId\" : \"customeraccountNumber_GET_2\",\n        \"parameters\" : [ {\n          \"name\" : \"accountNumber\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"allowEmptyValue\" : false,\n          \"schema\" : {\n            \"type\" : \"string\",\n            \"readOnly\" : false\n          }\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customeraccountNumber_GET_response\"\n                },\n                \"examples\" : { }\n              }\n            },\n            \"links\" : { }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\",\n            \"content\" : { },\n            \"links\" : { }\n          },\n          \"501\" : {\n            \"description\" : \"Internal Server Error\",\n            \"content\" : { },\n            \"links\" : { }\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    },\n    \"/customer/{accountNumber}/orders\" : {\n      \"summary\" : \"/customer/{accountNumber}/orders\",\n      \"get\" : {\n        \"operationId\" : \"customeraccountNumberorders_GET_3\",\n        \"parameters\" : [ {\n          \"name\" : \"accountNumber\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"allowEmptyValue\" : false,\n          \"schema\" : {\n            \"type\" : \"string\",\n            \"readOnly\" : false\n          }\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customeraccountNumberorders_GET_response\"\n                },\n                \"examples\" : { }\n              }\n            },\n            \"links\" : { }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\",\n            \"content\" : { },\n            \"links\" : { }\n          },\n          \"501\" : {\n            \"description\" : \"Internal Server Error\",\n            \"content\" : { },\n            \"links\" : { }\n          }\n        }\n      },\n      \"post\" : {\n        \"operationId\" : \"customeraccountNumberorders_POST_3\",\n        \"parameters\" : [ {\n          \"name\" : \"accountNumber\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"allowEmptyValue\" : false,\n          \"schema\" : {\n            \"type\" : \"string\",\n            \"readOnly\" : false\n          }\n        } ],\n        \"requestBody\" : {\n          \"content\" : {\n            \"application/json\" : {\n              \"schema\" : {\n                \"$ref\" : \"#/components/schemas/Order\"\n              },\n              \"examples\" : { }\n            }\n          }\n        },\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customeraccountNumberorders_POST_response\"\n                },\n                \"examples\" : { }\n              }\n            },\n            \"links\" : { }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\",\n            \"content\" : { },\n            \"links\" : { }\n          },\n          \"501\" : {\n            \"description\" : \"Internal Server Error\",\n            \"content\" : { },\n            \"links\" : { }\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    },\n    \"/customer\" : {\n      \"summary\" : \"/customer\",\n      \"get\" : {\n        \"operationId\" : \"customer_GET_1\",\n        \"parameters\" : [ ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customer_GET_response\"\n                },\n                \"examples\" : { }\n              }\n            },\n            \"links\" : { }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\",\n            \"content\" : { },\n            \"links\" : { }\n          },\n          \"501\" : {\n            \"description\" : \"Internal Server Error\",\n            \"content\" : { },\n            \"links\" : { }\n          }\n        }\n      },\n      \"post\" : {\n        \"operationId\" : \"customer_POST_1\",\n        \"parameters\" : [ ],\n        \"requestBody\" : {\n          \"content\" : {\n            \"application/json\" : {\n              \"schema\" : {\n                \"$ref\" : \"#/components/schemas/Customer\"\n              },\n              \"examples\" : { }\n            }\n          }\n        },\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customer_POST_response\"\n                },\n                \"examples\" : { }\n              }\n            },\n            \"links\" : { }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\",\n            \"content\" : { },\n            \"links\" : { }\n          },\n          \"501\" : {\n            \"description\" : \"Internal Server Error\",\n            \"content\" : { },\n            \"links\" : { }\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    }\n  },\n  \"components\" : {\n    \"schemas\" : {\n      \"Order\" : {\n        \"required\" : [ \"account_number\", \"customer_reference\", \"order_item\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"account_number\" : {\n            \"type\" : \"string\"\n          },\n          \"order_item\" : {\n            \"type\" : \"array\",\n            \"items\" : {\n              \"$ref\" : \"#/components/schemas/OrderItem\"\n            }\n          },\n          \"customer_reference\" : {\n            \"type\" : \"string\"\n          },\n          \"order_datetime\" : {\n            \"type\" : \"string\"\n          },\n          \"id\" : {\n            \"type\" : \"string\"\n          }\n        }\n      },\n      \"Customer\" : {\n        \"required\" : [ \"account_number\", \"annual_revenue\", \"industry\", \"name\", \"rating\", \"type\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"account_number\" : {\n            \"type\" : \"string\"\n          },\n          \"name\" : {\n            \"type\" : \"string\"\n          },\n          \"rating\" : {\n            \"type\" : \"string\"\n          },\n          \"sf_account_id\" : {\n            \"type\" : \"string\"\n          },\n          \"industry\" : {\n            \"type\" : \"string\"\n          },\n          \"type\" : {\n            \"type\" : \"string\"\n          },\n          \"annual_revenue\" : {\n            \"type\" : \"number\",\n            \"format\" : \"double\"\n          }\n        }\n      },\n      \"customer_POST_response\" : {\n        \"required\" : [ \"customer\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customer\" : {\n            \"$ref\" : \"#/components/schemas/Customer\"\n          }\n        }\n      },\n      \"OrderItem\" : {\n        \"required\" : [ \"product\", \"quantity\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"product\" : {\n            \"$ref\" : \"#/components/schemas/Product\"\n          },\n          \"quantity\" : {\n            \"type\" : \"integer\",\n            \"format\" : \"int32\"\n          },\n          \"position\" : {\n            \"type\" : \"string\"\n          }\n        }\n      },\n      \"customeraccountNumberorders_GET_response\" : {\n        \"required\" : [ \"orders\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"orders\" : {\n            \"type\" : \"array\",\n            \"items\" : {\n              \"$ref\" : \"#/components/schemas/Order\"\n            }\n          }\n        }\n      },\n      \"Product\" : {\n        \"required\" : [ \"description\", \"id\", \"list_price\", \"name\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"name\" : {\n            \"type\" : \"string\"\n          },\n          \"description\" : {\n            \"type\" : \"string\"\n          },\n          \"id\" : {\n            \"type\" : \"string\"\n          },\n          \"list_price\" : {\n            \"type\" : \"number\",\n            \"format\" : \"double\"\n          }\n        }\n      },\n      \"customer_GET_response\" : {\n        \"required\" : [ \"customer\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customer\" : {\n            \"type\" : \"array\",\n            \"items\" : {\n              \"$ref\" : \"#/components/schemas/Customer\"\n            }\n          }\n        }\n      },\n      \"customeraccountNumber_GET_response\" : {\n        \"required\" : [ \"customer\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customer\" : {\n            \"$ref\" : \"#/components/schemas/Customer\"\n          }\n        }\n      },\n      \"customeraccountNumberorders_POST_response\" : {\n        \"required\" : [ \"order\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"order\" : {\n            \"$ref\" : \"#/components/schemas/Order\"\n          }\n        }\n      }\n    },\n    \"responses\" : { },\n    \"parameters\" : { },\n    \"examples\" : { },\n    \"requestBodies\" : { },\n    \"headers\" : { },\n    \"securitySchemes\" : {\n      \"oAuth2Token\" : {\n        \"type\" : \"oauth2\",\n        \"flows\" : {\n          \"clientCredentials\" : {\n            \"tokenUrl\" : \"https://nestlepovpro.gateway.webmethodscloud.de/invoke/pub.apigateway.oauth2/getAccessToken\",\n            \"scopes\" : {\n              \"8e1619f6-abe1-4671-a153-493b2113423b\" : \"\"\n            }\n          }\n        }\n      },\n      \"jwtClaims\" : {\n        \"type\" : \"http\",\n        \"scheme\" : \"bearer\",\n        \"bearerFormat\" : \"JWT\"\n      }\n    },\n    \"links\" : { },\n    \"callbacks\" : { }\n  }\n}\n"
+  },
+  "tracingEnabled" : false,
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2021-11-02 09:55:22 GMT",
+  "lastModified" : "2021-11-02 10:21:31 GMT",
+  "systemVersion" : 1,
+  "mockService" : {
+    "enableMock" : false
+  },
+  "apiDocuments" : [ "966645d9-7e3d-4f50-ad3e-2c9178da8b91" ],
+  "gatewayEndpoints" : {
+    "ShortVersion" : "Customer"
+  },
+  "id" : "94bc77f4-dc70-4377-8cd4-f0da99381c07"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "API-Gateway-Administrators",
+  "name" : "API-Gateway-Administrators",
+  "owner" : "Default",
+  "description" : "",
+  "type" : "local",
+  "systemDefined" : true,
+  "userIds" : [ "Administrator", "b65e5844-a8b8-4387-93ae-eeec0b7dc27f", "45ff6450-8805-4fbf-990d-fd87bca31816" ]
+}
