@@ -464,7 +464,7 @@
   "apiVersion" : "v1.0",
   "apiDescription" : "This API provides access to customer data from CRM and Order Management System.",
   "maturityState" : "In Design",
-  "apiGroups" : [ " Internal" ],
+  "apiGroups" : [ "Internal" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "theo.straeten@softwareag.com",
@@ -476,7 +476,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-11-02 09:55:22 GMT",
-  "lastModified" : "2021-11-02 18:25:43 GMT",
+  "lastModified" : "2021-11-02 18:31:14 GMT",
   "systemVersion" : 1,
   "mockService" : {
     "enableMock" : false
