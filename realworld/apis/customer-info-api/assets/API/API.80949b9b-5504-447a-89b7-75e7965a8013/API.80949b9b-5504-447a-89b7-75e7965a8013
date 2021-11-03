@@ -1,0 +1,302 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "version" : "1.0",
+      "title" : "CustomerInfoAPI"
+    },
+    "serviceRegistryDisplayName" : "CustomerInfoAPI_1.0",
+    "tags" : [ {
+      "name" : "Initial design of API"
+    } ],
+    "schemes" : [ ],
+    "security" : [ ],
+    "paths" : {
+      "/customer/{accountNumber}" : {
+        "get" : {
+          "operationId" : "customeraccountNumber_GET_1",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "schema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "in" : "path",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "accountNumber",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customeraccountNumber_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"customerInfo\":{\"account_number\":\"PaxFFLFpHWlhuk\",\"total_amount_orders\":328907002,\"name\":\"DWkMwaPbgEhFX\",\"rating\":\"BxrVunKHmy\",\"sf_account_id\":\"qVbQhlNXDgbf\",\"industry\":\"FXtMExNfxgJYmd\",\"total_value_orders\":1.9630921205418258E9}}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "500" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "customeraccountNumber_GET_1"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/customer/{accountNumber}",
+        "enabled" : true
+      },
+      "/customer" : {
+        "get" : {
+          "operationId" : "customer_GET_2",
+          "produces" : [ "application/json" ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customer_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"customerInfos\":[{\"account_number\":\"CekIP\",\"total_amount_orders\":1798981543,\"name\":\"OYOwIagsYCVRrh\",\"rating\":\"\",\"sf_account_id\":\"PjyBqfvK\",\"industry\":\"AQ\",\"total_value_orders\":2.0719002229966438E9}]}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "500" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "customer_GET_2"
+          }
+        },
+        "post" : {
+          "operationId" : "customer_POST_2",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/customer_POST_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : {
+            "200" : {
+              "responseBody" : {
+                "application/json" : "{\"customerInfo\":{\"account_number\":\"bPqIg\",\"total_amount_orders\":1641911424,\"name\":\"wDIvWfQvbNE\",\"rating\":\"rgTg\",\"sf_account_id\":\"MNHcSEE\",\"industry\":\"xWhAmWW\",\"total_value_orders\":4.0246712589645535E8}}"
+              }
+            },
+            "401" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            },
+            "500" : {
+              "responseBody" : {
+                "application/json" : ""
+              }
+            }
+          },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomerInfoSvcIn"
+                },
+                "examples" : { }
+              }
+            },
+            "name" : "customer_POST_2"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "/customer",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : { },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "https://nestlepovdev.int-aws-de.webmethods.io/integration/restv2/development/fl48e1f17887c10f3be394c3/Test",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : {
+        "customer_POST_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"customerInfo\"],\"type\":\"object\",\"properties\":{\"customerInfo\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/CustomerInfo\"}}}"
+        },
+        "CustomerInfo" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"account_number\"],\"type\":\"object\",\"properties\":{\"account_number\":{\"type\":\"string\"},\"industry\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"rating\":{\"type\":\"string\"},\"sf_account_id\":{\"type\":\"string\"},\"total_amount_orders\":{\"type\":\"integer\",\"format\":\"int32\"},\"total_value_orders\":{\"type\":\"number\",\"format\":\"double\"}},\"description\":\"DocType to define customer info.\"}"
+        },
+        "customer_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"customerInfos\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/CustomerInfo\"}}}}"
+        },
+        "CustomerInfoSvcIn" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"account_number\",\"name\"],\"type\":\"object\",\"properties\":{\"account_number\":{\"type\":\"string\"},\"industry\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"rating\":{\"type\":\"string\"}},\"description\":\"DocType used as input to on-prem services to define customer info.\"}"
+        },
+        "customeraccountNumber_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"customerInfo\"],\"type\":\"object\",\"properties\":{\"customerInfo\":{\"type\":\"object\",\"$ref\":\"#/components/schemas/CustomerInfo\"}}}"
+        }
+      },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "apiTags" : [ "Initial design of API" ],
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "https://nestlepovdev.int-aws-de.webmethods.io/integration/restv2/development/fl48e1f17887c10f3be394c3/Test",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "CustomerInfoAPI",
+  "apiVersion" : "1.0",
+  "maturityState" : "In Design",
+  "apiGroups" : [ "Internal", "Drinks" ],
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "theo.straeten@softwareag.com",
+  "policies" : [ "719a58fb-f157-4f0e-9a0a-10366d8b8110" ],
+  "referencedFiles" : {
+    "CustomerInfoAPI.json" : "{\n  \"openapi\" : \"3.0.1\",\n  \"info\" : {\n    \"title\" : \"CustomerInfoAPI\",\n    \"version\" : \"1.0\"\n  },\n  \"paths\" : {\n    \"/customer/{accountNumber}\" : {\n      \"get\" : {\n        \"operationId\" : \"customeraccountNumber_GET_1\",\n        \"parameters\" : [ {\n          \"name\" : \"accountNumber\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"allowEmptyValue\" : false,\n          \"schema\" : {\n            \"type\" : \"string\",\n            \"readOnly\" : false\n          }\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customeraccountNumber_GET_response\"\n                }\n              }\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          },\n          \"500\" : {\n            \"description\" : \"Server Error\"\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    },\n    \"/customer\" : {\n      \"get\" : {\n        \"operationId\" : \"customer_GET_2\",\n        \"parameters\" : [ ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customer_GET_response\"\n                }\n              }\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          },\n          \"500\" : {\n            \"description\" : \"Server Error\"\n          }\n        }\n      },\n      \"post\" : {\n        \"operationId\" : \"customer_POST_2\",\n        \"parameters\" : [ ],\n        \"requestBody\" : {\n          \"content\" : {\n            \"application/json\" : {\n              \"schema\" : {\n                \"$ref\" : \"#/components/schemas/CustomerInfoSvcIn\"\n              }\n            }\n          },\n          \"required\" : true\n        },\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customer_POST_response\"\n                }\n              }\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          },\n          \"500\" : {\n            \"description\" : \"Server Error\"\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    }\n  },\n  \"components\" : {\n    \"schemas\" : {\n      \"customer_POST_response\" : {\n        \"required\" : [ \"customerInfo\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customerInfo\" : {\n            \"$ref\" : \"#/components/schemas/CustomerInfo\"\n          }\n        }\n      },\n      \"customer_GET_response\" : {\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customerInfos\" : {\n            \"type\" : \"array\",\n            \"items\" : {\n              \"$ref\" : \"#/components/schemas/CustomerInfo\"\n            }\n          }\n        }\n      },\n      \"CustomerInfo\" : {\n        \"required\" : [ \"account_number\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"account_number\" : {\n            \"type\" : \"string\"\n          },\n          \"total_amount_orders\" : {\n            \"type\" : \"integer\",\n            \"format\" : \"int32\"\n          },\n          \"name\" : {\n            \"type\" : \"string\"\n          },\n          \"rating\" : {\n            \"type\" : \"string\"\n          },\n          \"sf_account_id\" : {\n            \"type\" : \"string\"\n          },\n          \"industry\" : {\n            \"type\" : \"string\"\n          },\n          \"total_value_orders\" : {\n            \"type\" : \"number\",\n            \"format\" : \"double\"\n          }\n        },\n        \"description\" : \"DocType to define customer info.\"\n      },\n      \"CustomerInfoSvcIn\" : {\n        \"required\" : [ \"account_number\", \"name\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"account_number\" : {\n            \"type\" : \"string\"\n          },\n          \"name\" : {\n            \"type\" : \"string\"\n          },\n          \"rating\" : {\n            \"type\" : \"string\"\n          },\n          \"industry\" : {\n            \"type\" : \"string\"\n          }\n        },\n        \"description\" : \"DocType used as input to on-prem services to define customer info.\"\n      },\n      \"customeraccountNumber_GET_response\" : {\n        \"required\" : [ \"customerInfo\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customerInfo\" : {\n            \"$ref\" : \"#/components/schemas/CustomerInfo\"\n          }\n        }\n      }\n    }\n  }\n}\n"
+  },
+  "tracingEnabled" : false,
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2021-11-03 16:47:31 GMT",
+  "lastModified" : "2021-11-03 17:25:13 GMT",
+  "systemVersion" : 1,
+  "mockService" : {
+    "enableMock" : false
+  },
+  "apiDocuments" : [ "30c442a7-9b22-4f71-8e81-a260563321d0" ],
+  "gatewayEndpoints" : { },
+  "id" : "80949b9b-5504-447a-89b7-75e7965a8013"
+}

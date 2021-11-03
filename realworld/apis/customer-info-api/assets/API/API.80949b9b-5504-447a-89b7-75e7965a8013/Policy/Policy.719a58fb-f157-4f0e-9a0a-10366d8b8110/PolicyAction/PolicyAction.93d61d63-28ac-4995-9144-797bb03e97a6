@@ -1,5 +1,5 @@
 {
-  "id" : "1a5db27b-9af8-410b-87e2-31b47b9914b9",
+  "id" : "93d61d63-28ac-4995-9144-797bb03e97a6",
   "names" : [ {
     "value" : "Identify & Authorize",
     "locale" : "en"
@@ -10,7 +10,7 @@
     "values" : [ "OR" ]
   }, {
     "templateKey" : "allowAnonymous",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "IdentificationRule",
     "parameters" : [ {
@@ -24,19 +24,19 @@
     "templateKey" : "IdentificationRule",
     "parameters" : [ {
       "templateKey" : "applicationLookup",
-      "values" : [ "relax" ]
+      "values" : [ "open" ]
     }, {
       "templateKey" : "identificationType",
-      "values" : [ "httpBasicAuth" ]
+      "values" : [ "jwtClaims" ]
     } ]
   }, {
     "templateKey" : "IdentificationRule",
     "parameters" : [ {
       "templateKey" : "applicationLookup",
-      "values" : [ "relax" ]
+      "values" : [ "strict" ]
     }, {
       "templateKey" : "identificationType",
-      "values" : [ "jwtClaims" ]
+      "values" : [ "oAuth2Token" ]
     } ]
   } ],
   "active" : false
