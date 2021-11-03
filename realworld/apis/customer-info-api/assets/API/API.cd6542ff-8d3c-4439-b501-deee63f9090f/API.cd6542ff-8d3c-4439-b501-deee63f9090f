@@ -65,7 +65,7 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : { },
-            "name" : "requestBody"
+            "name" : "customeraccountNumber_GET_1"
           }
         },
         "scopes" : [ ],
@@ -115,7 +115,7 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : { },
-            "name" : "requestBody"
+            "name" : "customer_GET_2"
           }
         },
         "post" : {
@@ -239,7 +239,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-11-03 18:41:11 GMT",
-  "lastModified" : "2021-11-03 18:42:45 GMT",
+  "lastModified" : "2021-11-03 18:46:41 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "cd6542ff-8d3c-4439-b501-deee63f9090f"
