@@ -1,49 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-11-03T17:27:27"/>
-    <asset name="API.80949b9b-5504-447a-89b7-75e7965a8013" displayName="CustomerInfoAPI[1.0]" isDeployable="true">
+    <buildInfo name="BuildTimestamp" value="2021-11-03T18:42:53"/>
+    <asset name="API.cd6542ff-8d3c-4439-b501-deee63f9090f" displayName="CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
-        <dependsOn>APIGateway:AccessControlList.106c9351-87d5-42e5-844f-9be7830c6c85</dependsOn>
-        <dependsOn>APIGateway:Policy.719a58fb-f157-4f0e-9a0a-10366d8b8110</dependsOn>
+        <dependsOn>APIGateway:AccessControlList.61558137-ed5f-4784-8381-2c81f3b17543</dependsOn>
+        <dependsOn>APIGateway:Policy.01bf8467-886b-4bbb-9c27-f1986f98e9ef</dependsOn>
     </asset>
-    <asset name="Policy.719a58fb-f157-4f0e-9a0a-10366d8b8110" displayName="Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="Policy.01bf8467-886b-4bbb-9c27-f1986f98e9ef" displayName="Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
-        <dependsOn>APIGateway:PolicyAction.201be8eb-e353-4599-8f6c-97b05ad53e12</dependsOn>
-        <dependsOn>APIGateway:PolicyAction.2a82d1fd-093f-4965-8404-37f8ebc35a11</dependsOn>
-        <dependsOn>APIGateway:PolicyAction.4820577a-da5f-44c4-8c2c-908b3075b648</dependsOn>
-        <dependsOn>APIGateway:PolicyAction.8503af00-54d6-4b82-af0f-d386390097ad</dependsOn>
-        <dependsOn>APIGateway:PolicyAction.93d61d63-28ac-4995-9144-797bb03e97a6</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.bed0699f-9528-426f-b95d-97b8ccc05bba</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.e5647b50-d9ec-4279-8072-da0754e5fff6</dependsOn>
     </asset>
-    <asset name="PolicyAction.201be8eb-e353-4599-8f6c-97b05ad53e12" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="PolicyAction.bed0699f-9528-426f-b95d-97b8ccc05bba" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="PolicyAction.8503af00-54d6-4b82-af0f-d386390097ad" displayName="Policy Action [Outbound Auth - Transport] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
-        <implementation.generic type="PolicyAction"/>
-        <dependsOn>APIGateway:Alias.d720ab1d-3f36-44bc-9f70-11a13a14f0a3</dependsOn>
-    </asset>
-    <asset name="Alias.d720ab1d-3f36-44bc-9f70-11a13a14f0a3" displayName="WMIO_API_GATEWAY_USER" isDeployable="true">
-        <implementation.generic type="Alias"/>
-        <dependsOn>APIGateway:PassmanData.HTTP_AUTH_OUTBOUND_CLIENT_PWDWMIO_API_GATEWAY_USER</dependsOn>
-        <property name="Username for HTTP Transport Security Alias WMIO_API_GATEWAY_USER" many="false" isSecure="false" displayName="Username for HTTP Transport Security Alias WMIO_API_GATEWAY_USER">
-            <value>wmio.integrationapiuser@softwareag.com</value>
-        </property>
-        <property name="Password for HTTP Transport Security Alias WMIO_API_GATEWAY_USER" many="false" isSecure="true" displayName="Password for HTTP Transport Security Alias WMIO_API_GATEWAY_USER">
-            <value>{AES}vDt83fIfdPbOEh8vBitePrw7fN3yH3T2zhIfLwYrXj5pitcLjd1NawNQdFYbmaFM</value>
-        </property>
-    </asset>
-    <asset name="PassmanData.HTTP_AUTH_OUTBOUND_CLIENT_PWDWMIO_API_GATEWAY_USER" displayName="HTTP_AUTH_OUTBOUND_CLIENT_PWDWMIO_API_GATEWAY_USER" isDeployable="true">
-        <implementation.generic type="PassmanData"/>
-    </asset>
-    <asset name="PolicyAction.2a82d1fd-093f-4965-8404-37f8ebc35a11" displayName="Policy Action [Log Invocation] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="PolicyAction.e5647b50-d9ec-4279-8072-da0754e5fff6" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="PolicyAction.93d61d63-28ac-4995-9144-797bb03e97a6" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
-        <implementation.generic type="PolicyAction"/>
-    </asset>
-    <asset name="PolicyAction.4820577a-da5f-44c4-8c2c-908b3075b648" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
-        <implementation.generic type="PolicyAction"/>
-    </asset>
-    <asset name="AccessControlList.106c9351-87d5-42e5-844f-9be7830c6c85" displayName="AccessControlList for asset : CustomerInfoAPI" isDeployable="true">
+    <asset name="AccessControlList.61558137-ed5f-4784-8381-2c81f3b17543" displayName="AccessControlList for asset : CustomerInfoAPI" isDeployable="true">
         <implementation.generic type="AccessControlList"/>
         <dependsOn>APIGateway:AccessProfile.Administrators</dependsOn>
         <dependsOn>APIGateway:AccessProfile.Default</dependsOn>
