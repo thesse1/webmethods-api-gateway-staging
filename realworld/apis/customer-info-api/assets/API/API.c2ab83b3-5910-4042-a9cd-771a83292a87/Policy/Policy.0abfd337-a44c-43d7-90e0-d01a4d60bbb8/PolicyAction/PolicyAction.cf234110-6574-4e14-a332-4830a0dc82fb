@@ -1,5 +1,5 @@
 {
-  "id" : "5a9d60c1-b85c-426c-969f-92cb410d087d",
+  "id" : "cf234110-6574-4e14-a332-4830a0dc82fb",
   "names" : [ {
     "value" : "Log Invocation",
     "locale" : "en"
@@ -28,6 +28,12 @@
     "parameters" : [ {
       "templateKey" : "destinationType",
       "values" : [ "GATEWAY" ]
+    } ]
+  }, {
+    "templateKey" : "destination",
+    "parameters" : [ {
+      "templateKey" : "destinationType",
+      "values" : [ "APIPORTAL" ]
     } ]
   } ],
   "active" : false

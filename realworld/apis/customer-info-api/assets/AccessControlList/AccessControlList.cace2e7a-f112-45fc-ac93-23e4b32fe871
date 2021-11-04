@@ -1,6 +1,6 @@
 {
-  "id" : "1da47e6a-ddf1-437c-8e69-7be74f29ed11",
-  "assetId" : "645e64a2-3e43-4a8a-afeb-2f02b96f5de4",
+  "id" : "cace2e7a-f112-45fc-ac93-23e4b32fe871",
+  "assetId" : "c2ab83b3-5910-4042-a9cd-771a83292a87",
   "gatewayEntityType" : [ "gatewayentitytype", "APIS" ],
   "teamAccessControlList" : [ {
     "id" : "Administrators",

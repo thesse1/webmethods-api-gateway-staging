@@ -1,5 +1,5 @@
 {
-  "id" : "fd4e8367-c269-4826-bea2-5c8113cfcf83",
+  "id" : "6e1c2a50-a7fa-41a2-bf59-85d55eb94d19",
   "names" : [ {
     "value" : "Straight Through Routing",
     "locale" : "en"
@@ -7,7 +7,7 @@
   "templateKey" : "straightThroughRouting",
   "parameters" : [ {
     "templateKey" : "endpointUri",
-    "values" : [ "/${sys:resource_path}" ]
+    "values" : [ "https://nestlepovdev.int-aws-de.webmethods.io/integration/restv2/development/fl48e1f17887c10f3be394c3/CustomerInfoAPI/${sys:resource_path}" ]
   }, {
     "templateKey" : "method",
     "values" : [ "CUSTOM" ]
