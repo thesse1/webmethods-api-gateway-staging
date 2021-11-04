@@ -1,5 +1,5 @@
 {
-  "id" : "01bf8467-886b-4bbb-9c27-f1986f98e9ef",
+  "id" : "7fdddb7c-8bc5-459f-a9f0-eed10abd475c",
   "names" : [ {
     "value" : "Default Policy for API CustomerInfoAPI",
     "locale" : "English"
@@ -13,19 +13,19 @@
   },
   "policyEnforcements" : [ {
     "enforcements" : [ {
-      "enforcementObjectId" : "bed0699f-9528-426f-b95d-97b8ccc05bba",
+      "enforcementObjectId" : "fd4e8367-c269-4826-bea2-5c8113cfcf83",
       "order" : "0"
     } ],
     "stageKey" : "routing"
   }, {
     "enforcements" : [ {
-      "enforcementObjectId" : "f6e4c561-e374-4130-8c8e-84423cdb73eb",
+      "enforcementObjectId" : "5a9d60c1-b85c-426c-969f-92cb410d087d",
       "order" : "0"
     } ],
     "stageKey" : "LMT"
   }, {
     "enforcements" : [ {
-      "enforcementObjectId" : "e5647b50-d9ec-4279-8072-da0754e5fff6",
+      "enforcementObjectId" : "11c5be5e-6ba6-4d44-bbee-777c2bfa3e06",
       "order" : "0"
     } ],
     "stageKey" : "transport"

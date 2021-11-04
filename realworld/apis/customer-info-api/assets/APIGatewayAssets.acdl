@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-11-03T18:47:48"/>
-    <asset name="API.cd6542ff-8d3c-4439-b501-deee63f9090f" displayName="CustomerInfoAPI[1.0]" isDeployable="true">
+    <buildInfo name="BuildTimestamp" value="2021-11-04T08:22:20"/>
+    <asset name="API.645e64a2-3e43-4a8a-afeb-2f02b96f5de4" displayName="CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
-        <dependsOn>APIGateway:AccessControlList.61558137-ed5f-4784-8381-2c81f3b17543</dependsOn>
-        <dependsOn>APIGateway:Policy.01bf8467-886b-4bbb-9c27-f1986f98e9ef</dependsOn>
+        <dependsOn>APIGateway:AccessControlList.1da47e6a-ddf1-437c-8e69-7be74f29ed11</dependsOn>
+        <dependsOn>APIGateway:Policy.7fdddb7c-8bc5-459f-a9f0-eed10abd475c</dependsOn>
     </asset>
-    <asset name="Policy.01bf8467-886b-4bbb-9c27-f1986f98e9ef" displayName="Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="Policy.7fdddb7c-8bc5-459f-a9f0-eed10abd475c" displayName="Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
-        <dependsOn>APIGateway:PolicyAction.bed0699f-9528-426f-b95d-97b8ccc05bba</dependsOn>
-        <dependsOn>APIGateway:PolicyAction.e5647b50-d9ec-4279-8072-da0754e5fff6</dependsOn>
-        <dependsOn>APIGateway:PolicyAction.f6e4c561-e374-4130-8c8e-84423cdb73eb</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.11c5be5e-6ba6-4d44-bbee-777c2bfa3e06</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.5a9d60c1-b85c-426c-969f-92cb410d087d</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.fd4e8367-c269-4826-bea2-5c8113cfcf83</dependsOn>
     </asset>
-    <asset name="PolicyAction.bed0699f-9528-426f-b95d-97b8ccc05bba" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="PolicyAction.fd4e8367-c269-4826-bea2-5c8113cfcf83" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="PolicyAction.f6e4c561-e374-4130-8c8e-84423cdb73eb" displayName="Policy Action [Log Invocation] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="PolicyAction.5a9d60c1-b85c-426c-969f-92cb410d087d" displayName="Policy Action [Log Invocation] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="PolicyAction.e5647b50-d9ec-4279-8072-da0754e5fff6" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
+    <asset name="PolicyAction.11c5be5e-6ba6-4d44-bbee-777c2bfa3e06" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API CustomerInfoAPI[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="AccessControlList.61558137-ed5f-4784-8381-2c81f3b17543" displayName="AccessControlList for asset : CustomerInfoAPI" isDeployable="true">
+    <asset name="AccessControlList.1da47e6a-ddf1-437c-8e69-7be74f29ed11" displayName="AccessControlList for asset : CustomerInfoAPI" isDeployable="true">
         <implementation.generic type="AccessControlList"/>
         <dependsOn>APIGateway:AccessProfile.Administrators</dependsOn>
         <dependsOn>APIGateway:AccessProfile.Default</dependsOn>

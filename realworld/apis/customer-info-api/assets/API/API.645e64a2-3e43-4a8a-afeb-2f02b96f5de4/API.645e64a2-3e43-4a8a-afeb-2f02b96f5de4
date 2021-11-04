@@ -65,7 +65,7 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : { },
-            "name" : "customeraccountNumber_GET_1"
+            "name" : "requestBody"
           }
         },
         "scopes" : [ ],
@@ -115,7 +115,7 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : { },
-            "name" : "customer_GET_2"
+            "name" : "requestBody"
           }
         },
         "post" : {
@@ -227,20 +227,19 @@
   "apiName" : "CustomerInfoAPI",
   "apiVersion" : "1.0",
   "maturityState" : "In Design",
-  "apiGroups" : [ "Internal" ],
-  "isActive" : false,
+  "isActive" : true,
   "type" : "REST",
-  "owner" : "theo.straeten@softwareag.com",
-  "policies" : [ "01bf8467-886b-4bbb-9c27-f1986f98e9ef" ],
+  "owner" : "erik.becker@softwareag.com",
+  "policies" : [ "7fdddb7c-8bc5-459f-a9f0-eed10abd475c" ],
   "referencedFiles" : {
     "CustomerInfoAPI_OAS30.json" : "{\n  \"openapi\" : \"3.0.1\",\n  \"info\" : {\n    \"title\" : \"CustomerInfoAPI\",\n    \"version\" : \"1.0\"\n  },\n  \"paths\" : {\n    \"/customer/{accountNumber}\" : {\n      \"get\" : {\n        \"operationId\" : \"customeraccountNumber_GET_1\",\n        \"parameters\" : [ {\n          \"name\" : \"accountNumber\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"allowEmptyValue\" : false,\n          \"schema\" : {\n            \"type\" : \"string\",\n            \"readOnly\" : false\n          }\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customeraccountNumber_GET_response\"\n                }\n              }\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          },\n          \"500\" : {\n            \"description\" : \"Server Error\"\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    },\n    \"/customer\" : {\n      \"get\" : {\n        \"operationId\" : \"customer_GET_2\",\n        \"parameters\" : [ ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customer_GET_response\"\n                }\n              }\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          },\n          \"500\" : {\n            \"description\" : \"Server Error\"\n          }\n        }\n      },\n      \"post\" : {\n        \"operationId\" : \"customer_POST_2\",\n        \"parameters\" : [ ],\n        \"requestBody\" : {\n          \"content\" : {\n            \"application/json\" : {\n              \"schema\" : {\n                \"$ref\" : \"#/components/schemas/CustomerInfoSvcIn\"\n              }\n            }\n          },\n          \"required\" : true\n        },\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"content\" : {\n              \"application/json\" : {\n                \"schema\" : {\n                  \"$ref\" : \"#/components/schemas/customer_POST_response\"\n                }\n              }\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          },\n          \"500\" : {\n            \"description\" : \"Server Error\"\n          }\n        }\n      },\n      \"parameters\" : [ ]\n    }\n  },\n  \"components\" : {\n    \"schemas\" : {\n      \"customer_POST_response\" : {\n        \"required\" : [ \"customerInfo\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customerInfo\" : {\n            \"$ref\" : \"#/components/schemas/CustomerInfo\"\n          }\n        }\n      },\n      \"customer_GET_response\" : {\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customerInfos\" : {\n            \"type\" : \"array\",\n            \"items\" : {\n              \"$ref\" : \"#/components/schemas/CustomerInfo\"\n            }\n          }\n        }\n      },\n      \"CustomerInfo\" : {\n        \"required\" : [ \"account_number\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"account_number\" : {\n            \"type\" : \"string\"\n          },\n          \"total_amount_orders\" : {\n            \"type\" : \"integer\",\n            \"format\" : \"int32\"\n          },\n          \"name\" : {\n            \"type\" : \"string\"\n          },\n          \"rating\" : {\n            \"type\" : \"string\"\n          },\n          \"sf_account_id\" : {\n            \"type\" : \"string\"\n          },\n          \"industry\" : {\n            \"type\" : \"string\"\n          },\n          \"total_value_orders\" : {\n            \"type\" : \"number\",\n            \"format\" : \"double\"\n          }\n        },\n        \"description\" : \"DocType to define customer info.\"\n      },\n      \"CustomerInfoSvcIn\" : {\n        \"required\" : [ \"account_number\", \"name\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"account_number\" : {\n            \"type\" : \"string\"\n          },\n          \"name\" : {\n            \"type\" : \"string\"\n          },\n          \"rating\" : {\n            \"type\" : \"string\"\n          },\n          \"industry\" : {\n            \"type\" : \"string\"\n          }\n        },\n        \"description\" : \"DocType used as input to on-prem services to define customer info.\"\n      },\n      \"customeraccountNumber_GET_response\" : {\n        \"required\" : [ \"customerInfo\" ],\n        \"type\" : \"object\",\n        \"properties\" : {\n          \"customerInfo\" : {\n            \"$ref\" : \"#/components/schemas/CustomerInfo\"\n          }\n        }\n      }\n    }\n  }\n}\n"
   },
   "tracingEnabled" : false,
   "scopes" : [ ],
   "publishedPortals" : [ ],
-  "creationDate" : "2021-11-03 18:41:11 GMT",
-  "lastModified" : "2021-11-03 18:46:41 GMT",
+  "creationDate" : "2021-11-04 08:03:57 GMT",
+  "lastModified" : "2021-11-04 08:18:51 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
-  "id" : "cd6542ff-8d3c-4439-b501-deee63f9090f"
+  "id" : "645e64a2-3e43-4a8a-afeb-2f02b96f5de4"
 }
