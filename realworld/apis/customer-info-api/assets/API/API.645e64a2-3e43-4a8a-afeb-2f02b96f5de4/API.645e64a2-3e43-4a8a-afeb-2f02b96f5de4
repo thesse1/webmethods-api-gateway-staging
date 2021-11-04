@@ -65,7 +65,7 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : { },
-            "name" : "requestBody"
+            "name" : "customeraccountNumber_GET_1"
           }
         },
         "scopes" : [ ],
@@ -115,7 +115,7 @@
           "scopes" : [ ],
           "requestBody" : {
             "content" : { },
-            "name" : "requestBody"
+            "name" : "customer_GET_2"
           }
         },
         "post" : {
@@ -227,6 +227,7 @@
   "apiName" : "CustomerInfoAPI",
   "apiVersion" : "1.0",
   "maturityState" : "In Design",
+  "apiGroups" : [ "Internal" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "erik.becker@softwareag.com",
@@ -238,7 +239,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-11-04 08:03:57 GMT",
-  "lastModified" : "2021-11-04 08:18:51 GMT",
+  "lastModified" : "2021-11-04 08:25:00 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "645e64a2-3e43-4a8a-afeb-2f02b96f5de4"
