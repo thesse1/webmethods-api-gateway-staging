@@ -1,7 +1,7 @@
 {
   "id" : "Default",
   "name" : "Default",
-  "description" : "All users in APIGateway will be part of this team.",
+  "description" : "",
   "privilege" : [ ],
   "groupIds" : [ "Everybody" ],
   "systemDefined" : true

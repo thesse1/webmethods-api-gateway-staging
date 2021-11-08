@@ -289,6 +289,7 @@
   } ],
   "apiName" : "CustomerInfoAPI",
   "apiVersion" : "1.0",
+  "apiDescription" : "Change to increase performance",
   "maturityState" : "In Development",
   "apiGroups" : [ "Internal" ],
   "isActive" : true,
@@ -302,7 +303,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-11-05 14:19:13 GMT",
-  "lastModified" : "2021-11-05 14:46:02 GMT",
+  "lastModified" : "2021-11-08 18:05:42 GMT",
   "nextVersion" : "378e2385-1d6e-426a-bfcc-747fd46e0371",
   "systemVersion" : 1,
   "mockService" : {
