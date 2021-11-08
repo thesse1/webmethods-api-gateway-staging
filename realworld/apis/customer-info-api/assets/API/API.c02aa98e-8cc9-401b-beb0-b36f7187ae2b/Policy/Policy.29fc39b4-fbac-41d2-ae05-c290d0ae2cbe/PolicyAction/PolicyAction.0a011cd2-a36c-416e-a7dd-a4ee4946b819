@@ -1,0 +1,22 @@
+{
+  "id" : "0a011cd2-a36c-416e-a7dd-a4ee4946b819",
+  "names" : [ {
+    "value" : "Outbound Auth - Transport",
+    "locale" : "en"
+  } ],
+  "templateKey" : "outboundTransportAuthentication",
+  "parameters" : [ {
+    "templateKey" : "transportSecurity",
+    "parameters" : [ {
+      "templateKey" : "authType",
+      "values" : [ "ALIAS" ]
+    }, {
+      "templateKey" : "authMode",
+      "values" : [ "NEW" ]
+    }, {
+      "templateKey" : "alias",
+      "values" : [ "${WMIO_API_GATEWAY_USER}" ]
+    } ]
+  } ],
+  "active" : false
+}

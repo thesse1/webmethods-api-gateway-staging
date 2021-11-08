@@ -1,0 +1,43 @@
+{
+  "id" : "1a5db27b-9af8-410b-87e2-31b47b9914b9",
+  "names" : [ {
+    "value" : "Identify & Authorize",
+    "locale" : "en"
+  } ],
+  "templateKey" : "evaluatePolicy",
+  "parameters" : [ {
+    "templateKey" : "logicalConnector",
+    "values" : [ "OR" ]
+  }, {
+    "templateKey" : "allowAnonymous",
+    "values" : [ "true" ]
+  }, {
+    "templateKey" : "IdentificationRule",
+    "parameters" : [ {
+      "templateKey" : "applicationLookup",
+      "values" : [ "open" ]
+    }, {
+      "templateKey" : "identificationType",
+      "values" : [ "apiKey" ]
+    } ]
+  }, {
+    "templateKey" : "IdentificationRule",
+    "parameters" : [ {
+      "templateKey" : "applicationLookup",
+      "values" : [ "relax" ]
+    }, {
+      "templateKey" : "identificationType",
+      "values" : [ "httpBasicAuth" ]
+    } ]
+  }, {
+    "templateKey" : "IdentificationRule",
+    "parameters" : [ {
+      "templateKey" : "applicationLookup",
+      "values" : [ "relax" ]
+    }, {
+      "templateKey" : "identificationType",
+      "values" : [ "jwtClaims" ]
+    } ]
+  } ],
+  "active" : false
+}

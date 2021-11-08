@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "c0e5363d-fc93-4566-b6aa-41abff5f6b09",
-		"name": "API Test for ping",
+		"name": "Preparation for API Test of CustomerInfoAPI (ping resource has to added)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": []

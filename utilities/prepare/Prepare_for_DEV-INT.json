@@ -1,74 +1,10 @@
 {
 	"info": {
-		"_postman_id": "bc7a078d-9051-40e7-a99e-5b23fd8ecd85",
+		"_postman_id": "21b09d25-be16-41f6-9c11-b7d2a404345a",
 		"name": "Prepare_for_DEV-INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Get and Validate all Policy Actions",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"let policyActions = JSON.parse(responseBody).policyAction;\r",
-							"if (policyActions === undefined || policyActions === null || policyActions.length === 0) {\r",
-							"} else {\r",
-							"    for (i in policyActions) {\r",
-							"        if ((policyActions[i].templateKey === \"logInvocation\") && (policyActions[i].id !== \"GlobalLogInvocationPolicyAction\")) {\r",
-							"            console.log(\"Log Invocation policy not allowed on API level\");\r",
-							"            console.log(\"ID: \" + policyActions[i].id);\r",
-							"            console.log(\"Name: \" + policyActions[i].names[0].value);\r",
-							"\r",
-							"            pm.test(\"No local Log Invocation policies\", function () {\r",
-							"                pm.expect(policyActions[i].templateKey).not.to.be.equal(\"logInvocation\");\r",
-							"            });\r",
-							"\r",
-							"            postman.setNextRequest(null);\r",
-							"            break;\r",
-							"        }\r",
-							"    }\r",
-							"}"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/policyActions",
-					"protocol": "https",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"rest",
-						"apigateway",
-						"policyActions"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Get and Validate all Applications",
 			"event": [

@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "realdevint.gateway.webmethodscloud.de",
+			"value": "nestlepovpro.gateway.webmethodscloud.de",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "realdevint.gateway.webmethodscloud.de",
+			"value": "nestlepovpro.gateway.webmethodscloud.de",
 			"type": "text",
 			"enabled": true
 		},

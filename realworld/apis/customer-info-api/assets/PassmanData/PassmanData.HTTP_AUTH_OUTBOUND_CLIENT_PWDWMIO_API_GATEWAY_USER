@@ -1,0 +1,7 @@
+{
+  "id" : "HTTP_AUTH_OUTBOUND_CLIENT_PWDWMIO_API_GATEWAY_USER",
+  "pw" : "FlDNM1UQhA/zT9rHtUYpVUtqFtp1Jh6Pr6NExExqI3w=",
+  "encryptorId" : "EntrustPbePlus",
+  "saltString" : "xGtrsrh0tuGrIOJRp0zBbg==",
+  "iterationCount" : 2048
+}

@@ -1,0 +1,15 @@
+{
+  "types": [
+    "api"
+  ],
+  "includeOptions": {
+    "includeUsers" : false,
+    "includeGroups" : false
+  },
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "c02aa98e-8cc9-401b-beb0-b36f7187ae2b"
+    }
+  ]
+}
