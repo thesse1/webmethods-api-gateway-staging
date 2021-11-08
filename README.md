@@ -1,5 +1,3 @@
-CHANGE AGAIN
-
 # About API Gateway Staging
 
 The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central CONFIG environment, add them to the Azure DevOps repository (Git) and automatically promote them to DEV, STAGE and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _STAGE or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to STAGE and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, STAGE or PROD).
