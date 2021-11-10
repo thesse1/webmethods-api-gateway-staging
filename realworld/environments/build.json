@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "nestlepovreg.gateway.webmethodscloud.de",
+			"value": "realbuild.gateway.webmethodscloud.de",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "nestlepovreg.gateway.webmethodscloud.de",
+			"value": "realbuild.gateway.webmethodscloud.de",
 			"type": "text",
 			"enabled": true
 		},

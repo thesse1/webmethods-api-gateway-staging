@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "nestlepovdev.gateway.webmethodscloud.de",
+			"value": "realconfig.gateway.webmethodscloud.de",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "nestlepovdev.gateway.webmethodscloud.de",
+			"value": "realconfig.gateway.webmethodscloud.de",
 			"type": "text",
 			"enabled": true
 		},
