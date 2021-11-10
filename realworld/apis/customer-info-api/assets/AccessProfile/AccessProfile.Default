@@ -1,8 +1,0 @@
-{
-  "id" : "Default",
-  "name" : "Default",
-  "description" : "",
-  "privilege" : [ ],
-  "groupIds" : [ "Everybody" ],
-  "systemDefined" : true
-}
