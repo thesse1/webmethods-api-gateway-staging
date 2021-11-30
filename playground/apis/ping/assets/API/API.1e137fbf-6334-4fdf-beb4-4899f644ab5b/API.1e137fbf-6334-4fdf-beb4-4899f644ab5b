@@ -73,7 +73,7 @@
   } ],
   "apiName" : "Ping",
   "apiVersion" : "1.0",
-  "apiDescription" : "TOUCH001: This is a simple ping service invoking wm.server:ping IS service on http://localhost:5555. It is tagged as internal and external API, so it can be deployed on all API Gateway instances",
+  "apiDescription" : "This is a simple ping service invoking wm.server:ping IS service on http://localhost:5555. It is tagged as internal and external API, so it can be deployed on all API Gateway instances",
   "maturityState" : "Beta",
   "apiGroups" : [ "Internal", "External" ],
   "isActive" : true,
@@ -84,7 +84,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-18 12:46:12 GMT",
-  "lastModified" : "2021-11-29 07:01:52 GMT",
+  "lastModified" : "2021-11-30 06:53:53 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
