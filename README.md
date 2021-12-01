@@ -1161,7 +1161,7 @@ The following parameters can/must be provided for this pipeline:
 | apiProject | Case-sensitive name of the API project to be exported |
 | commit-message | The change will be committed with this commit message |
 
-### Drop-down list for apiProject and target_type
+### Drop-down list for apiProject
 
 In later versions of Azure DevOps Server, it will be possible to configure the apiProject as pipeline parameter (vs. pipeline variable). It will then be possible to configure a drop-down list which lets the user select the API project to be deployed from a configurable list of candidates which will be more convenient and less error-prone than having to type the full name of the API project correctly in the form entry field.
 
