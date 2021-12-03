@@ -1,0 +1,71 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "version" : "1.0",
+      "title" : "Ping2"
+    },
+    "serviceRegistryDisplayName" : "Ping2_1.0",
+    "schemes" : [ ],
+    "security" : [ ],
+    "paths" : {
+      "/test" : {
+        "get" : {
+          "responses" : { },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "requestBody"
+          }
+        },
+        "scopes" : [ ],
+        "displayName" : "test",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : { },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "http://dummy.url",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : { },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "http://dummy.url",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "Ping2",
+  "apiVersion" : "1.0",
+  "maturityState" : "Beta",
+  "apiGroups" : [ "Internal", "External" ],
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "thomas.hesse@softwareag.com",
+  "policies" : [ "5050ca01-3698-48f3-9cb8-13e90120e9a0" ],
+  "tracingEnabled" : false,
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2021-12-03 11:42:15 GMT",
+  "lastModified" : "2021-12-03 11:42:39 GMT",
+  "systemVersion" : 1,
+  "gatewayEndpoints" : { },
+  "id" : "390aaf2a-e953-4055-8fd8-64da43920152"
+}

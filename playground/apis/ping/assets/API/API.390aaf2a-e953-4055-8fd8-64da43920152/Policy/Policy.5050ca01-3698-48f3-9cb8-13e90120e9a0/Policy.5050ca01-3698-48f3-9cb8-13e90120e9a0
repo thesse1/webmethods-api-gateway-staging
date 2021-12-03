@@ -1,0 +1,31 @@
+{
+  "id" : "5050ca01-3698-48f3-9cb8-13e90120e9a0",
+  "names" : [ {
+    "value" : "Default Policy for API Ping2",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "c00a5de1-4830-403b-a107-a08183bb1419",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "8528c864-b8ee-47e6-8be5-0450634538cf",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "global" : false,
+  "systemPolicy" : false,
+  "active" : false
+}
