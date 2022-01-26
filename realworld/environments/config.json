@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "realconfig.gateway.webmethodscloud.de",
+			"value": "env932170.apigw-aw-us.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "realconfig.gateway.webmethodscloud.de",
+			"value": "env932170.apigw-aw-us.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
