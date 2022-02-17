@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "realdevint.gateway.webmethodscloud.de",
+			"value": "env162499.apigw-aw-us.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "realdevint.gateway.webmethodscloud.de",
+			"value": "env162499.apigw-aw-us.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
