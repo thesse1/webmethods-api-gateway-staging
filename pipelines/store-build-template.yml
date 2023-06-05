@@ -16,16 +16,16 @@ steps:
     TARGET_TYPE: ${{parameters.target_type}}
   displayName: Check for required parameters
 
-# - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
-#   displayName: 'Artifactory Build Upload'
-#   inputs:
-#     artifactoryService: '$(artifactoryService)'
-#     fileSpec: |
-#       {
-#         "files": [
-#           {
-#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
-#             "target": "$(artifactoryFolder)/"
-#           }
-#         ]
-#       }
+- task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
+  displayName: 'Artifactory Build Upload'
+  inputs:
+    artifactoryService: '$(artifactoryService)'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
+            "target": "$(artifactoryFolder)/"
+          }
+        ]
+      }
