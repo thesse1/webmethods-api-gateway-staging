@@ -158,12 +158,24 @@ steps:
           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
-          --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
           https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Export the Deployable from API Gateway BUILD'
   env:
     no_proxy: $(build_environment_hostname)
+
+# - bash: |
+#    curl $(build_environment_insecureflag) \
+#           -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
+#           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
+#           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
+#           --user '$(exporter_user)':'$(exporter_password)' \
+#           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
+#           https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
+#   workingDirectory: '$(System.DefaultWorkingDirectory)'
+#   displayName: 'Export the Deployable from API Gateway BUILD'
+#   env:
+#     no_proxy: $(build_environment_hostname)
 
 - task: PublishBuildArtifacts@1
   inputs:
