@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "thesconfig.gateway.webmethodscloud.de",
+			"value": "playconfig.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "thesconfig.gateway.webmethodscloud.de",
+			"value": "playconfig.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},

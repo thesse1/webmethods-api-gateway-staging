@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "thesprodext.gateway.webmethodscloud.de",
+			"value": "playprodext.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "thesprodext.gateway.webmethodscloud.de",
+			"value": "playprodext.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},

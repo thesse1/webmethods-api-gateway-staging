@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "thesstageint.gateway.webmethodscloud.de",
+			"value": "playstageint.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "thesstageint.gateway.webmethodscloud.de",
+			"value": "playstageint.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},

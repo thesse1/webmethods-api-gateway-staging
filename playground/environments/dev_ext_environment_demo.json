@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "thesdevext.gateway.webmethodscloud.de",
+			"value": "playdevext.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "thesdevext.gateway.webmethodscloud.de",
+			"value": "playdevext.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},

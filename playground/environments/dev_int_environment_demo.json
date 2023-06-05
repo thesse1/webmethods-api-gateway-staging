@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "thesdevint.gateway.webmethodscloud.de",
+			"value": "playdevint.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "thesdevint.gateway.webmethodscloud.de",
+			"value": "playdevint.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},

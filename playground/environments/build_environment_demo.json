@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "thesbuild.gateway.webmethodscloud.de",
+			"value": "playbuild.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "thesbuild.gateway.webmethodscloud.de",
+			"value": "playbuild.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
