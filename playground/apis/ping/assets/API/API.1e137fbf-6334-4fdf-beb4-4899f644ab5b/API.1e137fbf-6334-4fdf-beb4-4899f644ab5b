@@ -11,6 +11,7 @@
       "/ping" : {
         "get" : {
           "description" : "Invoke the ping service, it will respond with a current timestamp",
+          "parameters" : [ ],
           "responses" : {
             "200" : {
               "description" : "Ping response",
@@ -39,6 +40,7 @@
             "name" : "requestBody"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "ping",
         "enabled" : true
