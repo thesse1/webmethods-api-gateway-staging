@@ -10,7 +10,7 @@ trigger: none
 
 variables:
 - name: targetTypes
-  value: [ DEV_INT, DEV_EXT ]
+  value: "DEV_INT,DEV_EXT"
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
     tenant: playground
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
@@ -33,10 +33,10 @@ variables:
   #   targetType: PROD-EXT
 
 stages:
-- ${{ each value in targetTypes }}:
-  - stage: ${{ value }}
+- ${{ each targetType in split(variables.targetTypes, ',')}}:
+  - stage: ${{ targetType }}
     variables:
-      targetType: ${{ value }}
+      targetType: ${{ targetType }}
     jobs:
     - job: Configure_API_Gateway_DEV_INT
       variables:
