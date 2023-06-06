@@ -13,6 +13,9 @@ variables:
     tenant: playground
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
     tenant: realworld
+  targetTypes:
+  - DEV_INT
+  - DEV_EXT
   # ${{ if endsWith(variables['Build.DefinitionName'], 'config') }}:
   #   targetType: CONFIG
   # ${{ if endsWith(variables['Build.DefinitionName'], 'build') }}:
@@ -31,42 +34,23 @@ variables:
   #   targetType: PROD-EXT
 
 stages:
-- stage: DEV_INT
-  variables:
-    targetType: DEV-INT
-  jobs:
-  - job: Configure_API_Gateway_DEV_INT
+- ${{ each value in targetTypes }}:
+  - stage: ${{ value }}
     variables:
-    - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
-    pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
-    steps:
-    - checkout: self
-      submodules: "true"
-      persistCredentials: "true"
-    - template: /pipelines/api-configure-template.yml  # Template reference
-      parameters:
-        environment: $(environment)
-        type: $(targetType)
-        tenant: $(tenant)
-
-- stage: DEV_EXT
-  variables:
-    targetType: DEV-EXT
-  jobs:
-  - job: Configure_API_Gateway_DEV_EXT
-    variables:
-    - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
-    pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
-    steps:
-    - checkout: self
-      submodules: "true"
-      persistCredentials: "true"
-    - template: /pipelines/api-configure-template.yml  # Template reference
-      parameters:
-        environment: $(environment)
-        type: $(targetType)
-        tenant: $(tenant)
+      targetType: ${{ value }}
+    jobs:
+    - job: Configure_API_Gateway_DEV_INT
+      variables:
+      - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      pool:
+        name: '$(agent_pool)'
+        vmImage: '$(agent_pool_vmImage)'
+      steps:
+      - checkout: self
+        submodules: "true"
+        persistCredentials: "true"
+      - template: /pipelines/api-configure-template.yml  # Template reference
+        parameters:
+          environment: $(environment)
+          type: $(targetType)
+          tenant: $(tenant)
