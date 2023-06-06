@@ -1,0 +1,93 @@
+# Pipeline for apig staging
+
+trigger: none
+
+# To do: Add apiProject and target_type as pipeline parameters (vs. pipeline variable)
+# parameters:
+# - name: apiProject
+#   type: string
+#   default: 'petstore'
+# - name: target_type
+#   type: string
+#   default: 'DEV-INT'
+
+variables:
+- name: tenant
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
+    value: playground
+  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
+    value: realworld
+# - name: targetType
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'config') }}:
+#     value: CONFIG
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'dev_int') }}:
+#     value: DEV-INT
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'dev_ext') }}:
+#     value: DEV-EXT
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'stage_int') }}:
+#     value: STAGE-INT
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'stage_ext') }}:
+#     value: STAGE-EXT
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_int') }}:
+#     value: PROD-INT
+#   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
+#     value: PROD-EXT
+# - template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
+- name: targetTypes
+  value: "DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
+- template: /${{variables.tenant}}/variables/variables-aliases-template.yml
+
+stages:
+- ${{ each targetType in split(variables.targetTypes, ',')}}:
+  - stage: ${{ targetType }}
+    variables:
+      targetType: ${{ targetType }}
+    jobs:
+    - job: Build_for_${{ targetType }}
+      variables:
+      - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
+      pool:
+        name: '$(agent_pool)'
+        vmImage: '$(agent_pool_vmImage)'
+      steps:
+      - checkout: self
+        submodules: "true"
+        persistCredentials: "true"
+      - template: /pipelines/api-build-template.yml  # Template reference
+        parameters:
+          apiProject: $(apiProject)
+          build_environment: $(environment)
+          target_type: $(targetType)
+          prep_condition: ${{true}}
+          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
+          tenant: $(tenant)
+      - template: /pipelines/store-build-template.yml  # Template reference
+        parameters:
+          target_type: $(targetType)
+      # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+      #   parameters:
+      #     target_type: $(targetType)
+
+    - job: Deploy_to_API_Gateway_${{ targetType }}
+      variables:
+      - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      pool:
+        name: '$(agent_pool)'
+        vmImage: '$(agent_pool_vmImage)'
+      steps:
+      - checkout: self
+        submodules: "true"
+        persistCredentials: "true"
+      - template: /pipelines/retrieve-build-template.yml  # Template reference
+        parameters:
+            target_type: $(targetType)
+      - template: /pipelines/api-deploy-template.yml  # Template reference
+        parameters:
+          apiProject: $(apiProject)
+          target_environment: $(environment)
+          target_type: $(targetType)
+          prep_condition: ${{true}}
+          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
+          tenant: $(tenant)
+      dependsOn: Build_for_${{ targetType }}
+      condition: succeeded()
