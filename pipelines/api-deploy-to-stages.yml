@@ -16,7 +16,7 @@ variables:
   value: "DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
 - template: /${{variables.tenant}}/variables/variables-aliases-template.yml
 
-name: $(Build.BuildNumber)-${{parameters.apiProject}}
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
 - ${{ each targetType in split(variables.targetTypes, ',')}}:
