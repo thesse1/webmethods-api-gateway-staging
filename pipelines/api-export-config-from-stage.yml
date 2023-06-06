@@ -2,7 +2,6 @@
 
 trigger: none
 
-
 parameters:
 - name: tenant
   displayName: Export API Gateway configuration in which tenant?

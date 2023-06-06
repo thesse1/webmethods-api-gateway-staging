@@ -1,0 +1,38 @@
+# Pipeline for apig staging
+
+trigger: none
+
+parameters:
+- name: tenant
+  displayName: Purge analytics data on API Gateway stages in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+
+variables:
+- name: targetTypes
+  value: "CONFIG,BUILD,DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
+
+stages:
+- ${{ each targetType in split(variables.targetTypes, ',')}}:
+  - stage: ${{ targetType }}
+    variables:
+      targetType: ${{ targetType }}
+    jobs:
+    - job: Purge_Data_on_${{ targetType }}
+      variables:
+      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      pool:
+        name: '$(agent_pool)'
+        vmImage: '$(agent_pool_vmImage)'
+      steps:
+      - checkout: self
+        submodules: "true"
+        persistCredentials: "true"
+      - template: /pipelines/api-purge-data-template.yml  # Template reference
+        parameters:
+          environment: $(environment)
+          type: ${{ targetType }}
+          tenant: ${{parameters.tenant}}
