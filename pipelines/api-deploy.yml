@@ -83,19 +83,9 @@ jobs:
       prep_condition: ${{true}}
       test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
       tenant: $(tenant)
-  - bash: |
-      pwd
-      ls -l
-    workingDirectory: '$(Pipeline.Workspace)'
-    displayName: 'DEBUG'
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: $(targetType)
-  - bash: |
-      pwd
-      ls -l
-    workingDirectory: '$(Pipeline.Workspace)'
-    displayName: 'DEBUG'
   condition: eq(variables['useArtifactory'], 'true')
 
 - job: Deploy_to_API_Gateway
@@ -108,19 +98,9 @@ jobs:
   - checkout: self
     submodules: "true"
     persistCredentials: "true"
-  - bash: |
-      pwd
-      ls -l
-    workingDirectory: '$(Pipeline.Workspace)'
-    displayName: 'DEBUG'
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
         target_type: $(targetType)
-  - bash: |
-      pwd
-      ls -l
-    workingDirectory: '$(Pipeline.Workspace)'
-    displayName: 'DEBUG'
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
