@@ -2,11 +2,15 @@
 
 trigger: none
 
+parameters:
+- name: tenant
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+
 variables:
-  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
-    tenant: playground
-  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
-    tenant: realworld
   targetTypes: "CONFIG,BUILD,DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
 
 stages:
@@ -17,7 +21,7 @@ stages:
     jobs:
     - job: Configure_API_Gateway_${{ targetType }}
       variables:
-      - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
@@ -29,4 +33,4 @@ stages:
         parameters:
           environment: $(environment)
           type: $(targetType)
-          tenant: $(tenant)
+          tenant: ${{parameters.tenant}}
