@@ -83,13 +83,18 @@ jobs:
       prep_condition: ${{true}}
       test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
       tenant: $(tenant)
+  - bash: |
+      pwd
+      ls -l
+    workingDirectory: '$(Pipeline.Workspace)'
+    displayName: 'DEBUG'
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: $(targetType)
   - bash: |
       pwd
       ls -l
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(Pipeline.Workspace)'
     displayName: 'DEBUG'
   condition: eq(variables['useArtifactory'], 'true')
 
