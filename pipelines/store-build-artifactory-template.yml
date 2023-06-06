@@ -17,8 +17,8 @@ steps:
   displayName: Check for required parameters
 
 
-- bash: echo DEBUG
-  displayName: DEBUG
+- bash: echo DEBUG useArtifactory true
+  displayName: DEBUG useArtifactory true
   condition: eq(variables['useArtifactory'], 'true')
 
 
