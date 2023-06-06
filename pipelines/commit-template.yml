@@ -1,5 +1,9 @@
 # Pipeline template for apig staging
 
+parameters:
+- name: commit-message
+  type: string
+
 steps:
 - bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)'
   displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)'
@@ -11,6 +15,6 @@ steps:
 
 - bash: |
     git add .
-    git commit -m '$(commit-message)'
+    git commit -m '${{parameters.commit-message}}'
     git push origin 'HEAD:$(Build.SourceBranchName)'
   displayName: "Git add, commit and push"

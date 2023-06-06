@@ -2,21 +2,25 @@
 
 trigger: none
 
-# To do: Add apiProject and commit-message as pipeline parameters (vs. pipeline variable)
-# parameters:
-# - name: apiProject
-#   type: string
-#   default: 'petstore'
-# - name: commit-message
-#   type: string
+parameters:
+- name: tenant
+  displayName: Export API project from API Gateway CONFIG in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+- name: apiProject
+  displayName: Export which API project?
+  type: string
+- name: commit-message
+  displayName: Message for the commit in Git?
+  type: string
 
 variables:
-- name: tenant
-  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
-    value: playground
-  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
-    value: realworld
-- template: /${{variables.tenant}}/variables/CONFIG/variables-template.yml
+- template: /${{parameters.tenant}}/variables/CONFIG/variables-template.yml
+
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 pool:
   name: '$(agent_pool)'
@@ -30,9 +34,11 @@ steps:
 
 - template: /pipelines/api-export-api-template.yml  # Template reference
   parameters:
-    apiProject: $(apiProject)
+    apiProject: ${{parameters.apiProject}}
     source_environment: $(environment)
     source_type: CONFIG
-    tenant: $(tenant)
+    tenant: ${{parameters.tenant}}
 
 - template: /pipelines/commit-template.yml  # Template reference
+  parameters:
+    commit-message: ${{parameters.commit-message}}
