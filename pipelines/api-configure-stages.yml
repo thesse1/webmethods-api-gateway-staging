@@ -29,7 +29,7 @@ variables:
   #   targetType: PROD-INT
   # ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
   #   targetType: PROD-EXT
-  targetTypes: "DEV_INT,DEV_EXT"
+  targetTypes: "DEV-INT,DEV-EXT"
 
 stages:
 - ${{ each targetType in split(variables.targetTypes, ',')}}:
