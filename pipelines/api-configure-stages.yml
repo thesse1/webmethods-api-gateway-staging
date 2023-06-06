@@ -31,11 +31,11 @@ variables:
   #   targetType: PROD-EXT
 
 stages:
-- stage: DEV-INT
+- stage: DEV_INT
   variables:
     targetType: DEV-INT
   jobs:
-  - job: Configure_API_Gateway_DEV-INT
+  - job: Configure_API_Gateway_DEV_INT
     variables:
     - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
     pool:
