@@ -57,9 +57,9 @@ jobs:
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: $(targetType)
-  - template: /pipelines/store-build-artifactory-template.yml  # Template reference
-    parameters:
-      target_type: $(targetType)
+  # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+  #   parameters:
+  #     target_type: $(targetType)
 
 - job: Deploy_to_API_Gateway
   variables:
