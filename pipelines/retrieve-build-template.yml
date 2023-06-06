@@ -18,6 +18,7 @@ steps:
 
 - download: current
   artifact: apiproject
+  displayName: Build Download
 
 - bash: |
     cp $(Pipeline.Workspace)/apiproject/* $(System.DefaultWorkingDirectory)

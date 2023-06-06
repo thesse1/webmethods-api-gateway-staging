@@ -18,6 +18,7 @@ steps:
 
 - publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip"
   artifact: apiproject
+  displayName: Build Upload
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
 #   displayName: 'Artifactory Build Upload'

@@ -1,6 +1,6 @@
 # About API Gateway Staging
 
-> Note: This version of the API Gateway Staging solution depends on Azure DevOps Service. An older version of the sulution which supports Azure DevOps Server 2019 can be found in the azure_devops_server_2019 branch: https://github.com/thesse1/webmethods-api-gateway-staging/tree/azure_devops_server_2019.
+> Note: This version of the API Gateway Staging solution depends on Azure DevOps Service. An older version of the solution which supports Azure DevOps Server 2019 can be found in the azure_devops_server_2019 branch: https://github.com/thesse1/webmethods-api-gateway-staging/tree/azure_devops_server_2019.
 
 The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central CONFIG environment, add them to the Azure DevOps repository (Git) and automatically promote them to DEV, STAGE and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _STAGE or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to STAGE and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, STAGE or PROD).
 
@@ -1067,7 +1067,7 @@ All pipelines must be triggered manually by clicking on `Queue`. No triggers are
 
 The API Gateway Staging solution was developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
 
-Each deployment pipeline comes in two versions: In the basic version, all steps are executed in one job on one agent (or in two jobs for the STAGE-and-PROD pipelines). The agent must be able to access the API Gateway BUILD environment and the target environment(s) (CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT), and the user credentials for the technical users used by the agent connecting with the API Gateways must be identical. In the extended version of the pipeline, the build and deploy steps are divided into separate jobs which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT). This version of the pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments. You can switch between the two versions by setting the useArtifactory variable in the variable group referenced in /{tenant}/variables/variables-artifactory-template.yml to false (basic version) or true (extended version).
+Each deployment piplines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
 Each pipeline is configured twice - for both tenants. The pipelines with names starting with wm_test_apigw_staging operate on the playground environments; the pipelines with names starting with wm_apigw_staging (without "test_") operate on the real-world environments.
 
@@ -1448,26 +1448,23 @@ The pipeline definition files (YAML) for the eleven API Gateway Staging pipeline
 | wm_{test_}apigw_staging_deploy_to_config | api-deploy.yml | |
 | wm_{test_}apigw_staging_export_api_from_config | api-export-api-from-CONFIG.yml | Pipeline variable commit-message must be configured as settable at queue time in the pipeline configuration in the Azure DevOps user interface |
 
-The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-CONFIG.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
+The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-CONFIG.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
 
 | Template | README |
 | ------ | ------ |
 | api-build-template.yml | Includes all steps for preparing the deployable on the BUILD environment (including import, test execution, asset manipulation and export) |
 | api-deploy-template.yml | Includes all steps for importing the deployable on the CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT environment |
-| store-build-template.yml | Stores the deployable in Artifactory |
-| retrieve-build-template.yml | Retrieves the deployable from Artifactory |
+| store-build-template.yml | Stores the deployable in Azure DevOps |
+| store-build-artifactory-template.yml | Stores the deployable in Artifactory (optional) |
+| retrieve-build-template.yml | Retrieves the deployable from Azure DevOps |
 | api-export-api-template.yml | Exports the API project from the CONFIG environment |
 | commit-template.yml | Commits the results to the repository |
 
-The basic versions of the deployment pipelines (with useArtifactory variable set to false) invoke only api-build-template.yml and api-deploy-template.yml sequentially in one job on one agent. There is no need for storing the build result in Artifactory.
+The deployment pipelines invoke api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
 
-The extended versions of the deployment pipelines (with useArtifactory variable set to true) invoke api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
+The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
-In order to transport the deployable from the build job to the deploy job, it is stored in Artifactory. In later versions of Azure DevOps Server, it will be possible to use Build Artifacts or Pipeline Artifacts for automatically transporting the build result from one job to the next without having to use an external repository.
-
-In the basic version, wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int/stage_ext_and_prod_ext invokes the pipeline templates api-build-template.yml and api-deploy-template.yml twice - once for STAGE-INT/STAGE-EXT in one job and once for PROD-INT/PROD-EXT in another job.
-
-In the extended version, wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int/stage_ext_and_prod_ext invokes the pipeline templates api-build-template.yml, store-build-template.yml, retrieve-build-template.yml and api-deploy-template.yml twice - once for STAGE-INT/STAGE-EXT and once for PROD-INT/PROD-EXT - in four jobs on (potentially) four different agents.
+The pipelines wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int/stage_ext_and_prod_ext invoke the pipeline templates api-build-template.yml, store-build-template.yml, retrieve-build-template.yml and api-deploy-template.yml twice - once for STAGE-INT/STAGE-EXT and once for PROD-INT/PROD-EXT - in four jobs on (potentially) four different agents.
 
 The export pipeline wm_{test_}apigw_staging_export_api_from_config invokes api-export-api-template.yml and commit-template.yml sequentially in one job on one agent.
 
@@ -1520,13 +1517,19 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
+| Build Upload | Using publish task |
+
+### store-build-artifactory-template.yml
+
+| Step | README |
+| ------ | ------ |
 | Artifactory Build Upload | Using ArtifactoryGenericUpload@2 Artifactory plug-in task |
 
 ### retrieve-build-template.yml
 
 | Step | README |
 | ------ | ------ |
-| Artifactory Build Download | Using ArtifactoryGenericDownload@3 Artifactory plug-in task |
+| Build Download | Using download task |
 
 ### api-export-api-template.yml
 
@@ -1688,7 +1691,8 @@ All variable groups are referenced in the variable templates in /{tenant}/variab
 | /{tenant}/variables/PROD-EXT/variables-template.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
 | /{tenant}/variables/variables-aliases-template.yml | wm_test_apigw_staging_aliases | wm_apigw_staging_aliases |
 | /{tenant}/variables/variables-artifactory-template.yml | wm_test_apigw_staging_artifactory | wm_apigw_staging_artifactory |
-| /{tenant}/variables/variables-common-template.yml | wm_test_apigw_staging_common | wm_apigw_staging_common |
+
+The reference of variables-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
 This allows you to use variable groups with different names (or add further variables directly in the variable templates). The correct names of the variable groups would only have to be provided in the respective pipeline templates.
 
@@ -1696,7 +1700,7 @@ This allows you to use variable groups with different names (or add further vari
 
 These variable groups are used by
  - the configuration and the export pipelines for API Gateway configurations
- - the deployment pipelines for API projects (extended versions - with useArtifactory variable set to true)
+ - the deployment pipelines for API projects
  - the export pipeline for API projects
  - the log purging pipeline
 
@@ -1718,46 +1722,15 @@ Each variable group holds variable values specific for one API Gateway environme
 | purger_user | User for initializing the API Gateway, e.g., Purger. The user must have the "Manage purge and restore runtime events" privilege |
 | purger_password | The API Gateway password for the purger user |
 
-> Note: These variable groups must be defined even if you are only planning to use the basic versions of the deployment pipelines for API projects.
+### wm_test_apigw_staging_artifactory and wm_apigw_staging_artifactory (optional)
 
-### wm_test_apigw_staging_common and wm_apigw_staging_common
-
-These variable groups are used by the deployment pipelines for API projects (basic versions - with useArtifactory variable set to false). These variable groups hold a mix of variable values specific for one API Gateway environment and variable values valid for all API Gateway environments.
-
-| Variable | README |
-| ------ | ------ |
-| agent_pool | The Azure DevOps agent pool to be used for accessing all API Gateway environments. For Microsoft-hosted agents: "Azure Pipelines". Select the right pool for self-hosted agents |
-| agent_pool_vmImage | The VM image for Microsoft-hosted agents in the Azure Pipelines pool. For Microsoft-hosted agents: "ubuntu-latest". Leave blank for self-hosted agents |
-| environment_config | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for CONFIG, e.g., config_environment_demo.json |
-| environment_build | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for BUILD, e.g., build_environment_demo.json |
-| environment_dev_int | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for DEV-INT, e.g., dev_int_environment_demo.json |
-| environment_dev_ext | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for DEV-EXT, e.g., dev_ext_environment_demo.json |
-| environment_stage_int | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for STAGE-INT, e.g., stage_int_environment_demo.json |
-| environment_stage_ext | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for STAGE-EXT, e.g., stage_ext_environment_demo.json |
-| environment_prod_int | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for PROD-INT, e.g., prod_int_environment_demo.json |
-| environment_prod_ext | Name of the JSON file in the /{tenant}/environments folder for the API Gateway instances to be used for PROD-EXT, e.g., prod_ext_environment_demo.json |
-| exporter_user | User for exporting assets from API Gateway BUILD, e.g., Exporter. The user must have the "Export assets" privilege on BUILD |
-| exporter_password | The API Gateway password for the exporter user |
-| importer_user | User for importing assets in API Gateway, e.g., Importer. The user must have the "Import assets" privilege on CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT. Must be the same user on all environments |
-| importer_password | The API Gateway password for the importer user |
-| preparer_user | User for preparing assets on API Gateway BUILD, e.g., Preparer. The user must have the "Manage APIs", "Activate / Deactivate APIs", "Manage applications", "Manage aliases" and "Manage scope mapping" privileges on BUILD |
-| preparer_password | The API Gateway password for the preparer user |
-| initializer_user | User for initializing the API Gateway, e.g., Initializer. The user must have the "Manage general administration configurations" privilege on CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT. Must be the same user on all environments |
-| initializer_password | The API Gateway password for the initializer user |
-
-> Note: These variable groups must be defined even if you are only planning to use the extended versions of the deployment pipelines for API projects.
-
-### wm_test_apigw_staging_artifactory and wm_apigw_staging_artifactory
-
-These variable groups are used by the deployment pipelines for API projects. The value of the useArtifactory variable decides whether they are executed in the basic version (not needing Artifactory) or the extended version (using Artifactory for transporting the deployable from the build job to the deploy job). The artifactoryService and artifactoryFolder variables are only used in the extended versions when Artifactory is used, but artifactoryService must still point at an Artifactory service connection in Azure, even if it is not used in the pipeline.
+These variable groups are used by the deployment pipelines for API projects. The value of the useArtifactory variable decides whether they store build results in Artifactory - in addition to storing them in Azure DevOps.
 
 | Variable | README |
 | ------ | ------ |
 | useArtifactory | true or false |
 | artifactoryService | Name of the Artifactory service connection in Azure |
 | artifactoryFolder | Name of the Artifactory base-folder (repository) |
-
-> Note: These variable groups must be defined even if you are not planning to use Artifactory.
 
 ### wm_test_apigw_staging_aliases and wm_apigw_staging_aliases
 
