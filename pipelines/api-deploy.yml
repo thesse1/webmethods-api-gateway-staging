@@ -57,7 +57,7 @@ jobs:
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: $(targetType)
-  - ${{ eq(variables['useArtifactory'], 'true') }}:
+  - ${{ if eq(variables['useArtifactory'], 'true') }}:
     - template: /pipelines/store-build-artifactory-template.yml  # Template reference
       parameters:
         target_type: $(targetType)
