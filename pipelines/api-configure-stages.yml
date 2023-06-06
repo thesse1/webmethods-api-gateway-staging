@@ -37,7 +37,7 @@ stages:
     variables:
       targetType: ${{ targetType }}
     jobs:
-    - job: Configure_API_Gateway_DEV_INT
+    - job: Configure_API_Gateway_${{ targetType }}
       variables:
       - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
