@@ -87,6 +87,7 @@ jobs:
     parameters:
       target_type: $(targetType)
   - bash: |
+      pwd
       ls -l
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'DEBUG'
@@ -103,6 +104,7 @@ jobs:
     submodules: "true"
     persistCredentials: "true"
   - bash: |
+      pwd
       ls -l
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'DEBUG'
@@ -110,6 +112,7 @@ jobs:
     parameters:
         target_type: $(targetType)
   - bash: |
+      pwd
       ls -l
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'DEBUG'
