@@ -32,7 +32,7 @@ variables:
     value: PROD-INT
   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
     value: PROD-EXT
-- template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
+# - template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
 - template: /${{variables.tenant}}/variables/variables-aliases-template.yml
 
 jobs:
