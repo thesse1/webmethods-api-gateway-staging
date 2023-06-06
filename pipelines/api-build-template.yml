@@ -46,7 +46,8 @@ steps:
     TENANT: ${{parameters.tenant}}
   displayName: Check for required parameters
 
-- bash: echo "##vso[build.updatebuildnumber]$(Build.BuildNumber)-$(apiProject)"
+- bash: echo "##vso[build.updatebuildnumber]$(newBuildNumber)"
+  displayName: 'Add API project name to build number'
 
 - task: ArchiveFiles@2
   inputs:
