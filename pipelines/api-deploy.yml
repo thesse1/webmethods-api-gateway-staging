@@ -106,7 +106,7 @@ jobs:
   - bash: |
       pwd
       ls -l
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(Pipeline.Workspace)'
     displayName: 'DEBUG'
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
@@ -114,7 +114,7 @@ jobs:
   - bash: |
       pwd
       ls -l
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(Pipeline.Workspace)'
     displayName: 'DEBUG'
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
