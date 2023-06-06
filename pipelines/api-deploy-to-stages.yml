@@ -2,11 +2,9 @@
 
 trigger: none
 
-# To do: Add apiProject as pipeline parameter (vs. pipeline variable)
-# parameters:
-# - name: apiProject
-#   type: string
-#   default: 'petstore'
+parameters:
+- name: apiProject
+  type: string
 
 variables:
 - name: tenant
@@ -36,7 +34,7 @@ stages:
         persistCredentials: "true"
       - template: /pipelines/api-build-template.yml  # Template reference
         parameters:
-          apiProject: $(apiProject)
+          apiProject: ${{parameters.apiProject}}
           build_environment: $(environment)
           target_type: $(targetType)
           prep_condition: ${{true}}
@@ -64,7 +62,7 @@ stages:
             target_type: $(targetType)
       - template: /pipelines/api-deploy-template.yml  # Template reference
         parameters:
-          apiProject: $(apiProject)
+          apiProject: ${{parameters.apiProject}}
           target_environment: $(environment)
           target_type: $(targetType)
           prep_condition: ${{true}}
