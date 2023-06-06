@@ -16,6 +16,12 @@ steps:
     TARGET_TYPE: ${{parameters.target_type}}
   displayName: Check for required parameters
 
+
+- bash: echo DEBUG
+  displayName: DEBUG
+  condition: eq(variables['useArtifactory'], 'true')
+
+
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
 #   displayName: 'Artifactory Build Upload'
 #   inputs:
