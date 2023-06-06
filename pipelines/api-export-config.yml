@@ -20,17 +20,17 @@ variables:
   ${{ if endsWith(variables['Build.DefinitionName'], 'build') }}:
     sourceType: BUILD
   ${{ if endsWith(variables['Build.DefinitionName'], 'dev_int') }}:
-    sourceType: DEV-INT
+    sourceType: DEV_INT
   ${{ if endsWith(variables['Build.DefinitionName'], 'dev_ext') }}:
-    sourceType: DEV-EXT
+    sourceType: DEV_EXT
   ${{ if endsWith(variables['Build.DefinitionName'], 'stage_int') }}:
-    sourceType: STAGE-INT
+    sourceType: STAGE_INT
   ${{ if endsWith(variables['Build.DefinitionName'], 'stage_ext') }}:
-    sourceType: STAGE-EXT
+    sourceType: STAGE_EXT
   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_int') }}:
-    sourceType: PROD-INT
+    sourceType: PROD_INT
   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
-    sourceType: PROD-EXT
+    sourceType: PROD_EXT
 
 jobs:
 - job: Export_config_from_API_Gateway

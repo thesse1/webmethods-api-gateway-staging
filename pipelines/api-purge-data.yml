@@ -44,7 +44,7 @@ jobs:
 
 - job: Purge_Data_on_DEV_INT
   variables:
-  - template: /${{variables.tenant}}/variables/DEV-INT/variables-template.yml
+  - template: /${{variables.tenant}}/variables/DEV_INT/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -55,13 +55,13 @@ jobs:
   - template: /pipelines/api-purge-data-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: DEV-INT
+      type: DEV_INT
       tenant: $(tenant)
   dependsOn: Purge_Data_on_BUILD
 
 - job: Purge_Data_on_DEV_EXT
   variables:
-  - template: /${{variables.tenant}}/variables/DEV-EXT/variables-template.yml
+  - template: /${{variables.tenant}}/variables/DEV_EXT/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -72,13 +72,13 @@ jobs:
   - template: /pipelines/api-purge-data-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: DEV-EXT
+      type: DEV_EXT
       tenant: $(tenant)
   dependsOn: Purge_Data_on_DEV_INT
 
 - job: Purge_Data_on_STAGE_INT
   variables:
-  - template: /${{variables.tenant}}/variables/STAGE-INT/variables-template.yml
+  - template: /${{variables.tenant}}/variables/STAGE_INT/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -89,13 +89,13 @@ jobs:
   - template: /pipelines/api-purge-data-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: STAGE-INT
+      type: STAGE_INT
       tenant: $(tenant)
   dependsOn: Purge_Data_on_DEV_EXT
 
 - job: Purge_Data_on_STAGE_EXT
   variables:
-  - template: /${{variables.tenant}}/variables/STAGE-EXT/variables-template.yml
+  - template: /${{variables.tenant}}/variables/STAGE_EXT/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -106,13 +106,13 @@ jobs:
   - template: /pipelines/api-purge-data-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: STAGE-EXT
+      type: STAGE_EXT
       tenant: $(tenant)
   dependsOn: Purge_Data_on_STAGE_INT
 
 - job: Purge_Data_on_PROD_INT
   variables:
-  - template: /${{variables.tenant}}/variables/PROD-INT/variables-template.yml
+  - template: /${{variables.tenant}}/variables/PROD_INT/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -123,13 +123,13 @@ jobs:
   - template: /pipelines/api-purge-data-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: PROD-INT
+      type: PROD_INT
       tenant: $(tenant)
   dependsOn: Purge_Data_on_STAGE_EXT
 
 - job: Purge_Data_on_PROD_EXT
   variables:
-  - template: /${{variables.tenant}}/variables/PROD-EXT/variables-template.yml
+  - template: /${{variables.tenant}}/variables/PROD_EXT/variables-template.yml
   pool:
     name: '$(agent_pool)'
     vmImage: '$(agent_pool_vmImage)'
@@ -140,6 +140,6 @@ jobs:
   - template: /pipelines/api-purge-data-template.yml  # Template reference
     parameters:
       environment: $(environment)
-      type: PROD-EXT
+      type: PROD_EXT
       tenant: $(tenant)
   dependsOn: Purge_Data_on_PROD_INT

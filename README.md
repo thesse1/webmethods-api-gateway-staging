@@ -31,7 +31,7 @@ In addition to the deployment ("promotion") of assets to DEV, STAGE and PROD, th
 
 Finally, the solution also includes a pipeline for exporting API projects from the central CONFIG environment. The pipeline will automatically commit the exported project to the HEAD of the selected repository branch.
 
-The solution supports two instances each for DEV, STAGE and PROD for hosting internal and external APIs. The respective instances are called DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT. Both internal and external APIs can be configured on the same local development instance or the central CONFIG instance. They must be assigned to the "Internal" or the "External" API group in order to be eligible for deployment to internal or external API Gateway DEV/STAGE/PROD instances. ("Internal" and "External" must be added to the apiGroupingPossibleValues extended setting in API Gateway for making these values eligible as API groups.) APIs assigned to both the "Internal" and the "External" API group are eligible for deployment on internal and external API Gateway instances.
+The solution supports two instances each for DEV, STAGE and PROD for hosting internal and external APIs. The respective instances are called DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT. Both internal and external APIs can be configured on the same local development instance or the central CONFIG instance. They must be assigned to the "Internal" or the "External" API group in order to be eligible for deployment to internal or external API Gateway DEV/STAGE/PROD instances. ("Internal" and "External" must be added to the apiGroupingPossibleValues extended setting in API Gateway for making these values eligible as API groups.) APIs assigned to both the "Internal" and the "External" API group are eligible for deployment on internal and external API Gateway instances.
 
 ![GitHub Logo](/images/devops_flow.png)
 
@@ -75,15 +75,15 @@ This repository provides assets/scripts for implementing the CI/CD solution for 
 
 The repository has the following top-level folders:
   - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to CONFIG environment and stores the asset definition in file system
-  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments, for exporting assets and for log purging
+  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
   - playground: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for playground environments
   - realworld: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for real-world environments
   - utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
 
 The folders playground and realworld have the following sub-folders:
   - apis: Contains projects with the API Gateway assets exported from CONFIG environment along with the definition of the projects' asset sets and API tests (Postman collections)
-  - configuration: Contains folders with the API Gateway configuration assets exported from CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments along with the definition of the exported asset sets
-  - environments: Postman environment definitions for API Gateway CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments
+  - configuration: Contains folders with the API Gateway configuration assets exported from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
+  - environments: Postman environment definitions for API Gateway CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments
   - variables: Azure DevOps variable templates with tenant-specific variables or references to tenant-specific variable groups
 
 The repository content can be committed to the Azure DevOps repository (Git), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository can be imported back to a local development environment, to the central CONFIG environment or promoted to DEV, STAGE or PROD.
@@ -127,7 +127,7 @@ The batch script can also be used for importing and exporting general API Gatewa
 | ------ | ------ |
 | importconfig or exportconfig |  To import or export from/to the flat file representation |
 | tenant |  The name of the tenant: playground or realworld |
-| environment | The type of the environment to import or export (CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT) |
+| environment | The type of the environment to import or export (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
 | apigateway_url |  API Gateway URL to import to or export from |
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportconfig and --importconfig option |
 | password | The API Gateway user password |
@@ -166,7 +166,7 @@ The /playground/apis folder contains sample API projects with the following expo
 }
 ```
 
-This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the Petstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV-INT, STAGE-INT and PROD-INT.
+This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the Petstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV_INT, STAGE_INT and PROD_INT.
 
 ### petstore-basicauth
 
@@ -220,7 +220,7 @@ This API project includes two APIs, actually two versions of the same API. They 
 }
 ```
 
-This example features the Postman Echo API (https://learning.postman.com/docs/developer/echo-api/) which is often used for demonstrating API Management features. For each request type (POST, GET, DELETE), it extracts the header, query and path parameters and the request body from the request and echoes them back in the response payload. The API is using the PostmanEcho_Routing_Alias endpoint alias configured for routing API requests to the native PostmanEcho API at https://postman-echo.com. This API and all other instances of the PostmanEcho API are assigned to the External API group, so they can be deployed on DEV-EXT, STAGE-EXT and PROD-EXT.
+This example features the Postman Echo API (https://learning.postman.com/docs/developer/echo-api/) which is often used for demonstrating API Management features. For each request type (POST, GET, DELETE), it extracts the header, query and path parameters and the request body from the request and echoes them back in the response payload. The API is using the PostmanEcho_Routing_Alias endpoint alias configured for routing API requests to the native PostmanEcho API at https://postman-echo.com. This API and all other instances of the PostmanEcho API are assigned to the External API group, so they can be deployed on DEV_EXT, STAGE_EXT and PROD_EXT.
 
 ### postman-mocking
 
@@ -432,23 +432,23 @@ Examples:
 {
   "petstore-routing-alias": {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV-INT",
+      "description" : "Petstore alias on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE-INT",
+      "description" : "Petstore alias on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD-INT",
+      "description" : "Petstore alias on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -456,9 +456,9 @@ Examples:
   },
   "postman-echo-routing-alias": {
     "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
-    "DEV-EXT": {
+    "DEV_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on DEV-EXT",
+      "description" : "PostmanEcho alias on DEV_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -470,9 +470,9 @@ Examples:
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "STAGE-EXT": {
+    "STAGE_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on STAGE-EXT",
+      "description" : "PostmanEcho alias on STAGE_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -484,9 +484,9 @@ Examples:
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "PROD-EXT": {
+    "PROD_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on PROD-EXT",
+      "description" : "PostmanEcho alias on PROD_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -510,23 +510,23 @@ The global aliases.json file in the /playground/apis folder contains alias value
 {
   "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -534,23 +534,23 @@ The global aliases.json file in the /playground/apis folder contains alias value
   },
   "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -567,39 +567,39 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 {
   "postman-echo-security-alias": {
     "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
-    "DEV-EXT": {
+    "DEV_EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on DEV-EXT",
+      "description" : "PostmanEcho security alias on DEV_EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_DEV-EXT",
+        "userName" : "PostmanEcho_DEV_EXT",
         "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
       }
     },
-    "STAGE-EXT": {
+    "STAGE_EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on STAGE-EXT",
+      "description" : "PostmanEcho security alias on STAGE_EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_STAGE-EXT",
+        "userName" : "PostmanEcho_STAGE_EXT",
         "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
       }
     },
-    "PROD-EXT": {
+    "PROD_EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on PROD-EXT",
+      "description" : "PostmanEcho security alias on PROD_EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_PROD-EXT",
+        "userName" : "PostmanEcho_PROD_EXT",
         "password" : "TXlQYXNzd29yZF9QUk9ELUVYVA=="
       }
     }
@@ -617,23 +617,23 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
 {
   "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -641,23 +641,23 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
   },
   "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -674,23 +674,23 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 {
   "petstore-routing-alias": {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV-INT",
+      "description" : "Petstore alias on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE-INT",
+      "description" : "Petstore alias on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD-INT",
+      "description" : "Petstore alias on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -707,23 +707,23 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
 {
   "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -731,23 +731,23 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
   },
   "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -763,46 +763,46 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 ```
 {
   "petstore-routing-alias-108": {
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     }
   },
   "petstore-routing-alias-109": {
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
+      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
+      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
+      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -819,20 +819,20 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 {
   "petstore-routing-alias-108": {
     "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-    "DEV-INT": {
-      "description" : "Petstore alias for API version 1.0.8 on DEV-INT",
+    "DEV_INT": {
+      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
-      "description" : "Petstore alias for API version 1.0.8 on STAGE-INT",
+    "STAGE_INT": {
+      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
-      "description" : "Petstore alias for API version 1.0.8 on PROD-INT",
+    "PROD_INT": {
+      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -840,20 +840,20 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
   },
   "petstore-routing-alias-109": {
     "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV-INT": {
-      "description" : "Petstore alias for API version 1.0.9 on DEV-INT",
+    "DEV_INT": {
+      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
-      "description" : "Petstore alias for API version 1.0.9 on STAGE-INT",
+    "STAGE_INT": {
+      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
-      "description" : "Petstore alias for API version 1.0.9 on PROD-INT",
+    "PROD_INT": {
+      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -869,15 +869,15 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 All alias values defined in the global aliases.json file or in API-specific aliases.json files in the API projects can be replaced during pipeline execution by pipeline variables. These pipeline variables can be defined and set when queueing the pipeline or in variable groups. Every API deployment pipeline imports the variable group specified in /{tenant}/variables/variables-aliases-template.yml which can be used for assembling the variables used for replacing alias values. Names of these variables must represent the full JSON path of the value to be replaced in its aliases.json file. For every variable following this naming convention, the pipeline will automatically replace the corresponding value in its aliases.json file by the value of the replacement variable.
 
 For example,
- - the value of the variable petstore-routing-alias.DEV-INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV-INT, overwriting the value defined in the global aliases.json file,
- - the value of the variable postman-echo-routing-alias.STAGE-EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on STAGE-EXT, overwriting the value defined in the global aliases.json file,
- - the value of the variable petstore-routing-alias-108.PROD-INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD-INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
- - the value of the variable postman-echo-security-alias.STAGE-EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on STAGE-EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+ - the value of the variable petstore-routing-alias.DEV_INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV_INT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable postman-echo-routing-alias.STAGE_EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on STAGE_EXT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable petstore-routing-alias-108.PROD_INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD_INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
+ - the value of the variable postman-echo-security-alias.STAGE_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on STAGE_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
 
 Overwriting alias values with pipeline variables was mainly developed for replacing secret alias values like passwords in security aliases.
 
 For example,
- - the value of the variable postman-echo-security-alias.PROD-EXT.httpAuthCredentials.password will automatically replace the password stored in the PostmanEcho_Security_Alias on PROD-EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+ - the value of the variable postman-echo-security-alias.PROD_EXT.httpAuthCredentials.password will automatically replace the password stored in the PostmanEcho_Security_Alias on PROD_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
 
 Replacement values for secret alias values like passwords can and should be stored in secret variables.
 
@@ -887,7 +887,7 @@ Replacement values for secret alias values like passwords can and should be stor
 
 The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the wm_{test_}apigw_staging_export_config_from_config/build/... pipelines) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
-The /playground/configuration folder contains sample configurations for CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments, for example:
+The /playground/configuration folder contains sample configurations for CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments, for example:
 
 ### CONFIG
 
@@ -922,9 +922,9 @@ The Transaction logging global policy is configured differently on the eight env
 | ------ | ------ |
 | CONFIG | Always (on success and on failure) incl. HTTP headers and payloads |
 | BUILD | Always (on success and on failure) incl. HTTP headers and payloads |
-| DEV-INT, DEV-EXT | Always (on success and on failure) incl. HTTP headers and payloads |
-| STAGE-INT, STAGE-EXT | Always (on success and on failure) excl. HTTP headers and payloads |
-| PROD-INT, PROD-EXT | Always (on success and on failure) excl. HTTP headers and payloads |
+| DEV_INT, DEV_EXT | Always (on success and on failure) incl. HTTP headers and payloads |
+| STAGE_INT, STAGE_EXT | Always (on success and on failure) excl. HTTP headers and payloads |
+| PROD_INT, PROD_EXT | Always (on success and on failure) excl. HTTP headers and payloads |
 
 Send native provider fault in the API fault is configured differently on the eight environments:
 
@@ -932,9 +932,9 @@ Send native provider fault in the API fault is configured differently on the eig
 | ------ | ------ |
 | CONFIG | True |
 | BUILD | True |
-| DEV-INT, DEV-EXT | True |
-| STAGE-INT, STAGE-EXT | True |
-| PROD-INT, PROD-EXT | False |
+| DEV_INT, DEV_EXT | True |
+| STAGE_INT, STAGE_EXT | True |
+| PROD_INT, PROD_EXT | False |
 
 More configuration assets can be added later.
 
@@ -1050,8 +1050,8 @@ Finally, the (validated and manipulated) API Gateway assets will be exported fro
 
 Every deployment pipeline will publish the following artifacts:
 - BUILD_import: The API Gateway asset archive (ZIP file) containing the assets initially imported on the BUILD environment
-- BUILD_export_for_CONFIG, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT, PROD-EXT: The API Gateway asset archive (ZIP file) containing the assets exported from the BUILD environment (after manipulations)
-- CONFIG_import, DEV-INT_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, DEV-INT etc. These artifacts should be identical with BUILD_export_for_CONFIG, BUILD_export_for_DEV-INT etc.
+- BUILD_export_for_CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT, PROD_EXT: The API Gateway asset archive (ZIP file) containing the assets exported from the BUILD environment (after manipulations)
+- CONFIG_import, DEV_INT_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, DEV_INT etc. These artifacts should be identical with BUILD_export_for_CONFIG, BUILD_export_for_DEV_INT etc.
 - test_results: The results of the Postman tests in junitReport.xml form
 
 The export pipeline will publish the following artifact:
@@ -1063,17 +1063,17 @@ In addition to that, the test results are published into the Azure DevOps test r
 
 All pipelines must be triggered manually by clicking on `Queue`. No triggers are defined to start the pipelines automatically.
 
-> Note: Only one API Gateway Staging pipeline may run at one point in time. Parallel running builds might interfere while using the BUILD environment at the same time. Before starting an API Gateway Staging pipeline, make sure that there is no API Gateway Staging pipeline currently executing. If you want to promote an API to STAGE-INT and PROD-INT or to STAGE-EXT and PROD-EXT, use the wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int pipeline or the wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext instead of queuing a STAGE build and a PROD build in one go.
+> Note: Only one API Gateway Staging pipeline may run at one point in time. Parallel running builds might interfere while using the BUILD environment at the same time. Before starting an API Gateway Staging pipeline, make sure that there is no API Gateway Staging pipeline currently executing. If you want to promote an API to STAGE_INT and PROD_INT or to STAGE_EXT and PROD_EXT, use the wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int pipeline or the wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext instead of queuing a STAGE build and a PROD build in one go.
 
 The API Gateway Staging solution was developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
 
-Each deployment piplines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
+Each deployment piplines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
 Each pipeline is configured twice - for both tenants. The pipelines with names starting with wm_test_apigw_staging operate on the playground environments; the pipelines with names starting with wm_apigw_staging (without "test_") operate on the real-world environments.
 
 ### wm_{test_}apigw_staging_deploy_to_dev_int and dev_ext
 
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the DEV-INT or DEV-EXT environment.
+These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the DEV_INT or DEV_EXT environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1085,7 +1085,7 @@ The following parameters can/must be provided for this pipeline:
 
 ### wm_{test_}apigw_staging_deploy_to_stage_int and stage_ext
 
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the STAGE-INT or STAGE-EXT environment.
+These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the STAGE_INT or STAGE_EXT environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1097,7 +1097,7 @@ The following parameters can/must be provided for this pipeline:
 
 ### wm_{test_}apigw_staging_deploy_to_prod_int and prod_ext
 
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the PROD-INT or PROD-EXT environment.
+These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the PROD_INT or PROD_EXT environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1109,7 +1109,7 @@ The following parameters can/must be provided for this pipeline:
 
 ### wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int and stage_ext_and_prod_ext
 
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the STAGE-INT environment and then to the PROD-INT environment or to the STAGE-EXT environment and then to the PROD-EXT environment. It will execute all tasks (including the tests and the target-specific validation and preparation of assets on BUILD) twice - once for the STAGE target environment and once for the PROD target environment.
+These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the STAGE_INT environment and then to the PROD_INT environment or to the STAGE_EXT environment and then to the PROD_EXT environment. It will execute all tasks (including the tests and the target-specific validation and preparation of assets on BUILD) twice - once for the STAGE target environment and once for the PROD target environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1169,7 +1169,7 @@ In later versions of Azure DevOps Server, it will be possible to configure the a
 
 ## Pipelines for API Gateway configurations
 
-The API Gateway Staging solution includes eight Azure DevOps build pipelines (for each tenant) for deploying API Gateway configurations from the Azure DevOps repository to CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT environments and eight pipelines (for each tenant) for exporting the API Gateway configurations from CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT into the Azure DevOps repository. 
+The API Gateway Staging solution includes eight Azure DevOps build pipelines (for each tenant) for deploying API Gateway configurations from the Azure DevOps repository to CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments and eight pipelines (for each tenant) for exporting the API Gateway configurations from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT into the Azure DevOps repository. 
 
 In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on / exported from the target environment.
 
@@ -1193,7 +1193,7 @@ Each pipeline is configured twice - for both tenants. The pipelines with names s
 
 ### wm_{test_}apigw_staging_configure_config, build, dev_int, dev_ext, stage_int, stage_ext, prod_int and prod_ext
 
-These pipelines will import the API Gateway configuration assets on the CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT environment.
+These pipelines will import the API Gateway configuration assets on the CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1204,7 +1204,7 @@ The following parameters can/must be provided for this pipeline:
 
 ### wm_{test_}apigw_staging_export_config_from_config, build, dev_int, dev_ext, stage_int, stage_ext, prod_int and prod_ext
 
-These pipelines will export the API Gateway configuration assets from CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
+These pipelines will export the API Gateway configuration assets from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1216,7 +1216,7 @@ The following parameters can/must be provided for this pipeline:
 
 ## Pipeline for log purging
 
-The API Gateway Staging solution includes one Azure DevOps build pipeline (for each tenant) for automatically purging the API Gateway logs stored in the internal Elasticsearch database on all environments (CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT). It will purge
+The API Gateway Staging solution includes one Azure DevOps build pipeline (for each tenant) for automatically purging the API Gateway logs stored in the internal Elasticsearch database on all environments (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT). It will purge
  - all logs (except for audit logs) older than 28 days: transactionalEvents, monitorEvents, errorEvents, performanceMetrics, threatProtectionEvents, lifecycleEvents, policyViolationEvents, applicationlogs, mediatorTraceSpan
  - all audit logs older than Jan. 1st of the preceding calendar year: auditlogs. (This is implementing the requirement to purge all audit data on the end of the following calendar year.)
 
@@ -1271,15 +1271,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
   
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
 
-  - The changed API can now be tested on DEV-INT or DEV-EXT environment.
+  - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE-INT or STAGE-EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
 
-  - The changed API can now be tested on STAGE-INT or STAGE-EXT environment.
+  - The changed API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD-INT or PROD-EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
 
 ### Option B: Using the export/import pipelines
 
@@ -1295,15 +1295,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
 
-  - The changed API can now be tested on DEV-INT or DEV-EXT environment.
+  - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE-INT or STAGE-EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
 
-  - The changed API can now be tested on STAGE-INT or STAGE-EXT environment.
+  - The changed API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD-INT or PROD-EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
 
 ## Example 2: Create a new API in an existing API project
 
@@ -1335,15 +1335,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
 
-  - The new API can now be tested on DEV-INT or DEV-EXT environment.
+  - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE-INT or STAGE-EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
 
-  - The new API can now be tested on STAGE-INT or STAGE-EXT environment.
+  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD-INT or PROD-EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
 
 ### Option B: Using the export/import pipelines
 
@@ -1361,15 +1361,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
 
-  - The new API can now be tested on DEV-INT or DEV-EXT environment.
+  - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE-INT or STAGE-EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
 
-  - The new API can now be tested on STAGE-INT or STAGE-EXT environment.
+  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD-INT or PROD-EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
 
 ## Example 3: Create a new API in a new API project
 
@@ -1395,15 +1395,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
   
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
 
-  - The new API can now be tested on DEV-INT or DEV-EXT environment.
+  - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE-INT or STAGE-EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
 
-  - The new API can now be tested on STAGE-INT or STAGE-EXT environment.
+  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD-INT or PROD-EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
 
 ### Option B: Using the export/import pipelines
 
@@ -1419,15 +1419,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV-INT or DEV-EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
 
-  - The new API can now be tested on DEV-INT or DEV-EXT environment.
+  - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE-INT or STAGE-EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
 
-  - The new API can now be tested on STAGE-INT or STAGE-EXT environment.
+  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD-INT or PROD-EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
 
 # Implementation notes
 
@@ -1443,8 +1443,8 @@ The pipeline definition files (YAML) for the eleven API Gateway Staging pipeline
 | wm_{test_}apigw_staging_deploy_to_stage_ext | api-deploy.yml | |
 | wm_{test_}apigw_staging_deploy_to_prod_int | api-deploy.yml | |
 | wm_{test_}apigw_staging_deploy_to_prod_ext | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int | api-deploy-to-STAGE-INT-and-PROD-INT.yml | |
-| wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext | api-deploy-to-STAGE-EXT-and-PROD-EXT.yml | |
+| wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int | api-deploy-to-STAGE_INT-and-PROD_INT.yml | |
+| wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext | api-deploy-to-STAGE_EXT-and-PROD_EXT.yml | |
 | wm_{test_}apigw_staging_deploy_to_config | api-deploy.yml | |
 | wm_{test_}apigw_staging_export_api_from_config | api-export-api-from-CONFIG.yml | Pipeline variable commit-message must be configured as settable at queue time in the pipeline configuration in the Azure DevOps user interface |
 
@@ -1453,7 +1453,7 @@ The three deployment pipeline definitions are using central pipeline templates d
 | Template | README |
 | ------ | ------ |
 | api-build-template.yml | Includes all steps for preparing the deployable on the BUILD environment (including import, test execution, asset manipulation and export) |
-| api-deploy-template.yml | Includes all steps for importing the deployable on the CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT environment |
+| api-deploy-template.yml | Includes all steps for importing the deployable on the CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
 | store-build-template.yml | Stores the deployable in Azure DevOps |
 | store-build-artifactory-template.yml | Stores the deployable in Artifactory (optional) |
 | retrieve-build-template.yml | Retrieves the deployable from Azure DevOps |
@@ -1464,7 +1464,7 @@ The deployment pipelines invoke api-build-template.yml and store-build-template.
 
 The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
-The pipelines wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int/stage_ext_and_prod_ext invoke the pipeline templates api-build-template.yml, store-build-template.yml, retrieve-build-template.yml and api-deploy-template.yml twice - once for STAGE-INT/STAGE-EXT and once for PROD-INT/PROD-EXT - in four jobs on (potentially) four different agents.
+The pipelines wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int/stage_ext_and_prod_ext invoke the pipeline templates api-build-template.yml, store-build-template.yml, retrieve-build-template.yml and api-deploy-template.yml twice - once for STAGE_INT/STAGE_EXT and once for PROD_INT/PROD_EXT - in four jobs on (potentially) four different agents.
 
 The export pipeline wm_{test_}apigw_staging_export_api_from_config invokes api-export-api-template.yml and commit-template.yml sequentially in one job on one agent.
 
@@ -1475,8 +1475,8 @@ All four deployment pipeline templates need the following parameters to be set i
 | apiProject | Case-sensitive name of the API project to be propagated |
 | build_environment | Name of the environment definition file in /{tenant}/environments folder for the BUILD environment, e.g., build_environment_demo.json |
 | target_environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, dev_int_environment_demo.json etc. |
-| target_type | CONFIG, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT |
-| test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT and ${{false}} for CONFIG |
+| target_type | CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
+| test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT and ${{false}} for CONFIG |
 | prep_condition | Whether to prepare the API Gateway artifacts for the target environment (${{true}} or ${{false}}), should be ${{true}} for all environments |
 
 The export pipeline template needs the following parameters:
@@ -1503,7 +1503,7 @@ The pipeline templates execute the following major steps:
 | Replace alias values using pipeline variables | Using FileTransform@1 Azure DevOps standard task for replacing the values in all aliases.json files |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /{tenant}/apis root folder using jq |
-| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/STAGE/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT.json Postman collection in /utilities/prepare will run all the steps described. Executing the Prepare_for_CONFIG.json Postman collection in utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/STAGE/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /utilities/prepare will run all the steps described. Executing the Prepare_for_CONFIG.json Postman collection in utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
 ### api-deploy-template.yml
@@ -1511,7 +1511,7 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway CONFIG/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT | Executing the ImportAPI.json Postman collection in /utilities/import |
+| Import the Deployable to API Gateway CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /utilities/import |
 
 ### store-build-template.yml
 
@@ -1584,8 +1584,8 @@ The configuration pipeline definition api-configure.yml is using a central pipel
 
 | Template | README |
 | ------ | ------ |
-| api-configure-template.yml | Includes all steps for importing the deployable on the CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT environment and for initializing the environment |
-| api-export-config-template.yml | Exports the API Gateway configuration from the CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT environment |
+| api-configure-template.yml | Includes all steps for importing the deployable on the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
+| api-export-config-template.yml | Exports the API Gateway configuration from the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
 | commit-template.yml | Commits the results to the repository |
 
 All pipelines run their tasks in a single job: The configuration pipelines invoke api-configure-template.yml in one single job, and the export pipelines invoke api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
@@ -1595,14 +1595,14 @@ The configuration pipeline template needs the following parameters to be set in 
 | Parameter | README |
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | Case-sensitive name of the environment type to be configured or updated (CONFIG, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT) |
+| type | Case-sensitive name of the environment type to be configured or updated (CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
 
 The export pipeline template needs the following parameters:
 
 | Parameter | README |
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | CONFIG, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT |
+| type | CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
 
 The commit pipeline template does not need any parameters.
 
@@ -1612,10 +1612,10 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Create the API Deployable from the flat representation for CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
+| Create the API Deployable from the flat representation for CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Prepare list of scopes to be imported | Parse scopes.json in API Gateway configuration root folder using jq |
-| Import the Deployable to API Gateway CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT | Executing the ImportConfig.json Postman collection in /utilities/import |
-| Initialize API Gateway CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT | Executing the Initialize_CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT.json Postman collection in /utilities/initialize |
+| Import the Deployable to API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /utilities/import |
+| Initialize API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the Initialize_CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /utilities/initialize |
 
 ### api-export-config-template.yml
 
@@ -1650,7 +1650,7 @@ The pipeline definition is using a pipeline template defined in api-purge-data-t
 
 | Template | README |
 | ------ | ------ |
-| api-purge-data-template.yml | Purges the log data on the CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT environment |
+| api-purge-data-template.yml | Purges the log data on the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
 
 The pipeline invokes the template eight times in eight separate jobs on separate agents - once for every environment.
 
@@ -1659,7 +1659,7 @@ The pipeline template needs the following parameters to be set in the calling pi
 | Parameter | README |
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | Case-sensitive name of the environment type (CONFIG, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT or PROD-EXT) |
+| type | Case-sensitive name of the environment type (CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
 
 The pipeline template executes the following major steps:
 
@@ -1667,7 +1667,7 @@ The pipeline template executes the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Purge Data on API Gateway CONFIG/BUILD/DEV-INT/DEV-EXT/STAGE-INT/STAGE-EXT/PROD-INT/PROD-EXT | Executing the PurgeData.json Postman collection in /utilities/purge |
+| Purge Data on API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /utilities/purge |
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
 
@@ -1683,12 +1683,12 @@ All variable groups are referenced in the variable templates in /{tenant}/variab
 | ------ | ------ | ------ |
 | /{tenant}/variables/BUILD/variables-template.yml | wm_test_apigw_staging_build | wm_environment_build |
 | /{tenant}/variables/CONFIG/variables-template.yml | wm_test_apigw_staging_config | wm_environment_config |
-| /{tenant}/variables/DEV-INT/variables-template.yml | wm_test_apigw_staging_dev_int | wm_environment_dev_intern |
-| /{tenant}/variables/DEV-EXT/variables-template.yml | wm_test_apigw_staging_dev_ext | wm_environment_dev_extern |
-| /{tenant}/variables/STAGE-INT/variables-template.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
-| /{tenant}/variables/STAGE-EXT/variables-template.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
-| /{tenant}/variables/PROD-INT/variables-template.yml | wm_test_apigw_staging_prod_int | wm_environment_prod_intern |
-| /{tenant}/variables/PROD-EXT/variables-template.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
+| /{tenant}/variables/DEV_INT/variables-template.yml | wm_test_apigw_staging_dev_int | wm_environment_dev_intern |
+| /{tenant}/variables/DEV_EXT/variables-template.yml | wm_test_apigw_staging_dev_ext | wm_environment_dev_extern |
+| /{tenant}/variables/STAGE_INT/variables-template.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
+| /{tenant}/variables/STAGE_EXT/variables-template.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
+| /{tenant}/variables/PROD_INT/variables-template.yml | wm_test_apigw_staging_prod_int | wm_environment_prod_intern |
+| /{tenant}/variables/PROD_EXT/variables-template.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
 | /{tenant}/variables/variables-aliases-template.yml | wm_test_apigw_staging_aliases | wm_apigw_staging_aliases |
 | /{tenant}/variables/variables-artifactory-template.yml | wm_test_apigw_staging_artifactory | wm_apigw_staging_artifactory |
 
@@ -1704,7 +1704,7 @@ These variable groups are used by
  - the export pipeline for API projects
  - the log purging pipeline
 
-Each variable group holds variable values specific for one API Gateway environment (CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT, PROD-EXT).
+Each variable group holds variable values specific for one API Gateway environment (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT, PROD_EXT).
 
 | Variable | README |
 | ------ | ------ |
@@ -1744,7 +1744,7 @@ These variable groups are used by the deployment pipelines for API projects. The
 
 ## Environment configurations
 
-The environments used in the API Gateway Staging solution are configured in the /{tenant}/environments folder. For each environment (CONFIG, BUILD, DEV-INT, DEV-EXT, STAGE-INT, STAGE-EXT, PROD-INT and PROD-EXT), there is a Postman environment definition JSON file, for example:
+The environments used in the API Gateway Staging solution are configured in the /{tenant}/environments folder. For each environment (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT), there is a Postman environment definition JSON file, for example:
 
 ### build_environment_demo.json
 

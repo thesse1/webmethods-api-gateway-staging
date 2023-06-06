@@ -1,23 +1,23 @@
 {
   "petstore-routing-alias": {
     "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
-    "DEV-INT": {
+    "DEV_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV-INT",
+      "description" : "Petstore alias on DEV_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE-INT": {
+    "STAGE_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE-INT",
+      "description" : "Petstore alias on STAGE_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "PROD-INT": {
+    "PROD_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD-INT",
+      "description" : "Petstore alias on PROD_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -25,9 +25,9 @@
   },
   "postman-echo-routing-alias": {
     "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
-    "DEV-EXT": {
+    "DEV_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on DEV-EXT",
+      "description" : "PostmanEcho alias on DEV_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -39,9 +39,9 @@
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "STAGE-EXT": {
+    "STAGE_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on STAGE-EXT",
+      "description" : "PostmanEcho alias on STAGE_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -53,9 +53,9 @@
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "PROD-EXT": {
+    "PROD_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on PROD-EXT",
+      "description" : "PostmanEcho alias on PROD_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",

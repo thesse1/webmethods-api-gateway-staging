@@ -2,14 +2,11 @@
 
 trigger: none
 
-# To do: Add apiProject and target_type as pipeline parameters (vs. pipeline variable)
+# To do: Add apiProject as pipeline parameter (vs. pipeline variable)
 # parameters:
 # - name: apiProject
 #   type: string
 #   default: 'petstore'
-# - name: target_type
-#   type: string
-#   default: 'DEV-INT'
 
 variables:
 - name: tenant
@@ -17,22 +14,6 @@ variables:
     value: playground
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
     value: realworld
-# - name: targetType
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'config') }}:
-#     value: CONFIG
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'dev_int') }}:
-#     value: DEV-INT
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'dev_ext') }}:
-#     value: DEV-EXT
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'stage_int') }}:
-#     value: STAGE-INT
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'stage_ext') }}:
-#     value: STAGE-EXT
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_int') }}:
-#     value: PROD-INT
-#   ${{ if endsWith(variables['Build.DefinitionName'], 'prod_ext') }}:
-#     value: PROD-EXT
-# - template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
 - name: targetTypes
   value: "DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
 - template: /${{variables.tenant}}/variables/variables-aliases-template.yml
