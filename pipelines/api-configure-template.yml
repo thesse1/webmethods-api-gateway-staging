@@ -1,11 +1,9 @@
 # Pipeline template for apig configuring
 
 parameters:
+  environment: ''
   type: ''
   tenant: ''
-
-variables:
-- template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
 
 steps:
 - bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
@@ -25,7 +23,7 @@ steps:
       echo "##vso[task.complete result=Failed;]"
     fi
   env:
-    ENVIRONMENT: $(environment)
+    ENVIRONMENT: ${{parameters.environment}}
     TYPE: ${{parameters.type}}
     TENANT: ${{parameters.tenant}}
   displayName: Check for required parameters
@@ -46,10 +44,10 @@ steps:
     artifactName: '${{parameters.type}}_configuration'
 
 - bash: |
-   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(environment)`"
-   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(environment)`"
-   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(environment)`"
-   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(environment)`"
+   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
 
@@ -65,7 +63,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/$(environment) \
+    --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.type}}'
@@ -76,7 +74,7 @@ steps:
     newman run utilities/initialize/Initialize_${{parameters.type}}.json --reporters cli \
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
-    --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/$(environment) \
+    --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize API Gateway ${{parameters.type}}'
