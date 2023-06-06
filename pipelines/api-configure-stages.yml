@@ -36,8 +36,6 @@ stages:
     targetType: DEV-INT
   jobs:
   - job: Configure_API_Gateway_DEV_INT
-    variables:
-    - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
     pool:
       name: '$(agent_pool)'
       vmImage: '$(agent_pool_vmImage)'
@@ -47,7 +45,6 @@ stages:
       persistCredentials: "true"
     - template: /pipelines/api-configure-template.yml  # Template reference
       parameters:
-        environment: $(environment)
         type: $(targetType)
         tenant: $(tenant)
 
@@ -56,8 +53,6 @@ stages:
     targetType: DEV-EXT
   jobs:
   - job: Configure_API_Gateway_DEV_EXT
-    variables:
-    - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
     pool:
       name: '$(agent_pool)'
       vmImage: '$(agent_pool_vmImage)'
