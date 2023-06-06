@@ -50,3 +50,23 @@ stages:
         environment: $(environment)
         type: $(targetType)
         tenant: $(tenant)
+
+- stage: DEV_EXT
+  variables:
+    targetType: DEV-EXT
+  jobs:
+  - job: Configure_API_Gateway_DEV_EXT
+    variables:
+    - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+    pool:
+      name: '$(agent_pool)'
+      vmImage: '$(agent_pool_vmImage)'
+    steps:
+    - checkout: self
+      submodules: "true"
+      persistCredentials: "true"
+    - template: /pipelines/api-configure-template.yml  # Template reference
+      parameters:
+        environment: $(environment)
+        type: $(targetType)
+        tenant: $(tenant)
