@@ -3,18 +3,21 @@
 trigger: none
 
 parameters:
+- name: tenant
+  displayName: Deploy API project on API Gateway stages in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
 - name: apiProject
+  displayName: Deploy which API project?
   type: string
 
 variables:
-- name: tenant
-  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_test_apigw_staging') }}:
-    value: playground
-  ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
-    value: realworld
 - name: targetTypes
   value: "DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
-- template: /${{variables.tenant}}/variables/variables-aliases-template.yml
+- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
@@ -26,7 +29,7 @@ stages:
     jobs:
     - job: Build_for_${{ targetType }}
       variables:
-      - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
       pool:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
@@ -43,7 +46,7 @@ stages:
           target_type: $(targetType)
           prep_condition: ${{true}}
           test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: $(tenant)
+          tenant: ${{parameters.tenant}}
       - template: /pipelines/store-build-template.yml  # Template reference
         parameters:
           target_type: $(targetType)
@@ -53,7 +56,7 @@ stages:
 
     - job: Deploy_to_API_Gateway_${{ targetType }}
       variables:
-      - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
@@ -71,6 +74,6 @@ stages:
           target_type: $(targetType)
           prep_condition: ${{true}}
           test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: $(tenant)
+          tenant: ${{parameters.tenant}}
       dependsOn: Build_for_${{ targetType }}
       condition: succeeded()
