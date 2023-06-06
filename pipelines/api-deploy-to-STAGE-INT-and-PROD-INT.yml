@@ -14,67 +14,10 @@ variables:
     value: playground
   ${{ if startsWith(variables['Build.DefinitionName'], 'wm_apigw_staging') }}:
     value: realworld
-- template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
+# - template: /${{variables.tenant}}/variables/variables-artifactory-template.yml
 - template: /${{variables.tenant}}/variables/variables-aliases-template.yml
 
 jobs:
-- job: Build_and_deploy_to_STAGE_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_stage_int)
-      target_type: STAGE-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  condition: eq(variables['useArtifactory'], 'false')
-
-- job: Build_and_deploy_to_PROD_INT
-  variables:
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment_prod_int)
-      target_type: PROD-INT
-      prep_condition: ${{true}}
-      test_condition: ${{true}}
-      tenant: $(tenant)
-  dependsOn: Build_and_deploy_to_STAGE_INT
-  condition: succeeded()
-
 - job: Build_for_STAGE_INT
   variables:
   - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
@@ -96,7 +39,9 @@ jobs:
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: STAGE-INT
-  condition: eq(variables['useArtifactory'], 'true')
+  # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+  #   parameters:
+  #     target_type: STAGE-INT
 
 - job: Deploy_to_STAGE_INT
   variables:
@@ -145,6 +90,9 @@ jobs:
       target_type: PROD-INT
   dependsOn: Deploy_to_STAGE_INT
   condition: succeeded()
+  # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+  #   parameters:
+  #     target_type: PROD-INT
 
 - job: Deploy_to_PROD_INT
   variables:
