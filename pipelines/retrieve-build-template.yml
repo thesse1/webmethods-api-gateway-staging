@@ -17,11 +17,11 @@ steps:
   displayName: Check for required parameters
 
 - download: current
-  artifact: apiproject
+  artifact: apiproject_${{parameters.target_type}}
   displayName: Build Download
 
 - bash: |
-    cp $(Pipeline.Workspace)/apiproject/* $(System.DefaultWorkingDirectory)
+    cp $(Pipeline.Workspace)/apiproject_${{parameters.target_type}}/* $(System.DefaultWorkingDirectory)
   displayName: Copy artifact into working directory
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-download.ArtifactoryGenericDownload@3
