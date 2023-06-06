@@ -36,35 +36,6 @@ variables:
 - template: /${{variables.tenant}}/variables/variables-aliases-template.yml
 
 jobs:
-- job: Build_and_deploy_to_API_Gateway
-  variables:
-  - template: /${{variables.tenant}}/variables/${{variables.targetType}}/variables-template.yml
-  - template: /${{variables.tenant}}/variables/variables-common-template.yml
-  pool:
-    name: '$(agent_pool)'
-    vmImage: '$(agent_pool_vmImage)'
-  steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-  - template: /pipelines/api-build-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      build_environment: $(environment_build)
-      target_type: $(targetType)
-      prep_condition: ${{true}}
-      test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-      tenant: $(tenant)
-  - template: /pipelines/api-deploy-template.yml  # Template reference
-    parameters:
-      apiProject: $(apiProject)
-      target_environment: $(environment)
-      target_type: $(targetType)
-      prep_condition: ${{true}}
-      test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-      tenant: $(tenant)
-  condition: eq(variables['useArtifactory'], 'false')
-
 - job: Build
   variables:
   - template: /${{variables.tenant}}/variables/BUILD/variables-template.yml
@@ -86,7 +57,10 @@ jobs:
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: $(targetType)
-  condition: eq(variables['useArtifactory'], 'true')
+  - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+    parameters:
+      target_type: $(targetType)
+    condition: eq(variables['useArtifactory'], 'true')
 
 - job: Deploy_to_API_Gateway
   variables:

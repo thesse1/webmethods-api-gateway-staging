@@ -1,0 +1,31 @@
+# Pipeline template for apig staging
+
+parameters:
+  target_type: ''
+
+steps:
+- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
+  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
+
+- bash: |
+    if [ -z "$TARGET_TYPE" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"target_type\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+  env:
+    TARGET_TYPE: ${{parameters.target_type}}
+  displayName: Check for required parameters
+
+# - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
+#   displayName: 'Artifactory Build Upload'
+#   inputs:
+#     artifactoryService: '$(artifactoryService)'
+#     fileSpec: |
+#       {
+#         "files": [
+#           {
+#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
+#             "target": "$(artifactoryFolder)/"
+#           }
+#         ]
+#       }
