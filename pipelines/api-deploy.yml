@@ -86,6 +86,10 @@ jobs:
   - template: /pipelines/store-build-template.yml  # Template reference
     parameters:
       target_type: $(targetType)
+  - bash: |
+      ls -l
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+      displayName: 'DEBUG'
   condition: eq(variables['useArtifactory'], 'true')
 
 - job: Deploy_to_API_Gateway
@@ -98,9 +102,17 @@ jobs:
   - checkout: self
     submodules: "true"
     persistCredentials: "true"
+  - bash: |
+      ls -l
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+      displayName: 'DEBUG'
   - template: /pipelines/retrieve-build-template.yml  # Template reference
     parameters:
-      target_type: $(targetType)
+        target_type: $(targetType)
+  - bash: |
+      ls -l
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+      displayName: 'DEBUG'
   - template: /pipelines/api-deploy-template.yml  # Template reference
     parameters:
       apiProject: $(apiProject)
