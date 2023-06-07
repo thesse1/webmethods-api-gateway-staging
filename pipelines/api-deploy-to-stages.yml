@@ -18,6 +18,7 @@ variables:
 - name: targetTypes
   value: "DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
+# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 

@@ -18,6 +18,7 @@ variables:
 - name: targetTypes
   value: "CONFIG"
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
+# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
