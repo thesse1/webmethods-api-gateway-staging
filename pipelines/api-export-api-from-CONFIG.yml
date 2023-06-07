@@ -41,4 +41,4 @@ steps:
 
 - template: /pipelines/commit-template.yml  # Template reference
   parameters:
-    commit-message: ${{parameters.commitMessage}}
+    commitMessage: ${{parameters.commitMessage}}

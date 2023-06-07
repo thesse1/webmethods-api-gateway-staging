@@ -1161,7 +1161,7 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | apiProject | Case-sensitive name of the API project to be exported |
-| commit-message | The change will be committed with this commit message |
+| commitMessage | The change will be committed with this commit message |
 
 ### Drop-down list for apiProject
 
@@ -1212,7 +1212,7 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
-| commit-message | The change will be committed with this commit message |
+| commitMessage | The change will be committed with this commit message |
 
 ## Pipeline for log purging
 
@@ -1446,7 +1446,7 @@ The pipeline definition files (YAML) for the eleven API Gateway Staging pipeline
 | wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int | api-deploy-to-STAGE_INT-and-PROD_INT.yml | |
 | wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext | api-deploy-to-STAGE_EXT-and-PROD_EXT.yml | |
 | wm_{test_}apigw_staging_deploy_to_config | api-deploy.yml | |
-| wm_{test_}apigw_staging_export_api_from_config | api-export-api-from-CONFIG.yml | Pipeline variable commit-message must be configured as settable at queue time in the pipeline configuration in the Azure DevOps user interface |
+| wm_{test_}apigw_staging_export_api_from_config | api-export-api-from-CONFIG.yml | Pipeline variable commitMessage must be configured as settable at queue time in the pipeline configuration in the Azure DevOps user interface |
 
 The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-CONFIG.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
 
@@ -1567,7 +1567,7 @@ The pipeline definition files (YAML) for the sixteen API Gateway Staging pipelin
 | wm_{test_}apigw_staging_configure_prod_int | api-configure.yml | |
 | wm_{test_}apigw_staging_configure_prod_ext | api-configure.yml | |
 
-For all export pipelines, the pipeline variable commit-message must be configured as settable at queue time in the pipeline configurations in the Azure DevOps user interface.
+For all export pipelines, the pipeline variable commitMessage must be configured as settable at queue time in the pipeline configurations in the Azure DevOps user interface.
 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |

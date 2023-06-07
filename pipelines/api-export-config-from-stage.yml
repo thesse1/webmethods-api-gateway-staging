@@ -22,7 +22,7 @@ parameters:
   - STAGE_EXT
   - PROD_INT
   - PROD_EXT
-- name: commit-message
+- name: commitMessage
   displayName: Message for the commit in Git?
   type: string
 
@@ -45,4 +45,4 @@ jobs:
       tenant: ${{parameters.tenant}}
   - template: /pipelines/commit-template.yml  # Template reference
     parameters:
-      commit-message: ${{parameters.commit-message}}
+      commitMessage: ${{parameters.commitMessage}}
