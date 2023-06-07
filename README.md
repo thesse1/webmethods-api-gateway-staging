@@ -1209,7 +1209,7 @@ The following parameters can/must be provided for this pipeline:
 
 # Usage examples
 
-When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway CONFIG stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway CONFIG stage using the export_api_from_config / wm_{test_}apigw_staging_deploy_to_config pipelines.
+When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway CONFIG stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway CONFIG stage using the export_api_from_config / deploy_to_config pipelines.
 
 ## Example 1: Change an existing API
 
@@ -1239,19 +1239,19 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
   
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
 
   - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
 
   - The changed API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the central CONFIG environment for changes to be made. The developer executes the wm_{test_}apigw_staging_deploy_to_config pipeline for the petstore API project.
+  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the central CONFIG environment for changes to be made. The developer executes the deploy_to_config pipeline for the petstore API project.
 
   - The API Developer makes the necessary changes to the Petstore API on the central CONFIG environment. 
 
@@ -1263,15 +1263,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
 
   - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
 
   - The changed API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ## Example 2: Create a new API in an existing API project
 
@@ -1303,19 +1303,19 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - The developer would first have to update the API Gateway artifacts of the existing API project on the central CONFIG environment. The developer executes the wm_{test_}apigw_staging_deploy_to_config pipeline for the petstore API project.
+  - The developer would first have to update the API Gateway artifacts of the existing API project on the central CONFIG environment. The developer executes the deploy_to_config pipeline for the petstore API project.
 
   - The developer would then create the new API on the central CONFIG environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
 
@@ -1329,15 +1329,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ## Example 3: Create a new API in a new API project
 
@@ -1363,15 +1363,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
   
   - After this is done, the changes from the developer's local repository are committed to the VCS.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ### Option B: Using the export/import pipelines
 
@@ -1387,15 +1387,15 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the wm_{test_}apigw_staging_deploy_to_dev_int or dev_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the wm_{test_}apigw_staging_deploy_to_stage_int or stage_ext pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
 
   - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the wm_{test_}apigw_staging_deploy_to_prod_int or prod_ext pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 # Implementation notes
 
