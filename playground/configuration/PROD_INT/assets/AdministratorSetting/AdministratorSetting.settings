@@ -23,7 +23,8 @@
       },
       "wattKeys" : {
         "watt.server.oauth.requireHTTPS" : "false",
-        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z"
+        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
+        "watt.server.http.Strict-Transport-Security" : "max-age=31536000; includeSubDomains"
       }
     }
   }
