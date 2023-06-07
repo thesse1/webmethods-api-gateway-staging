@@ -53,9 +53,9 @@ The following API Gateway assets and configurations can be moved across API Gate
  - Destination configurations
  - External accounts configurations
  
-## Devops and CI/CD in webMethods API Gateway
+## DevOps and CI/CD in webMethods API Gateway
 
-The CI/CD and devops flow can be achieved in multiple ways.
+The CI/CD and DevOps flow can be achieved in multiple ways.
 
 ### Using webMethods Deployer and Asset Build Environment
 
@@ -94,7 +94,7 @@ The most common use case for an API Developer is to develop APIs in their local 
 
 The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central CONFIG environment to their VCS local repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, CONFIG, BUILD, DEV, STAGE or PROD.
 
-Alternatively, the developer can also use the wm_{test_}apigw_staging_export_api_from_config pipeline to export APIs from the central CONFIG environment into the VCS. In addition to that, the wm_{test_}apigw_staging_export_config_from_config/build/... pipelines and the wm_{test_}apigw_staging_configure_config/build/... pipelines can be used for exporting or importing the general configuration from/to CONFIG, BUILD, DEV, STAGE or PROD.
+Alternatively, the developer can also use the export_api_from_config pipeline to export APIs from the central CONFIG environment into the VCS. In addition to that, the export_configuration_from_stage pipeline and the configure_stages pipeline can be used for exporting or importing the general configuration from/to CONFIG, BUILD, DEV, STAGE or PROD.
 
 ## gateway_import_export_utils.bat
 
@@ -146,7 +146,7 @@ bin>gateway_import_export_utils.bat --exportconfig --tenant playground --environ
 
 ## export_payload.json export query for API projects
 
-The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the wm_{test_}apigw_staging_export_api_from_config pipeline) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the export_api_from_config pipeline) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 The /playground/apis folder contains sample API projects with the following export_payload.json files:
 
@@ -885,7 +885,7 @@ Replacement values for secret alias values like passwords can and should be stor
 
 ## export_payload.json export query for API Gateway configurations
 
-The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the wm_{test_}apigw_staging_export_config_from_config/build/... pipelines) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the export_configuration_from_stage pipeline) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 The /playground/configuration folder contains sample configurations for CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments, for example:
 
@@ -1150,7 +1150,7 @@ When queuing a deployment pipeline, you can select the specific commit that shou
 
 > Note: It will not work with the commit ID displayed in the UI. You have to use the "full SHA".
 
-### wm_{test_}apigw_staging_export_api_from_config
+### export_api_from_config
 
 This pipeline will export the APIs and other API Gateway assets in the selected API project from CONFIG, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
 
@@ -1202,9 +1202,9 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
 
-### wm_{test_}apigw_staging_export_config_from_config, build, dev_int, dev_ext, stage_int, stage_ext, prod_int and prod_ext
+### export_configuration_from_stage
 
-These pipelines will export the API Gateway configuration assets from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
+This pipeline will export the API Gateway configuration assets from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1212,6 +1212,8 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
+| tenant | Tenant in which to export the API Gateway configuration |
+| sourceType | CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
 | commitMessage | The change will be committed with this commit message |
 
 ## Pipeline for log purging
@@ -1241,7 +1243,7 @@ The following parameters can/must be provided for this pipeline:
 
 # Usage examples
 
-When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway CONFIG stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway CONFIG stage using the wm_{test_}apigw_staging_export_api_from_config / wm_{test_}apigw_staging_deploy_to_config pipelines.
+When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway CONFIG stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway CONFIG stage using the export_api_from_config / wm_{test_}apigw_staging_deploy_to_config pipelines.
 
 ## Example 1: Change an existing API
 
@@ -1291,7 +1293,7 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the wm_{test_}apigw_staging_export_api_from_config pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the export_api_from_config pipeline for the petstore API project.
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1357,7 +1359,7 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the wm_{test_}apigw_staging_export_api_from_config pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the export_api_from_config pipeline for the petstore API project.
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1415,7 +1417,7 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
 
   - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central CONFIG environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the wm_{test_}apigw_staging_export_api_from_config pipeline for the petstore API project.
+  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the export_api_from_config pipeline for the petstore API project.
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1433,20 +1435,13 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
 
 ## Pipeline definitions and pipeline templates for API projects
 
-The pipeline definition files (YAML) for the eleven API Gateway Staging pipelines for API projects can be found in the /pipelines folder. The pipelines for both tenants (playground and realworld) are using the same pipeline definitions. For all pipelines, the pipeline variable apiProject must be configured as settable at queue time in the pipeline configurations in the Azure DevOps user interface.
+The pipeline definition files (YAML) for the three Azure DevOps pipelines for API projects can be found in the /pipelines folder.
 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
-| wm_{test_}apigw_staging_deploy_to_dev_int | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_dev_ext | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_stage_int | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_stage_ext | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_prod_int | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_prod_ext | api-deploy.yml | |
-| wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int | api-deploy-to-STAGE_INT-and-PROD_INT.yml | |
-| wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext | api-deploy-to-STAGE_EXT-and-PROD_EXT.yml | |
-| wm_{test_}apigw_staging_deploy_to_config | api-deploy.yml | |
-| wm_{test_}apigw_staging_export_api_from_config | api-export-api-from-CONFIG.yml | Pipeline variable commitMessage must be configured as settable at queue time in the pipeline configuration in the Azure DevOps user interface |
+| deploy_to_stages | api-deploy-to-stages.yml | |
+| deploy_to_config | api-deploy-to-CONFIG.yml | |
+| export_api_from_config | api-export-api-from-CONFIG.yml | |
 
 The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-CONFIG.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
 
@@ -1460,15 +1455,13 @@ The three deployment pipeline definitions are using central pipeline templates d
 | api-export-api-template.yml | Exports the API project from the CONFIG environment |
 | commit-template.yml | Commits the results to the repository |
 
-The deployment pipelines invoke api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
+The deployment pipeline deploy_to_stages contains six stages for deploying an API project to DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT. The deployment pipeline deploy_to_config contains one stage for deployment to CONFIG. It is extracted into a separate pipeline in order to avoid accidental overwriting of API assets on CONFIG. Each stage in these pipelines invokes api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
 
 The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
-The pipelines wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int/stage_ext_and_prod_ext invoke the pipeline templates api-build-template.yml, store-build-template.yml, retrieve-build-template.yml and api-deploy-template.yml twice - once for STAGE_INT/STAGE_EXT and once for PROD_INT/PROD_EXT - in four jobs on (potentially) four different agents.
+The export pipeline export_api_from_config invokes api-export-api-template.yml and commit-template.yml sequentially in one stage in one job on one agent.
 
-The export pipeline wm_{test_}apigw_staging_export_api_from_config invokes api-export-api-template.yml and commit-template.yml sequentially in one job on one agent.
-
-All four deployment pipeline templates need the following parameters to be set in the calling pipeline (where applicable):
+All five deployment pipeline templates need the following parameters to be set in the calling pipeline (where applicable):
 
 | Parameter | README |
 | ------ | ------ |
@@ -1478,6 +1471,7 @@ All four deployment pipeline templates need the following parameters to be set i
 | target_type | CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
 | test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT and ${{false}} for CONFIG |
 | prep_condition | Whether to prepare the API Gateway artifacts for the target environment (${{true}} or ${{false}}), should be ${{true}} for all environments |
+| tenant | playground or realworld |
 
 The export pipeline template needs the following parameters:
 
@@ -1486,8 +1480,13 @@ The export pipeline template needs the following parameters:
 | apiProject | Case-sensitive name of the API project to be exported |
 | source_environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json |
 | source_type | CONFIG |
+| tenant | playground or realworld |
 
-The commit pipeline template does not need any parameters.
+The commit pipeline template needs the following parameter:
+
+| Parameter | README |
+| ------ | ------ |
+| commitMessage | The change will be committed with this commit message |
 
 The pipeline templates execute the following major steps:
 
@@ -1554,33 +1553,14 @@ The Postman collections are executed using the Postman command-line execution co
 
 ## Pipeline definitions and pipeline templates for API Gateway configurations
 
-The pipeline definition files (YAML) for the sixteen API Gateway Staging pipelines for API Gateway configurations can also be found in the /pipelines folder. The pipelines for both tenants (playground and realworld) are using the same pipeline definitions.
+The pipeline definition files (YAML) for the two Azure DevOps pipelines for API Gateway configurations can also be found in the /pipelines folder.
 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
-| wm_{test_}apigw_staging_configure_config | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_build | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_dev_int | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_dev_ext | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_stage_int | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_stage_ext | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_prod_int | api-configure.yml | |
-| wm_{test_}apigw_staging_configure_prod_ext | api-configure.yml | |
+| configure_stages | api-configure-stages.yml | |
+| export_configuration_from_stage | api-export-config-from-stage.yml | |
 
-For all export pipelines, the pipeline variable commitMessage must be configured as settable at queue time in the pipeline configurations in the Azure DevOps user interface.
-
-| Pipeline | Pipeline definition | README |
-| ------ | ------ | ------ |
-| wm_{test_}apigw_staging_export_config_from_config | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_build | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_dev_int | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_dev_ext | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_stage_int | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_stage_ext | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_prod_int | api-export-config.yml | |
-| wm_{test_}apigw_staging_export_config_from_prod_ext | api-export-config.yml | |
-
-The configuration pipeline definition api-configure.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
+The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
 
 | Template | README |
 | ------ | ------ |
@@ -1588,7 +1568,9 @@ The configuration pipeline definition api-configure.yml is using a central pipel
 | api-export-config-template.yml | Exports the API Gateway configuration from the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
 | commit-template.yml | Commits the results to the repository |
 
-All pipelines run their tasks in a single job: The configuration pipelines invoke api-configure-template.yml in one single job, and the export pipelines invoke api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
+The import pipeline configure_stages contains eight stages for importing the configuration on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
+
+The export pipeline export_configuration_from_stage contains one stage for exporting the configuration from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
 
 The configuration pipeline template needs the following parameters to be set in the calling pipeline:
 
@@ -1596,6 +1578,7 @@ The configuration pipeline template needs the following parameters to be set in 
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type to be configured or updated (CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
+| tenant | playground or realworld |
 
 The export pipeline template needs the following parameters:
 
@@ -1603,8 +1586,13 @@ The export pipeline template needs the following parameters:
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
+| tenant | playground or realworld |
 
-The commit pipeline template does not need any parameters.
+The commit pipeline template needs the following parameter:
+
+| Parameter | README |
+| ------ | ------ |
+| commitMessage | The change will be committed with this commit message |
 
 The pipeline templates execute the following major steps:
 
@@ -1640,11 +1628,11 @@ The Postman collections are executed using the Postman command-line execution co
 
 ## Pipeline definition and pipeline template for log purging
 
-The pipeline definition file (YAML) for the API Gateway Staging pipelines for log purging can also be found in the /pipelines folder. The pipelines for both tenants (playground and realworld) are using the same pipeline definition.
+The pipeline definition file (YAML) for the Azure DevOps pipeline for log purging can also be found in the /pipelines folder.
 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
-| wm_{test_}apigw_staging_purge_data | api-purge-data.yml | |
+| purge_data_from_stages | api-purge-data-from-stages.yml | |
 
 The pipeline definition is using a pipeline template defined in api-purge-data-template.yml:
 
@@ -1652,7 +1640,7 @@ The pipeline definition is using a pipeline template defined in api-purge-data-t
 | ------ | ------ |
 | api-purge-data-template.yml | Purges the log data on the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
 
-The pipeline invokes the template eight times in eight separate jobs on separate agents - once for every environment.
+The pipeline invokes the template eight times in eight separate stages on separate agents - once for every environment.
 
 The pipeline template needs the following parameters to be set in the calling pipeline:
 
@@ -1660,6 +1648,7 @@ The pipeline template needs the following parameters to be set in the calling pi
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type (CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
+| tenant | playground or realworld |
 
 The pipeline template executes the following major steps:
 
