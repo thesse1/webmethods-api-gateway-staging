@@ -27,7 +27,7 @@ parameters:
   type: string
 
 jobs:
-- job: Export_config_from_API_Gateway
+- job: Export_config_from_API_Gateway_${{parameters.sourceType}}
   variables:
   - template: /${{parameters.tenant}}/variables/${{parameters.sourceType}}/variables-template.yml
   pool:
