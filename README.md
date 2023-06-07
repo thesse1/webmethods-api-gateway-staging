@@ -1061,7 +1061,7 @@ These artifacts will be stored by Azure DevOps for some time. They will enable a
 
 In addition to that, the test results are published into the Azure DevOps test results framework.
 
-All pipelines must be triggered manually by clicking on `Queue`. No triggers are defined to start the pipelines automatically.
+All pipelines must be triggered manually by clicking on `Run pipeline`. No triggers are defined to start the pipelines automatically.
 
 > Note: Only one API Gateway Staging pipeline may run at one point in time. Parallel running builds might interfere while using the BUILD environment at the same time. Before starting an API Gateway Staging pipeline, make sure that there is no API Gateway Staging pipeline currently executing. If you want to promote an API to multiple stages, you can select multiple stages when starting the deploy_to_stages pipeline. It will execute the stages sequentially.
 
@@ -1083,7 +1083,7 @@ The following parameters can/must be provided for this pipeline:
 | apiProject | Case-sensitive name of the API project to be propagated |
 | Stages to run | DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
 
-### wm_{test_}apigw_staging_deploy_to_config
+### deploy_to_config
 
 This pipeline will import the APIs and other API Gateway assets in the selected API project to the CONFIG environment. It will not execute any tests, and it will not validate or prepare the assets for the target environment (no deletion of applications, no unsuspending of applications, no API tagging). The purpose of this pipeline is to reset the CONFIG environment to a defined (earlier) state.
 
@@ -1093,6 +1093,7 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
+| tenant | Tenant in which to deploy the API project |
 | apiProject | Case-sensitive name of the API project to be propagated |
 
 ### Selecting a specific commit to be deployed
@@ -1106,13 +1107,13 @@ When queuing a deployment pipeline, you can select the specific commit that shou
 
 ![GitHub Logo](/images/Copy_full_SHA.png)
 
-- Go back to the pipeline and click on ``Queue``. Paste the value from the clipboard into the Commit form entry field
+- Go back to the pipeline and click on ``Run pipeline``. Paste the value from the clipboard into the Commit form entry field
 
 ![GitHub Logo](/images/Paste.png)
 
 ![GitHub Logo](/images/SHA_pasted.png)
 
-> Note: It will not work with the commit ID displayed in the UI. You have to use the "full SHA".
+> Note: It will not work with the shortened commit ID displayed in the UI. You have to use the "full SHA".
 
 ### export_api_from_config
 
@@ -1124,16 +1125,17 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
+| tenant | Tenant in which to export the API project |
 | apiProject | Case-sensitive name of the API project to be exported |
 | commitMessage | The change will be committed with this commit message |
 
 ### Drop-down list for apiProject
 
-In later versions of Azure DevOps Server, it will be possible to configure the apiProject as pipeline parameter (vs. pipeline variable). It will then be possible to configure a drop-down list which lets the user select the API project to be deployed from a configurable list of candidates which will be more convenient and less error-prone than having to type the full name of the API project correctly in the form entry field.
+As an alternative for the apiProject free-text field, it would also be possible to define the names of existing API projects as possible values in the pipeline definition. Azure DevOps would then present a drop-down list which lets the user select the API project to be deployed from a configurable list of candidates which would be more convenient and less error-prone than having to type the full name of the API project correctly in the form entry field. But this candidate list would have to be updated for every new/renamed/removed API project.
 
 ## Pipelines for API Gateway configurations
 
-The API Gateway Staging solution includes eight Azure DevOps build pipelines (for each tenant) for deploying API Gateway configurations from the Azure DevOps repository (or GitHub repository) to CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments and eight pipelines (for each tenant) for exporting the API Gateway configurations from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT into the Azure DevOps repository (or GitHub repository). 
+The API Gateway Staging solution includes one Azure DevOps build pipeline for deploying API Gateway configurations from the Azure DevOps repository (or GitHub repository) to CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT environments and one pipeline for exporting the API Gateway configurations from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT into the Azure DevOps repository (or GitHub repository).
 
 In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on / exported from the target environment.
 
@@ -1151,13 +1153,11 @@ After importing the API Gateway assets, the configuration deployment pipelines w
 
 Further configuration steps can be added later.
 
-All pipelines must be triggered manually by clicking on `Queue`. No triggers are defined to start the pipelines automatically.
+All pipelines must be triggered manually by clicking on `Run pipeline`. No triggers are defined to start the pipelines automatically.
 
-Each pipeline is configured twice - for both tenants. The pipelines with names starting with wm_test_apigw_staging operate on the playground environments; the pipelines with names starting with wm_apigw_staging (without "test_") operate on the real-world environments.
+### configure_stages
 
-### wm_{test_}apigw_staging_configure_config, build, dev_int, dev_ext, stage_int, stage_ext, prod_int and prod_ext
-
-These pipelines will import the API Gateway configuration assets on the CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT environment.
+This pipeline will import the API Gateway configuration assets on the CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1165,6 +1165,8 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
+| tenant | Tenant in which to import the API Gateway configuration |
+| Stages to run | CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
 
 ### export_configuration_from_stage
 
@@ -1182,13 +1184,11 @@ The following parameters can/must be provided for this pipeline:
 
 ## Pipeline for log purging
 
-The API Gateway Staging solution includes one Azure DevOps build pipeline (for each tenant) for automatically purging the API Gateway logs stored in the internal Elasticsearch database on all environments (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT). It will purge
+The API Gateway Staging solution includes one Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT. It will purge
  - all logs (except for audit logs) older than 28 days: transactionalEvents, monitorEvents, errorEvents, performanceMetrics, threatProtectionEvents, lifecycleEvents, policyViolationEvents, applicationlogs, mediatorTraceSpan
  - all audit logs older than Jan. 1st of the preceding calendar year: auditlogs. (This is implementing the requirement to purge all audit data on the end of the following calendar year.)
 
-The pipeline is configured twice - for both tenants. The pipeline wm_test_apigw_staging_purge_data operates on the playground environments; the pipeline wm_apigw_staging_purge_data (without "test_") operates on the real-world environments.
-
-### wm_{test_}apigw_staging_purge_data
+### purge_data_from_stages
 
 This pipeline can be configured to run in defined iterations, e.g., once every day:
 
@@ -1204,6 +1204,8 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the master branch |
 | Commit | Leave this blank |
+| tenant | Tenant in which to purge the API Gateway analytics data |
+| Stages to run | CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
 
 # Usage examples
 
