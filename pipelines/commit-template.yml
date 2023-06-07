@@ -1,7 +1,7 @@
 # Pipeline template for apig staging
 
 parameters:
-- name: commit-message
+- name: commitMessage
   type: string
 
 steps:
@@ -15,6 +15,6 @@ steps:
 
 - bash: |
     git add .
-    git commit -m '${{parameters.commit-message}}'
+    git commit -m '${{parameters.commitMessage}}'
     git push origin 'HEAD:$(Build.SourceBranchName)'
   displayName: "Git add, commit and push"

@@ -13,7 +13,7 @@ parameters:
 - name: apiProject
   displayName: Export which API project?
   type: string
-- name: commit-message
+- name: commitMessage
   displayName: Message for the commit in Git?
   type: string
 
@@ -41,4 +41,4 @@ steps:
 
 - template: /pipelines/commit-template.yml  # Template reference
   parameters:
-    commit-message: ${{parameters.commit-message}}
+    commit-message: ${{parameters.commitMessage}}
