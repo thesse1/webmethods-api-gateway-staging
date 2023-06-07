@@ -3,16 +3,17 @@
   "name" : "MySwaggerPetstoreApp_STAGE",
   "description" : "This application should be used on STAGE environments for testing",
   "owner" : "Administrator",
+  "ownerType" : "user",
   "identifiers" : [ ],
   "contactEmails" : [ ],
   "accessTokens" : {
     "apiAccessKey" : {
-      "apiAccessKey" : "318e549a118bb4ee80f598a5393af731ea290de2008660b591a09a699aebcef0"
+      "apiAccessKey" : "********************************"
     }
   },
   "creationDate" : "2020-12-08 09:47:04 GMT",
   "lastModified" : "2021-06-23 14:49:20 GMT",
-  "lastUpdated" : 1631097872825,
+  "lastUpdated" : 1686120783793,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",
@@ -20,7 +21,7 @@
   "isSuspended" : true,
   "authStrategyIds" : [ ],
   "primaryNode" : {
-    "hostId" : "c779d804-dfde-486f-a6a5-9f2eb17b7036",
+    "hostId" : "ad297cc2-4c30-4cbc-95c4-2ba68ae71106",
     "replica" : 0
   },
   "subscription" : false,

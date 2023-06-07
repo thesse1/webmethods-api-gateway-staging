@@ -37,7 +37,7 @@
     "stageKey" : "transport"
   } ],
   "policyScope" : "SERVICE",
-  "active" : false,
+  "systemPolicy" : false,
   "global" : false,
-  "systemPolicy" : false
+  "active" : false
 }
