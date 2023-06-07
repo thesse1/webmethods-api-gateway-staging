@@ -2,7 +2,7 @@
 
 > Note: This version of the API Gateway Staging solution depends on Azure DevOps Service. An older version of the solution which supports Azure DevOps Server 2019 can be found in the azure_devops_server_2019 branch: https://github.com/thesse1/webmethods-api-gateway-staging/tree/azure_devops_server_2019.
 
-The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central CONFIG environment, add them to the Azure DevOps repository (Git) and automatically promote them to DEV, STAGE and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _STAGE or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to STAGE and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, STAGE or PROD).
+The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central CONFIG environment, add them to the Azure DevOps repository (or GitHub repository) and automatically promote them to DEV, STAGE and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _STAGE or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to STAGE and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, STAGE or PROD).
 
 The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway instances (local development environment, CONFIG, BUILD, DEV, STAGE and PROD). This includes the configuration of the API Gateway destination (event types, performance metrics and audit log data to be stored in the internal Elasticsearch database) and the Elasticsearch destination (event types and performance metrics to be stored in an external Elasticsearch database), the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway instances using Azure DevOps build pipelines for quickly setting up new API Gateway instances or for updating existing instances. After importing the base configuration, the build pipelines will also add environment-specific configuration items like loadbalancer URL, proxy server and the configuration of the local OAuth2 Authorization Server (authorization code and access token expiration interval, OAuth2 scopes) and the local JWT Provider (issuer, signing algorithm, token expiration interval, keystore alias and key alias).
 
@@ -86,7 +86,7 @@ The folders playground and realworld have the following sub-folders:
   - environments: Postman environment definitions for API Gateway CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments
   - variables: Azure DevOps variable templates with tenant-specific variables or references to tenant-specific variable groups
 
-The repository content can be committed to the Azure DevOps repository (Git), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository can be imported back to a local development environment, to the central CONFIG environment or promoted to DEV, STAGE or PROD.
+The repository content can be committed to the Azure DevOps repository (or GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository (or GitHub repository) can be imported back to a local development environment, to the central CONFIG environment or promoted to DEV, STAGE or PROD.
 
 ## Develop and test APIs using API Gateway
 
@@ -1023,9 +1023,9 @@ The test-failure test collection sends POST, GET and DELETE requests against the
 
 ## Pipelines for API projects
 
-The key to proper DevOps is continuous integration and continuous deployment. Organizations use standard tools such as Jenkins and Azure to design their integration and assuring continuous delivery.
+The key to proper DevOps is continuous integration and continuous deployment. Organizations use standard tools such as Jenkins, GitLab and Azure DevOps to design their integration and assuring continuous delivery.
 
-The API Gateway Staging solution includes ten Azure DevOps build pipelines (for each tenant) for deploying API projects from the Azure DevOps repository to CONFIG, DEV, STAGE and PROD environments and one pipeline (for each tenant) for exporting API projects from CONFIG into the Azure DevOps repository.
+The API Gateway Staging solution includes two Azure DevOps build pipelines for deploying API projects from the Azure DevOps repository (or GitHub repository) to CONFIG, DEV, STAGE and PROD environments and one pipeline for exporting API projects from CONFIG into the Azure DevOps repository (or GitHub repository).
 
 In each deployment pipeline, the API Gateway assets configured in the API project will be imported on the BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, STAGE and PROD, it will then execute the API tests configured in the API project's APITest.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to CONFIG.)
 
@@ -1063,17 +1063,15 @@ In addition to that, the test results are published into the Azure DevOps test r
 
 All pipelines must be triggered manually by clicking on `Queue`. No triggers are defined to start the pipelines automatically.
 
-> Note: Only one API Gateway Staging pipeline may run at one point in time. Parallel running builds might interfere while using the BUILD environment at the same time. Before starting an API Gateway Staging pipeline, make sure that there is no API Gateway Staging pipeline currently executing. If you want to promote an API to STAGE_INT and PROD_INT or to STAGE_EXT and PROD_EXT, use the wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int pipeline or the wm_{test_}apigw_staging_deploy_to_stage_ext_and_prod_ext instead of queuing a STAGE build and a PROD build in one go.
+> Note: Only one API Gateway Staging pipeline may run at one point in time. Parallel running builds might interfere while using the BUILD environment at the same time. Before starting an API Gateway Staging pipeline, make sure that there is no API Gateway Staging pipeline currently executing. If you want to promote an API to multiple stages, you can select multiple stages when starting the deploy_to_stages pipeline. It will execute the stages sequentially.
 
-The API Gateway Staging solution was developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
+The API Gateway Staging solution was originally developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
 
 Each deployment piplines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
-Each pipeline is configured twice - for both tenants. The pipelines with names starting with wm_test_apigw_staging operate on the playground environments; the pipelines with names starting with wm_apigw_staging (without "test_") operate on the real-world environments.
+### deploy_to_stages
 
-### wm_{test_}apigw_staging_deploy_to_dev_int and dev_ext
-
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the DEV_INT or DEV_EXT environment.
+This pipeline will propagate the APIs and other API Gateway assets in the selected API project to the selected target environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1081,43 +1079,9 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
+| tenant | Tenant in which to deploy the API project |
 | apiProject | Case-sensitive name of the API project to be propagated |
-
-### wm_{test_}apigw_staging_deploy_to_stage_int and stage_ext
-
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the STAGE_INT or STAGE_EXT environment.
-
-The following parameters can/must be provided for this pipeline:
-
-| Parameter | README |
-| ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
-| apiProject | Case-sensitive name of the API project to be propagated |
-
-### wm_{test_}apigw_staging_deploy_to_prod_int and prod_ext
-
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the PROD_INT or PROD_EXT environment.
-
-The following parameters can/must be provided for this pipeline:
-
-| Parameter | README |
-| ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
-| apiProject | Case-sensitive name of the API project to be propagated |
-
-### wm_{test_}apigw_staging_deploy_to_stage_int_and_prod_int and stage_ext_and_prod_ext
-
-These pipelines will propagate the APIs and other API Gateway assets in the selected API project to the STAGE_INT environment and then to the PROD_INT environment or to the STAGE_EXT environment and then to the PROD_EXT environment. It will execute all tasks (including the tests and the target-specific validation and preparation of assets on BUILD) twice - once for the STAGE target environment and once for the PROD target environment.
-
-The following parameters can/must be provided for this pipeline:
-
-| Parameter | README |
-| ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
-| apiProject | Case-sensitive name of the API project to be propagated |
+| Stages to run | DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
 
 ### wm_{test_}apigw_staging_deploy_to_config
 
@@ -1152,7 +1116,7 @@ When queuing a deployment pipeline, you can select the specific commit that shou
 
 ### export_api_from_config
 
-This pipeline will export the APIs and other API Gateway assets in the selected API project from CONFIG, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
+This pipeline will export the APIs and other API Gateway assets in the selected API project from CONFIG, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1169,7 +1133,7 @@ In later versions of Azure DevOps Server, it will be possible to configure the a
 
 ## Pipelines for API Gateway configurations
 
-The API Gateway Staging solution includes eight Azure DevOps build pipelines (for each tenant) for deploying API Gateway configurations from the Azure DevOps repository to CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments and eight pipelines (for each tenant) for exporting the API Gateway configurations from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT into the Azure DevOps repository. 
+The API Gateway Staging solution includes eight Azure DevOps build pipelines (for each tenant) for deploying API Gateway configurations from the Azure DevOps repository (or GitHub repository) to CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments and eight pipelines (for each tenant) for exporting the API Gateway configurations from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT into the Azure DevOps repository (or GitHub repository). 
 
 In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on / exported from the target environment.
 
@@ -1204,7 +1168,7 @@ The following parameters can/must be provided for this pipeline:
 
 ### export_configuration_from_stage
 
-This pipeline will export the API Gateway configuration assets from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository.
+This pipeline will export the API Gateway configuration assets from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
 
 The following parameters can/must be provided for this pipeline:
 
