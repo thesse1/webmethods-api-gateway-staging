@@ -1,5 +1,5 @@
 {
-  "id" : "c7aa28d6-70f5-4fb1-8d8b-804970d504be",
+  "id" : "9af7124f-390d-419a-ac97-7efa442a3ca2",
   "names" : [ {
     "value" : "Straight Through Routing",
     "locale" : "en"
@@ -7,7 +7,7 @@
   "templateKey" : "straightThroughRouting",
   "parameters" : [ {
     "templateKey" : "endpointUri",
-    "values" : [ "${PetStore_Routing_Alias}/${sys:resource_path}" ]
+    "values" : [ "https://swapi-graphql.netlify.app/.netlify/functions/index" ]
   }, {
     "templateKey" : "method",
     "values" : [ "CUSTOM" ]
