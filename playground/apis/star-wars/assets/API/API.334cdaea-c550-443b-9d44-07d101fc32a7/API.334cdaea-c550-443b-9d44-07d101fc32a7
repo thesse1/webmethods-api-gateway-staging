@@ -4888,6 +4888,7 @@
   "apiName" : "StarWarsDemoAPI",
   "apiVersion" : "1",
   "maturityState" : "Beta",
+  "apiGroups" : [ "Internal", "External" ],
   "isActive" : true,
   "type" : "GRAPHQL",
   "owner" : "testuser",
@@ -4899,7 +4900,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2023-06-08 09:26:43 GMT",
-  "lastModified" : "2023-06-08 09:56:21 GMT",
+  "lastModified" : "2023-06-08 10:15:22 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "334cdaea-c550-443b-9d44-07d101fc32a7"
