@@ -25,12 +25,6 @@
     "stageKey" : "routing"
   }, {
     "enforcements" : [ {
-      "enforcementObjectId" : "392f504d-364e-4348-968e-1189898f3652",
-      "order" : "0"
-    } ],
-    "stageKey" : "LMT"
-  }, {
-    "enforcements" : [ {
       "enforcementObjectId" : "44cbba20-082f-400a-b815-c2f705aec445",
       "order" : "0"
     } ],

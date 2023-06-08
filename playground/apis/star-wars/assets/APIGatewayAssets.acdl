@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-06-08T09:40:49"/>
+    <buildInfo name="BuildTimestamp" value="2023-06-08T09:57:16"/>
     <asset name="API.334cdaea-c550-443b-9d44-07d101fc32a7" displayName="StarWarsDemoAPI[1]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Policy.b139a751-8fbc-4434-83aa-9bbcf986661e</dependsOn>
@@ -8,7 +8,6 @@
     </asset>
     <asset name="Policy.b139a751-8fbc-4434-83aa-9bbcf986661e" displayName="Policy For API StarWarsDemoAPI[1]" isDeployable="true">
         <implementation.generic type="Policy"/>
-        <dependsOn>APIGateway:PolicyAction.392f504d-364e-4348-968e-1189898f3652</dependsOn>
         <dependsOn>APIGateway:PolicyAction.44cbba20-082f-400a-b815-c2f705aec445</dependsOn>
         <dependsOn>APIGateway:PolicyAction.9af7124f-390d-419a-ac97-7efa442a3ca2</dependsOn>
         <dependsOn>APIGateway:PolicyAction.ffb0ce10-49e4-49ca-b2de-b506bf3a3837</dependsOn>
@@ -17,9 +16,6 @@
         <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.9af7124f-390d-419a-ac97-7efa442a3ca2" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API StarWarsDemoAPI[1]" isDeployable="true">
-        <implementation.generic type="PolicyAction"/>
-    </asset>
-    <asset name="PolicyAction.392f504d-364e-4348-968e-1189898f3652" displayName="Policy Action [Log Invocation] -&gt; Policy For API StarWarsDemoAPI[1]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
     <asset name="PolicyAction.44cbba20-082f-400a-b815-c2f705aec445" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API StarWarsDemoAPI[1]" isDeployable="true">
