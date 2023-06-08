@@ -1067,7 +1067,7 @@ All pipelines must be triggered manually by clicking on `Run pipeline`. No trigg
 
 The API Gateway Staging solution was originally developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
 
-Each deployment piplines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
+Each deployment pipelines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
 ### deploy_to_stages
 
