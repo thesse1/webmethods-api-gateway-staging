@@ -1,0 +1,9 @@
+{
+	"info": {
+		"_postman_id": "edf063a2-d6d3-401f-82fc-36b40edbb08d",
+		"name": "API Test for petstore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	]
+}
