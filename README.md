@@ -323,6 +323,60 @@ This API is using JSON Web Tokens (JWT) for inbound authentication. It is config
 
 The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway without using any routing alias. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
 
+### number-conversion
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "211d57cf-dae3-4fbc-9836-c27b3c7f8182"
+    }
+  ]
+}
+```
+
+This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+
+### odata-tutorial
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "a63d8dc0-f1af-4993-a376-2929c6cfa2bc"
+    }
+  ]
+}
+```
+
+This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+
+### star-wars
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "334cdaea-c550-443b-9d44-07d101fc32a7"
+    }
+  ]
+}
+```
+
+This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+
 ### internal-external
 
 ```
