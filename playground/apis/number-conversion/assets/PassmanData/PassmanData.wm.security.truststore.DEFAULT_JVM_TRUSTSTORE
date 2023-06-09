@@ -1,0 +1,7 @@
+{
+  "id" : "wm.security.truststore.DEFAULT_JVM_TRUSTSTORE",
+  "pw" : "qpxggKyZxLShi5M40vokSg==",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "5gBZXhQbPx6/NWKnbSmsdA==",
+  "iterationCount" : 1
+}

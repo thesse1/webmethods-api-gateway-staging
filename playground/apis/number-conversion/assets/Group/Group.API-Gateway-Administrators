@@ -1,0 +1,9 @@
+{
+  "id" : "API-Gateway-Administrators",
+  "name" : "API-Gateway-Administrators",
+  "owner" : "Default",
+  "description" : "Users added to this group can perform similar API Gateway Administrative tasks.",
+  "type" : "local",
+  "systemDefined" : true,
+  "userIds" : [ "Administrator", "cbf44d34-5d38-4b4d-9393-3efcd9d3354e", "d20a99d0-98d3-413e-8627-0fcf2272ac6b" ]
+}

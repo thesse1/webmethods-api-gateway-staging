@@ -1,0 +1,18 @@
+{
+  "id" : "2b4d71d7-2abe-4edc-9a8d-bcd58f4d6223",
+  "assetId" : "b5a89c36-58a7-4ff6-8f1f-62c8de8c354e",
+  "gatewayEntityType" : [ "gatewayentitytype", "APPLICATIONS" ],
+  "teamAccessControlList" : [ {
+    "id" : "Administrators",
+    "privilege" : [ 0, 1, 2 ],
+    "accessControlSource" : "SYSTEM"
+  }, {
+    "id" : "Default",
+    "privilege" : [ 0, 1, 2 ],
+    "accessControlSource" : "SYSTEM"
+  } ],
+  "primaryNode" : {
+    "hostId" : "ad297cc2-4c30-4cbc-95c4-2ba68ae71106",
+    "replica" : 0
+  }
+}

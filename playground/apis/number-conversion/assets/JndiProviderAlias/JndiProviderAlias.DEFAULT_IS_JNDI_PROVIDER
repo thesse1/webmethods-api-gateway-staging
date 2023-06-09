@@ -1,0 +1,8 @@
+{
+  "id" : "DEFAULT_IS_JNDI_PROVIDER",
+  "jndiAliasName" : "DEFAULT_IS_JNDI_PROVIDER",
+  "description" : "system generated JNDI provider alias",
+  "initialContextFactory" : "com.pcbsys.nirvana.nSpace.NirvanaContextFactory",
+  "providerURL" : "nsp://localhost:9000",
+  "otherProps" : ""
+}

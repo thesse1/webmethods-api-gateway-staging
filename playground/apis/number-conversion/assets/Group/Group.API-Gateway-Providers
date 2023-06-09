@@ -1,0 +1,9 @@
+{
+  "id" : "API-Gateway-Providers",
+  "name" : "API-Gateway-Providers",
+  "owner" : "Default",
+  "description" : "Users added to this group can perform similar API Gateway Providers tasks.",
+  "type" : "local",
+  "systemDefined" : true,
+  "userIds" : [ ]
+}

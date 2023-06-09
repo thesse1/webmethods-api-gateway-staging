@@ -1,0 +1,13 @@
+{
+  "configId" : "HTTPGlobalIPAccessMode",
+  "userName" : "Administrator",
+  "internalPorts" : { },
+  "properties" : {
+    "listenerKey" : "global",
+    "listenerType" : "HTTPGlobalIPAccessMode",
+    "requestServiceStatus" : "true",
+    "pkg" : "WmRoot",
+    "ipAccessType" : "allow",
+    "hostsList" : [ ]
+  }
+}

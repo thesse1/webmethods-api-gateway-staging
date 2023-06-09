@@ -1,0 +1,14 @@
+{
+  "id" : "d20a99d0-98d3-413e-8627-0fcf2272ac6b",
+  "loginId" : "testuser",
+  "caller" : "Administrator",
+  "firstName" : "Test",
+  "lastName" : "User",
+  "hashedPassword" : "{sha-256_v2}T3Zq+3E2zpRcHj8BmWMF2jX2pfZ7C8qper2kXrC0lvT6UGa5WKf7EDAxMDAw",
+  "type" : "local",
+  "emailAddresses" : [ "thomas.hesse@softwareag.com" ],
+  "allowDigestAuth" : false,
+  "active" : true,
+  "systemDefined" : false,
+  "language" : ""
+}

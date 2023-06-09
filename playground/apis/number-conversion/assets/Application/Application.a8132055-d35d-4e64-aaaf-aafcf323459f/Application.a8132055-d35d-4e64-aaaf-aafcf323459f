@@ -1,0 +1,29 @@
+{
+  "applicationID" : "a8132055-d35d-4e64-aaaf-aafcf323459f",
+  "name" : "Tenant2_App_DEV",
+  "description" : "This application should be used on DEV environments for testing",
+  "owner" : "Administrator",
+  "ownerType" : "user",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2021-03-12 08:46:58 GMT",
+  "lastModified" : "2021-06-23 14:47:24 GMT",
+  "lastUpdated" : 1686148401916,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "ad297cc2-4c30-4cbc-95c4-2ba68ae71106",
+    "replica" : 0
+  },
+  "shell" : false,
+  "subscription" : false
+}

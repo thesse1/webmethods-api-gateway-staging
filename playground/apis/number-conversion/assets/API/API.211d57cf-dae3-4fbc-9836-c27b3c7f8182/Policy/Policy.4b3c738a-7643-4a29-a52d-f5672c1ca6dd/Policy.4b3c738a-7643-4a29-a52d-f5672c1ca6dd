@@ -1,0 +1,31 @@
+{
+  "id" : "4b3c738a-7643-4a29-a52d-f5672c1ca6dd",
+  "names" : [ {
+    "value" : "Default Policy for API NumberConversion",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "415b8d6e-5ce9-4cec-9e53-df3e1b606d88",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "e4869d33-092c-4469-adc8-f8ee30f7e73e",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "systemPolicy" : false,
+  "global" : false,
+  "active" : false
+}

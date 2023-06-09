@@ -1,0 +1,29 @@
+{
+  "applicationID" : "e517e0bc-a1d1-431f-8bd7-cd50ee5975a9",
+  "name" : "Petstore_Versioning_App_DEV",
+  "description" : "This application should be used on DEV environments for testing",
+  "owner" : "Administrator",
+  "ownerType" : "user",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2021-04-07 10:36:16 GMT",
+  "lastModified" : "2021-06-23 14:48:49 GMT",
+  "lastUpdated" : 1686146163591,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "ad297cc2-4c30-4cbc-95c4-2ba68ae71106",
+    "replica" : 0
+  },
+  "shell" : false,
+  "subscription" : false
+}

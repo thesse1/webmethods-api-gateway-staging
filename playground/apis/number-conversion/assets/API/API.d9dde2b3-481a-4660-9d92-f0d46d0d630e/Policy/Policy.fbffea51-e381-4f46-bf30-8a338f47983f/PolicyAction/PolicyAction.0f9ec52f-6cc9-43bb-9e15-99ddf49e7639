@@ -1,0 +1,16 @@
+{
+  "id" : "0f9ec52f-6cc9-43bb-9e15-99ddf49e7639",
+  "names" : [ {
+    "value" : "Straight Through Routing",
+    "locale" : "en"
+  } ],
+  "templateKey" : "straightThroughRouting",
+  "parameters" : [ {
+    "templateKey" : "endpointUri",
+    "values" : [ "https://postman-echo.com/${sys:resource_path}" ]
+  }, {
+    "templateKey" : "method",
+    "values" : [ "CUSTOM" ]
+  } ],
+  "active" : false
+}

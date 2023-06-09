@@ -1,0 +1,13 @@
+{
+  "configId" : "dataspace",
+  "internalPorts" : { },
+  "properties" : {
+    "listener.active" : {
+      "insecureTrustManager" : false,
+      "listener" : {
+        "nodeName" : "ad297cc2-4c30-4cbc-95c4-2ba68ae71106",
+        "port" : -1
+      }
+    }
+  }
+}

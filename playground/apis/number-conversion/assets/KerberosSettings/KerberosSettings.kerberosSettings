@@ -1,0 +1,11 @@
+{
+  "kerberosRealm" : "",
+  "kerberosKDC" : "",
+  "kerberosConfigFileName" : "",
+  "kerberosConfigContents" : "",
+  "useSubjectCreds" : "false",
+  "caller" : "",
+  "kerberosConfigFileFullLoc" : "packages/WmAPIGateway/config/resources/security/",
+  "kerberosConfigFileLoc" : "packages/WmAPIGateway/config/resources/security/",
+  "entityId" : "kerberosSettings"
+}

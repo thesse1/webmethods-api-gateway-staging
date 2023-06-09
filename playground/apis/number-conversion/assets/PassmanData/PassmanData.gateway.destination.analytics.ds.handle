@@ -1,0 +1,7 @@
+{
+  "id" : "gateway.destination.analytics.ds.handle",
+  "pw" : "LnsVgrUFBpDFte3SbPIZwQ==",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "hUtyrkYIsVzcaLUaSymCQA==",
+  "iterationCount" : 1
+}

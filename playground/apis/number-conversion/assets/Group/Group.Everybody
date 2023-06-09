@@ -1,0 +1,9 @@
+{
+  "id" : "Everybody",
+  "name" : "Everybody",
+  "owner" : "Default",
+  "description" : "All users in APIGateway will be part of this group.",
+  "type" : "local",
+  "systemDefined" : true,
+  "userIds" : [ "Administrator", "cbf44d34-5d38-4b4d-9393-3efcd9d3354e", "d20a99d0-98d3-413e-8627-0fcf2272ac6b", "f162fb3b-2429-48fb-983b-3fb7f7a15cae", "2682ccb0-3be4-47b3-9e2e-e252e4d1e773", "db4f4f95-6678-4272-a245-160f2cae0b36", "82182bb9-0184-4fc2-9eae-0c5a5b5023ab" ]
+}

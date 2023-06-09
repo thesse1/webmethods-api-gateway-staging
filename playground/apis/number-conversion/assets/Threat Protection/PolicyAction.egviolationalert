@@ -1,0 +1,28 @@
+{
+  "id" : "egviolationalert",
+  "names" : [ {
+    "value" : "Gateway Rule Violation Alerts",
+    "locale" : "en"
+  } ],
+  "templateKey" : "egviolationalert",
+  "parameters" : [ {
+    "templateKey" : "alertOnEvery",
+    "values" : [ "false" ]
+  }, {
+    "templateKey" : "alertInterval",
+    "values" : [ "1" ]
+  }, {
+    "templateKey" : "alertType",
+    "values" : [ "flowService" ]
+  }, {
+    "templateKey" : "emailTo",
+    "values" : [ ]
+  }, {
+    "templateKey" : "flowServiceName",
+    "values" : [ "pub.apigateway.threatProtection:violationListener" ]
+  }, {
+    "templateKey" : "runAsUser",
+    "values" : [ "Administrator" ]
+  } ],
+  "active" : false
+}

@@ -1,0 +1,30 @@
+{
+  "configId" : "analyticsDataStoreDestinationConfig",
+  "internalPorts" : { },
+  "properties" : {
+    "hostName" : "",
+    "sniffTimeInterval" : "60000",
+    "maxRetryTimeout" : "100000",
+    "sniffEnabled" : "true",
+    "keystoreName" : "",
+    "keepAliveMaxConnectionsPerRoute" : "15",
+    "protocol" : "",
+    "password" : "********************************",
+    "truststorePassword" : "********************************",
+    "truststoreName" : "",
+    "socketTimeout" : "30000",
+    "connectionTimeout" : "10000",
+    "keepAlive" : "true",
+    "keystorePassword" : "********************************",
+    "httpsEnforceHostnameVerification" : "",
+    "httpsEnabled" : "false",
+    "outboundProxyEnabled" : "",
+    "userName" : "",
+    "clientHttpResponseSize" : "100",
+    "port" : "",
+    "keystoreAlias" : "",
+    "keepAliveMaxConnections" : "50",
+    "tenantId" : "{0}",
+    "outboundProxyAlias" : ""
+  }
+}

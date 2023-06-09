@@ -1,0 +1,8 @@
+{
+  "configId" : "mobileApp",
+  "internalPorts" : { },
+  "properties" : {
+    "mobileApplications" : [ ],
+    "mobileAppDeviceTypes" : [ ]
+  }
+}

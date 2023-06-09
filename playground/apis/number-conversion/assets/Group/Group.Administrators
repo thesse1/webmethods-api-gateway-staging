@@ -1,0 +1,9 @@
+{
+  "id" : "Administrators",
+  "name" : "Administrators",
+  "owner" : "Default",
+  "description" : "Users added to this group can perform similar local administrative tasks.",
+  "type" : "local",
+  "systemDefined" : true,
+  "userIds" : [ "Administrator" ]
+}

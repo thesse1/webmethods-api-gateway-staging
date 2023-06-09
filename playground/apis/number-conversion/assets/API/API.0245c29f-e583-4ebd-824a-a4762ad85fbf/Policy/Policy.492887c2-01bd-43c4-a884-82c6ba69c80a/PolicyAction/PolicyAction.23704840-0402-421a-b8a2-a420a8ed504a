@@ -1,0 +1,133 @@
+{
+  "id" : "23704840-0402-421a-b8a2-a420a8ed504a",
+  "names" : [ {
+    "value" : "Conditional Routing",
+    "locale" : "en"
+  } ],
+  "templateKey" : "contextBasedRouting",
+  "parameters" : [ {
+    "templateKey" : "routeTo",
+    "parameters" : [ {
+      "templateKey" : "endpointUri",
+      "values" : [ "${PostmanEcho_Routing_Alias}/${sys:resource_path}" ]
+    }, {
+      "templateKey" : "method",
+      "values" : [ "CUSTOM" ]
+    } ]
+  }, {
+    "templateKey" : "contextRules",
+    "parameters" : [ {
+      "templateKey" : "name",
+      "values" : [ "Tenant1" ]
+    }, {
+      "templateKey" : "routeTo",
+      "parameters" : [ {
+        "templateKey" : "endpointUri",
+        "values" : [ "${PostmanEcho_Routing_Alias}/${sys:resource_path}?tenant=Tenant1" ]
+      }, {
+        "templateKey" : "method",
+        "values" : [ "CUSTOM" ]
+      } ]
+    }, {
+      "templateKey" : "transformationConditions",
+      "parameters" : [ {
+        "templateKey" : "logicalConnector",
+        "values" : [ "OR" ]
+      }, {
+        "templateKey" : "transformationCondition",
+        "parameters" : [ {
+          "templateKey" : "transformationVariable",
+          "values" : [ "${request.application.id}" ]
+        }, {
+          "templateKey" : "transformationConditionOperator",
+          "values" : [ "equals" ]
+        }, {
+          "templateKey" : "transformationConditionValue",
+          "values" : [ "88e36e10-f2db-4cf6-9bb0-3883f7a7c053" ]
+        } ]
+      }, {
+        "templateKey" : "transformationCondition",
+        "parameters" : [ {
+          "templateKey" : "transformationVariable",
+          "values" : [ "${request.application.id}" ]
+        }, {
+          "templateKey" : "transformationConditionOperator",
+          "values" : [ "equals" ]
+        }, {
+          "templateKey" : "transformationConditionValue",
+          "values" : [ "aa83a664-5a5c-4249-a007-eb018a0c431e" ]
+        } ]
+      }, {
+        "templateKey" : "transformationCondition",
+        "parameters" : [ {
+          "templateKey" : "transformationVariable",
+          "values" : [ "${request.application.id}" ]
+        }, {
+          "templateKey" : "transformationConditionOperator",
+          "values" : [ "equals" ]
+        }, {
+          "templateKey" : "transformationConditionValue",
+          "values" : [ "f044873f-6316-41a9-aed7-ceefa85d87b0" ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "templateKey" : "contextRules",
+    "parameters" : [ {
+      "templateKey" : "name",
+      "values" : [ "Tenant2" ]
+    }, {
+      "templateKey" : "routeTo",
+      "parameters" : [ {
+        "templateKey" : "endpointUri",
+        "values" : [ "${PostmanEcho_Routing_Alias}/${sys:resource_path}?tenant=Tenant2" ]
+      }, {
+        "templateKey" : "method",
+        "values" : [ "CUSTOM" ]
+      } ]
+    }, {
+      "templateKey" : "transformationConditions",
+      "parameters" : [ {
+        "templateKey" : "logicalConnector",
+        "values" : [ "OR" ]
+      }, {
+        "templateKey" : "transformationCondition",
+        "parameters" : [ {
+          "templateKey" : "transformationVariable",
+          "values" : [ "${request.application.id}" ]
+        }, {
+          "templateKey" : "transformationConditionOperator",
+          "values" : [ "equals" ]
+        }, {
+          "templateKey" : "transformationConditionValue",
+          "values" : [ "a8132055-d35d-4e64-aaaf-aafcf323459f" ]
+        } ]
+      }, {
+        "templateKey" : "transformationCondition",
+        "parameters" : [ {
+          "templateKey" : "transformationVariable",
+          "values" : [ "${request.application.id}" ]
+        }, {
+          "templateKey" : "transformationConditionOperator",
+          "values" : [ "equals" ]
+        }, {
+          "templateKey" : "transformationConditionValue",
+          "values" : [ "bf204106-1ecc-4d55-aded-6be9ea6a0e25" ]
+        } ]
+      }, {
+        "templateKey" : "transformationCondition",
+        "parameters" : [ {
+          "templateKey" : "transformationVariable",
+          "values" : [ "${request.application.id}" ]
+        }, {
+          "templateKey" : "transformationConditionOperator",
+          "values" : [ "equals" ]
+        }, {
+          "templateKey" : "transformationConditionValue",
+          "values" : [ "8fb2b059-8bd3-48ba-abee-d8d72962ba50" ]
+        } ]
+      } ]
+    } ]
+  } ],
+  "active" : false
+}

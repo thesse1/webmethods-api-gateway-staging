@@ -1,0 +1,8 @@
+{
+  "configId" : "whiteListingIPs",
+  "internalPorts" : { },
+  "properties" : {
+    "privateIPs" : [ ],
+    "privateV6IPs" : [ ]
+  }
+}

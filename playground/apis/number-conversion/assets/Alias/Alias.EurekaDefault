@@ -1,0 +1,26 @@
+{
+  "id" : "EurekaDefault",
+  "name" : "EurekaDefault",
+  "description" : "Eureka is a REST based service that is primarily used in the AWS cloud for locating services for the purpose of load balancing and failover of middle-tier servers",
+  "type" : "serviceRegistryAlias",
+  "owner" : "Administrator",
+  "endpointURI" : "http://localhost:8761",
+  "heartBeatInterval" : 0,
+  "password" : "",
+  "customHeaders" : { },
+  "discoveryInfo" : {
+    "path" : "/eureka/apps/{app}",
+    "httpMethod" : "GET"
+  },
+  "registrationInfo" : {
+    "path" : "/eureka/apps/{app}",
+    "httpMethod" : "POST"
+  },
+  "deRegistrationInfo" : {
+    "path" : "/eureka/apps/{app}/{instanceId}",
+    "httpMethod" : "DELETE"
+  },
+  "serviceRegistryType" : "EUREKA",
+  "connectionTimeout" : 30,
+  "readTimeout" : 30
+}
