@@ -22,15 +22,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -58,15 +63,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/$metadata",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//$metadata",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -94,15 +104,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -130,15 +145,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People('russellwhyte')",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -166,15 +186,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People('russellwhyte')/FirstName",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/FirstName",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -203,15 +228,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People('russellwhyte')/FirstName/$value",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/FirstName/$value",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -241,15 +271,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/Friends('scottketchum')/AddressInfo",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -279,15 +314,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$filter=FirstName eq 'Vincent'",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=FirstName eq 'Vincent'",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -321,15 +361,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -363,15 +408,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/Airports?$filter=Location/City/Region eq 'California'",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//Airports?$filter=Location/City/Region eq 'California'",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -405,15 +455,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -447,15 +502,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -489,15 +549,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -528,15 +593,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$orderby=length(FirstName) desc,UserName",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$orderby=length(FirstName) desc,UserName",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -570,15 +640,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$top=2&$skip=2",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$top=2&$skip=2",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -616,15 +691,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People/$count",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People/$count",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -653,15 +733,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$expand=Friends,Trips",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$expand=Friends,Trips",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -695,15 +780,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$select=FirstName,LastName",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$select=FirstName,LastName",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -737,15 +827,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People?$format=application/json;odata.metadata=full",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$format=application/json;odata.metadata=full",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",
@@ -779,15 +874,20 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://services.odata.org/V4/TripPinService/People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
 					"protocol": "http",
 					"host": [
-						"services",
-						"odata",
-						"org"
+						"{{ip}}"
 					],
+					"port": "{{port}}",
 					"path": [
 						"V4",
 						"TripPinService",

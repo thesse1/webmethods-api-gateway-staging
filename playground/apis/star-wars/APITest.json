@@ -27,7 +27,13 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -36,15 +42,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://playconfig.apigw-aw-eu.webmethods.io:443/gql/StarWarsDemoAPI/1",
+					"raw": "https://{{ip}}:{{port}}/gql/StarWarsDemoAPI/1",
 					"protocol": "https",
 					"host": [
-						"playconfig",
-						"apigw-aw-eu",
-						"webmethods",
-						"io"
+						"{{ip}}"
 					],
-					"port": "443",
+					"port": "{{port}}",
 					"path": [
 						"gql",
 						"StarWarsDemoAPI",
