@@ -1,9 +1,0 @@
-{
-  "id" : "API-Gateway-Providers",
-  "name" : "API-Gateway-Providers",
-  "description" : "Groups associated to this team are allowed to access an asset based on the functional privileges assigned to this team.",
-  "privilege" : [ 0, 1, 2, 3, 6, 8, 9, 11, 12, 20 ],
-  "groupIds" : [ "API-Gateway-Providers" ],
-  "systemDefined" : true,
-  "includeTeamAdminsAsApprovers" : false
-}
