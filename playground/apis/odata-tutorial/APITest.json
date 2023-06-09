@@ -544,51 +544,6 @@
 			"response": []
 		},
 		{
-			"name": "13. Filter using built-in functions",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
-					"protocol": "https",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"gateway",
-						"TripPinService",
-						"1",
-						"People('russellwhyte')",
-						"Trips(0)",
-						"PlanItems",
-						"Microsoft.OData.SampleService.Models.TripPin.Flight"
-					]
-				},
-				"description": "Built-in functions may be leveraged to filter the collection."
-			},
-			"response": []
-		},
-		{
 			"name": "14. Sort a collection",
 			"event": [
 				{
