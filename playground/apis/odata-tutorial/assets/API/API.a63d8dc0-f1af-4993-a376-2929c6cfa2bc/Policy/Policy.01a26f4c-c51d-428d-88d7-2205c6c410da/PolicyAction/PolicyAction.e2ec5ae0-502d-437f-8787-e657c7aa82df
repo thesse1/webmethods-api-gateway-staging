@@ -1,0 +1,16 @@
+{
+  "id" : "e2ec5ae0-502d-437f-8787-e657c7aa82df",
+  "names" : [ {
+    "value" : "Straight Through Routing",
+    "locale" : "en"
+  } ],
+  "templateKey" : "straightThroughRouting",
+  "parameters" : [ {
+    "templateKey" : "endpointUri",
+    "values" : [ "https://services.odata.org/V4/TripPinService/${sys:resource_path}" ]
+  }, {
+    "templateKey" : "method",
+    "values" : [ "CUSTOM" ]
+  } ],
+  "active" : false
+}
