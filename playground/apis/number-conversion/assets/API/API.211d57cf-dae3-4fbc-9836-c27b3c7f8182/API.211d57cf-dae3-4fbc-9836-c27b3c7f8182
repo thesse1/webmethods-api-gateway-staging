@@ -1,7 +1,7 @@
 {
   "apiDefinition" : {
     "wsdl" : "<definitions xmlns=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:tns=\"http://www.dataaccess.com/webservicesserver/\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://schemas.xmlsoap.org/wsdl/soap12/\" xmlns:soap=\"http://schemas.xmlsoap.org/wsdl/soap/\" name=\"NumberConversion\" targetNamespace=\"http://www.dataaccess.com/webservicesserver/\">\n  <types>\n    <xs:schema elementFormDefault=\"qualified\" targetNamespace=\"http://www.dataaccess.com/webservicesserver/\">\n      <xs:element name=\"NumberToWords\">\n        <xs:complexType>\n          <xs:sequence>\n            <xs:element name=\"ubiNum\" type=\"xs:unsignedLong\"/>\n          </xs:sequence>\n        </xs:complexType>\n      </xs:element>\n      <xs:element name=\"NumberToWordsResponse\">\n        <xs:complexType>\n          <xs:sequence>\n            <xs:element name=\"NumberToWordsResult\" type=\"xs:string\"/>\n          </xs:sequence>\n        </xs:complexType>\n      </xs:element>\n      <xs:element name=\"NumberToDollars\">\n        <xs:complexType>\n          <xs:sequence>\n            <xs:element name=\"dNum\" type=\"xs:decimal\"/>\n          </xs:sequence>\n        </xs:complexType>\n      </xs:element>\n      <xs:element name=\"NumberToDollarsResponse\">\n        <xs:complexType>\n          <xs:sequence>\n            <xs:element name=\"NumberToDollarsResult\" type=\"xs:string\"/>\n          </xs:sequence>\n        </xs:complexType>\n      </xs:element>\n    </xs:schema>\n  </types>\n  <message name=\"NumberToWordsSoapRequest\">\n    <part name=\"parameters\" element=\"tns:NumberToWords\"/>\n  </message>\n  <message name=\"NumberToWordsSoapResponse\">\n    <part name=\"parameters\" element=\"tns:NumberToWordsResponse\"/>\n  </message>\n  <message name=\"NumberToDollarsSoapRequest\">\n    <part name=\"parameters\" element=\"tns:NumberToDollars\"/>\n  </message>\n  <message name=\"NumberToDollarsSoapResponse\">\n    <part name=\"parameters\" element=\"tns:NumberToDollarsResponse\"/>\n  </message>\n  <portType name=\"NumberConversionSoapType\">\n    <operation name=\"NumberToWords\">\n      <documentation>Returns the word corresponding to the positive number passed as parameter. Limited to quadrillions.</documentation>\n      <input message=\"tns:NumberToWordsSoapRequest\"/>\n      <output message=\"tns:NumberToWordsSoapResponse\"/>\n    </operation>\n    <operation name=\"NumberToDollars\">\n      <documentation>Returns the non-zero dollar amount of the passed number.</documentation>\n      <input message=\"tns:NumberToDollarsSoapRequest\"/>\n      <output message=\"tns:NumberToDollarsSoapResponse\"/>\n    </operation>\n  </portType>\n  <binding name=\"NumberConversionSoapBinding\" type=\"tns:NumberConversionSoapType\">\n    <soap:binding style=\"document\" transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n    <operation name=\"NumberToWords\">\n      <soap:operation soapAction=\"\" style=\"document\"/>\n      <input>\n        <soap:body use=\"literal\"/>\n      </input>\n      <output>\n        <soap:body use=\"literal\"/>\n      </output>\n    </operation>\n    <operation name=\"NumberToDollars\">\n      <soap:operation soapAction=\"\" style=\"document\"/>\n      <input>\n        <soap:body use=\"literal\"/>\n      </input>\n      <output>\n        <soap:body use=\"literal\"/>\n      </output>\n    </operation>\n  </binding>\n  <binding name=\"NumberConversionSoapBinding12\" type=\"tns:NumberConversionSoapType\">\n    <soap12:binding style=\"document\" transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n    <operation name=\"NumberToWords\">\n      <soap12:operation soapAction=\"\" style=\"document\"/>\n      <input>\n        <soap12:body use=\"literal\"/>\n      </input>\n      <output>\n        <soap12:body use=\"literal\"/>\n      </output>\n    </operation>\n    <operation name=\"NumberToDollars\">\n      <soap12:operation soapAction=\"\" style=\"document\"/>\n      <input>\n        <soap12:body use=\"literal\"/>\n      </input>\n      <output>\n        <soap12:body use=\"literal\"/>\n      </output>\n    </operation>\n  </binding>\n  <service name=\"NumberConversion\">\n    <documentation>The Number Conversion Web Service, implemented with Visual DataFlex, provides functions that convert numbers into words or dollar amounts.</documentation>\n    <port name=\"NumberConversionSoap\" binding=\"tns:NumberConversionSoapBinding\">\n      <soap:address location=\"https://www.dataaccess.com/webservicesserver/NumberConversion.wso\"/>\n    </port>\n    <port name=\"NumberConversionSoap12\" binding=\"tns:NumberConversionSoapBinding12\">\n      <soap12:address location=\"https://www.dataaccess.com/webservicesserver/NumberConversion.wso\"/>\n    </port>\n  </service>\n</definitions>",
-    "baseWsdlUri" : "/opt/softwareag/IntegrationServer/instances/default/temp/0409d9a1-9309-4acf-a3ae-91f74a28aad5/",
+    "baseWsdlUri" : "/opt/softwareag/IntegrationServer/instances/default/temp/ab57086e-fe53-4560-93e7-16d605c6bdfb/",
     "nativeUri" : [ "https://www.dataaccess.com/webservicesserver/NumberConversion.wso" ],
     "serviceName" : "NumberConversion",
     "operationsInfo" : [ {
@@ -35,12 +35,18 @@
               "headersV3" : { },
               "content" : {
                 "application/xml" : {
-                  "schema" : { },
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{}"
+                  },
                   "examples" : { },
                   "example" : "<web:NumberToDollarsResponse xmlns:web=\"http://www.dataaccess.com/webservicesserver/\">\n  <web:NumberToDollarsResult>string</web:NumberToDollarsResult>\n</web:NumberToDollarsResponse>"
                 },
                 "application/json" : {
-                  "schema" : { },
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{}"
+                  },
                   "examples" : { },
                   "example" : "{\"NumberToDollarsResponse\":{\"$\":\"\\n  \\n\",\"NumberToDollarsResult\":\"string\"}}"
                 }
@@ -107,12 +113,18 @@
               "headersV3" : { },
               "content" : {
                 "application/xml" : {
-                  "schema" : { },
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{}"
+                  },
                   "examples" : { },
                   "example" : "<web:NumberToWordsResponse xmlns:web=\"http://www.dataaccess.com/webservicesserver/\">\n  <web:NumberToWordsResult>string</web:NumberToWordsResult>\n</web:NumberToWordsResponse>"
                 },
                 "application/json" : {
-                  "schema" : { },
+                  "schema" : {
+                    "type" : "gateway",
+                    "schema" : "{}"
+                  },
                   "examples" : { },
                   "example" : "{\"NumberToWordsResponse\":{\"$\":\"\\n  \\n\",\"NumberToWordsResult\":\"string\"}}"
                 }
@@ -184,7 +196,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2023-06-09 10:52:24 GMT",
-  "lastModified" : "2023-06-09 11:09:45 GMT",
+  "lastModified" : "2023-06-09 13:05:21 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "211d57cf-dae3-4fbc-9836-c27b3c7f8182"
