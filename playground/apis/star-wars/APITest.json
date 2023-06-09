@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "e1f39541-6d35-4809-85c3-db57ebdffb57",
-		"name": "APITest",
+		"_postman_id": "15ece0cc-bace-4df7-a2bf-7e77ed7cfc31",
+		"name": "APITest Star Wars",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "https://playconfig.apigw-aw-eu.webmethods.io:443/gql/StarWarsDemoAPI/1",
+			"name": "Get all films",
 			"event": [
 				{
 					"listen": "test",

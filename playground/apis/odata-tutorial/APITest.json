@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "0b53c958-0209-46cb-98cd-4a26eb939807",
-		"name": "Postman OData Tutorial",
+		"_postman_id": "2dbe63f7-9326-4c46-8469-b208dea3441f",
+		"name": "APITest Postman OData Tutorial",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -30,16 +30,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
-						""
+						"1"
 					]
 				},
 				"description": "All REST APIs should have a single entry point from which a generic hypermedia client can navigate to the resources in the service. In the response we see links to three things: 1. The $metadata document that describes the schema of ther service 2. Links to various collections of objects like People and Airports 3. Links to other top-level items like Me (a singleton) and operations."
@@ -71,15 +71,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//$metadata",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/$metadata",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"$metadata"
 					]
 				},
@@ -112,15 +113,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					]
 				},
@@ -153,15 +155,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People('russellwhyte')"
 					]
 				},
@@ -194,15 +197,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/FirstName",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People('russellwhyte')",
 						"FirstName"
 					]
@@ -236,15 +240,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/FirstName/$value",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName/$value",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People('russellwhyte')",
 						"FirstName",
 						"$value"
@@ -279,15 +284,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/Friends('scottketchum')/AddressInfo",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People('russellwhyte')",
 						"Friends('scottketchum')",
 						"AddressInfo"
@@ -322,15 +328,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=FirstName eq 'Vincent'",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=FirstName eq 'Vincent'",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -369,15 +376,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -416,15 +424,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//Airports?$filter=Location/City/Region eq 'California'",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/Airports?$filter=Location/City/Region eq 'California'",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"Airports"
 					],
 					"query": [
@@ -463,15 +472,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -510,15 +520,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -557,15 +568,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People('russellwhyte')",
 						"Trips(0)",
 						"PlanItems",
@@ -601,15 +613,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$orderby=length(FirstName) desc,UserName",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -648,15 +661,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$top=2&$skip=2",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$top=2&$skip=2",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -699,15 +713,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People/$count",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People/$count",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People",
 						"$count"
 					]
@@ -741,15 +756,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$expand=Friends,Trips",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$expand=Friends,Trips",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -788,15 +804,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$select=FirstName,LastName",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$select=FirstName,LastName",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -835,15 +852,16 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People?$format=application/json;odata.metadata=full",
-					"protocol": "http",
+					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$format=application/json;odata.metadata=full",
+					"protocol": "https",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"V4",
+						"gateway",
 						"TripPinService",
+						"1",
 						"People"
 					],
 					"query": [
@@ -854,50 +872,6 @@
 					]
 				},
 				"description": "By default OData services return an extremely compact JSON format. This happens by stripping out all of the metadata that should be calculable by \"smart\" OData clients. For generic hypermedia clients, you can request additional metadata by using the Accept header or $format system query option to request application/json;odata.metadata=full. In this case, we get a bunch of additional annotations in the payload indicating type information and relationships to related resources."
-			},
-			"response": []
-		},
-		{
-			"name": "20. Casting types",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1//People('russellwhyte')/Trips(0)/PlanItems/Microsoft.OData.SampleService.Models.TripPin.Flight",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"V4",
-						"TripPinService",
-						"People('russellwhyte')",
-						"Trips(0)",
-						"PlanItems",
-						"Microsoft.OData.SampleService.Models.TripPin.Flight"
-					]
-				},
-				"description": "Another way of filtering items is to use a type cast segment. In this case we are looking for all of the flights that are part of Russell's trip. A type cast also allows us to append additional path segments that are properties of the subtype."
 			},
 			"response": []
 		}
