@@ -1,9 +1,58 @@
 {
 	"info": {
-		"_postman_id": "edf063a2-d6d3-401f-82fc-36b40edbb08d",
-		"name": "API Test for petstore",
+		"_postman_id": "e1f39541-6d35-4809-85c3-db57ebdffb57",
+		"name": "APITest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "https://playconfig.apigw-aw-eu.webmethods.io:443/gql/StarWarsDemoAPI/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct first film title\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.allFilms.films[0].title).to.eql(\"A New Hope\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Query {\r\n  allFilms {\r\n    films {\r\n      title\r\n      director\r\n      releaseDate\r\n      speciesConnection {\r\n        species {\r\n          name\r\n          classification\r\n          homeworld {\r\n            name\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://playconfig.apigw-aw-eu.webmethods.io:443/gql/StarWarsDemoAPI/1",
+					"protocol": "https",
+					"host": [
+						"playconfig",
+						"apigw-aw-eu",
+						"webmethods",
+						"io"
+					],
+					"port": "443",
+					"path": [
+						"gql",
+						"StarWarsDemoAPI",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
 	]
 }
