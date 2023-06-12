@@ -35,8 +35,6 @@ stages:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
       steps:
-      - bash: echo $(newBuildNumber)
-        displayName: DEBUG
       - checkout: self
         submodules: "true"
         persistCredentials: "true"
