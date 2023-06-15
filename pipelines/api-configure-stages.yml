@@ -15,7 +15,7 @@ variables:
   targetTypes: "CONFIG,BUILD,DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
 
 stages:
-- ${{ each targetType in split(variables.targetTypes, ',')}}:
+- ${{ each targetType in [ "DEV_INT","DEV_EXT" ]}}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}
