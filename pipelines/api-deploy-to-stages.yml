@@ -23,7 +23,7 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- ${{ each targetType in split(variables.targetTypes, ',')}}:
+- ${{ each targetType in [ "DEV_INT","DEV_EXT" ]}}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}
