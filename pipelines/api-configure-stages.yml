@@ -10,12 +10,20 @@ parameters:
   values:
   - playground
   - realworld
-
-variables:
-  targetTypes: "CONFIG,BUILD,DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
+- name: target_types
+  type: object
+  default:
+  - CONFIG
+  - BUILD
+  - DEV_INT
+  - DEV_EXT
+  - STAGE_INT
+  - STAGE_EXT
+  - PROD_INT
+  - PROD_EXT
 
 stages:
-- ${{ each targetType in [ "DEV_INT","DEV_EXT" ]}}:
+- ${{ each targetType in ${{parameters.target_types}} }}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}

@@ -13,17 +13,24 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
+- name: target_types
+  type: object
+  default: 
+  - DEV_INT
+  - DEV_EXT
+  - STAGE_INT
+  - STAGE_EXT
+  - PROD_INT
+  - PROD_EXT
 
 variables:
-- name: targetTypes
-  value: "DEV_INT,DEV_EXT,STAGE_INT,STAGE_EXT,PROD_INT,PROD_EXT"
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- ${{ each targetType in [ "DEV_INT","DEV_EXT" ]}}:
+- ${{ each targetType in ${{parameters.target_types}} }}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}
