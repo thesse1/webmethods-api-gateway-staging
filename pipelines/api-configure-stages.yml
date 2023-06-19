@@ -11,9 +11,16 @@ parameters:
   - playground
   - realworld
 - name: target_types
-  type: stageList
+  type: object
   default:
-  - stage: CONFIG
+  - CONFIG
+  - BUILD
+  - DEV_INT
+  - DEV_EXT
+  - STAGE_INT
+  - STAGE_EXT
+  - PROD_INT
+  - PROD_EXT
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
