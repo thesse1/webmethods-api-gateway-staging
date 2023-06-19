@@ -71,5 +71,5 @@ stages:
         prep_condition: ${{true}}
         test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
         tenant: ${{parameters.tenant}}
-    dependsOn: Build_for_${{ targetType }}
+    dependsOn: Build_for_CONFIG
     condition: succeeded()
