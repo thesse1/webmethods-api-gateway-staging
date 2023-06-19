@@ -30,7 +30,7 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- ${{ each targetType in ${{parameters.target_types}} }}:
+- ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}
