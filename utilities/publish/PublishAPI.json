@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "0f9926a4-19cf-4f20-aa49-69b2d75111a1",
+		"name": "API Gateway API Publication",
+		"description": "This Collection deploys the API to API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get API Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var gatewayEndPoints = jsonData.apiResponse.gatewayEndPoints;\r",
+							"pm.globals.set(\"gatewayEndPoints\", JSON.stringify(gatewayEndPoints));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Manage123!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "testuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/publish?portalGatewayId=69ca5c6b-8b0a-4bae-8021-4ccf0ffd136f",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						":apiId",
+						"publish"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "69ca5c6b-8b0a-4bae-8021-4ccf0ffd136f"
+						}
+					],
+					"variable": [
+						{
+							"key": "apiId",
+							"value": "{{apiId}}",
+							"description": "(Required) API Id for the API to be retrieved"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PublishAPI ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.variables.get(\"gatewayEndPoints\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Manage123!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "testuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/zip",
+						"disabled": true
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"communities\": [\r\n        \"3bdf8005-5685-3ef5-b132-de4681963fb6\"\r\n    ],\r\n    \"endpoints\": {{gatewayEndPoints}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/publish?portalGatewayId=69ca5c6b-8b0a-4bae-8021-4ccf0ffd136f",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						":apiId",
+						"publish"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "69ca5c6b-8b0a-4bae-8021-4ccf0ffd136f"
+						}
+					],
+					"variable": [
+						{
+							"key": "apiId",
+							"value": "{{apiId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
