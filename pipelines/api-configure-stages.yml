@@ -23,7 +23,7 @@ parameters:
   - PROD_EXT
 
 stages:
-- ${{ each targetType in \[ \] }}:
+- ${{ each targetType in "[ ]" }}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}
