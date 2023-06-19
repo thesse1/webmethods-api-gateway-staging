@@ -29,3 +29,4 @@ stages:
         apiId: ${{parameters.apiId}}
         target_environment: CONFIG
         target_type: CONFIG
+        tenant: playground

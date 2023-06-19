@@ -4,6 +4,7 @@ parameters:
   apiId: ''
   target_environment: ''
   target_type: ''
+  tenant: ''
 
 steps:
 - bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for apiId '${{parameters.apiId}}' and target_type '${{parameters.target_type}}'
@@ -22,10 +23,15 @@ steps:
       echo "##vso[task.logissue type=error;]Missing template parameter \"target_type\""
       echo "##vso[task.complete result=Failed;]"
     fi
+    if [ -z "$TENANT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
   env:
     APIID: ${{parameters.apiId}}
     TARGET_ENVIRONMENT: ${{parameters.target_environment}}
     TARGET_TYPE: ${{parameters.target_type}}
+    TENANT: ${{parameters.tenant}}
   displayName: Check for required parameters
 
 - bash: |
@@ -38,7 +44,7 @@ steps:
 
 - script: |
     newman run utilities/publish/PublishAPI.json --reporters cli \
-    --env-var importer_user='$(importer_user)' \
+    -e ${{parameters.tenant}}/environments/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Publish the API To Developer Portal on API Gateway ${{parameters.target_type}}'
