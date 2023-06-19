@@ -11,8 +11,8 @@ parameters:
   - playground
   - realworld
 - name: target_types
-  type: object
-  values:
+  type: stageList
+  default:
   - CONFIG
   - BUILD
   - DEV_INT
