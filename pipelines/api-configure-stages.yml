@@ -12,7 +12,8 @@ parameters:
   - realworld
 - name: target_types
   type: stageList
-  default: [ "CONFIG" ]
+  default:
+  - stage: CONFIG
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
