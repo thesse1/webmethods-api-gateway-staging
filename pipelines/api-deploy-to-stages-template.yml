@@ -20,12 +20,6 @@ parameters:
   - PROD_INT
   - PROD_EXT
 
-variables:
-- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
-# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
-
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
-
 stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType }}
