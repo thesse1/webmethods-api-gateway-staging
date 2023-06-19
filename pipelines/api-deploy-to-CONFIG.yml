@@ -25,7 +25,7 @@ stages:
   variables:
     targetType: CONFIG
   jobs:
-  - job: Build_for_${{ targetType }}
+  - job: Build_for_CONFIG
     variables:
     - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
     pool:
