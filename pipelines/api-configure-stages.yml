@@ -12,15 +12,7 @@ parameters:
   - realworld
 - name: target_types
   type: object
-  values:
-  - CONFIG
-  - BUILD
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  values: [ [ "CONFIG", "BUILD"] ]
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
