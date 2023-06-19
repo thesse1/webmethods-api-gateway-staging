@@ -44,6 +44,7 @@ steps:
 
 - script: |
     newman run utilities/publish/PublishAPI.json --reporters cli \
+    --env-var apiId='${{parameters.apiId}}' \
     -e ${{parameters.tenant}}/environments/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
