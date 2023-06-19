@@ -27,6 +27,6 @@ stages:
     - template: /pipelines/api-publish-template.yml  # Template reference
       parameters:
         apiId: ${{parameters.apiId}}
-        target_environment: CONFIG
+        target_environment: $(environment)
         target_type: CONFIG
         tenant: playground
