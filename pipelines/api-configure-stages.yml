@@ -12,7 +12,7 @@ parameters:
   - realworld
 - name: target_types
   type: object
-  default:
+  values:
   - CONFIG
   - BUILD
   - DEV_INT
