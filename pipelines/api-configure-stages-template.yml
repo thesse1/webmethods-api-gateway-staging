@@ -1,7 +1,3 @@
-# Pipeline for apig staging
-
-trigger: none
-
 parameters:
 - name: tenant
   displayName: Configure API Gateway in which tenant?
