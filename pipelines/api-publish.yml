@@ -15,6 +15,8 @@ stages:
     targetType: CONFIG
   jobs:
   - job: Publish_on_CONFIG
+    variables:
+    - template: /playground/variables/CONFIG/variables-template.yml
     pool:
       name: '$(agent_pool)'
       vmImage: '$(agent_pool_vmImage)'
