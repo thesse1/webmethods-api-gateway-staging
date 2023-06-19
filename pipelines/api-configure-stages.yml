@@ -12,18 +12,10 @@ parameters:
   - realworld
 - name: target_types
   type: stageList
-  default:
-  - CONFIG
-  - BUILD
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  default: []
 
 stages:
-- ${{ each targetType in "[ ]" }}:
+- ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType }}
     variables:
       targetType: ${{ targetType }}
