@@ -88,7 +88,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
 							"console.log(pm.variables.get(\"gatewayEndPoints\"));"
