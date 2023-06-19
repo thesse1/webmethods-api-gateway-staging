@@ -15,64 +15,61 @@ parameters:
   type: string
 
 variables:
-- name: targetTypes
-  value: "CONFIG"
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- ${{ each targetType in split(variables.targetTypes, ',')}}:
-  - stage: ${{ targetType }}
+- stage: CONFIG
+  variables:
+    targetType: CONFIG
+  jobs:
+  - job: Build_for_${{ targetType }}
     variables:
-      targetType: ${{ targetType }}
-    jobs:
-    - job: Build_for_${{ targetType }}
-      variables:
-      - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
-      pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/api-build-template.yml  # Template reference
-        parameters:
-          apiProject: ${{parameters.apiProject}}
-          build_environment: $(environment)
-          target_type: $(targetType)
-          prep_condition: ${{true}}
-          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: ${{parameters.tenant}}
-      - template: /pipelines/store-build-template.yml  # Template reference
-        parameters:
-          target_type: $(targetType)
-      # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
-      #   parameters:
-      #     target_type: $(targetType)
+    - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
+    pool:
+      name: '$(agent_pool)'
+      vmImage: '$(agent_pool_vmImage)'
+    steps:
+    - checkout: self
+      submodules: "true"
+      persistCredentials: "true"
+    - template: /pipelines/api-build-template.yml  # Template reference
+      parameters:
+        apiProject: ${{parameters.apiProject}}
+        build_environment: $(environment)
+        target_type: $(targetType)
+        prep_condition: ${{true}}
+        test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
+        tenant: ${{parameters.tenant}}
+    - template: /pipelines/store-build-template.yml  # Template reference
+      parameters:
+        target_type: $(targetType)
+    # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+    #   parameters:
+    #     target_type: $(targetType)
 
-    - job: Deploy_to_API_Gateway_${{ targetType }}
-      variables:
-      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
-      pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/retrieve-build-template.yml  # Template reference
-        parameters:
-            target_type: $(targetType)
-      - template: /pipelines/api-deploy-template.yml  # Template reference
-        parameters:
-          apiProject: ${{parameters.apiProject}}
-          target_environment: $(environment)
+  - job: Deploy_to_API_Gateway_${{ targetType }}
+    variables:
+    - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+    pool:
+      name: '$(agent_pool)'
+      vmImage: '$(agent_pool_vmImage)'
+    steps:
+    - checkout: self
+      submodules: "true"
+      persistCredentials: "true"
+    - template: /pipelines/retrieve-build-template.yml  # Template reference
+      parameters:
           target_type: $(targetType)
-          prep_condition: ${{true}}
-          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: ${{parameters.tenant}}
-      dependsOn: Build_for_${{ targetType }}
-      condition: succeeded()
+    - template: /pipelines/api-deploy-template.yml  # Template reference
+      parameters:
+        apiProject: ${{parameters.apiProject}}
+        target_environment: $(environment)
+        target_type: $(targetType)
+        prep_condition: ${{true}}
+        test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
+        tenant: ${{parameters.tenant}}
+    dependsOn: Build_for_${{ targetType }}
+    condition: succeeded()
