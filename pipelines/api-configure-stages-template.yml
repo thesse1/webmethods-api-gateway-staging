@@ -24,7 +24,7 @@ stages:
   - stage: ${{ targetType }}
     variables:
     - name: targetType
-      values: ${{ targetType }}
+      value: ${{ targetType }}
     - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType }}
