@@ -23,9 +23,7 @@ stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType }}
     variables:
-    - name: targetType
-      value: ${{ targetType }}
-    - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+    - template: /${{parameters.tenant}}/variables/${{ targetType }}/variables-template.yml
     pool:
       name: 'pool-${{ targetType }}'
       vmImage: 'ubuntu-latest'
@@ -42,5 +40,5 @@ stages:
             - template: /pipelines/api-configure-template.yml  # Template reference
               parameters:
                 environment: $(environment)
-                type: $(targetType)
+                type: ${{ targetType }}
                 tenant: ${{parameters.tenant}}
