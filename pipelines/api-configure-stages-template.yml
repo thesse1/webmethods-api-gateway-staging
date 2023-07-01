@@ -27,7 +27,7 @@ stages:
       value: ${{ targetType }}
     - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
     pool:
-      name: 'vmssagentpool'
+      name: 'pool-${{ targetType }}'
       vmImage: 'ubuntu-latest'
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType }}
