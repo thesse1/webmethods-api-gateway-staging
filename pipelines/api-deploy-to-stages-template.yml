@@ -44,9 +44,7 @@ stages:
   - stage: ${{ targetType.stage }}
     jobs:
     - deployment: Build_for_${{ targetType.stage }}
-      environment:
-        name: '${{ parameters.build_type[0].stage }}'
-        tags: ${{parameters.apiProject}}
+      environment: '${{ parameters.build_type[0].stage }}-${{parameters.apiProject}}'
       variables:
       - template: /${{parameters.tenant}}/variables/${{ parameters.build_type[0].stage }}/variables-template.yml
       pool:
