@@ -44,12 +44,12 @@ stages:
   - stage: ${{ targetType.stage }}
     jobs:
     - deployment: Build_for_${{ targetType.stage }}
-      environment: '${{ build_type[0].stage }}'
+      environment: '${{ parameters.build_type[0].stage }}'
       variables:
-      - template: /${{parameters.tenant}}/variables/'${{ build_type[0].stage }}'/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/'${{ parameters.build_type[0].stage }}'/variables-template.yml
       pool:
-        name: '${{ build_type[0].pool }}'
-        vmImage: '${{ build_type[0].image }}'
+        name: '${{ parameters.build_type[0].pool }}'
+        vmImage: '${{ parameters.build_type[0].image }}'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
