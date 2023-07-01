@@ -59,12 +59,12 @@ stages:
         environment: ${{ type.stage }}
         variables:
         - template: /${{parameters.tenant}}/variables/${{ type.stage }}/variables-template.yml
+        pool:
+          name: '${{ type.pool }}'
+          vmImage: '${{ type.image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
-              pool:
-                name: '${{ type.pool }}'
-                vmImage: '${{ type.image }}'
               steps:
               - checkout: self
                 submodules: "true"

@@ -10,33 +10,51 @@ parameters:
   displayName: Purge analytics data on which API Gateway stages?
   type: object
   default:
-  - CONFIG
-  - BUILD
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  - stage: CONFIG
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: BUILD
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: DEV_INT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: DEV_EXT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: STAGE_INT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: STAGE_EXT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: PROD_INT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: PROD_EXT
+    pool: vmssagentpool
+    image: ubuntu-latest
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType }}
-    variables:
-      targetType: ${{ targetType }}
+  - stage: ${{ targetType.stage }}
     jobs:
-    - job: Purge_Data_on_${{ targetType }}
+    - deployment: Purge_Data_on_${{ targetType.stage }}
+      environment: ${{ targetType.stage }}
       variables:
-      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
       pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/api-purge-data-template.yml  # Template reference
-        parameters:
-          environment: $(environment)
-          type: ${{ targetType }}
-          tenant: ${{parameters.tenant}}
+        name: ${{ targetType.pool }}'
+        vmImage: '${{ targetType.image }}'
+      strategy:
+        runOnce:    #rolling, canary are the other strategies that are supported
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+            - template: /pipelines/api-purge-data-template.yml  # Template reference
+              parameters:
+                environment: $(environment)
+                type: ${{ targetType.stage }}
+                tenant: ${{parameters.tenant}}

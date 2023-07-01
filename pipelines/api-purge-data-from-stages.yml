@@ -16,11 +16,27 @@ stages:
   parameters:
     tenant: ${{parameters.tenant}}
     target_types:
-    - CONFIG
-    - BUILD
-    - DEV_INT
-    - DEV_EXT
-    - STAGE_INT
-    - STAGE_EXT
-    - PROD_INT
-    - PROD_EXT
+    - stage: CONFIG
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: BUILD
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: DEV_INT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: DEV_EXT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: STAGE_INT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: STAGE_EXT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: PROD_INT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: PROD_EXT
+      pool: vmssagentpool
+      image: ubuntu-latest
