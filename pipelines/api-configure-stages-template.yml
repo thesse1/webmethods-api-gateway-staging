@@ -10,26 +10,34 @@ parameters:
   displayName: Configure API Gateway in which stages?
   type: object
   default:
-  - CONFIG
-  - BUILD
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  - stage: CONFIG
+    pool: vmssagentpool
+  - stage: BUILD
+    pool: vmssagentpool
+  - stage: DEV_INT
+    pool: vmssagentpool
+  - stage: DEV_EXT
+    pool: vmssagentpool
+  - stage: STAGE_INT
+    pool: vmssagentpool
+  - stage: STAGE_EXT
+    pool: vmssagentpool
+  - stage: PROD_INT
+    pool: vmssagentpool
+  - stage: PROD_EXT
+    pool: vmssagentpool
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType }}
+  - stage: ${{ targetType.name }}
     variables:
-    - template: /${{parameters.tenant}}/variables/${{ targetType }}/variables-template.yml
+    - template: /${{parameters.tenant}}/variables/${{ targetType.name }}/variables-template.yml
     pool:
-      name: '$(pool-${{ targetType }})'
+      name: '${{ targetType.pool }}'
       vmImage: 'ubuntu-latest'
     jobs:
-    - deployment: Configure_API_Gateway_${{ targetType }}
-      environment: ${{ targetType }}
+    - deployment: Configure_API_Gateway_${{ targetType.name }}
+      environment: ${{ targetType.name }}
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
@@ -40,5 +48,5 @@ stages:
             - template: /pipelines/api-configure-template.yml  # Template reference
               parameters:
                 environment: $(environment)
-                type: ${{ targetType }}
+                type: ${{ targetType.name }}
                 tenant: ${{parameters.tenant}}

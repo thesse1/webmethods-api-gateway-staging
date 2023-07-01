@@ -16,11 +16,19 @@ stages:
   parameters:
     tenant: ${{parameters.tenant}}
     target_types:
-    - CONFIG
-    - BUILD
-    - DEV_INT
-    - DEV_EXT
-    - STAGE_INT
-    - STAGE_EXT
-    - PROD_INT
-    - PROD_EXT
+    - stage: CONFIG
+      pool: vmssagentpool
+    - stage: BUILD
+      pool: vmssagentpool
+    - stage: DEV_INT
+      pool: vmssagentpool
+    - stage: DEV_EXT
+      pool: vmssagentpool
+    - stage: STAGE_INT
+      pool: vmssagentpool
+    - stage: STAGE_EXT
+      pool: vmssagentpool
+    - stage: PROD_INT
+      pool: vmssagentpool
+    - stage: PROD_EXT
+      pool: vmssagentpool
