@@ -19,26 +19,31 @@ parameters:
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
+pool:
+  name: vmssagentpool
+  vmImage: ubuntu-latest
+
 stages:
 - stage: CONFIG
   jobs:
-  - job: Export_API_from_API_Gateway_CONFIG
+  - deployment: Export_API_from_API_Gateway_CONFIG
+    environment: 'CONFIG'
     variables:
     - template: /${{parameters.tenant}}/variables/CONFIG/variables-template.yml
-    pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
-    steps:
-    - checkout: self
-      submodules: "true"
-      persistCredentials: "true"
-      clean: "true"
-    - template: /pipelines/api-export-api-template.yml  # Template reference
-      parameters:
-        apiProject: ${{parameters.apiProject}}
-        source_environment: $(environment)
-        source_type: CONFIG
-        tenant: ${{parameters.tenant}}
-    - template: /pipelines/commit-template.yml  # Template reference
-      parameters:
-        commitMessage: ${{parameters.commitMessage}}
+    strategy:
+      runOnce:    #rolling, canary are the other strategies that are supported
+        deploy:
+          steps:
+          - checkout: self
+            submodules: "true"
+            persistCredentials: "true"
+            clean: "true"
+          - template: /pipelines/api-export-api-template.yml  # Template reference
+            parameters:
+              apiProject: ${{parameters.apiProject}}
+              source_environment: $(environment)
+              source_type: CONFIG
+              tenant: ${{parameters.tenant}}
+          - template: /pipelines/commit-template.yml  # Template reference
+            parameters:
+              commitMessage: ${{parameters.commitMessage}}
