@@ -44,7 +44,7 @@ stages:
   - stage: ${{ targetType.stage }}
     jobs:
     - deployment: Build_for_${{ targetType.stage }}
-      environment: '${{ parameters.build_type[0].stage }}_${{parameters.apiProject}}'
+      environment: '${{ parameters.build_type[0].stage }}'
       variables:
       - template: /${{parameters.tenant}}/variables/${{ parameters.build_type[0].stage }}/variables-template.yml
       pool:
@@ -73,7 +73,7 @@ stages:
             #     target_type: $(targetType)
 
     - deployment: Deploy_to_API_Gateway_${{ targetType.stage }}
-      environment: '${{ targetType.stage }}_${{parameters.apiProject}}'
+      environment: ${{ targetType.stage }}
       variables:
       - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
       pool:
