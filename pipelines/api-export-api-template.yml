@@ -7,8 +7,8 @@ parameters:
   tenant: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and source_type '${{parameters.source_type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and source_type '${{parameters.source_type}}'
+# - bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and source_type '${{parameters.source_type}}'
+#   displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and source_type '${{parameters.source_type}}'
 
 - bash: |
     if [ -z "$APIPROJECT" ]; then
