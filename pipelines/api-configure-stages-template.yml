@@ -12,32 +12,40 @@ parameters:
   default:
   - stage: CONFIG
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: BUILD
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: DEV_INT
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: DEV_EXT
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: STAGE_INT
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: STAGE_EXT
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: PROD_INT
     pool: vmssagentpool
+    image: ubuntu-latest
   - stage: PROD_EXT
     pool: vmssagentpool
+    image: ubuntu-latest
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType.stage }}
     variables:
     - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
-    pool:
-      name: '${{ targetType.pool }}'
-      vmImage: 'ubuntu-latest'
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType.stage }}
       environment: ${{ targetType.stage }}
+      pool:
+        name: '${{ targetType.pool }}'
+        vmImage: '${{ targetType.image }}'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
