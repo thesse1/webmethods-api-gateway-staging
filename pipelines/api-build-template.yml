@@ -12,6 +12,7 @@ steps:
 - bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and target_type '${{parameters.target_type}}'
   displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and target_type '${{parameters.target_type}}'
 
+
 - bash: |
     if [ -z "$APIPROJECT" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
