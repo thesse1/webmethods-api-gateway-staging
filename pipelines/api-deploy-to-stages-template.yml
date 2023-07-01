@@ -57,6 +57,7 @@ stages:
             - checkout: self
               submodules: "true"
               persistCredentials: "true"
+            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
             - template: /pipelines/api-build-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
