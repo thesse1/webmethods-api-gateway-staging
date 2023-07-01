@@ -74,7 +74,7 @@ stages:
 
     - deployment: Deploy_to_API_Gateway_${{ targetType.stage }}
       environment:
-        name: ${{ targetType.stage }}
+        name: '${{ targetType.stage }}-${{parameters.apiProject}}'
         resourceName: ${{parameters.apiProject}}
       variables:
       - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
