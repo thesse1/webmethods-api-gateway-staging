@@ -23,12 +23,12 @@ stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType }}
     variables:
-      targetType: ${{ targetType }}
+    - name: targetType
+      value: ${{ targetType }}
+    - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType }}
       environment: ${{ targetType }}
-      variables:
-      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
