@@ -9,68 +9,93 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
+- name: build_type
+  displayName: Build on which stage?
+  type: object
+  default: 
+  - stage: BUILD
+    pool: vmssagentpool
+    image: ubuntu-latest
 - name: target_types
   displayName: Deploy to which stages?
   type: object
-  default: 
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  default:
+  - stage: DEV_INT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: DEV_EXT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: STAGE_INT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: STAGE_EXT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: PROD_INT
+    pool: vmssagentpool
+    image: ubuntu-latest
+  - stage: PROD_EXT
+    pool: vmssagentpool
+    image: ubuntu-latest
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType }}
-    variables:
-      targetType: ${{ targetType }}
+  - stage: ${{ targetType.stage }}
     jobs:
-    - job: Build_for_${{ targetType }}
+    - deployment: Build_for_${{ targetType.stage }}
+      environment: ${{ build_Type[0].stage }}
       variables:
-      - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/${{ build_Type[0].stage }}/variables-template.yml
       pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/api-build-template.yml  # Template reference
-        parameters:
-          apiProject: ${{parameters.apiProject}}
-          build_environment: $(environment)
-          target_type: $(targetType)
-          prep_condition: ${{true}}
-          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: ${{parameters.tenant}}
-      - template: /pipelines/store-build-template.yml  # Template reference
-        parameters:
-          target_type: $(targetType)
-      # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
-      #   parameters:
-      #     target_type: $(targetType)
+        name: '${{ build_Type[0].pool }}'
+        vmImage: '${{ build_Type[0].image }}'
+      strategy:
+        runOnce:    #rolling, canary are the other strategies that are supported
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+            - template: /pipelines/api-build-template.yml  # Template reference
+              parameters:
+                apiProject: ${{parameters.apiProject}}
+                build_environment: $(environment)
+                target_type: ${{ targetType.stage }}
+                prep_condition: ${{true}}
+                test_condition: ${{ ne(${{ targetType.stage }}, 'CONFIG') }}
+                tenant: ${{parameters.tenant}}
+            - template: /pipelines/store-build-template.yml  # Template reference
+              parameters:
+                target_type: ${{ targetType.stage }}
+            # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+            #   parameters:
+            #     target_type: $(targetType)
 
-    - job: Deploy_to_API_Gateway_${{ targetType }}
+    - deployment: Deploy_to_API_Gateway_${{ targetType.stage }}
+      environment: ${{ targetType.stage }}
       variables:
-      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/${{variables.targetType.stage}}/variables-template.yml
       pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/retrieve-build-template.yml  # Template reference
-        parameters:
-            target_type: $(targetType)
-      - template: /pipelines/api-deploy-template.yml  # Template reference
-        parameters:
-          apiProject: ${{parameters.apiProject}}
-          target_environment: $(environment)
-          target_type: $(targetType)
-          prep_condition: ${{true}}
-          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: ${{parameters.tenant}}
-      dependsOn: Build_for_${{ targetType }}
+        name: '${{ targetType.pool }}'
+        vmImage: '${{ targetType.image }}'
+      strategy:
+        runOnce:    #rolling, canary are the other strategies that are supported
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+            - template: /pipelines/retrieve-build-template.yml  # Template reference
+              parameters:
+                  target_type: ${{ targetType.stage }}
+            - template: /pipelines/api-deploy-template.yml  # Template reference
+              parameters:
+                apiProject: ${{parameters.apiProject}}
+                target_environment: $(environment)
+                target_type: ${{ targetType.stage }}
+                prep_condition: ${{true}}
+                test_condition: ${{ ne(${{ targetType.stage }}, 'CONFIG') }}
+                tenant: ${{parameters.tenant}}
+      dependsOn: Build_for_${{ targetType.stage }}
       condition: succeeded()

@@ -38,11 +38,11 @@ parameters:
 stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType.stage }}
-    variables:
-    - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType.stage }}
       environment: ${{ targetType.stage }}
+      variables:
+      - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
       pool:
         name: '${{ targetType.pool }}'
         vmImage: '${{ targetType.image }}'
