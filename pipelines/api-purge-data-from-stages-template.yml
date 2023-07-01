@@ -44,7 +44,7 @@ stages:
       variables:
       - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
       pool:
-        name: ${{ targetType.pool }}'
+        name: '${{ targetType.pool }}'
         vmImage: '${{ targetType.image }}'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
