@@ -29,15 +29,15 @@ parameters:
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType.name }}
+  - stage: ${{ targetType.stage }}
     variables:
-    - template: /${{parameters.tenant}}/variables/${{ targetType.name }}/variables-template.yml
+    - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
     pool:
       name: '${{ targetType.pool }}'
       vmImage: 'ubuntu-latest'
     jobs:
-    - deployment: Configure_API_Gateway_${{ targetType.name }}
-      environment: ${{ targetType.name }}
+    - deployment: Configure_API_Gateway_${{ targetType.stage }}
+      environment: ${{ targetType.stage }}
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
@@ -48,5 +48,5 @@ stages:
             - template: /pipelines/api-configure-template.yml  # Template reference
               parameters:
                 environment: $(environment)
-                type: ${{ targetType.name }}
+                type: ${{ targetType.stage }}
                 tenant: ${{parameters.tenant}}
