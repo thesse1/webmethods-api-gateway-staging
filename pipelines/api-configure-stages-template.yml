@@ -26,12 +26,12 @@ stages:
     - name: targetType
       value: ${{ targetType }}
     - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+    pool:
+      name: '$(agent_pool)'
+      vmImage: '$(agent_pool_vmImage)'
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType }}
       environment: ${{ targetType }}
-      pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
