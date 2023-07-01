@@ -12,7 +12,7 @@ parameters:
   - realworld
 - name: sourceType
   displayName: Export API Gateway configuration from which API Gateway?
-  type: string
+  type: object
   values:
   - stage: CONFIG
     pool: vmssagentpool
