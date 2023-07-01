@@ -25,18 +25,22 @@ stages:
     variables:
       targetType: ${{ targetType }}
     jobs:
-    - job: Configure_API_Gateway_${{ targetType }}
+    - deployment: Configure_API_Gateway_${{ targetType }}
+      environment: ${{ targetType }}
       variables:
       - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/api-configure-template.yml  # Template reference
-        parameters:
-          environment: $(environment)
-          type: $(targetType)
-          tenant: ${{parameters.tenant}}
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - template: /pipelines/api-configure-template.yml  # Template reference
+                parameters:
+                  environment: $(environment)
+                  type: $(targetType)
+                  tenant: ${{parameters.tenant}}
