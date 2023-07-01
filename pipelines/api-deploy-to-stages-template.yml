@@ -46,7 +46,7 @@ stages:
     - deployment: Build_for_${{ targetType.stage }}
       environment: '${{ parameters.build_type[0].stage }}'
       variables:
-      - template: /${{parameters.tenant}}/variables/${{ parameters.build_type[0].stage }}/variables-template.yml
+      - template: '/${{parameters.tenant}}/variables/${{ parameters.build_type[0].stage }}/variables-template.yml'
       pool:
         name: '${{ parameters.build_type[0].pool }}'
         vmImage: '${{ parameters.build_type[0].image }}'
