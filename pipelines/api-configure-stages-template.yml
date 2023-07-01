@@ -25,7 +25,7 @@ stages:
     variables:
     - template: /${{parameters.tenant}}/variables/${{ targetType }}/variables-template.yml
     pool:
-      name: 'pool-${{ targetType }}'
+      name: '$(pool-${{ targetType }})'
       vmImage: 'ubuntu-latest'
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType }}
