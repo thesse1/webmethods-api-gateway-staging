@@ -77,3 +77,4 @@ stages:
               - template: /pipelines/commit-template.yml  # Template reference
                 parameters:
                   commitMessage: ${{parameters.commitMessage}}
+              - bash: echo "##vso[build.addbuildtag]${{type.stage}}"

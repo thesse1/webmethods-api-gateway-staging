@@ -58,3 +58,4 @@ stages:
                 environment: $(environment)
                 type: ${{ targetType.stage }}
                 tenant: ${{parameters.tenant}}
+            - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
