@@ -23,7 +23,7 @@ stages:
     tenant: ${{parameters.tenant}}
     apiProjects:
     - petstore
-    - petstore_basicauth
+    # - petstore_basicauth
     - petstore_versioning
     build_type:
     - stage: BUILD
