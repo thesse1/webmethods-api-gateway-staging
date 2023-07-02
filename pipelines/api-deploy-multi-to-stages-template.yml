@@ -58,9 +58,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - bash: echo "##vso[build.addbuildtag]${{apiProject}}"
-              - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
-              - bash: echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_type[0].stage}}"
+              - download: none
               - template: /pipelines/api-build-template.yml  # Template reference
                 parameters:
                   apiProject: ${{apiProject}}
@@ -73,6 +71,9 @@ stages:
                 parameters:
                   target_type: ${{ targetType.stage }}
                   apiProject: ${{apiProject}}
+              - bash: echo "##vso[build.addbuildtag]${{apiProject}}"
+              - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
+              - bash: echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_type[0].stage}}"
               # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
               #   parameters:
               #     target_type: $(targetType)

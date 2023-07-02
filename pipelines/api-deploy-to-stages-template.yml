@@ -57,9 +57,7 @@ stages:
             - checkout: self
               submodules: "true"
               persistCredentials: "true"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_type[0].stage}}"
+            - download: none
             - template: /pipelines/api-build-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
@@ -72,6 +70,9 @@ stages:
               parameters:
                 target_type: ${{ targetType.stage }}
                 apiProject: ${{apiProject}}
+            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
+            - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
+            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_type[0].stage}}"
             # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
             #   parameters:
             #     target_type: $(targetType)
@@ -90,9 +91,6 @@ stages:
             - checkout: self
               submodules: "true"
               persistCredentials: "true"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-            - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{targetType.stage}}"
             - template: /pipelines/retrieve-build-template.yml  # Template reference
               parameters:
                   target_type: ${{ targetType.stage }}
@@ -105,5 +103,8 @@ stages:
                 prep_condition: ${{true}}
                 test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
+            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
+            - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
+            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{targetType.stage}}"
       dependsOn: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
       condition: succeeded()
