@@ -48,8 +48,8 @@ parameters:
     image: ubuntu-latest
 
 stages:
-- ${{ each targetType in parameters.target_types }}:
-  - ${{ each apiProject in parameters.apiProjects }}:
+- ${{ each apiProject in parameters.apiProjects }}:
+  - ${{ each targetType in parameters.target_types }}:
     - stage: ${{ targetType.stage }}_${{ apiProject }}
       jobs:
       - deployment: 'Build_${{apiProject}}_for_${{ targetType.stage }}'
