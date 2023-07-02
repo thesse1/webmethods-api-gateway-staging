@@ -49,9 +49,9 @@ parameters:
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType.stage }}_${{parameters.api_group}}
-    jobs:
-    - ${{ each apiProject in parameters.apiProjects }}:
+  - ${{ each apiProject in parameters.apiProjects }}:
+    - stage: ${{ targetType.stage }}_${{ apiProject }}
+      jobs:
       - deployment: 'Build_${{apiProject}}_for_${{ targetType.stage }}'
         environment: '${{ parameters.build_type[0].stage }}'
         variables:
