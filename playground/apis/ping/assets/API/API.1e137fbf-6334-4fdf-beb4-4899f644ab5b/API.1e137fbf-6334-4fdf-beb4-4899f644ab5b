@@ -6,7 +6,7 @@
     },
     "serviceRegistryDisplayName" : "Ping_1.0",
     "tags" : [ {
-      "name" : "Ping Pong"
+      "name" : "Test"
     } ],
     "schemes" : [ ],
     "security" : [ ],
@@ -69,7 +69,7 @@
       "links" : { },
       "callbacks" : { }
     },
-    "apiTags" : [ "Ping Pong" ],
+    "apiTags" : [ "Test" ],
     "type" : "rest"
   },
   "nativeEndpoint" : [ {
@@ -91,7 +91,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-18 12:46:12 GMT",
-  "lastModified" : "2023-07-01 20:49:17 GMT",
+  "lastModified" : "2023-07-02 05:52:10 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
