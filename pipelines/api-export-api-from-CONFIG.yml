@@ -39,7 +39,7 @@ stages:
             persistCredentials: "true"
             clean: "true"
           - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-          - bash: echo "##vso[build.addbuildtag]$CONFIG"
+          - bash: echo "##vso[build.addbuildtag]CONFIG"
           - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_CONFIG"
           - template: /pipelines/api-export-api-template.yml  # Template reference
             parameters:
