@@ -6,9 +6,6 @@ parameters:
   tenant: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
-
 - bash: |
     if [ -z "$ENVIRONMENT" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"environment\""
