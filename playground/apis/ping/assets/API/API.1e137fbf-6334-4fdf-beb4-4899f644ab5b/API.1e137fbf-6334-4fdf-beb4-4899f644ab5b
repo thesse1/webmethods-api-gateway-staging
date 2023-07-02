@@ -5,6 +5,9 @@
       "title" : "Ping"
     },
     "serviceRegistryDisplayName" : "Ping_1.0",
+    "tags" : [ {
+      "name" : "Ping Pong"
+    } ],
     "schemes" : [ ],
     "security" : [ ],
     "paths" : {
@@ -15,6 +18,7 @@
           "responses" : {
             "200" : {
               "description" : "Ping response",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -65,6 +69,7 @@
       "links" : { },
       "callbacks" : { }
     },
+    "apiTags" : [ "Ping Pong" ],
     "type" : "rest"
   },
   "nativeEndpoint" : [ {
@@ -86,9 +91,8 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-18 12:46:12 GMT",
-  "lastModified" : "2021-11-30 06:53:53 GMT",
+  "lastModified" : "2023-07-01 20:49:17 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
-  "deployments" : [ "APIGateway" ],
   "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
 }
