@@ -45,6 +45,7 @@
           "summary" : "Update an existing pet",
           "operationId" : "updatePet",
           "consumes" : [ "application/xml", "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "400" : {
               "description" : "Invalid ID supplied",
@@ -98,6 +99,7 @@
           "summary" : "Add a new pet to the store",
           "operationId" : "addPet",
           "consumes" : [ "application/xml", "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "405" : {
               "description" : "Invalid input",
@@ -130,6 +132,7 @@
             "name" : "addPet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet",
         "enabled" : true
@@ -141,9 +144,6 @@
           "operationId" : "getUserByName",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -208,9 +208,6 @@
           "operationId" : "updateUser",
           "consumes" : [ "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -260,9 +257,6 @@
           "description" : "This can only be done by the logged in user.",
           "operationId" : "deleteUser",
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "path",
             "parameterSchema" : {
               "type" : "string"
@@ -299,6 +293,7 @@
             "name" : "deleteUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/{username}",
         "enabled" : true
@@ -311,9 +306,6 @@
           "operationId" : "findPetsByStatus",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -365,6 +357,7 @@
             "name" : "findPetsByStatus"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/findByStatus",
         "enabled" : true
@@ -375,6 +368,7 @@
           "summary" : "Creates list of users with given input array",
           "operationId" : "createUsersWithListInput",
           "consumes" : [ "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -402,6 +396,7 @@
             "name" : "createUsersWithListInput"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/createWithList",
         "enabled" : true
@@ -414,10 +409,6 @@
           "consumes" : [ "multipart/form-data" ],
           "produces" : [ "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -463,6 +454,7 @@
             "name" : "uploadFile"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/{petId}/uploadImage",
         "enabled" : true
@@ -474,6 +466,7 @@
           "description" : "Returns a map of status codes to quantities",
           "operationId" : "getInventory",
           "produces" : [ "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
@@ -501,6 +494,7 @@
             "name" : "getInventory"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/store/inventory",
         "enabled" : true
@@ -512,9 +506,6 @@
           "operationId" : "loginUser",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -524,9 +515,6 @@
             "type" : "string",
             "required" : true
           }, {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -578,6 +566,7 @@
             "name" : "loginUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/login",
         "enabled" : true
@@ -589,6 +578,7 @@
           "description" : "This can only be done by the logged in user.",
           "operationId" : "createUser",
           "consumes" : [ "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -615,6 +605,7 @@
             "name" : "createUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user",
         "enabled" : true
@@ -625,6 +616,7 @@
           "summary" : "Creates list of users with given input array",
           "operationId" : "createUsersWithArrayInput",
           "consumes" : [ "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -652,6 +644,7 @@
             "name" : "createUsersWithArrayInput"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/createWithArray",
         "enabled" : true
@@ -664,9 +657,6 @@
           "operationId" : "findPetsByTags",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "query",
             "parameterSchema" : {
               "type" : "string"
@@ -719,6 +709,7 @@
             "name" : "findPetsByTags"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/findByTags",
         "enabled" : true
@@ -730,6 +721,7 @@
           "operationId" : "placeOrder",
           "consumes" : [ "application/json" ],
           "produces" : [ "application/xml", "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
@@ -777,6 +769,7 @@
             "name" : "placeOrder"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/store/order",
         "enabled" : true
@@ -786,6 +779,7 @@
           "tags" : [ "user" ],
           "summary" : "Logs out current logged in user session",
           "operationId" : "logoutUser",
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -805,6 +799,7 @@
             "name" : "logoutUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/logout",
         "enabled" : true
@@ -817,10 +812,6 @@
           "operationId" : "getPetById",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -886,10 +877,6 @@
           "operationId" : "updatePetWithForm",
           "consumes" : [ "application/x-www-form-urlencoded" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -933,9 +920,6 @@
           "summary" : "Deletes a pet",
           "operationId" : "deletePet",
           "parameters" : [ {
-            "schema" : {
-              "type" : "string"
-            },
             "in" : "header",
             "parameterSchema" : {
               "type" : "string"
@@ -944,10 +928,6 @@
             "type" : "string",
             "required" : false
           }, {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -986,6 +966,7 @@
             "name" : "deletePet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/{petId}",
         "enabled" : true
@@ -998,10 +979,6 @@
           "operationId" : "getOrderById",
           "produces" : [ "application/xml", "application/json" ],
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1067,10 +1044,6 @@
           "description" : "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
           "operationId" : "deleteOrder",
           "parameters" : [ {
-            "schema" : {
-              "format" : "int64",
-              "type" : "integer"
-            },
             "in" : "path",
             "parameterSchema" : {
               "format" : "int64",
@@ -1109,6 +1082,7 @@
             "name" : "deleteOrder"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/store/order/{orderId}",
         "enabled" : true
@@ -1171,7 +1145,7 @@
   } ],
   "apiName" : "SwaggerPetstore",
   "apiVersion" : "1.0",
-  "apiDescription" : "REAL: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+  "apiDescription" : "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
   "maturityState" : "Experimental",
   "apiGroups" : [ "Internal" ],
   "isActive" : true,
@@ -1185,7 +1159,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-17 07:22:07 GMT",
-  "lastModified" : "2021-09-24 10:16:58 GMT",
+  "lastModified" : "2021-09-08 13:23:15 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"

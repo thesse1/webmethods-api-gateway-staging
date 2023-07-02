@@ -1,0 +1,37 @@
+{
+  "id" : "b139a751-8fbc-4434-83aa-9bbcf986661e",
+  "names" : [ {
+    "value" : "Default Policy for API StarWarsDemoAPI",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "ffb0ce10-49e4-49ca-b2de-b506bf3a3837",
+      "order" : "0"
+    } ],
+    "stageKey" : "requestPayloadProcessing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "9af7124f-390d-419a-ac97-7efa442a3ca2",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "44cbba20-082f-400a-b815-c2f705aec445",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "systemPolicy" : false,
+  "global" : false,
+  "active" : false
+}
