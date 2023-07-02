@@ -1,0 +1,51 @@
+# Pipeline for apig staging
+
+trigger: none
+
+parameters:
+- name: tenant
+  displayName: Deploy API project on API Gateway stages in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+
+variables:
+- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
+# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+
+stages:
+- template: /pipelines/api-deploy-multi-to-stages-template.yml  # Template reference
+  parameters:
+    tenant: ${{parameters.tenant}}
+    apiProjects:
+    - number_conversion
+    - odata_tutorial
+    - ping
+    - star_wars
+    build_type:
+    - stage: BUILD
+      pool: vmssagentpool
+      image: ubuntu-latest
+    target_types:
+    - stage: DEV_INT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: DEV_EXT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: STAGE_INT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: STAGE_EXT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: PROD_INT
+      pool: vmssagentpool
+      image: ubuntu-latest
+    - stage: PROD_EXT
+      pool: vmssagentpool
+      image: ubuntu-latest
