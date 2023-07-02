@@ -43,7 +43,7 @@ stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType.stage }}
     jobs:
-    - deployment: Build_for_${{ targetType.stage }}
+    - deployment: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
       environment: '${{ parameters.build_type[0].stage }}'
       variables:
       - template: /${{parameters.tenant}}/variables/${{ parameters.build_type[0].stage }}/variables-template.yml
@@ -73,7 +73,7 @@ stages:
             #   parameters:
             #     target_type: $(targetType)
 
-    - deployment: Deploy_to_API_Gateway_${{ targetType.stage }}
+    - deployment: 'Deploy_${{parameters.apiProject}}_to_API_Gateway_${{ targetType.stage }}'
       environment: ${{ targetType.stage }}
       variables:
       - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
@@ -98,5 +98,5 @@ stages:
                 prep_condition: ${{true}}
                 test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
-      dependsOn: Build_for_${{ targetType.stage }}
+      dependsOn: 'Build_for_${{parameters.apiProject}}_${{ targetType.stage }}'
       condition: succeeded()
