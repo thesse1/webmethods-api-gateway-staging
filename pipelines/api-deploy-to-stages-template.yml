@@ -100,5 +100,5 @@ stages:
                 prep_condition: ${{true}}
                 test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
-      dependsOn: 'Build_API_for_${{parameters.apiProject}}_${{ targetType.stage }}'
+      dependsOn: 'Build_API_for_${{ targetType.stage }}'
       condition: succeeded()
