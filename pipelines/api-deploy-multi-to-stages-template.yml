@@ -59,6 +59,8 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - bash: echo "##vso[build.addbuildtag]${{apiProject}}"
+              - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
+              - bash: echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_type[0].stage}}"
               - template: /pipelines/api-build-template.yml  # Template reference
                 parameters:
                   apiProject: ${{apiProject}}
@@ -101,5 +103,8 @@ stages:
                   prep_condition: ${{true}}
                   test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
                   tenant: ${{parameters.tenant}}
+              - bash: echo "##vso[build.addbuildtag]${{apiProject}}"
+              - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
+              - bash: echo "##vso[build.addbuildtag]${{apiProject}}_${{targetType.stage}}"
         dependsOn: 'Build_${{apiProject}}_for_${{ targetType.stage }}'
         condition: succeeded()
