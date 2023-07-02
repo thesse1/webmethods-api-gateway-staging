@@ -78,6 +78,7 @@ stages:
               - template: /pipelines/store-build-template.yml  # Template reference
                 parameters:
                   target_type: ${{ targetType.stage }}
+                  apiProject: ${{apiProject}}
               # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
               #   parameters:
               #     target_type: $(targetType)
@@ -99,6 +100,7 @@ stages:
               - template: /pipelines/retrieve-build-template.yml  # Template reference
                 parameters:
                     target_type: ${{ targetType.stage }}
+                    apiProject: ${{apiProject}}
               - template: /pipelines/api-deploy-template.yml  # Template reference
                 parameters:
                   apiProject: ${{apiProject}}
