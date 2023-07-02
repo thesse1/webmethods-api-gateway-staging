@@ -9,6 +9,14 @@ parameters:
 - name: apiProjects
   displayName: Deploy which API projects?
   type: object
+- name: api_group
+  displayName: Deploy which API type?
+  type: string
+  default: intext
+  values:
+  - intext
+  - internal
+  - external
 - name: build_type
   displayName: Build on which stage?
   type: object
@@ -41,7 +49,7 @@ parameters:
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType.stage }}
+  - stage: ${{ targetType.stage }}_${{parameters.api_group}}
     jobs:
     - ${{ each apiProject in parameters.apiProjects }}:
       - deployment: 'Build_${{apiProject}}_for_${{ targetType.stage }}'
