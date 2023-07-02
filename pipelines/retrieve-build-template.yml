@@ -4,7 +4,6 @@ parameters:
   target_type: ''
   apiProject: ''
 
-
 steps:
 - bash: |
     if [ -z "$TARGET_TYPE" ]; then

@@ -54,7 +54,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip'
-    artifactName: '${{parameters.target_type}}_import'
+    artifactName: '${{parameters.apiProject}}_${{parameters.target_type}}_import'
 
 - bash: |
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/scopes.json`"
