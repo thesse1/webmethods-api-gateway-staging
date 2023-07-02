@@ -33,18 +33,9 @@ stages:
     - stage: DEV_INT
       pool: vmssagentpool
       image: ubuntu-latest
-    - stage: DEV_EXT
-      pool: vmssagentpool
-      image: ubuntu-latest
     - stage: STAGE_INT
       pool: vmssagentpool
       image: ubuntu-latest
-    - stage: STAGE_EXT
-      pool: vmssagentpool
-      image: ubuntu-latest
     - stage: PROD_INT
-      pool: vmssagentpool
-      image: ubuntu-latest
-    - stage: PROD_EXT
       pool: vmssagentpool
       image: ubuntu-latest
