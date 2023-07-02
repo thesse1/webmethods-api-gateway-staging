@@ -9,14 +9,6 @@ parameters:
 - name: apiProjects
   displayName: Deploy which API projects?
   type: object
-- name: api_group
-  displayName: Deploy which API type?
-  type: string
-  default: intext
-  values:
-  - intext
-  - internal
-  - external
 - name: build_type
   displayName: Build on which stage?
   type: object

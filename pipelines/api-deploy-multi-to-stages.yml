@@ -26,7 +26,6 @@ stages:
     - odata_tutorial
     - ping
     - star_wars
-    api_group: intext
     build_type:
     - stage: BUILD
       pool: vmssagentpool
@@ -58,7 +57,6 @@ stages:
     - petstore
     - petstore_basicauth
     - petstore_versioning
-    api_group: internal
     build_type:
     - stage: BUILD
       pool: vmssagentpool
@@ -84,7 +82,6 @@ stages:
     - postman_mocking
     - multiple_tenants
     - security_alias
-    api_group: external
     build_type:
     - stage: BUILD
       pool: vmssagentpool
