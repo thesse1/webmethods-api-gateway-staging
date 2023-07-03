@@ -1,8 +1,0 @@
-{
-  "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-  "name" : "PetStore_Routing_Alias_1_0_8",
-  "description" : "Petstore alias for API version 1.0.8 on CONFIG",
-  "type" : "simple",
-  "owner" : "Administrator",
-  "value" : "https://petstore.swagger.io/v2"
-}
