@@ -4,19 +4,25 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "playbuild.apigw-aw-eu.webmethods.io",
+			"value": "build.apigateway.932589283db54fedaf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "playbuild.apigw-aw-eu.webmethods.io",
+			"value": "build.apigateway.932589283db54fedaf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "port",
 			"value": "443",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "insecureflag",
+			"value": "--insecure",
 			"type": "text",
 			"enabled": true
 		}
