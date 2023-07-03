@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "prod-int.apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
+			"value": "prod-int-apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "prod-int.apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
+			"value": "prod-int-apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
