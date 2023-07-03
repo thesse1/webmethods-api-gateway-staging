@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "2dbe63f7-9326-4c46-8469-b208dea3441f",
-		"name": "APITest Postman OData Tutorial",
+		"name": "API Test for odata-tutorial",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
