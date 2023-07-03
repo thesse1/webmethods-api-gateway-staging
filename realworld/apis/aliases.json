@@ -1,0 +1,71 @@
+{
+  "petstore-routing-alias": {
+    "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
+    "DEV_INT": {
+      "name" : "PetStore_Routing_Alias",
+      "description" : "Petstore alias on DEV_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "STAGE_INT": {
+      "name" : "PetStore_Routing_Alias",
+      "description" : "Petstore alias on STAGE_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD_INT": {
+      "name" : "PetStore_Routing_Alias",
+      "description" : "Petstore alias on PROD_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  },
+  "postman-echo-routing-alias": {
+    "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
+    "DEV_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on DEV_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 100,
+      "readTimeout" : 100,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "STAGE_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on STAGE_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 50,
+      "readTimeout" : 50,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "PROD_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on PROD_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 20,
+      "readTimeout" : 20,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    }
+  }
+}
