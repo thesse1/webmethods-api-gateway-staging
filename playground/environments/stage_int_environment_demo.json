@@ -4,19 +4,25 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "playstageint.apigw-aw-eu.webmethods.io",
+			"value": "stage-int.apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "playstageint.apigw-aw-eu.webmethods.io",
+			"value": "stage-int.apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "port",
 			"value": "443",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "insecureflag",
+			"value": "--insecure",
 			"type": "text",
 			"enabled": true
 		}
