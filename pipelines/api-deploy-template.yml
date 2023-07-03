@@ -43,12 +43,12 @@ steps:
     TENANT: ${{parameters.tenant}}
   displayName: Check for required parameters
 
-- task: FileTransform@1
-  displayName: 'Replace hostname, ip and port in environment configuration'
-  inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)/**/'
-    targetFiles: '**/${{parameters.target_environment}}'
-    fileType: json
+# - task: FileTransform@1
+#   displayName: 'Replace hostname, ip and port in environment configuration'
+#   inputs:
+#     folderPath: '$(System.DefaultWorkingDirectory)/**/'
+#     targetFiles: '**/${{parameters.target_environment}}'
+#     fileType: json
 
 - bash: |
    echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.target_environment}}`"
