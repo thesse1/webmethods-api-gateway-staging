@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "666d9c2a-1494-46f8-94a8-19b250eb9f90",
 		"name": "Initialize_BUILD",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-666d9c2a-1494-46f8-94a8-19b250eb9f90"
 	},
 	"item": [
 		{
@@ -11,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "d6d7c7ac-0013-4a1b-b307-f026bcb73e09",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -33,6 +35,10 @@
 					}
 				}
 			],
+			"id": "2db75c48-a355-4a6f-ac05-4bded9b183b6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -48,7 +54,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{api-hostname}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://{{api-hostname}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,6 +93,10 @@
 					}
 				}
 			],
+			"id": "4bb41b23-7a53-4a7a-9dce-dea831c1662b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -164,6 +174,7 @@
 					}
 				}
 			],
+			"id": "e29bbac3-5d7d-4995-8048-cba85c846983",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -250,6 +261,10 @@
 					}
 				}
 			],
+			"id": "1904c9e0-5ec9-46cf-a3a6-d70fee4bbb03",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
