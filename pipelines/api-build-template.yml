@@ -70,6 +70,7 @@ steps:
    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
+   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname, port and insecureflag'
 
@@ -106,7 +107,7 @@ steps:
 - script: |
     newman run ${{parameters.tenant}}/apis/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml \
     -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
+    $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway BUILD'
   env:
