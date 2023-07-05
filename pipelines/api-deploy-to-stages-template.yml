@@ -96,7 +96,7 @@ stages:
             - template: /pipelines/retrieve-build-template.yml  # Template reference
               parameters:
                   target_type: ${{ targetType.stage }}
-                  apiProject: ${{apiProject}}
+                  apiProject: ${{parameters.apiProject}}
             - template: /pipelines/api-deploy-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
