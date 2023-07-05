@@ -1,6 +1,15 @@
 # Pipeline for apig staging
 
-trigger: none
+trigger:
+  branches:
+    include:
+    - azure-demo
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true # Run this pipeline when any run of test-remote-invoke completes
 
 parameters:
 - name: tenant
@@ -10,21 +19,26 @@ parameters:
   values:
   - playground
   - realworld
-- name: apiProject
-  displayName: Deploy which API project?
-  type: string
+# - name: apiProject
+#   displayName: Deploy which API project?
+#   type: string
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
 - template: /pipelines/api-deploy-to-stages-template.yml  # Template reference
   parameters:
-    apiProject: ${{parameters.apiProject}}
+    # apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
+    apiProjects:
+    # - number_conversion
+    - odata_tutorial
+    - ping
+    - star_wars
     build_type:
     - stage: BUILD
       pool: vmsspoolagents
