@@ -28,24 +28,24 @@ stages:
     - star_wars
     build_type:
     - stage: BUILD
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: DEV_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: DEV_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest

@@ -28,26 +28,26 @@ stages:
     - star_wars
     build_type:
     - stage: BUILD
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: DEV_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: DEV_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
 
 - template: /pipelines/api-deploy-multi-to-stages-template.yml  # Template reference
@@ -59,17 +59,17 @@ stages:
     - petstore_versioning
     build_type:
     - stage: BUILD
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: DEV_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_INT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
 
 - template: /pipelines/api-deploy-multi-to-stages-template.yml  # Template reference
@@ -84,15 +84,15 @@ stages:
     - security_alias
     build_type:
     - stage: BUILD
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: DEV_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest

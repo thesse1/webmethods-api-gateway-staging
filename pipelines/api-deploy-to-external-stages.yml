@@ -30,15 +30,15 @@ stages:
     - security_alias
     build_type:
     - stage: BUILD
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: DEV_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_EXT
-      pool: vmssagentpool
+      pool: vmsspoolagents
       image: ubuntu-latest
