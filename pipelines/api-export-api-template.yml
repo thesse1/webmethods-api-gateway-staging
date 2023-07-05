@@ -7,9 +7,6 @@ parameters:
   tenant: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and source_type '${{parameters.source_type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}', apiProject '${{parameters.apiProject}}' and source_type '${{parameters.source_type}}'
-
 - bash: |
     if [ -z "$APIPROJECT" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
@@ -70,7 +67,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
-    artifactName: '${{parameters.source_type}}_export'
+    artifactName: '${{parameters.apiProject}}_${{parameters.source_type}}_export'
 
 - task: ExtractFiles@1
   inputs:

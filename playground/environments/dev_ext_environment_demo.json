@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "playdevext.apigw-aw-eu.webmethods.io",
+			"value": "dev-ext-apigateway-admin.azure-softwareag-demo.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "playdevext.apigw-aw-eu.webmethods.io",
+			"value": "dev-ext-apigateway-admin.azure-softwareag-demo.com",
 			"type": "text",
 			"enabled": true
 		},
@@ -18,6 +18,36 @@
 			"key": "port",
 			"value": "443",
 			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "insecureflag",
+			"value": "--insecure",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "api-hostname",
+			"value": "dev-ext-apigateway.azure-softwareag-demo.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-ip",
+			"value": "dev-ext-apigateway.azure-softwareag-demo.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-port",
+			"value": "443",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-insecureflag",
+			"value": "--insecure",
+			"type": "default",
 			"enabled": true
 		}
 	],

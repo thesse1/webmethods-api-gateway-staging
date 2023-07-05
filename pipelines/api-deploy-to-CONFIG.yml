@@ -4,7 +4,7 @@ trigger: none
 
 parameters:
 - name: tenant
-  displayName: Deploy API project on API Gateway CONFIG in which tenant?
+  displayName: Deploy API project on API Gateway stages in which tenant?
   type: string
   default: playground
   values:
@@ -21,55 +21,15 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- stage: CONFIG
-  variables:
-    targetType: CONFIG
-  jobs:
-  - job: Build_for_CONFIG
-    variables:
-    - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
-    pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
-    steps:
-    - checkout: self
-      submodules: "true"
-      persistCredentials: "true"
-    - template: /pipelines/api-build-template.yml  # Template reference
-      parameters:
-        apiProject: ${{parameters.apiProject}}
-        build_environment: $(environment)
-        target_type: $(targetType)
-        prep_condition: ${{true}}
-        test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-        tenant: ${{parameters.tenant}}
-    - template: /pipelines/store-build-template.yml  # Template reference
-      parameters:
-        target_type: $(targetType)
-    # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
-    #   parameters:
-    #     target_type: $(targetType)
-
-  - job: Deploy_to_API_Gateway_CONFIG
-    variables:
-    - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
-    pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
-    steps:
-    - checkout: self
-      submodules: "true"
-      persistCredentials: "true"
-    - template: /pipelines/retrieve-build-template.yml  # Template reference
-      parameters:
-          target_type: $(targetType)
-    - template: /pipelines/api-deploy-template.yml  # Template reference
-      parameters:
-        apiProject: ${{parameters.apiProject}}
-        target_environment: $(environment)
-        target_type: $(targetType)
-        prep_condition: ${{true}}
-        test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-        tenant: ${{parameters.tenant}}
-    dependsOn: Build_for_CONFIG
-    condition: succeeded()
+- template: /pipelines/api-deploy-to-stages-template.yml  # Template reference
+  parameters:
+    apiProject: ${{parameters.apiProject}}
+    tenant: ${{parameters.tenant}}
+    build_type:
+    - stage: BUILD
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    target_types:
+    - stage: CONFIG
+      pool: vmsspoolagents
+      image: ubuntu-latest

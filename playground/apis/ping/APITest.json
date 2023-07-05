@@ -30,7 +30,7 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -40,12 +40,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Ping/1.0/ping",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Ping/1.0/ping",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Ping",

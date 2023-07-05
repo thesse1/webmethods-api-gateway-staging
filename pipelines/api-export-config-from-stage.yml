@@ -27,24 +27,33 @@ parameters:
   type: string
 
 stages:
-- stage: ${{parameters.sourceType}}
-  jobs:
-  - job: Export_config_from_API_Gateway_${{parameters.sourceType}}
-    variables:
-    - template: /${{parameters.tenant}}/variables/${{parameters.sourceType}}/variables-template.yml
-    pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
-    steps:
-    - checkout: self
-      submodules: "true"
-      persistCredentials: "true"
-      clean: "true"
-    - template: /pipelines/api-export-config-template.yml  # Template reference
-      parameters:
-        environment: $(environment)
-        type: ${{parameters.sourceType}}
-        tenant: ${{parameters.tenant}}
-    - template: /pipelines/commit-template.yml  # Template reference
-      parameters:
-        commitMessage: ${{parameters.commitMessage}}
+- template: /pipelines/api-export-config-from-stage-template.yml  # Template reference
+  parameters:
+    tenant: ${{parameters.tenant}}
+    sourceType: ${{parameters.sourceType}}
+    commitMessage: ${{parameters.commitMessage}}
+    source_types:
+    - stage: CONFIG
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: BUILD
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: DEV_INT
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: DEV_EXT
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: STAGE_INT
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: STAGE_EXT
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: PROD_INT
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: PROD_EXT
+      pool: vmsspoolagents
+      image: ubuntu-latest

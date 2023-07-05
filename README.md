@@ -1567,8 +1567,6 @@ The pipeline templates execute the following major steps:
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server. The imported/exported API Gateway archives and the test results can be inspected by clicking on `Artifacts`. The test results can be inspected in the `Tests` tab.
 
-> Note: There is an error on the build details page in Azure DevOps Server 2019: When the agent pool name in the pipeline is pulled from a pipeline variable (i.e., not explicitly specified in the pipeline), it will not be displayed correctly on the build details page. Azure DevOps Server 2019 will always display "Default" instead of the correct agent pool which is actually used for running the job. We have therefore included a dummy echo step in the beginning of every pipeline template with the correct name of the agent pool in the step's display name.
-
 The Postman collections are executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 
 ## Pipeline definitions and pipeline templates for API Gateway configurations
@@ -1642,8 +1640,6 @@ The pipeline templates execute the following major steps:
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server. The imported/exported API Gateway archives can be inspected by clicking on `Artifacts`.
 
-> Note: There is an error on the build details page in Azure DevOps Server 2019: When the agent pool name in the pipeline is pulled from a pipeline variable (i.e., not explicitly specified in the pipeline), it will not be displayed correctly on the build details page. Azure DevOps Server 2019 will always display "Default" instead of the correct agent pool which is actually used for running the job. We have therefore included a dummy echo step in the beginning of every pipeline template with the correct name of the agent pool in the step's display name.
-
 The Postman collections are executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 
 ## Pipeline definition and pipeline template for log purging
@@ -1679,8 +1675,6 @@ The pipeline template executes the following major steps:
 | Purge Data on API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /utilities/purge |
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
-
-> Note: There is an error on the build details page in Azure DevOps Server 2019: When the agent pool name in the pipeline is pulled from a pipeline variable (i.e., not explicitly specified in the pipeline), it will not be displayed correctly on the build details page. Azure DevOps Server 2019 will always display "Default" instead of the correct agent pool which is actually used for running the job. We have therefore included a dummy echo step in the beginning of every pipeline template with the correct name of the agent pool in the step's display name.
 
 The Postman collection is executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 

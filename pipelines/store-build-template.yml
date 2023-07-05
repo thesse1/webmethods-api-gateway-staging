@@ -2,22 +2,26 @@
 
 parameters:
   target_type: ''
+  apiProject: ''
+
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
-
 - bash: |
     if [ -z "$TARGET_TYPE" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"target_type\""
       echo "##vso[task.complete result=Failed;]"
     fi
+    if [ -z "$API_PROJECT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
   env:
     TARGET_TYPE: ${{parameters.target_type}}
+    API_PROJECT: ${{parameters.apiProject}}
   displayName: Check for required parameters
 
 - publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip"
-  artifact: apiproject_${{parameters.target_type}}
+  artifact: ${{parameters.apiProject}}_${{parameters.target_type}}
   displayName: Build Upload
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2

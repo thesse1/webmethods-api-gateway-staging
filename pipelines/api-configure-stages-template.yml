@@ -10,33 +10,52 @@ parameters:
   displayName: Configure API Gateway in which stages?
   type: object
   default:
-  - CONFIG
-  - BUILD
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  - stage: CONFIG
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: BUILD
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: DEV_INT
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: DEV_EXT
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: STAGE_INT
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: STAGE_EXT
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: PROD_INT
+    pool: vmsspoolagents
+    image: ubuntu-latest
+  - stage: PROD_EXT
+    pool: vmsspoolagents
+    image: ubuntu-latest
 
 stages:
 - ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType }}
-    variables:
-      targetType: ${{ targetType }}
+  - stage: ${{ targetType.stage }}
     jobs:
-    - job: Configure_API_Gateway_${{ targetType }}
+    - deployment: Configure_API_Gateway_${{ targetType.stage }}
+      environment: ${{ targetType.stage }}
       variables:
-      - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
+      - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
       pool:
-        name: '$(agent_pool)'
-        vmImage: '$(agent_pool_vmImage)'
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/api-configure-template.yml  # Template reference
-        parameters:
-          environment: $(environment)
-          type: $(targetType)
-          tenant: ${{parameters.tenant}}
+        name: '${{ targetType.pool }}'
+        vmImage: '${{ targetType.image }}'
+      strategy:
+        runOnce:    #rolling, canary are the other strategies that are supported
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+            - template: /pipelines/api-configure-template.yml  # Template reference
+              parameters:
+                environment: $(environment)
+                type: ${{ targetType.stage }}
+                tenant: ${{parameters.tenant}}
+            - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"

@@ -6,9 +6,6 @@ parameters:
   tenant: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
-
 - bash: |
     if [ -z "$ENVIRONMENT" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"environment\""
@@ -64,7 +61,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.type}}.zip'
-    artifactName: '${{parameters.type}}_export'
+    artifactName: '$${{parameters.apiProject}}_${{parameters.target}}_export'
 
 - task: ExtractFiles@1
   inputs:
