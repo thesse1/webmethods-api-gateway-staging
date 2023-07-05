@@ -1,5 +1,4 @@
 {
   "entityId" : "proxyBypass",
-  "proxyBypassAddresses" : [ "localhost" ],
-  "caller" : ""
+  "proxyBypassAddresses" : [ "localhost" ]
 }

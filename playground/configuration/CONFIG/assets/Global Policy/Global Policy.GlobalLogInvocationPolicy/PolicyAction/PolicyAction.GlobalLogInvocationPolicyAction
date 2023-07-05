@@ -29,12 +29,6 @@
       "templateKey" : "destinationType",
       "values" : [ "GATEWAY" ]
     } ]
-  }, {
-    "templateKey" : "destination",
-    "parameters" : [ {
-      "templateKey" : "destinationType",
-      "values" : [ "ELASTICSEARCH" ]
-    } ]
   } ],
   "active" : false
 }

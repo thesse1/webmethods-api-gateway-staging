@@ -13,7 +13,7 @@
     },
     {
       "attributeName": "configId",
-      "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|elasticsearchDestinationConfig|keystore|settings|extended"
+      "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|elasticsearchDestinationConfig|keystore|settings|extended|HTTPListener@5556"
     }
   ],
   "condition" : "or"
