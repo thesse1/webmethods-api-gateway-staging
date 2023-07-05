@@ -39,7 +39,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -58,12 +58,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"SwaggerPetstore",
@@ -111,17 +111,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"SwaggerPetstore",
@@ -166,17 +166,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"SwaggerPetstore",

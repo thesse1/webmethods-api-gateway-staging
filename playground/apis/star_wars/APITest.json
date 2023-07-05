@@ -30,7 +30,7 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
@@ -42,12 +42,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gql/StarWarsDemoAPI/1",
+					"raw": "https://{{api-ip}}:{{api-port}}/gql/StarWarsDemoAPI/1",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gql",
 						"StarWarsDemoAPI",

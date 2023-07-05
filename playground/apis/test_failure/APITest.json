@@ -37,7 +37,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -56,12 +56,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Test_Failure/1.0/pet",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Test_Failure",
@@ -109,17 +109,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Test_Failure",
@@ -164,17 +164,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Test_Failure",

@@ -39,7 +39,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -58,12 +58,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"SwaggerPetstore",
@@ -111,17 +111,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"SwaggerPetstore",
@@ -166,17 +166,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"SwaggerPetstore",
@@ -220,7 +220,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -239,12 +239,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/post",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho/1.0/post",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
@@ -292,17 +292,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/get?foo=bar",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho/1.0/get?foo=bar",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
@@ -352,17 +352,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho/1.0/delete",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho/1.0/delete",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",

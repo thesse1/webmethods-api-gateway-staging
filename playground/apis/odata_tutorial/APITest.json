@@ -25,17 +25,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -66,17 +66,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/$metadata",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/$metadata",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -108,17 +108,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -150,17 +150,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -192,17 +192,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -235,17 +235,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName/$value",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName/$value",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -279,17 +279,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -323,17 +323,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=FirstName eq 'Vincent'",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=FirstName eq 'Vincent'",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -371,17 +371,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -419,17 +419,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/Airports?$filter=Location/City/Region eq 'California'",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/Airports?$filter=Location/City/Region eq 'California'",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -467,17 +467,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -515,17 +515,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -563,17 +563,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -611,17 +611,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$top=2&$skip=2",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$top=2&$skip=2",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -663,17 +663,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People/$count",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People/$count",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -706,17 +706,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$expand=Friends,Trips",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$expand=Friends,Trips",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -754,17 +754,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$select=FirstName,LastName",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$select=FirstName,LastName",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",
@@ -802,17 +802,17 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/TripPinService/1/People?$format=application/json;odata.metadata=full",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$format=application/json;odata.metadata=full",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"TripPinService",

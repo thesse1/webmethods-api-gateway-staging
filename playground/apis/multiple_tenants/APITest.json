@@ -44,7 +44,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{hostname}}",
+								"value": "{{api-hostname}}",
 								"type": "text"
 							},
 							{
@@ -63,12 +63,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}:{{port}}/gateway/Tenant1_PostmanEcho/1.0/post",
+							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Tenant1_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
-								"{{ip}}"
+								"{{api-ip}}"
 							],
-							"port": "{{port}}",
+							"port": "{{api-port}}",
 							"path": [
 								"gateway",
 								"Tenant1_PostmanEcho",
@@ -115,7 +115,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{hostname}}",
+								"value": "{{api-hostname}}",
 								"type": "text"
 							},
 							{
@@ -134,12 +134,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}:{{port}}/gateway/Tenant2_PostmanEcho/1.0/post",
+							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Tenant2_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
-								"{{ip}}"
+								"{{api-ip}}"
 							],
-							"port": "{{port}}",
+							"port": "{{api-port}}",
 							"path": [
 								"gateway",
 								"Tenant2_PostmanEcho",
@@ -191,7 +191,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{hostname}}",
+								"value": "{{api-hostname}}",
 								"type": "text"
 							},
 							{
@@ -210,12 +210,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}:{{port}}/gateway/Common_PostmanEcho/1.0/post",
+							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
-								"{{ip}}"
+								"{{api-ip}}"
 							],
-							"port": "{{port}}",
+							"port": "{{api-port}}",
 							"path": [
 								"gateway",
 								"Common_PostmanEcho",
@@ -262,7 +262,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{hostname}}",
+								"value": "{{api-hostname}}",
 								"type": "text"
 							},
 							{
@@ -281,12 +281,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}:{{port}}/gateway/Common_PostmanEcho/1.0/post",
+							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
 							"protocol": "https",
 							"host": [
-								"{{ip}}"
+								"{{api-ip}}"
 							],
-							"port": "{{port}}",
+							"port": "{{api-port}}",
 							"path": [
 								"gateway",
 								"Common_PostmanEcho",

@@ -43,7 +43,7 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
@@ -57,12 +57,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/invoke/pub.apigateway.oauth2/getAccessToken",
+					"raw": "https://{{api-ip}}:{{api-port}}/invoke/pub.apigateway.oauth2/getAccessToken",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"invoke",
 						"pub.apigateway.oauth2",
@@ -114,7 +114,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
@@ -128,12 +128,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_OAuth2/1.0/post",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/post",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_OAuth2",
@@ -186,17 +186,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_OAuth2/1.0/get?foo=bar",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/get?foo=bar",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_OAuth2",
@@ -251,17 +251,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_OAuth2/1.0/delete",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/delete",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_OAuth2",

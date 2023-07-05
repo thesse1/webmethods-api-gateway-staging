@@ -30,7 +30,7 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -54,12 +54,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/ws/NumberConversion/1",
+					"raw": "https://{{api-ip}}:{{api-port}}/ws/NumberConversion/1",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"ws",
 						"NumberConversion",

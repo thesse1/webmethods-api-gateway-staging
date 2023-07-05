@@ -39,7 +39,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -58,12 +58,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -111,17 +111,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -166,17 +166,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -222,7 +222,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					},
 					{
@@ -241,12 +241,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -294,17 +294,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",
@@ -349,17 +349,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"Petstore_Versioning",

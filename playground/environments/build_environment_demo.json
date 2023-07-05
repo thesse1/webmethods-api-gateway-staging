@@ -3,49 +3,49 @@
 	"name": "BuildEnvironment Demo",
 	"values": [
 		{
-			"key": "admin-hostname",
-			"value": "build-apigateway-admin.azure-softwareag-demo.com",
-			"type": "text",
-			"enabled": true
-		},
-		{
-			"key": "admin-ip",
-			"value": "build-apigateway-admin.azure-softwareag-demo.com",
-			"type": "text",
-			"enabled": true
-		},
-		{
-			"key": "admin-port",
-			"value": "443",
-			"type": "text",
-			"enabled": true
-		},
-		{
-			"key": "admin-insecureflag",
-			"value": "--insecure",
-			"type": "text",
-			"enabled": true
-		},
-		{
 			"key": "hostname",
-			"value": "build-apigateway.azure-softwareag-demo.com",
-			"type": "default",
+			"value": "build-apigateway-admin.azure-softwareag-demo.com",
+			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "build-apigateway.azure-softwareag-demo.com",
-			"type": "default",
+			"value": "build-apigateway-admin.azure-softwareag-demo.com",
+			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "port",
 			"value": "443",
-			"type": "default",
+			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "insecureflag",
+			"value": "--insecure",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "api-hostname",
+			"value": "build-apigateway.azure-softwareag-demo.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-ip",
+			"value": "build-apigateway.azure-softwareag-demo.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-port",
+			"value": "443",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-insecureflag",
 			"value": "--insecure",
 			"type": "default",
 			"enabled": true

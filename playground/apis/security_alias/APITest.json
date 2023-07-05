@@ -41,7 +41,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
@@ -55,12 +55,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias/1.0/post",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Security_Alias/1.0/post",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_Security_Alias",
@@ -107,17 +107,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias/1.0/get?foo=bar",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Security_Alias/1.0/get?foo=bar",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_Security_Alias",
@@ -166,17 +166,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
+						"value": "{{api-hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Security_Alias/1.0/delete",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Security_Alias/1.0/delete",
 					"protocol": "https",
 					"host": [
-						"{{ip}}"
+						"{{api-ip}}"
 					],
-					"port": "{{port}}",
+					"port": "{{api-port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_Security_Alias",
