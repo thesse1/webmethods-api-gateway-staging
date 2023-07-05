@@ -58,13 +58,17 @@ stages:
               submodules: "true"
               persistCredentials: "true"
             - download: none
+            - bash: |
+                echo '${{ targetType.stage }}'
+                echo 'CONFIG'
+              displayName: DEBUG
             - template: /pipelines/api-build-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
                 build_environment: $(environment)
                 target_type: ${{ targetType.stage }}
                 prep_condition: ${{true}}
-                test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
+                test_condition: ${{ ne(targetType.stage, 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
             - template: /pipelines/store-build-template.yml  # Template reference
               parameters:
