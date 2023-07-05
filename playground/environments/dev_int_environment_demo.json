@@ -3,27 +3,51 @@
 	"name": "DevIntEnvironment Demo",
 	"values": [
 		{
-			"key": "hostname",
-			"value": "dev-int-apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
+			"key": "admin-hostname",
+			"value": "dev-int-apigateway-admin.azure-softwareag-demo.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
-			"key": "ip",
-			"value": "dev-int-apigateway-admin.932589283db54fedaf96.westeurope.aksapp.io",
+			"key": "admin-ip",
+			"value": "dev-int-apigateway-admin.azure-softwareag-demo.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
-			"key": "port",
+			"key": "admin-port",
 			"value": "443",
 			"type": "text",
 			"enabled": true
 		},
 		{
-			"key": "insecureflag",
+			"key": "admin-insecureflag",
 			"value": "--insecure",
 			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "api-hostname",
+			"value": "dev-int-apigateway.azure-softwareag-demo.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-ip",
+			"value": "dev-int-apigateway.azure-softwareag-demo.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-port",
+			"value": "443",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-insecureflag",
+			"value": "--insecure",
+			"type": "default",
 			"enabled": true
 		}
 	],
