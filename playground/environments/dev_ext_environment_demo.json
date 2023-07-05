@@ -27,25 +27,25 @@
 			"enabled": true
 		},
 		{
-			"key": "api-hostname",
+			"key": "hostname",
 			"value": "dev-ext-apigateway.azure-softwareag-demo.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "api-ip",
+			"key": "ip",
 			"value": "dev-ext-apigateway.azure-softwareag-demo.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "api-port",
+			"key": "port",
 			"value": "443",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "api-insecureflag",
+			"key": "insecureflag",
 			"value": "--insecure",
 			"type": "default",
 			"enabled": true
