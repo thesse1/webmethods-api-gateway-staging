@@ -27,12 +27,12 @@ variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
 - template: /pipelines/api-deploy-to-stages-template.yml  # Template reference
   parameters:
-    apiProject: ${{parameters.apiProject}}
+    # apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
     apiProjects:
     # - number_conversion
