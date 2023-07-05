@@ -50,7 +50,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
