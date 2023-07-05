@@ -69,7 +69,7 @@ stages:
             - template: /pipelines/store-build-template.yml  # Template reference
               parameters:
                 target_type: ${{ targetType.stage }}
-                apiProject: ${{apiProject}}
+                apiProject: ${{parameters.apiProject}}
             - bash: |
                 echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
                 echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
