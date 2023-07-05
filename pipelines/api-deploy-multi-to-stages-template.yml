@@ -71,9 +71,11 @@ stages:
                 parameters:
                   target_type: ${{ targetType.stage }}
                   apiProject: ${{apiProject}}
-              - bash: echo "##vso[build.addbuildtag]${{apiProject}}"
-              - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
-              - bash: echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_type[0].stage}}"
+              - bash: |
+                  echo "##vso[build.addbuildtag]${{apiProject}}"
+                  echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
+                  echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_type[0].stage}}"
+                displayName: Add build tags
               # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
               #   parameters:
               #     target_type: $(targetType)
@@ -104,8 +106,10 @@ stages:
                   prep_condition: ${{true}}
                   test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
                   tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{apiProject}}"
-              - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
-              - bash: echo "##vso[build.addbuildtag]${{apiProject}}_${{targetType.stage}}"
+              - bash: |
+                  echo "##vso[build.addbuildtag]${{apiProject}}"
+                  echo "##vso[build.addbuildtag]${{targetType.stage}}"
+                  echo "##vso[build.addbuildtag]${{apiProject}}_${{targetType.stage}}"
+                displayName: Add build tags
         dependsOn: 'Build_${{apiProject}}_for_${{ targetType.stage }}'
         condition: succeeded()

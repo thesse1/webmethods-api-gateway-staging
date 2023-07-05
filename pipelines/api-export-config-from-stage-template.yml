@@ -78,3 +78,4 @@ stages:
                 parameters:
                   commitMessage: ${{parameters.commitMessage}}
               - bash: echo "##vso[build.addbuildtag]${{type.stage}}"
+                displayName: Add build tag
