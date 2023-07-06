@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Put loadbalancer configuration TOUCH",
+			"name": "Put loadbalancer configuration",
 			"event": [
 				{
 					"listen": "test",
