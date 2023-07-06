@@ -38,7 +38,7 @@ stages:
     - number_conversion
     - odata_tutorial
     - ping
-    - star_wars
+    # - star_wars
     - petstore
     - petstore_basicauth
     - petstore_versioning

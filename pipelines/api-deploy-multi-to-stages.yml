@@ -34,7 +34,7 @@ stages:
     # - number_conversion
     - odata_tutorial
     - ping
-    - star_wars
+    # - star_wars
     build_type:
     - stage: BUILD
       pool: vmsspoolagents
