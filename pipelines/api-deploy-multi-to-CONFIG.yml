@@ -45,7 +45,7 @@ stages:
     - petstore_basicauth
     - petstore_versioning
     - postman_echo
-    - postman_echo_jwt
+    # - postman_echo_jwt
     - postman_echo_oauth2
     - postman_mocking
     - multiple_tenants
