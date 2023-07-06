@@ -37,7 +37,7 @@ stages:
     # apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
     apiProjects:
-    - number_conversion
+    # - number_conversion
     - odata_tutorial
     - ping
     # - star_wars
