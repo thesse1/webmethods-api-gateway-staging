@@ -26,28 +26,28 @@ parameters:
   type: object
   default:
   - stage: CONFIG
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: BUILD
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: DEV_INT
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: DEV_EXT
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: STAGE_INT
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: STAGE_EXT
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: PROD_INT
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: PROD_EXT
-    pool: Azure Pipelines
+    pool: vmsspoolagents
     image: ubuntu-latest
 
 stages:

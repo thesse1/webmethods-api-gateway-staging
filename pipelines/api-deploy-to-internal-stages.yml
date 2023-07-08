@@ -27,15 +27,15 @@ stages:
     - petstore_versioning
     build_type:
     - stage: BUILD
-      pool: Azure Pipelines
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: DEV_INT
-      pool: Azure Pipelines
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_INT
-      pool: Azure Pipelines
+      pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_INT
-      pool: Azure Pipelines
+      pool: vmsspoolagents
       image: ubuntu-latest

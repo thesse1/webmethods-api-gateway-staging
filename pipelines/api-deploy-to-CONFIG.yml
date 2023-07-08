@@ -27,9 +27,9 @@ stages:
     tenant: ${{parameters.tenant}}
     build_type:
     - stage: BUILD
-      pool: Azure Pipelines
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
     - stage: CONFIG
-      pool: Azure Pipelines
+      pool: vmsspoolagents
       image: ubuntu-latest
