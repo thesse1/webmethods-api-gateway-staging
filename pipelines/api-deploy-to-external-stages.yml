@@ -30,15 +30,15 @@ stages:
     - security_alias
     build_type:
     - stage: BUILD
-      pool: vmsspoolagents
+      pool: Azure Pipelines
       image: ubuntu-latest
     target_types:
     - stage: DEV_EXT
-      pool: vmsspoolagents
+      pool: Azure Pipelines
       image: ubuntu-latest
     - stage: STAGE_EXT
-      pool: vmsspoolagents
+      pool: Azure Pipelines
       image: ubuntu-latest
     - stage: PROD_EXT
-      pool: vmsspoolagents
+      pool: Azure Pipelines
       image: ubuntu-latest

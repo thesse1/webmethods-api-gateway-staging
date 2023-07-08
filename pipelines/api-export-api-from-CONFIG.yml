@@ -20,7 +20,7 @@ parameters:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 pool:
-  name: vmsspoolagents
+  name: Azure Pipelines
   vmImage: ubuntu-latest
 
 stages:
