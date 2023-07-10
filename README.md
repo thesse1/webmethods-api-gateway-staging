@@ -1711,8 +1711,8 @@ Each variable group holds variable values specific for one API Gateway environme
 
 | Variable | README |
 | ------ | ------ |
-| agent_pool | The Azure DevOps agent pool to be used for accessing the API Gateway environment. For Microsoft-hosted agents: "vmsspoolagents". Select the right pool for self-hosted agents |
-| agent_pool_vmImage | The VM image for Microsoft-hosted agents in the vmsspoolagents pool. For Microsoft-hosted agents: "ubuntu-latest". Leave blank for self-hosted agents |
+| agent_pool | The Azure DevOps agent pool to be used for accessing the API Gateway environment. For Microsoft-hosted agents: "Azure Pipelines". Select the right pool for self-hosted agents |
+| agent_pool_vmImage | The VM image for Microsoft-hosted agents in the Azure Pipelines pool. For Microsoft-hosted agents: "ubuntu-latest". Leave blank for self-hosted agents |
 | environment | Name of the JSON file in the /{tenant}/environments folder for the API Gateway environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | exporter_user | User for exporting assets from API Gateway, e.g., Exporter. The user must have the "Export assets" privilege |
 | exporter_password | The API Gateway password for the exporter user |
