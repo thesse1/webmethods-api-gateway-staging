@@ -2,10 +2,10 @@
   "configId" : "logConfig",
   "internalPorts" : { },
   "properties" : {
-    "logDestination" : "",
+    "logDestination" : "INTERNAL",
     "hostName" : "",
     "indexName" : "",
-    "enableLogAggregation" : "false",
+    "enableLogAggregation" : "true",
     "userName" : "",
     "protocol" : "HTTP",
     "password" : "********************************",

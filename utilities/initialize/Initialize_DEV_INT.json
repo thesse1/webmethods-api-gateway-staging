@@ -21,6 +21,8 @@
 							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
 							"});\r",
 							"\r",
+							"console.log(\"HTTP Loadbalancer URL set to: \" + pm.response.json().httpUrls);\r",
+							"\r",
 							"console.log(\"HTTPS Loadbalancer URL set to: \" + pm.response.json().httpsUrls);\r",
 							"\r",
 							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
@@ -48,7 +50,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{api-hostname}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://{{api-hostname}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

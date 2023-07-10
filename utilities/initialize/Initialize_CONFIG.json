@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "671cae71-c0bb-42e5-bc06-f3ba6220c736",
 		"name": "Initialize_CONFIG",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-671cae71-c0bb-42e5-bc06-f3ba6220c736"
 	},
 	"item": [
 		{
@@ -11,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "e73ecb67-792d-4f1b-9b05-f2b7a0099417",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -20,6 +22,8 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
 							"});\r",
+							"\r",
+							"console.log(\"HTTP Loadbalancer URL set to: \" + pm.response.json().httpUrls);\r",
 							"\r",
 							"console.log(\"HTTPS Loadbalancer URL set to: \" + pm.response.json().httpsUrls);\r",
 							"\r",
@@ -33,6 +37,10 @@
 					}
 				}
 			],
+			"id": "9eb1c538-f732-4873-94c3-bfc5232b867d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -48,7 +56,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"https://{{hostname}}:{{port}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{api-hostname}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://{{api-hostname}}\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,6 +95,10 @@
 					}
 				}
 			],
+			"id": "d4461309-8d05-4935-b6f1-8b5e6816b0b9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -164,6 +176,7 @@
 					}
 				}
 			],
+			"id": "e99a9998-5227-4ddc-8d12-fb0df6258f75",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -250,6 +263,10 @@
 					}
 				}
 			],
+			"id": "5e9b78ce-2360-4f4b-9cf1-95333c43eacc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [

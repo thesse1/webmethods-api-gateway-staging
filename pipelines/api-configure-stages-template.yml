@@ -53,9 +53,11 @@ stages:
             - checkout: self
               submodules: "true"
               persistCredentials: "true"
+            - download: none
             - template: /pipelines/api-configure-template.yml  # Template reference
               parameters:
                 environment: $(environment)
                 type: ${{ targetType.stage }}
                 tenant: ${{parameters.tenant}}
             - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
+              displayName: Add build tag

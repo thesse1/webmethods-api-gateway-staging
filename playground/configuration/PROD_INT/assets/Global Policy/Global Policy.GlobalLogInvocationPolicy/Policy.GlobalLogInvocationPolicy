@@ -44,6 +44,6 @@
   } ],
   "policyScope" : "GLOBAL",
   "global" : true,
-  "systemPolicy" : true,
-  "active" : true
+  "active" : false,
+  "systemPolicy" : true
 }

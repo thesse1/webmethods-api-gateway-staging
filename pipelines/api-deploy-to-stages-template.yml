@@ -58,21 +58,27 @@ stages:
               submodules: "true"
               persistCredentials: "true"
             - download: none
+            - bash: |
+                echo '${{ targetType.stage }}'
+                echo 'CONFIG'
+              displayName: DEBUG
             - template: /pipelines/api-build-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
                 build_environment: $(environment)
                 target_type: ${{ targetType.stage }}
                 prep_condition: ${{true}}
-                test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
+                test_condition: ${{ ne(targetType.stage, 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
             - template: /pipelines/store-build-template.yml  # Template reference
               parameters:
                 target_type: ${{ targetType.stage }}
-                apiProject: ${{apiProject}}
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_type[0].stage}}"
+                apiProject: ${{parameters.apiProject}}
+            - bash: |
+                echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
+                echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
+                echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_type[0].stage}}"
+              displayName: Add build tags
             # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
             #   parameters:
             #     target_type: $(targetType)
@@ -94,7 +100,7 @@ stages:
             - template: /pipelines/retrieve-build-template.yml  # Template reference
               parameters:
                   target_type: ${{ targetType.stage }}
-                  apiProject: ${{apiProject}}
+                  apiProject: ${{parameters.apiProject}}
             - template: /pipelines/api-deploy-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
@@ -103,8 +109,10 @@ stages:
                 prep_condition: ${{true}}
                 test_condition: ${{ ne('${{ targetType.stage }}', 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-            - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
-            - bash: echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{targetType.stage}}"
+            - bash: |
+                echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
+                echo "##vso[build.addbuildtag]${{targetType.stage}}"
+                echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{targetType.stage}}"
+              displayName: Add build tags
       dependsOn: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
       condition: succeeded()

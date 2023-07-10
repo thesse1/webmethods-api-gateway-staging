@@ -1,6 +1,6 @@
 [
     {
-        "name": "prod-ext-scope",
+        "name": "dev-ext-scope",
         "description": "OAuth2 demo scope on PROD_EXT"
     }
 ]

@@ -1,5 +1,6 @@
 {
   "configId" : "settings",
+  "userName" : "Administrator",
   "internalPorts" : { },
   "properties" : {
     "preferredSettings" : {
@@ -10,8 +11,11 @@
         "apiGroupingPossibleValues" : ""
       },
       "wattKeys" : {
+        "watt.net.maxClientKeepaliveConns" : "140",
+        "watt.server.threadPool" : "600",
         "watt.server.oauth.requireHTTPS" : "false",
-        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z"
+        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
+        "watt.server.threadPoolMin" : "600"
       }
     },
     "savedSettings" : {
@@ -22,8 +26,11 @@
         "apiGroupingPossibleValues" : "Internal,External"
       },
       "wattKeys" : {
+        "watt.server.threadPool" : "600",
+        "watt.net.maxClientKeepaliveConns" : "140",
         "watt.server.oauth.requireHTTPS" : "false",
-        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z"
+        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
+        "watt.server.threadPoolMin" : "600"
       }
     }
   }

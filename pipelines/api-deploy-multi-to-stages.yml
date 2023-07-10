@@ -8,8 +8,8 @@ trigger:
 resources:
   pipelines:
   - pipeline: trigger-pipeline # Name of the pipeline resource.
-    source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
-    trigger: true # Run this pipeline when any run of test-remote-invoke completes
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true
 
 parameters:
 - name: tenant
@@ -31,10 +31,10 @@ stages:
   parameters:
     tenant: ${{parameters.tenant}}
     apiProjects:
-    - number_conversion
+    # - number_conversion
     - odata_tutorial
     - ping
-    - star_wars
+    # - star_wars
     build_type:
     - stage: BUILD
       pool: vmsspoolagents
