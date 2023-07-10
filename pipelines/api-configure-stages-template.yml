@@ -54,7 +54,6 @@ stages:
               submodules: "true"
               persistCredentials: "true"
             - download: none
-            - bash: 'echo DEBUG: $(environment)'
             - template: /pipelines/api-configure-template.yml  # Template reference
               parameters:
                 environment: $(environment)
