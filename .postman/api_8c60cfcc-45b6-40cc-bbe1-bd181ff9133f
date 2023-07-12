@@ -9,8 +9,6 @@ id = 8c60cfcc-45b6-40cc-bbe1-bd181ff9133f
 
 [config.relations.collections]
 rootDirectory = utilities
-files[] = {"id":"3558839-2465909b-3bf3-4b22-9981-833e402e48a8","path":"../playground/apis/petstore/APITest.json","metaData":{}}
-files[] = {"id":"3558839-989b6ea2-d284-41f9-8948-98b7b9dab4dd","path":"../playground/apis/ping/APITest.json","metaData":{}}
 files[] = {"id":"3558839-d19ad867-e906-4fe3-bd95-d70328600203","path":"import/ImportAPI.json","metaData":{}}
 files[] = {"id":"3558839-67338123-f95b-4661-bf22-1982e6d9ef72","path":"import/ImportConfig.json","metaData":{}}
 files[] = {"id":"3558839-ba1e6830-9455-4466-b63f-fa0106c6ae09","path":"initialize/Initialize_BUILD.json","metaData":{}}
