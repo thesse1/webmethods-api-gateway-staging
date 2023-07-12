@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "9c27ffb7-48c2-4624-8ad0-82e0a3de9938",
+		"name": "API Test for duplicate-alias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-9c27ffb7-48c2-4624-8ad0-82e0a3de9938"
+	},
+	"item": [
+		{
+			"name": "PostPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Pet ID is 123\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(123);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
+						],
+						"type": "text/javascript",
+						"id": "d82880e0-d02b-4afa-8f4e-d03b11692cf3"
+					}
+				}
+			],
+			"id": "9d959437-083b-48c6-b3d5-9c94611fd460",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"SwaggerPetstore",
+						"1.0",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Pet ID is 123\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(123);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "e7b1ddce-0db6-440d-b161-9115e23019ca"
+					}
+				}
+			],
+			"id": "165c7f7f-dd16-4a86-8ded-c943d7614ad8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"SwaggerPetstore",
+						"1.0",
+						"pet",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "8a337734-a59a-4184-a1a4-25ca4f9ed15d"
+					}
+				}
+			],
+			"id": "39bbcb24-812e-43fa-9754-7d6c2701b114",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"SwaggerPetstore",
+						"1.0",
+						"pet",
+						"123"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
