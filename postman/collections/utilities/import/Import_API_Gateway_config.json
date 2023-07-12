@@ -265,7 +265,9 @@
 				],
 				"body": {
 					"mode": "file",
-					"file": {}
+					"file": {
+						"src": "{{file_Loc}}"
+					}
 				},
 				"url": {
 					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=*,aliases",
