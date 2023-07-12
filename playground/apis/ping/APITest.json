@@ -40,7 +40,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Ping/1.0/ping/pong/5",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Ping/1.0/ping/pong/6",
 					"protocol": "https",
 					"host": [
 						"{{api-ip}}"
