@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c0e5363d-fc93-4566-b6aa-41abff5f6b09",
+		"_postman_id": "989b6ea2-d284-41f9-8948-98b7b9dab4dd",
 		"name": "API Test for ping",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-989b6ea2-d284-41f9-8948-98b7b9dab4dd"
 	},
 	"item": [
 		{
@@ -21,10 +22,15 @@
 							"    pm.expect(jsonData.date).to.exist;\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "02210862-a406-4ac9-8b0e-2ed06dea950c"
 					}
 				}
 			],
+			"id": "af6238df-ceab-4efe-9585-5e6e63bf3502",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -40,7 +46,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Ping/1.0/ping/pong/6",
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Ping/1.0/ping",
 					"protocol": "https",
 					"host": [
 						"{{api-ip}}"
