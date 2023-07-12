@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "edf063a2-d6d3-401f-82fc-36b40edbb08d",
+		"_postman_id": "2ab007a6-ea17-47df-9e05-4bccc666d628",
 		"name": "API Test for petstore",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-2ab007a6-ea17-47df-9e05-4bccc666d628"
 	},
 	"item": [
 		{
@@ -22,10 +23,12 @@
 							"\r",
 							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "8054c1b7-d9e9-4356-b9eb-a3d83111e827"
 					}
 				}
 			],
+			"id": "51fe79b3-5edf-4427-86da-d1e41605e3f3",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -89,10 +92,12 @@
 							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9e40b69c-fdcd-4c59-ab9d-b99cd67b5747"
 					}
 				}
 			],
+			"id": "25434d94-2883-4d8c-a685-1aec7da7abe2",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -144,10 +149,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "3b7a6291-25d8-49d9-a53f-732eda5af17f"
 					}
 				}
 			],
+			"id": "6e8542d5-a1d4-4473-a841-0882ade1f5d2",
 			"request": {
 				"method": "DELETE",
 				"header": [

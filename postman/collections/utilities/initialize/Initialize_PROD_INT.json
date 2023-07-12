@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0791bcb5-b8e8-44ba-bd2a-630627cfd17a",
+		"_postman_id": "0f77cb14-f709-4da9-810d-b8ec414a387a",
 		"name": "Initialize_PROD_INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-0791bcb5-b8e8-44ba-bd2a-630627cfd17a"
+		"_uid": "3558839-0f77cb14-f709-4da9-810d-b8ec414a387a"
 	},
 	"item": [
 		{
@@ -33,11 +33,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "df554d53-c29e-4be4-bbc9-ab50d85b2ba2"
+						"id": "66815f08-ec2f-4daa-8a38-f5d0a951814c"
 					}
 				}
 			],
-			"id": "bea8aca9-5c62-41d2-b8a5-5e5de4199d79",
+			"id": "6c87a0c2-557d-413f-8983-a30f00617138",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -89,11 +89,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "5c7481ef-bb9b-440f-b8a2-943359ec9bb5"
+						"id": "f4d7af24-3b9d-4bf2-8247-2425c371d151"
 					}
 				}
 			],
-			"id": "915b937d-165e-45db-abda-def64f5e764d",
+			"id": "63487ada-8bf0-43d1-a260-3a419906da0b",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -168,11 +168,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "28c4245a-ce18-458b-ade4-dbbd98be9096"
+						"id": "208e1f8d-a33e-4068-abbb-840d7cd91b47"
 					}
 				}
 			],
-			"id": "e96057b9-4a02-4751-93dc-27408a1bd4c0",
+			"id": "aa83afed-2df2-475a-970e-9c0c54dd323d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -256,11 +256,11 @@
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
 						"type": "text/javascript",
-						"id": "ae7de28e-0203-4309-908a-260623a2b69e"
+						"id": "9fcb2b15-19dd-4f01-9839-e18f357e02f9"
 					}
 				}
 			],
-			"id": "75d00a78-ebc1-4dee-ac05-47307da97b37",
+			"id": "083b92c1-c470-463a-8ac6-9c4074ce1584",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -324,7 +324,7 @@
 				"exec": [
 					""
 				],
-				"id": "b0ff5628-8da3-4fd2-8028-e3b4ace771b2"
+				"id": "3767741d-fdb3-49cd-911e-cb62bd78904d"
 			}
 		},
 		{
@@ -334,7 +334,7 @@
 				"exec": [
 					""
 				],
-				"id": "83aebfea-0b46-4a21-9a05-ff3cf5f510ae"
+				"id": "97e5b09e-96d8-422c-b331-2f145b31e4f3"
 			}
 		}
 	]

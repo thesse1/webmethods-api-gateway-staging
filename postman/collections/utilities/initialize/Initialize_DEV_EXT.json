@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d30fc96b-acfb-463b-a9e9-ec5c37146a7c",
+		"_postman_id": "79cade1f-09c8-4612-9fa5-aa2feb583def",
 		"name": "Initialize_DEV_EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-d30fc96b-acfb-463b-a9e9-ec5c37146a7c"
+		"_uid": "3558839-79cade1f-09c8-4612-9fa5-aa2feb583def"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "10683a98-36e1-4b5b-9beb-85f6c8373c5f",
+						"id": "41886699-37a5-4147-8c6b-2b6943ab736e",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -37,7 +37,7 @@
 					}
 				}
 			],
-			"id": "e323312b-27bb-4adc-ba0d-ee6da6b39250",
+			"id": "141d9ae2-acb3-4382-91c2-6873bda0c276",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -92,11 +92,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "c4e8fcb8-c29e-4924-b075-0106bec55313"
+						"id": "c28e2f21-844a-4f0b-8fc7-21ecbdda6895"
 					}
 				}
 			],
-			"id": "6fed8b07-daf5-4bc7-a6ae-aeffabb0363f",
+			"id": "ac72c4ab-7cf3-4d4e-91bb-437fecc14caa",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -174,11 +174,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "960e38df-7552-423f-8fc5-7eab647c1037"
+						"id": "f2932e82-5b2f-456f-993f-855d858292fa"
 					}
 				}
 			],
-			"id": "935d6f40-9d37-4b8b-b017-143a5b786a6a",
+			"id": "a3be8e93-af2c-44f0-be1e-ffe53ab86c81",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -262,11 +262,11 @@
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
 						"type": "text/javascript",
-						"id": "2927ac5e-9daf-4cbd-9d56-5c59ae6f799e"
+						"id": "b4838b49-d69d-4dcc-aede-b8f95792482d"
 					}
 				}
 			],
-			"id": "8563b781-8cd9-4149-9667-01323c08244e",
+			"id": "ff3f138c-3209-452f-b7f9-0ec3d6a2dc64",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -333,7 +333,7 @@
 				"exec": [
 					""
 				],
-				"id": "e6e61605-70c5-48fa-9ccf-49a681130dd5"
+				"id": "0a5d8be3-23d7-4c6f-b326-01da74e952c9"
 			}
 		},
 		{
@@ -343,7 +343,7 @@
 				"exec": [
 					""
 				],
-				"id": "a4316397-a23b-4320-a336-a6c58f1f01c8"
+				"id": "823e5347-1ee8-44a5-9715-620d404e055b"
 			}
 		}
 	]

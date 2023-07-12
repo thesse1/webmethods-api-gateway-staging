@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2c62d221-6eb1-4efb-afb8-d74fed3b2a22",
+		"_postman_id": "d4b93eed-79d8-42eb-a57f-cfa6bf0217bc",
 		"name": "Initialize_DEV_INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-2c62d221-6eb1-4efb-afb8-d74fed3b2a22"
+		"_uid": "3558839-d4b93eed-79d8-42eb-a57f-cfa6bf0217bc"
 	},
 	"item": [
 		{
@@ -33,11 +33,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "f9495334-f8f6-4634-ab9d-76c94f591ba0"
+						"id": "bda48cd7-5d23-4c3f-a986-55fb25da5cb4"
 					}
 				}
 			],
-			"id": "39e6aace-ed67-47d4-b5e4-06359b7e5451",
+			"id": "8884a077-ce80-4623-a25d-5a0490e67fc0",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -89,11 +89,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "51bcc082-2ac0-42d5-b55a-c1ad0e1b6c27"
+						"id": "993e8481-435e-4276-92c3-0ded9e909816"
 					}
 				}
 			],
-			"id": "acd9a183-24cc-4378-8f41-542be7a6437b",
+			"id": "08458c47-fe97-4a50-a686-a4b7e9344517",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -168,11 +168,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "b923a493-194f-45d7-b147-5e2aed7b3f5a"
+						"id": "3b8bb9d4-8fc5-4f05-a4dd-6b9a9100977b"
 					}
 				}
 			],
-			"id": "4b8214f2-0961-4936-8554-d44411f19256",
+			"id": "d25cf950-01d0-40d1-81e9-31b1c1799588",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -256,11 +256,11 @@
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
 						"type": "text/javascript",
-						"id": "aac824af-8a62-4431-93c9-4a4539f2f20c"
+						"id": "a158bdf5-4096-4026-9d38-b37ad4a1c465"
 					}
 				}
 			],
-			"id": "a5568261-ce07-441c-8c4f-d9b22afbceda",
+			"id": "632a2d1d-6eed-4fdb-bf22-bdaed83c2ec7",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -324,7 +324,7 @@
 				"exec": [
 					""
 				],
-				"id": "51a161f7-ef60-4a14-becd-21f594037103"
+				"id": "facc5964-300f-4fbc-87a5-c21cb3aee5cd"
 			}
 		},
 		{
@@ -334,7 +334,7 @@
 				"exec": [
 					""
 				],
-				"id": "086f4709-6e86-4d65-933f-3676a50a40f1"
+				"id": "e4d95acb-a4ca-4f6a-bc25-58dc994aa6f3"
 			}
 		}
 	]
