@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "9e0d8e12-853c-4042-858c-0d0f25dab8a7",
+		"name": "Prepare_for_CONFIG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-9e0d8e12-853c-4042-858c-0d0f25dab8a7"
+	},
+	"item": [
+		{
+			"name": "Get all Strategies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let strategies = apiResponse.strategies;\r",
+							"if (strategies === undefined || strategies === null || strategies.length === 0) {\r",
+							"    postman.setNextRequest(null); //es ist nichts zu tun, keine strategies vorhanden\r",
+							"} else {\r",
+							"    //strategies[0] wird hier behandelt, alle weiteren müssen an den nächsten request weitergereicht werden.\r",
+							"    let remainingStrategies = [];\r",
+							"    for (var i=1; i<strategies.length; i++) { \r",
+							"        remainingStrategies.push(strategies[i])\r",
+							"    }    \r",
+							"    pm.globals.set(\"remainingStrategies\", JSON.stringify(remainingStrategies))\r",
+							"    \r",
+							"    console.log(\"Sanitize strategy - remove dcrConfig.ClientId and dcrConfig.clientSecret\");\r",
+							"    console.log(\"ID: \" + strategies[0].id);\r",
+							"    console.log(\"Name: \" + strategies[0].name);\r",
+							"    console.log(\"Decription: \" + strategies[0].description);        \r",
+							"    delete strategies[0].dcrConfig.clientId;\r",
+							"    delete strategies[0].dcrConfig.clientSecret;\r",
+							"\r",
+							"    pm.globals.set(\"strategyContent\", JSON.stringify(strategies[0]));\r",
+							"    pm.globals.set(\"strategyId\", strategies[0].id)\r",
+							"    \r",
+							"    postman.setNextRequest(\"Update one Strategy\");\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"id": "2c6585eb-ab8e-495f-a28b-3e441ef00980"
+					}
+				}
+			],
+			"id": "070ac3be-5bd0-43a3-adf1-77a8dfe01701",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update one Strategy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let strategies = JSON.parse(pm.variables.get(\"remainingStrategies\"));\r",
+							"\r",
+							"if (strategies === undefined || strategies === null || strategies.length === 0) {\r",
+							"    postman.setNextRequest(null); //es ist nichts (mehr) zu tun, alle strategies wurden abgearbeitet\r",
+							"} else {\r",
+							"    //strategies[0] wird hier behandelt, alle weiteren müssen an den nächsten request weitergereicht werden.\r",
+							"    let remainingStrategies = [];\r",
+							"    for (var i=1; i<strategies.length; i++) { \r",
+							"        remainingStrategies.push(strategies[i])\r",
+							"    }    \r",
+							"    pm.globals.set(\"remainingStrategies\", JSON.stringify(remainingStrategies))\r",
+							"    \r",
+							"    console.log(\"Sanitize strategy - remove dcrConfig.ClientId and dcrConfig.clientSecret\");\r",
+							"    console.log(\"ID: \" + strategies[0].id);\r",
+							"    console.log(\"Name: \" + strategies[0].name);\r",
+							"    console.log(\"Decription: \" + strategies[0].description);        \r",
+							"    delete strategies[0].dcrConfig.clientId;\r",
+							"    delete strategies[0].dcrConfig.clientSecret;\r",
+							"\r",
+							"    pm.globals.set(\"strategyContent\", JSON.stringify(strategies[0]));\r",
+							"    pm.globals.set(\"strategyId\", strategies[0].id)\r",
+							"    \r",
+							"    postman.setNextRequest(\"Update one Strategy\");\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"id": "c5053cfe-18ae-40fb-95b6-793271806e88"
+					}
+				}
+			],
+			"id": "474684cc-93dc-4626-af6a-87b1f749fdf1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{strategyContent}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies",
+						"{{strategyId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{preparer_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{preparer_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "33eeb90a-a04c-4bf9-a9e3-70bd1723b737"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "82ef106a-a777-4849-8161-5bd941111da8"
+			}
+		}
+	]
+}
