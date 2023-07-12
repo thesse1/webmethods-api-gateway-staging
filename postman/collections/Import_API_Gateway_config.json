@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3e3b5704-f6f9-40bb-a147-61cc8250dc79",
-		"name": "API Gateway Configuration",
+		"name": "Import_API_Gateway_config",
 		"description": "This Collection deploys the API to API Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-3e3b5704-f6f9-40bb-a147-61cc8250dc79"
@@ -155,6 +155,9 @@
 				}
 			],
 			"id": "e9899cc2-87a8-4bfc-a1d0-5bf7c2da1e36",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -226,6 +229,9 @@
 				}
 			],
 			"id": "ca89b281-4dfb-4e2c-8bf0-5f7eb4766c79",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",

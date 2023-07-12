@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "1f6f71c3-3440-4302-b1c3-5502f4c7d8a0",
-		"name": "API Gateway Purge Data",
+		"name": "Purge_Data",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-1f6f71c3-3440-4302-b1c3-5502f4c7d8a0"
 	},
@@ -40,6 +40,9 @@
 				}
 			],
 			"id": "8fde8728-67af-47a0-aa47-4c1dcbd0d7ca",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -111,6 +114,9 @@
 				}
 			],
 			"id": "06659084-b163-460f-b98e-44be0ba7d7e8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -182,6 +188,9 @@
 				}
 			],
 			"id": "95fc8f8c-175c-4dea-8c2d-11bc4e880fb0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -253,6 +262,9 @@
 				}
 			],
 			"id": "223d258e-f225-4649-bd27-da34e9def4e6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -324,6 +336,9 @@
 				}
 			],
 			"id": "1e1b127f-c484-4a59-ab5c-11ec5c65a232",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -395,6 +410,9 @@
 				}
 			],
 			"id": "d0c8ed9d-c225-45e5-9ea3-b1b9e3650f6b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -466,6 +484,9 @@
 				}
 			],
 			"id": "5f9c6938-bb51-421c-8106-87f2701ba4cc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -537,6 +558,9 @@
 				}
 			],
 			"id": "560949d7-efa8-4a90-a25b-0c5e329e24b8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -608,6 +632,9 @@
 				}
 			],
 			"id": "69c763e1-2ebd-4de1-ad59-d99a98511e4e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -690,6 +717,9 @@
 				}
 			],
 			"id": "9d3dd60e-833e-4f61-a2fe-e14ea5744742",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
