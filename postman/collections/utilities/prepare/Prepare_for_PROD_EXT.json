@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b1e1c9ad-cb08-4859-9383-1c170f8f43ff",
+		"_postman_id": "686bed44-c44d-4ab2-846a-138ad30283ea",
 		"name": "Prepare_for_PROD_EXT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-686bed44-c44d-4ab2-846a-138ad30283ea"
 	},
 	"item": [
 		{
@@ -35,10 +36,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "a6d619f8-3d19-4bb3-a40e-61d73600168f"
 					}
 				}
 			],
+			"id": "8dbd8329-39ec-4e04-8345-023063848c49",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -104,10 +107,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "d64ed493-bad0-4448-8114-efa3e37d197b"
 					}
 				}
 			],
+			"id": "a37f94af-41bd-467e-82aa-ec2877682159",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -385,10 +390,12 @@
 							"    pm.globals.set(\"aliasId\", aliasId);\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "a0c9b5c2-7e20-48a7-877e-9933d0e0b6f3"
 					}
 				}
 			],
+			"id": "6020427b-dc3e-44ee-8a2e-a37f76c16f6e",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -463,10 +470,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "a1f6ea23-9821-477a-8673-452c77e61846"
 					}
 				}
 			],
+			"id": "cf5a2ba2-9e98-4ffd-895b-9e32abb1b637",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -555,10 +564,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "ed0b659a-b17a-462e-a78c-11e9e44dcd0b"
 					}
 				}
 			],
+			"id": "4428bf6b-de27-4672-9b63-58139e506972",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -605,10 +616,12 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "88dd8f38-f998-4721-8492-e7bd049c171d"
 					}
 				}
 			],
+			"id": "328fb943-6506-4dba-b254-57a2e4bda8b3",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -656,10 +669,12 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "28ee4e16-59ab-4e04-8c8a-080937d1ae85"
 					}
 				}
 			],
+			"id": "eeeacdd4-d13a-4f8c-8af2-a7616238368f",
 			"request": {
 				"method": "PATCH",
 				"header": [
@@ -738,10 +753,12 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "00280a35-5486-47ce-ba69-523675cc529c"
 					}
 				}
 			],
+			"id": "a3f6cb79-72eb-45cb-bc03-16fa25b43a4b",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -809,10 +826,12 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "cfdcb646-2ac1-44ad-9e6f-4599a4e85eab"
 					}
 				}
 			],
+			"id": "22b5abeb-f891-4a19-81d0-d0897275fd7a",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -878,10 +897,12 @@
 							"    postman.setNextRequest(\"Get and Validate one API\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "8f92df54-54a7-4dc2-9da6-670cc59342fb"
 					}
 				}
 			],
+			"id": "ec20df45-188b-4ca3-a968-4f34d4e0098c",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -979,10 +1000,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "3311f2bc-4128-4ebf-a2db-644a0eed5600"
 					}
 				}
 			],
+			"id": "ff68c4eb-365b-44d6-81f6-684e66024e73",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -1065,10 +1088,12 @@
 							"    postman.setNextRequest(\"Get and Validate one API\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "0c09ae9f-c018-4515-b7bc-fe7b6dc1071b"
 					}
 				}
 			],
+			"id": "0ca6c5e1-6370-4a7f-885c-a43eecb0fae5",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -1131,7 +1156,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "f1e10660-238a-40b1-84e5-6e5bf1dee128"
 			}
 		},
 		{
@@ -1140,7 +1166,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "3746c0a8-45a9-4bd1-b8bd-9e2ba3bdf372"
 			}
 		}
 	]

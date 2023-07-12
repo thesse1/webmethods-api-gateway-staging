@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7147ee0f-3e20-4e30-b9d5-d72ff2aaad74",
+		"_postman_id": "90c2424c-d7bb-44cb-8798-68b27e48eb09",
 		"name": "Prepare_BUILD",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-90c2424c-d7bb-44cb-8798-68b27e48eb09"
 	},
 	"item": [
 		{
@@ -33,10 +34,12 @@
 							"    postman.setNextRequest(\"Delete one Application\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "5e22999f-4443-4b4d-98db-0e4b1782c509"
 					}
 				}
 			],
+			"id": "6f39ac5c-b585-473d-b83e-59fbf1d2cf01",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -83,10 +86,12 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "86d87dc0-fa4c-42e7-a6be-7b492d11fb61"
 					}
 				}
 			],
+			"id": "30abcd7d-8eaf-4e39-b71b-40a3ffb7f7d5",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -147,10 +152,12 @@
 							"    console.log(\"Version: \" + apis[0].api.apiVersion);\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "f45ea399-6a02-4b8d-97ff-0cbefdb42ca5"
 					}
 				}
 			],
+			"id": "265266ce-58fb-4eca-9d26-846084c23acf",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -212,10 +219,12 @@
 							"});\r",
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "bbb6c65d-eaea-40a1-9c63-e7108b369cb1"
 					}
 				}
 			],
+			"id": "01c52661-36c7-4738-874e-55c0a0357d04",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -264,10 +273,12 @@
 							"    postman.setNextRequest(\"Get all APIs\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "2b5390d2-d6e6-44a6-8cc2-06c09d130ff4"
 					}
 				}
 			],
+			"id": "74111839-5460-4e95-bf06-e6be68c2da6a",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -325,10 +336,12 @@
 							"    postman.setNextRequest(\"Delete one Scope\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "007e2bfd-1125-4d1d-8139-adbdd410241a"
 					}
 				}
 			],
+			"id": "09777e5c-f545-42d3-a887-6f4b13bb97c9",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -375,10 +388,12 @@
 							"    postman.setNextRequest(\"Get all Scopes\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "dba1fe86-5213-4d61-b4cf-e8fa7e80e62f"
 					}
 				}
 			],
+			"id": "1ef4dcf6-b697-468a-ab7d-3acf71f3f0ee",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -444,10 +459,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "e0147698-899b-4444-a4e2-bbc5f7d75194"
 					}
 				}
 			],
+			"id": "1c218d09-ffc1-4806-b112-995c41feef57",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -494,10 +511,12 @@
 							"    postman.setNextRequest(\"Get all Aliases\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "c9207032-750c-4121-af0e-e5b7d2122069"
 					}
 				}
 			],
+			"id": "12cb15bc-ddf0-435a-aa1e-0a9651157fd1",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -556,10 +575,12 @@
 							"    postman.setNextRequest(\"Delete one Strategy\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "4c7e3cda-651a-4f7d-90d6-b6f83cfa8664"
 					}
 				}
 			],
+			"id": "d6b0e92d-fc4a-4dd2-93e3-c3a64d02cf12",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -607,10 +628,12 @@
 							"    postman.setNextRequest(\"Get all Strategies\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "468adbbf-ae57-46fd-9b60-ae7c29f2d17e"
 					}
 				}
 			],
+			"id": "ff173e19-6b97-4fbe-8965-4891f78d17eb",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -665,7 +688,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "02f8d170-d003-4fda-902f-39a687276866"
 			}
 		},
 		{
@@ -674,7 +698,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "74002996-e08a-42f3-b1e0-b28c14124c6d"
 			}
 		}
 	]
