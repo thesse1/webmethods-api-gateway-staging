@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "31f656b8-8a03-41a2-ac5c-3a3688aab233",
+		"_postman_id": "dffbb475-ee73-4689-a101-9bc81ad41c95",
 		"name": "API Gateway API Deployment",
 		"description": "This Collection deploys the API to API Gateway",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-dffbb475-ee73-4689-a101-9bc81ad41c95"
 	},
 	"item": [
 		{
@@ -62,10 +63,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "05c2aee6-c92f-436f-8817-e5d06be39e92"
 					}
 				}
 			],
+			"id": "19bb350b-cdd7-4292-b45d-567665f4eddd",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -146,10 +149,12 @@
 							"\r",
 							"console.log(\"OAuth2 scopes set to: \" + JSON.stringify(pm.response.json().alias.scopes));"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "7b894ab8-ce39-40f4-921d-3a8906f8b071"
 					}
 				}
 			],
+			"id": "d31a3a51-b96b-4d4c-9190-c348274f1dd3",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -215,10 +220,12 @@
 							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "8e8f58dd-f4d8-43d7-a82f-5403e2253e5b"
 					}
 				}
 			],
+			"id": "0a55c90b-09b6-4089-91f5-09691008129d",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -252,9 +259,7 @@
 				],
 				"body": {
 					"mode": "file",
-					"file": {
-						"src": "{{file_Loc}}"
-					}
+					"file": {}
 				},
 				"url": {
 					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases",
