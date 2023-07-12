@@ -61,7 +61,7 @@ steps:
   displayName: 'Prepare list of scopes to be imported'
 
 - script: |
-    newman run utilities/import/ImportConfig.json --reporters cli \
+    newman run postman/collections/utilities/import/ImportConfig.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
     --env-var initializer_user='$(initializer_user)' \
@@ -75,7 +75,7 @@ steps:
     no_proxy: $(environment_ip)
 
 - script: |
-    newman run utilities/initialize/Initialize_${{parameters.type}}.json --reporters cli \
+    newman run postman/collections/utilities/initialize/Initialize_${{parameters.type}}.json --reporters cli \
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/${{parameters.environment}} \

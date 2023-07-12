@@ -69,7 +69,7 @@ steps:
   displayName: 'Prepare list of scopes to be imported'
 
 - script: |
-    newman run utilities/import/ImportAPI.json --reporters cli \
+    newman run postman/collections/utilities/import/ImportAPI.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
     --env-var initializer_user='$(initializer_user)' \
