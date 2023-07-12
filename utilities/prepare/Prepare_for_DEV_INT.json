@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "903e21db-f16c-40f5-a6c1-bc2e5d8a0f27",
+		"_postman_id": "9281a223-22b7-4e9a-bff1-e3957ae06d92",
 		"name": "Prepare_for_DEV_INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-903e21db-f16c-40f5-a6c1-bc2e5d8a0f27"
+		"_uid": "3558839-9281a223-22b7-4e9a-bff1-e3957ae06d92"
 	},
 	"item": [
 		{
@@ -37,11 +37,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "3f980d08-e6c0-4aa2-bf7a-997f556558ba"
+						"id": "1ee09f3d-676a-4b30-96fb-0ceb765b3cc6"
 					}
 				}
 			],
-			"id": "0dde785f-e6a0-4e06-9af6-adcbbf4b3438",
+			"id": "47184b15-1755-463a-a4c0-05f366a0d8c5",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -108,11 +108,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "2de1dc82-ba1a-4be4-8a46-8315ecd4a5c3"
+						"id": "847f49f2-e794-4d26-b560-04989c76e389"
 					}
 				}
 			],
-			"id": "86c7a49f-d3c2-4c35-9958-970a6d030b83",
+			"id": "f6eb9c93-f366-4f3a-8d26-52836e406904",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -391,11 +391,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "68b2d8a1-3f75-4a91-afc3-d16a88a1f583"
+						"id": "26e4b45a-16f2-4e32-9c29-6932fde7917b"
 					}
 				}
 			],
-			"id": "8c174773-8c34-453f-917b-4d61979370df",
+			"id": "4cf69584-ddaf-48d5-b20b-58d8dcd8b20f",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -471,11 +471,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "3413ba67-3540-4664-87ee-61931e2b4e3c"
+						"id": "54fc816c-ff05-4709-ba0e-2b0ec419f0bf"
 					}
 				}
 			],
-			"id": "ef392b42-fa38-42d8-b513-28d701f04d09",
+			"id": "c50bf6c8-ca49-4f52-90f4-c06b0ddccbef",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -565,11 +565,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "1673420e-3f74-44f8-b44b-ba7e5930d623"
+						"id": "8449e501-57e4-49f7-b7f1-f167f3959fff"
 					}
 				}
 			],
-			"id": "319116d4-f200-4c84-ba47-e6f09aef1ea5",
+			"id": "aebab0a5-229d-485f-ae39-a43f36f092aa",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -617,11 +617,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "5796508a-29f5-41b2-9e0e-71ce5cb1d6db"
+						"id": "c4dddcc4-dcb8-4880-929f-f3bb3c82de69"
 					}
 				}
 			],
-			"id": "b4843c05-7b80-4bcf-8649-1b302334ab4b",
+			"id": "5e18ede1-a106-491a-8694-dac28177b1d4",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -670,11 +670,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "9476142b-eb1f-4804-98fe-be8399d8a719"
+						"id": "c52e8131-bba7-4a4d-ad52-8557f0116e94"
 					}
 				}
 			],
-			"id": "b6ee0463-f5b4-48bd-ab3e-00ebc33ed009",
+			"id": "d676cd04-14f1-4e74-816b-f44e1ecb1678",
 			"request": {
 				"method": "PATCH",
 				"header": [
@@ -754,11 +754,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "f18e7897-6721-43cd-9db6-74a5d21379cc"
+						"id": "1e73cdb6-16e6-4d04-aba7-e96c8c6b821c"
 					}
 				}
 			],
-			"id": "04c197ae-9203-4d54-a8dd-17f16c37b247",
+			"id": "0f200186-f3bd-4ef1-b0fa-eda10aea8bad",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -827,11 +827,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "398aab26-bee3-4907-88ed-5241debc5f6a"
+						"id": "6e387f4b-21cd-4a11-8729-468371d856ca"
 					}
 				}
 			],
-			"id": "891864a3-d6b2-4ae9-b052-7a2b06617427",
+			"id": "c179fdab-c711-4dd3-b929-26021439e43b",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -898,11 +898,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "52e9bfff-ed10-4c27-bc93-c0c39cd801ad"
+						"id": "84080cf3-29de-4855-ab8e-494d86be9720"
 					}
 				}
 			],
-			"id": "eac9ffe8-bb2d-4236-aef8-8ce03039b484",
+			"id": "d004e534-f5ab-419c-a43d-79e8c6df498c",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -997,11 +997,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "a1272fda-c82d-4e8d-8e26-2480693c7682"
+						"id": "0f2e6127-e567-434a-af14-f018a954b99f"
 					}
 				}
 			],
-			"id": "33f6e1bd-1233-4d80-b099-330eb2389f4f",
+			"id": "8222ea1a-4fd0-4ea1-aa92-5d3359b16a58",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -1085,11 +1085,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "c8dcf1ac-c464-45b5-87bc-e3be38b0dc3e"
+						"id": "1dedbc77-588f-4da6-a923-b1e0d4dd0547"
 					}
 				}
 			],
-			"id": "a436ff46-1cd5-42e2-a725-172c7f297c5b",
+			"id": "d609b65d-7766-4522-9d4c-70eeacc65869",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -1153,7 +1153,7 @@
 				"exec": [
 					""
 				],
-				"id": "49f607de-fd74-4ab4-baf4-da95bb730183"
+				"id": "1f6fd727-e663-415d-8223-75871596da70"
 			}
 		},
 		{
@@ -1163,7 +1163,7 @@
 				"exec": [
 					""
 				],
-				"id": "7284f4ef-f882-4047-8910-7aa4f3cb1f3b"
+				"id": "c14bb696-5698-493b-b08f-3dae54e44d80"
 			}
 		}
 	]
