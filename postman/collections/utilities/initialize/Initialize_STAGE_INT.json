@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5dd497ad-98a6-4b61-8fed-4a952623f3a3",
+		"_postman_id": "61da3e9d-d237-4aad-a7fe-6dc4d70f36a9",
 		"name": "Initialize_STAGE_INT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-61da3e9d-d237-4aad-a7fe-6dc4d70f36a9"
 	},
 	"item": [
 		{
@@ -31,10 +32,12 @@
 							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "65b79f15-ff92-4396-aec4-511afb3dcc3f"
 					}
 				}
 			],
+			"id": "37e5332b-a048-46e1-b16a-822efa5c4157",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -85,10 +88,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "ed3bc960-5fa0-4764-a9e4-79f78e75976f"
 					}
 				}
 			],
+			"id": "fca14aac-2b32-4eab-984d-fd371d1eb8b9",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -162,10 +167,12 @@
 							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "e522c4f4-4856-42ee-b3e4-e26d04c43f95"
 					}
 				}
 			],
+			"id": "0c4a51cc-7af3-44cc-b19b-cb1143dbcb77",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -248,10 +255,12 @@
 							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "2f0fcd51-7b59-4805-8154-70c50a8372de"
 					}
 				}
 			],
+			"id": "2f3657b9-b683-49ad-be99-1dd40421a288",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -314,7 +323,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "00035cca-5340-4535-abac-ca764c6d41a9"
 			}
 		},
 		{
@@ -323,7 +333,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "25dc9e1f-543b-4d45-ac95-31170434b6a5"
 			}
 		}
 	]

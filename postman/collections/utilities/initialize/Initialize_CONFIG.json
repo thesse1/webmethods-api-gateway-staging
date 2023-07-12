@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "671cae71-c0bb-42e5-bc06-f3ba6220c736",
+		"_postman_id": "14355e5a-205f-4810-a07e-9a9a6a1c9dcd",
 		"name": "Initialize_CONFIG",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-671cae71-c0bb-42e5-bc06-f3ba6220c736"
+		"_uid": "3558839-14355e5a-205f-4810-a07e-9a9a6a1c9dcd"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e73ecb67-792d-4f1b-9b05-f2b7a0099417",
+						"id": "d6b807a4-7149-40d8-8949-e8593c8fcae0",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -37,7 +37,7 @@
 					}
 				}
 			],
-			"id": "9eb1c538-f732-4873-94c3-bfc5232b867d",
+			"id": "ae179311-2624-42b3-9f3d-bcedacc1346f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -91,11 +91,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "dfac13f7-8d66-4cac-96fc-2a3f1281b7c5"
 					}
 				}
 			],
-			"id": "d4461309-8d05-4935-b6f1-8b5e6816b0b9",
+			"id": "91563f75-4eff-4649-b72c-ae9157f6b13e",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -172,11 +173,12 @@
 							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "d94c20bb-16b5-4357-aabb-eea7c12d0f6f"
 					}
 				}
 			],
-			"id": "e99a9998-5227-4ddc-8d12-fb0df6258f75",
+			"id": "fca4511c-7ba2-4b32-bf74-7c9c2999e295",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -259,11 +261,12 @@
 							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "d2e32cea-dd84-490b-bbdc-78a16fec84db"
 					}
 				}
 			],
-			"id": "5e9b78ce-2360-4f4b-9cf1-95333c43eacc",
+			"id": "1c638e2d-0a37-46e7-8f4b-0f9cd1ff297f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -329,7 +332,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "bd922f48-d4c3-41cb-ad17-78ea307e2975"
 			}
 		},
 		{
@@ -338,7 +342,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "2d97d986-e761-4c20-a4c8-18f26df776d4"
 			}
 		}
 	]

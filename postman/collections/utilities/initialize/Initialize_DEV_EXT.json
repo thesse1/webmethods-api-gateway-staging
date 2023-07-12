@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b0044c7c-4b9c-4528-8329-05fcaa1eabd5",
+		"_postman_id": "e1a0cec0-b910-4a4b-9e68-d731ae0f7b03",
 		"name": "Initialize_DEV_EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-b0044c7c-4b9c-4528-8329-05fcaa1eabd5"
+		"_uid": "3558839-e1a0cec0-b910-4a4b-9e68-d731ae0f7b03"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c4998d4e-aff2-404e-a801-d8a705727e73",
+						"id": "91ed7927-2e9d-43fa-a9fd-0773b573e6af",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -37,7 +37,7 @@
 					}
 				}
 			],
-			"id": "7e4349f2-a68a-4ada-940f-1bb215be8bf6",
+			"id": "06bb5092-8060-4660-b48c-474a937ebd79",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -91,11 +91,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "48a53d6f-6287-40e2-ac91-bdc27e5acb61"
 					}
 				}
 			],
-			"id": "39764035-d6a3-446d-84c7-174420747537",
+			"id": "100dbeb7-68e5-4525-bf49-97a14580cfe2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -172,11 +173,12 @@
 							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "8bde003d-02a0-4fbc-8e50-ea01e74f18ea"
 					}
 				}
 			],
-			"id": "65bcec04-bddc-4508-aeda-718ed3786092",
+			"id": "645e9c8d-6bf3-4178-a73f-bffc5ab634ec",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -259,11 +261,12 @@
 							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "575c8c9d-5e1e-4bac-ab3e-a0a9a2c562f4"
 					}
 				}
 			],
-			"id": "34d7eab0-e947-450b-853a-b1e9af538995",
+			"id": "a94424c1-41e8-4a78-bee3-be45b58e0818",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -329,7 +332,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "b6529978-6aab-4b74-aab3-57bbe5a93712"
 			}
 		},
 		{
@@ -338,7 +342,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "7eec2cbc-38a9-42f9-883a-a68ca409903c"
 			}
 		}
 	]

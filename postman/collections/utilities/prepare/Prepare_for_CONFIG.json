@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "10c8b6e4-ded3-44d8-bc24-8272d217a0f0",
+		"_postman_id": "3f6c0a72-9a76-4ccf-9c12-49bf59a0a270",
 		"name": "Prepare_for_CONFIG",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-3f6c0a72-9a76-4ccf-9c12-49bf59a0a270"
 	},
 	"item": [
 		{
@@ -44,10 +45,12 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "3ee960b8-7fdb-48c8-80b5-5efd36082b49"
 					}
 				}
 			],
+			"id": "af069096-3cc5-42aa-a4ef-25c30a8d641c",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -115,10 +118,12 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "3579a9e0-e5d8-4baa-a81b-1516f0f894ab"
 					}
 				}
 			],
+			"id": "fbb293e2-363d-436e-917a-e6f8305e7aac",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -182,7 +187,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "c2bfbfc9-9d57-4ea1-bdff-2527d05fd322"
 			}
 		},
 		{
@@ -191,7 +197,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "fbd061a8-8bb0-4b74-a118-45975e0f416d"
 			}
 		}
 	]

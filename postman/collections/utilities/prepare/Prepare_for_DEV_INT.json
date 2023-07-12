@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bc7a078d-9051-40e7-a99e-5b23fd8ecd85",
+		"_postman_id": "801967b2-ad3c-4605-977d-2d2e01ea7474",
 		"name": "Prepare_for_DEV_INT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-801967b2-ad3c-4605-977d-2d2e01ea7474"
 	},
 	"item": [
 		{
@@ -35,10 +36,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9c879593-0880-439d-808d-5e0c504bd92c"
 					}
 				}
 			],
+			"id": "7982e705-9db5-4e9c-bf85-ca1df2459434",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -104,10 +107,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "e535d148-00a8-4c6f-89fe-30d96350053a"
 					}
 				}
 			],
+			"id": "14f172e2-9cd7-4760-aeaa-4976b458cf79",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -385,10 +390,12 @@
 							"    pm.globals.set(\"aliasId\", aliasId);\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "68408e3b-75a5-407f-af80-97461749c26d"
 					}
 				}
 			],
+			"id": "5ef89ba0-1dfa-424c-8b0e-c746a6534780",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -463,10 +470,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "436ae692-05b3-465f-966d-2607970855e6"
 					}
 				}
 			],
+			"id": "4a15b6d3-b804-4529-be31-9e19445c1ac2",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -555,10 +564,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "2fab9f72-5f12-457a-a37d-3299bc938e28"
 					}
 				}
 			],
+			"id": "59bc2bb4-6331-471a-a3d9-3d66ef65e690",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -605,10 +616,12 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "0022b6f9-712e-4489-b0cc-805f6af95c76"
 					}
 				}
 			],
+			"id": "3b15bae7-b8f0-4a86-ad46-c6636066b15d",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -656,10 +669,12 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "976f275b-ea9f-4d06-a96e-c4aba0464f74"
 					}
 				}
 			],
+			"id": "eeec5937-2a26-4b3a-9910-4cdec482551e",
 			"request": {
 				"method": "PATCH",
 				"header": [
@@ -738,10 +753,12 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "b2864cf6-4cee-4238-91d6-8819a1a4ca20"
 					}
 				}
 			],
+			"id": "a29bbfa7-b383-425f-9be8-fd220b5e717c",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -809,10 +826,12 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9eeabb5c-02c1-4b72-bc28-6ef0e792e150"
 					}
 				}
 			],
+			"id": "ebcad47d-e011-4038-815e-81fd4ea27e52",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -878,10 +897,12 @@
 							"    postman.setNextRequest(\"Get and Validate one API\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "243782ec-51f9-4099-b2b6-93fe4cd4292e"
 					}
 				}
 			],
+			"id": "c880483d-61bf-40dc-91d5-b9d1b22364dd",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -975,10 +996,12 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "05e8499a-cb0a-463c-bf19-54dd48acbb90"
 					}
 				}
 			],
+			"id": "3529ae00-b008-411e-a259-7dc1e8329c7c",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -1061,10 +1084,12 @@
 							"    postman.setNextRequest(\"Get and Validate one API\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "84256f92-e816-46e0-a938-54d7392a667b"
 					}
 				}
 			],
+			"id": "92d261fa-28fe-4ac7-ba35-601b24ce87c4",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -1127,7 +1152,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "0747beee-77e6-41e1-8226-03a382c7f7cb"
 			}
 		},
 		{
@@ -1136,7 +1162,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "a6b56bb1-dfe5-447a-b73f-899f81202fa1"
 			}
 		}
 	]
