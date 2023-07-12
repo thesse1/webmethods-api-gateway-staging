@@ -28,6 +28,7 @@ files[] = {"id":"3558839-637bf7b2-f305-407a-9c55-11302db7c9a9","path":"prepare/P
 files[] = {"id":"3558839-84edb5b9-b942-4d80-b3d9-92d860e570e0","path":"prepare/Prepare_for_STAGE_EXT.json","metaData":{}}
 files[] = {"id":"3558839-96594a3f-6623-4598-a8db-1f9ba6fe0fcd","path":"prepare/Prepare_for_STAGE_INT.json","metaData":{}}
 files[] = {"id":"3558839-ce4972e8-1981-4eda-86e0-5f9add02ed2a","path":"purge/PurgeData.json","metaData":{}}
+files[] = {"id":"edf063a2-d6d3-401f-82fc-36b40edbb08d","path":"../playground/apis/petstore/APITest.json","metaData":{}}
 
 [config.relations.collections.metaData]
 
