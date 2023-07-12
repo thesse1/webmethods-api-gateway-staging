@@ -61,6 +61,8 @@ steps:
   displayName: 'Prepare list of scopes to be imported'
 
 - script: |
+    pwd
+    ls -l
     echo newman run postman/collections/utilities/import/Import_API_Gateway_config.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
@@ -68,7 +70,8 @@ steps:
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_configuration.zip -e $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/environments/${{parameters.environment}} \
-    $(environment_insecureflag)    newman run postman/collections/utilities/import/Import_API_Gateway_config.json --reporters cli \
+    $(environment_insecureflag)
+    newman run postman/collections/utilities/import/Import_API_Gateway_config.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
     --env-var initializer_user='$(initializer_user)' \
