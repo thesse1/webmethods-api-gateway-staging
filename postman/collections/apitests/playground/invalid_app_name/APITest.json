@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d070701a-d349-4d64-a53c-9cebbc28ec8f",
+		"_postman_id": "19f24184-3b17-4784-8c3d-ca0e1fc2da48",
 		"name": "API Test for invalid-app-name",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-19f24184-3b17-4784-8c3d-ca0e1fc2da48"
 	},
 	"item": [
 		{
@@ -20,10 +21,12 @@
 							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "56afc5f1-1999-4728-b506-cfc0cd2a33eb"
 					}
 				}
 			],
+			"id": "805ccf12-4300-42c8-85c7-8f2cb6cefc49",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -87,10 +90,12 @@
 							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "4c1ac23a-ab44-4884-a875-7acd81dad1a5"
 					}
 				}
 			],
+			"id": "ce125a25-ae82-451a-b421-45c8f6c82bf7",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -147,10 +152,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "a7e7033f-8e24-4e8f-9ee8-963b6fd3aa7a"
 					}
 				}
 			],
+			"id": "32022da5-7481-49e9-a079-688a69556f02",
 			"request": {
 				"method": "DELETE",
 				"header": [

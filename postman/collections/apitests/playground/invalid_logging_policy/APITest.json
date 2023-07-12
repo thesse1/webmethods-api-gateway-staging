@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "26ee80f9-81df-48dc-9403-c047a9164dc2",
+		"_postman_id": "cef18632-eecd-4204-9ce7-328a1b9e4f85",
 		"name": "API Test for invalid-logging-policy",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-cef18632-eecd-4204-9ce7-328a1b9e4f85"
 	},
 	"item": [
 		{
@@ -20,10 +21,12 @@
 							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "c76eee45-872e-4a1e-a6a0-b11acc11c38b"
 					}
 				}
 			],
+			"id": "80df1042-d500-414b-8c5e-65be543bb833",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -87,10 +90,12 @@
 							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "b68380d9-db0a-4fc6-9be8-ad8685e7c759"
 					}
 				}
 			],
+			"id": "fc3fdcdc-f330-424e-939c-6e9f148d4948",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -147,10 +152,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9cda9072-5ea6-4304-a9f7-ef801e3d9cbf"
 					}
 				}
 			],
+			"id": "ab737b2b-850f-4293-8185-713f2757b512",
 			"request": {
 				"method": "DELETE",
 				"header": [

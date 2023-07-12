@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "989b6ea2-d284-41f9-8948-98b7b9dab4dd",
+		"_postman_id": "bd8c0f2e-1c4e-4236-85e8-ab3cc2170e2e",
 		"name": "API Test for ping",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-989b6ea2-d284-41f9-8948-98b7b9dab4dd"
+		"_uid": "3558839-bd8c0f2e-1c4e-4236-85e8-ab3cc2170e2e"
 	},
 	"item": [
 		{
@@ -23,11 +23,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "02210862-a406-4ac9-8b0e-2ed06dea950c"
+						"id": "532d4b6b-b371-4f78-9bdc-e703d7f02ece"
 					}
 				}
 			],
-			"id": "af6238df-ceab-4efe-9585-5e6e63bf3502",
+			"id": "493ca585-955c-47b7-be1c-8fc81c6dcf0c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

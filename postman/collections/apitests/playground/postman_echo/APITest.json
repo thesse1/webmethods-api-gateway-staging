@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b3f2c0d6-de8e-4e8e-a34f-5f3c1280ca34",
+		"_postman_id": "70fabaaa-9bd1-462a-82c3-3a1e9e893b9b",
 		"name": "API Test for postman-echo",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-70fabaaa-9bd1-462a-82c3-3a1e9e893b9b"
 	},
 	"item": [
 		{
@@ -20,10 +21,12 @@
 							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "83dec246-fd92-4ec2-aa83-491d06670e37"
 					}
 				}
 			],
+			"id": "2588d779-e538-4d64-b8c1-4321a6ed53c7",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -87,10 +90,12 @@
 							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "7006effb-6762-44ca-87d8-a0e4a3348ac3"
 					}
 				}
 			],
+			"id": "c5974ff9-51d0-40d0-8cac-d1b5b0ae58e5",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -147,10 +152,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "b5bbbcc0-da9c-46d0-a6aa-7fabe8f06477"
 					}
 				}
 			],
+			"id": "dc0325a5-b740-4641-b846-e717b03fddd9",
 			"request": {
 				"method": "DELETE",
 				"header": [

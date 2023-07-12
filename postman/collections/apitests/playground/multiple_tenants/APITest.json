@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9dc9e665-c5b8-4bde-abfc-0a5f71ab59c9",
+		"_postman_id": "8f9674e6-2ec9-4d80-be13-ff6186c0030e",
 		"name": "API Test for multiple-tenants",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-8f9674e6-2ec9-4d80-be13-ff6186c0030e"
 	},
 	"item": [
 		{
@@ -27,10 +28,12 @@
 									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant1\");\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"id": "d0c4d000-81a8-43aa-92de-9848a98fecd8"
 							}
 						}
 					],
+					"id": "ad3cab3a-1e99-4034-814d-cd5a2d0d5805",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -98,10 +101,12 @@
 									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant2\");\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"id": "5ad173b5-b337-4723-8b03-613b6e8eb960"
 							}
 						}
 					],
+					"id": "31ff1e07-91ec-4f64-867f-73225b4ae4b9",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -150,7 +155,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"id": "b983e241-6d63-4d35-9be9-7df94ac80533"
 		},
 		{
 			"name": "One API for multiple tenants",
@@ -174,10 +180,12 @@
 									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant1\");\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"id": "865c65e4-496e-4269-a4ea-e47ba837ddf3"
 							}
 						}
 					],
+					"id": "b425aa71-1765-4dd7-8c1b-deceb3062dbe",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -245,10 +253,12 @@
 									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant2\");\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"id": "f8e51344-4f23-4046-9840-f8af8ba95116"
 							}
 						}
 					],
+					"id": "9f269956-af6d-4666-b9a6-534dd53fd455",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -297,7 +307,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"id": "d96d704b-5847-46d5-963b-2bb18023422a"
 		}
 	]
 }

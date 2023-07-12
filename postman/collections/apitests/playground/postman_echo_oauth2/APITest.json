@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e8b96e39-7d74-40ec-95a3-c92eb4a5ef0a",
+		"_postman_id": "041c149d-2ba1-4be9-b6c4-aa0810646898",
 		"name": "API Test for postman-echo-oauth2",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-041c149d-2ba1-4be9-b6c4-aa0810646898"
 	},
 	"item": [
 		{
@@ -19,10 +20,12 @@
 							"var jsonData = pm.response.json();\r",
 							"pm.globals.set(\"auth_token\", jsonData.access_token);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9ffbd0e2-178f-47c8-9617-c82670547ae5"
 					}
 				}
 			],
+			"id": "c5db8f1c-5df2-4aea-9249-8059bfb26e08",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -87,10 +90,12 @@
 							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "443c4e49-6c21-4499-b0a4-5c2771e12fc9"
 					}
 				}
 			],
+			"id": "03b098af-5e2c-4f06-9499-aaa426ef0120",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -159,10 +164,12 @@
 							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9d56cb74-3c97-4e20-96d5-09104d653eed"
 					}
 				}
 			],
+			"id": "958fdf97-3c3b-426f-9cb2-f3752f3b0cf2",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -224,10 +231,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "5165d716-8fa2-4f45-862a-4cec1b4bddc3"
 					}
 				}
 			],
+			"id": "6880214e-32e6-4b51-a4db-9e1e3178979a",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -280,7 +289,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "426a327b-a4b1-4be9-9917-7e19877bb3a7"
 			}
 		},
 		{
@@ -289,7 +299,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "a283a628-77d4-43bc-bd86-8275e511281d"
 			}
 		}
 	]

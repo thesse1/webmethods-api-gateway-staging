@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0df3ea9f-a585-4327-82e3-4322bfe421bb",
+		"_postman_id": "86ad86b7-978e-4c25-a326-ca7eafbccf03",
 		"name": "Prepare_BUILD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-0df3ea9f-a585-4327-82e3-4322bfe421bb"
+		"_uid": "3558839-86ad86b7-978e-4c25-a326-ca7eafbccf03"
 	},
 	"item": [
 		{
@@ -35,11 +35,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "fa00289a-b541-45b1-8339-57de15ca9453"
+						"id": "214c4ad6-3035-438c-82a7-44b8969e2f88"
 					}
 				}
 			],
-			"id": "84a434c4-aa95-4945-ba0e-ef3673500bf1",
+			"id": "75fe7486-68cd-46a4-89c4-efb3293c4796",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -87,11 +87,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "bf14e3dc-ba01-4dd5-9f94-2c970d431ca6"
+						"id": "32f8c8fd-2b92-4b50-bc2a-4e9bdc5cbd21"
 					}
 				}
 			],
-			"id": "315e8a56-3467-4990-b6f0-92a648a959de",
+			"id": "62c5f9d4-1404-446c-9be5-b188a274a450",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -153,11 +153,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "ea23035b-9882-48ea-a17a-bd5831555698"
+						"id": "6b22da44-43c5-4bf5-b54b-df3c6060f2cd"
 					}
 				}
 			],
-			"id": "1d33a247-747e-449b-a5b0-c86606af01e2",
+			"id": "95a6070b-933d-4bfc-9bf2-09393b5e93ad",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -220,11 +220,11 @@
 							""
 						],
 						"type": "text/javascript",
-						"id": "416c81f5-c1b1-43ff-b5ec-12e8911fb81d"
+						"id": "d1549285-3abf-4fab-98a7-25f108d380bc"
 					}
 				}
 			],
-			"id": "83338a94-b835-4040-82ea-948865d2df0b",
+			"id": "af5c6fe0-6e18-4423-beac-b63756e62d0e",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -274,11 +274,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "b5ffcc90-730a-4432-b290-b19a52af66b9"
+						"id": "5e544227-26b2-4ebe-8f23-39978c10010f"
 					}
 				}
 			],
-			"id": "8028703e-8814-4b4d-b46e-3224175fa1a3",
+			"id": "c02fa532-28fa-462e-9137-aba26e156dc9",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -337,11 +337,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "09b2d04b-96d4-44db-afff-9f0f75611d14"
+						"id": "73984169-3680-437f-bb16-1ea043f9c5b6"
 					}
 				}
 			],
-			"id": "ac0f4da8-4bec-49ba-8594-c6d079323e8d",
+			"id": "55e55ca5-8b58-43e7-903d-79a919e792e8",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -389,11 +389,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "10d092cd-35b4-42d5-bcda-4f07a3bbd16b"
+						"id": "6adb0b6f-c203-4870-ac30-fcbda2d15579"
 					}
 				}
 			],
-			"id": "f2df530b-4caf-4492-845b-c5c5315a9bbc",
+			"id": "249e81e5-6441-4468-b426-5ee3ead96a69",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -460,11 +460,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "4838cf3f-0cf9-443c-a968-4f291de2e839"
+						"id": "df548bed-e927-4091-8566-959083705ad4"
 					}
 				}
 			],
-			"id": "5b7ef601-1712-41c6-afd1-28313ee1e330",
+			"id": "79533424-825e-486f-b39d-93286fffca74",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -512,11 +512,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "7e3b039d-4074-4c34-a418-ecf77eeac6ad"
+						"id": "e330aa66-63d7-41e4-a948-817a6480a44c"
 					}
 				}
 			],
-			"id": "6c73d663-cb31-4d2a-bbcf-087195d52ceb",
+			"id": "f340b647-46b3-4f76-9a91-348a814dfc34",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -576,11 +576,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "445f2bbc-35cb-4e94-b6cf-f390cef69d04"
+						"id": "9b96a0b8-efd9-4d13-9649-6387109c6a6c"
 					}
 				}
 			],
-			"id": "d51cf282-d01f-4b7a-a2a9-1100657b0167",
+			"id": "e0103cea-5107-4880-a6fa-bfe01362f9e5",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -629,11 +629,11 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"id": "2ce5c682-53ab-4874-a8da-ee81324e53d8"
+						"id": "c4c79406-f672-4ebf-a505-d8c3aa66e34c"
 					}
 				}
 			],
-			"id": "6c42d9e5-81a2-4f54-9ce2-d1f91a057fe4",
+			"id": "52c9f00e-b150-40e7-826c-88f4084a50e0",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -689,7 +689,7 @@
 				"exec": [
 					""
 				],
-				"id": "f09d368a-f189-4dbd-b4fd-d024e773ab5c"
+				"id": "1e335d61-18cb-48fa-b7d5-bda10b6568bc"
 			}
 		},
 		{
@@ -699,7 +699,7 @@
 				"exec": [
 					""
 				],
-				"id": "d6f40620-dc89-4353-b26c-6c58eff6105b"
+				"id": "37eb5191-b0e1-453c-beb3-b1d75656d76c"
 			}
 		}
 	]

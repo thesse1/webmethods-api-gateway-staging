@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0bc7d21a-e8ed-400a-a480-0c666bad3762",
+		"_postman_id": "1f6f71c3-3440-4302-b1c3-5502f4c7d8a0",
 		"name": "API Gateway Purge Data",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-0bc7d21a-e8ed-400a-a480-0c666bad3762"
+		"_uid": "3558839-1f6f71c3-3440-4302-b1c3-5502f4c7d8a0"
 	},
 	"item": [
 		{
@@ -25,7 +25,7 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "00d2c46d-756e-4e86-9408-e97d910a9a29"
+						"id": "f57feb8f-c036-4669-97e0-22adf9d523f0"
 					}
 				},
 				{
@@ -35,11 +35,11 @@
 							"pm.globals.set(\"olderThan\", \"28d\");"
 						],
 						"type": "text/javascript",
-						"id": "72615312-14fa-4a4e-9c93-82ff07da3e69"
+						"id": "000bd8be-2a97-4793-ae92-24915eba8bab"
 					}
 				}
 			],
-			"id": "8c95317a-45ed-4944-a1f1-09c4efaff40c",
+			"id": "8fde8728-67af-47a0-aa47-4c1dcbd0d7ca",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -106,11 +106,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "6df83aea-74aa-4272-84a5-e0ab74b72a76"
+						"id": "5a73ee3c-7c51-4ed2-a528-a8c009202d52"
 					}
 				}
 			],
-			"id": "6201614e-8028-4d7e-adde-e16953e9710e",
+			"id": "06659084-b163-460f-b98e-44be0ba7d7e8",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -177,11 +177,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "bccb760d-638c-40e8-90ce-950c223b1706"
+						"id": "e1cad1da-282d-4880-a174-56e77aaa1588"
 					}
 				}
 			],
-			"id": "8989c6be-310a-433d-aee6-7b0f75a35a5b",
+			"id": "95fc8f8c-175c-4dea-8c2d-11bc4e880fb0",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -248,11 +248,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "bc1d3943-d966-4487-9574-278f1e7689f1"
+						"id": "a4117bdf-8d6d-4160-a88e-26a54f4dd913"
 					}
 				}
 			],
-			"id": "1b9b5342-8ef6-43b8-a4db-1d5396dd2157",
+			"id": "223d258e-f225-4649-bd27-da34e9def4e6",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -319,11 +319,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "5819d28d-204d-4125-84c9-7e0d66f55272"
+						"id": "2b4aa0e8-a045-428d-bd9b-fc354d253c5e"
 					}
 				}
 			],
-			"id": "9692cba7-b5d1-4b89-bb2f-d8b55bad4def",
+			"id": "1e1b127f-c484-4a59-ab5c-11ec5c65a232",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -390,11 +390,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "d8f96af2-5383-4079-9d7a-f9d37f496a26"
+						"id": "7e980318-6dfa-46ff-a073-c2f5f93db77c"
 					}
 				}
 			],
-			"id": "f2d2fe6b-ef8e-4b6b-98c9-1925ff5348d5",
+			"id": "d0c8ed9d-c225-45e5-9ea3-b1b9e3650f6b",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -461,11 +461,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "556cfae7-c577-4ef0-9029-8dc4a118bcab"
+						"id": "d158a907-417a-4876-85dd-aa78bc8889bd"
 					}
 				}
 			],
-			"id": "eb6abe13-b655-4913-8286-4eb55ed49770",
+			"id": "5f9c6938-bb51-421c-8106-87f2701ba4cc",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -532,11 +532,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "4dbe045e-394d-454d-86a5-3c15cfe90045"
+						"id": "4740f28a-0d18-49f5-8a62-1f72bf763045"
 					}
 				}
 			],
-			"id": "89c5f12b-59a3-47e3-89e2-4f6ffee9a493",
+			"id": "560949d7-efa8-4a90-a25b-0c5e329e24b8",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -603,11 +603,11 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "f35e4201-367a-4e2f-8a4e-9255f1d1da6a"
+						"id": "9c6f1c2b-9ead-49f5-834b-931f6b3b8f22"
 					}
 				}
 			],
-			"id": "48b6a8f5-1a52-4186-9ab0-c3ace6d61f6e",
+			"id": "69c763e1-2ebd-4de1-ad59-d99a98511e4e",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -674,7 +674,7 @@
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
 						"type": "text/javascript",
-						"id": "2c0c39fe-1ce7-4a72-ae75-c50c37427640"
+						"id": "25b7ea69-1730-4228-b73d-d7b0f3bd7bac"
 					}
 				},
 				{
@@ -685,11 +685,11 @@
 							"pm.globals.set(\"until\", year + \"-01-01%2000:00:00\");"
 						],
 						"type": "text/javascript",
-						"id": "2ad42150-0dbd-4fe4-97a6-ccf0b8540ca5"
+						"id": "2bf950b0-1461-4cf7-8b49-94b9af751127"
 					}
 				}
 			],
-			"id": "d6d4cf4a-54c0-4972-80dc-20d45b8da62f",
+			"id": "9d3dd60e-833e-4f61-a2fe-e14ea5744742",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -761,7 +761,7 @@
 				"exec": [
 					""
 				],
-				"id": "22a91049-d2f0-4b14-885e-620a5e8fd9d7"
+				"id": "e2aa567b-55a4-413a-8ff2-3669649bfa42"
 			}
 		},
 		{
@@ -771,7 +771,7 @@
 				"exec": [
 					""
 				],
-				"id": "5005a7ad-129e-441c-a04e-9cbd64c47130"
+				"id": "be1c15e9-ef94-47f9-959b-da5b2198a73f"
 			}
 		}
 	]

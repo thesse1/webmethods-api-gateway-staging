@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "10cec392-82cc-41d7-a5c9-bc6ebba0a3be",
+		"_postman_id": "a5b401b5-1de3-434b-917b-246de1cd7208",
 		"name": "API Test for postman-mocking",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-a5b401b5-1de3-434b-917b-246de1cd7208"
 	},
 	"item": [
 		{
@@ -24,10 +25,12 @@
 							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "2f369c93-3837-45b0-b7e5-3c9e6eb61eec"
 					}
 				}
 			],
+			"id": "70f92f91-96eb-4f27-8e4e-2c858621601e",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -95,10 +98,12 @@
 							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "15daf644-4015-4bd6-961a-3e597da0a8d9"
 					}
 				}
 			],
+			"id": "aaca7f3f-fcaa-467c-8179-ea795985f210",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -159,10 +164,12 @@
 							"    pm.expect(jsonData.source).to.eql(\"MOCKING\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "a2d83398-6339-43c9-81af-f2fc0597e13d"
 					}
 				}
 			],
+			"id": "bb7af567-2473-487e-9544-dde02a258d60",
 			"request": {
 				"method": "DELETE",
 				"header": [

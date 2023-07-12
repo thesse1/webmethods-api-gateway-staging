@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c191dc8f-1b07-400d-9772-a3d2bf79f130",
+		"_postman_id": "7c73c41b-61c5-4dbf-af16-6dee6f6599b0",
 		"name": "API Test for postman-echo-jwt",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-7c73c41b-61c5-4dbf-af16-6dee6f6599b0"
 	},
 	"item": [
 		{
@@ -19,10 +20,12 @@
 							"var jsonData = pm.response.json();\r",
 							"pm.globals.set(\"auth_token\", jsonData.jwt);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "e7bacf14-c19b-4e70-a620-3b820190fd4f"
 					}
 				}
 			],
+			"id": "d48438e0-cae9-431b-9c0f-d89bce0f57b8",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -85,10 +88,12 @@
 							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "dd44a0ad-995b-4057-92a0-befdeb3c9545"
 					}
 				}
 			],
+			"id": "51e9ac5d-d2dc-47d3-9d43-0fed1181dad4",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -157,10 +162,12 @@
 							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "a9f98ecc-0d33-498b-8f0c-6e09dd2b9e2b"
 					}
 				}
 			],
+			"id": "be3a6ca7-05a8-4be2-afd1-3ff42ea8c81e",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -222,10 +229,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "5e3aebc3-4365-46e7-aa28-217bdd009527"
 					}
 				}
 			],
+			"id": "bd93bfc9-1630-4c1f-9be4-8787fec63454",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -278,7 +287,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "3483f151-15fb-4393-8ae5-ec85e8134238"
 			}
 		},
 		{
@@ -287,7 +297,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "e4d26ef6-1b7e-4d75-9c0a-1d6daace2669"
 			}
 		}
 	]

@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "37c34c66-55f9-4124-9c5f-e6f59fe42492",
+		"_postman_id": "a79e6380-b2ff-4582-8f43-6b5fe24e9b4e",
 		"name": "API Test for number-conversion",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-a79e6380-b2ff-4582-8f43-6b5fe24e9b4e"
 	},
 	"item": [
 		{
@@ -21,10 +22,12 @@
 							"    pm.expect(jsonObject['soap:Envelope']['soap:Body']['m:NumberToWordsResponse']['m:NumberToWordsResult']).to.eql(\"five hundred\");\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "672db644-0a76-47c8-a037-3b6a929d9019"
 					}
 				}
 			],
+			"id": "242d5087-6fdf-497e-b1b3-5609f0268d3e",
 			"request": {
 				"method": "POST",
 				"header": [

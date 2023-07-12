@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "afa479ed-2524-4c4a-a9fd-40172a932d2c",
+		"_postman_id": "0e940b73-c1c6-4473-a9dc-b3ec50f633f0",
 		"name": "API Test for petstore-versioning",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-0e940b73-c1c6-4473-a9dc-b3ec50f633f0"
 	},
 	"item": [
 		{
@@ -22,10 +23,12 @@
 							"\r",
 							"postman.setNextRequest(\"PostPet 1.0.9\"); // workaround because Petstore API is not working correctly"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "46e0914c-2ce3-48cf-9bee-7b7833603c3c"
 					}
 				}
 			],
+			"id": "a146e3b7-6e9a-4d72-95b5-a06fe6459842",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -89,10 +92,12 @@
 							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "07a13699-950b-4dc2-a2da-855c5e93e44e"
 					}
 				}
 			],
+			"id": "3b105203-5422-447a-8623-51186fc37387",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -144,10 +149,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "aee20a44-8d7c-4a37-bc15-57fcac6ce55c"
 					}
 				}
 			],
+			"id": "9a11895a-8b54-47bf-baa8-0d10b76e0f38",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -205,10 +212,12 @@
 							"\r",
 							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "d1195bcf-9c7e-48e9-a427-e2515c88c689"
 					}
 				}
 			],
+			"id": "6f4ea043-fc66-4eda-b73a-e7090f0a62b0",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -272,10 +281,12 @@
 							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "11ddffc3-b811-410e-ab1c-e1ddc65cbe6c"
 					}
 				}
 			],
+			"id": "a3a858bc-3f20-4dfd-8fcb-007c5e97ff52",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -327,10 +338,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "77c6e227-8a8e-4fb8-9b29-3b934c75331c"
 					}
 				}
 			],
+			"id": "5da7c6df-5b32-4ad7-88a3-aad3e0f5bef7",
 			"request": {
 				"method": "DELETE",
 				"header": [
