@@ -34,7 +34,7 @@ steps:
   displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
 
 - script: |
-    newman run postman/collections/utilities/purge/PurgeData.json --reporters cli \
+    newman run postman/collections/utilities/purge/Purge_Data.json --reporters cli \
     --env-var purger_user='$(purger_user)' \
     --env-var purger_password='$(purger_password)' \
     -e ${{parameters.tenant}}/environments/${{parameters.environment}} \
