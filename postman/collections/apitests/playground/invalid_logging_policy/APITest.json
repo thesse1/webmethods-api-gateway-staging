@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "cef18632-eecd-4204-9ce7-328a1b9e4f85",
+		"name": "API Test for invalid-logging-policy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-cef18632-eecd-4204-9ce7-328a1b9e4f85"
+	},
+	"item": [
+		{
+			"name": "PostEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo in payload is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "c76eee45-872e-4a1e-a6a0-b11acc11c38b"
+					}
+				}
+			],
+			"id": "80df1042-d500-414b-8c5e-65be543bb833",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Invalid_LoggingPolicy/1.0/post",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Invalid_LoggingPolicy",
+						"1.0",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo query parameter is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "b68380d9-db0a-4fc6-9be8-ad8685e7c759"
+					}
+				}
+			],
+			"id": "fc3fdcdc-f330-424e-939c-6e9f148d4948",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Invalid_LoggingPolicy/1.0/get?foo=bar",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Invalid_LoggingPolicy",
+						"1.0",
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "9cda9072-5ea6-4304-a9f7-ef801e3d9cbf"
+					}
+				}
+			],
+			"id": "ab737b2b-850f-4293-8185-713f2757b512",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Invalid_LoggingPolicy/1.0/delete",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Invalid_LoggingPolicy",
+						"1.0",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

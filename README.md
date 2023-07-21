@@ -78,7 +78,7 @@ The repository has the following top-level folders:
   - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
   - playground: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for playground environments
   - realworld: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for real-world environments
-  - utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
+  - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
 
 The folders playground and realworld have the following sub-folders:
   - apis: Contains projects with the API Gateway assets exported from CONFIG environment along with the definition of the projects' asset sets and API tests (Postman collections)
@@ -1515,14 +1515,14 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Create the API Deployable from the flat representation for API project xxx | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
-| Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /utilities/prepare |
+| Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /postman/collections/utilities/prepare |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway BUILD | Executing the ImportAPI.json Postman collection in /utilities/import |
+| Import the Deployable to API Gateway BUILD | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
 | Run tests on API Gateway BUILD (if test_condition is ${{true}}) | Executing the APITest.json Postman collection in the API project's root folder |
 | Replace alias values using pipeline variables | Using FileTransform@1 Azure DevOps standard task for replacing the values in all aliases.json files |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /{tenant}/apis root folder using jq |
-| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/STAGE/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /utilities/prepare will run all the steps described. Executing the Prepare_for_CONFIG.json Postman collection in utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/STAGE/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_CONFIG.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
 ### api-deploy-template.yml
@@ -1530,7 +1530,7 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /utilities/import |
+| Import the Deployable to API Gateway CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
 
 ### store-build-template.yml
 
@@ -1620,8 +1620,8 @@ The pipeline templates execute the following major steps:
 | ------ | ------ |
 | Create the API Deployable from the flat representation for CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Prepare list of scopes to be imported | Parse scopes.json in API Gateway configuration root folder using jq |
-| Import the Deployable to API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /utilities/import |
-| Initialize API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the Initialize_CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /utilities/initialize |
+| Import the Deployable to API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
+| Initialize API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the Initialize_CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
 
 ### api-export-config-template.yml
 
@@ -1672,7 +1672,7 @@ The pipeline template executes the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Purge Data on API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /utilities/purge |
+| Purge Data on API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /postman/collections/utilities/purge |
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
 
@@ -1811,7 +1811,7 @@ Each environment must include values for the hostname, ip, port and insecureflag
 | {{https_proxy_host}} |  Hostname or IP address of the proxy server to be configured for this environment |
 | {{https_proxy_port}} |  Port number of the proxy server to be configured for this environment |
 
-These environment variables are used in the utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the APITest.json Postman test collections in the API projects.
+These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the APITest.json Postman test collections in the API projects.
 
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 

@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "ec729586-70ba-4888-b562-34fd904fe288",
+		"name": "API Test for duplicate-alias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-ec729586-70ba-4888-b562-34fd904fe288"
+	},
+	"item": [
+		{
+			"name": "PostPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Pet ID is 123\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(123);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
+						],
+						"type": "text/javascript",
+						"id": "13951817-70a0-45b9-9f08-08eddd3abd54"
+					}
+				}
+			],
+			"id": "23537f32-0e7b-48b9-8379-efe5a4a0fd43",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"SwaggerPetstore",
+						"1.0",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Pet ID is 123\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(123);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "0bc4a933-b2c3-4591-acb6-01b94f9c2a33"
+					}
+				}
+			],
+			"id": "b52d0d8b-06fb-4a35-b8c8-0501979e2dd4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"SwaggerPetstore",
+						"1.0",
+						"pet",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "f84bb581-b16e-47aa-83f3-0b6fd0538ebc"
+					}
+				}
+			],
+			"id": "991462b9-915f-4ee3-8bc3-72d9566d1466",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "785bde12-3c1d-47ee-9617-6a1b20e51059",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"SwaggerPetstore",
+						"1.0",
+						"pet",
+						"123"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

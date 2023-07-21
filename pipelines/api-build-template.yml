@@ -75,7 +75,7 @@ steps:
   displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname, port and insecureflag'
 
 - script: |
-    newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
+    newman run postman/collections/utilities/prepare/Prepare_BUILD.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
     -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
@@ -91,7 +91,7 @@ steps:
   displayName: 'Prepare list of scopes to be imported'
 
 - script: |
-    newman run utilities/import/ImportAPI.json --reporters cli \
+    newman run postman/collections/utilities/import/Import_API.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
     --env-var initializer_user='$(initializer_user)' \
@@ -108,7 +108,7 @@ steps:
   displayName: 'DEBUG'
 
 - script: |
-    newman run ${{parameters.tenant}}/apis/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml \
+    newman run postman/collections/apitests/${{parameters.tenant}}/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml \
     -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -141,7 +141,7 @@ steps:
   displayName: 'Prepare list of global aliases to be updated'
 
 - script: |
-    newman run utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
+    newman run postman/collections/utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
     --env-var buildId=$(Build.BuildId) \

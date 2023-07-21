@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "9488f171-1beb-42de-8bd1-75a3ea4f8959",
+		"name": "API Test for star-wars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-9488f171-1beb-42de-8bd1-75a3ea4f8959"
+	},
+	"item": [
+		{
+			"name": "Get all films",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct first film title\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.allFilms.films[0].title).to.eql(\"A New Hope\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "4609931b-28fc-4256-bb45-a082d6396f28"
+					}
+				}
+			],
+			"id": "da803b75-1eef-4e92-a941-f08644ad0653",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql"
+				},
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gql/StarWarsDemoAPI/1",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gql",
+						"StarWarsDemoAPI",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

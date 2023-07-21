@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "f981e42c-51ea-4c4e-a650-1a04b323555c",
+		"name": "API Test for odata-tutorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-f981e42c-51ea-4c4e-a650-1a04b323555c"
+	},
+	"item": [
+		{
+			"name": "01. Read the service root",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "36870145-320b-42fa-9208-3b48b5dc77fa"
+					}
+				}
+			],
+			"id": "e73c1de1-5de5-4cfd-af29-47d62ebcf5ab",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1"
+					]
+				},
+				"description": "All REST APIs should have a single entry point from which a generic hypermedia client can navigate to the resources in the service. In the response we see links to three things: 1. The $metadata document that describes the schema of ther service 2. Links to various collections of objects like People and Airports 3. Links to other top-level items like Me (a singleton) and operations."
+			},
+			"response": []
+		},
+		{
+			"name": "02. Read the service metadata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "66c8573d-ad9e-496f-8eda-fecedec9d256"
+					}
+				}
+			],
+			"id": "21603d41-2a79-411b-bd94-7441503aa4ad",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/$metadata",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"$metadata"
+					]
+				},
+				"description": "$metadata is an endpoint in OData services that contains a machine-readable description of the service model including type schemas, available operations, etc."
+			},
+			"response": []
+		},
+		{
+			"name": "03. Read an entity set",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "afe12a4d-84aa-4031-b4aa-357640648f2f"
+					}
+				}
+			],
+			"id": "c22f0e3c-6aec-4f93-bb91-509ecf09421f",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					]
+				},
+				"description": "One of the most common responses from a REST API is a collection of resources. In this case we asked for the People collection. For each response, the OData service writes a self-described response (another REST principle) by annotating the response with a context URL. This context URL tells the service that the contents of the response are a collection of things in the People entity set. The @odata.nextLink annotation is present because the server opted to split the result set across multiple pages. The client can also drive paging using $top and $skip, but server-side paging is a mitigation against DoS attacks. The value property contains the bulk of the response. Note that @odata.id and @odata.editLink should generally not be present in the payload unless they deviate from convention. In this case it appears that there is a bug in our sample service. Pretend those properties aren't there."
+			},
+			"response": []
+		},
+		{
+			"name": "04. Get a single entity from an entity set",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "f1fd515c-2051-43d2-8613-cb4fd816a08f"
+					}
+				}
+			],
+			"id": "c52763f8-4253-485c-b376-a48a6454fbb4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People('russellwhyte')"
+					]
+				},
+				"description": "To get a particular entity from a collection, append a key segment. By default, key segments in OData services are bounded by parens because they may be composite keys, e.g., OrderLine(OrderId=1,LineNumber=1) or alternate keys, e.g., Person(SSN='000-00-0000') and Person(2115) both address the same resource. Some OData services use normal URL segments for key segments, e.g., Orders/1. This is not recommended because of the scenarios mentioned above."
+			},
+			"response": []
+		},
+		{
+			"name": "05. Get a primitive property",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "e7ac0df0-e3b9-408e-998d-7cc898946533"
+					}
+				}
+			],
+			"id": "fb04e7bd-7759-4de2-85b3-7b0cc3956dbf",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People('russellwhyte')",
+						"FirstName"
+					]
+				},
+				"description": "Even when fetching a primitive property, an object wrapper is returned rather than returning the raw primitive. This is to protect against a JSON vulnerability."
+			},
+			"response": []
+		},
+		{
+			"name": "06. Get the raw value of a primitive property",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "3b7bd173-badb-427d-a51c-6b0073521c9f"
+					}
+				}
+			],
+			"id": "ca477e76-eb66-4c32-aed5-e9122a1d3514",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName/$value",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People('russellwhyte')",
+						"FirstName",
+						"$value"
+					]
+				},
+				"description": "If you really want the raw value of a primitive property, you can get it by appending $value to the URL. Note that the Content-Type header indicates that the content is text/plain."
+			},
+			"response": []
+		},
+		{
+			"name": "07. Navigate to related entities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "364c0dc3-6c60-42d2-8d23-d61d087b28f6"
+					}
+				}
+			],
+			"id": "59540839-486f-47f1-84e2-6eb8536a16d3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People('russellwhyte')",
+						"Friends('scottketchum')",
+						"AddressInfo"
+					]
+				},
+				"description": "To navigate the resource graph, keep appending segments representing valid property names as defined in $metadata or in a full metadata response (see query x). In this case we have started from the service root, navigated to the entity set People, navigated to the resource keyed 'russellwhyte', navigated to the Friends property, navigated to the resource keyed 'scottketchum', and finally navigated to the AddressInfo property. Note that the @odata.context URL self-describes the payload."
+			},
+			"response": []
+		},
+		{
+			"name": "08. Filter a collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "d8503467-7598-45cb-875b-53fa4d9612cf"
+					}
+				}
+			],
+			"id": "15ebd828-55ec-42e5-9c04-471a2a3e5180",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=FirstName eq 'Vincent'",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "FirstName eq 'Vincent'"
+						}
+					]
+				},
+				"description": "The $filter system query option can be used to filter any collection of resources. Note that the response to a filtered collection is a collection of the same type, regardless of the number of matched resources."
+			},
+			"response": []
+		},
+		{
+			"name": "09. Filter on enumeration properties",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "d6ad40e9-8a77-4a21-8d6b-4a5e3fa6fec6"
+					}
+				}
+			],
+			"id": "ff616536-be32-4967-bc20-a084ae86174a",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'"
+						}
+					]
+				},
+				"description": "You can filter any type of collection in OData services. When referring to a member of enum properties, please don't ignore the namespace for the enum property."
+			},
+			"response": []
+		},
+		{
+			"name": "10. Filter on nested structures",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "9ea19b74-e53d-4d48-aa31-e2ed47e51535"
+					}
+				}
+			],
+			"id": "d604cdb5-a78c-41be-98a8-cb6bf6903501",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/Airports?$filter=Location/City/Region eq 'California'",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"Airports"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "Location/City/Region eq 'California'"
+						}
+					]
+				},
+				"description": "You can use any related properties in a filter clause by using the same segments used in the path to traverse properties."
+			},
+			"response": []
+		},
+		{
+			"name": "11. Filter using logic operators",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "43a60185-d1c3-4309-b680-974e3b66f0e8"
+					}
+				}
+			],
+			"id": "62f919f5-1555-4177-ad6c-750c00118309",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))"
+						}
+					]
+				},
+				"description": "You can use and, or and not to create more complex filter clauses."
+			},
+			"response": []
+		},
+		{
+			"name": "12. Filter using any/all operators",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "7eef4214-9572-4a14-bbb7-5fe9451d28e3"
+					}
+				}
+			],
+			"id": "d6ac5a6b-e15d-488a-a8fa-dd1815adef1b",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "Emails/any(e: endswith(e, 'contoso.com'))"
+						}
+					]
+				},
+				"description": "You can use any/all lambda-style filters for collection properties."
+			},
+			"response": []
+		},
+		{
+			"name": "14. Sort a collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "d4274762-9bf2-4783-81de-fc3a2794b08a"
+					}
+				}
+			],
+			"id": "a84ea2b8-bc9b-48c6-b2d6-4d3e138de785",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$orderby",
+							"value": "length(FirstName) desc,UserName"
+						}
+					]
+				},
+				"description": "You can use the $orderby system query option to specify ordering criteria. You can use many of the functions usable in $filter in $orderby as well."
+			},
+			"response": []
+		},
+		{
+			"name": "15. Client-side paging",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "bf41e7fd-5643-4bce-a015-d64c71758238"
+					}
+				}
+			],
+			"id": "b994a413-2ff5-489c-8c90-b75a5a76802b",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$top=2&$skip=2",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$top",
+							"value": "2"
+						},
+						{
+							"key": "$skip",
+							"value": "2"
+						}
+					]
+				},
+				"description": "There are two types of paging in OData services. Servers can enable server-side paging, returning nextLinks that clients can follow to subsequent pages. Clients can drive paging using $top and $skip."
+			},
+			"response": []
+		},
+		{
+			"name": "16. Counting the elements in a collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "79547240-8189-4438-8527-6b0a310f403b"
+					}
+				}
+			],
+			"id": "352f3944-d88d-43b3-a7b8-2fc921c03b40",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People/$count",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People",
+						"$count"
+					]
+				},
+				"description": "If you want to know how many items meet a condition, you can use the $count path segment. Note that the Content-Type header indicates that the content is text/plain. Although it doesn't work with system query options in the reference service, $count can typically be combined with $filter."
+			},
+			"response": []
+		},
+		{
+			"name": "17. Expand related entities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "0e9b0e38-66f9-463b-b624-a4819d98911b"
+					}
+				}
+			],
+			"id": "034ff761-a71a-4708-98b5-c879b9ff8ce1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$expand=Friends,Trips",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$expand",
+							"value": "Friends,Trips"
+						}
+					]
+				},
+				"description": "You can use the $expand system query option to include related resources. The expand clause can include many of the other system query options, enabling left-join type semantics. Also, you can expand <property>/$ref in order to get just the links to the related resources."
+			},
+			"response": []
+		},
+		{
+			"name": "18. Select the properties",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "42cdf188-5eb2-4ff7-a876-bad0658ea3d0"
+					}
+				}
+			],
+			"id": "9459e75d-e51d-4b3f-8b86-f16bfe71401e",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$select=FirstName,LastName",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "FirstName,LastName"
+						}
+					]
+				},
+				"description": "You can use the $select system query option to only return specified properties."
+			},
+			"response": []
+		},
+		{
+			"name": "19. Request full metadata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "429b5742-e691-4ecf-9f67-ea692c5e3e2b"
+					}
+				}
+			],
+			"id": "d1d6a55d-fac7-4ef3-b683-2ef977eb559d",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$format=application/json;odata.metadata=full",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"TripPinService",
+						"1",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "application/json;odata.metadata=full"
+						}
+					]
+				},
+				"description": "By default OData services return an extremely compact JSON format. This happens by stripping out all of the metadata that should be calculable by \"smart\" OData clients. For generic hypermedia clients, you can request additional metadata by using the Accept header or $format system query option to request application/json;odata.metadata=full. In this case, we get a bunch of additional annotations in the payload indicating type information and relationships to related resources."
+			},
+			"response": []
+		}
+	]
+}

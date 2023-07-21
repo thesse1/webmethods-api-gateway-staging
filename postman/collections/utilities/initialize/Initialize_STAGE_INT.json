@@ -1,0 +1,341 @@
+{
+	"info": {
+		"_postman_id": "fcc44097-f241-494f-9fb4-a92a142d5349",
+		"name": "Initialize_STAGE_INT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-fcc44097-f241-494f-9fb4-a92a142d5349"
+	},
+	"item": [
+		{
+			"name": "Put loadbalancer configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains httpsUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"HTTP Loadbalancer URL set to: \" + pm.response.json().httpUrls);\r",
+							"\r",
+							"console.log(\"HTTPS Loadbalancer URL set to: \" + pm.response.json().httpsUrls);\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
+							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"id": "85fc0332-8574-4ae4-bb59-f62890ab0203"
+					}
+				}
+			],
+			"id": "34fe5c15-4c3e-4511-9da5-b01ab21b67b5",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{api-hostname}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://{{api-hostname}}\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"loadBalancer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update HTTPS_Proxy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "2f01c9f3-edde-42a0-a6ac-edc9eff6ef67"
+					}
+				}
+			],
+			"id": "690fe77e-743c-4a2a-89fa-77bff093fe19",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"proxyAlias\": \"HTTPS_Proxy\",\r\n    \"host\": \"{{https_proxy_host}}\",\r\n    \"port\": \"{{https_proxy_port}}\",\r\n    \"username\": null,\r\n    \"password\": null,\r\n    \"protocol\": \"HTTPS\",\r\n    \"isDefault\": \"Y\",\r\n    \"status\": \"Enabled\",\r\n    \"ftpType\": \"0\",\r\n    \"socksVersion\": \"5\",\r\n    \"passwordHandle\": null,\r\n    \"caller\": \"Administrator\",\r\n    \"entityId\": \"HTTPS_Proxy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/is/outboundproxy/HTTPS_Proxy",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"is",
+						"outboundproxy",
+						"HTTPS_Proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let alias = JSON.parse(responseBody).alias;\r",
+							"if (alias === undefined || alias === null) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    alias.localIntrospectionConfig = alias.localIntrospectionConfig || {};\r",
+							"    alias.localIntrospectionConfig.issuer = \"https://\" + pm.variables.get(\"hostname\");\r",
+							"\r",
+							"    alias.tokenGeneratorConfig = alias.tokenGeneratorConfig || {};\r",
+							"    alias.tokenGeneratorConfig.accessTokenExpInterval = 3600;\r",
+							"    alias.tokenGeneratorConfig.authCodeExpInterval = 60;\r",
+							"    alias.tokenGeneratorConfig.expiry = 60;\r",
+							"    alias.tokenGeneratorConfig.algorithm = \"RS512\";\r",
+							"\r",
+							"    alias.sslConfig = alias.sslConfig || {};\r",
+							"    alias.sslConfig.keyStoreAlias = \"DEFAULT_IS_KEYSTORE\";\r",
+							"    alias.sslConfig.keyAlias = \"ssos\";\r",
+							"\r",
+							"    let aliasString = JSON.stringify(alias);\r",
+							"    pm.globals.set(\"alias\", aliasString);\r",
+							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"id": "b064750c-9b44-4f9c-8d83-bbcc321e645a"
+					}
+				}
+			],
+			"id": "ac0890b6-b166-4b9a-b54c-25fc7ac5b0a2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains alias\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains localIntrospectionConfig\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.localIntrospectionConfig).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains tokenGeneratorConfig\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.tokenGeneratorConfig).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains sslConfig\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.sslConfig).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"JWT issuer set to: \" + pm.response.json().alias.localIntrospectionConfig.issuer);\r",
+							"console.log(\"JWT access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.expiry);\r",
+							"console.log(\"JWT signing algorithm set to: \" + pm.response.json().alias.tokenGeneratorConfig.algorithm);\r",
+							"console.log(\"JWT keystore alias set to: \" + pm.response.json().alias.sslConfig.keyStoreAlias);\r",
+							"console.log(\"JWT key alias set to: \" + pm.response.json().alias.sslConfig.keyAlias);\r",
+							"\r",
+							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
+							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
+						],
+						"type": "text/javascript",
+						"id": "ca88e311-a0c3-4007-84bf-12cfa5ed6907"
+					}
+				}
+			],
+			"id": "534f1b12-2ac4-485a-9446-97544226c446",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{alias}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{initializer_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{initializer_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "441da99c-ad60-4414-b8d4-661ab60710ba"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "1f5c003f-b168-4c56-96f4-f13417b6a80b"
+			}
+		}
+	]
+}

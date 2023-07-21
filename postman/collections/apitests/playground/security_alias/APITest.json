@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "951d984c-bd53-4924-bcfc-9df8f8a50aa1",
+		"name": "API Test for security-alias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-951d984c-bd53-4924-bcfc-9df8f8a50aa1"
+	},
+	"item": [
+		{
+			"name": "PostEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo in payload is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+							"});\r",
+							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fQ09ORklHOk15UGFzc3dvcmRfQ09ORklH\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "9cf3d3fc-3b70-4010-87ef-ee0bbae63964"
+					}
+				}
+			],
+			"id": "391d106c-c9c9-4e7a-b8cd-fec6b6fcc693",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Security_Alias/1.0/post",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Security_Alias",
+						"1.0",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo query parameter is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
+							"});\r",
+							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fQ09ORklHOk15UGFzc3dvcmRfQ09ORklH\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "4300a4d3-733b-424f-94de-2026d88ffe86"
+					}
+				}
+			],
+			"id": "d41c6617-ce28-47b4-95a4-5b2f55892f66",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Security_Alias/1.0/get?foo=bar",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Security_Alias",
+						"1.0",
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fQ09ORklHOk15UGFzc3dvcmRfQ09ORklH\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "2052dbbc-994e-421a-8f56-5652cf7f0b38"
+					}
+				}
+			],
+			"id": "125aafc5-ea98-4898-84f5-0bede010fbba",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Security_Alias/1.0/delete",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Security_Alias",
+						"1.0",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

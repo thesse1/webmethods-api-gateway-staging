@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "a79e6380-b2ff-4582-8f43-6b5fe24e9b4e",
+		"name": "API Test for number-conversion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-a79e6380-b2ff-4582-8f43-6b5fe24e9b4e"
+	},
+	"item": [
+		{
+			"name": "Convert 500 into words",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Number to Words Result\", function () {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.expect(jsonObject['soap:Envelope']['soap:Body']['m:NumberToWordsResponse']['m:NumberToWordsResult']).to.eql(\"five hundred\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "672db644-0a76-47c8-a037-3b6a929d9019"
+					}
+				}
+			],
+			"id": "242d5087-6fdf-497e-b1b3-5609f0268d3e",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "default"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "\"#POST\"",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\r\n      <ubiNum>500</ubiNum>\r\n    </NumberToWords>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api-ip}}:{{api-port}}/ws/NumberConversion/1",
+					"protocol": "https",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"ws",
+						"NumberConversion",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
