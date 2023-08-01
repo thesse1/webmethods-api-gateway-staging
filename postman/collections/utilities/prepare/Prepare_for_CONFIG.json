@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "11971386-c74f-4d97-a752-1e2d49b99145",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -45,12 +46,14 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "11971386-c74f-4d97-a752-1e2d49b99145"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "c238fd20-644f-477a-906d-86dc43b92196",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -66,8 +69,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/strategies",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -87,6 +90,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "1ea9b419-e027-445d-8021-bf92ff1acc72",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -118,12 +122,14 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "1ea9b419-e027-445d-8021-bf92ff1acc72"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "eeb62f28-3db4-4040-8eb3-5e9f1c6f0a18",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -148,8 +154,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
