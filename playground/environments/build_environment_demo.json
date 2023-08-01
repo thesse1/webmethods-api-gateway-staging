@@ -33,6 +33,12 @@
 			"enabled": true
 		},
 		{
+			"key": "api-protocol",
+			"value": "http",
+			"type": "text",
+			"enabled": true
+		},
+		{
 			"key": "api-hostname",
 			"value": "build-apigateway.azure-softwareag-demo.com",
 			"type": "default",
@@ -46,7 +52,7 @@
 		},
 		{
 			"key": "api-port",
-			"value": "443",
+			"value": "80",
 			"type": "default",
 			"enabled": true
 		},
