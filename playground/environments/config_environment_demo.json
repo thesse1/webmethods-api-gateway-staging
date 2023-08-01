@@ -3,14 +3,14 @@
 	"name": "ConfigEnvironment Demo",
 	"values": [
 		{
-			"key": "hostname",
-			"value": "config-apigateway-admin.azure-softwareag-demo.com",
+			"key": "protocol",
+			"value": "http",
 			"type": "text",
 			"enabled": true
 		},
 		{
-			"key": "protocol",
-			"value": "http",
+			"key": "hostname",
+			"value": "config-apigateway-admin.azure-softwareag-demo.com",
 			"type": "text",
 			"enabled": true
 		},

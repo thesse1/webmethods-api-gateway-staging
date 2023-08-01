@@ -3,6 +3,12 @@
   "name": "ProdIntEnvironment Demo",
   "values": [
 	{
+		"key": "protocol",
+		"value": "http",
+		"type": "text",
+		"enabled": true
+	},
+	{
 		"key": "hostname",
 		"value": "prod-int-apigateway-admin.azure-softwareag-demo.com",
 		"type": "text",
@@ -16,7 +22,7 @@
 	},
 	{
 		"key": "port",
-		"value": "443",
+		"value": "80",
 		"type": "text",
 		"enabled": true
 	},
