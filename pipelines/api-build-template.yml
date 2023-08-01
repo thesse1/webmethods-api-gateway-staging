@@ -66,13 +66,14 @@ steps:
 #     fileType: json
 
 - bash: |
+   echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway BUILD configuration, extract protocol, ip, hostname, port and insecureflag'
 
 - script: |
     newman run postman/collections/utilities/prepare/Prepare_BUILD.json --reporters cli \
@@ -164,7 +165,7 @@ steps:
           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
-          https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
+          $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Export the Deployable from API Gateway BUILD'
   env:
@@ -177,7 +178,7 @@ steps:
 #           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
 #           --user '$(exporter_user)':'$(exporter_password)' \
 #           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
-#           https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
+#           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
 #   workingDirectory: '$(System.DefaultWorkingDirectory)'
 #   displayName: 'Export the Deployable from API Gateway BUILD'
 #   env:
