@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "4d78430e-a251-44a1-b914-bcf9b04b251e",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -32,12 +33,14 @@
 							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "4d78430e-a251-44a1-b914-bcf9b04b251e"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "8d2a55f7-0c8b-4ba9-a4ef-ce3fe53d0f9f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -61,8 +64,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -83,17 +86,20 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "a642d75b-7dfe-4e12-90ec-cbddf560754e",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "a642d75b-7dfe-4e12-90ec-cbddf560754e"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "85aa6fc5-5c8f-4e38-a3ba-e20d4171d310",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -117,8 +123,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/is/outboundproxy/HTTPS_Proxy",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/is/outboundproxy/HTTPS_Proxy",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -140,6 +146,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "1e1637c5-5db9-41e0-ad8b-97aac5a0a31f",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -167,8 +174,7 @@
 							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "1e1637c5-5db9-41e0-ad8b-97aac5a0a31f"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -199,8 +205,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -221,6 +227,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "ed703688-8fa1-4a03-85b1-da2bee306a07",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -255,12 +262,14 @@
 							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
-						"type": "text/javascript",
-						"id": "ed703688-8fa1-4a03-85b1-da2bee306a07"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "565da395-8b38-4eda-b0e8-307d4d01e5b9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -284,8 +293,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
