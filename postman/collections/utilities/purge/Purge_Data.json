@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "f57feb8f-c036-4669-97e0-22adf9d523f0",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -24,18 +25,17 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "f57feb8f-c036-4669-97e0-22adf9d523f0"
+						"type": "text/javascript"
 					}
 				},
 				{
 					"listen": "prerequest",
 					"script": {
+						"id": "000bd8be-2a97-4793-ae92-24915eba8bab",
 						"exec": [
 							"pm.globals.set(\"olderThan\", \"28d\");"
 						],
-						"type": "text/javascript",
-						"id": "000bd8be-2a97-4793-ae92-24915eba8bab"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -57,8 +57,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=transactionalEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=transactionalEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -96,6 +96,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "5a73ee3c-7c51-4ed2-a528-a8c009202d52",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -108,8 +109,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "5a73ee3c-7c51-4ed2-a528-a8c009202d52"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -131,8 +131,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=monitorEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=monitorEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -170,6 +170,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "e1cad1da-282d-4880-a174-56e77aaa1588",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -182,8 +183,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "e1cad1da-282d-4880-a174-56e77aaa1588"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -205,8 +205,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=errorEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=errorEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -244,6 +244,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "a4117bdf-8d6d-4160-a88e-26a54f4dd913",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -256,8 +257,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "a4117bdf-8d6d-4160-a88e-26a54f4dd913"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -279,8 +279,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=performanceMetrics&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=performanceMetrics&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -318,6 +318,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "2b4aa0e8-a045-428d-bd9b-fc354d253c5e",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -330,8 +331,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "2b4aa0e8-a045-428d-bd9b-fc354d253c5e"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -353,8 +353,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=threatProtectionEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=threatProtectionEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -392,6 +392,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "7e980318-6dfa-46ff-a073-c2f5f93db77c",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -404,8 +405,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "7e980318-6dfa-46ff-a073-c2f5f93db77c"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -427,8 +427,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=lifecycleEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=lifecycleEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -466,6 +466,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "d158a907-417a-4876-85dd-aa78bc8889bd",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -478,8 +479,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "d158a907-417a-4876-85dd-aa78bc8889bd"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -501,8 +501,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=policyViolationEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=policyViolationEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -540,6 +540,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "4740f28a-0d18-49f5-8a62-1f72bf763045",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -552,8 +553,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "4740f28a-0d18-49f5-8a62-1f72bf763045"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -575,8 +575,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=applicationlogs&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=applicationlogs&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -614,6 +614,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "9c6f1c2b-9ead-49f5-834b-931f6b3b8f22",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -626,8 +627,7 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "9c6f1c2b-9ead-49f5-834b-931f6b3b8f22"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -649,8 +649,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=mediatorTraceSpan&objectType=Analytics&until=&olderThan={{olderThan}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=mediatorTraceSpan&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -688,6 +688,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "25b7ea69-1730-4228-b73d-d7b0f3bd7bac",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -700,19 +701,18 @@
 							"\r",
 							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
 						],
-						"type": "text/javascript",
-						"id": "25b7ea69-1730-4228-b73d-d7b0f3bd7bac"
+						"type": "text/javascript"
 					}
 				},
 				{
 					"listen": "prerequest",
 					"script": {
+						"id": "2bf950b0-1461-4cf7-8b49-94b9af751127",
 						"exec": [
 							"var year = new Date().getFullYear()-1;\r",
 							"pm.globals.set(\"until\", year + \"-01-01%2000:00:00\");"
 						],
-						"type": "text/javascript",
-						"id": "2bf950b0-1461-4cf7-8b49-94b9af751127"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -734,8 +734,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=auditlogs&objectType=Analytics&until={{until}}&olderThan=",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=auditlogs&objectType=Analytics&until={{until}}&olderThan=",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
