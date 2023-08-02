@@ -10,13 +10,13 @@
 		},
 		{
 			"key": "hostname",
-			"value": "config-apigateway-admin.azure-softwareag-demo.com",
+			"value": "config-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "config-apigateway-admin.azure-softwareag-demo.com",
+			"value": "config-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
@@ -40,13 +40,13 @@
 		},
 		{
 			"key": "api-hostname",
-			"value": "config-apigateway.azure-softwareag-demo.com",
+			"value": "config-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api-ip",
-			"value": "config-apigateway.azure-softwareag-demo.com",
+			"value": "config-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
