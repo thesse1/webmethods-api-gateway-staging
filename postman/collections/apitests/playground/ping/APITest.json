@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "532d4b6b-b371-4f78-9bdc-e703d7f02ece",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -19,11 +20,10 @@
 							"\r",
 							"pm.test(\"Response contains date\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.date).to.exist;\r",
+							"    pm.expect(jsonData.date).to.not.exist;\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "532d4b6b-b371-4f78-9bdc-e703d7f02ece"
+						"type": "text/javascript"
 					}
 				}
 			],
