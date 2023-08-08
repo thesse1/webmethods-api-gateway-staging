@@ -20,7 +20,7 @@
 							"\r",
 							"pm.test(\"Response contains date\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.date).to.not.exist;\r",
+							"    pm.expect(jsonData.date).to.exist;\r",
 							"});"
 						],
 						"type": "text/javascript"
