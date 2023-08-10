@@ -87,6 +87,32 @@
 		},
 		{
 			"name": "Put Elasticsearch destination configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "790fa769-4548-4599-b195-708b9db6f623",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains hostname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.hostName).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Elasticsearch hostname set to: \" + pm.response.json().hostName);\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined)\r",
+							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"id": "4ee1e1e6-92c6-430f-8836-f076fa174c19",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
