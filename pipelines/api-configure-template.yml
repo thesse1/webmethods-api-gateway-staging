@@ -5,6 +5,8 @@ parameters:
   type: ''
   tenant: ''
 
+group: 'Project Configuration'
+
 steps:
 - bash: |
     if [ -z "$ENVIRONMENT" ]; then
@@ -78,6 +80,7 @@ steps:
     newman run postman/collections/utilities/initialize/Initialize_${{parameters.type}}.json --reporters cli \
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
+    --env-var elasticsearch_hostname='$(projectName)-elasticsearch.es.westeurope.azure.elastic-cloud.com' \
     --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
