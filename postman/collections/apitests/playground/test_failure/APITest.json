@@ -59,8 +59,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -119,8 +119,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -176,8 +176,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Test_Failure/1.0/pet/123",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],

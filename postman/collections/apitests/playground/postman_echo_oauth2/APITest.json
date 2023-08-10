@@ -60,8 +60,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/invoke/pub.apigateway.oauth2/getAccessToken",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/invoke/pub.apigateway.oauth2/getAccessToken",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -133,8 +133,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/post",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/post",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -198,8 +198,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/get?foo=bar",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/get?foo=bar",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -265,8 +265,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/delete",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_OAuth2/1.0/delete",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],

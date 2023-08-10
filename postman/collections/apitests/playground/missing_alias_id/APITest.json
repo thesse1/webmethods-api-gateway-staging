@@ -61,8 +61,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -121,8 +121,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -178,8 +178,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.8/pet/123",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -250,8 +250,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -310,8 +310,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -367,8 +367,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_Versioning/1.0.9/pet/123",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
