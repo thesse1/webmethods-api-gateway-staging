@@ -102,7 +102,12 @@
 							"    pm.expect(jsonData.hostName).to.exist;\r",
 							"});\r",
 							"\r",
-							"console.log(\"Elasticsearch hostname set to: \" + pm.response.json().hostName);"
+							"console.log(\"Elasticsearch hostname set to: \" + pm.response.json().hostName);\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined)\r",
+							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");"
 						],
 						"type": "text/javascript"
 					}
