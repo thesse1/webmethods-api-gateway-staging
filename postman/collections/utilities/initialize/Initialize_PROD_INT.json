@@ -29,8 +29,13 @@
 							"\r",
 							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
 							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
-							"if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
-							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
+							"let elasticsearchHostname = pm.variables.get(\"elasticsearch_hostname\");\r",
+							"if (elasticsearchHostname == null || elasticsearchHostname == undefined) {\r",
+							"    if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
+							"        postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
+							"    } else {\r",
+							"        postman.setNextRequest(\"Update HTTPS_Proxy\");\r",
+							"    }\r",
 							"}"
 						],
 						"type": "text/javascript"
@@ -75,6 +80,52 @@
 						"apigateway",
 						"configurations",
 						"loadBalancer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Elasticsearch destination configuration",
+			"id": "d31e6108-acfa-453c-8cba-6c94b2f0964f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hostName\": \"{{elasticsearch_hostname}}\",\r\n    \"sendAuditlogPackageManagementEvent\": \"true\",\r\n    \"sendAuditlogPlanManagementEvent\": \"true\",\r\n    \"sendPerformanceMetrics\": \"true\",\r\n    \"sendAuditlogApplicationManagementEvent\": \"true\",\r\n    \"keystoreName\": \"\",\r\n    \"protocol\": \"https\",\r\n    \"password\": \"manage\",\r\n    \"sendAuditlogRuleManagementEvent\": \"true\",\r\n    \"truststoreName\": \"\",\r\n    \"sendAuditlogAliasManagementEvent\": \"true\",\r\n    \"sendAuditlogAccessControlListManagementEvent\": \"true\",\r\n    \"sendLifecycleEvent\": \"true\",\r\n    \"sendAuditlogRuntimeDataManagementEvent\": \"true\",\r\n    \"sendAuditlogPolicyManagementEvent\": \"true\",\r\n    \"sendAuditlogApprovalManagementEvent\": \"true\",\r\n    \"sendAuditlogUserManagementEvent\": \"true\",\r\n    \"indexName\": \"apigw\",\r\n    \"sendAuditlogAdministrationEvent\": \"true\",\r\n    \"userName\": \"apigw\",\r\n    \"sendPolicyViolationEvent\": \"true\",\r\n    \"sendErrorEvent\": \"true\",\r\n    \"port\": \"443\",\r\n    \"sendAuditlogGroupManagementEvent\": \"true\",\r\n    \"keystoreAlias\": \"\",\r\n    \"metricsPublishInterval\": \"5\",\r\n    \"sendAuditlogAccessProfileManagementEvent\": \"true\",\r\n    \"sendAuditlogAPIManagementEvent\": \"true\",\r\n    \"sendAuditlogPromotionManagementEvent\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/elasticsearchDestinationConfig",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"elasticsearchDestinationConfig"
 					]
 				}
 			},
