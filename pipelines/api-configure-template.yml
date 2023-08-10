@@ -5,9 +5,6 @@ parameters:
   type: ''
   tenant: ''
 
-variables:
-- group: 'Project Configuration'
-
 steps:
 - bash: |
     if [ -z "$ENVIRONMENT" ]; then

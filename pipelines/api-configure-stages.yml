@@ -20,6 +20,9 @@ parameters:
   - playground
   - realworld
 
+variables:
+- group: 'Project Configuration'
+
 stages:
 - template: /pipelines/api-configure-stages-template.yml  # Template reference
   parameters:
