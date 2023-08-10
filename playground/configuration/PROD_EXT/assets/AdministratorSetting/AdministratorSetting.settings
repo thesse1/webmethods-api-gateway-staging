@@ -1,6 +1,5 @@
 {
   "configId" : "settings",
-  "userName" : "Administrator",
   "internalPorts" : { },
   "properties" : {
     "preferredSettings" : {
