@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-07-05T17:34:02"/>
-    <asset name="AdministratorSetting.settings" displayName="settings" isDeployable="true">
+    <buildInfo name="BuildTimestamp" value="2023-08-10T11:24:16"/>
+    <asset name="AdministratorSetting.extended" displayName="Extended settings" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
-    </asset>
-    <asset name="AdministratorSetting.HTTPListener@5556" displayName="HTTPListener@5556" isDeployable="true">
-        <implementation.generic type="AdministratorSetting"/>
-    </asset>
-    <asset name="AdministratorSetting.elasticsearchDestinationConfig" displayName="Elasticsearch" isDeployable="true">
-        <implementation.generic type="AdministratorSetting"/>
-        <dependsOn>APIGateway:PassmanData.gateway.destination.elasticsearch.handle</dependsOn>
-    </asset>
-    <asset name="PassmanData.gateway.destination.elasticsearch.handle" displayName="gateway.destination.elasticsearch.handle" isDeployable="true">
-        <implementation.generic type="PassmanData"/>
-    </asset>
-    <asset name="UrlAlias.GLOBAL_GATEWAY_ENDPOINT" displayName="GLOBAL_GATEWAY_ENDPOINT" isDeployable="true">
-        <implementation.generic type="UrlAlias"/>
     </asset>
     <asset name="Policy.GlobalLogInvocationPolicy" displayName="Transaction logging[Global Policy]" isDeployable="true">
         <implementation.generic type="Policy"/>
@@ -24,19 +11,25 @@
     <asset name="PolicyAction.GlobalLogInvocationPolicyAction" displayName="Policy Action [Log Invocation] -&gt; Transaction logging" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="AdministratorSetting.errorProcessing" displayName="Service fault" isDeployable="true">
-        <implementation.generic type="AdministratorSetting"/>
-    </asset>
-    <asset name="AdministratorSetting.logConfig" displayName="logConfig" isDeployable="true">
+    <asset name="AdministratorSetting.HTTPListener@5556" displayName="HTTPListener@5556" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
     </asset>
     <asset name="ProxyBypass.proxyBypass" displayName="proxyBypass" isDeployable="true">
         <implementation.generic type="ProxyBypass"/>
     </asset>
-    <asset name="AdministratorSetting.extended" displayName="Extended settings" isDeployable="true">
+    <asset name="AdministratorSetting.errorProcessing" displayName="Service fault" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
     </asset>
     <asset name="AdministratorSetting.gatewayDestinationConfig" displayName="API Gateway" isDeployable="true">
+        <implementation.generic type="AdministratorSetting"/>
+    </asset>
+    <asset name="AdministratorSetting.settings" displayName="settings" isDeployable="true">
+        <implementation.generic type="AdministratorSetting"/>
+    </asset>
+    <asset name="UrlAlias.GLOBAL_GATEWAY_ENDPOINT" displayName="GLOBAL_GATEWAY_ENDPOINT" isDeployable="true">
+        <implementation.generic type="UrlAlias"/>
+    </asset>
+    <asset name="AdministratorSetting.logConfig" displayName="logConfig" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
     </asset>
     <asset name="AdministratorSetting.keystore" displayName="Keystore/Truststore" isDeployable="true">
