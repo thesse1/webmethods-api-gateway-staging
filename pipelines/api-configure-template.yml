@@ -79,7 +79,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var elasticsearch_hostname='$(projectName)-elasticsearch.es.westeurope.azure.elastic-cloud.com' \
-    --env-var elasticsearch_indexname='apigw-${{parameters.type}}' \
+    --env-var elasticsearch_indexname='apigw-lower(${{parameters.type}})' \
     --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
