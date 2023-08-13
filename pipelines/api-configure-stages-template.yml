@@ -38,6 +38,7 @@ parameters:
 stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType.stage }}
+    dependsOn: []
     jobs:
     - deployment: Configure_API_Gateway_${{ targetType.stage }}
       environment: ${{ targetType.stage }}
@@ -54,7 +55,7 @@ stages:
               submodules: "true"
               persistCredentials: "true"
             - download: none
-            - template: /pipelines/api-configure-template.yml  # Template reference
+            - template: /pipelines/api-configure-steps-template.yml
               parameters:
                 environment: $(environment)
                 type: ${{ targetType.stage }}

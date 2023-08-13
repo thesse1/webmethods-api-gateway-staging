@@ -10,6 +10,9 @@ parameters:
   values:
   - playground
   - realworld
+- name: apiProject
+  displayName: Deploy which API project?
+  type: string
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
@@ -18,25 +21,28 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-deploy-multi-to-stages-template.yml  # Template reference
+- template: /pipelines/api-deploy-stages-template.yml  # Template reference
   parameters:
+    apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
-    apiProjects:
-    - postman_echo
-    - postman_echo_jwt
-    - postman_echo_oauth2
-    - postman_mocking
-    - multiple_tenants
-    - security_alias
     build_type:
     - stage: BUILD
       pool: vmsspoolagents
       image: ubuntu-latest
     target_types:
+    - stage: DEV_INT
+      pool: vmsspoolagents
+      image: ubuntu-latest
     - stage: DEV_EXT
       pool: vmsspoolagents
       image: ubuntu-latest
+    - stage: STAGE_INT
+      pool: vmsspoolagents
+      image: ubuntu-latest
     - stage: STAGE_EXT
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    - stage: PROD_INT
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_EXT

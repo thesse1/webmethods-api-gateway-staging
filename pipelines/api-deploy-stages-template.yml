@@ -42,6 +42,7 @@ parameters:
 stages:
 - ${{ each targetType in parameters.target_types }}:
   - stage: ${{ targetType.stage }}
+    dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
       environment: '${{ parameters.build_type[0].stage }}'
@@ -62,7 +63,7 @@ stages:
                 echo '${{ targetType.stage }}'
                 echo 'CONFIG'
               displayName: DEBUG
-            - template: /pipelines/api-build-template.yml  # Template reference
+            - template: /pipelines/api-build-steps-template.yml
               parameters:
                 apiProject: ${{parameters.apiProject}}
                 build_environment: $(environment)
@@ -101,7 +102,7 @@ stages:
               parameters:
                   target_type: ${{ targetType.stage }}
                   apiProject: ${{parameters.apiProject}}
-            - template: /pipelines/api-deploy-template.yml  # Template reference
+            - template: /pipelines/api-deploy-steps-template.yml  # Template reference
               parameters:
                 apiProject: ${{parameters.apiProject}}
                 target_environment: $(environment)

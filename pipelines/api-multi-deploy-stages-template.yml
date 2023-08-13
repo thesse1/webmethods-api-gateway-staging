@@ -43,6 +43,7 @@ stages:
 - ${{ each apiProject in parameters.apiProjects }}:
   - ${{ each targetType in parameters.target_types }}:
     - stage: ${{ targetType.stage }}_${{ apiProject }}
+      dependsOn: []
       jobs:
       - deployment: 'Build_${{apiProject}}_for_${{ targetType.stage }}'
         environment: '${{ parameters.build_type[0].stage }}'

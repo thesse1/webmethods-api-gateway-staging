@@ -2,37 +2,29 @@
 
 trigger: none
 
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Execute JMeter Load Test' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true # Run this pipeline when any run of test-remote-invoke completes
+
+variables:
+- group: 'Shutdown approval'
+
 parameters:
 - name: tenant
-  displayName: Export API Gateway configuration in which tenant?
+  displayName: Purge analytics data on API Gateway stages in which tenant?
   type: string
   default: playground
   values:
   - playground
   - realworld
-- name: sourceType
-  displayName: Export API Gateway configuration from which API Gateway?
-  type: string
-  values:
-  - CONFIG
-  - BUILD
-  - DEV_INT
-  - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
-- name: commitMessage
-  displayName: Message for the commit in Git?
-  type: string
 
 stages:
-- template: /pipelines/api-export-config-from-stage-template.yml  # Template reference
+- template: /pipelines/api-purge-data-stages-template.yml  # Template reference
   parameters:
     tenant: ${{parameters.tenant}}
-    sourceType: ${{parameters.sourceType}}
-    commitMessage: ${{parameters.commitMessage}}
-    source_types:
+    target_types:
     - stage: CONFIG
       pool: vmsspoolagents
       image: ubuntu-latest

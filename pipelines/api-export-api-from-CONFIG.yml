@@ -38,13 +38,13 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             clean: "true"
-          - template: /pipelines/api-export-api-template.yml  # Template reference
+          - template: /pipelines/api-export-api-steps-template.yml
             parameters:
               apiProject: ${{parameters.apiProject}}
               source_environment: $(environment)
               source_type: CONFIG
               tenant: ${{parameters.tenant}}
-          - template: /pipelines/commit-template.yml  # Template reference
+          - template: /pipelines/commit-template.yml
             parameters:
               commitMessage: ${{parameters.commitMessage}}
           - bash: |
