@@ -60,7 +60,7 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
-              - template: /pipelines/api-build-template.yml  # Template reference
+              - template: /pipelines/api-build-steps-template.yml
                 parameters:
                   apiProject: ${{apiProject}}
                   build_environment: $(environment)
@@ -95,11 +95,11 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - template: /pipelines/retrieve-build-template.yml  # Template reference
+              - template: /pipelines/retrieve-build-template.yml
                 parameters:
                     target_type: ${{ targetType.stage }}
                     apiProject: ${{apiProject}}
-              - template: /pipelines/api-deploy-template.yml  # Template reference
+              - template: /pipelines/api-deploy-steps-template.yml
                 parameters:
                   apiProject: ${{apiProject}}
                   target_environment: $(environment)
