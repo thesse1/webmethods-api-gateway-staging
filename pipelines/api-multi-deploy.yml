@@ -59,7 +59,7 @@ stages:
       pool: vmsspoolagents
       image: ubuntu-latest
 
-- template: /pipelines/api-deploy-multi-to-stages-template.yml  # Template reference
+- template: /pipelines/api-multi-deploy-stages-template.yml  # Template reference
   parameters:
     tenant: ${{parameters.tenant}}
     apiProjects:
@@ -81,7 +81,7 @@ stages:
       pool: vmsspoolagents
       image: ubuntu-latest
 
-- template: /pipelines/api-deploy-multi-to-stages-template.yml  # Template reference
+- template: /pipelines/api-multi-deploy-stages-template.yml  # Template reference
   parameters:
     tenant: ${{parameters.tenant}}
     apiProjects:
