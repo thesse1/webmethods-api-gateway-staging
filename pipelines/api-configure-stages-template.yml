@@ -6,59 +6,65 @@ parameters:
   values:
   - playground
   - realworld
-- name: target_types
-  displayName: Configure API Gateway in which stages?
-  type: object
-  default:
-  - stage: CONFIG
+  stages:
+  - name: CONFIG
+    targets: [ "CONFIG" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: BUILD
+  - name: BUILD
+    targets: [ "BUILD" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: DEV_INT
+  - name: DEV_INT
+    targets: [ "DEV_INT" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: DEV_EXT
+  - name: DEV_EXT
+    targets: [ "DEV_EXT" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: STAGE_INT
+  - name: STAGE_INT
+    targets: [ "STAGE_INT" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: STAGE_EXT
+  - name: STAGE_EXT
+    targets: [ "STAGE_EXT" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: PROD_INT
+  - name: PROD_INT
+    targets: [ "PROD_INT_01", "PROD_INT_02" ]
     pool: vmsspoolagents
     image: ubuntu-latest
-  - stage: PROD_EXT
+  - name: PROD_EXT
+    targets: [ "PROD_EXT_01", "PROD_EXT_02" ]
     pool: vmsspoolagents
     image: ubuntu-latest
 
 stages:
-- ${{ each targetType in parameters.target_types }}:
-  - stage: ${{ targetType.stage }}
+- ${{ each stage in parameters.stages }}:
+  - stage: ${{ stage.name }}
     dependsOn: []
     jobs:
-    - deployment: Configure_API_Gateway_${{ targetType.stage }}
-      environment: ${{ targetType.stage }}
-      variables:
-      - template: /${{parameters.tenant}}/variables/${{ targetType.stage }}/variables-template.yml
-      pool:
-        name: '${{ targetType.pool }}'
-        vmImage: '${{ targetType.image }}'
-      strategy:
-        runOnce:    #rolling, canary are the other strategies that are supported
-          deploy:
-            steps:
-            - checkout: self
-              submodules: "true"
-              persistCredentials: "true"
-            - download: none
-            - template: /pipelines/api-configure-steps-template.yml
-              parameters:
-                environment: $(environment)
-                type: ${{ targetType.stage }}
-                tenant: ${{parameters.tenant}}
-            - bash: echo "##vso[build.addbuildtag]${{targetType.stage}}"
-              displayName: Add build tag
+    - ${{ each target in stage.targets }}:
+      - deployment: Configure_API_Gateway_${{ target }}
+        environment: ${{ target }}
+        variables:
+        - template: /${{parameters.tenant}}/variables/${{ target }}/variables-template.yml
+        pool:
+          name: '${{ stage.pool }}'
+          vmImage: '${{ stage.image }}'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+              - template: /pipelines/api-configure-steps-template.yml
+                parameters:
+                  environment: $(environment)
+                  type: ${{ stage.name }}
+                  tenant: ${{parameters.tenant}}
+              - bash: echo "##vso[build.addbuildtag]${{target}}"
+                displayName: Add build tag

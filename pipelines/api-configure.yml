@@ -27,28 +27,36 @@ stages:
 - template: /pipelines/api-configure-stages-template.yml  # Template reference
   parameters:
     tenant: ${{parameters.tenant}}
-    target_types:
+    stages:
     - stage: CONFIG
+      targets: [ "CONFIG" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: BUILD
+      targets: [ "BUILD" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: DEV_INT
+      targets: [ "DEV_INT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: DEV_EXT
+      targets: [ "DEV_EXT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_INT
+      targets: [ "STAGE_INT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: STAGE_EXT
+      targets: [ "STAGE_EXT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_INT
+      targets: [ "PROD_INT_01", "PROD_INT_02" ]
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: PROD_EXT
+      targets: [ "PROD_EXT_01", "PROD_EXT_02" ]
       pool: vmsspoolagents
       image: ubuntu-latest
