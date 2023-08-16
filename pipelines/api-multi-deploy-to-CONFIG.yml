@@ -21,9 +21,6 @@ parameters:
   values:
   - playground
   - realworld
-# - name: apiProject
-#   displayName: Deploy which API project?
-#   type: string
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
@@ -34,7 +31,6 @@ variables:
 stages:
 - template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
-    # apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
     apiProjects:
     # - number_conversion
@@ -50,11 +46,13 @@ stages:
     - postman_mocking
     - multiple_tenants
     - security_alias
-    build_type:
-    - stage: BUILD
+    build_stage:
+      name: BUILD
       pool: vmsspoolagents
       image: ubuntu-latest
-    target_types:
-    - stage: CONFIG
-      pool: vmsspoolagents
-      image: ubuntu-latest
+    target_stages:
+    - name: CONFIG
+      jobs:
+      - name: CONFIG
+        pool: vmsspoolagents
+        image: ubuntu-latest
