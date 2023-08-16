@@ -81,7 +81,7 @@ stages:
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
                   environment: $(environment)
-                  type: ${{ job.name }}
+                  type: ${{ stage.name }}
                   tenant: ${{parameters.tenant}}
               - bash: echo "##vso[build.addbuildtag]${{job.name}}"
                 displayName: Add build tag
