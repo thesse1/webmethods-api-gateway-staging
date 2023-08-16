@@ -6,7 +6,7 @@ parameters:
   values:
   - playground
   - realworld
-- name: target_types
+- name: target_stages
   displayName: Purge analytics data on which API Gateway stages?
   type: object
   default:
