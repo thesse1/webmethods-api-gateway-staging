@@ -6,7 +6,7 @@ parameters:
   values:
   - playground
   - realworld
-  stages:
+- stages:
   - name: CONFIG
     targets: [ "CONFIG" ]
     pool: vmsspoolagents
