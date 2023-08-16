@@ -1,6 +1,6 @@
 {
   "id": "f313be5f-2640-22f7-36b6-3e79bbadc9e2",
-  "name": "ProdExtEnvironment Demo",
+  "name": "PROD_INT_01 Environment Demo",
   "values": [
 	{
 		"key": "protocol",
@@ -10,13 +10,13 @@
 	},
 	{
 		"key": "hostname",
-		"value": "prod-ext-apigateway-admin.azuredemo-softwareag.com",
+		"value": "prod-int-01-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
 	{
 		"key": "ip",
-		"value": "prod-ext-apigateway-admin.azuredemo-softwareag.com",
+		"value": "prod-int-01-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
@@ -40,13 +40,13 @@
 	},
 	{
 		"key": "api-hostname",
-		"value": "prod-ext-apigateway.azuredemo-softwareag.com",
+		"value": "prod-int-01-apigateway.azuredemo-softwareag.com",
 		"type": "default",
 		"enabled": true
 	},
 	{
 		"key": "api-ip",
-		"value": "prod-ext-apigateway.azuredemo-softwareag.com",
+		"value": "prod-int-01-apigateway.azuredemo-softwareag.com",
 		"type": "default",
 		"enabled": true
 	},

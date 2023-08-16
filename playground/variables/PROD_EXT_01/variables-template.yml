@@ -1,4 +1,4 @@
 # Variable template for apig staging
 
 variables:
-- group: wm_test_apigw_staging_prod_int
+- group: wm_test_apigw_staging_prod_ext_01
