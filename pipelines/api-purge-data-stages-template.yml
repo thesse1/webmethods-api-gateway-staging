@@ -68,8 +68,8 @@ stages:
         variables:
         - template: /${{parameters.tenant}}/variables/${{ job.name }}/variables-template.yml
         pool:
-          name: '${{ target_stage.pool }}'
-          vmImage: '${{ target_stage.image }}'
+          name: '${{ job.pool }}'
+          vmImage: '${{ job.image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
