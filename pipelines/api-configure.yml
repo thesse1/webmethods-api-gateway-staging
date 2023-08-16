@@ -28,35 +28,35 @@ stages:
   parameters:
     tenant: ${{parameters.tenant}}
     stages:
-    - stage: CONFIG
+    - name: CONFIG
       targets: [ "CONFIG" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: BUILD
+    - name: BUILD
       targets: [ "BUILD" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: DEV_INT
+    - name: DEV_INT
       targets: [ "DEV_INT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: DEV_EXT
+    - name: DEV_EXT
       targets: [ "DEV_EXT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: STAGE_INT
+    - name: STAGE_INT
       targets: [ "STAGE_INT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: STAGE_EXT
+    - name: STAGE_EXT
       targets: [ "STAGE_EXT" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: PROD_INT
+    - name: PROD_INT
       targets: [ "PROD_INT_01", "PROD_INT_02" ]
       pool: vmsspoolagents
       image: ubuntu-latest
-    - stage: PROD_EXT
+    - name: PROD_EXT
       targets: [ "PROD_EXT_01", "PROD_EXT_02" ]
       pool: vmsspoolagents
       image: ubuntu-latest
