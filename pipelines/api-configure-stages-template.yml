@@ -6,7 +6,10 @@ parameters:
   values:
   - playground
   - realworld
-- stages:
+- name: stages
+  displayName: Configure API Gateway in which stages?
+  type: object
+  default:
   - name: CONFIG
     targets: [ "CONFIG" ]
     pool: vmsspoolagents
