@@ -8,8 +8,8 @@ trigger: none
 resources:
   pipelines:
   - pipeline: trigger-pipeline # Name of the pipeline resource.
-    # source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
-    source: 'Terraform Create Front Door endpoints' # The name of the pipeline referenced by this pipeline resource.
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    # source: 'Terraform Create Front Door endpoints' # The name of the pipeline referenced by this pipeline resource.
     trigger: true
 
 parameters:
