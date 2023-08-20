@@ -96,7 +96,7 @@ stages:
 
     - ${{ each job in stage.configure_haft_jobs }}:
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
-        environment: ${{ stage.name }}
+        environment: HAFT_${{ stage.name }}
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
