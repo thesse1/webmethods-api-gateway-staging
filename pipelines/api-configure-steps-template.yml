@@ -4,7 +4,7 @@ parameters:
   environment: ''
   type: ''
   tenant: ''
-  haft: ''
+  configure_haft: ''
 
 steps:
 - bash: |
