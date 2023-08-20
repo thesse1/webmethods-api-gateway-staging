@@ -1,0 +1,27 @@
+# Pipeline template for apig configuring
+
+parameters:
+  type: ''
+  tenant: ''
+
+steps:
+- bash: |
+    if [ -z "$TYPE" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"type\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+    if [ -z "$TENANT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+  env:
+    TYPE: ${{parameters.type}}
+    TENANT: ${{parameters.tenant}}
+  displayName: Check for required parameters
+
+- script: |
+    newman run postman/collections/utilities/haft/Configure_HAFT_${{parameters.type}}.json --reporters cli \
+    -e ${{parameters.tenant}}/environments/${{parameters.type}}_haft_environment.json
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
+  condition: and(succeeded(), eq('${{ parameters.configure_haft }}', true))
