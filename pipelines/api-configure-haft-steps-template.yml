@@ -24,4 +24,3 @@ steps:
     -e ${{parameters.tenant}}/environments/${{parameters.type}}_haft_environment.json
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
-  condition: and(succeeded(), eq('${{ parameters.configure_haft }}', true))
