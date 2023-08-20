@@ -54,8 +54,8 @@
 					}
 				],
 				"url": {
-					"raw": "{{schema_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
-					"protocol": "{{schema_01}}",
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
 					],
@@ -119,8 +119,8 @@
 					}
 				],
 				"url": {
-					"raw": "{{schema_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
-					"protocol": "{{schema_02}}",
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_02}}",
 					"host": [
 						"{{ip_02}}"
 					],
@@ -187,8 +187,8 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/listener",
-					"protocol": "{{schema_01}}",
+					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
 					],
@@ -256,8 +256,8 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/listener",
-					"protocol": "{{schema_02}}",
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol_02}}",
 					"host": [
 						"{{ip_02}}"
 					],
@@ -325,8 +325,8 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/ring",
-					"protocol": "{{schema_01}}",
+					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
 					],
@@ -394,8 +394,8 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/ring",
-					"protocol": "{{schema_02}}",
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol_02}}",
 					"host": [
 						"{{ip_02}}"
 					],
@@ -463,8 +463,8 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/activate",
-					"protocol": "{{schema_01}}",
+					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
 					],
@@ -532,8 +532,8 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/activate",
-					"protocol": "{{schema_02}}",
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol_02}}",
 					"host": [
 						"{{ip_02}}"
 					],
@@ -597,8 +597,8 @@
 					}
 				],
 				"url": {
-					"raw": "{{schema_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace",
-					"protocol": "{{schema_01}}",
+					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
 					],
@@ -661,8 +661,8 @@
 					}
 				],
 				"url": {
-					"raw": "{{schema_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
-					"protocol": "{{schema_02}}",
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_02}}",
 					"host": [
 						"{{ip_02}}"
 					],
@@ -720,8 +720,8 @@
 					}
 				],
 				"url": {
-					"raw": "{{schema_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/status",
-					"protocol": "{{schema_01}}",
+					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
 					],
@@ -780,8 +780,8 @@
 					}
 				],
 				"url": {
-					"raw": "{{schema_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/status",
-					"protocol": "{{schema_02}}",
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_02}}",
 					"host": [
 						"{{ip_02}}"
 					],
