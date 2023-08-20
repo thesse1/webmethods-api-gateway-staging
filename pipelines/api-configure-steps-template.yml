@@ -4,6 +4,7 @@ parameters:
   environment: ''
   type: ''
   tenant: ''
+  haft: ''
 
 steps:
 - bash: |
@@ -94,3 +95,4 @@ steps:
   displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
   # env:
   #   no_proxy: $(environment_ip)
+  condition: and(succeeded(), ${{ parameters.configure_haft }})

@@ -41,6 +41,7 @@ parameters:
       pool: vmsspoolagents
       image: ubuntu-latest
   - name: PROD_INT
+    configure_haft: true
     jobs:
     - name: PROD_INT_01
       pool: vmsspoolagents
@@ -49,6 +50,7 @@ parameters:
       pool: vmsspoolagents
       image: ubuntu-latest
   - name: PROD_EXT
+    configure_haft: true
     jobs:
     - name: PROD_EXT_01
       pool: vmsspoolagents
@@ -83,5 +85,6 @@ stages:
                   environment: $(environment)
                   type: ${{ stage.name }}
                   tenant: ${{parameters.tenant}}
+                  configure_haft: ${{ stage.configure_haft }}
               - bash: echo "##vso[build.addbuildtag]${{job.name}}"
                 displayName: Add build tag
