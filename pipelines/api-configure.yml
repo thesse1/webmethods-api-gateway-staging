@@ -60,7 +60,6 @@ stages:
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: PROD_INT
-      configure_haft: true
       jobs:
       - name: PROD_INT_01
         pool: vmsspoolagents
@@ -68,12 +67,19 @@ stages:
       - name: PROD_INT_02
         pool: vmsspoolagents
         image: ubuntu-latest
+      configure_haft_jobs:
+      - name: PROD_INT_HAFT
+        pool: vmsspoolagents
+        image: ubuntu-latest
     - name: PROD_EXT
-      configure_haft: true
       jobs:
       - name: PROD_EXT_01
         pool: vmsspoolagents
         image: ubuntu-latest
       - name: PROD_EXT_02
+        pool: vmsspoolagents
+        image: ubuntu-latest
+      configure_haft_jobs:
+      - name: PROD_INT_HAFT
         pool: vmsspoolagents
         image: ubuntu-latest
