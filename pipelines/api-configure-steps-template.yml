@@ -92,7 +92,7 @@ steps:
     newman run postman/collections/utilities/haft/HAFT_${{parameters.type}}.json --reporters cli \
     -e ${{parameters.tenant}}/environments/${{parameters.type}}_haft_environment.json
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
+  displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}} ${{ parameters.configure_haft }}'
   # env:
   #   no_proxy: $(environment_ip)
-  condition: and(succeeded(), ${{ parameters.configure_haft }})
+  # condition: and(succeeded(), ${{ parameters.configure_haft }})
