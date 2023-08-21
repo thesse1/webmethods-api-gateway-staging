@@ -71,7 +71,7 @@ stages:
     # dependsOn: []
     jobs:
     - ${{ each job in parameters.build_stage.jobs }}:
-      - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
+      - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}_on_${{job.name}}'
         environment: '${{ job.name }}'
         variables:
         - group: ${{parameters.tenant}}_${{ job.name }}_users
