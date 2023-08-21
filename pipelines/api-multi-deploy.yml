@@ -28,7 +28,7 @@ variables:
 # name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-multi-deploy-stages-template.yml  # Template reference
+- template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     apiProjects:
@@ -78,7 +78,7 @@ stages:
         pool: vmsspoolagents
         image: ubuntu-latest
 
-- template: /pipelines/api-multi-deploy-stages-template.yml  # Template reference
+- template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     apiProjects:
@@ -109,7 +109,7 @@ stages:
         pool: vmsspoolagents
         image: ubuntu-latest
 
-- template: /pipelines/api-multi-deploy-stages-template.yml  # Template reference
+- template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     apiProjects:

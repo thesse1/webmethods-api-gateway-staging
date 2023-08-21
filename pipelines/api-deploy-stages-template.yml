@@ -60,7 +60,7 @@ parameters:
 stages:
 - ${{ each target_stage in parameters.target_stages }}:
   - stage: ${{ target_stage.name }}
-    # dependsOn: []
+    dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
       environment: '${{ parameters.build_stage.name }}'
@@ -89,7 +89,7 @@ stages:
                 prep_condition: ${{true}}
                 test_condition: ${{ ne(target_stage.name, 'CONFIG') }}
                 tenant: ${{parameters.tenant}}
-            - template: /pipelines/store-build-template.yml  # Template reference
+            - template: /pipelines/store-build-template.yml
               parameters:
                 target_type: ${{ target_stage.name }}
                 apiProject: ${{parameters.apiProject}}
@@ -98,7 +98,7 @@ stages:
                 echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
                 echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_stage.name}}"
               displayName: Add build tags
-            # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+            # - template: /pipelines/store-build-artifactory-template.yml
             #   parameters:
             #     target_type: $(target_stage)
 
@@ -117,11 +117,11 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - template: /pipelines/retrieve-build-template.yml  # Template reference
+              - template: /pipelines/retrieve-build-template.yml
                 parameters:
                     target_type: ${{ target_stage.name }}
                     apiProject: ${{parameters.apiProject}}
-              - template: /pipelines/api-deploy-steps-template.yml  # Template reference
+              - template: /pipelines/api-deploy-steps-template.yml
                 parameters:
                   apiProject: ${{parameters.apiProject}}
                   target_environment: ${{ job.name }}_environment.json

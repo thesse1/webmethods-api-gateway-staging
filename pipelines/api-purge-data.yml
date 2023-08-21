@@ -21,7 +21,7 @@ parameters:
   - realworld
 
 stages:
-- template: /pipelines/api-purge-data-stages-template.yml  # Template reference
+- template: /pipelines/api-purge-data-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     target_stages:

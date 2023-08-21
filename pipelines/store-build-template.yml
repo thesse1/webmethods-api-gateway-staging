@@ -21,7 +21,7 @@ steps:
   displayName: Check for required parameters
 
 - publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip"
-  artifact: ${{parameters.apiProject}}_${{parameters.target_type}}
+  artifact: ${{parameters.target_type}}_${{parameters.apiProject}}
   displayName: Build Upload
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2

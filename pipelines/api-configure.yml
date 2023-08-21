@@ -25,7 +25,7 @@ variables:
 - group: 'Project Configuration'
 
 stages:
-- template: /pipelines/api-configure-stages-template.yml  # Template reference
+- template: /pipelines/api-configure-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     stages:

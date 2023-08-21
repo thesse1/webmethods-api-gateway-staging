@@ -20,7 +20,7 @@ steps:
   displayName: Check for required parameters
 
 - download: current
-  artifact: ${{parameters.apiProject}}_${{parameters.target_type}}
+  artifact: ${{ parameters.target_type }}_${{ parameters.apiProject }}
   displayName: Build Download
 
 - bash: |

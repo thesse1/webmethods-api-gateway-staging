@@ -68,7 +68,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
-    artifactName: '${{parameters.apiProject}}_${{parameters.source_type}}_export'
+    artifactName: '${{parameters.source_type}}_${{parameters.apiProject}}_export'
 
 - task: ExtractFiles@1
   inputs:

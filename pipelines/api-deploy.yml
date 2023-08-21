@@ -21,7 +21,7 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-deploy-stages-template.yml  # Template reference
+- template: /pipelines/api-deploy-stages-template.yml
   parameters:
     apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}

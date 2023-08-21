@@ -27,7 +27,7 @@ parameters:
   type: string
 
 stages:
-- template: /pipelines/api-export-config-stages-template.yml  # Template reference
+- template: /pipelines/api-export-config-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     sourceType: ${{parameters.sourceType}}

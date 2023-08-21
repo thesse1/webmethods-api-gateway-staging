@@ -48,15 +48,15 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/assets'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_import.zip'
+    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_import.zip'
     replaceExistingArchive: true
     verbose: true
   displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.apiProject}}'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_import.zip'
-    artifactName: '${{parameters.apiProject}}_${{parameters.target_type}}_BUILD_import'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_import.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.apiProject}}_BUILD_import'
 
 # - task: FileTransform@1
 #   displayName: 'Replace hostname, ip and port in environment configuration'
@@ -98,7 +98,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_import.zip -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
+    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_import.zip -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway BUILD'
@@ -121,7 +121,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml'
-    artifactName: '${{parameters.apiProject}}_${{parameters.target_type}}_test_results'
+    artifactName: '${{parameters.target_type}}_${{parameters.apiProject}}_test_results'
   condition: ${{parameters.test_condition}}
 
 - task: FileTransform@1
@@ -162,7 +162,7 @@ steps:
 - bash: |
    curl $(build_environment_insecureflag) \
           -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
-          --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
+          --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
@@ -174,7 +174,7 @@ steps:
 # - bash: |
 #    curl $(build_environment_insecureflag) \
 #           -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
-#           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
+#           --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip \
 #           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
 #           --user '$(exporter_user)':'$(exporter_password)' \
 #           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
@@ -186,8 +186,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip'
-    artifactName: 'BUILD_export_for_${{parameters.apiProject}}_${{parameters.target_type}}'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.apiProject}}_export'
 
 - task: PublishTestResults@2
   inputs:
