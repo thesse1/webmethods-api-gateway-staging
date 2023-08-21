@@ -70,7 +70,7 @@ stages:
       #   name: '${{ parameters.build_stage.pool }}'
       #   vmImage: '${{ parameters.build_stage.image }}'
       pool:
-        name: '${{ parameters.build_stage.name }}'
+        name: '${{ parameters.build_stage.pool }}'
         vmImage: 'ubuntu-latest'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
