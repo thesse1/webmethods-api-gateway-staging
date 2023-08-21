@@ -72,13 +72,13 @@ stages:
     jobs:
     - ${{ each job in parameters.build_stage.jobs }}:
       - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
-        environment: '${{ parameters.job.name }}'
+        environment: '${{ job.name }}'
         variables:
-        - group: ${{parameters.tenant}}_${{ parameters.job.name }}_users
+        - group: ${{parameters.tenant}}_${{ job.name }}_users
         pool:
-          name: '${{ parameters.job.pool }}'
-          vmImage: '${{ parameters.job.image }}'
-        condition: eq($(Agent.Name), ${{ parameters.job.name }})
+          name: '${{ job.pool }}'
+          vmImage: '${{ job.image }}'
+        condition: eq($(Agent.Name), ${{ job.name }})
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -105,8 +105,8 @@ stages:
                   apiProject: ${{parameters.apiProject}}
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-                  echo "##vso[build.addbuildtag]${{parameters.job.name}}"
-                  echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.job.name}}"
+                  echo "##vso[build.addbuildtag]${{job.name}}"
+                  echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{job.name}}"
                 displayName: Add build tags
               # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
               #   parameters:
