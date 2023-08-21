@@ -64,8 +64,8 @@ stages:
     jobs:
     - job: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
       # environment: '${{ parameters.build_stage.name }}'
-      variables:
-      - group: ${{parameters.tenant}}_$(Agent.Name)_users
+      # variables:
+      # - group: ${{parameters.tenant}}_$(Agent.Name)_users
       pool:
         name: '${{ parameters.build_stage.pool }}'
         vmImage: '${{ parameters.build_stage.image }}'
