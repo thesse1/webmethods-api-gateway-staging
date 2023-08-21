@@ -14,7 +14,7 @@ parameters:
   type: object
   default:
     name: BUILD
-    pool: vmsspoolagents
+    pool: buildagents
     image: ubuntu-latest
 - name: target_stages
   displayName: Deploy to which stages?
@@ -66,7 +66,7 @@ stages:
       - deployment: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
         environment: '${{ parameters.build_stage.name }}'
         variables:
-        - group: ${{parameters.tenant}}_$(Agent.Name)_users
+        - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
         pool:
           name: '${{ parameters.build_stage.pool }}'
           vmImage: '${{ parameters.build_stage.image }}'

@@ -38,7 +38,7 @@ stages:
     # - star_wars
     build_stage:
       name: BUILD
-      pool: vmsspoolagents
+      pool: buildagents
       image: ubuntu-latest
     target_stages:
     - name: DEV_INT
@@ -87,7 +87,7 @@ stages:
     - petstore_versioning
     build_stage:
       name: BUILD
-      pool: vmsspoolagents
+      pool: buildagents
       image: ubuntu-latest
     target_stages:
     - name: DEV_INT
@@ -121,7 +121,7 @@ stages:
     # - security_alias
     build_stage:
       name: BUILD
-      pool: vmsspoolagents
+      pool: buildagents
       image: ubuntu-latest
     target_stages:
     - name: DEV_EXT
