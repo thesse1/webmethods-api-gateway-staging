@@ -20,7 +20,7 @@ steps:
     API_PROJECT: ${{parameters.apiProject}}
   displayName: Check for required parameters
 
-- publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip"
+- publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip"
   artifact: ${{parameters.target_type}}_${{parameters.apiProject}}
   displayName: Build Upload
 
@@ -32,7 +32,7 @@ steps:
 #       {
 #         "files": [
 #           {
-#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
+#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip",
 #             "target": "$(artifactoryFolder)/"
 #           }
 #         ]

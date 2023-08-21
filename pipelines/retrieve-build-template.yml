@@ -35,7 +35,7 @@ steps:
 #       {
 #           "files": [
 #               {
-#                   "pattern": "$(artifactoryFolder)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
+#                   "pattern": "$(artifactoryFolder)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip",
 #                   "target": "$(System.DefaultWorkingDirectory)/",
 #                   "flat": "true"
 #               }
