@@ -16,7 +16,7 @@ parameters:
       pool: vmsspoolagents
       image: ubuntu-latest
   - name: BUILD
-    jobs:
+    buildjobs:
     - name: BUILD_01
       pool: buildagents
       image: ubuntu-latest
@@ -84,6 +84,31 @@ stages:
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+              - template: /pipelines/api-configure-steps-template.yml
+                parameters:
+                  environment: "${{ job.name }}_environment.json"
+                  type: ${{ stage.name }}
+                  tenant: ${{parameters.tenant}}
+              - bash: echo "##vso[build.addbuildtag]${{job.name}}"
+                displayName: Add build tag
+
+    - ${{ each job in stage.buildjobs }}:
+      - deployment: Configure_API_Gateway_${{ job.name }}
+        environment: ${{ stage.name }}
+        variables:
+        - group: ${{parameters.tenant}}_${{ job.name }}_users
+        pool:
+          name: '${{ job.pool }}'
+          vmImage: '${{ job.image }}'
+          demands: Agent.Name -equals ${{ job.name }}
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:

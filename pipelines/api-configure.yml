@@ -35,7 +35,7 @@ stages:
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: BUILD
-      jobs:
+      buildjobs:
       - name: BUILD_01
         pool: buildagents
         image: ubuntu-latest
