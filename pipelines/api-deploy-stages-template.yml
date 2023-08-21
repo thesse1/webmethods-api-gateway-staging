@@ -45,7 +45,8 @@ stages:
     # dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
-      environment: '${{ parameters.build_type[0].stage }}'
+      # environment: '${{ parameters.build_type[0].stage }}'
+      environment: '$(Agent.Name)'
       variables:
       - template: /${{parameters.tenant}}/variables/${{ parameters.build_type[0].stage }}/variables-template.yml
       pool:

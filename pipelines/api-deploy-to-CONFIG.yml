@@ -27,7 +27,7 @@ stages:
     tenant: ${{parameters.tenant}}
     build_stage:
       name: BUILD
-      pool: vmsspoolagents
+      pool: buildagents
       image: ubuntu-latest
     target_stages:
     - name: CONFIG

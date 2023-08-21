@@ -37,13 +37,13 @@ stages:
     - name: BUILD
       jobs:
       - name: BUILD_01
-        pool: vmsspoolagents
+        pool: buildagents
         image: ubuntu-latest
       - name: BUILD_02
-        pool: vmsspoolagents
+        pool: buildagents
         image: ubuntu-latest
       - name: BUILD_03
-        pool: vmsspoolagents
+        pool: buildagents
         image: ubuntu-latest
     - name: DEV_INT
       jobs:
