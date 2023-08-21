@@ -37,7 +37,7 @@ stages:
       pool: vmsspoolagents
       image: ubuntu-latest
     - stage: BUILD
-      pool: vmsspoolagents
+      pool: buildagents
       image: ubuntu-latest
     - stage: DEV_INT
       pool: vmsspoolagents
