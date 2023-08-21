@@ -45,9 +45,9 @@ stages:
     # dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
-      environment: '$(Agent.Name)'
+      environment: '${{ parameters.build_type[0].name }}'
       variables:
-      - group: ${{parameters.tenant}}_$(Agent.Name)_users  
+      - group: ${{parameters.tenant}}_$(Agent.Name)_users
       pool:
         name: '${{ parameters.build_type[0].pool }}'
         vmImage: '${{ parameters.build_type[0].image }}'
@@ -66,7 +66,7 @@ stages:
             - template: /pipelines/api-build-steps-template.yml
               parameters:
                 apiProject: ${{parameters.apiProject}}
-                build_environment: "$(Agent.Name)_environment.json"
+                build_environment: "${{parameters.tenant}}_$(Agent.Name)_environment.json"
                 target_type: ${{ targetType.stage }}
                 prep_condition: ${{true}}
                 test_condition: ${{ ne(targetType.stage, 'CONFIG') }}
