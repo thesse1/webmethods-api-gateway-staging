@@ -1,0 +1,58 @@
+# Pipeline for apig staging
+
+trigger: none
+  # branches:
+  #   include:
+  #   - azure-demo
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    trigger:
+      tags:
+      - CONFIG
+
+parameters:
+- name: tenant
+  displayName: Deploy API project on API Gateway stages in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+
+variables:
+- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
+# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+
+stages:
+- template: /pipelines/api-multi-deploy-stages-template.yml
+  parameters:
+    tenant: ${{parameters.tenant}}
+    apiProjects:
+    # - number_conversion
+    - odata_tutorial
+    - ping
+    # - star_wars
+    - petstore
+    - petstore_basicauth
+    - petstore_versioning
+    - postman_echo
+    # - postman_echo_jwt
+    # - postman_echo_oauth2
+    - postman_mocking
+    - multiple_tenants
+    - security_alias
+    build_stage:
+      name: BUILD
+      pool: vmsspoolagents
+      image: ubuntu-latest
+    target_stages:
+    - name: CONFIG
+      jobs:
+      - name: CONFIG
+        pool: vmsspoolagents
+        image: ubuntu-latest

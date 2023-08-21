@@ -1,0 +1,91 @@
+# Pipeline for apig staging
+
+trigger:
+  branches:
+    include:
+    - azure-demo
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    # source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    source: 'Terraform Create Front Door endpoints' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true # Run this pipeline when any run of test-remote-invoke completes
+
+parameters:
+- name: tenant
+  displayName: Configure API Gateway in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+
+variables:
+- group: 'Project Configuration'
+
+stages:
+- template: /pipelines/api-configure-stages-template.yml  # Template reference
+  parameters:
+    tenant: ${{parameters.tenant}}
+    stages:
+    - name: CONFIG
+      jobs:
+      - name: CONFIG
+        pool: vmsspoolagents
+        image: ubuntu-latest
+    - name: BUILD
+      jobs:
+      - name: BUILD_01
+        pool: buildagents
+        image: ubuntu-latest
+      - name: BUILD_02
+        pool: buildagents
+        image: ubuntu-latest
+      - name: BUILD_03
+        pool: buildagents
+        image: ubuntu-latest
+    - name: DEV_INT
+      jobs:
+      - name: DEV_INT
+        pool: vmsspoolagents
+        image: ubuntu-latest
+    - name: DEV_EXT
+      jobs:
+      - name: DEV_EXT
+        pool: vmsspoolagents
+        image: ubuntu-latest
+    - name: STAGE_INT
+      jobs:
+      - name: STAGE_INT
+        pool: vmsspoolagents
+        image: ubuntu-latest
+    - name: STAGE_EXT
+      jobs:
+      - name: STAGE_EXT
+        pool: vmsspoolagents
+        image: ubuntu-latest
+    - name: PROD_INT
+      jobs:
+      - name: PROD_INT_01
+        pool: vmsspoolagents
+        image: ubuntu-latest
+      - name: PROD_INT_02
+        pool: vmsspoolagents
+        image: ubuntu-latest
+      configure_haft_jobs:
+      - name: PROD_INT_HAFT
+        pool: vmsspoolagents
+        image: ubuntu-latest
+    - name: PROD_EXT
+      jobs:
+      - name: PROD_EXT_01
+        pool: vmsspoolagents
+        image: ubuntu-latest
+      - name: PROD_EXT_02
+        pool: vmsspoolagents
+        image: ubuntu-latest
+      configure_haft_jobs:
+      - name: PROD_INT_HAFT
+        pool: vmsspoolagents
+        image: ubuntu-latest

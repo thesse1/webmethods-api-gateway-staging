@@ -36,5 +36,5 @@
       "values" : [ "ELASTICSEARCH" ]
     } ]
   } ],
-  "active" : false
+  "active" : true
 }

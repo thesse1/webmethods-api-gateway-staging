@@ -13,6 +13,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "d8a1dea2-9b6d-4f55-a422-12ce1c91cc71",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -63,8 +64,7 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "d8a1dea2-9b6d-4f55-a422-12ce1c91cc71"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -110,8 +110,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -132,6 +132,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "2a5af896-dad9-4baf-bfd7-167c772e2e28",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -149,8 +150,7 @@
 							"\r",
 							"console.log(\"OAuth2 scopes set to: \" + JSON.stringify(pm.response.json().alias.scopes));"
 						],
-						"type": "text/javascript",
-						"id": "2a5af896-dad9-4baf-bfd7-167c772e2e28"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -196,8 +196,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -218,13 +218,13 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "1e100cc7-aa57-4f82-b50b-8fc853229f5e",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "1e100cc7-aa57-4f82-b50b-8fc853229f5e"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -270,8 +270,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],

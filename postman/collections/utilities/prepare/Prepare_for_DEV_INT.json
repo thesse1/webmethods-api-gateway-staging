@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "124164d2-3c18-431b-80dd-4b875a1f83f9",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -36,12 +37,14 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "124164d2-3c18-431b-80dd-4b875a1f83f9"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "d45440ac-5404-4e1c-8258-48de66e88b24",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -57,8 +60,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/policyActions",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/policyActions",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -78,6 +81,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "523afeb0-61bf-47cf-8e72-d97e6a6242e4",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -107,12 +111,14 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "523afeb0-61bf-47cf-8e72-d97e6a6242e4"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "30f6c7b2-ed46-441f-8a38-2a3971108d51",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -127,8 +133,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/applications",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -148,6 +154,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "fc3aca89-97da-44d7-9432-bcdd7a85c6c2",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -390,12 +397,14 @@
 							"    pm.globals.set(\"aliasId\", aliasId);\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "fc3aca89-97da-44d7-9432-bcdd7a85c6c2"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "8774c748-69a4-4dec-b793-a9971f751e07",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -410,8 +419,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -431,6 +440,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "87460b75-5e1c-4e05-959d-faa7610310ba",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -470,12 +480,14 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "87460b75-5e1c-4e05-959d-faa7610310ba"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "f4c388da-7957-4ba7-94b0-55023b3f47ba",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -499,8 +511,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/{{aliasId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/{{aliasId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -521,6 +533,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "b988e2b8-9892-45a7-80eb-95b46da778d6",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -564,12 +577,14 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "b988e2b8-9892-45a7-80eb-95b46da778d6"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "ab19dcb6-6518-4b72-865d-1c81b13d13d1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -584,8 +599,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/applications",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -605,6 +620,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "375809b1-e6bb-4c40-a115-4a331d266338",
 						"exec": [
 							"pm.test(\"Status code is 204\", function () {\r",
 							"    pm.response.to.have.status(204);\r",
@@ -616,12 +632,14 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "375809b1-e6bb-4c40-a115-4a331d266338"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "92e57be3-d6e6-41ef-91e9-363d28e3fc1b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -636,8 +654,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -658,6 +676,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "c26dcde3-5573-4940-9ff2-33cdf35b2deb",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -669,12 +688,14 @@
 							"    postman.setNextRequest(\"Get all Applications\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "c26dcde3-5573-4940-9ff2-33cdf35b2deb"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "2f747c62-c910-46e4-b6a4-df32e487b39b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PATCH",
 				"header": [
@@ -698,8 +719,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -720,6 +741,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "7b7b95b6-3842-4a8e-a252-725ca5e900aa",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -753,12 +775,14 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "7b7b95b6-3842-4a8e-a252-725ca5e900aa"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "1aa5828b-c100-4ede-ab40-4f35663b77c2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -774,8 +798,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/strategies",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -795,6 +819,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "be5c088f-5e35-447a-9745-715e799ed599",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -826,12 +851,14 @@
 							"\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "be5c088f-5e35-447a-9745-715e799ed599"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "a358fb2a-58c6-4723-a320-d15bc7f90980",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -856,8 +883,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -878,6 +905,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "4e312851-4a82-4f5e-b3de-6431c37eddee",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -897,12 +925,14 @@
 							"    postman.setNextRequest(\"Get and Validate one API\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "4e312851-4a82-4f5e-b3de-6431c37eddee"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "e248b22b-94e5-4afd-be5c-f3083bb1d86b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -917,8 +947,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -938,6 +968,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "11a50184-1e14-4ae2-b371-591b12afe765",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -996,12 +1027,14 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "11a50184-1e14-4ae2-b371-591b12afe765"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "baf60fa5-d44b-4e03-836a-54d3a6553f47",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -1016,8 +1049,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -1038,6 +1071,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "d7f97579-e253-428e-a55c-4c0de2d15536",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1084,12 +1118,14 @@
 							"    postman.setNextRequest(\"Get and Validate one API\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "d7f97579-e253-428e-a55c-4c0de2d15536"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "caeb8d51-e061-4916-ab15-821659ea556d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -1113,8 +1149,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],

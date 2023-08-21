@@ -21,15 +21,17 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-deploy-to-stages-template.yml  # Template reference
+- template: /pipelines/api-deploy-stages-template.yml
   parameters:
     apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
-    build_type:
-    - stage: BUILD
-      pool: vmsspoolagents
+    build_stage:
+      name: BUILD
+      pool: buildagents
       image: ubuntu-latest
-    target_types:
-    - stage: CONFIG
-      pool: vmsspoolagents
-      image: ubuntu-latest
+    target_stages:
+    - name: CONFIG
+      jobs:
+      - name: CONFIG
+        pool: vmsspoolagents
+        image: ubuntu-latest

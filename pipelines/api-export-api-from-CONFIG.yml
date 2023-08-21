@@ -28,8 +28,6 @@ stages:
   jobs:
   - deployment: 'Export_${{parameters.apiProject}}_from_API_Gateway_CONFIG'
     environment: 'CONFIG'
-    variables:
-    - template: /${{parameters.tenant}}/variables/CONFIG/variables-template.yml
     strategy:
       runOnce:    #rolling, canary are the other strategies that are supported
         deploy:
@@ -38,13 +36,13 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             clean: "true"
-          - template: /pipelines/api-export-api-template.yml  # Template reference
+          - template: /pipelines/api-export-api-steps-template.yml
             parameters:
               apiProject: ${{parameters.apiProject}}
-              source_environment: $(environment)
+              source_environment: CONFIG_environment.json
               source_type: CONFIG
               tenant: ${{parameters.tenant}}
-          - template: /pipelines/commit-template.yml  # Template reference
+          - template: /pipelines/commit-template.yml
             parameters:
               commitMessage: ${{parameters.commitMessage}}
           - bash: |

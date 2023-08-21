@@ -56,8 +56,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/rest/pub/apigateway/jwt/getJsonWebToken",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/rest/pub/apigateway/jwt/getJsonWebToken",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -131,8 +131,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/post",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/post",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -196,8 +196,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/get?foo=bar",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/get?foo=bar",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -263,8 +263,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/delete",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/delete",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],

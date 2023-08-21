@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "85fc0332-8574-4ae4-bb59-f62890ab0203",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -28,16 +29,23 @@
 							"\r",
 							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
 							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
-							"if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
-							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
+							"let elasticsearchHostname = pm.variables.get(\"elasticsearch_hostname\");\r",
+							"if (elasticsearchHostname == null || elasticsearchHostname == undefined) {\r",
+							"    if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
+							"        postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
+							"    } else {\r",
+							"        postman.setNextRequest(\"Update HTTPS_Proxy\");\r",
+							"    }\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "85fc0332-8574-4ae4-bb59-f62890ab0203"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "34fe5c15-4c3e-4511-9da5-b01ab21b67b5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -61,8 +69,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -78,22 +86,97 @@
 			"response": []
 		},
 		{
+			"name": "Put Elasticsearch destination configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "263c1037-f806-4a90-93c9-182dab6bdf18",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains hostname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.hostName).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Elasticsearch hostname set to: \" + pm.response.json().hostName);\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined)\r",
+							"    postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "2955d095-1405-41c3-a478-753fa9ecafd6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hostName\": \"{{elasticsearch_hostname}}\",\r\n    \"sendAuditlogPackageManagementEvent\": \"true\",\r\n    \"sendAuditlogPlanManagementEvent\": \"true\",\r\n    \"sendPerformanceMetrics\": \"true\",\r\n    \"sendAuditlogApplicationManagementEvent\": \"true\",\r\n    \"keystoreName\": \"\",\r\n    \"protocol\": \"https\",\r\n    \"password\": \"manage\",\r\n    \"sendAuditlogRuleManagementEvent\": \"true\",\r\n    \"truststoreName\": \"\",\r\n    \"sendAuditlogAliasManagementEvent\": \"true\",\r\n    \"sendAuditlogAccessControlListManagementEvent\": \"true\",\r\n    \"sendLifecycleEvent\": \"true\",\r\n    \"sendAuditlogRuntimeDataManagementEvent\": \"true\",\r\n    \"sendAuditlogPolicyManagementEvent\": \"true\",\r\n    \"sendAuditlogApprovalManagementEvent\": \"true\",\r\n    \"sendAuditlogUserManagementEvent\": \"true\",\r\n    \"indexName\": \"{{elasticsearch_indexname}}\",\r\n    \"sendAuditlogAdministrationEvent\": \"true\",\r\n    \"userName\": \"apigw\",\r\n    \"sendPolicyViolationEvent\": \"true\",\r\n    \"sendErrorEvent\": \"true\",\r\n    \"port\": \"443\",\r\n    \"sendAuditlogGroupManagementEvent\": \"true\",\r\n    \"keystoreAlias\": \"\",\r\n    \"metricsPublishInterval\": \"5\",\r\n    \"sendAuditlogAccessProfileManagementEvent\": \"true\",\r\n    \"sendAuditlogAPIManagementEvent\": \"true\",\r\n    \"sendAuditlogPromotionManagementEvent\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/elasticsearchDestinationConfig",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"elasticsearchDestinationConfig"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update HTTPS_Proxy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "2f01c9f3-edde-42a0-a6ac-edc9eff6ef67",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "2f01c9f3-edde-42a0-a6ac-edc9eff6ef67"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "690fe77e-743c-4a2a-89fa-77bff093fe19",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -117,8 +200,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/is/outboundproxy/HTTPS_Proxy",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/is/outboundproxy/HTTPS_Proxy",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -140,6 +223,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "b064750c-9b44-4f9c-8d83-bbcc321e645a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -167,8 +251,7 @@
 							"    postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "b064750c-9b44-4f9c-8d83-bbcc321e645a"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -199,8 +282,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -221,6 +304,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "ca88e311-a0c3-4007-84bf-12cfa5ed6907",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -255,12 +339,14 @@
 							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
 							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);"
 						],
-						"type": "text/javascript",
-						"id": "ca88e311-a0c3-4007-84bf-12cfa5ed6907"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "534f1b12-2ac4-485a-9446-97544226c446",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -284,8 +370,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/alias/local",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],

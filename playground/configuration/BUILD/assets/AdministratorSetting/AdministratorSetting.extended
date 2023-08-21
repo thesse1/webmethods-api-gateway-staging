@@ -38,6 +38,7 @@
     "pg_Cache_averageObjectSize" : "64",
     "maxBackupsLimit" : "-1",
     "pgmen.quotaSurvival.addLostIntervals" : "true",
+    "eventsBatchTimeIntervalSeconds" : "10",
     "events.collectionPool.maxThreads" : "16",
     "pg.endpoint.readTimeout" : "30",
     "sendClientRequestURI" : "false",
@@ -104,6 +105,7 @@
     "events.collectionPool.minThreads" : "2",
     "pg.MTOMStreaming.cachedFiles.delete.interval" : "3600",
     "pg_OpenID_isHTTPS" : "false",
+    "eventsBatchCount" : "1000",
     "decodeAllDelimitersInURI" : "false",
     "disableRemoteEntityReference" : "true",
     "transformerPoolSize" : "5",
@@ -115,6 +117,7 @@
     "pg.endpoint.connectionTimeout" : "30",
     "invokeESB_asUser" : "",
     "apig_rest_service_redirect" : "false",
-    "forwardQueryParams" : "false"
+    "forwardQueryParams" : "false",
+    "eventsBatchPayloadSizeInMB" : "10"
   }
 }

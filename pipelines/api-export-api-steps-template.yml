@@ -1,0 +1,87 @@
+# Pipeline template for apig staging
+
+parameters:
+  apiProject: ''
+  source_environment: ''
+  source_type: ''
+  tenant: ''
+
+steps:
+- bash: |
+    if [ -z "$APIPROJECT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+    if [ -z "$SOURCE_ENVIRONMENT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"source_environment\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+    if [ -z "$SOURCE_TYPE" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"source_type\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+    if [ -z "$TENANT" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+  env:
+    APIPROJECT: ${{parameters.apiProject}}
+    SOURCE_ENVIRONMENT: ${{parameters.source_environment}}
+    SOURCE_TYPE: ${{parameters.source_type}}
+    TENANT: ${{parameters.tenant}}
+  displayName: Check for required parameters
+
+- bash: |
+   echo "##vso[task.setvariable variable=source_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.source_environment}}`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Read and parse API Gateway ${{parameters.source_type}} configuration, extract ip, hostname, port and insecureflag'
+
+- bash: |
+   curl $(source_environment_insecureflag) \
+          -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
+          --output $(Build.BuildId)_export_from_${{parameters.source_type}}.zip \
+          -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
+          --user '$(exporter_user)':'$(exporter_password)' \
+          $(source_environment_protocol)://$(source_environment_hostname):$(source_environment_port)/rest/apigateway/archive
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Export the Deployable from API Gateway ${{parameters.source_type}}'
+  env:
+    no_proxy: $(source_environment_hostname)
+
+# - bash: |
+#    curl $(source_environment_insecureflag) \
+#           -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
+#           --output $(Build.BuildId)_export_from_${{parameters.source_type}}.zip \
+#           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
+#           --user '$(exporter_user)':'$(exporter_password)' \
+#           --resolve $(source_environment_hostname):$(source_environment_port):$(source_environment_ip) \
+#           $(source_environment_protocol)://$(source_environment_hostname):$(source_environment_port)/rest/apigateway/archive
+#   workingDirectory: '$(System.DefaultWorkingDirectory)'
+#   displayName: 'Export the Deployable from API Gateway ${{parameters.source_type}}'
+#   env:
+#     no_proxy: $(source_environment_hostname)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
+    artifactName: '${{parameters.apiProject}}_${{parameters.source_type}}_export'
+
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/assets'
+    cleanDestinationFolder: true
+    overwriteExistingFiles: false
+    #pathToSevenZipTool: 
+  displayName: 'Extract the flat representation from the API Deployable for API project ${{parameters.apiProject}}'
+
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '$(Build.BuildId)_export_from_${{parameters.source_type}}.zip' 
+    #RemoveSourceFolder: # Optional
+  displayName: 'Remove the API Deployable again'

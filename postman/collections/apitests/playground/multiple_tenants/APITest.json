@@ -66,8 +66,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Tenant1_PostmanEcho/1.0/post",
-							"protocol": "https",
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Tenant1_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
 							"host": [
 								"{{api-ip}}"
 							],
@@ -139,8 +139,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Tenant2_PostmanEcho/1.0/post",
-							"protocol": "https",
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Tenant2_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
 							"host": [
 								"{{api-ip}}"
 							],
@@ -218,8 +218,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
-							"protocol": "https",
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
 							"host": [
 								"{{api-ip}}"
 							],
@@ -291,8 +291,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
-							"protocol": "https",
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
 							"host": [
 								"{{api-ip}}"
 							],

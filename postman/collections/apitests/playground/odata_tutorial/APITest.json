@@ -12,17 +12,20 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "36870145-320b-42fa-9208-3b48b5dc77fa",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "36870145-320b-42fa-9208-3b48b5dc77fa"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "e73c1de1-5de5-4cfd-af29-47d62ebcf5ab",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -33,8 +36,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -66,6 +69,9 @@
 				}
 			],
 			"id": "21603d41-2a79-411b-bd94-7441503aa4ad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -76,8 +82,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/$metadata",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/$metadata",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -110,6 +116,9 @@
 				}
 			],
 			"id": "c22f0e3c-6aec-4f93-bb91-509ecf09421f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -120,8 +129,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -154,6 +163,9 @@
 				}
 			],
 			"id": "c52763f8-4253-485c-b376-a48a6454fbb4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -164,8 +176,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -198,6 +210,9 @@
 				}
 			],
 			"id": "fb04e7bd-7759-4de2-85b3-7b0cc3956dbf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -208,8 +223,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -243,6 +258,9 @@
 				}
 			],
 			"id": "ca477e76-eb66-4c32-aed5-e9122a1d3514",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -253,8 +271,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName/$value",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/FirstName/$value",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -289,6 +307,9 @@
 				}
 			],
 			"id": "59540839-486f-47f1-84e2-6eb8536a16d3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -299,8 +320,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People('russellwhyte')/Friends('scottketchum')/AddressInfo",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -335,6 +356,9 @@
 				}
 			],
 			"id": "15ebd828-55ec-42e5-9c04-471a2a3e5180",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -345,8 +369,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=FirstName eq 'Vincent'",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=FirstName eq 'Vincent'",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -385,6 +409,9 @@
 				}
 			],
 			"id": "ff616536-be32-4967-bc20-a084ae86174a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -395,8 +422,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Gender eq Microsoft.OData.SampleService.Models.TripPin.PersonGender'Female'",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -435,6 +462,9 @@
 				}
 			],
 			"id": "d604cdb5-a78c-41be-98a8-cb6bf6903501",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -445,8 +475,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/Airports?$filter=Location/City/Region eq 'California'",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/Airports?$filter=Location/City/Region eq 'California'",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -485,6 +515,9 @@
 				}
 			],
 			"id": "62f919f5-1555-4177-ad6c-750c00118309",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -495,8 +528,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=not(contains(FirstName,'Q')) and (AddressInfo/any(ai:ai/City/Region eq 'WA') or AddressInfo/any(ai:ai/City/Region eq 'ID'))",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -535,6 +568,9 @@
 				}
 			],
 			"id": "d6ac5a6b-e15d-488a-a8fa-dd1815adef1b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -545,8 +581,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$filter=Emails/any(e: endswith(e, 'contoso.com'))",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -585,6 +621,9 @@
 				}
 			],
 			"id": "a84ea2b8-bc9b-48c6-b2d6-4d3e138de785",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -595,8 +634,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -635,6 +674,9 @@
 				}
 			],
 			"id": "b994a413-2ff5-489c-8c90-b75a5a76802b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -645,8 +687,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$top=2&$skip=2",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$top=2&$skip=2",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -689,6 +731,9 @@
 				}
 			],
 			"id": "352f3944-d88d-43b3-a7b8-2fc921c03b40",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -699,8 +744,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People/$count",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People/$count",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -734,6 +779,9 @@
 				}
 			],
 			"id": "034ff761-a71a-4708-98b5-c879b9ff8ce1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -744,8 +792,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$expand=Friends,Trips",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$expand=Friends,Trips",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -784,6 +832,9 @@
 				}
 			],
 			"id": "9459e75d-e51d-4b3f-8b86-f16bfe71401e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -794,8 +845,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$select=FirstName,LastName",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$select=FirstName,LastName",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
@@ -834,6 +885,9 @@
 				}
 			],
 			"id": "d1d6a55d-fac7-4ef3-b683-2ef977eb559d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -844,8 +898,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$format=application/json;odata.metadata=full",
-					"protocol": "https",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$format=application/json;odata.metadata=full",
+					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
 					],
