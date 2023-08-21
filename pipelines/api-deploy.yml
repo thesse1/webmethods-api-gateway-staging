@@ -27,8 +27,16 @@ stages:
     tenant: ${{parameters.tenant}}
     build_stage:
       name: BUILD
-      pool: buildagents
-      image: ubuntu-latest
+      jobs:
+      - name: BUILD_01
+        pool: buildagents
+        image: ubuntu-latest
+      - name: BUILD_02
+        pool: buildagents
+        image: ubuntu-latest
+      - name: BUILD_03
+        pool: buildagents
+        image: ubuntu-latest
     target_stages:
     - name: DEV_INT
       jobs:
