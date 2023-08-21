@@ -29,7 +29,7 @@ stages:
   - deployment: 'Export_${{parameters.apiProject}}_from_API_Gateway_CONFIG'
     environment: 'CONFIG'
     variables:
-    - group: $(tenant)_CONFIG_users
+    - group: ${{parameters.tenant}}_CONFIG_users
     strategy:
       runOnce:    #rolling, canary are the other strategies that are supported
         deploy:

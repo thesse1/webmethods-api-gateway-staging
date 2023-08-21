@@ -80,7 +80,7 @@ stages:
       - deployment: Configure_API_Gateway_${{ job.name }}
         environment: ${{ job.name }}
         variables:
-        - group: $(tenant)_${{ job.name }}_users
+        - group: ${{parameters.tenant}}_${{ job.name }}_users
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
