@@ -78,7 +78,7 @@ stages:
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
-        # condition: eq($(Agent.Name), ${{ job.name }})
+        condition: eq($(Agent.Name), ${{ job.name }})
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
