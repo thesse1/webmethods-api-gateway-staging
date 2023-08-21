@@ -66,9 +66,9 @@ stages:
       # environment: '${{ parameters.build_stage.name }}'
       # variables:
       # - group: ${{parameters.tenant}}_$(Agent.Name)_users
-      pool:
-        name: '${{ parameters.build_stage.pool }}'
-        vmImage: '${{ parameters.build_stage.image }}'
+      # pool:
+      #   name: '${{ parameters.build_stage.pool }}'
+      #   vmImage: '${{ parameters.build_stage.image }}'
       # strategy:
       #   runOnce:    #rolling, canary are the other strategies that are supported
       #     deploy:
