@@ -64,7 +64,7 @@ stages:
       # dependsOn: []
       jobs:
       - deployment: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
-        environment: '${{ parameters.build_stage[0].name }}'
+        environment: '${{ parameters.build_stage.name }}'
         variables:
         - group: ${{parameters.tenant}}_$(Agent.Name)_users
         pool:
