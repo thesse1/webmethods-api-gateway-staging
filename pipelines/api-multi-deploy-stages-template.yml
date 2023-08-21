@@ -66,7 +66,7 @@ stages:
       - deployment: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
         environment: '$(Agent.Name)'
         variables:
-        - group: $(Agent.Name)_users
+        - group: $(tenant)_$(Agent.Name)_users
         pool:
           name: '${{ parameters.build_stage.pool }}'
           vmImage: '${{ parameters.build_stage.image }}'
@@ -103,7 +103,7 @@ stages:
         - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ job.name }}'
           environment: ${{ job.name }}
           variables:
-          - group: ${{ job.name }}_users
+          - group: $(tenant)_${{ job.name }}_users
           pool:
             name: '${{ job.pool }}'
             vmImage: '${{ job.image }}'

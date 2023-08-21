@@ -59,7 +59,7 @@ stages:
       - deployment: Export_config_from_API_Gateway_${{ type.stage }}
         environment: ${{ type.stage }}
         variables:
-        - group: ${{ type.stage }}_users
+        - group: $(tenant)_${{ type.stage }}_users
         pool:
           name: '${{ type.pool }}'
           vmImage: '${{ type.image }}'
