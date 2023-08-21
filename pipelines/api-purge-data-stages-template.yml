@@ -65,8 +65,6 @@ stages:
     - ${{ each job in target_stage.jobs }}:
       - deployment: Purge_Data_on_${{ job.name }}
         environment: ${{ job.name }}
-        variables:
-        - template: /${{parameters.tenant}}/variables/${{ job.name }}/variables-template.yml
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
@@ -79,7 +77,7 @@ stages:
                 persistCredentials: "true"
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
-                  environment: $(environment)
+                  environment: ${{ job.name }}_environment.json
                   type: ${{ target_stage.name }}
                   tenant: ${{parameters.tenant}}
               - bash: echo "##vso[build.addbuildtag]${{job.name}}"

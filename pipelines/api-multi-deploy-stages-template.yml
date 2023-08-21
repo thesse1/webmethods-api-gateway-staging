@@ -65,8 +65,6 @@ stages:
       jobs:
       - deployment: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
         environment: '${{ parameters.build_stage.name }}'
-        variables:
-        - template: /${{parameters.tenant}}/variables/${{ parameters.build_stage.name }}/variables-template.yml
         pool:
           name: '${{ parameters.build_stage.pool }}'
           vmImage: '${{ parameters.build_stage.image }}'
@@ -81,8 +79,8 @@ stages:
               - template: /pipelines/api-build-steps-template.yml
                 parameters:
                   apiProject: ${{apiProject}}
-                  # build_environment: $(environment)
-                  build_environment: "$(Agent.Name)"
+                  # build_environment: BUILD_environment.json
+                  build_environment: "$(Agent.Name)_environment.json"
                   target_type: ${{ target_stage.name }}
                   prep_condition: ${{true}}
                   test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
@@ -103,8 +101,6 @@ stages:
       - ${{ each job in target_stage.jobs }}:
         - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ job.name }}'
           environment: ${{ job.name }}
-          variables:
-          - template: /${{parameters.tenant}}/variables/${{ job.name }}/variables-template.yml
           pool:
             name: '${{ job.pool }}'
             vmImage: '${{ job.image }}'
@@ -122,7 +118,7 @@ stages:
                 - template: /pipelines/api-deploy-steps-template.yml
                   parameters:
                     apiProject: ${{apiProject}}
-                    target_environment: $(environment)
+                    target_environment: ${{ job.name }}_environment.json
                     target_type: ${{ target_stage.name }}
                     prep_condition: ${{true}}
                     test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}

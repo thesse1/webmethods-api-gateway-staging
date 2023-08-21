@@ -58,8 +58,6 @@ stages:
       jobs:
       - deployment: Export_config_from_API_Gateway_${{ type.stage }}
         environment: ${{ type.stage }}
-        variables:
-        - template: /${{parameters.tenant}}/variables/${{ type.stage }}/variables-template.yml
         pool:
           name: '${{ type.pool }}'
           vmImage: '${{ type.image }}'
@@ -72,7 +70,7 @@ stages:
                 persistCredentials: "true"
               - template: /pipelines/api-export-config-steps-template.yml
                 parameters:
-                  environment: $(environment)
+                  environment: ${{ job.name }}_environment.json
                   type: ${{ type.stage }}
                   tenant: ${{parameters.tenant}}
               - template: /pipelines/commit-template.yml

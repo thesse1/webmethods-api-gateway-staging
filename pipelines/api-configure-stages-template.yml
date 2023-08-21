@@ -79,8 +79,6 @@ stages:
     - ${{ each job in stage.jobs }}:
       - deployment: Configure_API_Gateway_${{ job.name }}
         environment: ${{ job.name }}
-        variables:
-        - template: /${{parameters.tenant}}/variables/${{ job.name }}/variables-template.yml
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
@@ -94,7 +92,7 @@ stages:
               - download: none
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
-                  environment: $(environment)
+                  environment: "${{ job.name }}_environment.json"
                   type: ${{ stage.name }}
                   tenant: ${{parameters.tenant}}
               - bash: echo "##vso[build.addbuildtag]${{job.name}}"
