@@ -9,7 +9,7 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
-- name: build_type
+- name: build_stage
   displayName: Build on which stage?
   type: object
   default: 
@@ -45,12 +45,12 @@ stages:
     # dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ targetType.stage }}'
-      environment: '${{ parameters.build_type[0].name }}'
+      environment: '${{ parameters.build_stage[0].name }}'
       variables:
       - group: ${{parameters.tenant}}_$(Agent.Name)_users
       pool:
-        name: '${{ parameters.build_type[0].pool }}'
-        vmImage: '${{ parameters.build_type[0].image }}'
+        name: '${{ parameters.build_stage[0].pool }}'
+        vmImage: '${{ parameters.build_stage[0].image }}'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
@@ -77,8 +77,8 @@ stages:
                 apiProject: ${{parameters.apiProject}}
             - bash: |
                 echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-                echo "##vso[build.addbuildtag]${{parameters.build_type[0].stage}}"
-                echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_type[0].stage}}"
+                echo "##vso[build.addbuildtag]${{parameters.build_stage[0].stage}}"
+                echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{parameters.build_stage[0].stage}}"
               displayName: Add build tags
             # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
             #   parameters:
