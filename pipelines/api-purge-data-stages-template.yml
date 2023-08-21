@@ -65,6 +65,8 @@ stages:
     - ${{ each job in target_stage.jobs }}:
       - deployment: Purge_Data_on_${{ job.name }}
         environment: ${{ job.name }}
+        variables:
+        - group: ${{ job.name }}_users
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'

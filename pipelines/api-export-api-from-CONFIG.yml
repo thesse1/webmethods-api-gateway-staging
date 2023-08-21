@@ -28,6 +28,8 @@ stages:
   jobs:
   - deployment: 'Export_${{parameters.apiProject}}_from_API_Gateway_CONFIG'
     environment: 'CONFIG'
+    variables:
+    - group: CONFIG_users
     strategy:
       runOnce:    #rolling, canary are the other strategies that are supported
         deploy:

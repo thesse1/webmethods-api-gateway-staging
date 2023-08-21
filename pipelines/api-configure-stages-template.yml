@@ -79,6 +79,8 @@ stages:
     - ${{ each job in stage.jobs }}:
       - deployment: Configure_API_Gateway_${{ job.name }}
         environment: ${{ job.name }}
+        variables:
+        - group: ${{ job.name }}_users
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
@@ -100,7 +102,7 @@ stages:
 
     - ${{ each job in stage.configure_haft_jobs }}:
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
-        environment: HAFT_${{ stage.name }}
+        environment: ${{ job.name }}
         pool:
           name: '${{ job.pool }}'
           vmImage: '${{ job.image }}'
