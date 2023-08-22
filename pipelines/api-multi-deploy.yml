@@ -51,6 +51,10 @@ stages:
         image: ubuntu-latest
         targets:
         - PROD_INT
+      - name: BUILD_04
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
         - PROD_EXT
     target_stages:
     - name: DEV_INT
