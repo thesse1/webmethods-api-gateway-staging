@@ -32,8 +32,8 @@ stages:
                 variables:
                 - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
                 pool:
-                  name: '${{ parameters.build_stage.pool }}'
-                  vmImage: '${{ parameters.build_stage.image }}'
+                  name: '${{ build_instance.pool }}'
+                  vmImage: '${{ build_instance.image }}'
                 strategy:
                   runOnce:    #rolling, canary are the other strategies that are supported
                     deploy:
@@ -63,14 +63,14 @@ stages:
                       #   parameters:
                       #     target_type: $(targetType)
 
-              - ${{ each job in target_stage.jobs }}:
-                - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ job.name }}'
-                  environment: ${{ job.name }}
+              - ${{ each deploy_instance in target_stage.instances }}:
+                - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance.name }}'
+                  environment: ${{ deploy_instance.name }}
                   variables:
-                  - group: ${{parameters.tenant}}_${{ job.name }}_users
+                  - group: ${{parameters.tenant}}_${{ deploy_instance.name }}_users
                   pool:
-                    name: '${{ job.pool }}'
-                    vmImage: '${{ job.image }}'
+                    name: '${{ deploy_instance.pool }}'
+                    vmImage: '${{ deploy_instance.image }}'
                   strategy:
                     runOnce:    #rolling, canary are the other strategies that are supported
                       deploy:
@@ -85,15 +85,15 @@ stages:
                         - template: /pipelines/api-deploy-steps-template.yml
                           parameters:
                             apiProject: ${{apiProject}}
-                            target_environment: ${{ job.name }}_environment.json
+                            target_environment: ${{ deploy_instance.name }}_environment.json
                             target_type: ${{ target }}
                             prep_condition: ${{true}}
                             test_condition: ${{ ne('${{ target }}', 'CONFIG') }}
                             tenant: ${{parameters.tenant}}
                         - bash: |
                             echo "##vso[build.addbuildtag]${{apiProject}}"
-                            echo "##vso[build.addbuildtag]${{job.name}}"
-                            echo "##vso[build.addbuildtag]${{apiProject}}_${{job.name}}"
+                            echo "##vso[build.addbuildtag]${{deploy_instance.name}}"
+                            echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance.name}}"
                           displayName: Add build tags
                   dependsOn: 'Build_${{apiProject}}_for_${{ target }}'
                   condition: succeeded()
