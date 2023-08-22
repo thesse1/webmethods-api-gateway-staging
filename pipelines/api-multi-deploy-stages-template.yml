@@ -45,6 +45,7 @@ stages:
                       - bash: |
                           echo '${{ build_target }}'
                           echo 'CONFIG'
+                          echo ${{ ne('${{ build_target }}', 'CONFIG') }}
                         displayName: DEBUG
                       - template: /pipelines/api-build-steps-template.yml
                         parameters:
