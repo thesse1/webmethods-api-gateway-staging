@@ -10,12 +10,6 @@ parameters:
   displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
 
-variables:
-- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
-# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
-
-# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
-
 stages:
 - ${{ each set in parameters.sets }}:
   - ${{ each target_stage in set.target_stages }}:
