@@ -5,7 +5,7 @@
     "locale" : "English"
   } ],
   "descriptions" : [ {
-    "value" : "CONFIG: This is a system policy, which has log invocation policy and filters associated to log request or response payloads to a specified destination. These transactions are monitored and logged across all APIs in API Gateway",
+    "value" : "This is a system policy, which has log invocation policy and filters associated to log request or response payloads to a specified destination. These transactions are monitored and logged across all APIs in API Gateway",
     "locale" : "English"
   } ],
   "scope" : {
@@ -37,13 +37,12 @@
   },
   "policyEnforcements" : [ {
     "enforcements" : [ {
-      "enforcementObjectId" : "GlobalLogInvocationPolicyAction",
-      "order" : "0"
+      "enforcementObjectId" : "GlobalLogInvocationPolicyAction"
     } ],
     "stageKey" : "LMT"
   } ],
   "policyScope" : "GLOBAL",
   "global" : true,
-  "active" : true,
+  "active" : false,
   "systemPolicy" : true
 }
