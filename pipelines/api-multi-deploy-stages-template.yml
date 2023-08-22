@@ -45,7 +45,7 @@ stages:
                       - bash: |
                           echo '${{ build_target }}'
                           echo 'CONFIG'
-                          echo ${{ ne('${{ build_target }}', 'CONFIG') }}
+                          echo ${{ ne(build_target, 'CONFIG') }}
                         displayName: DEBUG
                       - template: /pipelines/api-build-steps-template.yml
                         parameters:
@@ -53,7 +53,7 @@ stages:
                           build_environment: "${{ build_instance.name }}_environment.json"
                           target_type: ${{ build_target }}
                           prep_condition: ${{true}}
-                          test_condition: ${{ ne('${{ build_target }}', 'CONFIG') }}
+                          test_condition: ${{ ne(build_target, 'CONFIG') }}
                           tenant: ${{parameters.tenant}}
                       - template: /pipelines/store-build-template.yml
                         parameters:
