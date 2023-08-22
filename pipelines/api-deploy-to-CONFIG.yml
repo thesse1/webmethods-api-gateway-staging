@@ -28,36 +28,11 @@ stages:
     build_stage:
       name: BUILD
       instances:
-      - name: BUILD_01
+      - name: BUILD_07
         pool: vmsspoolagents
         image: ubuntu-latest
         targets:
-        - DEV_INT
-      - name: BUILD_02
-        pool: vmsspoolagents
-        image: ubuntu-latest
-        targets:
-        - DEV_EXT
-      - name: BUILD_03
-        pool: vmsspoolagents
-        image: ubuntu-latest
-        targets:
-        - STAGE_INT
-      - name: BUILD_04
-        pool: vmsspoolagents
-        image: ubuntu-latest
-        targets:
-        - STAGE_EXT
-      - name: BUILD_05
-        pool: vmsspoolagents
-        image: ubuntu-latest
-        targets:
-        - PROD_INT
-      - name: BUILD_06
-        pool: vmsspoolagents
-        image: ubuntu-latest
-        targets:
-        - PROD_EXT
+        - CONFIG
     target_stages:
     - name: CONFIG
       instances:
