@@ -35,7 +35,7 @@ stages:
     build_stage:
       name: BUILD
       instances:
-      - name: BUILD_01
+      - name: BUILD_07
         pool: vmsspoolagents
         image: ubuntu-latest
         targets:
