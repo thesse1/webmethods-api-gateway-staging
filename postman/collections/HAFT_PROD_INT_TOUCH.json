@@ -1,0 +1,893 @@
+{
+	"info": {
+		"_postman_id": "a46e427e-464d-4e30-972d-30ed65006032",
+		"name": "HAFT_PROD_INT_TOUCH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-a46e427e-464d-4e30-972d-30ed65006032"
+	},
+	"item": [
+		{
+			"name": "Get dataspace from node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    pm.expect(pm.response.json()[\"listener.active\"].listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"nodeName_01\", pm.response.json()[\"listener.active\"].listener.nodeName);"
+						],
+						"type": "text/javascript",
+						"id": "ced666ed-6f8f-43b9-a32c-83c787e2dc35"
+					}
+				}
+			],
+			"id": "f9d1b84f-0520-4f5d-864b-73633eeafa94",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    pm.expect(pm.response.json()[\"listener.active\"].listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"nodeName_02\", pm.response.json()[\"listener.active\"].listener.nodeName);"
+						],
+						"type": "text/javascript",
+						"id": "592a1caa-a542-4d1f-8775-05b861ed04d6"
+					}
+				}
+			],
+			"id": "e641dff3-7afe-49b0-b6a1-2ba75e628ac8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure listener on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "ad37f2f2-eaeb-40d6-b9a6-49546c75d11b"
+					}
+				}
+			],
+			"id": "38018a56-b24d-4c17-a1a0-a88cada2d023",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"listener\": {\r\n            \"nodeName\": \"{{nodeName_01}}\",\r\n            \"host\": \"{{ip_grpc_01}}\", \r\n            \"port\": {{port_grpc_01}}\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"listener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure listener on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "a0713de9-1287-4a3a-a7f1-a9c9392b7953"
+					}
+				}
+			],
+			"id": "3f88edd4-2c29-4489-a095-a1de7db0bb4f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"listener\": {\r\n            \"nodeName\": \"{{nodeName_02}}\",\r\n            \"host\": \"{{ip_grpc_02}}\", \r\n            \"port\": {{port_grpc_02}}\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"listener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure ring on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "e35c2265-201f-4728-a805-9fe7b28ef0e4"
+					}
+				}
+			],
+			"id": "d51d63a8-e325-4ccd-8fa5-8f87011724e2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ring\": [\r\n        {\r\n            \"nodeName\": \"{{nodeName_02}}\",\r\n            \"host\": \"{{ip_grpc_02}}\",\r\n            \"port\": {{port_grpc_02}}\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"ring"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure ring on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "110c06b3-ef24-44b9-ab6f-3a420f4b38f9"
+					}
+				}
+			],
+			"id": "43fdf060-106b-4aa2-9ce9-45823f0a27f9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ring\": [\r\n        {\r\n            \"nodeName\": \"{{nodeName_01}}\",\r\n            \"host\": \"{{ip_grpc_01}}\",\r\n            \"port\": {{port_grpc_01}}\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"ring"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate ring on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "f44f8aab-e260-4672-8f04-527e290040af"
+					}
+				}
+			],
+			"id": "1ea36f74-2e4a-4a10-b3b0-c7ed0d5665f8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"mode\": \"ACTIVE_RING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate ring on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "ea08a4b0-8f84-470d-9bc3-2c5c05dda149"
+					}
+				}
+			],
+			"id": "529e16f8-3864-4560-a1e8-cb466ae22097",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"mode\": \"ACTIVE_RING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 01 again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "8c5fa2a3-28a7-4ccd-9b29-dcb857f29f9f"
+					}
+				}
+			],
+			"id": "277cb1ce-50a8-4541-9b25-b9112e49f53d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 02 again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "5b45caa8-6bda-4ed6-834a-c77a3a013bb5"
+					}
+				}
+			],
+			"id": "708b339f-1900-4e2a-82c5-0f6bb00c4f40",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace status on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "0508dcd3-30e4-4fdb-a7ad-75905dd51420"
+					}
+				}
+			],
+			"id": "7fbccea2-b605-4cb0-9352-22afe2330013",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace status on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "9a51d6f9-6c39-41a5-9209-350b473561e6"
+					}
+				}
+			],
+			"id": "3f06d763-32db-4f9e-a9c0-325f8efd7e7c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "manage",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "8acb3e56-a9cf-4603-b69d-a063bb64e592"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let requests = pm.globals.has('requests') ?  JSON.parse(pm.globals.get('requests')) : [];",
+					"request = {};",
+					"request.method = pm.request.method;",
+					"request.url = pm.request.url;",
+					"request.body = pm.request.body;",
+					"response = {};",
+					"response.status = pm.response.status;",
+					"response.body = pm.response.json();",
+					"requests.push({\"request\": request, \"response\": response});",
+					"pm.globals.set('requests', JSON.stringify(requests));"
+				],
+				"id": "38440e72-9508-477b-82d8-e1ebc63560a8"
+			}
+		}
+	]
+}
