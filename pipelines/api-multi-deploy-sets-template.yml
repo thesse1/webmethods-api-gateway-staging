@@ -11,6 +11,7 @@ parameters:
   type: object
 - name: target_stages
   displayName: Deploy to which stages?
+  type: object
 - name: deployment_sets
   displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
