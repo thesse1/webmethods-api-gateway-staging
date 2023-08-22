@@ -29,7 +29,7 @@ parameters:
     pool: vmsspoolagents
     image: ubuntu-latest
   - stage: BUILD
-    pool: buildagents
+    pool: vmsspoolagents
     image: ubuntu-latest
   - stage: DEV_INT
     pool: vmsspoolagents

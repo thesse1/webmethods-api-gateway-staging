@@ -14,7 +14,7 @@ parameters:
   type: object
   default:
     name: BUILD
-    pool: buildagents
+    pool: vmsspoolagents
     image: ubuntu-latest
 - name: target_stages
   displayName: Deploy to which stages?

@@ -48,7 +48,7 @@ stages:
     - security_alias
     build_stage:
       name: BUILD
-      pool: buildagents
+      pool: vmsspoolagents
       image: ubuntu-latest
     target_stages:
     - name: CONFIG
