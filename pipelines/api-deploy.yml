@@ -27,31 +27,60 @@ stages:
     tenant: ${{parameters.tenant}}
     build_stage:
       name: BUILD
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      instances:
+      - name: BUILD_01
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - DEV_INT
+      - name: BUILD_02
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - DEV_EXT
+      - name: BUILD_03
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - STAGE_INT
+      - name: BUILD_04
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - STAGE_EXT
+      - name: BUILD_05
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - PROD_INT
+      - name: BUILD_06
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - PROD_EXT
     target_stages:
     - name: DEV_INT
-      jobs:
+      instances:
       - name: DEV_INT
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: DEV_EXT
-      jobs:
+      instances:
       - name: DEV_EXT
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: STAGE_INT
-      jobs:
+      instances:
       - name: STAGE_INT
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: STAGE_EXT
-      jobs:
+      instances:
       - name: STAGE_EXT
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: PROD_INT
-      jobs:
+      instances:
       - name: PROD_INT_01
         pool: vmsspoolagents
         image: ubuntu-latest
@@ -59,7 +88,7 @@ stages:
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: PROD_EXT
-      jobs:
+      instances:
       - name: PROD_EXT_01
         pool: vmsspoolagents
         image: ubuntu-latest
