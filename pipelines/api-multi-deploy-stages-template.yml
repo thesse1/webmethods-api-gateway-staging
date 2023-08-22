@@ -42,6 +42,10 @@ stages:
                         submodules: "true"
                         persistCredentials: "true"
                       - download: none
+                      - bash: |
+                          echo '${{ build_target }}'
+                          echo 'CONFIG'
+                        displayName: DEBUG
                       - template: /pipelines/api-build-steps-template.yml
                         parameters:
                           apiProject: ${{apiProject}}
