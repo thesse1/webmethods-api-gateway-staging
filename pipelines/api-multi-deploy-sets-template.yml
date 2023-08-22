@@ -82,15 +82,15 @@ stages:
                               persistCredentials: "true"
                             - template: /pipelines/retrieve-build-template.yml
                               parameters:
-                                  target_type: ${{ target }}
+                                  target_type: ${{ build_target }}
                                   apiProject: ${{apiProject}}
                             - template: /pipelines/api-deploy-steps-template.yml
                               parameters:
                                 apiProject: ${{apiProject}}
                                 target_environment: ${{ deploy_instance.name }}_environment.json
-                                target_type: ${{ target }}
+                                target_type: ${{ build_target }}
                                 prep_condition: ${{true}}
-                                test_condition: ${{ ne('${{ target }}', 'CONFIG') }}
+                                test_condition: ${{ ne('${{ build_target }}', 'CONFIG') }}
                                 tenant: ${{parameters.tenant}}
                             - bash: |
                                 echo "##vso[build.addbuildtag]${{apiProject}}"
