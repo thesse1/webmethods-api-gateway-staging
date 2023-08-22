@@ -32,27 +32,51 @@ stages:
 - template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
-    apiProjects:
-    # - number_conversion
-    - odata_tutorial
-    - ping
-    # - star_wars
-    - petstore
-    - petstore_basicauth
-    - petstore_versioning
-    - postman_echo
-    # - postman_echo_jwt
-    # - postman_echo_oauth2
-    - postman_mocking
-    - multiple_tenants
-    - security_alias
     build_stage:
       name: BUILD
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      instances:
+      - name: BUILD_01
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - DEV_INT
+        - DEV_EXT
+      - name: BUILD_02
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - STAGE_INT
+        - STAGE_EXT
+      - name: BUILD_03
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - PROD_INT
+      - name: BUILD_04
+        pool: vmsspoolagents
+        image: ubuntu-latest
+        targets:
+        - PROD_EXT
     target_stages:
     - name: CONFIG
-      jobs:
+      instances:
       - name: CONFIG
         pool: vmsspoolagents
         image: ubuntu-latest
+    deployment_sets:
+    - apiProjects:
+      # - number_conversion
+      - odata_tutorial
+      - ping
+      # - star_wars
+      - petstore
+      - petstore_basicauth
+      - petstore_versioning
+      - postman_echo
+      # - postman_echo_jwt
+      # - postman_echo_oauth2
+      - postman_mocking
+      - multiple_tenants
+      - security_alias
+      targets:
+      - CONFIG
