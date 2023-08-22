@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bd8c0f2e-1c4e-4236-85e8-ab3cc2170e2e",
+		"_postman_id": "859cb7ff-b90f-4dda-88e3-f3aed8e72053",
 		"name": "API Test for ping",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-bd8c0f2e-1c4e-4236-85e8-ab3cc2170e2e"
+		"_uid": "3558839-859cb7ff-b90f-4dda-88e3-f3aed8e72053"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "532d4b6b-b371-4f78-9bdc-e703d7f02ece",
+						"id": "f83f2137-78a9-4e3a-99d8-209976273a1c",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -27,7 +27,7 @@
 					}
 				}
 			],
-			"id": "493ca585-955c-47b7-be1c-8fc81c6dcf0c",
+			"id": "4e1ec52d-a193-42fa-9102-ff64f5dcedd1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "79b4f527-2cbe-45ea-b36f-18a4471a4d91",
+		"_postman_id": "7be41fd5-2e9a-4e1f-9785-0180685b9653",
 		"name": "API Test for missing-alias-id",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-79b4f527-2cbe-45ea-b36f-18a4471a4d91"
+		"_uid": "3558839-7be41fd5-2e9a-4e1f-9785-0180685b9653"
 	},
 	"item": [
 		{
@@ -24,11 +24,11 @@
 							"postman.setNextRequest(\"PostPet 1.0.9\"); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
-						"id": "dc03e604-d651-4573-bec9-be6c7e251db0"
+						"id": "7b87c9d3-7f43-40e1-b7b5-66fa1c930b8b"
 					}
 				}
 			],
-			"id": "2de223d9-6d4a-422f-aa44-0384b252f673",
+			"id": "5e528448-1507-4a10-8f10-48a8b660fa51",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -93,11 +93,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "3aa8d031-daf9-49aa-87fb-7ea934efcce1"
+						"id": "86877a48-4061-4f0e-84fc-2c53a9bbcebd"
 					}
 				}
 			],
-			"id": "9b3f7832-04e0-43f2-88dd-ce02ea9e9bf0",
+			"id": "13fa5c0e-d222-4fe4-b180-cd74d88f46c0",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -150,11 +150,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "05d5508e-7ca9-45e8-ac73-105298600f59"
+						"id": "154583c9-3836-414b-9504-9dce521ba57a"
 					}
 				}
 			],
-			"id": "5cf4a77c-4ca1-4e2e-80b1-ed473f156cce",
+			"id": "cc03213f-ccb8-420b-ab8c-e2c8c0bee2f3",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -213,11 +213,11 @@
 							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
-						"id": "d668c322-3581-483a-a1ad-697e18d92ee0"
+						"id": "79259aff-8b65-4769-953a-17426078542a"
 					}
 				}
 			],
-			"id": "ed5afc1f-177a-41d2-863f-5bca01fda14f",
+			"id": "682bdfda-f19b-437d-9509-9f21f989c6cd",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -282,11 +282,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "875609af-61a9-43b4-97af-e145ff7bf0ff"
+						"id": "5318f001-ca31-4b41-80a4-9c257e3b97db"
 					}
 				}
 			],
-			"id": "4fb211c2-6f48-486e-a780-6a14c1be1653",
+			"id": "89f7947c-5b7d-44de-a614-5f8dcc5cbfbd",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -339,11 +339,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "54547d74-8afd-42d4-953e-283f994b5d17"
+						"id": "c567ff0d-2180-4169-b4d8-00a915bffc36"
 					}
 				}
 			],
-			"id": "484a8dd6-cc5d-47ae-a5c1-f22efd495150",
+			"id": "7d7e7cc5-90eb-4bff-a828-b61158ee45c1",
 			"request": {
 				"method": "DELETE",
 				"header": [

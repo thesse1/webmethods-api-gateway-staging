@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0e940b73-c1c6-4473-a9dc-b3ec50f633f0",
+		"_postman_id": "7760053d-47c4-45a5-a44e-80822d96d36f",
 		"name": "API Test for petstore-versioning",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-0e940b73-c1c6-4473-a9dc-b3ec50f633f0"
+		"_uid": "3558839-7760053d-47c4-45a5-a44e-80822d96d36f"
 	},
 	"item": [
 		{
@@ -24,11 +24,11 @@
 							"postman.setNextRequest(\"PostPet 1.0.9\"); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
-						"id": "46e0914c-2ce3-48cf-9bee-7b7833603c3c"
+						"id": "2abfb2e0-1c2e-4f00-83fb-845cf8db3a5e"
 					}
 				}
 			],
-			"id": "a146e3b7-6e9a-4d72-95b5-a06fe6459842",
+			"id": "ef34170d-f8e8-4100-8d11-01366268d29e",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -93,11 +93,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "07a13699-950b-4dc2-a2da-855c5e93e44e"
+						"id": "9afeec9d-3f2b-4f8b-bdf2-75d846992836"
 					}
 				}
 			],
-			"id": "3b105203-5422-447a-8623-51186fc37387",
+			"id": "86099b47-b148-4e3b-995a-48557309f35c",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -150,11 +150,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "aee20a44-8d7c-4a37-bc15-57fcac6ce55c"
+						"id": "2723893e-4793-45f7-8a6d-00950e2db4ff"
 					}
 				}
 			],
-			"id": "9a11895a-8b54-47bf-baa8-0d10b76e0f38",
+			"id": "24d78468-7e6e-4ce4-96dd-36087943267f",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -213,11 +213,11 @@
 							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
-						"id": "d1195bcf-9c7e-48e9-a427-e2515c88c689"
+						"id": "2292933a-1ed8-4880-8795-bf0a9126a140"
 					}
 				}
 			],
-			"id": "6f4ea043-fc66-4eda-b73a-e7090f0a62b0",
+			"id": "a027a892-4e46-442e-900f-e2268c45d1e2",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -282,11 +282,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "11ddffc3-b811-410e-ab1c-e1ddc65cbe6c"
+						"id": "7f42af3f-0603-4d42-8206-05e725fa95a1"
 					}
 				}
 			],
-			"id": "a3a858bc-3f20-4dfd-8fcb-007c5e97ff52",
+			"id": "395fe4a8-fee4-4613-b6d7-9f726a3fce90",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -339,11 +339,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "77c6e227-8a8e-4fb8-9b29-3b934c75331c"
+						"id": "e2f9d34f-9ef1-4055-bb88-58b7ffee0620"
 					}
 				}
 			],
-			"id": "5da7c6df-5b32-4ad7-88a3-aad3e0f5bef7",
+			"id": "869e631d-211c-41b8-a875-834b17e0dd7f",
 			"request": {
 				"method": "DELETE",
 				"header": [

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "41852654-4a70-4f4a-8f5f-3feb3c592cb6",
+		"_postman_id": "b298a522-6788-4786-8d46-612260702e77",
 		"name": "API Test for petstore-basicauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-41852654-4a70-4f4a-8f5f-3feb3c592cb6"
+		"_uid": "3558839-b298a522-6788-4786-8d46-612260702e77"
 	},
 	"item": [
 		{
@@ -27,11 +27,11 @@
 									"postman.setNextRequest(\"PostPet_02\"); // workaround because Petstore API is not working correctly"
 								],
 								"type": "text/javascript",
-								"id": "72f407d1-dd1b-4af6-ab8b-230e7830da40"
+								"id": "081222e8-d4a3-47d4-835e-bf5ebcae0db9"
 							}
 						}
 					],
-					"id": "53eeceb4-ed36-42ba-9542-b196b34f6eb0",
+					"id": "6fbde286-9f94-495c-a4aa-c0fcdbfdda59",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -106,11 +106,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "8e1897c1-cf31-47d3-9daa-3f89b1a0c39b"
+								"id": "857a777f-e7be-46da-9ea0-a4b52161da05"
 							}
 						}
 					],
-					"id": "a8c45f1e-a568-44e9-85ff-f2c5097beec4",
+					"id": "d099b98d-5694-4408-92e2-62ff2cab4982",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -173,11 +173,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "3d1dc42f-de31-41a1-877b-b3ec173f8b20"
+								"id": "d36c76e1-7512-4ae0-9de4-6f76af11461f"
 							}
 						}
 					],
-					"id": "0ea61531-3b70-40b1-ae5c-fadb83dfe6a3",
+					"id": "f84276c4-6dbd-429e-b0eb-e689ab6b3253",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -229,7 +229,7 @@
 					"response": []
 				}
 			],
-			"id": "796b0b24-5f2f-4872-a163-81e10382b7ac"
+			"id": "1aa6ac45-5ccc-45b6-a289-fd1d02c5196c"
 		},
 		{
 			"name": "testgroup_02",
@@ -252,11 +252,11 @@
 									"postman.setNextRequest(\"PostPet_03\"); // workaround because Petstore API is not working correctly"
 								],
 								"type": "text/javascript",
-								"id": "329d3074-4806-4658-9b22-07514efe60c0"
+								"id": "ea92da60-cfd2-4921-a349-69c605710275"
 							}
 						}
 					],
-					"id": "7f61d79f-bd55-455a-97b5-d92918e8f33c",
+					"id": "272c0684-2d56-4103-b773-200bf9114fac",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -331,11 +331,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "3497c580-a4f6-46de-a053-0da9270339e5"
+								"id": "9d3058d9-f714-4e0f-abbd-5257bdb4ee32"
 							}
 						}
 					],
-					"id": "38b35689-278c-4704-9754-68e2b6253303",
+					"id": "5f256e95-7232-46f9-a86a-64844ed8bfd9",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -398,11 +398,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "b83b6b87-6671-4d1b-92f2-a752ab6a38d3"
+								"id": "6a2ea0cd-2ebf-4343-ac23-c54c8f86ba4a"
 							}
 						}
 					],
-					"id": "6429bc86-ccb8-40fe-9f5e-f347acb10583",
+					"id": "7303b16f-065c-4e7f-8e80-2c4f2e50a955",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -454,7 +454,7 @@
 					"response": []
 				}
 			],
-			"id": "0323eb79-2c5a-4d81-902e-9e3913b3285c"
+			"id": "154b2802-4c3a-4ab5-ba4e-b2cc7efadf4f"
 		},
 		{
 			"name": "testteam_03",
@@ -477,11 +477,11 @@
 									"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
 								],
 								"type": "text/javascript",
-								"id": "9907626d-32fc-4598-a69f-c47da43e3a75"
+								"id": "22d67eb8-79fa-4f2b-b628-6e4a5db5605f"
 							}
 						}
 					],
-					"id": "4d69817d-4098-4e82-aca8-f98a847f86ef",
+					"id": "a878b99e-036d-47fa-a92d-1627f41b2ec6",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -556,11 +556,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "35d6523d-72f8-4b92-8edd-3b89712bbd1a"
+								"id": "66012664-26c9-4a33-9b2a-93c348bc4365"
 							}
 						}
 					],
-					"id": "5d17c3f1-a91f-4c47-808b-fdeae09de0ac",
+					"id": "eead6bea-5555-47d3-b2d5-0ef72b31f689",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -623,11 +623,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "5608eb81-7f2e-4a92-a266-91b405549630"
+								"id": "87c5e12b-24bb-4321-889c-851debce30d5"
 							}
 						}
 					],
-					"id": "1091739c-16f3-4469-9e87-0f5605ed6f61",
+					"id": "23358eed-f68c-4da7-802c-2059aa61df47",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -679,7 +679,7 @@
 					"response": []
 				}
 			],
-			"id": "c6054b84-fd88-495c-8dc5-838a19ca54f2"
+			"id": "823719f6-c1d7-4eac-9628-f44ede7c7518"
 		}
 	]
 }

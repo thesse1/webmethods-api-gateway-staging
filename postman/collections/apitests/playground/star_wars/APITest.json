@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9488f171-1beb-42de-8bd1-75a3ea4f8959",
+		"_postman_id": "dfc6194a-8e8c-4af0-8087-4984d0409694",
 		"name": "API Test for star-wars",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-9488f171-1beb-42de-8bd1-75a3ea4f8959"
+		"_uid": "3558839-dfc6194a-8e8c-4af0-8087-4984d0409694"
 	},
 	"item": [
 		{
@@ -23,11 +23,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "4609931b-28fc-4256-bb45-a082d6396f28"
+						"id": "b16c6498-a666-4273-a991-877dfae44a19"
 					}
 				}
 			],
-			"id": "da803b75-1eef-4e92-a941-f08644ad0653",
+			"id": "00c86a5c-9b9f-4f65-b283-bd81ab88cee0",
 			"request": {
 				"method": "POST",
 				"header": [

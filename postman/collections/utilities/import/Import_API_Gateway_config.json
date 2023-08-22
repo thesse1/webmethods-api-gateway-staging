@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "3e3b5704-f6f9-40bb-a147-61cc8250dc79",
+		"_postman_id": "5b5363b8-7ac1-44f6-ae50-9e01176c8528",
 		"name": "Import_API_Gateway_config",
 		"description": "This Collection deploys the API to API Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-3e3b5704-f6f9-40bb-a147-61cc8250dc79"
+		"_uid": "3558839-5b5363b8-7ac1-44f6-ae50-9e01176c8528"
 	},
 	"item": [
 		{
@@ -13,7 +13,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a99e698b-39d4-480d-a50c-be34afd25904",
+						"id": "b9c24653-8e2e-432f-bb31-2a116b6c43e0",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -68,7 +68,7 @@
 					}
 				}
 			],
-			"id": "0c3485c3-1c3e-4f07-bff6-85588a086f1d",
+			"id": "af03a243-e66e-4d89-af13-f3b439daa2f5",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -132,7 +132,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b706e900-283a-4cfe-9b67-35b38dd752c1",
+						"id": "21824d9a-9fa5-4c88-8eb4-7d6395028549",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -154,7 +154,7 @@
 					}
 				}
 			],
-			"id": "e9899cc2-87a8-4bfc-a1d0-5bf7c2da1e36",
+			"id": "e478fa90-6b94-49f2-b837-26cfd6bff918",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -218,7 +218,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a24e361d-0e3c-488a-968a-eca6f4ec5e40",
+						"id": "eab2c3e8-1bbb-4513-8201-45bc05f1216e",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
@@ -228,7 +228,7 @@
 					}
 				}
 			],
-			"id": "ca89b281-4dfb-4e2c-8bf0-5f7eb4766c79",
+			"id": "a6b647a5-50bf-4c70-8f47-a3e6a688ae61",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -265,9 +265,7 @@
 				],
 				"body": {
 					"mode": "file",
-					"file": {
-						"src": "{{file_Loc}}"
-					}
+					"file": {}
 				},
 				"url": {
 					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=*,aliases",

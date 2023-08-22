@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "041c149d-2ba1-4be9-b6c4-aa0810646898",
+		"_postman_id": "4d20c40f-1df0-4221-803c-551732ad0482",
 		"name": "API Test for postman-echo-oauth2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-041c149d-2ba1-4be9-b6c4-aa0810646898"
+		"_uid": "3558839-4d20c40f-1df0-4221-803c-551732ad0482"
 	},
 	"item": [
 		{
@@ -21,11 +21,11 @@
 							"pm.globals.set(\"auth_token\", jsonData.access_token);"
 						],
 						"type": "text/javascript",
-						"id": "9ffbd0e2-178f-47c8-9617-c82670547ae5"
+						"id": "c34d523c-31b3-4931-8192-ac06d23d9243"
 					}
 				}
 			],
-			"id": "c5db8f1c-5df2-4aea-9249-8059bfb26e08",
+			"id": "be2bd164-5c08-4fbd-8884-3c5123554874",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -91,11 +91,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "443c4e49-6c21-4499-b0a4-5c2771e12fc9"
+						"id": "06fbcfeb-afed-4941-8b0f-e2f1ed7dab08"
 					}
 				}
 			],
-			"id": "03b098af-5e2c-4f06-9499-aaa426ef0120",
+			"id": "024cc6cc-ae7d-4c00-9139-08fb5a0866bc",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -165,11 +165,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "9d56cb74-3c97-4e20-96d5-09104d653eed"
+						"id": "b60ced49-7e85-4044-bd96-016bbc23c402"
 					}
 				}
 			],
-			"id": "958fdf97-3c3b-426f-9cb2-f3752f3b0cf2",
+			"id": "4882651c-4f63-4ef0-ae81-a24bc4f998b7",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -232,11 +232,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "5165d716-8fa2-4f45-862a-4cec1b4bddc3"
+						"id": "9894aec3-7c23-4dff-8cba-59b2d1d599a0"
 					}
 				}
 			],
-			"id": "6880214e-32e6-4b51-a4db-9e1e3178979a",
+			"id": "c47c5de6-a446-4a36-91d3-b81d5808b406",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -290,7 +290,7 @@
 				"exec": [
 					""
 				],
-				"id": "426a327b-a4b1-4be9-9917-7e19877bb3a7"
+				"id": "0cf7c9ef-8a8c-4014-8588-eb010690ebaf"
 			}
 		},
 		{
@@ -300,7 +300,7 @@
 				"exec": [
 					""
 				],
-				"id": "a283a628-77d4-43bc-bd86-8275e511281d"
+				"id": "5f2801a0-14b7-445e-9600-3eb57add62ed"
 			}
 		}
 	]

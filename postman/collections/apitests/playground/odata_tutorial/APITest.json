@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f981e42c-51ea-4c4e-a650-1a04b323555c",
+		"_postman_id": "85447976-cc57-4ca8-b18b-cbff58a9d65a",
 		"name": "API Test for odata-tutorial",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-f981e42c-51ea-4c4e-a650-1a04b323555c"
+		"_uid": "3558839-85447976-cc57-4ca8-b18b-cbff58a9d65a"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "36870145-320b-42fa-9208-3b48b5dc77fa",
+						"id": "768bd024-db92-4182-9d4c-f4f8b20deb0e",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -22,7 +22,7 @@
 					}
 				}
 			],
-			"id": "e73c1de1-5de5-4cfd-af29-47d62ebcf5ab",
+			"id": "35a666d0-c858-447d-a324-a25f19ed9b4d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -64,11 +64,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "66c8573d-ad9e-496f-8eda-fecedec9d256"
+						"id": "68777d81-f901-4502-b9a3-700cf411a56d"
 					}
 				}
 			],
-			"id": "21603d41-2a79-411b-bd94-7441503aa4ad",
+			"id": "2607a43d-126b-4d79-8243-632a0c970088",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -111,11 +111,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "afe12a4d-84aa-4031-b4aa-357640648f2f"
+						"id": "315eff6d-3e32-43cc-a210-d9f31ffe7024"
 					}
 				}
 			],
-			"id": "c22f0e3c-6aec-4f93-bb91-509ecf09421f",
+			"id": "eba22def-87e7-4f4f-9714-b05b46c66fcf",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -158,11 +158,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "f1fd515c-2051-43d2-8613-cb4fd816a08f"
+						"id": "5d5ee641-3337-48d6-b2c5-61e719eaee6c"
 					}
 				}
 			],
-			"id": "c52763f8-4253-485c-b376-a48a6454fbb4",
+			"id": "6e5f921f-f45c-4287-9ac4-4cf3fded0055",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -205,11 +205,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "e7ac0df0-e3b9-408e-998d-7cc898946533"
+						"id": "bf0f08d8-1370-4624-93a4-3e98fc766cf3"
 					}
 				}
 			],
-			"id": "fb04e7bd-7759-4de2-85b3-7b0cc3956dbf",
+			"id": "89c90e85-99fa-440d-a599-dfaa7c3bf57f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -253,11 +253,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "3b7bd173-badb-427d-a51c-6b0073521c9f"
+						"id": "e70a39e8-dce5-408d-87f3-2f8ed960bef6"
 					}
 				}
 			],
-			"id": "ca477e76-eb66-4c32-aed5-e9122a1d3514",
+			"id": "87dd52a4-9363-4d1e-bbd8-41fbc4caf248",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -302,11 +302,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "364c0dc3-6c60-42d2-8d23-d61d087b28f6"
+						"id": "3e91a972-4ef8-4e05-83ca-632554e1e3e6"
 					}
 				}
 			],
-			"id": "59540839-486f-47f1-84e2-6eb8536a16d3",
+			"id": "6cfff086-5092-490e-9503-9c7d1fd17214",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -351,11 +351,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "d8503467-7598-45cb-875b-53fa4d9612cf"
+						"id": "11e0585e-5a9b-4534-8e1d-0ed85fa7ba16"
 					}
 				}
 			],
-			"id": "15ebd828-55ec-42e5-9c04-471a2a3e5180",
+			"id": "5e091f2d-bda0-4bcd-8a79-bf81a878fdd4",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -404,11 +404,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "d6ad40e9-8a77-4a21-8d6b-4a5e3fa6fec6"
+						"id": "37cbfc4f-11cd-4e9e-8471-ed8096999bcd"
 					}
 				}
 			],
-			"id": "ff616536-be32-4967-bc20-a084ae86174a",
+			"id": "b802be17-14e1-4133-a7a0-dcc821ae140f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -457,11 +457,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "9ea19b74-e53d-4d48-aa31-e2ed47e51535"
+						"id": "2a5508ef-cceb-4034-8eb6-75b763d9cef8"
 					}
 				}
 			],
-			"id": "d604cdb5-a78c-41be-98a8-cb6bf6903501",
+			"id": "d0664551-0f5d-423d-8a63-2fee6518e6cb",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -510,11 +510,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "43a60185-d1c3-4309-b680-974e3b66f0e8"
+						"id": "6537bfaf-fa5b-4873-a406-1e68284ca1fe"
 					}
 				}
 			],
-			"id": "62f919f5-1555-4177-ad6c-750c00118309",
+			"id": "cd18feba-2a12-4755-96ae-a27fe1b289c5",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -563,11 +563,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "7eef4214-9572-4a14-bbb7-5fe9451d28e3"
+						"id": "e7103436-4035-4c63-80b9-71112ff33a5f"
 					}
 				}
 			],
-			"id": "d6ac5a6b-e15d-488a-a8fa-dd1815adef1b",
+			"id": "fae89ae4-b321-4749-a838-871f37139945",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -616,11 +616,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "d4274762-9bf2-4783-81de-fc3a2794b08a"
+						"id": "4b8cd1d0-8abe-4f67-9684-68fc43a37073"
 					}
 				}
 			],
-			"id": "a84ea2b8-bc9b-48c6-b2d6-4d3e138de785",
+			"id": "64a3b82e-2df1-4a3e-a678-23148eb1b160",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -669,11 +669,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "bf41e7fd-5643-4bce-a015-d64c71758238"
+						"id": "43f2d842-fe6b-45bb-9366-b5ba21bf4e7c"
 					}
 				}
 			],
-			"id": "b994a413-2ff5-489c-8c90-b75a5a76802b",
+			"id": "316bc3dc-195e-4e51-8947-e9610bafa167",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -726,11 +726,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "79547240-8189-4438-8527-6b0a310f403b"
+						"id": "7aa89774-2db7-4e94-bdbd-9a3fd950b100"
 					}
 				}
 			],
-			"id": "352f3944-d88d-43b3-a7b8-2fc921c03b40",
+			"id": "d40ba2b4-7606-4893-ac53-429ecad12592",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -774,11 +774,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "0e9b0e38-66f9-463b-b624-a4819d98911b"
+						"id": "c4093836-1330-4f96-880c-2fd1712557a4"
 					}
 				}
 			],
-			"id": "034ff761-a71a-4708-98b5-c879b9ff8ce1",
+			"id": "aaed94e3-df30-4d66-80d2-b3b6bbfaa0e7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -827,11 +827,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "42cdf188-5eb2-4ff7-a876-bad0658ea3d0"
+						"id": "1f4659a4-f67f-4c72-9358-43b5ac98d1d3"
 					}
 				}
 			],
-			"id": "9459e75d-e51d-4b3f-8b86-f16bfe71401e",
+			"id": "c8145a1b-56d7-44ac-937f-5c4eb6839bbb",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -880,11 +880,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "429b5742-e691-4ecf-9f67-ea692c5e3e2b"
+						"id": "5e968a59-0d45-42d3-9816-064588b0406c"
 					}
 				}
 			],
-			"id": "d1d6a55d-fac7-4ef3-b683-2ef977eb559d",
+			"id": "15c2ed0e-cb1a-48ab-b910-ea23e114a974",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

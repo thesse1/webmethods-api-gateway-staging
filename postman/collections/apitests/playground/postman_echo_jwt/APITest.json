@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7c73c41b-61c5-4dbf-af16-6dee6f6599b0",
+		"_postman_id": "0e63c507-20bb-45e4-a476-4e0da7e3ffe2",
 		"name": "API Test for postman-echo-jwt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-7c73c41b-61c5-4dbf-af16-6dee6f6599b0"
+		"_uid": "3558839-0e63c507-20bb-45e4-a476-4e0da7e3ffe2"
 	},
 	"item": [
 		{
@@ -21,11 +21,11 @@
 							"pm.globals.set(\"auth_token\", jsonData.jwt);"
 						],
 						"type": "text/javascript",
-						"id": "e7bacf14-c19b-4e70-a620-3b820190fd4f"
+						"id": "2bba6589-ad34-405d-b527-0ac443bf803a"
 					}
 				}
 			],
-			"id": "d48438e0-cae9-431b-9c0f-d89bce0f57b8",
+			"id": "3cdf8005-5cbb-412c-8eeb-4849845c4011",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -89,11 +89,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "dd44a0ad-995b-4057-92a0-befdeb3c9545"
+						"id": "421234dc-f3d8-46d6-a7ff-e2151d9336fe"
 					}
 				}
 			],
-			"id": "51e9ac5d-d2dc-47d3-9d43-0fed1181dad4",
+			"id": "053e397b-c979-4a5b-9655-4d5ac88d8eae",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -163,11 +163,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "a9f98ecc-0d33-498b-8f0c-6e09dd2b9e2b"
+						"id": "fdd81a9c-5313-472d-8c06-e5ff4bceac34"
 					}
 				}
 			],
-			"id": "be3a6ca7-05a8-4be2-afd1-3ff42ea8c81e",
+			"id": "b2ce61c6-c72f-4e58-b90e-a4d3a6fda65e",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -230,11 +230,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "5e3aebc3-4365-46e7-aa28-217bdd009527"
+						"id": "9c1e850f-6294-4e83-a9b0-a035853ef59c"
 					}
 				}
 			],
-			"id": "bd93bfc9-1630-4c1f-9be4-8787fec63454",
+			"id": "5c941ae4-c0a6-4f6c-9426-9e7e6d5ef1b3",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -288,7 +288,7 @@
 				"exec": [
 					""
 				],
-				"id": "3483f151-15fb-4393-8ae5-ec85e8134238"
+				"id": "35d4bef6-1c7a-453f-8ad9-fd387f256b96"
 			}
 		},
 		{
@@ -298,7 +298,7 @@
 				"exec": [
 					""
 				],
-				"id": "e4d26ef6-1b7e-4d75-9c0a-1d6daace2669"
+				"id": "5776fc0f-7251-4f29-a40f-c4c998420369"
 			}
 		}
 	]

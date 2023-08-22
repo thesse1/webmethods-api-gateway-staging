@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8f9674e6-2ec9-4d80-be13-ff6186c0030e",
+		"_postman_id": "8f6c0361-ffde-4573-be08-5b556b6dae32",
 		"name": "API Test for multiple-tenants",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-8f9674e6-2ec9-4d80-be13-ff6186c0030e"
+		"_uid": "3558839-8f6c0361-ffde-4573-be08-5b556b6dae32"
 	},
 	"item": [
 		{
@@ -29,11 +29,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "d0c4d000-81a8-43aa-92de-9848a98fecd8"
+								"id": "f5c1defa-6550-4703-b89c-e0aded3c4b44"
 							}
 						}
 					],
-					"id": "ad3cab3a-1e99-4034-814d-cd5a2d0d5805",
+					"id": "1c3611c0-732d-4838-a426-1724bf0cef96",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -102,11 +102,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "5ad173b5-b337-4723-8b03-613b6e8eb960"
+								"id": "8919cbc6-d2bf-4516-b322-06292fb2cc7d"
 							}
 						}
 					],
-					"id": "31ff1e07-91ec-4f64-867f-73225b4ae4b9",
+					"id": "01e862c0-9ec7-48a6-aeac-90b9a1de5f9a",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -156,7 +156,7 @@
 					"response": []
 				}
 			],
-			"id": "b983e241-6d63-4d35-9be9-7df94ac80533"
+			"id": "3472a523-a30e-4dd8-9eba-fb589032d2e1"
 		},
 		{
 			"name": "One API for multiple tenants",
@@ -181,11 +181,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "865c65e4-496e-4269-a4ea-e47ba837ddf3"
+								"id": "48ed30b7-cd64-4ec7-bfb3-b679404059d8"
 							}
 						}
 					],
-					"id": "b425aa71-1765-4dd7-8c1b-deceb3062dbe",
+					"id": "905f6552-2dbe-41e1-b449-767f75fb8155",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -254,11 +254,11 @@
 									"});"
 								],
 								"type": "text/javascript",
-								"id": "f8e51344-4f23-4046-9840-f8af8ba95116"
+								"id": "34d440f1-3950-43c9-8d13-a20275765d6a"
 							}
 						}
 					],
-					"id": "9f269956-af6d-4666-b9a6-534dd53fd455",
+					"id": "262b7ac4-ca54-450b-bc14-7b789886d87d",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -308,7 +308,7 @@
 					"response": []
 				}
 			],
-			"id": "d96d704b-5847-46d5-963b-2bb18023422a"
+			"id": "640f9389-4d42-41c3-93c1-06981ff0cf84"
 		}
 	]
 }

@@ -1,7 +1,9 @@
 {
 	"info": {
+		"_postman_id": "0a549535-198f-4078-bbc1-80e30966c6fd",
 		"name": "HAFT_PROD_EXT_TOUCH",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-0a549535-198f-4078-bbc1-80e30966c6fd"
 	},
 	"item": [
 		{
@@ -21,10 +23,12 @@
 							"\r",
 							"pm.globals.set(\"nodeName_01\", pm.response.json()[\"listener.active\"].listener.nodeName);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "7f4e49c0-8c78-4478-8098-90d8cfa147d0"
 					}
 				}
 			],
+			"id": "72fd7cf1-b5aa-4dc9-acc3-6ab34793c0ae",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -86,10 +90,12 @@
 							"\r",
 							"pm.globals.set(\"nodeName_02\", pm.response.json()[\"listener.active\"].listener.nodeName);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "bb8d73a0-066d-4014-9a72-89a79dd41176"
 					}
 				}
 			],
+			"id": "921d29bc-5b75-452e-992b-b179d52c3e80",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -145,10 +151,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "e5fbf4f8-aa25-44ae-ab17-5e61bc7f6684"
 					}
 				}
 			],
+			"id": "a436cf83-6ee4-4644-8d1e-1e751c5b8160",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -187,7 +195,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/listener",
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/listener",
 					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
@@ -214,10 +222,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "78732007-67a8-4bbe-bc87-23d51398d2c2"
 					}
 				}
 			],
+			"id": "3d3f91da-fbbb-4445-974d-fcae4e71870d",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -283,10 +293,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "bdc64f2f-f10d-4c4a-8925-1144d7a0afb4"
 					}
 				}
 			],
+			"id": "b1118c8a-fe13-4c19-bb06-a9e9ca20f800",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -325,7 +337,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/ring",
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/ring",
 					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
@@ -352,10 +364,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "64783381-e9e7-4e2e-8da9-ab963d1e4d27"
 					}
 				}
 			],
+			"id": "3c4c5ce7-1335-4083-9846-69debccf1f53",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -421,10 +435,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "bac3ebf6-ca32-4232-a78b-8d240dab4d4e"
 					}
 				}
 			],
+			"id": "02446941-7f21-4daa-9472-e0d38df56fd7",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -463,7 +479,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/activate",
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/activate",
 					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
@@ -490,10 +506,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "d03cdbb3-cdfc-4202-b49b-37fccaf8ce9a"
 					}
 				}
 			],
+			"id": "acb73457-9c82-4616-b7ed-ed729284fedf",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -564,10 +582,12 @@
 							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "440a7111-22b6-4daf-87c6-28cba29585d9"
 					}
 				}
 			],
+			"id": "bd7e6866-8a65-4111-b5b1-54807fb32c7b",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -597,7 +617,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace",
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
 					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
@@ -628,10 +648,12 @@
 							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "7d8fd2ee-97bf-4225-99c4-8c01327bd308"
 					}
 				}
 			],
+			"id": "c6e8d019-b9d3-472f-9cb6-43ff33240c5e",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -687,10 +709,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "32ffcca9-0c02-4f70-ae95-15c2ccdb1b57"
 					}
 				}
 			],
+			"id": "ecb53853-3e54-4efc-8fc4-92f3c5086507",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -720,7 +744,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{protocol_01}}://{{ip_01}:{{port_01}}/rest/apigateway/dataspace/status",
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/status",
 					"protocol": "{{protocol_01}}",
 					"host": [
 						"{{ip_01}}"
@@ -747,10 +771,12 @@
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "efebc6cf-ab43-46cf-811c-2edc946cb70d"
 					}
 				}
 			],
+			"id": "f4a39dc0-2a8d-4025-b777-c059d94a6e7f",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -804,7 +830,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "e9a2ad38-9d09-4e68-b6f5-f6ebf82f25e3"
 			}
 		},
 		{
@@ -822,7 +849,8 @@
 					"response.body = pm.response.json();",
 					"requests.push({\"request\": request, \"response\": response});",
 					"pm.globals.set('requests', JSON.stringify(requests));"
-				]
+				],
+				"id": "2c184233-a2b9-48cd-af31-a838c385731a"
 			}
 		}
 	]

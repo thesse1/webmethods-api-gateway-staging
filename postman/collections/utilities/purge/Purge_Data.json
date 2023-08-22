@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "1f6f71c3-3440-4302-b1c3-5502f4c7d8a0",
+		"_postman_id": "dd4cb378-c542-4996-8691-1cb7435bacba",
 		"name": "Purge_Data",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-1f6f71c3-3440-4302-b1c3-5502f4c7d8a0"
+		"_uid": "3558839-dd4cb378-c542-4996-8691-1cb7435bacba"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f57feb8f-c036-4669-97e0-22adf9d523f0",
+						"id": "08350cc1-0e1d-4b67-8a6d-48b3413f781a",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -31,7 +31,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "000bd8be-2a97-4793-ae92-24915eba8bab",
+						"id": "3b7e7741-1981-4c5a-aba1-025cf65d65d0",
 						"exec": [
 							"pm.globals.set(\"olderThan\", \"28d\");"
 						],
@@ -39,7 +39,7 @@
 					}
 				}
 			],
-			"id": "8fde8728-67af-47a0-aa47-4c1dcbd0d7ca",
+			"id": "c965d920-fa52-4bf8-a81f-3c6edc3f2031",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -96,7 +96,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "5a73ee3c-7c51-4ed2-a528-a8c009202d52",
+						"id": "4c0b40ba-e348-41d8-ac47-150cf2d8ddbf",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -113,7 +113,7 @@
 					}
 				}
 			],
-			"id": "06659084-b163-460f-b98e-44be0ba7d7e8",
+			"id": "0d8daf55-f021-4852-83e6-aa4a2296192d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -170,7 +170,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e1cad1da-282d-4880-a174-56e77aaa1588",
+						"id": "734d7206-b1ef-47c5-9b39-5f8faa3d7e17",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -187,7 +187,7 @@
 					}
 				}
 			],
-			"id": "95fc8f8c-175c-4dea-8c2d-11bc4e880fb0",
+			"id": "d72ef4a9-3799-4b46-bc90-632d0c50a704",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -244,7 +244,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a4117bdf-8d6d-4160-a88e-26a54f4dd913",
+						"id": "3ce87723-5150-4dc4-8655-141b952d92cd",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -261,7 +261,7 @@
 					}
 				}
 			],
-			"id": "223d258e-f225-4649-bd27-da34e9def4e6",
+			"id": "08238d5a-0db1-4237-8c29-74c9dce8a57e",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -318,7 +318,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2b4aa0e8-a045-428d-bd9b-fc354d253c5e",
+						"id": "c278f52b-a725-4750-bf64-a5353b85729f",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -335,7 +335,7 @@
 					}
 				}
 			],
-			"id": "1e1b127f-c484-4a59-ab5c-11ec5c65a232",
+			"id": "6621d778-5f65-4eb0-b2df-4ae17227cec9",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -392,7 +392,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7e980318-6dfa-46ff-a073-c2f5f93db77c",
+						"id": "da8457b3-d3d8-425a-9f79-34513c27fb6e",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -409,7 +409,7 @@
 					}
 				}
 			],
-			"id": "d0c8ed9d-c225-45e5-9ea3-b1b9e3650f6b",
+			"id": "3e3a73d1-f4b5-4f31-9b83-3bfea08af1ba",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -466,7 +466,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d158a907-417a-4876-85dd-aa78bc8889bd",
+						"id": "83850903-b75f-44a0-93a2-066a86aa06d0",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -483,7 +483,7 @@
 					}
 				}
 			],
-			"id": "5f9c6938-bb51-421c-8106-87f2701ba4cc",
+			"id": "2f519ec1-87ea-4560-b11a-795ff682629d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -540,7 +540,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4740f28a-0d18-49f5-8a62-1f72bf763045",
+						"id": "8a5d6257-0602-4109-b584-cf2a2d2cd39f",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -557,7 +557,7 @@
 					}
 				}
 			],
-			"id": "560949d7-efa8-4a90-a25b-0c5e329e24b8",
+			"id": "74e87749-e299-4860-978e-8abab37ca0f9",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -614,7 +614,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9c6f1c2b-9ead-49f5-834b-931f6b3b8f22",
+						"id": "2a042a46-78e3-480b-9035-75240ec7abed",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -631,7 +631,7 @@
 					}
 				}
 			],
-			"id": "69c763e1-2ebd-4de1-ad59-d99a98511e4e",
+			"id": "2641716e-91b7-4472-b0df-01d1d457af87",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -688,7 +688,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "25b7ea69-1730-4228-b73d-d7b0f3bd7bac",
+						"id": "bf897a7d-65ea-4125-b8db-0951bd8db269",
 						"exec": [
 							"pm.test(\"Status code is 202\", function () {\r",
 							"    pm.response.to.have.status(202);\r",
@@ -707,7 +707,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "2bf950b0-1461-4cf7-8b49-94b9af751127",
+						"id": "5d9a6dac-212d-43ba-884a-046976eb2ca0",
 						"exec": [
 							"var year = new Date().getFullYear()-1;\r",
 							"pm.globals.set(\"until\", year + \"-01-01%2000:00:00\");"
@@ -716,7 +716,7 @@
 					}
 				}
 			],
-			"id": "9d3dd60e-833e-4f61-a2fe-e14ea5744742",
+			"id": "6f7bce29-a10e-436f-b751-89289e7e957d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -791,7 +791,7 @@
 				"exec": [
 					""
 				],
-				"id": "e2aa567b-55a4-413a-8ff2-3669649bfa42"
+				"id": "b67af535-1aa1-41bb-b939-a4a9ca50bbb6"
 			}
 		},
 		{
@@ -801,7 +801,7 @@
 				"exec": [
 					""
 				],
-				"id": "be1c15e9-ef94-47f9-959b-da5b2198a73f"
+				"id": "091f9a27-244a-4609-8131-51597b8db695"
 			}
 		}
 	]
