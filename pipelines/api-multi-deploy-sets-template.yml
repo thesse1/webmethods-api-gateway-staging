@@ -45,7 +45,7 @@ stages:
                       - template: /pipelines/api-build-steps-template.yml
                         parameters:
                           apiProject: ${{apiProject}}
-                          build_environment: "$(Agent.Name)_environment.json"
+                          build_environment: "${{ build_target }}_environment.json"
                           target_type: ${{ build_target }}
                           prep_condition: ${{true}}
                           test_condition: ${{ ne('${{ build_target }}', 'CONFIG') }}
