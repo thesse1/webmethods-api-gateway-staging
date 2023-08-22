@@ -15,14 +15,14 @@ stages:
   - stage: ${{ stage.name }}
     dependsOn: []
     jobs:
-    - ${{ each job in stage.jobs }}:
-      - deployment: Configure_API_Gateway_${{ job.name }}
-        environment: ${{ job.name }}
+    - ${{ each instance in stage.instances }}:
+      - deployment: Configure_API_Gateway_${{ instance.name }}
+        environment: ${{ instance.name }}
         variables:
-        - group: ${{parameters.tenant}}_${{ job.name }}_users
+        - group: ${{parameters.tenant}}_${{ instance.name }}_users
         pool:
-          name: '${{ job.pool }}'
-          vmImage: '${{ job.image }}'
+          name: '${{ instance.pool }}'
+          vmImage: '${{ instance.image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -33,18 +33,18 @@ stages:
               - download: none
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
-                  environment: "${{ job.name }}_environment.json"
+                  environment: "${{ instance.name }}_environment.json"
                   type: ${{ stage.name }}
                   tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{job.name}}"
+              - bash: echo "##vso[build.addbuildtag]${{instance.name}}"
                 displayName: Add build tag
 
-    - ${{ each job in stage.configure_haft_jobs }}:
+    - ${{ if stage.haft }}:
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
-        environment: ${{ job.name }}
+        environment: ${{ stage.name }}_HAFT
         pool:
-          name: '${{ job.pool }}'
-          vmImage: '${{ job.image }}'
+          name: '${{ stage.haft.pool }}'
+          vmImage: '${{ stage.haft.image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -57,5 +57,5 @@ stages:
                 parameters:
                   type: ${{ stage.name }}
                   tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{job.name}}"
+              - bash: echo "##vso[build.addbuildtag]${{ stage.name }}_HAFT"
                 displayName: Add build tag

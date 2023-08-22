@@ -10,18 +10,26 @@ parameters:
   values:
   - playground
   - realworld
-- name: sourceType
+- name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
   values:
   - CONFIG
-  - BUILD
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
   - DEV_INT
   - DEV_EXT
   - STAGE_INT
   - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  - PROD_INT_01
+  - PROD_INT_02
+  - PROD_EXT_01
+  - PROD_EXT_02
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
@@ -30,7 +38,7 @@ stages:
 - template: /pipelines/api-export-config-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
-    sourceType: ${{parameters.sourceType}}
+    source_instance: ${{parameters.source_instance}}
     commitMessage: ${{parameters.commitMessage}}
     source_types:
     - stage: CONFIG

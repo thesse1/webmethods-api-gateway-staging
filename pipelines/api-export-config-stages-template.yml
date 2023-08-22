@@ -6,18 +6,26 @@ parameters:
   values:
   - playground
   - realworld
-- name: sourceType
+- name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
   values:
   - CONFIG
-  - BUILD
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
   - DEV_INT
   - DEV_EXT
   - STAGE_INT
   - STAGE_EXT
-  - PROD_INT
-  - PROD_EXT
+  - PROD_INT_01
+  - PROD_INT_02
+  - PROD_EXT_01
+  - PROD_EXT_02
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
@@ -54,7 +62,7 @@ stages:
 - ${{ each type in parameters.source_types }}:
   - ${{ if eq(type.stage, parameters.sourceType) }}:
     - stage: ${{ type.stage }}
-      dependsOn: []
+      # dependsOn: []
       jobs:
       - deployment: Export_config_from_API_Gateway_${{ type.stage }}
         environment: ${{ type.stage }}
