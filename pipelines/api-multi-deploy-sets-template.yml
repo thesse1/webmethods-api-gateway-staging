@@ -6,25 +6,30 @@ parameters:
   values:
   - playground
   - realworld
-- name: sets
+- name: build_stage
+  displayName: Build on which stage?
+  type: object
+- name: target_stages
+  displayName: Deploy to which stages?
+- name: deployment_sets
   displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
 
 stages:
-- ${{ each set in parameters.sets }}:
-  - ${{ each target_stage in set.target_stages }}:
-    - ${{ each apiProject in set.apiProjects }}:
+- ${{ each target_stage in parameters.target_stages }}:
+  - ${{ each deployment_set in parameters.deployment_sets }}:
+    - ${{ each apiProject in deployment_set.apiProjects }}:
       - stage: ${{ target_stage.name }}_${{ apiProject }}
-        ${{ if eq(apiProject, set.apiProjects[0]) }}:
+        ${{ if eq(apiProject, deployment_set.apiProjects[0]) }}:
           dependsOn: []
         jobs:
         - deployment: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
-          environment: '${{ set.build_stage.name }}'
+          environment: '${{ parameters.build_stage.name }}'
           variables:
-          - group: ${{parameters.tenant}}_${{ set.build_stage.name }}_users
+          - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
           pool:
-            name: '${{ set.build_stage.pool }}'
-            vmImage: '${{ set.build_stage.image }}'
+            name: '${{ parameters.build_stage.pool }}'
+            vmImage: '${{ parameters.build_stage.image }}'
           strategy:
             runOnce:    #rolling, canary are the other strategies that are supported
               deploy:
@@ -47,8 +52,8 @@ stages:
                     apiProject: ${{apiProject}}
                 - bash: |
                     echo "##vso[build.addbuildtag]${{apiProject}}"
-                    echo "##vso[build.addbuildtag]${{set.build_stage.name}}"
-                    echo "##vso[build.addbuildtag]${{apiProject}}_${{set.build_stage.name}}"
+                    echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
+                    echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_stage.name}}"
                   displayName: Add build tags
                 # - template: /pipelines/store-build-artifactory-template.yml
                 #   parameters:
