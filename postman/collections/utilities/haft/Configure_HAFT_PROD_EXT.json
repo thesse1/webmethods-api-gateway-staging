@@ -29,6 +29,9 @@
 				}
 			],
 			"id": "72fd7cf1-b5aa-4dc9-acc3-6ab34793c0ae",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -96,6 +99,9 @@
 				}
 			],
 			"id": "921d29bc-5b75-452e-992b-b179d52c3e80",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -157,6 +163,9 @@
 				}
 			],
 			"id": "a436cf83-6ee4-4644-8d1e-1e751c5b8160",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -228,6 +237,9 @@
 				}
 			],
 			"id": "3d3f91da-fbbb-4445-974d-fcae4e71870d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -299,6 +311,9 @@
 				}
 			],
 			"id": "b1118c8a-fe13-4c19-bb06-a9e9ca20f800",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -370,6 +385,9 @@
 				}
 			],
 			"id": "3c4c5ce7-1335-4083-9846-69debccf1f53",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -441,6 +459,9 @@
 				}
 			],
 			"id": "02446941-7f21-4daa-9472-e0d38df56fd7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -512,6 +533,9 @@
 				}
 			],
 			"id": "acb73457-9c82-4616-b7ed-ed729284fedf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -588,6 +612,9 @@
 				}
 			],
 			"id": "bd7e6866-8a65-4111-b5b1-54807fb32c7b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -654,6 +681,9 @@
 				}
 			],
 			"id": "c6e8d019-b9d3-472f-9cb6-43ff33240c5e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -704,17 +734,32 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "32ffcca9-0c02-4f70-ae95-15c2ccdb1b57",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "32ffcca9-0c02-4f70-ae95-15c2ccdb1b57"
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "83f7a29c-1d39-4e06-9d0f-18f6b3c09266",
+						"exec": [
+							"console.log(\"Hello\");\r",
+							"setTimeout(() => {  console.log(\"World!\"); }, 10000);\r",
+							""
+						],
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "ecb53853-3e54-4efc-8fc4-92f3c5086507",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -777,6 +822,9 @@
 				}
 			],
 			"id": "f4a39dc0-2a8d-4025-b777-c059d94a6e7f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
