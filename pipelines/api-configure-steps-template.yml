@@ -87,12 +87,3 @@ steps:
   displayName: 'Initialize API Gateway ${{parameters.type}}'
   env:
     no_proxy: $(environment_ip)
-
-- script: |
-    newman run postman/collections/utilities/haft/Configure_HAFT_${{parameters.type}}.json --reporters cli \
-    -e ${{parameters.tenant}}/environments/${{parameters.type}}_haft_environment.json
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
-  # env:
-  #   no_proxy: $(environment_ip)
-  condition: and(succeeded(), eq('${{ parameters.configure_haft }}', true))
