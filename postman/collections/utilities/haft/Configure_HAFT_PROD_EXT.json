@@ -748,8 +748,8 @@
 					"script": {
 						"id": "83f7a29c-1d39-4e06-9d0f-18f6b3c09266",
 						"exec": [
-							"console.log(\"Hello\");\r",
-							"setTimeout(() => {  console.log(\"World!\"); }, 10000);\r",
+							"console.log(\"Waiting one minute for ring forming\");\r",
+							"setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
 							""
 						],
 						"type": "text/javascript"
