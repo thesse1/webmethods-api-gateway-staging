@@ -665,6 +665,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "7d8fd2ee-97bf-4225-99c4-8c01327bd308",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -673,10 +674,11 @@
 							"pm.test(\"Response contains nodeName\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
-							"});"
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);"
 						],
-						"type": "text/javascript",
-						"id": "7d8fd2ee-97bf-4225-99c4-8c01327bd308"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -748,8 +750,8 @@
 					"script": {
 						"id": "83f7a29c-1d39-4e06-9d0f-18f6b3c09266",
 						"exec": [
-							"console.log(\"Waiting one minute for ring forming\");\r",
-							"setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
+							"// console.log(\"Waiting one minute for ring forming\");\r",
+							"// setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
 							""
 						],
 						"type": "text/javascript"
