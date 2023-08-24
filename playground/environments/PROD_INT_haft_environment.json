@@ -70,7 +70,7 @@
 	},
 	{
 		"key": "port_grpc_01",
-		"value": "4440",
+		"value": "80",
 		"type": "text",
 		"enabled": true
 	},
@@ -82,7 +82,7 @@
 	},
 	{
 		"key": "port_grpc_02",
-		"value": "4440",
+		"value": "80",
 		"type": "text",
 		"enabled": true
 	}
