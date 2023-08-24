@@ -7,10 +7,10 @@
   "templateKey" : "logInvocation",
   "parameters" : [ {
     "templateKey" : "storeRequestPayload",
-    "values" : [ "false" ]
+    "values" : [ "true" ]
   }, {
     "templateKey" : "storeResponsePayload",
-    "values" : [ "false" ]
+    "values" : [ "true" ]
   }, {
     "templateKey" : "storeAsZip",
     "values" : [ "false" ]
@@ -18,10 +18,22 @@
     "templateKey" : "logGenerationFrequency",
     "values" : [ "Always" ]
   }, {
+    "templateKey" : "storeRequestHeaders",
+    "values" : [ "true" ]
+  }, {
+    "templateKey" : "storeResponseHeaders",
+    "values" : [ "true" ]
+  }, {
     "templateKey" : "destination",
     "parameters" : [ {
       "templateKey" : "destinationType",
       "values" : [ "GATEWAY" ]
+    } ]
+  }, {
+    "templateKey" : "destination",
+    "parameters" : [ {
+      "templateKey" : "destinationType",
+      "values" : [ "ELASTICSEARCH" ]
     } ]
   } ],
   "active" : false

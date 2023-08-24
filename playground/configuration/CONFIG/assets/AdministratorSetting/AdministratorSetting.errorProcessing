@@ -1,6 +1,5 @@
 {
   "configId" : "errorProcessing",
-  "userName" : "Administrator",
   "internalPorts" : { },
   "properties" : {
     "sendNativeProviderFault" : "true",

@@ -203,6 +203,7 @@
   } ],
   "apiName" : "TripPinService",
   "apiVersion" : "1",
+  "apiDescription" : "This is a sample OData service based on https://services.odata.org/V4/TripPinService/",
   "maturityState" : "Beta",
   "apiGroups" : [ "Internal", "External" ],
   "isActive" : true,
@@ -213,7 +214,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2023-06-09 11:51:20 GMT",
-  "lastModified" : "2023-06-09 13:05:01 GMT",
+  "lastModified" : "2023-08-23 17:26:53 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "a63d8dc0-f1af-4993-a376-2929c6cfa2bc"
