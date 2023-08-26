@@ -32,7 +32,6 @@ files[] = {"id":"3558839-a5b401b5-1de3-434b-917b-246de1cd7208","path":"apitests/
 files[] = {"id":"3558839-951d984c-bd53-4924-bcfc-9df8f8a50aa1","path":"apitests/playground/security_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-9488f171-1beb-42de-8bd1-75a3ea4f8959","path":"apitests/playground/star_wars/APITest.json","metaData":{}}
 files[] = {"id":"3558839-7a0d3be3-3fa4-49c5-9327-2a9f2f16565c","path":"apitests/playground/test_failure/APITest.json","metaData":{}}
-files[] = {"id":"3558839-a46e427e-464d-4e30-972d-30ed65006032","path":"HAFT_PROD_INT_TOUCH.json","metaData":{}}
 files[] = {"id":"3558839-1ee3d49f-17da-46ea-9816-8acdbdfec755","path":"utilities/haft/Configure_HAFT_PROD_EXT.json","metaData":{}}
 files[] = {"id":"3558839-0076f8e0-72e1-44b0-a346-37940f71b15e","path":"utilities/haft/Configure_HAFT_PROD_INT.json","metaData":{}}
 files[] = {"id":"3558839-c7cccca6-2607-4d7b-914b-8c90c5528008","path":"utilities/import/Import_API.json","metaData":{}}
