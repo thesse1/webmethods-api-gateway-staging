@@ -42,6 +42,8 @@ stages:
     - ${{ if stage.haft }}:
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
         environment: ${{ stage.name }}_HAFT
+        variables:
+        - group: ${{parameters.tenant}}_${{ stage.name }}_HAFT_users
         pool:
           name: '${{ stage.haft.pool }}'
           vmImage: '${{ stage.haft.image }}'

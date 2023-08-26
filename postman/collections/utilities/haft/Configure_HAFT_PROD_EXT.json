@@ -38,12 +38,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_01_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_01_password}}",
 							"type": "string"
 						}
 					]
@@ -108,12 +108,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_02_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_02_password}}",
 							"type": "string"
 						}
 					]
@@ -172,12 +172,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_01_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_01_password}}",
 							"type": "string"
 						}
 					]
@@ -246,12 +246,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_02_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_02_password}}",
 							"type": "string"
 						}
 					]
@@ -320,12 +320,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_01_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_01_password}}",
 							"type": "string"
 						}
 					]
@@ -394,12 +394,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_02_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_02_password}}",
 							"type": "string"
 						}
 					]
@@ -468,12 +468,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_01_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_01_password}}",
 							"type": "string"
 						}
 					]
@@ -542,12 +542,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_02_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_02_password}}",
 							"type": "string"
 						}
 					]
@@ -621,12 +621,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_01_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_01_password}}",
 							"type": "string"
 						}
 					]
@@ -692,12 +692,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_02_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_02_password}}",
 							"type": "string"
 						}
 					]
@@ -768,12 +768,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_01_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_01_password}}",
 							"type": "string"
 						}
 					]
@@ -833,12 +833,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "Administrator",
+							"value": "{{haft_manager_02_user}}",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "manage",
+							"value": "{{haft_manager_02_password}}",
 							"type": "string"
 						}
 					]
