@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "5dbb92c6-2f96-4e4d-895e-7e1deac02bb2",
-		"name": "HAFT_PROD_INT",
+		"name": "Configure_HAFT_PROD_INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-5dbb92c6-2f96-4e4d-895e-7e1deac02bb2"
 	},
