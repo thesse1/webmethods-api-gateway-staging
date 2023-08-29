@@ -2,13 +2,13 @@
 
 > Note: This version of the API Gateway Staging solution depends on Azure DevOps Service. An older version of the solution which supports Azure DevOps Server 2019 can be found in the azure_devops_server_2019 branch: https://github.com/thesse1/webmethods-api-gateway-staging/tree/azure_devops_server_2019.
 
-The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central CONFIG environment, add them to the Azure DevOps repository (or GitHub repository) and automatically promote them to DEV, STAGE and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _STAGE or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to STAGE and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, STAGE or PROD).
+The API Gateway Staging solution allows to extract API Gateway assets from a local development environment or a central DESIGN environment, add them to the Azure DevOps repository (or GitHub repository) and automatically promote them to DEV, TEST and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections): The pipeline will automatically remove all applications which are not intended for the target environment (with names not ending with _DEV, _TEST or _PROD), activate (unsuspend) all other applications, adjust environment-specific alias values, add API tags to all APIs indicating the build ID, the build name and the pipeline name (for auditability) and disable API mocking for deployments to TEST and PROD environments. After that procedure, the assets are exported again from BUILD environment and imported on the target environment (DEV, TEST or PROD).
 
-The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway instances (local development environment, CONFIG, BUILD, DEV, STAGE and PROD). This includes the configuration of the API Gateway destination (event types, performance metrics and audit log data to be stored in the internal Elasticsearch database) and the Elasticsearch destination (event types and performance metrics to be stored in an external Elasticsearch database), the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway instances using Azure DevOps build pipelines for quickly setting up new API Gateway instances or for updating existing instances. After importing the base configuration, the build pipelines will also add environment-specific configuration items like loadbalancer URL, proxy server and the configuration of the local OAuth2 Authorization Server (authorization code and access token expiration interval, OAuth2 scopes) and the local JWT Provider (issuer, signing algorithm, token expiration interval, keystore alias and key alias).
+The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway instances (local development environment, DESIGN, BUILD, DEV, TEST and PROD). This includes the configuration of the API Gateway destination (event types, performance metrics and audit log data to be stored in the internal Elasticsearch database) and the Elasticsearch destination (event types and performance metrics to be stored in an external Elasticsearch database), the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway instances using Azure DevOps build pipelines for quickly setting up new API Gateway instances or for updating existing instances. After importing the base configuration, the build pipelines will also add environment-specific configuration items like loadbalancer URL, proxy server and the configuration of the local OAuth2 Authorization Server (authorization code and access token expiration interval, OAuth2 scopes) and the local JWT Provider (issuer, signing algorithm, token expiration interval, keystore alias and key alias).
 
 Finally, the solution also includes an Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database. This pipeline can be configured to run in defined iterations, e.g., once every day.
 
-The solution supports multiple tenants, i.e., multiple sets of CONFIG, BUILD, DEV, STAGE and PROD environments, each with its own sets of APIs and API Gateway configurations. This can be used for independently serving multiple clients, or for operating a set of playground environments for testing the solution itself and a set of real-world environments for actually using the solution. 
+The solution supports multiple tenants, i.e., multiple sets of DESIGN, BUILD, DEV, TEST and PROD environments, each with its own sets of APIs and API Gateway configurations. This can be used for independently serving multiple clients, or for operating a set of playground environments for testing the solution itself and a set of real-world environments for actually using the solution. 
 
 This solution is based on https://github.com/thesse1/webmethods-api-gateway-devops which is by itself a fork of https://github.com/SoftwareAG/webmethods-api-gateway-devops.
 
@@ -19,19 +19,19 @@ As each organization builds APIs using API Gateway for easy consumption and mone
 ![GitHub Logo](/images/api.png)
 
 In addition to the functionality of the original webmethods-api-gateway-devops template (as depicted in the image above), this solution includes an automatic validation and adjustment of API Gateway assets for the deployment on different stages. It implements the following requirements:
- - APIs should have separate sets of applications (with different identifiers) on different stages. The correct deployment of these applications should be enforced automatically. All applications are created on a local development environment or the central CONFIG environment with names ending with "_DEV", "_STAGE" or "_PROD" indicating their intended usage. All applications should be exported and managed in VCS, but only the intended applications should be imported on the respective DEV, STAGE and PROD environments. In order to cover a specific use case, the solution will also allow applications with "_TEST" suffix and it will deploy them to STAGE environments together with the "_STAGE" applications.
+ - APIs should have separate sets of applications (with different identifiers) on different stages. The correct deployment of these applications should be enforced automatically. All applications are created on a local development environment or the central DESIGN environment with names ending with "_DEV", "_TEST" or "_PROD" indicating their intended usage. All applications should be exported and managed in VCS, but only the intended applications should be imported on the respective DEV, TEST and PROD environments. In order to cover a specific use case, the solution will also allow applications with "_TEST" suffix and it will deploy them to TEST environments together with the "_TEST" applications.
  - APIs must not contain any local, API-level Log Invocation policies in order to prevent any privacy issues caused by too detailed transaction logging
  - Aliases are set to environment-specific values
- - API mocking is turned off for deployments on STAGE and PROD environments
+ - API mocking is turned off for deployments on TEST and PROD environments
  - API tags are added to all APIs indicating the build ID, the build name and the pipeline name (for auditability)
 
-This is implemented by validating and manipulating the assets on a dedicated BUILD environment: Initially, all assets (including all applications) are imported on the BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _STAGE, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values are overwritten, and API tags are inserted, and API mocking is disabled (for STAGE and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and, if applicable, API mocking turned off) and imported on the target environment.
+This is implemented by validating and manipulating the assets on a dedicated BUILD environment: Initially, all assets (including all applications) are imported on the BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values are overwritten, and API tags are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and, if applicable, API mocking turned off) and imported on the target environment.
 
-In addition to the deployment ("promotion") of assets to DEV, STAGE and PROD, the solution also includes pipelines for deploying API projects to the central CONFIG environment - without validations, manipulations and API tests. This allows for (re)setting the CONFIG environment to the current (or some former) state of the API development - selectively for the assets defined in one API project. Older states (Git commits) can be retrieved temporarily for inspecting former stages of the development or permanently for re-basing the development of the API project on an earlier version.
+In addition to the deployment ("promotion") of assets to DEV, TEST and PROD, the solution also includes pipelines for deploying API projects to the central DESIGN environment - without validations, manipulations and API tests. This allows for (re)setting the DESIGN environment to the current (or some former) state of the API development - selectively for the assets defined in one API project. Older states (Git commits) can be retrieved temporarily for inspecting former stages of the development or permanently for re-basing the development of the API project on an earlier version.
 
-Finally, the solution also includes a pipeline for exporting API projects from the central CONFIG environment. The pipeline will automatically commit the exported project to the HEAD of the selected repository branch.
+Finally, the solution also includes a pipeline for exporting API projects from the central DESIGN environment. The pipeline will automatically commit the exported project to the HEAD of the selected repository branch.
 
-The solution supports two instances each for DEV, STAGE and PROD for hosting internal and external APIs. The respective instances are called DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT. Both internal and external APIs can be configured on the same local development instance or the central CONFIG instance. They must be assigned to the "Internal" or the "External" API group in order to be eligible for deployment to internal or external API Gateway DEV/STAGE/PROD instances. ("Internal" and "External" must be added to the apiGroupingPossibleValues extended setting in API Gateway for making these values eligible as API groups.) APIs assigned to both the "Internal" and the "External" API group are eligible for deployment on internal and external API Gateway instances.
+The solution supports two instances each for DEV, TEST and PROD for hosting internal and external APIs. The respective instances are called DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT. Both internal and external APIs can be configured on the same local development instance or the central DESIGN instance. They must be assigned to the "Internal" or the "External" API group in order to be eligible for deployment to internal or external API Gateway DEV/TEST/PROD instances. ("Internal" and "External" must be added to the apiGroupingPossibleValues extended setting in API Gateway for making these values eligible as API groups.) APIs assigned to both the "Internal" and the "External" API group are eligible for deployment on internal and external API Gateway instances.
 
 ![GitHub Logo](/images/devops_flow.png)
 
@@ -74,27 +74,27 @@ This approach is followed in this solution.
 This repository provides assets/scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive Service API (and other API Gateway Service APIs) for automation of the DevOps flow. The repository contains two sets of tenant-specific folders for playground environments and for real-world environments.
 
 The repository has the following top-level folders:
-  - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to CONFIG environment and stores the asset definition in file system
-  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
+  - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system
+  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
   - playground: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for playground environments
   - realworld: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for real-world environments
   - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
 
 The folders playground and realworld have the following sub-folders:
-  - apis: Contains projects with the API Gateway assets exported from CONFIG environment along with the definition of the projects' asset sets and API tests (Postman collections)
-  - configuration: Contains folders with the API Gateway configuration assets exported from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
-  - environments: Postman environment definitions for API Gateway CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments
+  - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets and API tests (Postman collections)
+  - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
+  - environments: Postman environment definitions for API Gateway DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments
   - variables: Azure DevOps variable templates with tenant-specific variables or references to tenant-specific variable groups
 
-The repository content can be committed to the Azure DevOps repository (or GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository (or GitHub repository) can be imported back to a local development environment, to the central CONFIG environment or promoted to DEV, STAGE or PROD.
+The repository content can be committed to the Azure DevOps repository (or GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository (or GitHub repository) can be imported back to a local development environment, to the central DESIGN environment or promoted to DEV, TEST or PROD.
 
 ## Develop and test APIs using API Gateway
 
-The most common use case for an API Developer is to develop APIs in their local development environments or the central CONFIG environment and then export them to a flat file representation such that they can be integrated to any VCS. Also, developers need to import their APIs from a VCS (flat file representation) to their local development environments for further updates.
+The most common use case for an API Developer is to develop APIs in their local development environments or the central DESIGN environment and then export them to a flat file representation such that they can be integrated to any VCS. Also, developers need to import their APIs from a VCS (flat file representation) to their local development environments for further updates.
 
-The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central CONFIG environment to their VCS local repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, CONFIG, BUILD, DEV, STAGE or PROD.
+The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central DESIGN environment to their VCS local repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
 
-Alternatively, the developer can also use the export_api_from_config pipeline to export APIs from the central CONFIG environment into the VCS. In addition to that, the export_configuration_from_stage pipeline and the configure_stages pipeline can be used for exporting or importing the general configuration from/to CONFIG, BUILD, DEV, STAGE or PROD.
+Alternatively, the developer can also use the export_api_from_config pipeline to export APIs from the central DESIGN environment into the VCS. In addition to that, the export_configuration_from_stage pipeline and the configure_stages pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
 ## gateway_import_export_utils.bat
 
@@ -127,21 +127,21 @@ The batch script can also be used for importing and exporting general API Gatewa
 | ------ | ------ |
 | importconfig or exportconfig |  To import or export from/to the flat file representation |
 | tenant |  The name of the tenant: playground or realworld |
-| environment | The type of the environment to import or export (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
+| environment | The type of the environment to import or export (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
 | apigateway_url |  API Gateway URL to import to or export from |
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportconfig and --importconfig option |
 | password | The API Gateway user password |
 
-Sample Usage for importing the configuration that is present as flat file representation under /playground/configuration/CONFIG/assets into API Gateway server at https://apigw-config.acme.com
+Sample Usage for importing the configuration that is present as flat file representation under /playground/configuration/DESIGN/assets into API Gateway server at https://apigw-config.acme.com
 
 ```sh
-bin>gateway_import_export_utils.bat --importconfig --tenant playground --environment CONFIG --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --importconfig --tenant playground --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-Sample Usage for exporting the configuration that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /playground/configuration/CONFIG/assets
+Sample Usage for exporting the configuration that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /playground/configuration/DESIGN/assets
 
 ```sh
-bin>gateway_import_export_utils.bat --exportconfig --tenant playground --environment CONFIG --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --exportconfig --tenant playground --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
 ## export_payload.json export query for API projects
@@ -166,7 +166,7 @@ The /playground/apis folder contains sample API projects with the following expo
 }
 ```
 
-This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the Petstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV_INT, STAGE_INT and PROD_INT.
+This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the Petstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV_INT, TEST_INT and PROD_INT.
 
 ### petstore-basicauth
 
@@ -220,7 +220,7 @@ This API project includes two APIs, actually two versions of the same API. They 
 }
 ```
 
-This example features the Postman Echo API (https://learning.postman.com/docs/developer/echo-api/) which is often used for demonstrating API Management features. For each request type (POST, GET, DELETE), it extracts the header, query and path parameters and the request body from the request and echoes them back in the response payload. The API is using the PostmanEcho_Routing_Alias endpoint alias configured for routing API requests to the native PostmanEcho API at https://postman-echo.com. This API and all other instances of the PostmanEcho API are assigned to the External API group, so they can be deployed on DEV_EXT, STAGE_EXT and PROD_EXT.
+This example features the Postman Echo API (https://learning.postman.com/docs/developer/echo-api/) which is often used for demonstrating API Management features. For each request type (POST, GET, DELETE), it extracts the header, query and path parameters and the request body from the request and echoes them back in the response payload. The API is using the PostmanEcho_Routing_Alias endpoint alias configured for routing API requests to the native PostmanEcho API at https://postman-echo.com. This API and all other instances of the PostmanEcho API are assigned to the External API group, so they can be deployed on DEV_EXT, TEST_EXT and PROD_EXT.
 
 ### postman-mocking
 
@@ -238,7 +238,7 @@ This example features the Postman Echo API (https://learning.postman.com/docs/de
 }
 ```
 
-This API project contains an instance of the Postman Echo API with API mocking enabled. API tests will be executed on the BUILD environment against the Mock API, and the API will be deployed on DEV with mocking enabled. For the deployment on STAGE and PROD, mocking will be disabled. This example also features a _TEST application which is also deployed on the STAGE environment together with the _STAGE application.
+This API project contains an instance of the Postman Echo API with API mocking enabled. API tests will be executed on the BUILD environment against the Mock API, and the API will be deployed on DEV with mocking enabled. For the deployment on TEST and PROD, mocking will be disabled. This example also features a _TEST application which is also deployed on the TEST environment together with the _TEST application.
 
 ### multiple-tenants
 
@@ -321,7 +321,7 @@ This API is using JSON Web Tokens (JWT) for inbound authentication. It is config
 }
 ```
 
-The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway without using any routing alias. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway without using any routing alias. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
 ### number-conversion
 
@@ -339,7 +339,7 @@ The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local u
 }
 ```
 
-This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
 ### odata-tutorial
 
@@ -357,7 +357,7 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
 }
 ```
 
-This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
 ### star-wars
 
@@ -375,7 +375,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 }
 ```
 
-This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, STAGE and PROD instances.
+This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
 ### internal-external
 
@@ -393,7 +393,7 @@ This is an example for a GraphQL API incl. test request in APITest.json. The API
 }
 ```
 
-This API project includes an instance of the internal Petstore API and an instance of the external PostmanEcho API. Therefore, this API project cannot be deployed on any DEV, STAGE or PROD environment. The build pipeline will detect this and return with an error message.
+This API project includes an instance of the internal Petstore API and an instance of the external PostmanEcho API. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
 ### invalid-app-name
 
@@ -411,7 +411,7 @@ This API project includes an instance of the internal Petstore API and an instan
 }
 ```
 
-This API project includes an instance of the PostmanEcho API with an application called "Invalid_App_Name_INVALID". Therefore, this API project cannot be deployed on any DEV, STAGE or PROD environment. The build pipeline will detect this and return with an error message.
+This API project includes an instance of the PostmanEcho API with an application called "Invalid_App_Name_INVALID". Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
 ### invalid-logging-policy
 
@@ -429,7 +429,7 @@ This API project includes an instance of the PostmanEcho API with an application
 }
 ```
 
-This API project includes an instance of the PostmanEcho API with an unwanted local, API-level Log Invocation policy. Therefore, this API project cannot be deployed on any DEV, STAGE or PROD environment. The build pipeline will detect this and return with an error message.
+This API project includes an instance of the PostmanEcho API with an unwanted local, API-level Log Invocation policy. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
 ### missing-api-group
 
@@ -447,7 +447,7 @@ This API project includes an instance of the PostmanEcho API with an unwanted lo
 }
 ```
 
-This API project includes an instance of the PostmanEcho API which is not assigned to any API group. Therefore, this API project cannot be deployed on any DEV, STAGE or PROD environment. The build pipeline will detect this and return with an error message.
+This API project includes an instance of the PostmanEcho API which is not assigned to any API group. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
 ## scopes.json configuration of OAuth2 scopes for API projects
 
@@ -476,7 +476,7 @@ In order to avoid conflicts, each alias may only be configured to be overwritten
 
 Alias names cannot be changed by this functionality.
 
-Aliases for which no values are defined (for the current target environment) in the global aliases.json file or in the API project's aliases.json file will be deployed with their original alias values from the CONFIG environment.
+Aliases for which no values are defined (for the current target environment) in the global aliases.json file or in the API project's aliases.json file will be deployed with their original alias values from the DESIGN environment.
 
 Examples:
 
@@ -493,9 +493,9 @@ Examples:
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE_INT",
+      "description" : "Petstore alias on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -524,9 +524,9 @@ Examples:
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "STAGE_EXT": {
+    "TEST_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on STAGE_EXT",
+      "description" : "PostmanEcho alias on TEST_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
@@ -556,7 +556,7 @@ Examples:
 }
 ```
 
-The global aliases.json file in the /playground/apis folder contains alias values for the respective DEV, STAGE and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
+The global aliases.json file in the /playground/apis folder contains alias values for the respective DEV, TEST and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
 
 ### petstore-versioning
 
@@ -571,9 +571,9 @@ The global aliases.json file in the /playground/apis folder contains alias value
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -595,9 +595,9 @@ The global aliases.json file in the /playground/apis folder contains alias value
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -633,15 +633,15 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
         "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
       }
     },
-    "STAGE_EXT": {
+    "TEST_EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on STAGE_EXT",
+      "description" : "PostmanEcho security alias on TEST_EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_STAGE_EXT",
+        "userName" : "PostmanEcho_TEST_EXT",
         "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
       }
     },
@@ -678,9 +678,9 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -702,9 +702,9 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -735,9 +735,9 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE_INT",
+      "description" : "Petstore alias on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -768,9 +768,9 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -792,9 +792,9 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -824,9 +824,9 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -847,9 +847,9 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -879,8 +879,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
-      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
+    "TEST_INT": {
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -900,8 +900,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
-      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
+    "TEST_INT": {
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -924,9 +924,9 @@ All alias values defined in the global aliases.json file or in API-specific alia
 
 For example,
  - the value of the variable petstore-routing-alias.DEV_INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV_INT, overwriting the value defined in the global aliases.json file,
- - the value of the variable postman-echo-routing-alias.STAGE_EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on STAGE_EXT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable postman-echo-routing-alias.TEST_EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on TEST_EXT, overwriting the value defined in the global aliases.json file,
  - the value of the variable petstore-routing-alias-108.PROD_INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD_INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
- - the value of the variable postman-echo-security-alias.STAGE_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on STAGE_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+ - the value of the variable postman-echo-security-alias.TEST_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on TEST_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
 
 Overwriting alias values with pipeline variables was mainly developed for replacing secret alias values like passwords in security aliases.
 
@@ -941,9 +941,9 @@ Replacement values for secret alias values like passwords can and should be stor
 
 The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the export_configuration_from_stage pipeline) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
-The /playground/configuration folder contains sample configurations for CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT environments, for example:
+The /playground/configuration folder contains sample configurations for DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for example:
 
-### CONFIG
+### DESIGN
 
 ```
 {
@@ -974,20 +974,20 @@ The Transaction logging global policy is configured differently on the eight env
 
 | Environment | Configuration of Transaction logging global policy |
 | ------ | ------ |
-| CONFIG | Always (on success and on failure) incl. HTTP headers and payloads |
+| DESIGN | Always (on success and on failure) incl. HTTP headers and payloads |
 | BUILD | Always (on success and on failure) incl. HTTP headers and payloads |
 | DEV_INT, DEV_EXT | Always (on success and on failure) incl. HTTP headers and payloads |
-| STAGE_INT, STAGE_EXT | Always (on success and on failure) excl. HTTP headers and payloads |
+| TEST_INT, TEST_EXT | Always (on success and on failure) excl. HTTP headers and payloads |
 | PROD_INT, PROD_EXT | Always (on success and on failure) excl. HTTP headers and payloads |
 
 Send native provider fault in the API fault is configured differently on the eight environments:
 
 | Environment | Send native provider fault |
 | ------ | ------ |
-| CONFIG | True |
+| DESIGN | True |
 | BUILD | True |
 | DEV_INT, DEV_EXT | True |
-| STAGE_INT, STAGE_EXT | True |
+| TEST_INT, TEST_EXT | True |
 | PROD_INT, PROD_EXT | False |
 
 More configuration assets can be added later.
@@ -998,13 +998,13 @@ Each API Gateway configuration can include one scopes.json file in the configura
 
 Each /playground/configuration folder contains a scopes.json file for demonstrating this feature, for example:
 
-### CONFIG
+### DESIGN
 
 ```
 [
     {
-        "name": "config-scope",
-        "description": "OAuth2 demo scope on CONFIG"
+        "name": "design-scope",
+        "description": "OAuth2 demo scope on DESIGN"
     }
 ]
 ```
@@ -1013,11 +1013,11 @@ The JSON array can include multiple scope definitions.
 
 ## APITest.json Postman test collection
 
-The next common scenario for an API developer is to assert the changes made to the APIs do not break their customer scenarios. This is achieved using Postman test collections, cf. https://learning.postman.com/docs/getting-started/introduction/. In a Postman test collection, the developer can group test requests that should be executed against the API under test every time a change is to be propagated to DEV, STAGE or PROD. The collection can be defined and executed in a local instance of the Postman REST client, cf. https://learning.postman.com/docs/sending-requests/intro-to-collections/. The requests in a test collection should include scripted test cases asserting that the API response is as expected (response status, payload elements, headers etc.), cf. https://learning.postman.com/docs/writing-scripts/test-scripts/. Test scripts can also extract values from the response and store them in Postman variable for later use, https://learning.postman.com/docs/sending-requests/variables/. For example, the first request might request and get an OAuth2 access token and store it in a Postman variable; later requests can use the token in the variable for authenticating against their API. Test collections can even define request workflows including branches and loops, cf. https://learning.postman.com/docs/running-collections/building-workflows/. The automatic execution of Postman collections can be tested in the Postman REST client itself, cf. https://learning.postman.com/docs/running-collections/intro-to-collection-runs/.
+The next common scenario for an API developer is to assert the changes made to the APIs do not break their customer scenarios. This is achieved using Postman test collections, cf. https://learning.postman.com/docs/getting-started/introduction/. In a Postman test collection, the developer can group test requests that should be executed against the API under test every time a change is to be propagated to DEV, TEST or PROD. The collection can be defined and executed in a local instance of the Postman REST client, cf. https://learning.postman.com/docs/sending-requests/intro-to-collections/. The requests in a test collection should include scripted test cases asserting that the API response is as expected (response status, payload elements, headers etc.), cf. https://learning.postman.com/docs/writing-scripts/test-scripts/. Test scripts can also extract values from the response and store them in Postman variable for later use, https://learning.postman.com/docs/sending-requests/variables/. For example, the first request might request and get an OAuth2 access token and store it in a Postman variable; later requests can use the token in the variable for authenticating against their API. Test collections can even define request workflows including branches and loops, cf. https://learning.postman.com/docs/running-collections/building-workflows/. The automatic execution of Postman collections can be tested in the Postman REST client itself, cf. https://learning.postman.com/docs/running-collections/intro-to-collection-runs/.
 
-Each API project must include one Postman test collection under the name APITest.json in its root folder. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, STAGE and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's root folder under the name APITest.json.
+Each API project must include one Postman test collection under the name APITest.json in its root folder. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's root folder under the name APITest.json.
 
-> Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definition for the central CONFIG environment in the Postman REST client at /{tenant}/environments/config_environment_demo.json.
+> Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definition for the central DESIGN environment in the Postman REST client at /{tenant}/environments/config_environment_demo.json.
 
 | Environment variable | README |
 | ------ | ------ |
@@ -1025,7 +1025,7 @@ Each API project must include one Postman test collection under the name APITest
 | {{port}} |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123 |
 | {{hostname}} | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{hostname}} |
 
-> Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement. So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central CONFIG environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
+> Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement. So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
 
 The /playground/apis folder contains sample API projects with the following test collections:
 
@@ -1079,37 +1079,37 @@ The test-failure test collection sends POST, GET and DELETE requests against the
 
 The key to proper DevOps is continuous integration and continuous deployment. Organizations use standard tools such as Jenkins, GitLab and Azure DevOps to design their integration and assuring continuous delivery.
 
-The API Gateway Staging solution includes two Azure DevOps build pipelines for deploying API projects from the Azure DevOps repository (or GitHub repository) to CONFIG, DEV, STAGE and PROD environments and one pipeline for exporting API projects from CONFIG into the Azure DevOps repository (or GitHub repository).
+The API Gateway Staging solution includes two Azure DevOps build pipelines for deploying API projects from the Azure DevOps repository (or GitHub repository) to DESIGN, DEV, TEST and PROD environments and one pipeline for exporting API projects from DESIGN into the Azure DevOps repository (or GitHub repository).
 
-In each deployment pipeline, the API Gateway assets configured in the API project will be imported on the BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, STAGE and PROD, it will then execute the API tests configured in the API project's APITest.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to CONFIG.)
+In each deployment pipeline, the API Gateway assets configured in the API project will be imported on the BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, TEST and PROD, it will then execute the API tests configured in the API project's APITest.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to DESIGN.)
 
-For a deployment to DEV, STAGE and PROD, the pipeline will now validate and manipulate the assets on the BUILD environment (using API Gateway's own APIs) to prepare them for the target environment:
+For a deployment to DEV, TEST and PROD, the pipeline will now validate and manipulate the assets on the BUILD environment (using API Gateway's own APIs) to prepare them for the target environment:
 - All policy actions will be scanned for unwanted API-level Log Invocation policies
-- All applications with names not ending with _DEV, _STAGE, _TEST or _PROD, respectively, will be removed
+- All applications with names not ending with _DEV, _TEST, _TEST or _PROD, respectively, will be removed
 - The remaining applications will be unsuspended (if necessary) to make sure they can be used on the target environment
 - Aliases will be overwritten with the values retrieved from the global aliases.json file or the local API project's aliases.json file (perhaps after value replacement via pipeline variables)
 - It will be assured that all APIs are assigned to the Internal API group or the External API group, respectively
 - Incorrect clientId and clientSecret values in OAuth2 strategies will be fixed as a workaround for a defect identified in API Gateway 10.7 Fix 5 and 6
 - Three API tags will be added to every API indicating the build ID, the build name and the pipeline name. These tags can later be used in the API Gateway UI on the target environments to understand when and how (and by whom) every API was promoted to the environment
-- For a deployment to STAGE or PROD, API mocking will be disabled
+- For a deployment to TEST or PROD, API mocking will be disabled
 
-For a deployment to CONFIG, the pipeline will execute only one step to prepare OAuth2 strategies for the target environment:
+For a deployment to DESIGN, the pipeline will execute only one step to prepare OAuth2 strategies for the target environment:
 - Incorrect clientId and clientSecret values in OAuth2 strategies will be fixed as a workaround for a defect identified in API Gateway 10.7 Fix 5 and 6
 
 More manipulations or tests (e.g., enforcement of API standards) can be added later.
 
-Finally, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target environment (CONFIG, DEV, STAGE or PROD).
+Finally, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target environment (DESIGN, DEV, TEST or PROD).
 
 > Note: If the imported assets already exist on the target environment (i.e., assets with same IDs), they will be overwritten for the following asset types: APIs, policies, policy actions, applications, scope mappings, aliases, users, groups and teams. Any assets of any other types, like configuration items, will not be overwritten.
 
 Every deployment pipeline will publish the following artifacts:
 - BUILD_import: The API Gateway asset archive (ZIP file) containing the assets initially imported on the BUILD environment
-- BUILD_export_for_CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT, PROD_EXT: The API Gateway asset archive (ZIP file) containing the assets exported from the BUILD environment (after manipulations)
-- CONFIG_import, DEV_INT_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, DEV_INT etc. These artifacts should be identical with BUILD_export_for_CONFIG, BUILD_export_for_DEV_INT etc.
+- BUILD_export_for_DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT: The API Gateway asset archive (ZIP file) containing the assets exported from the BUILD environment (after manipulations)
+- DESIGN_import, DEV_INT_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on DESIGN, DEV_INT etc. These artifacts should be identical with BUILD_export_for_DESIGN, BUILD_export_for_DEV_INT etc.
 - test_results: The results of the Postman tests in junitReport.xml form
 
 The export pipeline will publish the following artifact:
-- CONFIG_export: The API Gateway asset archive (ZIP file) containing the assets exported from the CONFIG environment
+- DESIGN_export: The API Gateway asset archive (ZIP file) containing the assets exported from the DESIGN environment
 
 These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
 
@@ -1121,7 +1121,7 @@ All pipelines must be triggered manually by clicking on `Run pipeline`. No trigg
 
 The API Gateway Staging solution was originally developed for Azure DevOps Server 2019. This version offers no simple way to prevent parallel invocations of build pipelines. In later versions, this could be accomplished using Environments and Exclusive Locks.
 
-Each deployment pipelines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
+Each deployment pipelines consists of two jobs for build and deployment which can be executed on different agents using different credentials. Each job only contains steps connecting the agent with one API Gateway (either BUILD or DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT). The pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
 ### deploy_to_stages
 
@@ -1135,11 +1135,11 @@ The following parameters can/must be provided for this pipeline:
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | tenant | Tenant in which to deploy the API project |
 | apiProject | Case-sensitive name of the API project to be propagated |
-| Stages to run | DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
+| Stages to run | DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
 
 ### deploy_to_config
 
-This pipeline will import the APIs and other API Gateway assets in the selected API project to the CONFIG environment. It will not execute any tests, and it will not validate or prepare the assets for the target environment (no deletion of applications, no unsuspending of applications, no API tagging). The purpose of this pipeline is to reset the CONFIG environment to a defined (earlier) state.
+This pipeline will import the APIs and other API Gateway assets in the selected API project to the DESIGN environment. It will not execute any tests, and it will not validate or prepare the assets for the target environment (no deletion of applications, no unsuspending of applications, no API tagging). The purpose of this pipeline is to reset the DESIGN environment to a defined (earlier) state.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1171,7 +1171,7 @@ When queuing a deployment pipeline, you can select the specific commit that shou
 
 ### export_api_from_config
 
-This pipeline will export the APIs and other API Gateway assets in the selected API project from CONFIG, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
+This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1189,12 +1189,12 @@ As an alternative for the apiProject free-text field, it would also be possible 
 
 ## Pipelines for API Gateway configurations
 
-The API Gateway Staging solution includes one Azure DevOps build pipeline for deploying API Gateway configurations from the Azure DevOps repository (or GitHub repository) to CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT environments and one pipeline for exporting the API Gateway configurations from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT into the Azure DevOps repository (or GitHub repository).
+The API Gateway Staging solution includes one Azure DevOps build pipeline for deploying API Gateway configurations from the Azure DevOps repository (or GitHub repository) to DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT environments and one pipeline for exporting the API Gateway configurations from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT into the Azure DevOps repository (or GitHub repository).
 
 In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on / exported from the target environment.
 
 Every pipeline will publish the following artifact:
-- CONFIG_configuration, BUILD_configuration etc.: The API Gateway asset archive (ZIP file) containing the assets imported on CONFIG, BUILD etc.
+- DESIGN_configuration, BUILD_configuration etc.: The API Gateway asset archive (ZIP file) containing the assets imported on DESIGN, BUILD etc.
 
 These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
 
@@ -1211,7 +1211,7 @@ All pipelines must be triggered manually by clicking on `Run pipeline`. No trigg
 
 ### configure_stages
 
-This pipeline will import the API Gateway configuration assets on the CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT environment.
+This pipeline will import the API Gateway configuration assets on the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT environment.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1220,11 +1220,11 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
 | tenant | Tenant in which to import the API Gateway configuration |
-| Stages to run | CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
+| Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
 
 ### export_configuration_from_stage
 
-This pipeline will export the API Gateway configuration assets from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
+This pipeline will export the API Gateway configuration assets from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1233,12 +1233,12 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | tenant | Tenant in which to export the API Gateway configuration |
-| sourceType | CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
+| sourceType | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
 | commitMessage | The change will be committed with this commit message |
 
 ## Pipeline for log purging
 
-The API Gateway Staging solution includes one Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT. It will purge
+The API Gateway Staging solution includes one Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. It will purge
  - all logs (except for audit logs) older than 28 days: transactionalEvents, monitorEvents, errorEvents, performanceMetrics, threatProtectionEvents, lifecycleEvents, policyViolationEvents, applicationlogs, mediatorTraceSpan
  - all audit logs older than Jan. 1st of the preceding calendar year: auditlogs. (This is implementing the requirement to purge all audit data on the end of the following calendar year.)
 
@@ -1259,11 +1259,11 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the master branch |
 | Commit | Leave this blank |
 | tenant | Tenant in which to purge the API Gateway analytics data |
-| Stages to run | CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT |
+| Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
 
 # Usage examples
 
-When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway CONFIG stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway CONFIG stage using the export_api_from_config / deploy_to_config pipelines.
+When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway DESIGN stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway DESIGN stage using the export_api_from_config / deploy_to_config pipelines.
 
 ## Example 1: Change an existing API
 
@@ -1271,19 +1271,19 @@ Let's consider this example: An API developer wants to make a change to the Pets
 
 ### Option A: Using a local repository
 
-  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central CONFIG environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central CONFIG environment.
+  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
 bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
-  - The API Developer makes the necessary changes to the Petstore API on the local development environment or the central CONFIG environment. 
+  - The API Developer makes the necessary changes to the Petstore API on the local development environment or the central DESIGN environment. 
 
   - The API developer needs to ensure that the change that was made does not cause regressions. For this, the user needs to run the set of function/regression tests over his change in Postman REST client before the change gets propagated to the next stage.
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central CONFIG environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1297,17 +1297,17 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
 
-  - The changed API can now be tested on STAGE_INT or STAGE_EXT environment.
+  - The changed API can now be tested on TEST_INT or TEST_EXT environment.
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the central CONFIG environment for changes to be made. The developer executes the deploy_to_config pipeline for the petstore API project.
+  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the central DESIGN environment for changes to be made. The developer executes the deploy_to_config pipeline for the petstore API project.
 
-  - The API Developer makes the necessary changes to the Petstore API on the central CONFIG environment. 
+  - The API Developer makes the necessary changes to the Petstore API on the central DESIGN environment. 
 
   - The API developer needs to ensure that the change that was made does not cause regressions. For this, the user needs to run the set of function/regression tests over his change in Postman REST client before the change gets propagated to the next stage.
 
@@ -1321,9 +1321,9 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
 
-  - The changed API can now be tested on STAGE_INT or STAGE_EXT environment.
+  - The changed API can now be tested on TEST_INT or TEST_EXT environment.
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
@@ -1333,13 +1333,13 @@ Let's consider this example: An API developer wants to create a new API and add 
 
 ### Option A: Using a local repository
 
-  - The developer would first have to update the API Gateway artifacts of the existing API project on the local development environment or the central CONFIG environment. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import the existing API project (and related assets like applications) to the local development environment or the central CONFIG environment.
+  - The developer would first have to update the API Gateway artifacts of the existing API project on the local development environment or the central DESIGN environment. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import the existing API project (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
 bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
-  - The developer would then create the new API on the local development environment or the central CONFIG environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
+  - The developer would then create the new API on the local development environment or the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
 
   - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
 
@@ -1347,7 +1347,7 @@ bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name p
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central CONFIG environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1361,17 +1361,17 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
 
-  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
+  - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - The developer would first have to update the API Gateway artifacts of the existing API project on the central CONFIG environment. The developer executes the deploy_to_config pipeline for the petstore API project.
+  - The developer would first have to update the API Gateway artifacts of the existing API project on the central DESIGN environment. The developer executes the deploy_to_config pipeline for the petstore API project.
 
-  - The developer would then create the new API on the central CONFIG environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
+  - The developer would then create the new API on the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
 
   - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
 
@@ -1387,9 +1387,9 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name p
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
 
-  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
+  - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
@@ -1399,15 +1399,15 @@ Let's consider this example: An API developer wants to create a new API and add 
 
 ### Option A: Using a local repository
 
-  - The developer would create the new API on the local development environment or the central CONFIG environment.
+  - The developer would create the new API on the local development environment or the central DESIGN environment.
 
   - The developer would then create a new collection of function/regression tests for the API project in the local Postman REST client with requests and tests for the new API.
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder which will later hold the asset definitions exported from the local development environment or the central CONFIG environment.
+  - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder which will later hold the asset definitions exported from the local development environment or the central DESIGN environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central CONFIG environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
+  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1421,21 +1421,21 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
 
-  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
+  - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - The developer would create the new API on the central CONFIG environment.
+  - The developer would create the new API on the central DESIGN environment.
 
   - The developer would then create a new collection of function/regression tests for the API project in the local Postman REST client with requests and tests for the new API.
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central CONFIG environment.
+  - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
 
   - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the export_api_from_config pipeline for the petstore API project.
 
@@ -1445,9 +1445,9 @@ bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name n
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to STAGE_INT or STAGE_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
 
-  - The new API can now be tested on STAGE_INT or STAGE_EXT environment.
+  - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
 
@@ -1460,22 +1460,22 @@ The pipeline definition files (YAML) for the three Azure DevOps pipelines for AP
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
 | deploy_to_stages | api-deploy-to-stages.yml | |
-| deploy_to_config | api-deploy-to-CONFIG.yml | |
-| export_api_from_config | api-export-api-from-CONFIG.yml | |
+| deploy_to_config | api-deploy-to-DESIGN.yml | |
+| export_api_from_config | api-export-api-from-DESIGN.yml | |
 
-The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-CONFIG.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
+The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-DESIGN.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
 
 | Template | README |
 | ------ | ------ |
 | api-build-template.yml | Includes all steps for preparing the deployable on the BUILD environment (including import, test execution, asset manipulation and export) |
-| api-deploy-template.yml | Includes all steps for importing the deployable on the CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
+| api-deploy-template.yml | Includes all steps for importing the deployable on the DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
 | store-build-template.yml | Stores the deployable in Azure DevOps |
 | store-build-artifactory-template.yml | Stores the deployable in Artifactory (optional) |
 | retrieve-build-template.yml | Retrieves the deployable from Azure DevOps |
-| api-export-api-template.yml | Exports the API project from the CONFIG environment |
+| api-export-api-template.yml | Exports the API project from the DESIGN environment |
 | commit-template.yml | Commits the results to the repository |
 
-The deployment pipeline deploy_to_stages contains six stages for deploying an API project to DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT. The deployment pipeline deploy_to_config contains one stage for deployment to CONFIG. It is extracted into a separate pipeline in order to avoid accidental overwriting of API assets on CONFIG. Each stage in these pipelines invokes api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
+The deployment pipeline deploy_to_stages contains six stages for deploying an API project to DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. The deployment pipeline deploy_to_config contains one stage for deployment to DESIGN. It is extracted into a separate pipeline in order to avoid accidental overwriting of API assets on DESIGN. Each stage in these pipelines invokes api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
 
 The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
@@ -1488,8 +1488,8 @@ All five deployment pipeline templates need the following parameters to be set i
 | apiProject | Case-sensitive name of the API project to be propagated |
 | build_environment | Name of the environment definition file in /{tenant}/environments folder for the BUILD environment, e.g., build_environment_demo.json |
 | target_environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, dev_int_environment_demo.json etc. |
-| target_type | CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
-| test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT and ${{false}} for CONFIG |
+| target_type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
+| test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT and ${{false}} for DESIGN |
 | prep_condition | Whether to prepare the API Gateway artifacts for the target environment (${{true}} or ${{false}}), should be ${{true}} for all environments |
 | tenant | playground or realworld |
 
@@ -1499,7 +1499,7 @@ The export pipeline template needs the following parameters:
 | ------ | ------ |
 | apiProject | Case-sensitive name of the API project to be exported |
 | source_environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json |
-| source_type | CONFIG |
+| source_type | DESIGN |
 | tenant | playground or realworld |
 
 The commit pipeline template needs the following parameter:
@@ -1522,7 +1522,7 @@ The pipeline templates execute the following major steps:
 | Replace alias values using pipeline variables | Using FileTransform@1 Azure DevOps standard task for replacing the values in all aliases.json files |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /{tenant}/apis root folder using jq |
-| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/STAGE/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_CONFIG.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prep_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
 ### api-deploy-template.yml
@@ -1530,7 +1530,7 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway CONFIG/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
+| Import the Deployable to API Gateway DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
 
 ### store-build-template.yml
 
@@ -1554,7 +1554,7 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway CONFIG | Using a bash script calling curl to invoke the API Gateway Archive Service API |
+| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 | Extract the flat representation from the API Deployable for API project xxx | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
@@ -1576,26 +1576,26 @@ The pipeline definition files (YAML) for the two Azure DevOps pipelines for API 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
 | configure_stages | api-configure-stages.yml | |
-| export_configuration_from_stage | api-export-config-from-stage.yml | |
+| export_configuration_from_stage | api-export-design-from-stage.yml | |
 
-The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
+The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-design-from-stage.yml is using the api-export-design-template.yml and the commit-template.yml pipeline templates:
 
 | Template | README |
 | ------ | ------ |
-| api-configure-template.yml | Includes all steps for importing the deployable on the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
-| api-export-config-template.yml | Exports the API Gateway configuration from the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
+| api-configure-template.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
+| api-export-design-template.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
 | commit-template.yml | Commits the results to the repository |
 
-The import pipeline configure_stages contains eight stages for importing the configuration on CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
+The import pipeline configure_stages contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
 
-The export pipeline export_configuration_from_stage contains one stage for exporting the configuration from CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
+The export pipeline export_configuration_from_stage contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-design-template.yml and commit-template.yml sequentially in one job on one agent.
 
 The configuration pipeline template needs the following parameters to be set in the calling pipeline:
 
 | Parameter | README |
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | Case-sensitive name of the environment type to be configured or updated (CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
+| type | Case-sensitive name of the environment type to be configured or updated (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
 | tenant | playground or realworld |
 
 The export pipeline template needs the following parameters:
@@ -1603,7 +1603,7 @@ The export pipeline template needs the following parameters:
 | Parameter | README |
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT |
+| type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
 | tenant | playground or realworld |
 
 The commit pipeline template needs the following parameter:
@@ -1618,16 +1618,16 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Create the API Deployable from the flat representation for CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
+| Create the API Deployable from the flat representation for DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Prepare list of scopes to be imported | Parse scopes.json in API Gateway configuration root folder using jq |
-| Import the Deployable to API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
-| Initialize API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the Initialize_CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
+| Import the Deployable to API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
+| Initialize API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the Initialize_DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
 
-### api-export-config-template.yml
+### api-export-design-template.yml
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway CONFIG | Using a bash script calling curl to invoke the API Gateway Archive Service API |
+| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 | Extract the flat representation from the API Deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
@@ -1654,7 +1654,7 @@ The pipeline definition is using a pipeline template defined in api-purge-data-t
 
 | Template | README |
 | ------ | ------ |
-| api-purge-data-template.yml | Purges the log data on the CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT environment |
+| api-purge-data-template.yml | Purges the log data on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
 
 The pipeline invokes the template eight times in eight separate stages on separate agents - once for every environment.
 
@@ -1663,7 +1663,7 @@ The pipeline template needs the following parameters to be set in the calling pi
 | Parameter | README |
 | ------ | ------ |
 | environment | Name of the environment definition file in /{tenant}/environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | Case-sensitive name of the environment type (CONFIG, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT or PROD_EXT) |
+| type | Case-sensitive name of the environment type (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
 | tenant | playground or realworld |
 
 The pipeline template executes the following major steps:
@@ -1672,7 +1672,7 @@ The pipeline template executes the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Purge Data on API Gateway CONFIG/BUILD/DEV_INT/DEV_EXT/STAGE_INT/STAGE_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /postman/collections/utilities/purge |
+| Purge Data on API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /postman/collections/utilities/purge |
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
 
@@ -1685,11 +1685,11 @@ All variable groups are referenced in the variable templates in /{tenant}/variab
 | Variable template | Referenced variable group for playground tenant | Referenced variable group for realworld tenant |
 | ------ | ------ | ------ |
 | /{tenant}/variables/BUILD/variables-template.yml | wm_test_apigw_staging_build | wm_environment_build |
-| /{tenant}/variables/CONFIG/variables-template.yml | wm_test_apigw_staging_config | wm_environment_config |
+| /{tenant}/variables/DESIGN/variables-template.yml | wm_test_apigw_staging_config | wm_environment_config |
 | /{tenant}/variables/DEV_INT/variables-template.yml | wm_test_apigw_staging_dev_int | wm_environment_dev_intern |
 | /{tenant}/variables/DEV_EXT/variables-template.yml | wm_test_apigw_staging_dev_ext | wm_environment_dev_extern |
-| /{tenant}/variables/STAGE_INT/variables-template.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
-| /{tenant}/variables/STAGE_EXT/variables-template.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
+| /{tenant}/variables/TEST_INT/variables-template.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
+| /{tenant}/variables/TEST_EXT/variables-template.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
 | /{tenant}/variables/PROD_INT/variables-template.yml | wm_test_apigw_staging_prod_int | wm_environment_prod_intern |
 | /{tenant}/variables/PROD_EXT/variables-template.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
 | /{tenant}/variables/variables-aliases-template.yml | wm_test_apigw_staging_aliases | wm_apigw_staging_aliases |
@@ -1707,7 +1707,7 @@ These variable groups are used by
  - the export pipeline for API projects
  - the log purging pipeline
 
-Each variable group holds variable values specific for one API Gateway environment (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT, PROD_EXT).
+Each variable group holds variable values specific for one API Gateway environment (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT).
 
 | Variable | README |
 | ------ | ------ |
@@ -1747,7 +1747,7 @@ These variable groups are used by the deployment pipelines for API projects. The
 
 ## Environment configurations
 
-The environments used in the API Gateway Staging solution are configured in the /{tenant}/environments folder. For each environment (CONFIG, BUILD, DEV_INT, DEV_EXT, STAGE_INT, STAGE_EXT, PROD_INT and PROD_EXT), there is a Postman environment definition JSON file, for example:
+The environments used in the API Gateway Staging solution are configured in the /{tenant}/environments folder. For each environment (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT), there is a Postman environment definition JSON file, for example:
 
 ### build_environment_demo.json
 
@@ -1836,7 +1836,7 @@ The API Gateway Staging solution is using the following API Gateway Service APIs
 Direct invocation (curl) in the gateway_import_export_utils.bat script:
  - API Gateway Archive Service API for importing and exporting API Gateway assets
 
-Direct invocation (curl) in the api-build-template.yml, api-export-api-template.yml and api-export-config-template.yml pipeline templates:
+Direct invocation (curl) in the api-build-template.yml, api-export-api-template.yml and api-export-design-template.yml pipeline templates:
  - API Gateway Archive Service API for exporting API Gateway assets
 
 In the ImportAPI.json and the ImportConfig.json Postman collections:

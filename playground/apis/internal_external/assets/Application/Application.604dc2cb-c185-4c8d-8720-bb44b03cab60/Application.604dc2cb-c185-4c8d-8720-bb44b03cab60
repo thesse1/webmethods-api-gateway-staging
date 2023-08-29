@@ -1,7 +1,7 @@
 {
   "applicationID" : "604dc2cb-c185-4c8d-8720-bb44b03cab60",
-  "name" : "MyPostmanEchoApp_STAGE",
-  "description" : "This application should be used on STAGE environments for testing",
+  "name" : "MyPostmanEchoApp_TEST",
+  "description" : "This application should be used on TEST environments for testing",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],

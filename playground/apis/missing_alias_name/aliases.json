@@ -7,8 +7,8 @@
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
-      "description" : "Petstore alias for API version 1.0.8 on STAGE_INT",
+    "TEST_INT": {
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -28,8 +28,8 @@
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
-      "description" : "Petstore alias for API version 1.0.9 on STAGE_INT",
+    "TEST_INT": {
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"

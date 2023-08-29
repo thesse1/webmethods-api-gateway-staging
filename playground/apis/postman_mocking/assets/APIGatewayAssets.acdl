@@ -52,7 +52,7 @@
     <asset name="RegisteredApplication.826551f1-b48d-4be4-be53-246a5b0af6f1" displayName="RegisteredApplication [ PostmanEcho_Mocking_PROD ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
-    <asset name="Application.454873f9-8b09-44b1-9fca-58c7cdffea82" displayName="PostmanEcho_Mocking_STAGE" isDeployable="true">
+    <asset name="Application.454873f9-8b09-44b1-9fca-58c7cdffea82" displayName="PostmanEcho_Mocking_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.d9dde2b3-481a-4660-9d92-f0d46d0d630e</dependsOn>
         <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY454873f9-8b09-44b1-9fca-58c7cdffea82</dependsOn>
@@ -61,7 +61,7 @@
     <asset name="PassmanData.API_ACCESS_KEY454873f9-8b09-44b1-9fca-58c7cdffea82" displayName="API_ACCESS_KEY454873f9-8b09-44b1-9fca-58c7cdffea82" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="RegisteredApplication.454873f9-8b09-44b1-9fca-58c7cdffea82" displayName="RegisteredApplication [ PostmanEcho_Mocking_STAGE ]" isDeployable="true">
+    <asset name="RegisteredApplication.454873f9-8b09-44b1-9fca-58c7cdffea82" displayName="RegisteredApplication [ PostmanEcho_Mocking_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.b7fa720d-e1dc-4afc-992e-eb90c5eee9e6" displayName="PostmanEcho_Mocking_DEV" isDeployable="true">

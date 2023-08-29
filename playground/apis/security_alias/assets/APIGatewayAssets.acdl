@@ -42,7 +42,7 @@
         <implementation.generic type="Alias"/>
         <dependsOn>APIGateway:PassmanData.HTTP_AUTH_OUTBOUND_CLIENT_PWDPostmanEcho_Security_Alias</dependsOn>
         <property name="Username for HTTP Transport Security Alias PostmanEcho_Security_Alias" many="false" isSecure="false" displayName="Username for HTTP Transport Security Alias PostmanEcho_Security_Alias">
-            <value>PostmanEcho_CONFIG</value>
+            <value>PostmanEcho_DESIGN</value>
         </property>
         <property name="Password for HTTP Transport Security Alias PostmanEcho_Security_Alias" many="false" isSecure="true" displayName="Password for HTTP Transport Security Alias PostmanEcho_Security_Alias">
             <value>{AES}vDt83fIfdPbOEh8vBitePrw7fN3yH3T2zhIfLwYrXj5pitcLjd1NawNQdFYbmaFM</value>

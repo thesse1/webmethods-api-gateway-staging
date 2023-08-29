@@ -48,12 +48,12 @@ stages:
         pool: vmsspoolagents
         image: ubuntu-latest
         targets:
-        - STAGE_INT
+        - TEST_INT
       - name: BUILD_04
         pool: vmsspoolagents
         image: ubuntu-latest
         targets:
-        - STAGE_EXT
+        - TEST_EXT
       - name: BUILD_05
         pool: vmsspoolagents
         image: ubuntu-latest
@@ -75,14 +75,14 @@ stages:
       - name: DEV_EXT
         pool: vmsspoolagents
         image: ubuntu-latest
-    - name: STAGE_INT
+    - name: TEST_INT
       instances:
-      - name: STAGE_INT
+      - name: TEST_INT
         pool: vmsspoolagents
         image: ubuntu-latest
-    - name: STAGE_EXT
+    - name: TEST_EXT
       instances:
-      - name: STAGE_EXT
+      - name: TEST_EXT
         pool: vmsspoolagents
         image: ubuntu-latest
     - name: PROD_INT
@@ -110,8 +110,8 @@ stages:
       targets:
       - DEV_INT
       - DEV_EXT
-      - STAGE_INT
-      - STAGE_EXT
+      - TEST_INT
+      - TEST_EXT
       - PROD_INT
       - PROD_EXT
 
@@ -121,7 +121,7 @@ stages:
       - petstore_versioning
       targets:
       - DEV_INT
-      - STAGE_INT
+      - TEST_INT
       - PROD_INT
 
     - apiProjects:
@@ -133,5 +133,5 @@ stages:
       # - security_alias
       targets:
       - DEV_EXT
-      - STAGE_EXT
+      - TEST_EXT
       - PROD_EXT

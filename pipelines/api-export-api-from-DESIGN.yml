@@ -1,0 +1,54 @@
+# Pipeline for apig staging
+
+trigger: none
+
+parameters:
+- name: tenant
+  displayName: Export API project from API Gateway DESIGN in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+- name: apiProject
+  displayName: Export which API project?
+  type: string
+- name: commitMessage
+  displayName: Message for the commit in Git?
+  type: string
+
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+
+pool:
+  name: vmsspoolagents
+  vmImage: ubuntu-latest
+
+stages:
+- stage: DESIGN
+  jobs:
+  - deployment: 'Export_${{parameters.apiProject}}_from_API_Gateway_DESIGN'
+    environment: 'DESIGN'
+    variables:
+    - group: ${{parameters.tenant}}_DESIGN_users
+    strategy:
+      runOnce:    #rolling, canary are the other strategies that are supported
+        deploy:
+          steps:
+          - checkout: self
+            submodules: "true"
+            persistCredentials: "true"
+            clean: "true"
+          - template: /pipelines/api-export-api-steps-template.yml
+            parameters:
+              apiProject: ${{parameters.apiProject}}
+              source_environment: DESIGN_environment.json
+              source_type: DESIGN
+              tenant: ${{parameters.tenant}}
+          - template: /pipelines/commit-template.yml
+            parameters:
+              commitMessage: ${{parameters.commitMessage}}
+          - bash: |
+              echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
+              echo "##vso[build.addbuildtag]DESIGN"
+              echo "##vso[build.addbuildtag]${{parameters.apiProject}}_DESIGN"
+            displayName: Add build tags

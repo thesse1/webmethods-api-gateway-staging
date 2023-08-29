@@ -1,7 +1,7 @@
 {
   "applicationID" : "bf204106-1ecc-4d55-aded-6be9ea6a0e25",
-  "name" : "Tenant2_App_STAGE",
-  "description" : "This application should be used on STAGE environment for testing",
+  "name" : "Tenant2_App_TEST",
+  "description" : "This application should be used on TEST environment for testing",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],

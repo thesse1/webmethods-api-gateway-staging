@@ -46,7 +46,7 @@ stages:
                       build_environment: "${{ build_instance.name }}_environment.json"
                       target_type: ${{ target_stage.name }}
                       prep_condition: ${{true}}
-                      test_condition: ${{ ne(target_stage.name, 'CONFIG') }}
+                      test_condition: ${{ ne(target_stage.name, 'DESIGN') }}
                       tenant: ${{parameters.tenant}}
                   - template: /pipelines/store-build-template.yml
                     parameters:
@@ -86,7 +86,7 @@ stages:
                         target_environment: ${{ instance.name }}_environment.json
                         target_type: ${{ target_stage.name }}
                         prep_condition: ${{true}}
-                        test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
+                        test_condition: ${{ ne('${{ target_stage.name }}', 'DESIGN') }}
                         tenant: ${{parameters.tenant}}
                     - bash: |
                         echo "##vso[build.addbuildtag]${{parameters.apiProject}}"

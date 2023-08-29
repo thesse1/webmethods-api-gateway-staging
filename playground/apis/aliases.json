@@ -8,9 +8,9 @@
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
     },
-    "STAGE_INT": {
+    "TEST_INT": {
       "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on STAGE_INT",
+      "description" : "Petstore alias on TEST_INT",
       "type" : "simple",
       "owner" : "Administrator",
       "value" : "https://petstore.swagger.io/v2"
@@ -39,9 +39,9 @@
       "keystoreAlias" : "",
       "truststoreAlias" : ""
     },
-    "STAGE_EXT": {
+    "TEST_EXT": {
       "name" : "PostmanEcho_Routing_Alias",
-      "description" : "PostmanEcho alias on STAGE_EXT",
+      "description" : "PostmanEcho alias on TEST_EXT",
       "type" : "endpoint",
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",

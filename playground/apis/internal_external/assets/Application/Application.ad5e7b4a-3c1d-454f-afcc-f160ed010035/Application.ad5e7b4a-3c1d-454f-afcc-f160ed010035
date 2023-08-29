@@ -1,7 +1,7 @@
 {
   "applicationID" : "ad5e7b4a-3c1d-454f-afcc-f160ed010035",
-  "name" : "MySwaggerPetstoreApp_STAGE",
-  "description" : "This application should be used on STAGE environments for testing",
+  "name" : "MySwaggerPetstoreApp_TEST",
+  "description" : "This application should be used on TEST environments for testing",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],

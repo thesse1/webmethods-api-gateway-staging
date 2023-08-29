@@ -123,7 +123,7 @@
     <asset name="RegisteredApplication.88e36e10-f2db-4cf6-9bb0-3883f7a7c053" displayName="RegisteredApplication [ Tenant1_App_DEV ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
-    <asset name="Application.aa83a664-5a5c-4249-a007-eb018a0c431e" displayName="Tenant1_App_STAGE" isDeployable="true">
+    <asset name="Application.aa83a664-5a5c-4249-a007-eb018a0c431e" displayName="Tenant1_App_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.0245c29f-e583-4ebd-824a-a4762ad85fbf</dependsOn>
         <dependsOn>APIGateway:API.9be25215-20c6-4e8c-803a-d9ddac3394cc</dependsOn>
@@ -133,7 +133,7 @@
     <asset name="PassmanData.API_ACCESS_KEYaa83a664-5a5c-4249-a007-eb018a0c431e" displayName="API_ACCESS_KEYaa83a664-5a5c-4249-a007-eb018a0c431e" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="RegisteredApplication.aa83a664-5a5c-4249-a007-eb018a0c431e" displayName="RegisteredApplication [ Tenant1_App_STAGE ]" isDeployable="true">
+    <asset name="RegisteredApplication.aa83a664-5a5c-4249-a007-eb018a0c431e" displayName="RegisteredApplication [ Tenant1_App_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.f044873f-6316-41a9-aed7-ceefa85d87b0" displayName="Tenant1_App_PROD" isDeployable="true">
@@ -152,7 +152,7 @@
     <asset name="PassmanData.API_ACCESS_KEY88e36e10-f2db-4cf6-9bb0-3883f7a7c053" displayName="API_ACCESS_KEY88e36e10-f2db-4cf6-9bb0-3883f7a7c053" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="Application.bf204106-1ecc-4d55-aded-6be9ea6a0e25" displayName="Tenant2_App_STAGE" isDeployable="true">
+    <asset name="Application.bf204106-1ecc-4d55-aded-6be9ea6a0e25" displayName="Tenant2_App_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.0245c29f-e583-4ebd-824a-a4762ad85fbf</dependsOn>
         <dependsOn>APIGateway:API.328ae890-452f-43f1-9501-b708c7afc83f</dependsOn>
@@ -162,7 +162,7 @@
     <asset name="PassmanData.API_ACCESS_KEYbf204106-1ecc-4d55-aded-6be9ea6a0e25" displayName="API_ACCESS_KEYbf204106-1ecc-4d55-aded-6be9ea6a0e25" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="RegisteredApplication.bf204106-1ecc-4d55-aded-6be9ea6a0e25" displayName="RegisteredApplication [ Tenant2_App_STAGE ]" isDeployable="true">
+    <asset name="RegisteredApplication.bf204106-1ecc-4d55-aded-6be9ea6a0e25" displayName="RegisteredApplication [ Tenant2_App_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.a8132055-d35d-4e64-aaaf-aafcf323459f" displayName="Tenant2_App_DEV" isDeployable="true">

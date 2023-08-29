@@ -45,7 +45,7 @@
     <asset name="PolicyAction.05234b85-7fc0-4f0b-aad6-7a779c700548" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API PostmanEcho_OAuth2[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="Application.eb94a48d-f262-4cc9-a264-84a37f65e458" displayName="MyPostmanEchoApp_OAuth2_STAGE" isDeployable="true">
+    <asset name="Application.eb94a48d-f262-4cc9-a264-84a37f65e458" displayName="MyPostmanEchoApp_OAuth2_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.4ceba5ec-f0bc-42c7-a431-40ec951aeecf</dependsOn>
         <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYeb94a48d-f262-4cc9-a264-84a37f65e458</dependsOn>
@@ -55,14 +55,14 @@
     <asset name="PassmanData.API_ACCESS_KEYeb94a48d-f262-4cc9-a264-84a37f65e458" displayName="API_ACCESS_KEYeb94a48d-f262-4cc9-a264-84a37f65e458" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="Strategy.ff06307c-e891-4f77-8c26-cb1bb2d4fe69" displayName="MyPostmanEchoApp_OAuth2_Strategy_STAGE" isDeployable="true">
+    <asset name="Strategy.ff06307c-e891-4f77-8c26-cb1bb2d4fe69" displayName="MyPostmanEchoApp_OAuth2_Strategy_TEST" isDeployable="true">
         <implementation.generic type="Strategy"/>
         <dependsOn>APIGateway:PassmanData.870cd829-61e6-445f-a5a6-2ddf2878ebac-clientSecret</dependsOn>
     </asset>
     <asset name="PassmanData.870cd829-61e6-445f-a5a6-2ddf2878ebac-clientSecret" displayName="870cd829-61e6-445f-a5a6-2ddf2878ebac-clientSecret" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="RegisteredApplication.eb94a48d-f262-4cc9-a264-84a37f65e458" displayName="RegisteredApplication [ MyPostmanEchoApp_OAuth2_STAGE ]" isDeployable="true">
+    <asset name="RegisteredApplication.eb94a48d-f262-4cc9-a264-84a37f65e458" displayName="RegisteredApplication [ MyPostmanEchoApp_OAuth2_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.a2d57c08-9b06-47ec-baf1-a74db893d023" displayName="MyPostmanEchoApp_OAuth2_PROD" isDeployable="true">

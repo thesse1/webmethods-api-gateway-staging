@@ -33,7 +33,7 @@
     <asset name="PolicyAction.a486bfd1-59e8-4ef3-8fc6-14e2b14e88ba" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API SwaggerPetstore[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="Application.ad5e7b4a-3c1d-454f-afcc-f160ed010035" displayName="MySwaggerPetstoreApp_STAGE" isDeployable="true">
+    <asset name="Application.ad5e7b4a-3c1d-454f-afcc-f160ed010035" displayName="MySwaggerPetstoreApp_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5</dependsOn>
         <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYad5e7b4a-3c1d-454f-afcc-f160ed010035</dependsOn>
@@ -42,7 +42,7 @@
     <asset name="PassmanData.API_ACCESS_KEYad5e7b4a-3c1d-454f-afcc-f160ed010035" displayName="API_ACCESS_KEYad5e7b4a-3c1d-454f-afcc-f160ed010035" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="RegisteredApplication.ad5e7b4a-3c1d-454f-afcc-f160ed010035" displayName="RegisteredApplication [ MySwaggerPetstoreApp_STAGE ]" isDeployable="true">
+    <asset name="RegisteredApplication.ad5e7b4a-3c1d-454f-afcc-f160ed010035" displayName="RegisteredApplication [ MySwaggerPetstoreApp_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.b5a89c36-58a7-4ff6-8f1f-62c8de8c354e" displayName="MySwaggerPetstoreApp_PROD" isDeployable="true">

@@ -10,7 +10,7 @@ parameters:
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
   values:
-  - CONFIG
+  - DESIGN
   - BUILD_01
   - BUILD_02
   - BUILD_03
@@ -20,8 +20,8 @@ parameters:
   - BUILD_07
   - DEV_INT
   - DEV_EXT
-  - STAGE_INT
-  - STAGE_EXT
+  - TEST_INT
+  - TEST_EXT
   - PROD_INT_01
   - PROD_INT_02
   - PROD_EXT_01
@@ -54,7 +54,7 @@ stages:
                 - checkout: self
                   submodules: "true"
                   persistCredentials: "true"
-                - template: /pipelines/api-export-config-steps-template.yml
+                - template: /pipelines/api-export-design-steps-template.yml
                   parameters:
                     environment: ${{ instance.name }}_environment.json
                     type: ${{ stage.name }}

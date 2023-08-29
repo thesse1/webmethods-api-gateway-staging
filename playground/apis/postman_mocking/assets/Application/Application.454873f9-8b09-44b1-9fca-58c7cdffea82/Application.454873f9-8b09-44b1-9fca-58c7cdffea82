@@ -1,7 +1,7 @@
 {
   "applicationID" : "454873f9-8b09-44b1-9fca-58c7cdffea82",
-  "name" : "PostmanEcho_Mocking_STAGE",
-  "description" : "This application should be used on STAGE environments for testing against native STAGE environments",
+  "name" : "PostmanEcho_Mocking_TEST",
+  "description" : "This application should be used on TEST environments for testing against native TEST environments",
   "owner" : "Administrator",
   "identifiers" : [ ],
   "contactEmails" : [ ],

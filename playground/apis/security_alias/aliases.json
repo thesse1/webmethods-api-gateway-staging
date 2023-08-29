@@ -13,15 +13,15 @@
         "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
       }
     },
-    "STAGE_EXT": {
+    "TEST_EXT": {
       "name" : "PostmanEcho_Security_Alias",
-      "description" : "PostmanEcho security alias on STAGE_EXT",
+      "description" : "PostmanEcho security alias on TEST_EXT",
       "type" : "httpTransportSecurityAlias",
       "owner" : "Administrator",
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_STAGE_EXT",
+        "userName" : "PostmanEcho_TEST_EXT",
         "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
       }
     },
