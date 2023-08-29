@@ -30,7 +30,7 @@ stages:
               - deployment: 'Build_${{apiProject}}_for_${{ build_target }}'
                 environment: '${{ build_instance.name }}'
                 variables:
-                - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
+                - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
                 pool:
                   name: '${{ build_instance.pool }}'
                   vmImage: '${{ build_instance.image }}'
