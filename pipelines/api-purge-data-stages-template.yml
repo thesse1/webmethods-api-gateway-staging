@@ -13,49 +13,49 @@ parameters:
   - name: DESIGN
     jobs:
     - name: DESIGN
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: BUILD
     jobs:
     - name: BUILD
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: DEV_INT
     jobs:
     - name: DEV_INT
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: DEV_EXT
     jobs:
     - name: DEV_EXT
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: TEST_INT
     jobs:
     - name: TEST_INT
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: TEST_EXT
     jobs:
     - name: TEST_EXT
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: PROD_INT
     jobs:
     - name: PROD_INT_01
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
     - name: PROD_INT_02
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
   - name: PROD_EXT
     jobs:
     - name: PROD_EXT_01
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
     - name: PROD_EXT_02
-      pool: vmsspoolagents
-      image: ubuntu-latest
+      pool: $(pool_name)
+      image: $(pool_image)
 
 stages:
 - ${{ each target_stage in parameters.target_stages }}:

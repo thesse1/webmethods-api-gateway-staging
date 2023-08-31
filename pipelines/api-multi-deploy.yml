@@ -35,72 +35,72 @@ stages:
       name: BUILD
       instances:
       - name: BUILD_01
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - DEV_INT
       - name: BUILD_02
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - DEV_EXT
       - name: BUILD_03
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - TEST_INT
       - name: BUILD_04
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - TEST_EXT
       - name: BUILD_05
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - PROD_INT
       - name: BUILD_06
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - PROD_EXT
     target_stages:
     - name: DEV_INT
       instances:
       - name: DEV_INT
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
     - name: DEV_EXT
       instances:
       - name: DEV_EXT
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
     - name: TEST_INT
       instances:
       - name: TEST_INT
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
     - name: TEST_EXT
       instances:
       - name: TEST_EXT
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
     - name: PROD_INT
       instances:
       - name: PROD_INT_01
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
       - name: PROD_INT_02
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
     - name: PROD_EXT
       instances:
       - name: PROD_EXT_01
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
       - name: PROD_EXT_02
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
     deployment_sets:
     - apiProjects:
       # - number_conversion

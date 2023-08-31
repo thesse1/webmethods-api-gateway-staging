@@ -29,13 +29,13 @@ stages:
       name: BUILD
       instances:
       - name: BUILD_07
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)
         targets:
         - DESIGN
     target_stages:
     - name: DESIGN
       instances:
       - name: DESIGN
-        pool: vmsspoolagents
-        image: ubuntu-latest
+        pool: $(pool_name)
+        image: $(pool_image)

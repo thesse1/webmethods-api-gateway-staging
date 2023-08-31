@@ -20,8 +20,8 @@ parameters:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 pool:
-  name: vmsspoolagents
-  vmImage: ubuntu-latest
+  name: $(pool_name)
+  vmImage: $(pool_image)
 
 stages:
 - stage: DESIGN
