@@ -30,8 +30,10 @@ stages:
             variables:
             - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
             pool:
-              name: '${{ build_instance.pool }}'
-              vmImage: '${{ build_instance.image }}'
+              # name: '${{ build_instance.pool }}'
+              # vmImage: '${{ build_instance.image }}'
+              name: $(pool_name)
+              vmImage: $(pool_image)
             strategy:
               runOnce:    #rolling, canary are the other strategies that are supported
                 deploy:
