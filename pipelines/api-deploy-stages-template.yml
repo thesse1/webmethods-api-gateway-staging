@@ -32,8 +32,8 @@ stages:
             pool:
               # name: '${{ build_instance.pool }}'
               # vmImage: '${{ build_instance.image }}'
-              name: $(pool_name)
-              vmImage: $(pool_image)
+              name: vmsspoolagents-04
+              vmImage: ubuntu-latest
             strategy:
               runOnce:    #rolling, canary are the other strategies that are supported
                 deploy:
@@ -69,8 +69,10 @@ stages:
               variables:
               - group: ${{parameters.tenant}}_${{ instance.name }}_users
               pool:
-                name: '${{ instance.pool }}'
-                vmImage: '${{ instance.image }}'
+                # name: '${{ instance.pool }}'
+                # vmImage: '${{ instance.image }}'
+                name: vmsspoolagents-04
+                vmImage: ubuntu-latest
               strategy:
                 runOnce:    #rolling, canary are the other strategies that are supported
                   deploy:
