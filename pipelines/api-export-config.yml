@@ -34,6 +34,9 @@ parameters:
   displayName: Message for the commit in Git?
   type: string
 
+variables:
+- group: 'Project Configuration'
+
 stages:
 - template: /pipelines/api-export-design-stages-template.yml
   parameters:

@@ -19,6 +19,9 @@ parameters:
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
+variables:
+- group: 'Project Configuration'
+
 pool:
   name: $(pool_name)
   vmImage: $(pool_image)
