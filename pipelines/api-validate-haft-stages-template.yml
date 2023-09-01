@@ -1,0 +1,39 @@
+parameters:
+- name: tenant
+  displayName: Configure API Gateway in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+- name: stages
+  displayName: Configure API Gateway in which stages?
+  type: object
+
+stages:
+- ${{ each stage in parameters.stages }}:
+  - stage: ${{ stage.name }}
+    dependsOn: []
+    jobs:
+    - ${{ if stage.haft }}:
+      - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
+        environment: ${{ stage.name }}_HAFT
+        variables:
+        - group: ${{parameters.tenant}}_${{ stage.name }}_HAFT_users
+        pool:
+          name: '${{ stage.haft.pool }}'
+          vmImage: '${{ stage.haft.image }}'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+              - template: /pipelines/api-validate-haft-steps-template.yml
+                parameters:
+                  type: ${{ stage.name }}
+                  tenant: ${{parameters.tenant}}
+              - bash: echo "##vso[build.addbuildtag]${{ stage.name }}_HAFT"
+                displayName: Add build tag
