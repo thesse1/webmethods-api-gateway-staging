@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "859cb7ff-b90f-4dda-88e3-f3aed8e72053",
+		"name": "API Test for ping",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-859cb7ff-b90f-4dda-88e3-f3aed8e72053"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f83f2137-78a9-4e3a-99d8-209976273a1c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains date\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.date).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4e1ec52d-a193-42fa-9102-ff64f5dcedd1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Ping/1.0/ping",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"Ping",
+						"1.0",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
