@@ -38,7 +38,7 @@ variables:
 - group: 'Project Configuration'
 
 stages:
-- template: /pipelines/api-export-design-stages-template.yml
+- template: /pipelines/api-export-config-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     source_instance: ${{parameters.source_instance}}
