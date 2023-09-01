@@ -1576,19 +1576,19 @@ The pipeline definition files (YAML) for the two Azure DevOps pipelines for API 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
 | configure_stages | api-configure-stages.yml | |
-| export_configuration_from_stage | api-export-design-from-stage.yml | |
+| export_configuration_from_stage | api-export-config-from-stage.yml | |
 
-The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-design-from-stage.yml is using the api-export-design-template.yml and the commit-template.yml pipeline templates:
+The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
 
 | Template | README |
 | ------ | ------ |
 | api-configure-template.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
-| api-export-design-template.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+| api-export-config-template.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
 | commit-template.yml | Commits the results to the repository |
 
 The import pipeline configure_stages contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
 
-The export pipeline export_configuration_from_stage contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-design-template.yml and commit-template.yml sequentially in one job on one agent.
+The export pipeline export_configuration_from_stage contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
 
 The configuration pipeline template needs the following parameters to be set in the calling pipeline:
 
@@ -1623,7 +1623,7 @@ The pipeline templates execute the following major steps:
 | Import the Deployable to API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
 | Initialize API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the Initialize_DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
 
-### api-export-design-template.yml
+### api-export-config-template.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1836,7 +1836,7 @@ The API Gateway Staging solution is using the following API Gateway Service APIs
 Direct invocation (curl) in the gateway_import_export_utils.bat script:
  - API Gateway Archive Service API for importing and exporting API Gateway assets
 
-Direct invocation (curl) in the api-build-template.yml, api-export-api-template.yml and api-export-design-template.yml pipeline templates:
+Direct invocation (curl) in the api-build-template.yml, api-export-api-template.yml and api-export-config-template.yml pipeline templates:
  - API Gateway Archive Service API for exporting API Gateway assets
 
 In the ImportAPI.json and the ImportConfig.json Postman collections:
