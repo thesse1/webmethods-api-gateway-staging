@@ -1,0 +1,907 @@
+{
+	"info": {
+		"_postman_id": "5dbb92c6-2f96-4e4d-895e-7e1deac02bb2",
+		"name": "Validate_HAFT_PROD_INT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-5dbb92c6-2f96-4e4d-895e-7e1deac02bb2"
+	},
+	"item": [
+		{
+			"name": "Get dataspace from node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    pm.expect(pm.response.json()[\"listener.active\"].listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"nodeName_01\", pm.response.json()[\"listener.active\"].listener.nodeName);"
+						],
+						"type": "text/javascript",
+						"id": "4fa59667-1648-4770-9cb9-654e94a33d6a"
+					}
+				}
+			],
+			"id": "b7274071-273b-4b30-99e5-4a77a55ccb1a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    pm.expect(pm.response.json()[\"listener.active\"].listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"nodeName_02\", pm.response.json()[\"listener.active\"].listener.nodeName);"
+						],
+						"type": "text/javascript",
+						"id": "0a9747ab-09e3-4c9f-bf37-c62c8ec18b26"
+					}
+				}
+			],
+			"id": "3f1c48a9-976f-4478-a108-2a58694bb94f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure listener on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "9cc94d9a-61c0-4a4f-af38-26fa5617ccf6"
+					}
+				}
+			],
+			"id": "ab44e57d-b577-4601-879b-e9462f7c1608",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"listener\": {\r\n            \"nodeName\": \"{{nodeName_01}}\",\r\n            \"host\": \"{{ip_grpc_01}}\", \r\n            \"port\": {{port_grpc_01}}\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"listener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure listener on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "13a6517d-d217-4fa8-b71a-d293a2fef552"
+					}
+				}
+			],
+			"id": "1578aa9b-30de-4ed5-aa42-aed73aae3c78",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"listener\": {\r\n            \"nodeName\": \"{{nodeName_02}}\",\r\n            \"host\": \"{{ip_grpc_02}}\", \r\n            \"port\": {{port_grpc_02}}\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"listener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure ring on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "77366e51-1e6d-4285-8a5a-574c8b36a141"
+					}
+				}
+			],
+			"id": "28c0f6a4-44be-46af-8f67-ad90dd563a47",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ring\": [\r\n        {\r\n            \"nodeName\": \"{{nodeName_02}}\",\r\n            \"host\": \"{{ip_grpc_02}}\",\r\n            \"port\": {{port_grpc_02}}\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"ring"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure ring on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "4a735e16-b436-4df4-8ee4-3f9dd02b6612"
+					}
+				}
+			],
+			"id": "4619e7d8-4187-4483-9082-ab7a3e300716",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ring\": [\r\n        {\r\n            \"nodeName\": \"{{nodeName_01}}\",\r\n            \"host\": \"{{ip_grpc_01}}\",\r\n            \"port\": {{port_grpc_01}}\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"ring"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate ring on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "25d9256e-5b83-4d2d-ba63-b0b161bfc3dc"
+					}
+				}
+			],
+			"id": "44b14475-6acd-44a4-a7b4-0939279b2c5f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"mode\": \"ACTIVE_RING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate ring on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "f075607f-8f38-44f8-ac11-8b275531b2cf"
+					}
+				}
+			],
+			"id": "7082e499-dee8-43b9-a0b9-71f31daa6e5d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"mode\": \"ACTIVE_RING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 01 again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "afe40244-69b8-498b-9f7e-3fd14abae0e9"
+					}
+				}
+			],
+			"id": "5c032796-d435-4fa0-bf20-382fb57b2cd7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 02 again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "33e4cc80-0d5e-4477-8eb4-994133940c11",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "bbb5c0ba-89b9-40bf-83f5-a07a75b59726",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace status on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34f7f208-aca6-46ad-a28a-50a76e378a9b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cf528ba0-9502-4322-bcd2-5e7ac7b80c4f",
+						"exec": [
+							"// console.log(\"Waiting one minute for ring forming\");\r",
+							"// setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "0e220788-f97a-49e9-b726-358a949a51b8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace status on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "2957d790-b8fa-4d00-9fdd-703e4abe8289"
+					}
+				}
+			],
+			"id": "713354f3-b8e6-4072-bde4-717c2ac462c5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "f218bb9b-2e82-4ef9-af25-99750f3aa7a6"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let requests = pm.globals.has('requests') ?  JSON.parse(pm.globals.get('requests')) : [];",
+					"request = {};",
+					"request.method = pm.request.method;",
+					"request.url = pm.request.url;",
+					"request.body = pm.request.body;",
+					"response = {};",
+					"response.status = pm.response.status;",
+					"response.body = pm.response.json();",
+					"requests.push({\"request\": request, \"response\": response});",
+					"pm.globals.set('requests', JSON.stringify(requests));"
+				],
+				"id": "edee242b-bde9-43e8-aa5e-c02aca677617"
+			}
+		}
+	]
+}
