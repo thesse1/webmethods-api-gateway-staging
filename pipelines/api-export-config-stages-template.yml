@@ -54,7 +54,7 @@ stages:
                 - checkout: self
                   submodules: "true"
                   persistCredentials: "true"
-                - template: /pipelines/api-export-design-steps-template.yml
+                - template: /pipelines/api-export-config-steps-template.yml
                   parameters:
                     environment: ${{ instance.name }}_environment.json
                     type: ${{ stage.name }}
