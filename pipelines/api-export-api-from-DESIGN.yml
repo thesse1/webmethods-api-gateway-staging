@@ -22,10 +22,6 @@ name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 variables:
 - group: 'Project Configuration'
 
-pool:
-  name: $(pool_name)
-  vmImage: $(pool_image)
-
 stages:
 - stage: DESIGN
   jobs:
@@ -33,6 +29,9 @@ stages:
     environment: 'DESIGN'
     variables:
     - group: ${{parameters.tenant}}_DESIGN_users
+    pool:
+      name: '$(pool_name)'
+      vmImage: '$(pool_image)'
     strategy:
       runOnce:    #rolling, canary are the other strategies that are supported
         deploy:
