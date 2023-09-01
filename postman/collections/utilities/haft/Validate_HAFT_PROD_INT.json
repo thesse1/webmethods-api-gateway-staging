@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5dbb92c6-2f96-4e4d-895e-7e1deac02bb2",
+		"_postman_id": "3cafd7fa-de45-43ae-8594-b774d06b0284",
 		"name": "Validate_HAFT_PROD_INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-5dbb92c6-2f96-4e4d-895e-7e1deac02bb2"
+		"_uid": "3558839-3cafd7fa-de45-43ae-8594-b774d06b0284"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "34f7f208-aca6-46ad-a28a-50a76e378a9b",
+						"id": "d0baf3cc-51e9-410b-8db4-8f99e874eef4",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -24,7 +24,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "cf528ba0-9502-4322-bcd2-5e7ac7b80c4f",
+						"id": "02c7a36b-76ea-4c22-9fed-9fed2cead1ba",
 						"exec": [
 							"// console.log(\"Waiting one minute for ring forming\");\r",
 							"// setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
@@ -34,7 +34,7 @@
 					}
 				}
 			],
-			"id": "0e220788-f97a-49e9-b726-358a949a51b8",
+			"id": "a7fbb5d3-8243-4335-b2b4-c1fdf5e0ae09",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -95,11 +95,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "2957d790-b8fa-4d00-9fdd-703e4abe8289"
+						"id": "6f2d7f4e-63ba-404f-8091-ff368a26419d"
 					}
 				}
 			],
-			"id": "713354f3-b8e6-4072-bde4-717c2ac462c5",
+			"id": "8114d268-9197-4024-9abb-9180064cc40b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -157,7 +157,7 @@
 				"exec": [
 					""
 				],
-				"id": "f218bb9b-2e82-4ef9-af25-99750f3aa7a6"
+				"id": "ab4d3ed1-182a-473c-95a6-8939bf7d235e"
 			}
 		},
 		{
@@ -176,7 +176,7 @@
 					"requests.push({\"request\": request, \"response\": response});",
 					"pm.globals.set('requests', JSON.stringify(requests));"
 				],
-				"id": "edee242b-bde9-43e8-aa5e-c02aca677617"
+				"id": "2c3af343-ac1d-4d16-9e11-bf7f64728e13"
 			}
 		}
 	]

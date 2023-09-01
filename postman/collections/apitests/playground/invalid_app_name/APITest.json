@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "391040d2-4cce-44ab-b0d4-9b9285dbcc8c",
+		"_postman_id": "f48d6a18-d01b-43b4-979d-4f6ba857594b",
 		"name": "API Test for invalid-app-name",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-391040d2-4cce-44ab-b0d4-9b9285dbcc8c"
+		"_uid": "3558839-f48d6a18-d01b-43b4-979d-4f6ba857594b"
 	},
 	"item": [
 		{
@@ -22,11 +22,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "25796979-fff6-4039-8905-2d47f406c4f4"
+						"id": "1f2a4e6b-2ab3-4323-b5f2-056c9efc017c"
 					}
 				}
 			],
-			"id": "a9acd225-3ca0-4f9a-8009-9128ec462aa8",
+			"id": "b49a092f-93cd-44f5-8af5-486b52e44ff0",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -91,11 +91,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "b1ff98aa-02d9-4cd9-a260-4a107aa74121"
+						"id": "359b02a8-1b87-486a-afed-5b1c8e5e873e"
 					}
 				}
 			],
-			"id": "a7393c8d-f2fc-4f30-bf6a-22817c6bb39b",
+			"id": "a54caad2-3a31-43fe-aeb9-03cc609bbf38",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -153,11 +153,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "d41d7f7e-bbbd-47cb-ab5f-69a9f757de22"
+						"id": "d24db4e1-ea50-4e23-83bb-9ceb977aedfd"
 					}
 				}
 			],
-			"id": "fe5d433e-07d8-46d2-9a39-84541aba017f",
+			"id": "7e19ca50-07f8-4e98-bfba-f6cdb5c9eb13",
 			"request": {
 				"method": "DELETE",
 				"header": [

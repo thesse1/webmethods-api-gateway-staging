@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8f91e425-e660-4170-8c88-902ac7b6bb6e",
+		"_postman_id": "12a3fa7a-6432-4154-b6bf-c49476c0d522",
 		"name": "API Test for internal-external",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-8f91e425-e660-4170-8c88-902ac7b6bb6e"
+		"_uid": "3558839-12a3fa7a-6432-4154-b6bf-c49476c0d522"
 	},
 	"item": [
 		{
@@ -24,11 +24,11 @@
 							"postman.setNextRequest(\"PostEcho\"); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
-						"id": "4342ddcb-de09-4b71-b568-ff44f490d633"
+						"id": "367a3f5d-ea59-4eeb-9688-db6fe43b4f29"
 					}
 				}
 			],
-			"id": "2212edb6-feb5-4e44-8a24-51ca35e1904c",
+			"id": "ebdb0b95-657d-4713-b34a-ca6526a2ed65",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -93,11 +93,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "364defa9-de95-441c-87a6-9063d9b5015f"
+						"id": "c71991b0-cdb1-4e6b-a9a9-776bc60ab060"
 					}
 				}
 			],
-			"id": "4beee813-7dd8-4252-9681-1fbc095219b5",
+			"id": "5aaf4f9e-e112-4c3c-8ba6-661bad364cd6",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -150,11 +150,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "16173e44-e0f7-4916-b968-fe2e70e81295"
+						"id": "31fdb7bd-72ba-471b-a2ba-286489344f55"
 					}
 				}
 			],
-			"id": "0d372acf-a8f8-4a1f-960e-bef38995edd6",
+			"id": "b7810e80-74b8-4e22-aaf4-3ae9a5065762",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -211,11 +211,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "e9c98259-e536-4b42-90d7-a1302f2178d6"
+						"id": "88f7fcd4-41e9-4999-a060-7680c6ea968f"
 					}
 				}
 			],
-			"id": "6bd83c71-b15b-4e2d-976b-07bc74bcb0d2",
+			"id": "bbe00698-4426-4cdf-b888-9e4dc44a3883",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -280,11 +280,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "91aceaf9-898d-49b4-b3b1-264048497c21"
+						"id": "f59401a5-65ff-406b-bb36-9480d08ecc03"
 					}
 				}
 			],
-			"id": "7591380d-066c-4fc2-9930-a16bcf6cf3d8",
+			"id": "1d85876c-ce89-491e-91ed-55da7fca0f81",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -342,11 +342,11 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "d2a557d3-63cf-42e6-beb9-39d4373bf3ad"
+						"id": "998a870d-fa6f-4aed-8a0f-86d8a52c3e3e"
 					}
 				}
 			],
-			"id": "bc5bcbfa-9ba5-457d-8b5e-af6cb7200e2d",
+			"id": "f5a6a1f9-1091-49a1-b705-6399f2f8712a",
 			"request": {
 				"method": "DELETE",
 				"header": [

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3504e414-3b38-4712-bf8c-92688faf2698",
+		"_postman_id": "8be3daed-ea82-4f11-a52b-5f87935ee155",
 		"name": "Initialize_PROD_EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-3504e414-3b38-4712-bf8c-92688faf2698"
+		"_uid": "3558839-8be3daed-ea82-4f11-a52b-5f87935ee155"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "73662c88-af1c-4cc4-acb0-2c5e8d50982c",
+						"id": "36c7f9d3-9973-4758-92b2-4bcb93a8d151",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -42,7 +42,7 @@
 					}
 				}
 			],
-			"id": "6016432a-bc8b-4964-b6ed-917252ea24d2",
+			"id": "926e1941-ac88-4867-9469-0b2c1e7f574c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -91,7 +91,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "02f8b66b-05b5-4b45-b90f-9a84482468c4",
+						"id": "d4821d5b-6ba8-43a8-af4b-18991c20d3c3",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -113,7 +113,7 @@
 					}
 				}
 			],
-			"id": "3bb86a65-8969-46bf-a9c2-a8ed71f7bb07",
+			"id": "d5e9eb9a-0068-4416-a774-a91944000129",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -163,7 +163,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c7809e7d-c796-4a16-85a8-f8ace9a63e83",
+						"id": "aae8b7b5-0d37-417e-b756-e29565f3825a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -173,7 +173,7 @@
 					}
 				}
 			],
-			"id": "0a7028b5-2f53-4685-b80a-a91ecc2da5de",
+			"id": "e262f0c8-0287-4b42-9f56-76322d9489b5",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -223,7 +223,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "685abf61-817e-41ac-ae18-a07a2d3adb64",
+						"id": "ff7cdc1b-8e34-4e17-b4d5-94d4fc9a3d68",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -255,7 +255,7 @@
 					}
 				}
 			],
-			"id": "0d0728fd-9dde-4e85-94be-4103cf6ad332",
+			"id": "611545b8-401f-4184-82a2-597ea7d26814",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -304,7 +304,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f885420b-6a44-45e2-bf6b-10f47edce1cf",
+						"id": "baa79e65-c56f-4073-85b4-a74481ea2215",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -343,7 +343,7 @@
 					}
 				}
 			],
-			"id": "c42cdccb-de43-4db2-9c0a-88686f9d5e61",
+			"id": "e0ccdf7c-5025-4424-896f-4f8497689c95",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -410,7 +410,7 @@
 				"exec": [
 					""
 				],
-				"id": "a8bbe1ac-6ebb-4102-a709-3ac05b853e3b"
+				"id": "0c21e5f1-24fc-4865-a2de-22f8e16528a8"
 			}
 		},
 		{
@@ -420,7 +420,7 @@
 				"exec": [
 					""
 				],
-				"id": "953f3414-7c08-4bdc-aa18-a6520b37baa3"
+				"id": "d120516b-d1a3-4c18-9b8f-9a37859bb0c8"
 			}
 		}
 	]
