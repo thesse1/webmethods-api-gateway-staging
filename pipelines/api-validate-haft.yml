@@ -1,0 +1,52 @@
+# Pipeline for apig staging
+
+trigger:
+  branches:
+    include:
+    - azure-demo
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Helm Scale API Gateway clusters' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true
+
+parameters:
+- name: tenant
+  displayName: Configure API Gateway in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+
+variables:
+- group: 'Project Configuration'
+
+stages:
+- template: /pipelines/api-configure-stages-template.yml
+  parameters:
+    tenant: ${{parameters.tenant}}
+    stages:
+    - name: PROD_INT
+      instances:
+      - name: PROD_INT_01
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: PROD_INT_02
+        pool: $(pool_name)
+        image: $(pool_image)
+      haft:
+        pool: $(pool_name)
+        image: $(pool_image)
+    - name: PROD_EXT
+      instances:
+      - name: PROD_EXT_01
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: PROD_EXT_02
+        pool: $(pool_name)
+        image: $(pool_image)
+      haft:
+        pool: $(pool_name)
+        image: $(pool_image)
