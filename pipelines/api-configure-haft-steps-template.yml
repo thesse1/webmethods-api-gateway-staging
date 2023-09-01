@@ -29,6 +29,9 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
 
+- bash: sleep 60
+  displayName: Wait 60 seconds for HAFT ring to form
+
 - script: |
     newman run postman/collections/utilities/haft/Validate_HAFT_${{parameters.type}}.json --reporters cli \
     --env-var haft_manager_01_user='$(haft_manager_01_user)' \
