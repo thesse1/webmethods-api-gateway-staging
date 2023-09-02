@@ -8,7 +8,7 @@ trigger: none
 resources:
   pipelines:
   - pipeline: trigger-pipeline # Name of the pipeline resource.
-    source: 'Validate HAFT configuration' # The name of the pipeline referenced by this pipeline resource.
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
     trigger:
       tags:
       - DESIGN
