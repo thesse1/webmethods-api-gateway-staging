@@ -3,7 +3,7 @@
 trigger: none
   # branches:
   #   include:
-  #   - azure-demo 
+  #   - azure-demo
 
 resources:
   pipelines:
