@@ -4,8 +4,8 @@
       "version" : "1.0",
       "title" : "Ping"
     },
+    "basePath" : "",
     "serviceRegistryDisplayName" : "Ping_1.0",
-    "tags" : [ ],
     "schemes" : [ ],
     "security" : [ ],
     "paths" : {
@@ -27,6 +27,29 @@
                   "example" : "{\n    \"date\": \"Thu Jun 17 08:20:39 CEST 2021\"\n}"
                 }
               },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "requestBody"
+          }
+        },
+        "head" : {
+          "description" : "Probe the ping service, it will respond with headers and response code, but no payload",
+          "parameters" : [ ],
+          "responses" : {
+            "200" : {
+              "description" : "Ping probe response",
+              "headersV3" : { },
+              "content" : { },
               "links" : { },
               "schema" : { },
               "examples" : { },
@@ -88,7 +111,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-18 12:46:12 GMT",
-  "lastModified" : "2023-08-22 13:25:19 GMT",
+  "lastModified" : "2023-09-03 12:26:21 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
