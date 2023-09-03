@@ -1,9 +1,6 @@
 # Pipeline for apig staging
 
-trigger:
-  branches:
-    include:
-    - azure-demo
+trigger: none
 
 # resources:
 #   pipelines:
