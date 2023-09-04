@@ -10,13 +10,13 @@
 		},
 		{
 			"key": "hostname",
-			"value": "design-apigateway-admin.azuredemo-softwareag.com",
+			"value": "azure-demo-design-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "design-apigateway-admin.azuredemo-softwareag.com",
+			"value": "azure-demo-design-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},

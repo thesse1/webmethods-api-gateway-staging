@@ -10,13 +10,13 @@
 		},
 		{
 			"key": "hostname",
-			"value": "build-02-apigateway-admin.azuredemo-softwareag.com",
+			"value": "azure-demo-build-02-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "build-02-apigateway-admin.azuredemo-softwareag.com",
+			"value": "azure-demo-build-02-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
