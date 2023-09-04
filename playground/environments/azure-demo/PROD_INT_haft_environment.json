@@ -64,7 +64,7 @@
 	},
 	{
 		"key": "ip_grpc_01",
-		"value": "prod-int-01-apigateway-grpc.azuredemo-softwareag.com",
+		"value": "azure-demo-prod-int-01-apigateway-grpc.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
@@ -76,7 +76,7 @@
 	},
 	{
 		"key": "ip_grpc_02",
-		"value": "prod-int-02-apigateway-grpc.azuredemo-softwareag.com",
+		"value": "azure-demo-prod-int-02-apigateway-grpc.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
