@@ -51,10 +51,10 @@ steps:
 #     fileType: json
 
 - bash: |
-   echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environment/$(project_name)/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environment/$(project_name)/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environment/$(project_name)/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environment/$(project_name)/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.target_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.target_type}} configuration, extract ip, hostname, port and insecureflag'
 
@@ -75,7 +75,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip -e ${{parameters.tenant}}/environment/$(project_name)/${{parameters.target_environment}} \
+    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_type}}'
