@@ -25,7 +25,7 @@ steps:
     --env-var haft_manager_01_password='$(haft_manager_01_password)' \
     --env-var haft_manager_02_user='$(haft_manager_02_user)' \
     --env-var haft_manager_02_password='$(haft_manager_02_password)' \
-    -e ${{parameters.tenant}}/environments$(project_name)/${{parameters.type}}_haft_environment.json
+    -e ${{parameters.tenant}}/environment/$(project_name)/${{parameters.type}}_haft_environment.json
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
 
@@ -38,6 +38,6 @@ steps:
     --env-var haft_manager_01_password='$(haft_manager_01_password)' \
     --env-var haft_manager_02_user='$(haft_manager_02_user)' \
     --env-var haft_manager_02_password='$(haft_manager_02_password)' \
-    -e ${{parameters.tenant}}/environments$(project_name)/${{parameters.type}}_haft_environment.json
+    -e ${{parameters.tenant}}/environment/$(project_name)/${{parameters.type}}_haft_environment.json
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Validate High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
