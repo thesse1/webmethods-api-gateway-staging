@@ -70,7 +70,7 @@
 	},
 	{
 		"key": "elasticsearch-indexname",
-		"value": "apigw_test_int",
+		"value": "apigw-test_int",
 		"type": "default",
 		"enabled": true
 }

@@ -70,7 +70,7 @@
 		},
 		{
 			"key": "elasticsearch-indexname",
-			"value": "apigw_design",
+			"value": "apigw-design",
 			"type": "default",
 			"enabled": true
 		}
