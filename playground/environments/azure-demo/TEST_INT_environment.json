@@ -61,7 +61,19 @@
 		"value": "--insecure",
 		"type": "default",
 		"enabled": true
-	}
+	},
+	{
+		"key": "elasticsearch-hostname",
+		"value": "azure-demo-elasticsearch.es.westeurope.azure.elastic-cloud.com",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "elasticsearch-indexname",
+		"value": "apigw_test_int",
+		"type": "default",
+		"enabled": true
+}
 ],
 "timestamp": 1587036498482,
   "_postman_variable_scope": "environment",
