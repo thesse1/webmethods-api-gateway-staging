@@ -40,4 +40,4 @@ stages:
       - name: DESIGN
         pool: $(pool_name)
         image: $(pool_image)
-      build_environment: $(design_build_environment)
+      build_environment: ${{ variables.design_build_environment }}
