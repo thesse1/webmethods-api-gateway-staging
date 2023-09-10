@@ -18,7 +18,7 @@ variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
-- name: design_build_environment
+- name: design_build_instance
   value: BUILD_07
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
@@ -42,4 +42,4 @@ stages:
       - name: DESIGN
         pool: $(pool_name)
         image: $(pool_image)
-      build_environment: BUILD_07
+      build_environment: ${{ variables.design_build_instance }}
