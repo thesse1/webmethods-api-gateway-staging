@@ -29,7 +29,7 @@ stages:
     build_stage:
       name: BUILD
       instances:
-      - name: BUILD_07
+      - name: $(design_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
