@@ -13,10 +13,6 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
-- name: design_build_instance
-  displayName: Use which BUILD instance?
-  type: string
-  default: ${{ variables.design_build_instance }}
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
