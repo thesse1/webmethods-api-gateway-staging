@@ -27,8 +27,8 @@ stages:
           jobs:
           - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
             environment: '${{ build_instance.name }}'
-            variables:
-            - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
+            # variables:
+            # - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
             pool:
               name: '${{ build_instance.pool }}'
               vmImage: '${{ build_instance.image }}'
@@ -64,8 +64,8 @@ stages:
           - ${{ each instance in target_stage.instances }}:
             - deployment: 'Deploy_${{parameters.apiProject}}_to_API_Gateway_${{ instance.name }}'
               environment: ${{ instance.name }}
-              # variables:
-              # - group: ${{parameters.tenant}}_${{ instance.name }}_users
+              variables:
+              - group: ${{parameters.tenant}}_${{ instance.name }}_users
               pool:
                 name: '${{ instance.pool }}'
                 vmImage: '${{ instance.image }}'
