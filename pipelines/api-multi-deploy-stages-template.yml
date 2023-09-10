@@ -23,8 +23,8 @@ stages:
       - ${{ if eq(target_stage, deployment_target) }}:
         - ${{ each apiProject in deployment_set.apiProjects }}:
           - stage: ${{ deployment_target }}_${{ apiProject }}
-            ${{ if eq(apiProject, parameters.deployment_sets[0].apiProjects[0]) }}:
-              dependsOn: []
+            # ${{ if eq(apiProject, parameters.deployment_sets[0].apiProjects[0]) }}:
+            #   dependsOn: []
             jobs:
             - deployment: 'Build_${{apiProject}}_for_${{ deployment_target }}'
               environment: '$(${{ deployment_target }}_build_instance)'
