@@ -62,40 +62,38 @@ stages:
                     #   parameters:
                     #     target_type: $(targetType)
 
-            - ${{ each target_stage in parameters.target_stages }}:
-              - ${{ if eq(target_stage.name, deployment_target) }}:
-                - ${{ each deploy_instance in target_stage.instances }}:
-                  - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance.name }}'
-                    environment: ${{ deploy_instance.name }}
-                    variables:
-                    - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
-                    - group: ${{parameters.tenant}}_${{ deploy_instance.name }}_users
-                    pool:
-                      name: '$(pool_name)'
-                      vmImage: '$(pool_image)'
-                    strategy:
-                      runOnce:    #rolling, canary are the other strategies that are supported
-                        deploy:
-                          steps:
-                          - checkout: self
-                            submodules: "true"
-                            persistCredentials: "true"
-                          - template: /pipelines/retrieve-build-template.yml
-                            parameters:
-                                target_type: ${{ deployment_target }}
-                                apiProject: ${{apiProject}}
-                          - template: /pipelines/api-deploy-steps-template.yml
-                            parameters:
-                              apiProject: ${{apiProject}}
-                              target_environment: ${{ deploy_instance.name }}_environment.json
-                              target_type: ${{ deployment_target }}
-                              prep_condition: ${{true}}
-                              test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
-                              tenant: ${{parameters.tenant}}
-                          - bash: |
-                              echo "##vso[build.addbuildtag]${{apiProject}}"
-                              echo "##vso[build.addbuildtag]${{deploy_instance.name}}"
-                              echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance.name}}"
-                            displayName: Add build tags
-                    dependsOn: 'Build_${{apiProject}}_for_${{ deployment_target }}'
-                    condition: succeeded()
+            - ${{ each deploy_instance in target_stage.instances }}:
+              - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance.name }}'
+                environment: ${{ deploy_instance.name }}
+                variables:
+                - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
+                - group: ${{parameters.tenant}}_${{ deploy_instance.name }}_users
+                pool:
+                  name: '$(pool_name)'
+                  vmImage: '$(pool_image)'
+                strategy:
+                  runOnce:    #rolling, canary are the other strategies that are supported
+                    deploy:
+                      steps:
+                      - checkout: self
+                        submodules: "true"
+                        persistCredentials: "true"
+                      - template: /pipelines/retrieve-build-template.yml
+                        parameters:
+                            target_type: ${{ deployment_target }}
+                            apiProject: ${{apiProject}}
+                      - template: /pipelines/api-deploy-steps-template.yml
+                        parameters:
+                          apiProject: ${{apiProject}}
+                          target_environment: ${{ deploy_instance.name }}_environment.json
+                          target_type: ${{ deployment_target }}
+                          prep_condition: ${{true}}
+                          test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
+                          tenant: ${{parameters.tenant}}
+                      - bash: |
+                          echo "##vso[build.addbuildtag]${{apiProject}}"
+                          echo "##vso[build.addbuildtag]${{deploy_instance.name}}"
+                          echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance.name}}"
+                        displayName: Add build tags
+                dependsOn: 'Build_${{apiProject}}_for_${{ deployment_target }}'
+                condition: succeeded()
