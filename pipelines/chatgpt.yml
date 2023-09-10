@@ -17,12 +17,14 @@ stages:
     steps:
     - script: echo "This is Stage 3, Job 1"
 
-- job: CountStages
-  steps:
-  - script: |
-      # Count the number of stages by using the length of the stages array
-      stage_count=${#STAGES[*]}
+- stage: CountStages
+  jobs:
+  - job: CountStages
+    steps:
+    - script: |
+        # Count the number of stages by using the length of the stages array
+        stage_count=${#STAGES[*]}
 
-      # Print the stage count
-      echo "Number of stages in this pipeline: $stage_count"
-    displayName: 'Count Stages'
+        # Print the stage count
+        echo "Number of stages in this pipeline: $stage_count"
+      displayName: 'Count Stages'
