@@ -21,16 +21,16 @@ stages:
       - ${{ each apiProject in deployment_set.apiProjects }}:
         - ${{ each deployment_target in deployment_set.targets }}:
             - stage: ${{ deployment_target }}_${{ apiProject }}
-              ${{ if and( eq(apiProject, parameters.deployment_sets[0].apiProjects[0]), eq(deployment_target, build_instance.targets[0]) ) }}:
-                dependsOn: []
+              # ${{ if and( eq(apiProject, parameters.deployment_sets[0].apiProjects[0]), eq(deployment_target, build_instance.targets[0]) ) }}:
+              #   dependsOn: []
               jobs:
               - deployment: 'Build_${{apiProject}}_for_${{ deployment_target }}'
                 environment: '$(${{ deployment_target }}_build_instance)'
                 variables:
                 - group: ${{parameters.tenant}}_BUILD_users
                 pool:
-                  name: '${{ build_instance.pool }}'
-                  vmImage: '${{ build_instance.image }}'
+                  name: '$(pool_name)'
+                  vmImage: '$(pool_image)'
                 strategy:
                   runOnce:    #rolling, canary are the other strategies that are supported
                     deploy:
