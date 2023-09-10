@@ -26,8 +26,8 @@ stages:
       - ${{ if eq(build_instance.name, target_stage.build_environment) }}:
         - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
           environment: '${{ build_instance.name }}'
-          # variables:
-          # - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
+          variables:
+          - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
           pool:
             name: '${{ build_instance.pool }}'
             vmImage: '${{ build_instance.image }}'
