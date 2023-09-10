@@ -13,6 +13,10 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
+- name: design_build_instance
+  displayName: Use which BUILD instance?
+  type: string
+  default: BUILD_07
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
@@ -42,4 +46,4 @@ stages:
       - name: DESIGN
         pool: $(pool_name)
         image: $(pool_image)
-      build_environment: ${{ variables.design_build_instance }}
+      build_environment: ${{ parameters.design_build_instance }}
