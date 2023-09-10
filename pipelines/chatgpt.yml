@@ -1,3 +1,10 @@
+variables:
+- group: 'Project Configuration'
+
+pool:
+  name: '$(pool_name)'
+  vmImage: '$(pool_image)'
+
 stages:
 - stage: Stage1
   jobs:
