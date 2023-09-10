@@ -18,8 +18,8 @@ parameters:
 
 stages:
 - ${{ each deployment_set in parameters.deployment_sets }}:
-  - ${{ each apiProject in deployment_set.apiProjects }}:
-    - ${{ each deployment_target in deployment_set.targets }}:
+  - ${{ each deployment_target in deployment_set.targets }}:
+    - ${{ each apiProject in deployment_set.apiProjects }}:
       - stage: ${{ deployment_target }}_${{ apiProject }}
         ${{ if eq(apiProject, parameters.deployment_sets[0].apiProjects[0]) }}:
           dependsOn: []
