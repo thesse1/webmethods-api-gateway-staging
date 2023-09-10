@@ -13,11 +13,17 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
+- name: design_build_instance
+  displayName: Use which BUILD instance?
+  type: string
+  default: ${{ variables.design_build_instance }}
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
+- name: design_build_instance
+  value: BUILD_08
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
@@ -40,3 +46,4 @@ stages:
       - name: DESIGN
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: ${{ parameters.design_build_instance }}

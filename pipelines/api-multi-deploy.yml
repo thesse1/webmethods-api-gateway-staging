@@ -34,32 +34,32 @@ stages:
     build_stage:
       name: BUILD
       instances:
-      - name: BUILD_01
+      - name: $(dev_int_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
         - DEV_INT
-      - name: BUILD_02
+      - name: $(dev_ext_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
         - DEV_EXT
-      - name: BUILD_03
+      - name: $(test_int_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
         - TEST_INT
-      - name: BUILD_04
+      - name: $(test_ext_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
         - TEST_EXT
-      - name: BUILD_05
+      - name: $(prod_int_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
         - PROD_INT
-      - name: BUILD_06
+      - name: $(prod_ext_build_environment)
         pool: $(pool_name)
         image: $(pool_image)
         targets:
