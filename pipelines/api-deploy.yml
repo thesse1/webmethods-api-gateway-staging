@@ -29,57 +29,52 @@ stages:
     build_stage:
       name: BUILD
       instances:
-      - name: $(dev_int_build_environment)
+      - name: BUILD_01
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - DEV_INT
-      - name: $(dev_ext_build_environment)
+      - name: BUILD_02
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - DEV_EXT
-      - name: $(test_int_build_environment)
+      - name: BUILD_03
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - TEST_INT
-      - name: $(test_ext_build_environment)
+      - name: BUILD_04
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - TEST_EXT
-      - name: $(prod_int_build_environment)
+      - name: BUILD_05
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - PROD_INT
-      - name: $(prod_ext_build_environment)
+      - name: BUILD_06
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - PROD_EXT
+      - name: BUILD_07
+        pool: $(pool_name)
+        image: $(pool_image)
     target_stages:
     - name: DEV_INT
       instances:
       - name: DEV_INT
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: $(dev_int_build_environment)
     - name: DEV_EXT
       instances:
       - name: DEV_EXT
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: $(dev_ext_build_environment)
     - name: TEST_INT
       instances:
       - name: TEST_INT
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: $(test_int_build_environment)
     - name: TEST_EXT
       instances:
       - name: TEST_EXT
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: $(test_ext_build_environment)
     - name: PROD_INT
       instances:
       - name: PROD_INT_01
@@ -88,6 +83,7 @@ stages:
       - name: PROD_INT_02
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: $(prod_int_build_environment)
     - name: PROD_EXT
       instances:
       - name: PROD_EXT_01
@@ -96,3 +92,4 @@ stages:
       - name: PROD_EXT_02
         pool: $(pool_name)
         image: $(pool_image)
+      build_environment: $(prod_ext_build_environment)
