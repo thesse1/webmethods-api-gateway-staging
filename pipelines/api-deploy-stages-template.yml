@@ -32,8 +32,8 @@ stages:
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
-            variables:
-            - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
+              variables:
+              - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
               steps:
               - checkout: self
                 submodules: "true"
