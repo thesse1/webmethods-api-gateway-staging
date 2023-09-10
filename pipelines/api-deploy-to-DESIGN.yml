@@ -35,15 +35,30 @@ stages:
     build_stage:
       name: BUILD
       instances:
+      - name: BUILD_01
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: BUILD_02
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: BUILD_03
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: BUILD_04
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: BUILD_05
+        pool: $(pool_name)
+        image: $(pool_image)
+      - name: BUILD_06
+        pool: $(pool_name)
+        image: $(pool_image)
       - name: BUILD_07
         pool: $(pool_name)
         image: $(pool_image)
-        targets:
-        - DESIGN
     target_stages:
     - name: DESIGN
       instances:
       - name: DESIGN
         pool: $(pool_name)
         image: $(pool_image)
-      build_environment: ${{ parameters.design_build_instance }}
