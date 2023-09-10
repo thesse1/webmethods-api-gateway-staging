@@ -61,10 +61,11 @@ stages:
       - deployment: 'Deploy_${{parameters.apiProject}}_to_API_Gateway_${{ instance.name }}'
         environment: ${{ instance.name }}
         variables:
+        - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
         - group: ${{parameters.tenant}}_${{ instance.name }}_users
         pool:
-          name: '${{ instance.pool }}'
-          vmImage: '${{ instance.image }}'
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
