@@ -23,17 +23,20 @@ stages:
         # dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
-      # - ${{ each build_instance in parameters.build_stage.instances }}:
-      #   - ${{ if eq(build_instance.name, target_stage.build_environment) }}:
-      environment: '${{ build_instance.name }}'
-      # variables:
-      # - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
+      environment: '${{ target_stage.build_environment }}'
+      variables:
+      - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
+      # pool:
+      #   name: '${{ build_instance.pool }}'
+      #   vmImage: '${{ build_instance.image }}'
       pool:
-        name: '${{ build_instance.pool }}'
-        vmImage: '${{ build_instance.image }}'
+        name: '$(pool_name)'
+        vmImage: '$(pool_image)'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
+      # ${{ each build_instance in parameters.build_stage.instances }}:
+      #   - ${{ if eq(build_instance.name, target_stage.build_environment) }}:
             steps:
             - checkout: self
               submodules: "true"
