@@ -16,14 +16,14 @@ parameters:
 - name: design_build_instance
   displayName: Use which BUILD instance?
   type: string
-  default: BUILD_07
+  default: ${{ variables.design_build_instance }}
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
-# - name: design_build_instance
-#   value: BUILD_08
+- name: design_build_instance
+  value: BUILD_08
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
