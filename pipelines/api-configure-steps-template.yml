@@ -79,6 +79,8 @@ steps:
     newman run postman/collections/utilities/initialize/Initialize_${{parameters.type}}.json --reporters cli \
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
+    --env-var elasticsearch_user='$(elasticsearch_user)' \
+    --env-var elasticsearch_password='$(elasticsearch_password)' \
     --env-var file_Loc=$(Build.BuildId)_configuration.zip -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
