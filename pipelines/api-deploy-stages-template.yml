@@ -19,8 +19,7 @@ parameters:
 stages:
 - ${{ each target_stage in parameters.target_stages }}:
   - stage: ${{ target_stage.name }}_${{ parameters.apiProject }}
-    # ${{ if eq(build_target, build_instance.targets[0]) }}:
-    #   dependsOn: []
+    dependsOn: []
     jobs:
     - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
       environment: '$(${{ target_stage.name }}_build_instance)'
@@ -29,8 +28,6 @@ stages:
       pool:
         name: '$(pool_name)'
         vmImage: '$(pool_image)'
-        # name: '${{ build_instance.pool }}'
-        # vmImage: '${{ build_instance.image }}'
       strategy:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
