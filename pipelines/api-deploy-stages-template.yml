@@ -31,9 +31,9 @@ stages:
           vmImage: '${{ build_instance.image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
-          variables:
-          - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
             deploy:
+            variables:
+            - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
               steps:
               - checkout: self
                 submodules: "true"
