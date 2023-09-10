@@ -17,13 +17,13 @@ parameters:
   type: object
 
 stages:
-- ${{ each build_instance in parameters.build_stage.instances }}:
-  - ${{ each target_stage in parameters.target_stages }}:
-    - $[ if eq(build_instance.name, target_stage.build_environment) ]:
-      - stage: ${{ build_instance.name }}_${{ parameters.apiProject }}
+- ${{ each target_stage in parameters.target_stages }}:
+  - stage: ${{ target_stage.name }}_${{ parameters.apiProject }}
         # ${{ if eq(build_target, build_instance.targets[0]) }}:
-        dependsOn: []
-        jobs:
+        # dependsOn: []
+    jobs:
+    - ${{ each build_instance in parameters.build_stage.instances }}:
+      - ${{ if eq(build_instance.name, target_stage.build_environment) }}:
         - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
           environment: '${{ build_instance.name }}'
           # variables:
