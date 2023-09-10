@@ -17,20 +17,17 @@ parameters:
   type: object
 
 stages:
-- ${{ each build_instance in parameters.build_stage.instances }}:
-  - ${{ each build_target in build_instance.targets }}:
     - ${{ each deployment_set in parameters.deployment_sets }}:
       - ${{ each apiProject in deployment_set.apiProjects }}:
         - ${{ each deployment_target in deployment_set.targets }}:
-          - ${{ if eq(build_target, deployment_target) }}:
-            - stage: ${{ build_target }}_${{ apiProject }}
-              ${{ if and( eq(apiProject, parameters.deployment_sets[0].apiProjects[0]), eq(build_target, build_instance.targets[0]) ) }}:
+            - stage: ${{ deployment_target }}_${{ apiProject }}
+              ${{ if and( eq(apiProject, parameters.deployment_sets[0].apiProjects[0]), eq(deployment_target, build_instance.targets[0]) ) }}:
                 dependsOn: []
               jobs:
-              - deployment: 'Build_${{apiProject}}_for_${{ build_target }}'
-                environment: '${{ build_instance.name }}'
+              - deployment: 'Build_${{apiProject}}_for_${{ deployment_target }}'
+                environment: '$(${{ deployment_target }}_build_instance)'
                 variables:
-                - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
+                - group: ${{parameters.tenant}}_BUILD_users
                 pool:
                   name: '${{ build_instance.pool }}'
                   vmImage: '${{ build_instance.image }}'
@@ -45,14 +42,14 @@ stages:
                       - template: /pipelines/api-build-steps-template.yml
                         parameters:
                           apiProject: ${{apiProject}}
-                          build_environment: "${{ build_instance.name }}_environment.json"
-                          target_type: ${{ build_target }}
+                          build_environment: "$(${{ deployment_target }}_build_instance)_environment.json"
+                          target_type: ${{ deployment_target }}
                           prep_condition: ${{true}}
-                          test_condition: ${{ ne(build_target, 'DESIGN') }}
+                          test_condition: ${{ ne(deployment_target, 'DESIGN') }}
                           tenant: ${{parameters.tenant}}
                       - template: /pipelines/store-build-template.yml
                         parameters:
-                          target_type: ${{ build_target }}
+                          target_type: ${{ deployment_target }}
                           apiProject: ${{apiProject}}
                       - bash: |
                           echo "##vso[build.addbuildtag]${{apiProject}}"
@@ -64,7 +61,7 @@ stages:
                       #     target_type: $(targetType)
 
               - ${{ each target_stage in parameters.target_stages }}:
-                - ${{ if eq(target_stage.name, build_target) }}:
+                - ${{ if eq(target_stage.name, deployment_target) }}:
                   - ${{ each deploy_instance in target_stage.instances }}:
                     - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance.name }}'
                       environment: ${{ deploy_instance.name }}
@@ -82,20 +79,20 @@ stages:
                               persistCredentials: "true"
                             - template: /pipelines/retrieve-build-template.yml
                               parameters:
-                                  target_type: ${{ build_target }}
+                                  target_type: ${{ deployment_target }}
                                   apiProject: ${{apiProject}}
                             - template: /pipelines/api-deploy-steps-template.yml
                               parameters:
                                 apiProject: ${{apiProject}}
                                 target_environment: ${{ deploy_instance.name }}_environment.json
-                                target_type: ${{ build_target }}
+                                target_type: ${{ deployment_target }}
                                 prep_condition: ${{true}}
-                                test_condition: ${{ ne('${{ build_target }}', 'DESIGN') }}
+                                test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
                                 tenant: ${{parameters.tenant}}
                             - bash: |
                                 echo "##vso[build.addbuildtag]${{apiProject}}"
                                 echo "##vso[build.addbuildtag]${{deploy_instance.name}}"
                                 echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance.name}}"
                               displayName: Add build tags
-                      dependsOn: 'Build_${{apiProject}}_for_${{ build_target }}'
+                      dependsOn: 'Build_${{apiProject}}_for_${{ deployment_target }}'
                       condition: succeeded()
