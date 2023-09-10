@@ -37,9 +37,11 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
+              - template: /pipelines/variables.yml
+                parameters:
+                  tenant: ${{parameters.tenant}}
+                  build_instance_name: ${{ build_instance.name }}
               - template: /pipelines/api-build-steps-template.yml
-                variables:
-                - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
                 parameters:
                   apiProject: ${{parameters.apiProject}}
                   build_environment: "${{ build_instance.name }}_environment.json"
