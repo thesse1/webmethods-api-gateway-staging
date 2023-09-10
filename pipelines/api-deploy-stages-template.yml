@@ -37,7 +37,7 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
-              - template: /pipelines/variables.yml
+              - template: /pipelines/variables-template.yml
                 parameters:
                   tenant: ${{parameters.tenant}}
                   build_instance_name: ${{ build_instance.name }}
