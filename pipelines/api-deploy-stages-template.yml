@@ -18,7 +18,7 @@ parameters:
 
 stages:
 - ${{ each target_stage in parameters.target_stages }}:
-  - stage: ${{ target_stage }}_${{ parameters.apiProject }}
+  - stage: ${{ target_stage.name }}_${{ parameters.apiProject }}
     # ${{ if eq(build_target, build_instance.targets[0]) }}:
     #   dependsOn: []
     jobs:
