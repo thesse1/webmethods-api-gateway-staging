@@ -26,13 +26,13 @@ stages:
       - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}_on_${{ build_instance.name }}'
         condition: and(succeeded(), eq(variables.${{ target_stage.name }}_build_instance, '${{ build_instance.name }}'))
         environment: '${{ build_instance.name }}'
-        variables:
-        - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
         pool:
           name: '${{ build_instance.pool }}'
           vmImage: '${{ build_instance.image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
+          variables:
+          - group: ${{parameters.tenant}}_${{ build_instance.name }}_users
             deploy:
               steps:
               - checkout: self
