@@ -19,7 +19,7 @@ parameters:
 stages:
 - ${{ each build_instance in parameters.build_stage.instances }}:
   - ${{ each target_stage in parameters.target_stages }}:
-    - ${{ if eq(build_instance.name, target_stage.build_environment) }}:
+    - $[ if eq(build_instance.name, target_stage.build_environment) ]:
       - stage: ${{ build_instance.name }}_${{ parameters.apiProject }}
         # ${{ if eq(build_target, build_instance.targets[0]) }}:
         dependsOn: []
