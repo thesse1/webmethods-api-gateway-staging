@@ -64,8 +64,8 @@ stages:
           - ${{ each instance in target_stage.instances }}:
             - deployment: 'Deploy_${{parameters.apiProject}}_to_API_Gateway_${{ instance.name }}'
               environment: ${{ instance.name }}
-              variables:
-              - group: ${{parameters.tenant}}_${{ instance.name }}_users
+              # variables:
+              # - group: ${{parameters.tenant}}_${{ instance.name }}_users
               pool:
                 name: '${{ instance.pool }}'
                 vmImage: '${{ instance.image }}'
