@@ -28,9 +28,10 @@ parameters:
   # - multiple_tenants
   # - security_alias
   - 'other (Please specify below)'
-- name: api_project_other
-  displayName: Deploy which other API project?
-  type: string
+- ${{ if eq(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project_other
+    displayName: Deploy which other API project?
+    type: string
 - name: DEV_INT_build_instance
   displayName: Build for DEV_INT on which BUILD instance?
   default: BUILD_01
