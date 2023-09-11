@@ -33,9 +33,8 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-deploy-stages-template.yml
+- template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
-    apiProject: ${{parameters.apiProject}}
     tenant: ${{parameters.tenant}}
     build_stage:
       name: BUILD
@@ -51,4 +50,9 @@ stages:
     - name: DESIGN
       build_instance: ${{ parameters.DESIGN_build_instance }}
       instances:
+      - DESIGN
+    deployment_sets:
+    - apiProjects:
+      - ${{parameters.apiProject}}
+      targets:
       - DESIGN
