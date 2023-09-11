@@ -47,19 +47,19 @@ stages:
                   - checkout: self
                     submodules: "true"
                     persistCredentials: "true"
-                  - download: none
-                  - template: /pipelines/api-build-steps-template.yml
-                    parameters:
-                      apiProject: ${{parameters.apiProject}}
-                      build_environment: "${{build_instance}}_environment.json"
-                      target_type: ${{ target_stage.name }}
-                      prep_condition: ${{true}}
-                      test_condition: ${{ ne(target_stage.name, 'DESIGN') }}
-                      tenant: ${{parameters.tenant}}
-                  - template: /pipelines/store-build-template.yml
-                    parameters:
-                      target_type: ${{ target_stage.name }}
-                      apiProject: ${{parameters.apiProject}}
+                  # - download: none
+                  # - template: /pipelines/api-build-steps-template.yml
+                  #   parameters:
+                  #     apiProject: ${{parameters.apiProject}}
+                  #     build_environment: "${{build_instance}}_environment.json"
+                  #     target_type: ${{ target_stage.name }}
+                  #     prep_condition: ${{true}}
+                  #     test_condition: ${{ ne(target_stage.name, 'DESIGN') }}
+                  #     tenant: ${{parameters.tenant}}
+                  # - template: /pipelines/store-build-template.yml
+                  #   parameters:
+                  #     target_type: ${{ target_stage.name }}
+                  #     apiProject: ${{parameters.apiProject}}
                   - bash: |
                       echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
                       echo "##vso[build.addbuildtag]${{parameters.build_stage}}"
