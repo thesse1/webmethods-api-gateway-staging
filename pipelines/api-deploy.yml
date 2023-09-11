@@ -13,6 +13,72 @@ parameters:
 - name: apiProject
   displayName: Deploy which API project?
   type: string
+- name: DEV_INT_build_instance
+  displayName: Build for DEV_INT on which BUILD instance?
+  default: BUILD_01
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: DEV_EXT_build_instance
+  displayName: Build for DEV_EXT on which BUILD instance?
+  default: BUILD_02
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: TEST_INT_build_instance
+  displayName: Build for TEST_INT on which BUILD instance?
+  default: BUILD_03
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: TEST_EXT_build_instance
+  displayName: Build for TEST_EXT on which BUILD instance?
+  default: BUILD_04
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: PROD_INT_build_instance
+  displayName: Build for PROD_INT on which BUILD instance?
+  default: BUILD_05
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: PROD_EXT_build_instance
+  displayName: Build for PROD_EXT on which BUILD instance?
+  default: BUILD_06
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
@@ -29,61 +95,37 @@ stages:
     build_stage:
       name: BUILD
       instances:
-      - name: BUILD_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_02
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_03
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_04
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_05
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_06
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_07
-        pool: $(pool_name)
-        image: $(pool_image)
+      - BUILD_01
+      - BUILD_02
+      - BUILD_03
+      - BUILD_04
+      - BUILD_05
+      - BUILD_06
+      - BUILD_07
     target_stages:
     - name: DEV_INT
+      build_instance: ${{ parameters.DEV_INT_build_instance }}
       instances:
-      - name: DEV_INT
-        pool: $(pool_name)
-        image: $(pool_image)
+      - DEV_INT
     - name: DEV_EXT
+      build_instance: ${{ parameters.DEV_EXT_build_instance }}
       instances:
-      - name: DEV_EXT
-        pool: $(pool_name)
-        image: $(pool_image)
+      - DEV_EXT
     - name: TEST_INT
+      build_instance: ${{ parameters.TEST_INT_build_instance }}
       instances:
-      - name: TEST_INT
-        pool: $(pool_name)
-        image: $(pool_image)
+      - TEST_INT
     - name: TEST_EXT
+      build_instance: ${{ parameters.TEST_EXT_build_instance }}
       instances:
-      - name: TEST_EXT
-        pool: $(pool_name)
-        image: $(pool_image)
+      - TEST_EXT
     - name: PROD_INT
+      build_instance: ${{ parameters.PROD_INT_build_instance }}
       instances:
-      - name: PROD_INT_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: PROD_INT_02
-        pool: $(pool_name)
-        image: $(pool_image)
+      - PROD_INT_01
+      - PROD_INT_02
     - name: PROD_EXT
+      build_instance: ${{ parameters.PROD_EXT_build_instance }}
       instances:
-      - name: PROD_EXT_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: PROD_EXT_02
-        pool: $(pool_name)
-        image: $(pool_image)
+      - PROD_EXT_01
+      - PROD_EXT_02
