@@ -71,9 +71,9 @@ stages:
       - DESIGN
     deployment_sets:
     - api_projects:
-      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}
+      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
         - ${{parameters.api_project}}
-      - ${{ else }}
+      - ${{ else }}:
         - ${{parameters.api_project_other}}
       targets:
       - DESIGN
