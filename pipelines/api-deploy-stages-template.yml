@@ -61,7 +61,7 @@ stages:
                   #   parameters:
                   #     target_type: $(target_stage.name)
 
-        - ${{ each instance in target_stage.name.instances }}:
+        - ${{ each instance in target_stage.instances }}:
           - deployment: 'Deploy_${{parameters.apiProject}}_to_API_Gateway_${{ instance }}'
             environment: ${{ instance }}
             variables:
