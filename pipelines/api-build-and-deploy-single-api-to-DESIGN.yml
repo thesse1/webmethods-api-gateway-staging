@@ -32,7 +32,7 @@ parameters:
 - name: api_project_other
   displayName: Deploy which other API project?
   type: string
-  default: ''
+  default: 'n/a'
 - name: DESIGN_build_instance
   displayName: Build on which BUILD instance?
   default: BUILD_07

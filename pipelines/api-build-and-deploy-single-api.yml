@@ -31,7 +31,7 @@ parameters:
 - name: api_project_other
   displayName: Deploy which other API project?
   type: string
-  default: ''
+  default: 'n/a'
 - name: DEV_INT_build_instance
   displayName: Build for DEV_INT on which BUILD instance?
   default: BUILD_01
