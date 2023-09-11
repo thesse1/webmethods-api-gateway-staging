@@ -29,9 +29,10 @@ parameters:
   - security_alias
   - 'other (Please specify below)'
 - ${{ if eq(parameters.api_project, 'other (Please specify below)') }}:
-  - name: api_project_other
-    displayName: Deploy which other API project?
-    type: string
+- name: api_project_other
+  displayName: Deploy which other API project?
+  type: string
+  default: ''
 - name: DESIGN_build_instance
   displayName: Build on which BUILD instance?
   default: BUILD_07
