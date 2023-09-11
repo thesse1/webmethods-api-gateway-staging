@@ -1,7 +1,7 @@
 # Pipeline for apig staging
 
 trigger: none
-  # branches: 
+  # branches:
   #   include:
   #   - azure-demo
 
