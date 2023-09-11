@@ -91,7 +91,7 @@ variables:
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
-# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
@@ -135,7 +135,7 @@ stages:
       - PROD_EXT_01
       - PROD_EXT_02
     deployment_sets:
-    - apiProjects:
+    - api_projects:
       # - number_conversion
       - ping
       - odata_tutorial
@@ -148,7 +148,7 @@ stages:
       - PROD_INT
       - PROD_EXT
 
-    - apiProjects:
+    - api_projects:
       - petstore
       # - petstore_basicauth
       - petstore_versioning
@@ -157,7 +157,7 @@ stages:
       - TEST_INT
       - PROD_INT
 
-    - apiProjects:
+    - api_projects:
       - postman_echo
       # - postman_echo_jwt
       # - postman_echo_oauth2

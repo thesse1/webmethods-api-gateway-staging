@@ -10,8 +10,26 @@ parameters:
   values:
   - playground
   - realworld
-- name: apiProject
+- name: api_project
   displayName: Deploy which API project?
+  type: string
+  values:
+  # - number_conversion
+  - odata_tutorial
+  - ping
+  # - star_wars
+  - petstore
+  - petstore_basicauth
+  - petstore_versioning
+  - postman_echo
+  # - postman_echo_jwt
+  # - postman_echo_oauth2
+  - postman_mocking
+  - multiple_tenants
+  - security_alias
+  - 'other (Please specify below)'
+- name: api_project_other
+  displayName: Deploy which other API project?
   type: string
 - name: DESIGN_build_instance
   displayName: Build on which BUILD instance?
@@ -30,7 +48,7 @@ variables:
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
@@ -52,7 +70,10 @@ stages:
       instances:
       - DESIGN
     deployment_sets:
-    - apiProjects:
-      - ${{parameters.apiProject}}
+    - api_projects:
+      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}
+        - ${{parameters.api_project}}
+      - ${{ else }}
+        - ${{parameters.api_project_other}}
       targets:
       - DESIGN

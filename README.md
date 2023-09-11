@@ -1134,7 +1134,7 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | tenant | Tenant in which to deploy the API project |
-| apiProject | Case-sensitive name of the API project to be propagated |
+| api_project | Case-sensitive name of the API project to be propagated |
 | Stages to run | DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
 
 ### deploy_to_config
@@ -1148,7 +1148,7 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | tenant | Tenant in which to deploy the API project |
-| apiProject | Case-sensitive name of the API project to be propagated |
+| api_project | Case-sensitive name of the API project to be propagated |
 
 ### Selecting a specific commit to be deployed
 
@@ -1180,12 +1180,12 @@ The following parameters can/must be provided for this pipeline:
 | Branch | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | tenant | Tenant in which to export the API project |
-| apiProject | Case-sensitive name of the API project to be exported |
+| api_project | Case-sensitive name of the API project to be exported |
 | commitMessage | The change will be committed with this commit message |
 
-### Drop-down list for apiProject
+### Drop-down list for api_project
 
-As an alternative for the apiProject free-text field, it would also be possible to define the names of existing API projects as possible values in the pipeline definition. Azure DevOps would then present a drop-down list which lets the user select the API project to be deployed from a configurable list of candidates which would be more convenient and less error-prone than having to type the full name of the API project correctly in the form entry field. But this candidate list would have to be updated for every new/renamed/removed API project.
+As an alternative for the api_project free-text field, it would also be possible to define the names of existing API projects as possible values in the pipeline definition. Azure DevOps would then present a drop-down list which lets the user select the API project to be deployed from a configurable list of candidates which would be more convenient and less error-prone than having to type the full name of the API project correctly in the form entry field. But this candidate list would have to be updated for every new/renamed/removed API project.
 
 ## Pipelines for API Gateway configurations
 
@@ -1485,7 +1485,7 @@ All five deployment pipeline templates need the following parameters to be set i
 
 | Parameter | README |
 | ------ | ------ |
-| apiProject | Case-sensitive name of the API project to be propagated |
+| api_project | Case-sensitive name of the API project to be propagated |
 | build_environment | Name of the environment definition file in /{tenant}/environments folder for the BUILD environment, e.g., build_environment_demo.json |
 | target_environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, dev_int_environment_demo.json etc. |
 | target_type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
@@ -1497,7 +1497,7 @@ The export pipeline template needs the following parameters:
 
 | Parameter | README |
 | ------ | ------ |
-| apiProject | Case-sensitive name of the API project to be exported |
+| api_project | Case-sensitive name of the API project to be exported |
 | source_environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json |
 | source_type | DESIGN |
 | tenant | playground or realworld |

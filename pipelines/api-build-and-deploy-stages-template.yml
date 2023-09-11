@@ -33,10 +33,10 @@ stages:
       - ${{ each deployment_set in parameters.deployment_sets }}:
         - ${{ each deployment_target in deployment_set.targets }}:
           - ${{ if eq(target_stage.name, deployment_target) }}:
-            - ${{ each apiProject in deployment_set.apiProjects }}:
-              - stage: ${{ deployment_target }}_${{ apiProject }}
+            - ${{ each api_project in deployment_set.api_projects }}:
+              - stage: ${{ deployment_target }}_${{ api_project }}
                 jobs:
-                - deployment: 'Build_${{apiProject}}_for_${{ deployment_target }}_on_${{build_instance}}'
+                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
                   environment: '${{build_instance}}'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
@@ -53,7 +53,7 @@ stages:
                         - download: none
                         - template: /pipelines/api-build-steps-template.yml
                           parameters:
-                            apiProject: ${{apiProject}}
+                            api_project: ${{api_project}}
                             build_environment: "${{build_instance}}_environment.json"
                             target_type: ${{ deployment_target }}
                             prep_condition: ${{true}}
@@ -62,18 +62,18 @@ stages:
                         - template: /pipelines/store-build-template.yml
                           parameters:
                             target_type: ${{ deployment_target }}
-                            apiProject: ${{apiProject}}
+                            api_project: ${{api_project}}
                         - bash: |
-                            echo "##vso[build.addbuildtag]${{apiProject}}"
+                            echo "##vso[build.addbuildtag]${{api_project}}"
                             echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
-                            echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_stage.name}}"
+                            echo "##vso[build.addbuildtag]${{api_project}}_${{parameters.build_stage.name}}"
                           displayName: Add build tags
                         # - template: /pipelines/store-build-artifactory-template.yml
                         #   parameters:
                         #     target_type: $(targetType)
 
                 - ${{ each deploy_instance in target_stage.instances }}:
-                  - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance }}'
+                  - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{ deploy_instance }}'
                     environment: ${{ deploy_instance }}
                     variables:
                     - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
@@ -91,19 +91,19 @@ stages:
                           - template: /pipelines/retrieve-build-template.yml
                             parameters:
                                 target_type: ${{ deployment_target }}
-                                apiProject: ${{apiProject}}
+                                api_project: ${{api_project}}
                           - template: /pipelines/api-deploy-steps-template.yml
                             parameters:
-                              apiProject: ${{apiProject}}
+                              api_project: ${{api_project}}
                               target_environment: ${{ deploy_instance }}_environment.json
                               target_type: ${{ deployment_target }}
                               prep_condition: ${{true}}
                               test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
                               tenant: ${{parameters.tenant}}
                           - bash: |
-                              echo "##vso[build.addbuildtag]${{apiProject}}"
+                              echo "##vso[build.addbuildtag]${{api_project}}"
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
-                              echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance}}"
+                              echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                             displayName: Add build tags
-                    dependsOn: 'Build_${{apiProject}}_for_${{ deployment_target }}_on_${{build_instance}}'
+                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
                     condition: succeeded()

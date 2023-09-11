@@ -1,15 +1,15 @@
 # Pipeline template for apig staging
 
 parameters:
-  apiProject: ''
+  api_project: ''
   source_environment: ''
   source_type: ''
   tenant: ''
 
 steps:
 - bash: |
-    if [ -z "$APIPROJECT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
+    if [ -z "$api_project" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"api_project\""
       echo "##vso[task.complete result=Failed;]"
     fi
     if [ -z "$SOURCE_ENVIRONMENT" ]; then
@@ -25,7 +25,7 @@ steps:
       echo "##vso[task.complete result=Failed;]"
     fi
   env:
-    APIPROJECT: ${{parameters.apiProject}}
+    api_project: ${{parameters.api_project}}
     SOURCE_ENVIRONMENT: ${{parameters.source_environment}}
     SOURCE_TYPE: ${{parameters.source_type}}
     TENANT: ${{parameters.tenant}}
@@ -42,7 +42,7 @@ steps:
 
 - bash: |
    curl -v $(source_environment_insecureflag) \
-          -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
+          -d @"${{parameters.tenant}}/apis/${{parameters.api_project}}/export_payload.json" \
           --output $(Build.BuildId)_export_from_${{parameters.source_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
@@ -55,16 +55,16 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
-    artifactName: '${{parameters.source_type}}_${{parameters.apiProject}}_export'
+    artifactName: '${{parameters.source_type}}_${{parameters.api_project}}_export'
 
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/assets'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
-  displayName: 'Extract the flat representation from the API Deployable for API project ${{parameters.apiProject}}'
+  displayName: 'Extract the flat representation from the API Deployable for API project ${{parameters.api_project}}'
 
 - task: DeleteFiles@1
   inputs:

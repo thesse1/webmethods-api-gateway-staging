@@ -2,7 +2,7 @@
 
 parameters:
   target_type: ''
-  apiProject: ''
+  api_project: ''
 
 
 steps:
@@ -12,16 +12,16 @@ steps:
       echo "##vso[task.complete result=Failed;]"
     fi
     if [ -z "$API_PROJECT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
+      echo "##vso[task.logissue type=error;]Missing template parameter \"api_project\""
       echo "##vso[task.complete result=Failed;]"
     fi
   env:
     TARGET_TYPE: ${{parameters.target_type}}
-    API_PROJECT: ${{parameters.apiProject}}
+    API_PROJECT: ${{parameters.api_project}}
   displayName: Check for required parameters
 
-- publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip"
-  artifact: ${{parameters.target_type}}_${{parameters.apiProject}}
+- publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip"
+  artifact: ${{parameters.target_type}}_${{parameters.api_project}}
   displayName: Build Upload
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
@@ -32,7 +32,7 @@ steps:
 #       {
 #         "files": [
 #           {
-#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip",
+#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip",
 #             "target": "$(artifactoryFolder)/"
 #           }
 #         ]

@@ -1,7 +1,7 @@
 # Pipeline template for apig staging
 
 parameters:
-  apiProject: ''
+  api_project: ''
   build_environment: ''
   target_type: ''
   prep_condition: ''
@@ -10,8 +10,8 @@ parameters:
 
 steps:
 - bash: |
-    if [ -z "$APIPROJECT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"apiProject\""
+    if [ -z "$api_project" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"api_project\""
       echo "##vso[task.complete result=Failed;]"
     fi
     if [ -z "$BUILD_ENVIRONMENT" ]; then
@@ -35,7 +35,7 @@ steps:
       echo "##vso[task.complete result=Failed;]"
     fi
   env:
-    APIPROJECT: ${{parameters.apiProject}}
+    api_project: ${{parameters.api_project}}
     BUILD_ENVIRONMENT: ${{parameters.build_environment}}
     TARGET_TYPE: ${{parameters.target_type}}
     PREP_CONDITION: ${{parameters.prep_condition}}
@@ -45,18 +45,18 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/assets'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/assets'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_import.zip'
+    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip'
     replaceExistingArchive: true
     verbose: true
-  displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.apiProject}}'
+  displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.api_project}}'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_import.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.apiProject}}_BUILD_import'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_BUILD_import'
 
 # - task: FileTransform@1
 #   displayName: 'Replace hostname, ip and port in environment configuration'
@@ -87,7 +87,7 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - bash: |
-    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/scopes.json`"
+    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/scopes.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
@@ -98,7 +98,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
+    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway BUILD'
@@ -106,7 +106,7 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - script: |
-    newman run postman/collections/apitests/${{parameters.tenant}}/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml \
+    newman run postman/collections/apitests/${{parameters.tenant}}/${{parameters.api_project}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml \
     -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -117,8 +117,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml'
-    artifactName: '${{parameters.target_type}}_${{parameters.apiProject}}_test_results'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_test_results'
   condition: ${{parameters.test_condition}}
 
 - task: FileTransform@1
@@ -129,7 +129,7 @@ steps:
     fileType: json
 
 - bash: |
-    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/aliases.json`"
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
@@ -162,8 +162,8 @@ steps:
 
 - bash: |
    curl $(build_environment_insecureflag) \
-          -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
-          --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip \
+          -d @"${{parameters.tenant}}/apis/${{parameters.api_project}}/export_payload.json" \
+          --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
@@ -174,8 +174,8 @@ steps:
 
 # - bash: |
 #    curl $(build_environment_insecureflag) \
-#           -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
-#           --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip \
+#           -d @"${{parameters.tenant}}/apis/${{parameters.api_project}}/export_payload.json" \
+#           --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip \
 #           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
 #           --user '$(exporter_user)':'$(exporter_password)' \
 #           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
@@ -187,13 +187,13 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.apiProject }}_export.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.apiProject}}_export'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_export'
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' 
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml'
-    testRunTitle: 'QA environment test results for ${{parameters.apiProject}}_${{parameters.target_type}}'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml'
+    testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_type}}'
     publishRunAttachments: false
   condition: always()

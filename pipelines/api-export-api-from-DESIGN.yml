@@ -10,14 +10,14 @@ parameters:
   values:
   - playground
   - realworld
-- name: apiProject
+- name: api_project
   displayName: Export which API project?
   type: string
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 variables:
 - group: 'Project Configuration'
@@ -25,7 +25,7 @@ variables:
 stages:
 - stage: DESIGN
   jobs:
-  - deployment: 'Export_${{parameters.apiProject}}_from_API_Gateway_DESIGN'
+  - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_DESIGN'
     environment: 'DESIGN'
     variables:
     - group: ${{parameters.tenant}}_DESIGN_users
@@ -42,7 +42,7 @@ stages:
             clean: "true"
           - template: /pipelines/api-export-api-steps-template.yml
             parameters:
-              apiProject: ${{parameters.apiProject}}
+              api_project: ${{parameters.api_project}}
               source_environment: DESIGN_environment.json
               source_type: DESIGN
               tenant: ${{parameters.tenant}}
@@ -50,7 +50,7 @@ stages:
             parameters:
               commitMessage: ${{parameters.commitMessage}}
           - bash: |
-              echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
               echo "##vso[build.addbuildtag]DESIGN"
-              echo "##vso[build.addbuildtag]${{parameters.apiProject}}_DESIGN"
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}_DESIGN"
             displayName: Add build tags
