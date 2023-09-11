@@ -22,6 +22,12 @@ stages:
     dependsOn: []
     jobs:
     - job: 'Do_nothing'
+      variables:
+      - group: ${{parameters.tenant}}_BUILD_users
+      - group: ${{parameters.tenant}}_${{build_instance}}_users
+      pool:
+        name: '$(pool_name)'
+        vmImage: '$(pool_image)'
   - ${{ each target_stage in parameters.target_stages }}:
     - ${{ if eq(build_instance, target_stage.build_instance) }}:
       - ${{ each deployment_set in parameters.deployment_sets }}:
