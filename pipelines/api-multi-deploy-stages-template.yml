@@ -65,11 +65,11 @@ stages:
                         #     target_type: $(targetType)
 
                 - ${{ each deploy_instance in target_stage.instances }}:
-                  - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance.name }}'
-                    environment: ${{ deploy_instance.name }}
+                  - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ deploy_instance }}'
+                    environment: ${{ deploy_instance }}
                     variables:
                     - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
-                    - group: ${{parameters.tenant}}_${{ deploy_instance.name }}_users
+                    - group: ${{parameters.tenant}}_${{ deploy_instance }}_users
                     pool:
                       name: '$(pool_name)'
                       vmImage: '$(pool_image)'
@@ -87,15 +87,15 @@ stages:
                           - template: /pipelines/api-deploy-steps-template.yml
                             parameters:
                               apiProject: ${{apiProject}}
-                              target_environment: ${{ deploy_instance.name }}_environment.json
+                              target_environment: ${{ deploy_instance }}_environment.json
                               target_type: ${{ deployment_target }}
                               prep_condition: ${{true}}
                               test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
                               tenant: ${{parameters.tenant}}
                           - bash: |
                               echo "##vso[build.addbuildtag]${{apiProject}}"
-                              echo "##vso[build.addbuildtag]${{deploy_instance.name}}"
-                              echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance.name}}"
+                              echo "##vso[build.addbuildtag]${{deploy_instance}}"
+                              echo "##vso[build.addbuildtag]${{apiProject}}_${{deploy_instance}}"
                             displayName: Add build tags
                     dependsOn: 'Build_${{apiProject}}_for_${{ deployment_target }}_on_${{build_instance}}'
                     condition: succeeded()
