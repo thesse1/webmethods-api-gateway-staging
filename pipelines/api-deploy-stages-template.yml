@@ -20,6 +20,7 @@ stages:
 - ${{ each build_instance in parameters.build_stage.instances }}:
   - stage: 'Anchor_Stage_for_${{ build_instance }}'
     dependsOn: []
+    jobs: 'Do_nothing'
   - ${{ each target_stage in parameters.target_stages }}:
     - ${{ if eq(build_instance, target_stage.build_instance) }}:
       - stage: '${{ target_stage.name }}_${{ parameters.apiProject }}'
