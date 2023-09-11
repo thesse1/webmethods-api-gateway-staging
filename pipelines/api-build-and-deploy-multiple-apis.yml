@@ -1,6 +1,15 @@
 # Pipeline for apig staging
 
 trigger: none
+  # branches:
+  #   include:
+  #   - azure-demo
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true
 
 parameters:
 - name: tenant
@@ -10,9 +19,6 @@ parameters:
   values:
   - playground
   - realworld
-- name: apiProject
-  displayName: Deploy which API project?
-  type: string
 - name: DEV_INT_build_instance
   displayName: Build for DEV_INT on which BUILD instance?
   default: BUILD_01
@@ -85,10 +91,10 @@ variables:
 # - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-multi-deploy-stages-template.yml
+- template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     build_stage:
@@ -130,11 +136,35 @@ stages:
       - PROD_EXT_02
     deployment_sets:
     - apiProjects:
-      - ${{parameters.apiProject}}
+      # - number_conversion
+      - ping
+      - odata_tutorial
+      # - star_wars
       targets:
       - DEV_INT
       - DEV_EXT
       - TEST_INT
       - TEST_EXT
       - PROD_INT
+      - PROD_EXT
+
+    - apiProjects:
+      - petstore
+      # - petstore_basicauth
+      - petstore_versioning
+      targets:
+      - DEV_INT
+      - TEST_INT
+      - PROD_INT
+
+    - apiProjects:
+      - postman_echo
+      # - postman_echo_jwt
+      # - postman_echo_oauth2
+      - postman_mocking
+      # - multiple_tenants
+      # - security_alias
+      targets:
+      - DEV_EXT
+      - TEST_EXT
       - PROD_EXT

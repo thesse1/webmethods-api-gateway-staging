@@ -33,7 +33,7 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
 
 stages:
-- template: /pipelines/api-multi-deploy-stages-template.yml
+- template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
     build_stage:
