@@ -62,7 +62,7 @@ stages:
                       apiProject: ${{parameters.apiProject}}
                   - bash: |
                       echo "##vso[build.addbuildtag]${{parameters.apiProject}}"
-                      echo "##vso[build.addbuildtag]${{build_instance}}
+                      echo "##vso[build.addbuildtag]${{build_instance}}"
                       echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{build_instance}}"
                     displayName: Add build tags
                   # - template: /pipelines/store-build-artifactory-template.yml
