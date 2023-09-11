@@ -24,7 +24,7 @@ stages:
     - ${{ if eq(build_instance, target_stage.build_instance) }}:
       - stage: '${{ target_stage.name }}_${{ parameters.apiProject }}'
         jobs:
-        - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}_on_'
+        - deployment: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}_on_${{build_instance}}'
           environment: '${{build_instance}}'
           variables:
           - group: ${{parameters.tenant}}_BUILD_users
@@ -94,5 +94,5 @@ stages:
                       echo "##vso[build.addbuildtag]${{instance}}"
                       echo "##vso[build.addbuildtag]${{parameters.apiProject}}_${{instance}}"
                     displayName: Add build tags
-            dependsOn: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}'
+            dependsOn: 'Build_${{parameters.apiProject}}_for_${{ target_stage.name }}_on_${{build_instance}}'
             condition: succeeded()
