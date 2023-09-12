@@ -35,6 +35,7 @@ stages:
           - ${{ if eq(target_stage.name, deployment_target) }}:
             - ${{ each api_project in deployment_set.api_projects }}:
               - stage: ${{ deployment_target }}_${{ api_project }}
+                dependsOn: []
                 jobs:
                 - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
                   variables:
