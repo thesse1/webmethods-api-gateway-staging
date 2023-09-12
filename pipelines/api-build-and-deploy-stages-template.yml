@@ -36,7 +36,7 @@ stages:
             - ${{ each api_project in deployment_set.api_projects }}:
               - stage: ${{ deployment_target }}_${{ api_project }}
                 jobs:
-                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_$(Agent.Name)'
+                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}'
                   environment: '$(Agent.Name)'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
@@ -105,5 +105,5 @@ stages:
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
                               echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                             displayName: Add build tags
-                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_$(Agent.Name)'
+                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}'
                     condition: succeeded()
