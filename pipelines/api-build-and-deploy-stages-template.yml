@@ -37,7 +37,7 @@ stages:
               - stage: ${{ deployment_target }}_${{ api_project }}
                 jobs:
                 - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{ variables.Agent.Name }}'
-                  environment: '${{ variables.Agent.Name }}'
+                  # environment: '${{ variables.Agent.Name }}'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
                   pool:
