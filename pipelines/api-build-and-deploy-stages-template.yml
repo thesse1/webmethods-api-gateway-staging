@@ -41,8 +41,8 @@ stages:
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
                   pool:
-                    name: '$(pool_name)'
-                    vmImage: '$(pool_image)'
+                    name: '$(build_pool_name)'
+                    vmImage: '$(build_pool_image)'
                   strategy:
                     runOnce:    #rolling, canary are the other strategies that are supported
                       deploy:
