@@ -110,5 +110,5 @@ stages:
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
                               echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                             displayName: Add build tags
-                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{ variables.Agent.Name }}'
+                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}'
                     condition: succeeded()
