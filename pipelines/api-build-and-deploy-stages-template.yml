@@ -36,8 +36,8 @@ stages:
             - ${{ each api_project in deployment_set.api_projects }}:
               - stage: ${{ deployment_target }}_${{ api_project }}
                 jobs:
-                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}'
-                  environment: '$(Agent.Name)'
+                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{ variables.Agent.Name }}'
+                  environment: '${{ variables.Agent.Name }}'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
                   pool:
@@ -54,7 +54,7 @@ stages:
                         - template: /pipelines/api-build-steps-template.yml
                           parameters:
                             api_project: ${{api_project}}
-                            build_environment: "$(Agent.Name)_environment.json"
+                            build_environment: "${{ variables.Agent.Name }}_environment.json"
                             target_type: ${{ deployment_target }}
                             prep_condition: ${{true}}
                             test_condition: ${{ ne(deployment_target, 'DESIGN') }}
@@ -105,5 +105,5 @@ stages:
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
                               echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                             displayName: Add build tags
-                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}'
+                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{ variables.Agent.Name }}'
                     condition: succeeded()
