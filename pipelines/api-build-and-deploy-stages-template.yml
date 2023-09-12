@@ -6,9 +6,6 @@ parameters:
   values:
   - playground
   - realworld
-- name: build_stage
-  displayName: Build on which stage?
-  type: object
 - name: target_stages
   displayName: Deploy to which stages?
   type: object
@@ -67,8 +64,8 @@ stages:
                       api_project: ${{api_project}}
                   - bash: |
                       echo "##vso[build.addbuildtag]${{api_project}}"
-                      echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
-                      echo "##vso[build.addbuildtag]${{api_project}}_${{parameters.build_stage.name}}"
+                      echo "##vso[build.addbuildtag]$(agent_name)"
+                      echo "##vso[build.addbuildtag]${{api_project}}_$(agent_name)"
                     displayName: Add build tags
                   # - template: /pipelines/store-build-artifactory-template.yml
                   #   parameters:
