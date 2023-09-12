@@ -40,6 +40,7 @@ stages:
                   environment: '${{build_instance}}'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
+                  - group: ${{parameters.tenant}}_${{build_instance}}_users
                   pool:
                     name: '$(pool_name)'
                     vmImage: '$(pool_image)'
