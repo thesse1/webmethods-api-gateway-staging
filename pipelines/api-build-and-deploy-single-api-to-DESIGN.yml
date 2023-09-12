@@ -15,8 +15,8 @@ parameters:
   type: string
   values:
   # - number_conversion
-  - odata_tutorial
   - ping
+  - odata_tutorial
   # - star_wars
   - petstore
   - petstore_basicauth
