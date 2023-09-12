@@ -56,7 +56,6 @@ stages:
       - BUILD_07
     target_stages:
     - name: DESIGN
-      build_instance: ${{ parameters.DESIGN_build_instance }}
       instances:
       - DESIGN
     deployment_sets:

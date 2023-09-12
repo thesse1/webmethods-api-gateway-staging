@@ -56,28 +56,22 @@ stages:
       - BUILD_07
     target_stages:
     - name: DEV_INT
-      build_instance: ${{ parameters.DEV_INT_build_instance }}
       instances:
       - DEV_INT
     - name: DEV_EXT
-      build_instance: ${{ parameters.DEV_EXT_build_instance }}
       instances:
       - DEV_EXT
     - name: TEST_INT
-      build_instance: ${{ parameters.TEST_INT_build_instance }}
       instances:
       - TEST_INT
     - name: TEST_EXT
-      build_instance: ${{ parameters.TEST_EXT_build_instance }}
       instances:
       - TEST_EXT
     - name: PROD_INT
-      build_instance: ${{ parameters.PROD_INT_build_instance }}
       instances:
       - PROD_INT_01
       - PROD_INT_02
     - name: PROD_EXT
-      build_instance: ${{ parameters.PROD_EXT_build_instance }}
       instances:
       - PROD_EXT_01
       - PROD_EXT_02
