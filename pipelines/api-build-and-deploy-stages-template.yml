@@ -17,27 +17,27 @@ parameters:
   type: object
 
 stages:
-- ${{ each build_instance in parameters.build_stage.instances }}:
-  - stage: 'Anchor_Stage_for_${{ build_instance }}'
-    dependsOn: []
-    jobs:
-    - job: 'Do_nothing'
-      variables:
-      - group: ${{parameters.tenant}}_BUILD_users
-      - group: ${{parameters.tenant}}_${{build_instance}}_users
-      pool:
-        name: '$(pool_name)'
-        vmImage: '$(pool_image)'
+# - ${{ each build_instance in parameters.build_stage.instances }}:
+#   - stage: 'Anchor_Stage_for_${{ build_instance }}'
+#     dependsOn: []
+#     jobs:
+#     - job: 'Do_nothing'
+#       variables:
+#       - group: ${{parameters.tenant}}_BUILD_users
+#       - group: ${{parameters.tenant}}_${{build_instance}}_users
+#       pool:
+#         name: '$(pool_name)'
+#         vmImage: '$(pool_image)'
   - ${{ each target_stage in parameters.target_stages }}:
-    - ${{ if eq(build_instance, target_stage.build_instance) }}:
+    # - ${{ if eq(build_instance, target_stage.build_instance) }}:
       - ${{ each deployment_set in parameters.deployment_sets }}:
         - ${{ each deployment_target in deployment_set.targets }}:
           - ${{ if eq(target_stage.name, deployment_target) }}:
             - ${{ each api_project in deployment_set.api_projects }}:
               - stage: ${{ deployment_target }}_${{ api_project }}
                 jobs:
-                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
-                  environment: '${{build_instance}}'
+                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_$(Agent.Name)'
+                  environment: '$(Agent.Name)'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
                   pool:
@@ -54,7 +54,7 @@ stages:
                         - template: /pipelines/api-build-steps-template.yml
                           parameters:
                             api_project: ${{api_project}}
-                            build_environment: "${{build_instance}}_environment.json"
+                            build_environment: "$(Agent.Name)_environment.json"
                             target_type: ${{ deployment_target }}
                             prep_condition: ${{true}}
                             test_condition: ${{ ne(deployment_target, 'DESIGN') }}
@@ -105,5 +105,5 @@ stages:
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
                               echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                             displayName: Add build tags
-                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
+                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_$(Agent.Name)'
                     condition: succeeded()
