@@ -55,7 +55,7 @@ stages:
                             agentName=$(echo $AGENT_NAME)
                             echo "Agent Name: $agentName"
                             echo "##vso[task.setvariable variable=agent_name]$agentName"  # Set an output variable
-                          name: Retrieve agent name
+                          displayName: Retrieve agent name
                         - template: /pipelines/api-build-steps-template.yml
                           parameters:
                             api_project: ${{api_project}}
