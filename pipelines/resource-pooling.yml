@@ -23,12 +23,10 @@ stages:
           az config set extension.use_dynamic_install=yes_without_prompt
           echo DEBUG login
           echo $(System.AccessToken) | az devops login
-          echo DEBUG add extension
-          az extension add --name azure-devops
           echo DEBUG 01
-          az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-devops --group-name BUILD_instances --query [0].id
+          az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id
           echo DEBUG 02
-          group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-devops --group-name BUILD_instances --query [0].id)
+          group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
           echo DEBUG 03
 
           resource_name="null"
@@ -36,9 +34,9 @@ stages:
           # Loop until a resource is available
           while [ "$resource_name" == "null" ]; do
             echo DEBUG 04
-            az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-devops --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]" 
+            az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]" 
             echo DEBUG 05
-            resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-devops --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]")
+            resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]")
             echo DEBUG 06
 
             if [ "$resource_name" == "null" ]; then
@@ -47,7 +45,7 @@ stages:
             fi
           done
 
-          az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-devops --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
+          az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
 
           echo "Selected Resource: $resource_name"
           echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
