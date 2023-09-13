@@ -17,7 +17,7 @@ stages:
         echo DEBUG set config
         az config set extension.use_dynamic_install=yes_without_prompt
         echo DEBUG login
-        echo "chgi6f3x6xt2u4nadxsmpid6olocubm7ypp6cjgrppasj4s4d54a" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+        echo "wor2jfjxbc5em3v4qdqvqwmwlvuyztwxr2iq2bsl72bcfgz4y5va" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
         echo DEBUG 01
         az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id
         echo DEBUG 02
