@@ -22,7 +22,45 @@ stages:
             - stage: ${{ deployment_target }}_${{ api_project }}
               dependsOn: []
               jobs:
+              - job: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
+                variables:
+                - group: ${{parameters.tenant}}_BUILD_users
+                pool:
+                  name: '$(pool_name)'
+                  vmImage: '$(pool_image)'
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                - download: none
+                - script: |
+                    echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+                    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
+                    resource_name="null"
+                    # Loop until resource claiming is successful
+                    while [ "$resource_name" == "null" ]; do
+                      # Loop until a resource is available
+                      while [ "$resource_name" == "null" ]; do
+                        resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+                        echo $resource_name
+                        if [ "$resource_name" == "null" ]; then
+                          echo "No available resource found. Waiting..."
+                          sleep 60
+                        fi
+                      done
+                      az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --yes
+                      if [ $? -ne 0 ]; then
+                        resource_name="null"
+                      fi
+                    done
+                    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name"_claimed --value "Claimed by $(Build.DefinitionName)-$(Build.BuildNumber)"
+                    echo "Selected Resource: $resource_name"
+                    echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
+                  displayName: 'Claim Resource'
+
               - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
+                dependsOn: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
+                condition: succeeded()
                 variables:
                 - group: ${{parameters.tenant}}_BUILD_users
                 pool:

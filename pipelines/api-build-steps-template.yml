@@ -30,31 +30,6 @@ steps:
 #     targetFiles: '**/$(ClaimedResource)_environment.json'
 #     fileType: json
 
-- script: |
-    echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-    resource_name="null"
-    # Loop until resource claiming is successful
-    while [ "$resource_name" == "null" ]; do
-      # Loop until a resource is available
-      while [ "$resource_name" == "null" ]; do
-        resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
-        echo $resource_name
-        if [ "$resource_name" == "null" ]; then
-          echo "No available resource found. Waiting..."
-          sleep 60
-        fi
-      done
-      az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --yes
-      if [ $? -ne 0 ]; then
-        resource_name="null"
-      fi
-    done
-    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name"_claimed --value "Claimed by $(Build.DefinitionName)-$(Build.BuildNumber)"
-    echo "Selected Resource: $resource_name"
-    echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
-  displayName: 'Claim Resource'
-
 - bash: |
    echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
@@ -162,18 +137,24 @@ steps:
   env:
     no_proxy: $(build_environment_hostname)
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_export'
+
+- bash: |
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+    echo "##vso[build.addbuildtag]$(ClaimedResource)"
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(ClaimedResource)"
+  displayName: Add build tags
+
 - script: |
     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
     az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)_claimed" --yes
     az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
     echo "Released Claimed Resource: $(ClaimedResource)"
   displayName: 'Release Resource'
-  condition: always()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_export'
+  condition: always() # Release lock even if build was not successful
 
 - task: PublishTestResults@2
   inputs:
@@ -182,9 +163,3 @@ steps:
     testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_type}}'
     publishRunAttachments: false
   condition: always()
-
-- bash: |
-    echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-    echo "##vso[build.addbuildtag]$(ClaimedResource)"
-    echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(ClaimedResource)"
-  displayName: Add build tags
