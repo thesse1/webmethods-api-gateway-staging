@@ -20,6 +20,7 @@ stages:
         - ${{ if eq(target_stage.name, deployment_target) }}:
           - ${{ each api_project in deployment_set.api_projects }}:
             - stage: ${{ deployment_target }}_${{ api_project }}
+              lockBehavior: sequential
               dependsOn: []
               jobs:
               - job: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
