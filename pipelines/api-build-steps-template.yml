@@ -175,7 +175,7 @@ steps:
   condition: always()
 
 - bash: |
-    echo "##vso[build.addbuildtag]${{api_project}}"
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}"
     echo "##vso[build.addbuildtag]$(ClaimedResource)"
-    echo "##vso[build.addbuildtag]${{api_project}}_$(ClaimedResource)"
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(ClaimedResource)"
   displayName: Add build tags
