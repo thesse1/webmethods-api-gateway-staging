@@ -16,7 +16,7 @@ stages:
         echo DEBUG 01
         # Azure DevOps organization URL
         echo DEBUG 02
-        org_url="https://dev.azure.com/pswm-inno-api-management"
+        org_url="https://dev.azure.com/pswm-inno-api-management/azure-demo"
         echo DEBUG 03
 
         # Personal Access Token, PAT, with appropriate permissions
