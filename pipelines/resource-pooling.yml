@@ -13,6 +13,7 @@ stages:
   - job: ResourceManagementJob
     steps:
     - bash: |
+        echo Start
         # Azure DevOps organization URL
         org_url="https://dev.azure.com/your-org-name"
 
