@@ -29,7 +29,7 @@ stages:
                 steps:
                 - bash: |
                     echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
-                    name: passOutput
+                  name: passOutput
               - job: B
                 pool:
                   name: '$(pool_name)'
