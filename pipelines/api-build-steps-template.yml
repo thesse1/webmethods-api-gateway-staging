@@ -150,8 +150,7 @@ steps:
 
 - script: |
     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-    az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)_claimed" --yes
-    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
+    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
     echo "Released Claimed Resource: $(ClaimedResource)"
   displayName: 'Release Resource'
   condition: always() # Release lock even if build was not successful
