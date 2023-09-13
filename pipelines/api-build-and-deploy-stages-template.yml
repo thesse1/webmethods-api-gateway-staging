@@ -26,8 +26,8 @@ stages:
                 variables:
                 - group: ${{parameters.tenant}}_BUILD_users
                 pool:
-                  name: '$(build_pool_name)'
-                  vmImage: '$(build_pool_image)'
+                  name: '$(pool_name)'
+                  vmImage: '$(pool_image)'
                 steps:
                 - checkout: self
                   submodules: "true"
