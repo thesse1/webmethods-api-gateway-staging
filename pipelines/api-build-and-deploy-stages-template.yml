@@ -22,105 +22,31 @@ stages:
             - stage: ${{ deployment_target }}_${{ api_project }}
               dependsOn: []
               jobs:
-              - job: A
-                pool:
-                  name: '$(pool_name)'
-                  vmImage: '$(pool_image)'
-                steps:
-                - bash: |
-                    echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]ENV_B"
-                  name: passOutput
-              - deployment: B
-                pool:
-                  name: '$(pool_name)'
-                  vmImage: '$(pool_image)'
-                dependsOn: A
+              - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
                 variables:
-                  myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
-                environment: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]
-                strategy:
-                  runOnce:    #rolling, canary are the other strategies that are supported
-                    deploy:
-                      steps:
-                      - bash: |
-                          echo $(myVarFromJobA)
-              # - job: 'Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
-              - job: 'Claim_resource'
-                pool:
-                  name: '$(pool_name)'
-                  vmImage: '$(pool_image)'
-                steps:
-                - script: |
-                    echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-                    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-                    resource_name="null"
-                    # Loop until resource claiming is successful
-                    while [ "$resource_name" == "null" ]; do
-                      # Loop until a resource is available
-                      while [ "$resource_name" == "null" ]; do
-                        resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
-
-                        if [ "$resource_name" == "null" ]; then
-                          echo "No available resource found. Waiting..."
-                          sleep 60
-                        fi
-                      done
-                      az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --yes
-                      if [ $? -ne 0 ]; then
-                        resource_name="null"
-                      fi
-                    done
-                    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name"_claimed --value "Claimed by $(Build.BuildNumber)"
-                    echo "Selected Resource: $resource_name"
-                    echo "##vso[task.setvariable variable=ClaimedResource;isoutput=true]$resource_name"
-                  name: claim_resource
-                  displayName: 'Claim Resource'
-              - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}'
-                dependsOn: 'Claim_resource'
-                # environment: $[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource']
-                environment: BUILD_instances
-                variables:
-                - name: fromA
-                  value: $[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource'] ]
                 - group: ${{parameters.tenant}}_BUILD_users
-                # - group: ${{parameters.tenant}}_$(fromA)_users
                 pool:
-                  name: '$(pool_name)'
-                  vmImage: '$(pool_image)'
-                strategy:
-                  runOnce:    #rolling, canary are the other strategies that are supported
-                    deploy:
-                      steps:
-                      - checkout: self
-                        submodules: "true"
-                        persistCredentials: "true"
-                      - download: none
-                      - template: /pipelines/api-build-steps-template.yml
-                        parameters:
-                          api_project: ${{api_project}}
-                          target_type: ${{ deployment_target }}
-                          prep_condition: ${{true}}
-                          test_condition: ${{ ne(deployment_target, 'DESIGN') }}
-                          tenant: ${{parameters.tenant}}
-                      - template: /pipelines/store-build-template.yml
-                        parameters:
-                          target_type: ${{ deployment_target }}
-                          api_project: ${{api_project}}
-                      # - template: /pipelines/store-build-artifactory-template.yml
-                      #   parameters:
-                      #     target_type: $(targetType)
-              - job: 'Release_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
-                dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}'
-                pool:
-                  name: '$(pool_name)'
-                  vmImage: '$(pool_image)'
+                  name: '$(build_pool_name)'
+                  vmImage: '$(build_pool_image)'
                 steps:
-                - script: |
-                    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-                    az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)_claimed" --yes
-                    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
-                    echo "Released Claimed Resource: $(ClaimedResource)"
-                  displayName: 'Release Resource'
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                - download: none
+                - template: /pipelines/api-build-steps-template.yml
+                  parameters:
+                    api_project: ${{api_project}}
+                    target_type: ${{ deployment_target }}
+                    prep_condition: ${{true}}
+                    test_condition: ${{ ne(deployment_target, 'DESIGN') }}
+                    tenant: ${{parameters.tenant}}
+                - template: /pipelines/store-build-template.yml
+                  parameters:
+                    target_type: ${{ deployment_target }}
+                    api_project: ${{api_project}}
+                # - template: /pipelines/store-build-artifactory-template.yml
+                #   parameters:
+                #     target_type: $(targetType)
 
               - ${{ each deploy_instance in target_stage.instances }}:
                 - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{ deploy_instance }}'
