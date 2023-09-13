@@ -31,13 +31,13 @@ stages:
                     echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
                   name: passOutput
               - deployment: B
-                environment: B
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
                 dependsOn: A
                 variables:
                   myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
+                environment: $(myVarFromJobA)
                 strategy:
                   runOnce:    #rolling, canary are the other strategies that are supported
                     deploy:
