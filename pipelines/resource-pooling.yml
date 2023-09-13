@@ -15,7 +15,7 @@ stages:
     steps:
     - script: |
         echo DEBUG set config
-        az config set extension.use_dynamic_install=yes_without_prompt
+        # az config set extension.use_dynamic_install=yes_without_prompt
         echo DEBUG login
         echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
         echo DEBUG 01
@@ -54,8 +54,7 @@ stages:
       displayName: 'Use Resource'
 
     - script: |
-        # Release the claimed resource
-        # Example: Release the claimed resource from the environment
-        az pipelines resource release --name ResourcePoolEnvironment --type EnvironmentResource --identifier "$(ClaimedResource)"
+        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
+        az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $(ClaimedResource)" --value "Available"
         echo "Released Claimed Resource: $(ClaimedResource)"
       displayName: 'Release Resource'
