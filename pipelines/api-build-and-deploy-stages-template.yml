@@ -19,7 +19,7 @@ stages:
       - ${{ each deployment_target in deployment_set.targets }}:
         - ${{ if eq(target_stage.name, deployment_target) }}:
           - ${{ each api_project in deployment_set.api_projects }}:
-            - stage: ${{ deployment_target }}_${{ api_project }}
+            - stage: ${{ deployment_target }}_${{ api_project }}_Claim_resource
               lockBehavior: sequential
               dependsOn: []
               jobs:
@@ -60,12 +60,15 @@ stages:
                   name: claim_resource
                   displayName: 'Claim Resource'
 
+            - stage: ${{ deployment_target }}_${{ api_project }}
+              dependsOn: ${{ deployment_target }}_${{ api_project }}_Claim_resource
+              jobs:
               - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
                 dependsOn: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
                 condition: succeeded()
                 variables:
                 - name: ClaimedResource
-                  value: $[ dependencies.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource'] ]
+                  value: $[ stageDependencies.${{ deployment_target }}_${{ api_project }}_Claim_resource.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource'] ]
                 - group: ${{parameters.tenant}}_BUILD_users
                 pool:
                   name: '$(pool_name)'
