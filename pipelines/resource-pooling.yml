@@ -14,6 +14,8 @@ stages:
   - job: ResourceManagementJob
     steps:
     - bash: |
+        az extension add --name azure-devops
+
         # Define the name of the variable group containing resources
         variable_group_name="BUILD_instances"
 
