@@ -16,7 +16,7 @@ stages:
     - bash: |
         az extension add --name azure-devops
         echo DEBUG 01
-        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management -group-name BUILD_instances --query [0].id
+        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --group-name BUILD_instances --query [0].id
         echo DEBUG 02
         group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --group-name BUILD_instances --query [0].id)
         echo DEBUG 03
