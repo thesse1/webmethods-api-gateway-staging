@@ -1,5 +1,6 @@
 variables:
 - group: 'Project Configuration'
+- group: 'BUILD_instances' # If you want to use a variable group for connection details
 - name: ClaimedResource
   value: ''
 
@@ -13,53 +14,34 @@ stages:
   - job: ResourceManagementJob
     steps:
     - bash: |
-        echo DEBUG 01
-        # Azure DevOps organization URL
-        echo DEBUG 02
-        org_url="https://dev.azure.com/pswm-inno-api-management/azure-demo"
-        echo DEBUG 03
-
-        # Personal Access Token, PAT, with appropriate permissions
-        pat="4ybfq4hxjrxdo3ffbhbwnu5krytrfwmafvlyqwz6all42y6zseka"
-
-        echo DEBUG 04
-        # Candidate environment resource names
-        candidates=("BUILD_01" "BUILD_02" "BUILD_03" "BUILD_04" "BUILD_05" "BUILD_06" "BUILD_07")
+        # Define the name of the variable group containing resources
+        variable_group_name="BUILD_instances"
 
         # Initialize variables
         selectedResource=""
-        claimedResource=""
 
-        echo DEBUG 05
-        # Loop through candidates and claim the first available resource
-        for candidate in "${candidates[@]}"; do
-          # Query the availability of the candidate resource
-          echo DEBUG 06
-          availability_response=$(curl -s -H "Authorization: Basic $pat" "https://dev.azure.com/pswm-inno-api-management/azure-demo/_apis/distributedtask/environments?api-version=7.2-preview.1")
-          echo $availability_response
-
-          # Check if the resource is unallocated
-          echo DEBUG 07
-          status=$(echo "$availability_response" | jq -r '.status')
-          echo DEBUG 08
-          if [ "$status" == "unallocated" ]; then
-            # Claim the resource
-            claim_response=$(curl -X PATCH -H "Authorization: Basic $pat" -H "Content-Type: application/json" -d '{"status": "allocated"}' "$org_url/_apis/resourcecontainers/pools/PoolName/resources/$candidate?api-version=6.0-preview.1")
-
-            # Parse the response to get the claimed resource name
-            claimedResource=$(echo "$claim_response" | jq -r '.name')
+        # Loop through available resources and claim the first one
+        for i in {1..7}; do
+          resource_variable="BUILD_0$i"
+          resource_status=$(az pipelines variable-group variable show --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name" --query 'value' --output tsv)
+          if [ "$resource_status" == "Available" ]; then
+            # Claim the resource by updating its status
+            az pipelines variable-group variable update --group-name "$variable_group_name" --name "$resource_variable" --new-value "Claimed" --org "$org_url" --project "$project_name"
+            selectedResource="$resource_variable"
             break
           fi
         done
 
-        if [ -z "$claimedResource" ]; then
-          echo "No available resources found among the candidates. Exiting..."
+        if [ -z "$selectedResource" ]; then
+          echo "No available resources found. Exiting..."
           exit 1
         fi
 
-        echo "Selected Resource: $claimedResource"
-        echo "##vso[task.setvariable variable=ClaimedResource]$claimedResource"
+        echo "Selected Resource: $selectedResource"
+        echo "##vso[task.setvariable variable=ClaimedResource]$selectedResource"
       displayName: 'Claim Resource'
+
+    # Add steps to use and release the claimed resource
 
     - script: |
         # Use the claimed resource, e.g., in your build or deployment process
