@@ -61,7 +61,7 @@ stages:
                 - name: fromA
                   value: $[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource'] ]
                 - group: ${{parameters.tenant}}_BUILD_users
-                - group: ${{parameters.tenant}}_$[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource'] ]_users
+                - group: ${{parameters.tenant}}_$(fromA))_users
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
