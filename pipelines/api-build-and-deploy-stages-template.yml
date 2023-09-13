@@ -62,10 +62,9 @@ stages:
 
             - stage: ${{ deployment_target }}_${{ api_project }}
               dependsOn: ${{ deployment_target }}_${{ api_project }}_Claim_resource
+              condition: succeeded()
               jobs:
               - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
-                dependsOn: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
-                condition: succeeded()
                 variables:
                 - name: ClaimedResource
                   value: $[ stageDependencies.${{ deployment_target }}_${{ api_project }}_Claim_resource.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource'] ]
