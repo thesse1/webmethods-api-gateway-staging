@@ -22,7 +22,8 @@ stages:
             - stage: ${{ deployment_target }}_${{ api_project }}
               dependsOn: []
               jobs:
-              - job: 'Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
+              # - job: 'Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
+              - job: 'Claim_resource'
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
@@ -53,12 +54,12 @@ stages:
                   name: claim_resource
                   displayName: 'Claim Resource'
               - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}'
-                dependsOn: 'Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
-                # environment: $[ dependencies.Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource']
+                dependsOn: 'Claim_resource'
+                # environment: $[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource']
                 environment: BUILD_instances
                 variables:
                 - group: ${{parameters.tenant}}_BUILD_users
-                - group: ${{parameters.tenant}}_$[ dependencies.Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource']_users
+                - group: ${{parameters.tenant}}_$[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource']_users
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
@@ -85,6 +86,7 @@ stages:
                       #   parameters:
                       #     target_type: $(targetType)
               - job: 'Release_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
+                dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}'
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
