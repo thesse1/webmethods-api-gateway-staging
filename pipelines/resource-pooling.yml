@@ -34,10 +34,13 @@ stages:
         # Loop through candidates and claim the first available resource
         for candidate in "${candidates[@]}"; do
           # Query the availability of the candidate resource
+          echo DEBUG 06
           availability_response=$(curl -s -H "Authorization: Basic $pat" "$org_url/_apis/resourcecontainers/pools/PoolName/resources/$candidate?api-version=6.0-preview.1")
 
           # Check if the resource is unallocated
+          echo DEBUG 07
           status=$(echo "$availability_response" | jq -r '.status')
+          echo DEBUG 08
           if [ "$status" == "unallocated" ]; then
             # Claim the resource
             claim_response=$(curl -X PATCH -H "Authorization: Basic $pat" -H "Content-Type: application/json" -d '{"status": "allocated"}' "$org_url/_apis/resourcecontainers/pools/PoolName/resources/$candidate?api-version=6.0-preview.1")
