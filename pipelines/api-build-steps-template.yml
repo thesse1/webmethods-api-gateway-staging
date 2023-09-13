@@ -34,16 +34,23 @@ steps:
     echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
     resource_name="null"
-    # Loop until a resource is available
+    # Loop until resource claiming is successful
     while [ "$resource_name" == "null" ]; do
-      resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+      # Loop until a resource is available
+      while [ "$resource_name" == "null" ]; do
+        resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
 
-      if [ "$resource_name" == "null" ]; then
-        echo "No available resource found. Waiting..."
-        sleep 60
+        if [ "$resource_name" == "null" ]; then
+          echo "No available resource found. Waiting..."
+          sleep 60
+        fi
+      done
+      az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name
+      if [ $? -ne 0 ]; then
+        resource_name="null"
       fi
     done
-    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
+    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name"_claimed --value "Claimed by $(Build.BuildNumber)"
     echo "Selected Resource: $resource_name"
     echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
   displayName: 'Claim Resource'
@@ -157,7 +164,8 @@ steps:
 
 - script: |
     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
+    az pipelines variable-group variable delete --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)_claimed"
+    az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
     echo "Released Claimed Resource: $(ClaimedResource)"
   displayName: 'Release Resource'
 
