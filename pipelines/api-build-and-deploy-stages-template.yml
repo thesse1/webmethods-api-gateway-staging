@@ -22,6 +22,18 @@ stages:
             - stage: ${{ deployment_target }}_${{ api_project }}
               dependsOn: []
               jobs:
+              - job: A
+                steps:
+                - bash: |
+                    echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
+                    name: passOutput
+              - job: B
+                dependsOn: A
+                variables:
+                  myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
+                steps:
+                - bash: |
+                    echo $(myVarFromJobA)
               # - job: 'Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
               - job: 'Claim_resource'
                 pool:
@@ -61,7 +73,7 @@ stages:
                 - name: fromA
                   value: $[ dependencies.Claim_resource.outputs['claim_resource.ClaimedResource'] ]
                 - group: ${{parameters.tenant}}_BUILD_users
-                - group: ${{parameters.tenant}}_$(fromA)_users
+                # - group: ${{parameters.tenant}}_$(fromA)_users
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
