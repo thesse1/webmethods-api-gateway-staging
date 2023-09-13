@@ -22,6 +22,7 @@ stages:
         # Personal Access Token, PAT, with appropriate permissions
         pat="y5yrpummmfeps33yjzsmbqjep4pv2ugpdvettpa3fysqsbrba5fa"
 
+        echo DEBUG 04
         # Candidate environment resource names
         candidates=("BUILD_01" "BUILD_02" "BUILD_03" "BUILD_04" "BUILD_05" "BUILD_06" "BUILD_07")
 
@@ -29,6 +30,7 @@ stages:
         selectedResource=""
         claimedResource=""
 
+        echo DEBUG 05
         # Loop through candidates and claim the first available resource
         for candidate in "${candidates[@]}"; do
           # Query the availability of the candidate resource
