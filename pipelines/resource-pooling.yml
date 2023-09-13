@@ -15,36 +15,29 @@ stages:
     steps:
     - bash: |
         az extension add --name azure-devops
-        az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]" 
-        resource=$(az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]")
-        echo $resource
+        az pipelines variable-group list --group-name BUILD_instances --query [0].id
+        group_id=$(az pipelines variable-group list --group-name BUILD_instances --query [0].id)
+        # az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]"
+        # resource=$(az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]")
+        # echo $resource
 
-        # Define the name of the variable group containing resources
-        variable_group_name="BUILD_instances"
+        resource_name="null"
 
-        # Initialize variables
-        selectedResource=""
+        # Loop until a resource is available
+        while [ $resource_name .eq "null" ]; do
+          az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]" 
+          resource_name=$(az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]")
 
-        # Loop through available resources and claim the first one
-        for i in {1..7}; do
-          resource_variable="BUILD_0$i"
-          az pipelines variable-group variable list --group-id  --name "$resource_variable" --org "$org_url" --project "$project_name"
-          resource_status=$(az pipelines variable-group variable list --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name" --query 'value' --output tsv)
-          if [ "$resource_status" == "Available" ]; then
-            # Claim the resource by updating its status
-            az pipelines variable-group variable update --group-name "$variable_group_name" --name "$resource_variable" --new-value "Claimed" --org "$org_url" --project "$project_name"
-            selectedResource="$resource_variable"
-            break
+          if [ $resource_name .eq "null" ]; then
+            echo "No available resource found. Waiting..."
+            sleep 60
           fi
         done
 
-        if [ -z "$selectedResource" ]; then
-          echo "No available resources found. Exiting..."
-          exit 1
-        fi
+        az pipelines variable-group variable update --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
 
-        echo "Selected Resource: $selectedResource"
-        echo "##vso[task.setvariable variable=ClaimedResource]$selectedResource"
+        echo "Selected Resource: $resource_name"
+        echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
       displayName: 'Claim Resource'
 
     # Add steps to use and release the claimed resource
