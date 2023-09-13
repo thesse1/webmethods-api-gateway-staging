@@ -24,7 +24,6 @@ stages:
               jobs:
               - job: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
                 variables:
-                - group: ${{parameters.tenant}}_BUILD_users
                 - group: BUILD_instances
                 pool:
                   name: '$(pool_name)'
