@@ -13,42 +13,37 @@ stages:
   jobs:
   - job: ResourceManagementJob
     steps:
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'sub-ps-wminno-container-sbx'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          echo DEBUG set config
-          az config set extension.use_dynamic_install=yes_without_prompt
-          echo DEBUG login
-          echo "4qhpmevxa5ubk4hliqr2667niemadddgxgppnx75mrtom34diufq" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-          echo DEBUG 01
-          az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id
-          echo DEBUG 02
-          group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-          echo DEBUG 03
+    - script: |
+        echo DEBUG set config
+        az config set extension.use_dynamic_install=yes_without_prompt
+        echo DEBUG login
+        echo "4qhpmevxa5ubk4hliqr2667niemadddgxgppnx75mrtom34diufq" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+        echo DEBUG 01
+        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id
+        echo DEBUG 02
+        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
+        echo DEBUG 03
 
-          resource_name="null"
+        resource_name="null"
 
-          # Loop until a resource is available
-          while [ "$resource_name" == "null" ]; do
-            echo DEBUG 04
-            az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key"
-            echo DEBUG 05
-            resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
-            echo DEBUG 06
+        # Loop until a resource is available
+        while [ "$resource_name" == "null" ]; do
+          echo DEBUG 04
+          az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key"
+          echo DEBUG 05
+          resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+          echo DEBUG 06
 
-            if [ "$resource_name" == "null" ]; then
-              echo "No available resource found. Waiting..."
-              sleep 60
-            fi
-          done
+          if [ "$resource_name" == "null" ]; then
+            echo "No available resource found. Waiting..."
+            sleep 60
+          fi
+        done
 
-          az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
+        az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
 
-          echo "Selected Resource: $resource_name"
-          echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
+        echo "Selected Resource: $resource_name"
+        echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
       displayName: 'Claim Resource'
 
     # Add steps to use and release the claimed resource
