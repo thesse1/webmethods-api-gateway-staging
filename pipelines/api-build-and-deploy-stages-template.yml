@@ -55,13 +55,16 @@ stages:
                     done
                     az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name"_claimed --value "Claimed by $(Build.DefinitionName)-$(Build.BuildNumber)"
                     echo "Selected Resource: $resource_name"
-                    echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
+                    echo "##vso[task.setvariable variable=ClaimedResource;isoutput=true]$resource_name"
+                  name: claim_resource
                   displayName: 'Claim Resource'
 
               - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
                 dependsOn: 'Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}'
                 condition: succeeded()
                 variables:
+                - name: ClaimedResource
+                  value: $[ dependencies.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource'] ]
                 - group: ${{parameters.tenant}}_BUILD_users
                 pool:
                   name: '$(pool_name)'
