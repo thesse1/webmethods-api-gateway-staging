@@ -38,10 +38,6 @@ steps:
     while [ "$resource_name" == "null" ]; do
       # Loop until a resource is available
       while [ "$resource_name" == "null" ]; do
-        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key"
-        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0]"
-        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ]"
-        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables
         resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
         echo $resource_name
         if [ "$resource_name" == "null" ]; then
@@ -172,6 +168,7 @@ steps:
     az pipelines variable-group variable create --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
     echo "Released Claimed Resource: $(ClaimedResource)"
   displayName: 'Release Resource'
+  condition: always()
 
 - task: PublishBuildArtifacts@1
   inputs:
