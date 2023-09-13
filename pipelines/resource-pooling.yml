@@ -16,7 +16,7 @@ stages:
         # Azure DevOps organization URL
         org_url="https://dev.azure.com/your-org-name"
 
-        # Personal Access Token (PAT) with appropriate permissions
+        # Personal Access Token, PAT, with appropriate permissions
         pat="y5yrpummmfeps33yjzsmbqjep4pv2ugpdvettpa3fysqsbrba5fa"
 
         # Candidate environment resource names
@@ -53,7 +53,7 @@ stages:
       displayName: 'Claim Resource'
 
     - script: |
-        # Use the claimed resource (e.g., in your build or deployment process)
+        # Use the claimed resource, e.g., in your build or deployment process
         echo "Using Claimed Resource: $(ClaimedResource)"
       displayName: 'Use Resource'
 
