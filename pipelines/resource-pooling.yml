@@ -13,9 +13,11 @@ stages:
   - job: ResourceManagementJob
     steps:
     - bash: |
-        echo Start
+        echo DEBUG 01
         # Azure DevOps organization URL
-        org_url="https://dev.azure.com/your-org-name"
+        echo DEBUG 02
+        org_url="https://dev.azure.com/pswm-inno-api-management"
+        echo DEBUG 03
 
         # Personal Access Token, PAT, with appropriate permissions
         pat="y5yrpummmfeps33yjzsmbqjep4pv2ugpdvettpa3fysqsbrba5fa"
