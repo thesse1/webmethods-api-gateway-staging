@@ -19,6 +19,9 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
+          echo DEBUG -1
+          az config set extension.use_dynamic_install=yes_without_prompt
+          echo DEBUG 00
           az extension add --name azure-devops
           echo DEBUG 01
           az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-devops --group-name BUILD_instances --query [0].id
