@@ -37,7 +37,7 @@ stages:
                 dependsOn: A
                 variables:
                   myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
-                environment: $(myVarFromJobA)
+                environment: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]
                 strategy:
                   runOnce:    #rolling, canary are the other strategies that are supported
                     deploy:
