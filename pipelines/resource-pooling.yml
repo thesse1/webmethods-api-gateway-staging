@@ -20,7 +20,7 @@ stages:
         echo DEBUG 03
 
         # Personal Access Token, PAT, with appropriate permissions
-        pat="y5yrpummmfeps33yjzsmbqjep4pv2ugpdvettpa3fysqsbrba5fa"
+        pat="4ybfq4hxjrxdo3ffbhbwnu5krytrfwmafvlyqwz6all42y6zseka"
 
         echo DEBUG 04
         # Candidate environment resource names
@@ -35,7 +35,7 @@ stages:
         for candidate in "${candidates[@]}"; do
           # Query the availability of the candidate resource
           echo DEBUG 06
-          availability_response=$(curl -s -H "Authorization: Basic $pat" "$org_url/_apis/resourcecontainers/pools/PoolName/resources/$candidate?api-version=6.0-preview.1")
+          availability_response=$(curl -s -H "Authorization: Basic $pat" "https://dev.azure.com/pswm-inno-api-management/azure-demo/_apis/distributedtask/environments?api-version=7.2-preview.1")
           echo $availability_response
 
           # Check if the resource is unallocated
