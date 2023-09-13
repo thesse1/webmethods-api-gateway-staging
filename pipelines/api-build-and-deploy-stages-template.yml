@@ -23,11 +23,17 @@ stages:
               dependsOn: []
               jobs:
               - job: A
+                pool:
+                  name: '$(pool_name)'
+                  vmImage: '$(pool_image)'
                 steps:
                 - bash: |
                     echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
                     name: passOutput
               - job: B
+                pool:
+                  name: '$(pool_name)'
+                  vmImage: '$(pool_image)'
                 dependsOn: A
                 variables:
                   myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
