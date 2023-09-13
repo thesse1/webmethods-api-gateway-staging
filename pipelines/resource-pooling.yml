@@ -1,0 +1,65 @@
+variables:
+- group: 'Project Configuration'
+- name: ClaimedResource
+  value: ''
+
+pool:
+  name: '$(pool_name)'
+  vmImage: '$(pool_image)'
+
+stages:
+- stage: ResourceManagement
+  jobs:
+  - job: ResourceManagementJob
+    steps:
+    - bash: |
+        # Azure DevOps organization URL
+        org_url="https://dev.azure.com/your-org-name"
+
+        # Personal Access Token (PAT) with appropriate permissions
+        pat="y5yrpummmfeps33yjzsmbqjep4pv2ugpdvettpa3fysqsbrba5fa"
+
+        # Candidate environment resource names
+        candidates=("BUILD_01" "BUILD_02" "BUILD_03" "BUILD_04" "BUILD_05" "BUILD_06" "BUILD_07")
+
+        # Initialize variables
+        selectedResource=""
+        claimedResource=""
+
+        # Loop through candidates and claim the first available resource
+        for candidate in "${candidates[@]}"; do
+          # Query the availability of the candidate resource
+          availability_response=$(curl -s -H "Authorization: Basic $pat" "$org_url/_apis/resourcecontainers/pools/PoolName/resources/$candidate?api-version=6.0-preview.1")
+
+          # Check if the resource is unallocated
+          status=$(echo "$availability_response" | jq -r '.status')
+          if [ "$status" == "unallocated" ]; then
+            # Claim the resource
+            claim_response=$(curl -X PATCH -H "Authorization: Basic $pat" -H "Content-Type: application/json" -d '{"status": "allocated"}' "$org_url/_apis/resourcecontainers/pools/PoolName/resources/$candidate?api-version=6.0-preview.1")
+
+            # Parse the response to get the claimed resource name
+            claimedResource=$(echo "$claim_response" | jq -r '.name')
+            break
+          fi
+        done
+
+        if [ -z "$claimedResource" ]; then
+          echo "No available resources found among the candidates. Exiting..."
+          exit 1
+        fi
+
+        echo "Selected Resource: $claimedResource"
+        echo "##vso[task.setvariable variable=ClaimedResource]$claimedResource"
+      displayName: 'Claim Resource'
+
+    - script: |
+        # Use the claimed resource (e.g., in your build or deployment process)
+        echo "Using Claimed Resource: $(ClaimedResource)"
+      displayName: 'Use Resource'
+
+    - script: |
+        # Release the claimed resource
+        # Example: Release the claimed resource from the environment
+        az pipelines resource release --name ResourcePoolEnvironment --type EnvironmentResource --identifier "$(ClaimedResource)"
+        echo "Released Claimed Resource: $(ClaimedResource)"
+      displayName: 'Release Resource'
