@@ -15,6 +15,9 @@ stages:
     steps:
     - bash: |
         az extension add --name azure-devops
+        az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]" 
+        resource=$(az pipelines variable-group list --group-name BUILD_instances --query [0].variables | jq "[ to_entries[] | select (.value.value==\"Available\") ][0]")
+        echo $resource
 
         # Define the name of the variable group containing resources
         variable_group_name="BUILD_instances"
@@ -25,7 +28,7 @@ stages:
         # Loop through available resources and claim the first one
         for i in {1..7}; do
           resource_variable="BUILD_0$i"
-          az pipelines variable-group variable list --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name"
+          az pipelines variable-group variable list --group-id  --name "$resource_variable" --org "$org_url" --project "$project_name"
           resource_status=$(az pipelines variable-group variable list --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name" --query 'value' --output tsv)
           if [ "$resource_status" == "Available" ]; then
             # Claim the resource by updating its status
