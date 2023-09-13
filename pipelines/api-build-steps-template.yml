@@ -43,7 +43,7 @@ steps:
         az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ]"
         az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables
         resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
-
+        echo $resource_name
         if [ "$resource_name" == "null" ]; then
           echo "No available resource found. Waiting..."
           sleep 60
