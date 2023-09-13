@@ -14,25 +14,14 @@ stages:
   - job: ResourceManagementJob
     steps:
     - script: |
-        echo DEBUG set config
-        # az config set extension.use_dynamic_install=yes_without_prompt
-        echo DEBUG login
         echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-        echo DEBUG 01
-        az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id
-        echo DEBUG 02
         group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-        echo DEBUG 03
 
         resource_name="null"
 
         # Loop until a resource is available
         while [ "$resource_name" == "null" ]; do
-          echo DEBUG 04
-          az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key"
-          echo DEBUG 05
           resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
-          echo DEBUG 06
 
           if [ "$resource_name" == "null" ]; then
             echo "No available resource found. Waiting..."
@@ -49,7 +38,6 @@ stages:
     # Add steps to use and release the claimed resource
 
     - script: |
-        # Use the claimed resource, e.g., in your build or deployment process
         echo "Using Claimed Resource: $(ClaimedResource)"
       displayName: 'Use Resource'
 

@@ -2,47 +2,12 @@
 
 parameters:
   api_project: ''
-  build_environment: ''
   target_type: ''
   prep_condition: ''
   test_condition: ''
   tenant: ''
 
 steps:
-- bash: |
-    if [ -z "$api_project" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"api_project\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$BUILD_ENVIRONMENT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"build_environment\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TARGET_TYPE" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"target_type\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$PREP_CONDITION" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"prep_condition\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TEST_CONDITION" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"test_condition\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TENANT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-  env:
-    api_project: ${{parameters.api_project}}
-    BUILD_ENVIRONMENT: ${{parameters.build_environment}}
-    TARGET_TYPE: ${{parameters.target_type}}
-    PREP_CONDITION: ${{parameters.prep_condition}}
-    TEST_CONDITION: ${{parameters.test_condition}}
-    TENANT: ${{parameters.tenant}}
-  displayName: Check for required parameters
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/assets'
@@ -62,16 +27,34 @@ steps:
 #   displayName: 'Replace hostname, ip and port in environment configuration'
 #   inputs:
 #     folderPath: '$(System.DefaultWorkingDirectory)/**/'
-#     targetFiles: '**/${{parameters.build_environment}}'
+#     targetFiles: '**/$(ClaimedResource)_environment.json'
 #     fileType: json
 
+- script: |
+    echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
+    resource_name="null"
+    # Loop until a resource is available
+    while [ "$resource_name" == "null" ]; do
+      resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+
+      if [ "$resource_name" == "null" ]; then
+        echo "No available resource found. Waiting..."
+        sleep 60
+      fi
+    done
+    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name $resource_name --value "Claimed by $(Build.BuildNumber)"
+    echo "Selected Resource: $resource_name"
+    echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
+  displayName: 'Claim Resource'
+
 - bash: |
-   echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}}`"
+   echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway BUILD configuration, extract protocol, ip, hostname, port and insecureflag'
 
@@ -79,7 +62,7 @@ steps:
     newman run postman/collections/utilities/prepare/Prepare_BUILD.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
-    -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
@@ -98,7 +81,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
+    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway BUILD'
@@ -107,7 +90,7 @@ steps:
 
 - script: |
     newman run postman/collections/apitests/${{parameters.tenant}}/${{parameters.api_project}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml \
-    -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway BUILD'
@@ -152,7 +135,7 @@ steps:
     --env-var commitId='$(Build.SourceVersion)' \
     --env-var aliases='$(aliases)' \
     --env-var globalAliases='$(globalAliases)' \
-    -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.build_environment}} \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Validate and prepare assets for ${{parameters.target_type}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
@@ -172,18 +155,11 @@ steps:
   env:
     no_proxy: $(build_environment_hostname)
 
-# - bash: |
-#    curl $(build_environment_insecureflag) \
-#           -d @"${{parameters.tenant}}/apis/${{parameters.api_project}}/export_payload.json" \
-#           --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip \
-#           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
-#           --user '$(exporter_user)':'$(exporter_password)' \
-#           --resolve $(build_environment_hostname):$(build_environment_port):$(build_environment_ip) \
-#           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
-#   workingDirectory: '$(System.DefaultWorkingDirectory)'
-#   displayName: 'Export the Deployable from API Gateway BUILD'
-#   env:
-#     no_proxy: $(build_environment_hostname)
+- script: |
+    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
+    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
+    echo "Released Claimed Resource: $(ClaimedResource)"
+  displayName: 'Release Resource'
 
 - task: PublishBuildArtifacts@1
   inputs:
@@ -197,3 +173,9 @@ steps:
     testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_type}}'
     publishRunAttachments: false
   condition: always()
+
+- bash: |
+    echo "##vso[build.addbuildtag]${{api_project}}"
+    echo "##vso[build.addbuildtag]$(ClaimedResource)"
+    echo "##vso[build.addbuildtag]${{api_project}}_$(ClaimedResource)"
+  displayName: Add build tags
