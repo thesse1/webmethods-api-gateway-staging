@@ -54,7 +54,8 @@ stages:
                   displayName: 'Claim Resource'
               - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}'
                 dependsOn: 'Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}'
-                environment: $[ dependencies.Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource']
+                # environment: $[ dependencies.Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource']
+                environment: BUILD_instances
                 variables:
                 - group: ${{parameters.tenant}}_BUILD_users
                 - group: ${{parameters.tenant}}_$[ dependencies.Claim_resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource']_users
