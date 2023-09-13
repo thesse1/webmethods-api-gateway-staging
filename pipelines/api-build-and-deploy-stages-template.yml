@@ -84,6 +84,12 @@ stages:
                 # - template: /pipelines/store-build-artifactory-template.yml
                 #   parameters:
                 #     target_type: $(targetType)
+                - script: |
+                    group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
+                    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
+                    echo "Released Claimed Resource: $(ClaimedResource)"
+                  displayName: 'Release Resource'
+                  condition: always() # Release lock even if build was not successful
 
               - ${{ each deploy_instance in target_stage.instances }}:
                 - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{ deploy_instance }}'
