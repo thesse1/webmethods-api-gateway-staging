@@ -25,7 +25,8 @@ stages:
         # Loop through available resources and claim the first one
         for i in {1..7}; do
           resource_variable="BUILD_0$i"
-          resource_status=$(az pipelines variable-group variable show --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name" --query 'value' --output tsv)
+          az pipelines variable-group variable list --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name"
+          resource_status=$(az pipelines variable-group variable list --group-name "$variable_group_name" --name "$resource_variable" --org "$org_url" --project "$project_name" --query 'value' --output tsv)
           if [ "$resource_status" == "Available" ]; then
             # Claim the resource by updating its status
             az pipelines variable-group variable update --group-name "$variable_group_name" --name "$resource_variable" --new-value "Claimed" --org "$org_url" --project "$project_name"
