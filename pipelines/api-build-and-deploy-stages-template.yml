@@ -47,7 +47,7 @@ stages:
                         sleep 60
                       fi
                     done
-                    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "Claimed by $(Build.DefinitionName)-$(Build.BuildNumber)"
+                    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{ deployment_target }}_${{ api_project }}"
                     echo "Selected Resource: $resource_name"
                     echo "##vso[task.setvariable variable=ClaimedResource;isoutput=true]$resource_name"
                   name: claim_resource
