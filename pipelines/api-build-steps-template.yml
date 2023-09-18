@@ -27,16 +27,16 @@ steps:
 #   displayName: 'Replace hostname, ip and port in environment configuration'
 #   inputs:
 #     folderPath: '$(System.DefaultWorkingDirectory)/**/'
-#     targetFiles: '**/$(ClaimedResource)_environment.json'
+#     targetFiles: '**/$(claimed_resource)_environment.json'
 #     fileType: json
 
 - bash: |
-   echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
-   echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
-   echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
-   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
-   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
-   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway BUILD configuration, extract protocol, ip, hostname, port and insecureflag'
 
@@ -44,7 +44,7 @@ steps:
     newman run postman/collections/utilities/prepare/Prepare_BUILD.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
-    -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
@@ -63,7 +63,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
+    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway BUILD'
@@ -72,7 +72,7 @@ steps:
 
 - script: |
     newman run postman/collections/apitests/${{parameters.tenant}}/${{parameters.api_project}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml \
-    -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway BUILD'
@@ -117,7 +117,7 @@ steps:
     --env-var commitId='$(Build.SourceVersion)' \
     --env-var aliases='$(aliases)' \
     --env-var globalAliases='$(globalAliases)' \
-    -e ${{parameters.tenant}}/environments/$(project_name)/$(ClaimedResource)_environment.json \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Validate and prepare assets for ${{parameters.target_type}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
@@ -144,8 +144,8 @@ steps:
 
 - bash: |
     echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-    echo "##vso[build.addbuildtag]$(ClaimedResource)"
-    echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(ClaimedResource)"
+    echo "##vso[build.addbuildtag]$(claimed_resource)"
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(claimed_resource)"
   displayName: Add build tags
 
 - task: PublishTestResults@2
