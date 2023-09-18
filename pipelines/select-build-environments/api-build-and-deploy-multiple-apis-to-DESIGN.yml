@@ -1,0 +1,78 @@
+# Pipeline for apig staging
+
+trigger: none
+  # branches:
+  #   include:
+  #   - azure-demo
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
+    trigger:
+      tags:
+      - DESIGN
+
+parameters:
+- name: tenant
+  displayName: Deploy API project on API Gateway stages in which tenant?
+  type: string
+  default: playground
+  values:
+  - playground
+  - realworld
+- name: DESIGN_build_instance
+  displayName: Build on which BUILD instance?
+  default: BUILD_07
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+
+variables:
+- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
+# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+- group: 'Project Configuration'
+
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+
+stages:
+- template: /pipelines/api-build-and-deploy-stages-template.yml
+  parameters:
+    tenant: ${{parameters.tenant}}
+    build_stage:
+      name: BUILD
+      instances:
+      - BUILD_01
+      - BUILD_02
+      - BUILD_03
+      - BUILD_04
+      - BUILD_05
+      - BUILD_06
+      - BUILD_07
+    target_stages:
+    - name: DESIGN
+      build_instance: ${{ parameters.DESIGN_build_instance }}
+      instances:
+      - DESIGN
+    deployment_sets:
+    - api_projects:
+      # - number_conversion
+      - odata_tutorial
+      - ping
+      # - star_wars
+      - petstore
+      - petstore_basicauth
+      - petstore_versioning
+      - postman_echo
+      # - postman_echo_jwt
+      # - postman_echo_oauth2
+      - postman_mocking
+      - multiple_tenants
+      - security_alias
+      targets:
+      - DESIGN
