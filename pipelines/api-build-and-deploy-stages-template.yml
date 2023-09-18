@@ -54,6 +54,7 @@ stages:
             #       displayName: 'Claim Resource'
 
             - stage: ${{ deployment_target }}_${{ api_project }}
+              dependsOn: []
               # dependsOn: ${{ deployment_target }}_${{ api_project }}_Claim_resource
               # condition: succeeded()
               jobs:
