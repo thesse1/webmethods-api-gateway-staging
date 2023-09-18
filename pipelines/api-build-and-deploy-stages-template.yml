@@ -87,11 +87,11 @@ stages:
                         az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
                         sleep 5
                         claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].variables.$resource_name.value)
-                        if [ "$claimtext_read" == "$claimtext" ]; then
-                          echo "Resource claimed: $claimtext"
+                        if [ "$claimtext_read" == "\"$claimtext\"" ]; then
+                          echo "Resource claimed: \"$claimtext\""
                         else
                           echo "Resource taken by another agent: $claimtext_read"
-                          echo "Expected claimtext: $claimtext"
+                          echo "Expected claimtext: \"$claimtext\""
                           echo "Trying again..."
                           resource_name="null"
                         fi
