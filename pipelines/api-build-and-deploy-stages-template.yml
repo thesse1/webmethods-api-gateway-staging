@@ -6,6 +6,9 @@ parameters:
   values:
   - playground
   - realworld
+- name: build_stage
+  displayName: Build on which stage?
+  type: object
 - name: target_stages
   displayName: Deploy to which stages?
   type: object
@@ -14,62 +17,61 @@ parameters:
   type: object
 
 stages:
-# - ${{ each build_instance in parameters.build_stage.instances }}:
-#   - stage: 'Anchor_Stage_for_${{ build_instance }}'
-#     dependsOn: []
-#     jobs:
-#     - job: 'Do_nothing'
-#       variables:
-#       - group: ${{parameters.tenant}}_BUILD_users
-#       - group: ${{parameters.tenant}}_${{build_instance}}_users
-#       pool:
-#         name: '$(pool_name)'
-#         vmImage: '$(pool_image)'
+- ${{ each build_instance in parameters.build_stage.instances }}:
+  - stage: 'Anchor_Stage_for_${{ build_instance }}'
+    dependsOn: []
+    jobs:
+    - job: 'Do_nothing'
+      variables:
+      - group: ${{parameters.tenant}}_BUILD_users
+      - group: ${{parameters.tenant}}_${{build_instance}}_users
+      pool:
+        name: '$(pool_name)'
+        vmImage: '$(pool_image)'
   - ${{ each target_stage in parameters.target_stages }}:
-    # - ${{ if eq(build_instance, target_stage.build_instance) }}:
+    - ${{ if eq(build_instance, target_stage.build_instance) }}:
       - ${{ each deployment_set in parameters.deployment_sets }}:
         - ${{ each deployment_target in deployment_set.targets }}:
           - ${{ if eq(target_stage.name, deployment_target) }}:
             - ${{ each api_project in deployment_set.api_projects }}:
               - stage: ${{ deployment_target }}_${{ api_project }}
-                dependsOn: []
                 jobs:
-                - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
+                - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
+                  environment: '${{build_instance}}'
                   variables:
                   - group: ${{parameters.tenant}}_BUILD_users
+                  - group: ${{parameters.tenant}}_${{build_instance}}_users
                   pool:
-                    name: '$(build_pool_name)'
-                    vmImage: '$(build_pool_image)'
-                  steps:
-                  - checkout: self
-                    submodules: "true"
-                    persistCredentials: "true"
-                  - download: none
-                  - bash: |
-                      agentName=$(echo $AGENT_NAME)
-                      echo "Agent Name: $agentName"
-                      echo "##vso[task.setvariable variable=agent_name]$agentName"  # Set an output variable
-                    displayName: Retrieve agent name
-                  - template: /pipelines/api-build-steps-template.yml
-                    parameters:
-                      api_project: ${{api_project}}
-                      build_environment: "$(agent_name)_environment.json"
-                      target_type: ${{ deployment_target }}
-                      prep_condition: ${{true}}
-                      test_condition: ${{ ne(deployment_target, 'DESIGN') }}
-                      tenant: ${{parameters.tenant}}
-                  - template: /pipelines/store-build-template.yml
-                    parameters:
-                      target_type: ${{ deployment_target }}
-                      api_project: ${{api_project}}
-                  - bash: |
-                      echo "##vso[build.addbuildtag]${{api_project}}"
-                      echo "##vso[build.addbuildtag]$(agent_name)"
-                      echo "##vso[build.addbuildtag]${{api_project}}_$(agent_name)"
-                    displayName: Add build tags
-                  # - template: /pipelines/store-build-artifactory-template.yml
-                  #   parameters:
-                  #     target_type: $(targetType)
+                    name: '$(pool_name)'
+                    vmImage: '$(pool_image)'
+                  strategy:
+                    runOnce:    #rolling, canary are the other strategies that are supported
+                      deploy:
+                        steps:
+                        - checkout: self
+                          submodules: "true"
+                          persistCredentials: "true"
+                        - download: none
+                        - template: /pipelines/api-build-steps-template.yml
+                          parameters:
+                            api_project: ${{api_project}}
+                            build_environment: "${{build_instance}}_environment.json"
+                            target_type: ${{ deployment_target }}
+                            prep_condition: ${{true}}
+                            test_condition: ${{ ne(deployment_target, 'DESIGN') }}
+                            tenant: ${{parameters.tenant}}
+                        - template: /pipelines/store-build-template.yml
+                          parameters:
+                            target_type: ${{ deployment_target }}
+                            api_project: ${{api_project}}
+                        - bash: |
+                            echo "##vso[build.addbuildtag]${{api_project}}"
+                            echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
+                            echo "##vso[build.addbuildtag]${{api_project}}_${{parameters.build_stage.name}}"
+                          displayName: Add build tags
+                        # - template: /pipelines/store-build-artifactory-template.yml
+                        #   parameters:
+                        #     target_type: $(targetType)
 
                 - ${{ each deploy_instance in target_stage.instances }}:
                   - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{ deploy_instance }}'
@@ -104,5 +106,5 @@ stages:
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
                               echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                             displayName: Add build tags
-                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}'
+                    dependsOn: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
                     condition: succeeded()

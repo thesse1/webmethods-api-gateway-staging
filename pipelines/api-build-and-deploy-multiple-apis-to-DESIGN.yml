@@ -21,6 +21,17 @@ parameters:
   values:
   - playground
   - realworld
+- name: DESIGN_build_instance
+  displayName: Build on which BUILD instance?
+  default: BUILD_07
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
@@ -33,8 +44,19 @@ stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
+    build_stage:
+      name: BUILD
+      instances:
+      - BUILD_01
+      - BUILD_02
+      - BUILD_03
+      - BUILD_04
+      - BUILD_05
+      - BUILD_06
+      - BUILD_07
     target_stages:
     - name: DESIGN
+      build_instance: ${{ parameters.DESIGN_build_instance }}
       instances:
       - DESIGN
     deployment_sets:

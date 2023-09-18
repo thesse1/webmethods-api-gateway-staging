@@ -32,6 +32,72 @@ parameters:
   displayName: Deploy which other API project?
   type: string
   default: 'n/a'
+- name: DEV_INT_build_instance
+  displayName: Build for DEV_INT on which BUILD instance?
+  default: BUILD_01
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: DEV_EXT_build_instance
+  displayName: Build for DEV_EXT on which BUILD instance?
+  default: BUILD_02
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: TEST_INT_build_instance
+  displayName: Build for TEST_INT on which BUILD instance?
+  default: BUILD_03
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: TEST_EXT_build_instance
+  displayName: Build for TEST_EXT on which BUILD instance?
+  default: BUILD_04
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: PROD_INT_build_instance
+  displayName: Build for PROD_INT on which BUILD instance?
+  default: BUILD_05
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+- name: PROD_EXT_build_instance
+  displayName: Build for PROD_EXT on which BUILD instance?
+  default: BUILD_06
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
 
 variables:
 - template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
@@ -44,24 +110,40 @@ stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
+    build_stage:
+      name: BUILD
+      instances:
+      - BUILD_01
+      - BUILD_02
+      - BUILD_03
+      - BUILD_04
+      - BUILD_05
+      - BUILD_06
+      - BUILD_07
     target_stages:
     - name: DEV_INT
+      build_instance: ${{ parameters.DEV_INT_build_instance }}
       instances:
       - DEV_INT
     - name: DEV_EXT
+      build_instance: ${{ parameters.DEV_EXT_build_instance }}
       instances:
       - DEV_EXT
     - name: TEST_INT
+      build_instance: ${{ parameters.TEST_INT_build_instance }}
       instances:
       - TEST_INT
     - name: TEST_EXT
+      build_instance: ${{ parameters.TEST_EXT_build_instance }}
       instances:
       - TEST_EXT
     - name: PROD_INT
+      build_instance: ${{ parameters.PROD_INT_build_instance }}
       instances:
       - PROD_INT_01
       - PROD_INT_02
     - name: PROD_EXT
+      build_instance: ${{ parameters.PROD_EXT_build_instance }}
       instances:
       - PROD_EXT_01
       - PROD_EXT_02
