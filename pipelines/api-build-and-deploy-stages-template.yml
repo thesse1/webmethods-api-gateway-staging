@@ -49,7 +49,7 @@ stages:
             #         done
             #         az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{ deployment_target }}_${{ api_project }}"
             #         echo "Selected Resource: $resource_name"
-            #         echo "##vso[task.setvariable variable=ClaimedResource;isoutput=true]$resource_name"
+            #         echo "##vso[task.setvariable variable=claimed_resource;isoutput=true]$resource_name"
             #       name: claim_resource
             #       displayName: 'Claim Resource'
 
@@ -60,8 +60,8 @@ stages:
               jobs:
               - job: 'Build_${{api_project}}_for_${{ deployment_target }}'
                 variables:
-                # - name: ClaimedResource
-                #   value: $[ stageDependencies.${{ deployment_target }}_${{ api_project }}_Claim_resource.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.ClaimedResource'] ]
+                # - name: claimed_resource
+                #   value: $[ stageDependencies.${{ deployment_target }}_${{ api_project }}_Claim_resource.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.claimed_resource'] ]
                 - group: ${{parameters.tenant}}_BUILD_users
                 pool:
                   name: '$(pool_name)'
@@ -97,7 +97,7 @@ stages:
                       fi
                     done
                     echo "Selected Resource: $resource_name"
-                    echo "##vso[task.setvariable variable=ClaimedResource]$resource_name"
+                    echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
                   name: claim_resource
                   displayName: 'Claim Resource'
                 - template: /pipelines/api-build-steps-template.yml
@@ -117,8 +117,8 @@ stages:
                 - script: |
                     echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
                     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name BUILD_instances --query [0].id)
-                    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(ClaimedResource)" --value "Available"
-                    echo "Released Claimed Resource: $(ClaimedResource)"
+                    az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
+                    echo "Released Claimed Resource: $(claimed_resource)"
                   displayName: 'Release Resource'
                   condition: always() # Release lock even if build was not successful
 
