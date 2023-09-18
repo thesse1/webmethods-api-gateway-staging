@@ -18,16 +18,16 @@ parameters:
 
 stages:
 - ${{ each build_instance in parameters.build_stage.instances }}:
-  - stage: 'Anchor_Stage_for_${{ build_instance }}'
-    dependsOn: []
-    jobs:
-    - job: 'Do_nothing'
-      variables:
-      - group: ${{parameters.tenant}}_BUILD_users
-      - group: ${{parameters.tenant}}_${{build_instance}}_users
-      pool:
-        name: '$(pool_name)'
-        vmImage: '$(pool_image)'
+  # - stage: 'Anchor_Stage_for_${{ build_instance }}'
+  #   dependsOn: []
+  #   jobs:
+  #   - job: 'Do_nothing'
+  #     variables:
+  #     - group: ${{parameters.tenant}}_BUILD_users
+  #     - group: ${{parameters.tenant}}_${{build_instance}}_users
+  #     pool:
+  #       name: '$(pool_name)'
+  #       vmImage: '$(pool_image)'
   - ${{ each target_stage in parameters.target_stages }}:
     - ${{ if eq(build_instance, target_stage.build_instance) }}:
       - ${{ each deployment_set in parameters.deployment_sets }}:
@@ -35,6 +35,8 @@ stages:
           - ${{ if eq(target_stage.name, deployment_target) }}:
             - ${{ each api_project in deployment_set.api_projects }}:
               - stage: ${{ deployment_target }}_${{ api_project }}
+                dependsOn: []
+                lockBehavior: sequential
                 jobs:
                 - deployment: 'Build_${{api_project}}_for_${{ deployment_target }}_on_${{build_instance}}'
                   environment: '${{build_instance}}'
