@@ -1,0 +1,157 @@
+# Pipeline template for apig staging
+
+parameters:
+  api_project: ''
+  target_type: ''
+  prep_condition: ''
+  test_condition: ''
+  tenant: ''
+
+steps:
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/assets'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip'
+    replaceExistingArchive: true
+    verbose: true
+  displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.api_project}}'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_BUILD_import'
+
+# - task: FileTransform@1
+#   displayName: 'Replace hostname, ip and port in environment configuration'
+#   inputs:
+#     folderPath: '$(System.DefaultWorkingDirectory)/**/'
+#     targetFiles: '**/$(claimed_resource)_environment.json'
+#     fileType: json
+
+- bash: |
+   echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Read and parse API Gateway BUILD configuration, extract protocol, ip, hostname, port and insecureflag'
+
+- script: |
+    newman run postman/collections/utilities/prepare/Prepare_BUILD.json --reporters cli \
+    --env-var preparer_user='$(preparer_user)' \
+    --env-var preparer_password='$(preparer_password)' \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
+    $(build_environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
+  env:
+    no_proxy: $(build_environment_ip)
+
+- bash: |
+    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/scopes.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Prepare list of scopes to be imported'
+
+- script: |
+    newman run postman/collections/utilities/import/Import_API.json --reporters cli \
+    --env-var importer_user='$(importer_user)' \
+    --env-var importer_password='$(importer_password)' \
+    --env-var initializer_user='$(initializer_user)' \
+    --env-var initializer_password='$(initializer_password)' \
+    --env-var scopes='$(scopes)' \
+    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
+    $(build_environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Import the Deployable To API Gateway BUILD'
+  env:
+    no_proxy: $(build_environment_ip)
+
+- script: |
+    newman run postman/collections/apitests/${{parameters.tenant}}/${{parameters.api_project}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
+    $(build_environment_api_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Run tests on API Gateway BUILD'
+  env:
+    no_proxy: $(build_environment_ip)
+  condition: and(succeeded(), ${{parameters.test_condition}})
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_test_results'
+  condition: ${{parameters.test_condition}}
+
+- task: FileTransform@1
+  displayName: 'Replace alias values using pipeline variables'
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/**/'
+    targetFiles: '**/aliases.json'
+    fileType: json
+
+- bash: |
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/aliases.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Prepare list of project-specific aliases to be updated'
+
+- bash: |
+    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/aliases.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Prepare list of global aliases to be updated'
+
+- script: |
+    newman run postman/collections/utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
+    --env-var preparer_user='$(preparer_user)' \
+    --env-var preparer_password='$(preparer_password)' \
+    --env-var buildId=$(Build.BuildId) \
+    --env-var buildNumber='$(Build.BuildNumber)' \
+    --env-var definitionId='$(System.DefinitionId)' \
+    --env-var definitionName='$(Build.DefinitionName)' \
+    --env-var definitionVersion='$(Build.DefinitionVersion)' \
+    --env-var repoName='$(Build.Repository.Name)' \
+    --env-var repoUrl='$(Build.Repository.Uri)' \
+    --env-var commitId='$(Build.SourceVersion)' \
+    --env-var aliases='$(aliases)' \
+    --env-var globalAliases='$(globalAliases)' \
+    -e ${{parameters.tenant}}/environments/$(project_name)/$(claimed_resource)_environment.json \
+    $(build_environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Validate and prepare assets for ${{parameters.target_type}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
+  env:
+    no_proxy: $(build_environment_ip)
+  condition: and(succeeded(), ${{parameters.prep_condition}})
+
+- bash: |
+   curl $(build_environment_insecureflag) \
+          -d @"${{parameters.tenant}}/apis/${{parameters.api_project}}/export_payload.json" \
+          --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip \
+          -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
+          --user '$(exporter_user)':'$(exporter_password)' \
+          $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Export the Deployable from API Gateway BUILD'
+  env:
+    no_proxy: $(build_environment_hostname)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_export'
+
+- bash: |
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+    echo "##vso[build.addbuildtag]$(claimed_resource)"
+    echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(claimed_resource)"
+  displayName: Add build tags
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit' 
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/junitReport.xml'
+    testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_type}}'
+    publishRunAttachments: false
+  condition: always()
