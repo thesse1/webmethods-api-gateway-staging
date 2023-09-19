@@ -1,27 +1,6 @@
 parameters:
 - name: template
   type: string
-- name: DESIGN_build_instance
-  type: string
-  default: BUILD_07
-- name: DEV_INT_build_instance
-  type: string
-  default: BUILD_01
-- name: DEV_EXT_build_instance
-  type: string
-  default: BUILD_02
-- name: TEST_INT_build_instance
-  type: string
-  default: BUILD_03
-- name: TEST_EXT_build_instance
-  type: string
-  default: BUILD_04
-- name: PROD_INT_build_instance
-  type: string
-  default: BUILD_05
-- name: PROD_EXT_build_instance
-  type: string
-  default: BUILD_06
 - name: parameters
   type: object
 - name: stages
