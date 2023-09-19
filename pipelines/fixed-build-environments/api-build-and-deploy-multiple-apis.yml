@@ -1,7 +1,4 @@
 trigger: none
-  # branches:
-  #   include:
-  #   - azure-demo
 
 resources:
   pipelines:
@@ -13,8 +10,6 @@ variables:
 - template: /variables/variables-aliases-template.yml
 # - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
-
-# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml
