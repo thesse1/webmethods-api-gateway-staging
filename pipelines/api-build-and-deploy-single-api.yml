@@ -35,7 +35,6 @@ variables:
   - name: api_project
     value: ${{parameters.api_project_other}}
 
-
 name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
@@ -45,7 +44,10 @@ stages:
     parameters:
       deployment_sets:
       - api_projects:
-        - $(api_project)
+        - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+          - ${{parameters.api_project}}
+        - ${{ else }}:
+          - ${{parameters.api_project_other}}
         targets:
         - DEV_INT
         - DEV_EXT
