@@ -13,7 +13,7 @@ parameters:
   type: string
 
 stages:
-- ${{ each stage in parameters.stages }}:
+- ${{ each stage in parameters.all_stages }}:
   - ${{ each instance in stage.instances }}:
     - ${{ if eq(instance, parameters.source_instance) }}:
       - stage: ${{ instance }}
