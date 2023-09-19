@@ -1,5 +1,3 @@
-# Pipeline for apig staging
-
 trigger: none
 
 parameters:
@@ -34,28 +32,15 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
-- template: /pipelines/api-build-and-deploy-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    build_stage:
-      name: BUILD
-      instances:
-      - BUILD_01
-      - BUILD_02
-      - BUILD_03
-      - BUILD_04
-      - BUILD_05
-      - BUILD_06
-      - BUILD_07
-    target_stages:
-    - name: DESIGN
-      build_instance: BUILD_07
-      instances:
-      - DESIGN
-    deployment_sets:
-    - api_projects:
-      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
-        - ${{parameters.api_project}}
-      - ${{ else }}:
-        - ${{parameters.api_project_other}}
-      targets:
-      - DESIGN
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      deployment_sets:
+      - api_projects:
+        - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+          - ${{parameters.api_project}}
+        - ${{ else }}:
+          - ${{parameters.api_project_other}}
+        targets:
+        - DESIGN
