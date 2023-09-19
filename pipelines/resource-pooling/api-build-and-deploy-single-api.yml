@@ -1,5 +1,3 @@
-# Pipeline for apig staging
-
 trigger: none
 
 parameters:
