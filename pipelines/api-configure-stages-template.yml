@@ -1,21 +1,25 @@
 parameters:
-- name: stages
-  displayName: Configure API Gateway in which stages?
+- name: design_stages
+  type: object
+- name: build_stages
+  type: object
+- name: target_stages
   type: object
 
 stages:
-- ${{ each stage in parameters.stages }}:
+- ${{ each stage in parameters.design_stages }}:
   - stage: ${{ stage.name }}
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      - deployment: Configure_API_Gateway_${{ instance.name }}
-        environment: ${{ instance.name }}
+      - deployment: Configure_API_Gateway_${{ instance }}
+        environment: ${{ instance }}
         variables:
-        - group: ${{ instance.name }}_users
+        - group: ${{ stage.name }}_users
+        - group: ${{ instance }}_users
         pool:
-          name: '${{ instance.pool }}'
-          vmImage: '${{ instance.image }}'
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -26,19 +30,75 @@ stages:
               - download: none
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
-                  environment: "${{ instance.name }}_environment.json"
+                  environment: ${{ instance }}_environment.json
                   type: ${{ stage.name }}
-              - bash: echo "##vso[build.addbuildtag]${{instance.name}}"
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag
 
-    - ${{ if stage.haft }}:
+- ${{ each stage in parameters.build_stages }}:
+  - stage: ${{ stage.name }}
+    dependsOn: []
+    jobs:
+    - ${{ each instance in stage.instances }}:
+      - deployment: Configure_API_Gateway_${{ instance }}
+        environment: ${{ instance }}
+        variables:
+        - group: ${{ stage.name }}_users
+        - group: ${{ instance }}_users
+        pool:
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+              - template: /pipelines/api-configure-steps-template.yml
+                parameters:
+                  environment: ${{ instance }}_environment.json
+                  type: ${{ stage.name }}
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                displayName: Add build tag
+
+- ${{ each stage in parameters.target_stages }}:
+  - stage: ${{ stage.name }}
+    dependsOn: []
+    jobs:
+    - ${{ each instance in stage.instances }}:
+      - deployment: Configure_API_Gateway_${{ instance }}
+        environment: ${{ instance }}
+        variables:
+        - group: ${{ stage.name }}_users
+        - group: ${{ instance }}_users
+        pool:
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+              - template: /pipelines/api-configure-steps-template.yml
+                parameters:
+                  environment: ${{ instance }}_environment.json
+                  type: ${{ stage.name }}
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                displayName: Add build tag
+
+    - ${{ if gt(length(stage.instances),1) }}: # Configure HAFT if more than one instance per stage
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
         environment: ${{ stage.name }}_HAFT
         variables:
         - group: ${{ stage.name }}_HAFT_users
         pool:
-          name: '${{ stage.haft.pool }}'
-          vmImage: '${{ stage.haft.image }}'
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
