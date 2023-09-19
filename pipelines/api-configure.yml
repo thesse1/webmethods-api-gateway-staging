@@ -16,3 +16,4 @@ stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:
     template: /pipelines/api-configure-stages-template.yml
+    parameters: []
