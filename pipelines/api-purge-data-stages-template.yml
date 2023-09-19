@@ -1,54 +1,21 @@
 parameters:
-- name: job_name
-  type: string
-- name: job_template
-  type: string
+- name: design_stages
+  type: object
+- name: build_stages
+  type: object
 - name: target_stages
   type: object
-  default:
-  - name: DESIGN
-    instances:
-    - DESIGN
-  - name: BUILD
-    instances:
-    - BUILD_01
-    - BUILD_02
-    - BUILD_03
-    - BUILD_04
-    - BUILD_05
-    - BUILD_06
-    - BUILD_07
-  - name: DEV_INT
-    instances:
-    - DEV_INT
-  - name: DEV_EXT
-    instances:
-    - DEV_EXT
-  - name: TEST_INT
-    instances:
-    - TEST_INT
-  - name: TEST_EXT
-    instances:
-    - TEST_EXT
-  - name: PROD_INT
-    instances:
-    - PROD_INT_01
-    - PROD_INT_02
-  - name: PROD_EXT
-    instances:
-    - PROD_EXT_01
-    - PROD_EXT_02
 
 stages:
-- ${{ each target_stage in parameters.target_stages }}:
-  - stage: ${{ target_stage.name }}
+- ${{ each stage in parameters.target_stages }}:
+  - stage: ${{ stage.name }}
     dependsOn: []
     jobs:
-    - ${{ each instance in target_stage.instances }}:
-      - deployment: ${{ parameters.job_name }}_${{ instance }}
+    - ${{ each instance in stage.instances }}:
+      - deployment: Purge_Data_on_${{ instance }}
         environment: ${{ instance }}
         variables:
-        - group: ${{ target_stage.name }}_users
+        - group: ${{ stage.name }}_users
         - group: ${{ instance }}_users
         pool:
           name: '$(pool_name)'
@@ -60,9 +27,9 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - template: /pipelines/${{ parameters.job_template }}
+              - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment: ${{ instance }}_environment.json
-                  type: ${{ target_stage.name }}
+                  type: ${{ stage.name }}
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag

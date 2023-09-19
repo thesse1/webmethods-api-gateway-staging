@@ -11,7 +11,6 @@ variables:
 - group: 'Project Configuration'
 
 stages:
-- template: /pipelines/api-purge-data-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    job_name: Purge_Data_on
-    job_template: api-purge-data-steps-template.yml
+    template: /pipelines/pi-purge-data-stages-template.yml
