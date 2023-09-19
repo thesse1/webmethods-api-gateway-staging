@@ -50,7 +50,7 @@ stages:
                       target_type: ${{ deployment_target }}
                       prep_condition: ${{true}}
                       test_condition: ${{ ne(deployment_target, 'DESIGN') }}
-                                    - template: /pipelines/store-build-template.yml
+                  - template: /pipelines/store-build-template.yml
                     parameters:
                       target_type: ${{ deployment_target }}
                       api_project: ${{api_project}}
@@ -81,8 +81,8 @@ stages:
                             persistCredentials: "true"
                           - template: /pipelines/retrieve-build-template.yml
                             parameters:
-                                target_type: ${{ deployment_target }}
-                                api_project: ${{api_project}}
+                              target_type: ${{ deployment_target }}
+                              api_project: ${{api_project}}
                           - template: /pipelines/api-deploy-steps-template.yml
                             parameters:
                               api_project: ${{api_project}}
@@ -90,7 +90,7 @@ stages:
                               target_type: ${{ deployment_target }}
                               prep_condition: ${{true}}
                               test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
-                                                    - bash: |
+                          - bash: |
                               echo "##vso[build.addbuildtag]${{api_project}}"
                               echo "##vso[build.addbuildtag]${{deploy_instance}}"
                               echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
