@@ -1,33 +1,40 @@
 parameters:
 - name: stage_groups
   type: object
+- name: design_stages
+  type: object
+- name: build_stages
+  type: object
+- name: target_stages
+  type: object
+- name: stages
+  type: object
 
 stages:
-- ${{ each stage_group in parameters.stage_groups }}:
-  - ${{ each stage in stage_group.stages }}:
-    - stage: ${{ stage.name }}
-      dependsOn: []
-      jobs:
-      - ${{ each instance in stage.instances }}:
-        - deployment: Purge_Data_on_${{ instance }}
-          environment: ${{ instance }}
-          variables:
-          - group: ${{ stage.name }}_users
-          - group: ${{ instance }}_users
-          pool:
-            name: '$(pool_name)'
-            vmImage: '$(pool_image)'
-          strategy:
-            runOnce:    #rolling, canary are the other strategies that are supported
-              deploy:
-                steps:
-                - checkout: self
-                  submodules: "true"
-                  persistCredentials: "true"
-                - download: none
-                - template: /pipelines/api-purge-data-steps-template.yml
-                  parameters:
-                    environment: ${{ instance }}_environment.json
-                    type: ${{ stage.name }}
-                - bash: echo "##vso[build.addbuildtag]${{instance}}"
-                  displayName: Add build tag
+- ${{ each stage in parameters.stages }}:
+  - stage: ${{ stage.name }}
+    dependsOn: []
+    jobs:
+    - ${{ each instance in stage.instances }}:
+      - deployment: Purge_Data_on_${{ instance }}
+        environment: ${{ instance }}
+        variables:
+        - group: ${{ stage.name }}_users
+        - group: ${{ instance }}_users
+        pool:
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+              - template: /pipelines/api-purge-data-steps-template.yml
+                parameters:
+                  environment: ${{ instance }}_environment.json
+                  type: ${{ stage.name }}
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                displayName: Add build tag
