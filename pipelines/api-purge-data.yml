@@ -13,5 +13,5 @@ variables:
 stages:
 - template: /pipelines/api-purge-data-stages-template.yml
   parameters:
-  - job_name: Purge_Data_on
-  - job_template: api-purge-data-steps-template.yml
+    job_name: Purge_Data_on
+    job_template: api-purge-data-steps-template.yml
