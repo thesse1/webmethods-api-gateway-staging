@@ -60,7 +60,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - template: /pipelines/{{ parameters.job_template }}
+              - template: /pipelines/${{ parameters.job_template }}
                 parameters:
                   environment: ${{ instance }}_environment.json
                   type: ${{ target_stage.name }}
