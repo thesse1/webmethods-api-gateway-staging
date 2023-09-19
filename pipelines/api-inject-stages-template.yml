@@ -8,11 +8,11 @@ parameters:
   default:
   - name: DESIGN
     build_instance: BUILD_01
-    is_design_stage: ${{ true }}
+    is_design_stage: true
     instances:
     - DESIGN
   - name: BUILD
-    is_build_stage: ${{ true }}
+    is_build_stage: true
     instances:
     - BUILD_01
     - BUILD_02
@@ -39,13 +39,13 @@ parameters:
     - TEST_EXT
   - name: PROD_INT
     build_instance: BUILD_06
-    configure_haft: ${{ true }}
+    configure_haft: true
     instances:
     - PROD_INT_01
     - PROD_INT_02
   - name: PROD_EXT
     build_instance: BUILD_07
-    configure_haft: ${{ true }}
+    configure_haft: true
     instances:
     - PROD_EXT_01
     - PROD_EXT_02
