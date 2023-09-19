@@ -1,5 +1,3 @@
-# Pipeline for apig staging
-
 trigger: none
 
 parameters:
@@ -8,8 +6,8 @@ parameters:
   type: string
   values:
   # - number_conversion
-  - odata_tutorial
   - ping
+  - odata_tutorial
   # - star_wars
   - petstore
   - petstore_basicauth
@@ -41,32 +39,27 @@ variables:
 - template: /variables/variables-aliases-template.yml
 # - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
+- ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project
+    value: ${{parameters.api_project}}
+- ${{ else }}:
+  - name: api_project
+    value: ${{parameters.api_project_other}}
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
-- template: /pipelines/api-build-and-deploy-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    build_stage:
-      name: BUILD
-      instances:
-      - BUILD_01
-      - BUILD_02
-      - BUILD_03
-      - BUILD_04
-      - BUILD_05
-      - BUILD_06
-      - BUILD_07
-    target_stages:
-    - name: DESIGN
-      build_instance: ${{ parameters.DESIGN_build_instance }}
-      instances:
-      - DESIGN
-    deployment_sets:
-    - api_projects:
-      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
-        - ${{parameters.api_project}}
-      - ${{ else }}:
-        - ${{parameters.api_project_other}}
-      targets:
-      - DESIGN
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      build_instances:
+        DESIGN: ${{parameters.DESIGN_build_instance}}
+      deployment_sets:
+      - api_projects:
+        - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+          - ${{parameters.api_project}}
+        - ${{ else }}:
+          - ${{parameters.api_project_other}}
+        targets:
+        - DESIGN

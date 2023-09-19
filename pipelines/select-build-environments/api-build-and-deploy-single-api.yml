@@ -1,5 +1,3 @@
-# Pipeline for apig staging
-
 trigger: none
 
 parameters:
@@ -96,59 +94,37 @@ variables:
 - template: /variables/variables-aliases-template.yml
 # - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
+- ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project
+    value: ${{parameters.api_project}}
+- ${{ else }}:
+  - name: api_project
+    value: ${{parameters.api_project_other}}
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
-- template: /pipelines/api-build-and-deploy-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    build_stage:
-      name: BUILD
-      instances:
-      - BUILD_01
-      - BUILD_02
-      - BUILD_03
-      - BUILD_04
-      - BUILD_05
-      - BUILD_06
-      - BUILD_07
-    target_stages:
-    - name: DEV_INT
-      build_instance: ${{ parameters.DEV_INT_build_instance }}
-      instances:
-      - DEV_INT
-    - name: DEV_EXT
-      build_instance: ${{ parameters.DEV_EXT_build_instance }}
-      instances:
-      - DEV_EXT
-    - name: TEST_INT
-      build_instance: ${{ parameters.TEST_INT_build_instance }}
-      instances:
-      - TEST_INT
-    - name: TEST_EXT
-      build_instance: ${{ parameters.TEST_EXT_build_instance }}
-      instances:
-      - TEST_EXT
-    - name: PROD_INT
-      build_instance: ${{ parameters.PROD_INT_build_instance }}
-      instances:
-      - PROD_INT_01
-      - PROD_INT_02
-    - name: PROD_EXT
-      build_instance: ${{ parameters.PROD_EXT_build_instance }}
-      instances:
-      - PROD_EXT_01
-      - PROD_EXT_02
-    deployment_sets:
-    - api_projects:
-      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
-        - ${{parameters.api_project}}
-      - ${{ else }}:
-        - ${{parameters.api_project_other}}
-      targets:
-      - DEV_INT
-      - DEV_EXT
-      - TEST_INT
-      - TEST_EXT
-      - PROD_INT
-      - PROD_EXT
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      build_instances:
+        DEV_INT: ${{parameters.DEV_INT_build_instance}}
+        DEV_EXT: ${{parameters.DEV_EXT_build_instance}}
+        TEST_INT: ${{parameters.TEST_INT_build_instance}}
+        TEST_EXT: ${{parameters.TEST_EXT_build_instance}}
+        PROD_INT: ${{parameters.PROD_INT_build_instance}}
+        PROD_EXT: ${{parameters.PROD_EXT_build_instance}}
+      deployment_sets:
+      - api_projects:
+        - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+          - ${{parameters.api_project}}
+        - ${{ else }}:
+          - ${{parameters.api_project_other}}
+        targets:
+        - DEV_INT
+        - DEV_EXT
+        - TEST_INT
+        - TEST_EXT
+        - PROD_INT
+        - PROD_EXT
