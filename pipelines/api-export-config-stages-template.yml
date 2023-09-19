@@ -51,7 +51,7 @@ stages:
                   parameters:
                     environment: ${{ instance.name }}_environment.json
                     type: ${{ stage.name }}
-                                - template: /pipelines/commit-template.yml
+                - template: /pipelines/commit-template.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}
                 - bash: echo "##vso[build.addbuildtag]${{instance.name}}"
