@@ -4,8 +4,29 @@ trigger: none
 
 parameters:
 - name: api_project
+  type: string
+- name: api_project
   displayName: Export which API project?
   type: string
+  values:
+  # - number_conversion
+  - ping
+  - odata_tutorial
+  # - star_wars
+  - petstore
+  # - petstore_basicauth
+  - petstore_versioning
+  - postman_echo
+  # - postman_echo_jwt
+  # - postman_echo_oauth2
+  - postman_mocking
+  # - multiple_tenants
+  # - security_alias
+  - 'other (Please specify below)'
+- name: api_project_other
+  displayName: Export which other API project?
+  type: string
+  default: 'n/a'
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
