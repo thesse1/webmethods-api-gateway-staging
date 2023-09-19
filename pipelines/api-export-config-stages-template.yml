@@ -1,11 +1,4 @@
 parameters:
-- name: tenant
-  displayName: Export API Gateway configuration in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
@@ -43,7 +36,7 @@ stages:
         - deployment: Export_config_from_API_Gateway_${{ instance.name }}
           environment: ${{ instance.name }}
           variables:
-          - group: ${{parameters.tenant}}_${{ instance.name }}_users
+          - group: ${{ instance.name }}_users
           pool:
             name: '${{ instance.pool }}'
             vmImage: '${{ instance.image }}'
@@ -58,8 +51,7 @@ stages:
                   parameters:
                     environment: ${{ instance.name }}_environment.json
                     type: ${{ stage.name }}
-                    tenant: ${{parameters.tenant}}
-                - template: /pipelines/commit-template.yml
+                                - template: /pipelines/commit-template.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}
                 - bash: echo "##vso[build.addbuildtag]${{instance.name}}"

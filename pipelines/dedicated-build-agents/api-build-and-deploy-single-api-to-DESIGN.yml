@@ -3,13 +3,6 @@
 trigger: none
 
 parameters:
-- name: tenant
-  displayName: Deploy API project on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: api_project
   displayName: Deploy which API project?
   type: string
@@ -34,8 +27,8 @@ parameters:
   default: 'n/a'
 
 variables:
-- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
-# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+- template: /variables/variables-aliases-template.yml
+# - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
@@ -43,7 +36,6 @@ name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
-    tenant: ${{parameters.tenant}}
     target_stages:
     - name: DESIGN
       instances:

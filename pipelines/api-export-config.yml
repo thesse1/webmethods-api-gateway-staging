@@ -3,13 +3,6 @@
 trigger: none
 
 parameters:
-- name: tenant
-  displayName: Export API Gateway configuration in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
@@ -40,7 +33,6 @@ variables:
 stages:
 - template: /pipelines/api-export-config-stages-template.yml
   parameters:
-    tenant: ${{parameters.tenant}}
     source_instance: ${{parameters.source_instance}}
     commitMessage: ${{parameters.commitMessage}}
     stages:

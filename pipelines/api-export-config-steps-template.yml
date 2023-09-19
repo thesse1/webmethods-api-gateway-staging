@@ -3,40 +3,20 @@
 parameters:
   environment: ''
   type: ''
-  tenant: ''
 
 steps:
 - bash: |
-    if [ -z "$ENVIRONMENT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"environment\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TYPE" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"type\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TENANT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-  env:
-    ENVIRONMENT: ${{parameters.environment}}
-    TYPE: ${{parameters.type}}
-    TENANT: ${{parameters.tenant}}
-  displayName: Check for required parameters
-
-- bash: |
-   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/$(project_name)/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/$(project_name)/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/$(project_name)/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/$(project_name)/${{parameters.environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
 
 - bash: |
    curl -v $(environment_insecureflag) \
-          -d @"${{parameters.tenant}}/configuration/${{parameters.type}}/export_payload.json" \
+          -d @"configuration/${{parameters.type}}/export_payload.json" \
           --output $(Build.BuildId)_export_from_${{parameters.type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
@@ -54,7 +34,7 @@ steps:
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.type}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/configuration/${{parameters.type}}/assets'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/configuration/${{parameters.type}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 

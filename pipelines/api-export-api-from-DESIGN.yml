@@ -3,13 +3,6 @@
 trigger: none
 
 parameters:
-- name: tenant
-  displayName: Export API project from API Gateway DESIGN in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: api_project
   displayName: Export which API project?
   type: string
@@ -28,7 +21,7 @@ stages:
   - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_DESIGN'
     environment: 'DESIGN'
     variables:
-    - group: ${{parameters.tenant}}_DESIGN_users
+    - group: DESIGN_users
     pool:
       name: '$(pool_name)'
       vmImage: '$(pool_image)'
@@ -45,8 +38,7 @@ stages:
               api_project: ${{parameters.api_project}}
               source_environment: DESIGN_environment.json
               source_type: DESIGN
-              tenant: ${{parameters.tenant}}
-          - template: /pipelines/commit-template.yml
+                    - template: /pipelines/commit-template.yml
             parameters:
               commitMessage: ${{parameters.commitMessage}}
           - bash: |

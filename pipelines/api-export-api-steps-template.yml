@@ -4,45 +4,20 @@ parameters:
   api_project: ''
   source_environment: ''
   source_type: ''
-  tenant: ''
 
 steps:
 - bash: |
-    if [ -z "$api_project" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"api_project\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$SOURCE_ENVIRONMENT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"source_environment\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$SOURCE_TYPE" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"source_type\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TENANT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-  env:
-    api_project: ${{parameters.api_project}}
-    SOURCE_ENVIRONMENT: ${{parameters.source_environment}}
-    SOURCE_TYPE: ${{parameters.source_type}}
-    TENANT: ${{parameters.tenant}}
-  displayName: Check for required parameters
-
-- bash: |
-   echo "##vso[task.setvariable variable=source_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.source_environment}}`"
-   echo "##vso[task.setvariable variable=source_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.source_environment}}`"
-   echo "##vso[task.setvariable variable=source_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.source_environment}}`"
-   echo "##vso[task.setvariable variable=source_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.source_environment}}`"
-   echo "##vso[task.setvariable variable=source_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.source_type}} configuration, extract ip, hostname, port and insecureflag'
 
 - bash: |
    curl -v $(source_environment_insecureflag) \
-          -d @"${{parameters.tenant}}/apis/${{parameters.api_project}}/export_payload.json" \
+          -d @"apis/${{parameters.api_project}}/export_payload.json" \
           --output $(Build.BuildId)_export_from_${{parameters.source_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
@@ -60,7 +35,7 @@ steps:
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.api_project}}/assets'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 

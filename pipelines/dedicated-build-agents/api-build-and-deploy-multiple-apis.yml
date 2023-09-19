@@ -11,18 +11,9 @@ resources:
     source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
     trigger: true
 
-parameters:
-- name: tenant
-  displayName: Deploy API project on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
-
 variables:
-- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
-# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+- template: /variables/variables-aliases-template.yml
+# - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
 # name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
@@ -30,7 +21,6 @@ variables:
 stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
-    tenant: ${{parameters.tenant}}
     target_stages:
     - name: DEV_INT
       instances:

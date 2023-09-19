@@ -1,11 +1,4 @@
 parameters:
-- name: tenant
-  displayName: Deploy API project on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: target_stages
   displayName: Deploy to which stages?
   type: object
@@ -62,7 +55,7 @@ stages:
                 variables:
                 # - name: claimed_resource
                 #   value: $[ stageDependencies.${{ deployment_target }}_${{ api_project }}_Claim_resource.Claim_Resource_for_building_${{api_project}}_for_${{ deployment_target }}.outputs['claim_resource.claimed_resource'] ]
-                - group: ${{parameters.tenant}}_BUILD_users
+                - group: BUILD_users
                 pool:
                   name: '$(pool_name)'
                   vmImage: '$(pool_image)'
@@ -107,8 +100,7 @@ stages:
                     target_type: ${{ deployment_target }}
                     prep_condition: ${{true}}
                     test_condition: ${{ ne(deployment_target, 'DESIGN') }}
-                    tenant: ${{parameters.tenant}}
-                - template: /pipelines/store-build-template.yml
+                                - template: /pipelines/store-build-template.yml
                   parameters:
                     target_type: ${{ deployment_target }}
                     api_project: ${{api_project}}
@@ -127,8 +119,8 @@ stages:
                 - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{ deploy_instance }}'
                   environment: ${{ deploy_instance }}
                   variables:
-                  - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
-                  - group: ${{parameters.tenant}}_${{ deploy_instance }}_users
+                  - group: ${{ target_stage.name }}_users
+                  - group: ${{ deploy_instance }}_users
                   pool:
                     name: '$(pool_name)'
                     vmImage: '$(pool_image)'
@@ -150,8 +142,7 @@ stages:
                             target_type: ${{ deployment_target }}
                             prep_condition: ${{true}}
                             test_condition: ${{ ne('${{ deployment_target }}', 'DESIGN') }}
-                            tenant: ${{parameters.tenant}}
-                        - bash: |
+                                                - bash: |
                             echo "##vso[build.addbuildtag]${{api_project}}"
                             echo "##vso[build.addbuildtag]${{deploy_instance}}"
                             echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"

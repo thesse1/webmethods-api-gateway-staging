@@ -61,6 +61,5 @@ stages:
                 parameters:
                   environment: ${{ instance }}_environment.json
                   type: ${{ target_stage.name }}
-                  tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                            - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag

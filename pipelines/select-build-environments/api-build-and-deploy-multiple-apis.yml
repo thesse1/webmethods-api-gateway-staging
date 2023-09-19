@@ -12,13 +12,6 @@ resources:
     trigger: true
 
 parameters:
-- name: tenant
-  displayName: Deploy API project on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: DEV_INT_build_instance
   displayName: Build for DEV_INT on which BUILD instance?
   default: BUILD_01
@@ -87,8 +80,8 @@ parameters:
   - BUILD_07
 
 variables:
-- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
-# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+- template: /variables/variables-aliases-template.yml
+# - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
 # name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
@@ -96,7 +89,6 @@ variables:
 stages:
 - template: /pipelines/api-build-and-deploy-stages-template.yml
   parameters:
-    tenant: ${{parameters.tenant}}
     build_stage:
       name: BUILD
       instances:
