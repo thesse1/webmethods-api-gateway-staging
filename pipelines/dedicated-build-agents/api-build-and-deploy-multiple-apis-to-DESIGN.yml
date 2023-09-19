@@ -14,26 +14,24 @@ variables:
 - group: 'Project Configuration'
 
 stages:
-- template: /pipelines/api-build-and-deploy-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    target_stages:
-    - name: DESIGN
-      instances:
-      - DESIGN
-    deployment_sets:
-    - api_projects:
-      # - number_conversion
-      - odata_tutorial
-      - ping
-      # - star_wars
-      - petstore
-      - petstore_basicauth
-      - petstore_versioning
-      - postman_echo
-      # - postman_echo_jwt
-      # - postman_echo_oauth2
-      - postman_mocking
-      - multiple_tenants
-      - security_alias
-      targets:
-      - DESIGN
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      deployment_sets:
+      - api_projects:
+        # - number_conversion
+        - odata_tutorial
+        - ping
+        # - star_wars
+        - petstore
+        - petstore_basicauth
+        - petstore_versioning
+        - postman_echo
+        # - postman_echo_jwt
+        # - postman_echo_oauth2
+        - postman_mocking
+        - multiple_tenants
+        - security_alias
+        targets:
+        - DESIGN

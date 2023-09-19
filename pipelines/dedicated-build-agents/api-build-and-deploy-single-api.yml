@@ -28,43 +28,30 @@ variables:
 - template: /variables/variables-aliases-template.yml
 # - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
+- ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project
+    value: ${{parameters.api_project}}
+- ${{ else }}:
+  - name: api_project
+    value: ${{parameters.api_project_other}}
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
-- template: /pipelines/api-build-and-deploy-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    target_stages:
-    - name: DEV_INT
-      instances:
-      - DEV_INT
-    - name: DEV_EXT
-      instances:
-      - DEV_EXT
-    - name: TEST_INT
-      instances:
-      - TEST_INT
-    - name: TEST_EXT
-      instances:
-      - TEST_EXT
-    - name: PROD_INT
-      instances:
-      - PROD_INT_01
-      - PROD_INT_02
-    - name: PROD_EXT
-      instances:
-      - PROD_EXT_01
-      - PROD_EXT_02
-    deployment_sets:
-    - api_projects:
-      - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
-        - ${{parameters.api_project}}
-      - ${{ else }}:
-        - ${{parameters.api_project_other}}
-      targets:
-      - DEV_INT
-      - DEV_EXT
-      - TEST_INT
-      - TEST_EXT
-      - PROD_INT
-      - PROD_EXT
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      deployment_sets:
+      - api_projects:
+        - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+          - ${{parameters.api_project}}
+        - ${{ else }}:
+          - ${{parameters.api_project_other}}
+        targets:
+        - DEV_INT
+        - DEV_EXT
+        - TEST_INT
+        - TEST_EXT
+        - PROD_INT
+        - PROD_EXT
