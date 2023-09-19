@@ -60,7 +60,7 @@ stages:
         build_stage: ${{ stage }}
     target_stages:
     - ${{ each stage in parameters.stages }}:
-      - ${{ if ne(stage.is_build_stage) }}:
+      - ${{ if not(stage.is_build_stage) }}:
         - ${{ stage }}
     all_stages: ${{ parameters.stages }}
     ${{ each parameter in parameters.parameters}}:
