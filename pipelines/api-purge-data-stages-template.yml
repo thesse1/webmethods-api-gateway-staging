@@ -4,7 +4,7 @@ parameters:
 
 stages:
 # - ${{ each stage_group in parameters.stage_groups }}:
-  - ${{ each stage in stage_group.design_stages }}:
+  - ${{ each stage in parameters.stage_groups.design_stages }}:
     - stage: ${{ stage.name }}
       dependsOn: []
       jobs:
