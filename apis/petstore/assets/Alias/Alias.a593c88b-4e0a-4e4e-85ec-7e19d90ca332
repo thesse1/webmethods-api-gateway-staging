@@ -3,6 +3,6 @@
   "name" : "PetStore_Routing_Alias",
   "description" : "Petstore alias on DESIGN",
   "type" : "simple",
-  "owner" : "thomas.hesse@softwareag.com",
+  "owner" : "Administrator",
   "value" : "https://petstore.swagger.io/v2"
 }
