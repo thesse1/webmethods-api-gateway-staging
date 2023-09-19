@@ -1,6 +1,9 @@
 parameters:
+- name: job_name
+  type: string
+- name: job_steps
+  type: object
 - name: target_stages
-  displayName: Purge analytics data on which API Gateway stages?
   type: object
   default:
   - name: DESIGN
@@ -42,7 +45,7 @@ stages:
     dependsOn: []
     jobs:
     - ${{ each instance in target_stage.instances }}:
-      - deployment: Purge_Data_on_${{ instance }}
+      - deployment: ${{ parameters.job_name }}_${{ instance }}
         environment: ${{ instance }}
         variables:
         - group: ${{ target_stage.name }}_users
@@ -57,7 +60,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - template: /pipelines/api-purge-data-steps-template.yml
+              - template: /pipelines/{{ parameters.job_template }}
                 parameters:
                   environment: ${{ instance }}_environment.json
                   type: ${{ target_stage.name }}
