@@ -1,6 +1,8 @@
 parameters:
   api_project: ''
   build_environment: ''
+  build_stage_name: ''
+  build_instance_name: ''
   target_type: ''
   prep_condition: ''
   test_condition: ''
@@ -11,15 +13,15 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip'
+    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip'
     replaceExistingArchive: true
     verbose: true
   displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.api_project}}'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_BUILD_import'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_${{parameters.build_stage_name}}_import'
 
 # - task: FileTransform@1
 #   displayName: 'Replace hostname, ip and port in environment configuration'
@@ -36,16 +38,16 @@ steps:
    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/$(project_name)/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/$(project_name)/${{parameters.build_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway BUILD configuration, extract protocol, ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.build_instance_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
 
 - script: |
-    newman run postman/collections/utilities/prepare/Prepare_BUILD.json --reporters cli \
+    newman run postman/collections/utilities/prepare/Prepare_${{parameters.build_stage_name}}.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
     -e environments/$(project_name)/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
+  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway ${{parameters.build_instance_name}}'
   env:
     no_proxy: $(build_environment_ip)
 
@@ -61,10 +63,10 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_import.zip -e environments/$(project_name)/${{parameters.build_environment}} \
+    --env-var file_Loc=$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip -e environments/$(project_name)/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Import the Deployable To API Gateway BUILD'
+  displayName: 'Import the Deployable To API Gateway ${{parameters.build_instance_name}}'
   env:
     no_proxy: $(build_environment_ip)
 
@@ -73,7 +75,7 @@ steps:
     -e environments/$(project_name)/${{parameters.build_environment}} \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Run tests on API Gateway BUILD'
+  displayName: 'Run tests on API Gateway ${{parameters.build_instance_name}}'
   env:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.test_condition}})
@@ -126,18 +128,18 @@ steps:
 - bash: |
    curl $(build_environment_insecureflag) \
           -d @"apis/${{parameters.api_project}}/export_payload.json" \
-          --output $(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip \
+          --output $(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Export the Deployable from API Gateway BUILD'
+  displayName: 'Export the Deployable from API Gateway ${{parameters.build_instance_name}}'
   env:
     no_proxy: $(build_environment_hostname)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip'
     artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_export'
 
 - task: PublishTestResults@2
