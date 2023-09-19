@@ -7,6 +7,60 @@ parameters:
   type: object
 
 stages:
+- ${{ each stage in parameters.design_stages }}:
+  - stage: ${{ stage.name }}
+    dependsOn: []
+    jobs:
+    - ${{ each instance in stage.instances }}:
+      - deployment: Purge_Data_on_${{ instance }}
+        environment: ${{ instance }}
+        variables:
+        - group: ${{ stage.name }}_users
+        - group: ${{ instance }}_users
+        pool:
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - template: /pipelines/api-purge-data-steps-template.yml
+                parameters:
+                  environment: ${{ instance }}_environment.json
+                  type: ${{ stage.name }}
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                displayName: Add build tag
+
+- ${{ each stage in parameters.build_stages }}:
+  - stage: ${{ stage.name }}
+    dependsOn: []
+    jobs:
+    - ${{ each instance in stage.instances }}:
+      - deployment: Purge_Data_on_${{ instance }}
+        environment: ${{ instance }}
+        variables:
+        - group: ${{ stage.name }}_users
+        - group: ${{ instance }}_users
+        pool:
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - template: /pipelines/api-purge-data-steps-template.yml
+                parameters:
+                  environment: ${{ instance }}_environment.json
+                  type: ${{ stage.name }}
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                displayName: Add build tag
+
 - ${{ each stage in parameters.target_stages }}:
   - stage: ${{ stage.name }}
     dependsOn: []
