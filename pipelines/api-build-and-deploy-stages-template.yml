@@ -12,7 +12,7 @@ parameters:
   type: object
 
 stages:
-- ${{ each target_stage in target_stages }}:
+- ${{ each target_stage in parameters.target_stages }}:
   - ${{ each deployment_set in parameters.deployment_sets }}:
     - ${{ each deployment_target in deployment_set.targets }}:
       - ${{ if eq(target_stage.name, deployment_target) }}:
