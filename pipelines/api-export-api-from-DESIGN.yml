@@ -38,7 +38,7 @@ stages:
               api_project: ${{parameters.api_project}}
               source_environment: DESIGN_environment.json
               source_type: DESIGN
-                    - template: /pipelines/commit-template.yml
+          - template: /pipelines/commit-template.yml
             parameters:
               commitMessage: ${{parameters.commitMessage}}
           - bash: |
