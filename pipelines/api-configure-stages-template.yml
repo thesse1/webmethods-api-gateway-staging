@@ -1,6 +1,12 @@
 parameters:
 - name: stage_groups
   type: object
+- name: design_stages
+  type: object
+- name: build_stages
+  type: object
+- name: target_stages
+  type: object
 
 stages:
 - ${{ each stage_group in parameters.stage_groups }}:
