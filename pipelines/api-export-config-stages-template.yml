@@ -7,6 +7,10 @@ parameters:
   type: object
 - name: all_stages
   type: object
+- name: source_instance
+  type: string
+- name: commitMessage
+  type: string
 
 stages:
 - ${{ each stage in parameters.stages }}:
