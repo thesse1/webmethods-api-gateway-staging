@@ -1,6 +1,8 @@
 parameters:
 - name: template
   type: string
+- name: parameters
+  type: object
 - name: design_stages
   type: object
   default:
@@ -49,3 +51,5 @@ stages:
     design_stages: ${{ parameters.design_stages }}
     build_stages: ${{ parameters.build_stages }}
     target_stages: ${{ parameters.target_stages }}
+    ${{ each parameter in parameters.parameters}}:
+      ${{ parameter }}
