@@ -82,10 +82,10 @@ stages:
                       - template: /pipelines/api-deploy-steps-template.yml
                         parameters:
                           api_project: ${{api_project}}
-                          target_environment: ${{ deploy_instance }}_environment.json
+                          target_environment: ${{deploy_instance}}_environment.json
                           target_type: ${{deployment_target}}
                           prep_condition: ${{true}}
-                          test_condition: ${{ ne('${{deployment_target}}', 'DESIGN') }}
+                          test_condition: ${{ not(target_stage.is_design_stage) }}
                       - bash: |
                           echo "##vso[build.addbuildtag]${{api_project}}"
                           echo "##vso[build.addbuildtag]${{deploy_instance}}"
