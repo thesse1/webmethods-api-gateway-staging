@@ -10,15 +10,15 @@ parameters:
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
-  - stage: ${{ stage.name }}
+  - stage: ${{stage.name}}
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      - deployment: Purge_Data_on_${{ instance }}
-        environment: ${{ instance }}
+      - deployment: Purge_Data_on_${{instance}}
+        environment: ${{instance}}
         variables:
-        - group: ${{ stage.name }}_users
-        - group: ${{ instance }}_users
+        - group: ${{stage.name}}_users
+        - group: ${{instance}}_users
         pool:
           name: '$(pool_name)'
           vmImage: '$(pool_image)'
@@ -32,7 +32,7 @@ stages:
               - download: none
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
-                  environment: ${{ instance }}_environment.json
-                  type: ${{ stage.name }}
+                  environment: ${{instance}}_environment.json
+                  type: ${{stage.name}}
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag

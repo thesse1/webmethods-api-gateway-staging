@@ -23,7 +23,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip'
     artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_import'
 
 - bash: |
@@ -38,7 +38,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip -e environments/$(project_name)/${{parameters.target_environment}} \
+    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip -e environments/$(project_name)/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_type}}'

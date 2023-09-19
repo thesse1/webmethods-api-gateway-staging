@@ -16,14 +16,14 @@ stages:
 - ${{ each stage in parameters.all_stages }}:
   - ${{ each instance in stage.instances }}:
     - ${{ if eq(instance, parameters.source_instance) }}:
-      - stage: ${{ instance }}
+      - stage: ${{instance}}
         dependsOn: []
         jobs:
-        - deployment: Export_config_from_API_Gateway_${{ instance }}
-          environment: ${{ instance }}
+        - deployment: Export_config_from_API_Gateway_${{instance}}
+          environment: ${{instance}}
           variables:
-          - group: ${{ stage.name }}_users
-          - group: ${{ instance }}_users
+          - group: ${{stage.name}}_users
+          - group: ${{instance}}_users
           pool:
             name: '$(pool_name)'
             vmImage: '$(pool_image)'
@@ -36,8 +36,8 @@ stages:
                   persistCredentials: "true"
                 - template: /pipelines/api-export-config-steps-template.yml
                   parameters:
-                    environment: ${{ instance }}_environment.json
-                    type: ${{ stage.name }}
+                    environment: ${{instance}}_environment.json
+                    type: ${{stage.name}}
                 - template: /pipelines/commit-template.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}

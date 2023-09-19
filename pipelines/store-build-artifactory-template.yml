@@ -19,7 +19,7 @@ steps:
       {
         "files": [
           {
-            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip",
+            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip",
             "target": "$(artifactoryFolder)/"
           }
         ]

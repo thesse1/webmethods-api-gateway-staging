@@ -10,15 +10,15 @@ parameters:
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
-  - stage: ${{ stage.name }}
+  - stage: ${{stage.name}}
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      - deployment: Configure_API_Gateway_${{ instance }}
-        environment: ${{ instance }}
+      - deployment: Configure_API_Gateway_${{instance}}
+        environment: ${{instance}}
         variables:
-        - group: ${{ stage.name }}_users
-        - group: ${{ instance }}_users
+        - group: ${{stage.name}}_users
+        - group: ${{instance}}_users
         pool:
           name: '$(pool_name)'
           vmImage: '$(pool_image)'
@@ -32,16 +32,16 @@ stages:
               - download: none
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
-                  environment: ${{ instance }}_environment.json
-                  type: ${{ stage.name }}
+                  environment: ${{instance}}_environment.json
+                  type: ${{stage.name}}
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
-      - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
-        environment: ${{ stage.name }}_HAFT
+      - deployment: Configure_HAFT_for_API_Gateway_${{stage.name}}
+        environment: ${{stage.name}}_HAFT
         variables:
-        - group: ${{ stage.name }}_HAFT_users
+        - group: ${{stage.name}}_HAFT_users
         pool:
           name: '$(pool_name)'
           vmImage: '$(pool_image)'
@@ -55,6 +55,6 @@ stages:
               - download: none
               - template: /pipelines/api-configure-haft-steps-template.yml
                 parameters:
-                  type: ${{ stage.name }}
-              - bash: echo "##vso[build.addbuildtag]${{ stage.name }}_HAFT"
+                  type: ${{stage.name}}
+              - bash: echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
                 displayName: Add build tag
