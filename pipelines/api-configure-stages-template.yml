@@ -7,10 +7,12 @@ parameters:
   type: object
 - name: target_stages
   type: object
+- name: stages
+  type: object
 
 stages:
-- ${{ each stage_group in parameters.stage_groups }}:
-  - ${{ each stage in stage_group.stages }}:
+# - ${{ each stage_group in parameters.stage_groups }}:
+  - ${{ each stage in parameters.stages }}:
     - stage: ${{ stage.name }}
       dependsOn: []
       jobs:

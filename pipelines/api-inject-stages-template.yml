@@ -58,5 +58,8 @@ stages:
     stage_groups: ${{ parameters.stage_groups }}
     ${{ each stage_group in parameters.stage_groups }}:
       ${{ stage_group.name }}: ${{ stage_group.stages }}
+    stages:
+    - ${{ each stage_group in parameters.stage_groups }}:
+      - ${{ stage_group.stages }}
     ${{ each parameter in parameters.parameters}}:
       ${{ parameter.key }}: ${{ parameter.value }}
