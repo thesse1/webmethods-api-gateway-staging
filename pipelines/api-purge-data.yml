@@ -12,16 +12,5 @@ variables:
 - group: 'Shutdown approval'
 - group: 'Project Configuration'
 
-parameters:
-- name: tenant
-  displayName: Purge analytics data on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
-
 stages:
 - template: /pipelines/api-purge-data-stages-template.yml
-  parameters:
-    tenant: ${{parameters.tenant}}

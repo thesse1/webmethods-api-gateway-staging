@@ -1,11 +1,4 @@
 parameters:
-- name: tenant
-  displayName: Purge analytics data on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: target_stages
   displayName: Purge analytics data on which API Gateway stages?
   type: object
@@ -52,8 +45,8 @@ stages:
       - deployment: Purge_Data_on_${{ instance }}
         environment: ${{ instance }}
         variables:
-        - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
-        - group: ${{parameters.tenant}}_${{ instance }}_users
+        - group: ${{ target_stage.name }}_users
+        - group: ${{ instance }}_users
         pool:
           name: '$(pool_name)'
           vmImage: '$(pool_image)'
