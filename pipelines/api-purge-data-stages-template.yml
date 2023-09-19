@@ -3,8 +3,8 @@ parameters:
   type: object
 
 stages:
-# - ${{ each stage_group in parameters.stage_groups }}:
-  - ${{ each stage in parameters.stage_groups.design_stages }}:
+- ${{ each stage_group in parameters.stage_groups }}:
+  - ${{ each stage in stage_group }}:
     - stage: ${{ stage.name }}
       dependsOn: []
       jobs:
