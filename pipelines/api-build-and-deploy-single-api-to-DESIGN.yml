@@ -28,8 +28,14 @@ variables:
 - template: /variables/variables-aliases-template.yml
 # - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
+- ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project
+    value: ${{parameters.api_project}}
+- ${{ else }}:
+  - name: api_project
+    value: ${{parameters.api_project_other}}
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml
