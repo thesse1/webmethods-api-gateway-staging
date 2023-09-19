@@ -4,8 +4,6 @@ trigger: none
 
 parameters:
 - name: api_project
-  type: string
-- name: api_project
   displayName: Export which API project?
   type: string
   values:
