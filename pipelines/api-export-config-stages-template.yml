@@ -1,9 +1,5 @@
 parameters:
-- name: design_stages
-  type: object
-- name: build_stages
-  type: object
-- name: target_stages
+- name: stage_groups
   type: object
 - name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
@@ -13,33 +9,34 @@ parameters:
   type: string
 
 stages:
-- ${{ each stage in parameters.design_stages }}:
-  - ${{ each instance in stage.instances }}:
-    - ${{ if eq(instance, parameters.source_instance) }}:
-      - stage: ${{ instance }}
-        # dependsOn: []
-        jobs:
-        - deployment: Export_config_from_API_Gateway_${{ instance }}
-          environment: ${{ instance }}
-          variables:
-          - group: ${{ stage.name }}_users
-          - group: ${{ instance }}_users
-          pool:
-            name: '$(pool_name)'
-            vmImage: '$(pool_image)'
-          strategy:
-            runOnce:    #rolling, canary are the other strategies that are supported
-              deploy:
-                steps:
-                - checkout: self
-                  submodules: "true"
-                  persistCredentials: "true"
-                - template: /pipelines/api-export-config-steps-template.yml
-                  parameters:
-                    environment: ${{ instance }}_environment.json
-                    type: ${{ stage.name }}
-                - template: /pipelines/commit-template.yml
-                  parameters:
-                    commitMessage: ${{parameters.commitMessage}}
-                - bash: echo "##vso[build.addbuildtag]${{instance}}"
-                  displayName: Add build tag
+- ${{ each stage_group in parameters.stage_groups }}:
+  - ${{ each stage in stage_group }}:
+    - ${{ each instance in stage.instances }}:
+      - ${{ if eq(instance, parameters.source_instance) }}:
+        - stage: ${{ instance }}
+          dependsOn: []
+          jobs:
+          - deployment: Export_config_from_API_Gateway_${{ instance }}
+            environment: ${{ instance }}
+            variables:
+            - group: ${{ stage.name }}_users
+            - group: ${{ instance }}_users
+            pool:
+              name: '$(pool_name)'
+              vmImage: '$(pool_image)'
+            strategy:
+              runOnce:    #rolling, canary are the other strategies that are supported
+                deploy:
+                  steps:
+                  - checkout: self
+                    submodules: "true"
+                    persistCredentials: "true"
+                  - template: /pipelines/api-export-config-steps-template.yml
+                    parameters:
+                      environment: ${{ instance }}_environment.json
+                      type: ${{ stage.name }}
+                  - template: /pipelines/commit-template.yml
+                    parameters:
+                      commitMessage: ${{parameters.commitMessage}}
+                  - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                    displayName: Add build tag

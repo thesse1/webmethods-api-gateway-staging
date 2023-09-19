@@ -3,53 +3,48 @@ parameters:
   type: string
 - name: parameters
   type: object
-- name: design_stages
+- name: stage_groups
   type: object
   default:
-  - name: DESIGN
-    instances:
-    - DESIGN
-- name: build_stages
-  type: object
-  default:
-  - name: BUILD
-    instances:
-    - BUILD_01
-    - BUILD_02
-    - BUILD_03
-    - BUILD_04
-    - BUILD_05
-    - BUILD_06
-    - BUILD_07
-- name: target_stages
-  type: object
-  default:
-  - name: DEV_INT
-    instances:
-    - DEV_INT
-  - name: DEV_EXT
-    instances:
-    - DEV_EXT
-  - name: TEST_INT
-    instances:
-    - TEST_INT
-  - name: TEST_EXT
-    instances:
-    - TEST_EXT
-  - name: PROD_INT
-    instances:
-    - PROD_INT_01
-    - PROD_INT_02
-  - name: PROD_EXT
-    instances:
-    - PROD_EXT_01
-    - PROD_EXT_02
+  - design_stages:
+    - name: DESIGN
+      instances:
+      - DESIGN
+  - build_stages:
+    - name: BUILD
+      instances:
+      - BUILD_01
+      - BUILD_02
+      - BUILD_03
+      - BUILD_04
+      - BUILD_05
+      - BUILD_06
+      - BUILD_07
+  - target_stages:
+    - name: DEV_INT
+      instances:
+      - DEV_INT
+    - name: DEV_EXT
+      instances:
+      - DEV_EXT
+    - name: TEST_INT
+      instances:
+      - TEST_INT
+    - name: TEST_EXT
+      instances:
+      - TEST_EXT
+    - name: PROD_INT
+      instances:
+      - PROD_INT_01
+      - PROD_INT_02
+    - name: PROD_EXT
+      instances:
+      - PROD_EXT_01
+      - PROD_EXT_02
 
 stages:
 - template: ${{ parameters.template }}
   parameters:
-    design_stages: ${{ parameters.design_stages }}
-    build_stages: ${{ parameters.build_stages }}
-    target_stages: ${{ parameters.target_stages }}
+    stage_groups: ${{ parameters.stage_groups }}
     ${{ each parameter in parameters.parameters}}:
       ${{ parameter.key }}: ${{ parameter.value }}
