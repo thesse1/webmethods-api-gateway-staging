@@ -1,5 +1,3 @@
-# Pipeline template for apig staging
-
 parameters:
   target_type: ''
   api_project: ''

@@ -1,5 +1,3 @@
-# Pipeline template for apig configuring
-
 parameters:
   type: ''
 

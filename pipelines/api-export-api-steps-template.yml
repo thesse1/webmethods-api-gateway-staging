@@ -1,5 +1,3 @@
-# Pipeline template for apig staging
-
 parameters:
   api_project: ''
   source_environment: ''
