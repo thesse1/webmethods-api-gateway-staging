@@ -3,63 +3,65 @@ parameters:
   type: string
 - name: parameters
   type: object
-- name: stage_groups
+- name: stages
   type: object
   default:
-  - name: design_stages
-    stages:
-    - name: DESIGN
-      build_instance: BUILD_07
-      instances:
-      - DESIGN
-  - name: build_stages
-    stages:
-    - name: BUILD
-      instances:
-      - BUILD_01
-      - BUILD_02
-      - BUILD_03
-      - BUILD_04
-      - BUILD_05
-      - BUILD_06
-      - BUILD_07
-  - name: target_stages
-    stages:
-    - name: DEV_INT
-      build_instance: BUILD_01
-      instances:
-      - DEV_INT
-    - name: DEV_EXT
-      build_instance: BUILD_02
-      instances:
-      - DEV_EXT
-    - name: TEST_INT
-      build_instance: BUILD_03
-      instances:
-      - TEST_INT
-    - name: TEST_EXT
-      build_instance: BUILD_04
-      instances:
-      - TEST_EXT
-    - name: PROD_INT
-      build_instance: BUILD_05
-      instances:
-      - PROD_INT_01
-      - PROD_INT_02
-    - name: PROD_EXT
-      build_instance: BUILD_06
-      instances:
-      - PROD_EXT_01
-      - PROD_EXT_02
+  - name: DESIGN
+    build_instance: BUILD_01
+    is_design_stage: ${{ true }}
+    instances:
+    - DESIGN
+  - name: BUILD
+    is_build_stage: ${{ true }}
+    instances:
+    - BUILD_01
+    - BUILD_02
+    - BUILD_03
+    - BUILD_04
+    - BUILD_05
+    - BUILD_06
+    - BUILD_07
+  - name: DEV_INT
+    build_instance: BUILD_02
+    instances:
+    - DEV_INT
+  - name: DEV_EXT
+    build_instance: BUILD_03
+    instances:
+    - DEV_EXT
+  - name: TEST_INT
+    build_instance: BUILD_04
+    instances:
+    - TEST_INT
+  - name: TEST_EXT
+    build_instance: BUILD_05
+    instances:
+    - TEST_EXT
+  - name: PROD_INT
+    build_instance: BUILD_06
+    configure_haft: ${{ true }}
+    instances:
+    - PROD_INT_01
+    - PROD_INT_02
+  - name: PROD_EXT
+    build_instance: BUILD_07
+    configure_haft: ${{ true }}
+    instances:
+    - PROD_EXT_01
+    - PROD_EXT_02
 
 stages:
 - template: ${{ parameters.template }}
   parameters:
-    stage_groups: ${{ parameters.stage_groups }}
-    ${{ each stage_group in parameters.stage_groups }}:
-      ${{ stage_group.name }}: ${{ stage_group.stages }}
-    stages:
-    - ${{ each stage_group in parameters.stage_groups }}:
-      - ${{ stage_group.stages }}
+    ${{ each stage in parameters.stages }}:
+      ${{ if stage.is_design_stage }}:
+        design_stage: ${{ stage }}
+      ${{ if stage.is_build_stage }}:
+        build_stage: ${{ stage }}
+    target_stages:
+    - ${{ each stage in parameters.stages }}:
+      - ${{ if ne(stage.is_build_stage) }}:
+        - ${{ stage }}
+    all_stages: ${{ parameters.stages }}
     ${{ each parameter in parameters.parameters}}:
       ${{ parameter.key }}: ${{ parameter.value }}

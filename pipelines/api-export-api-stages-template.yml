@@ -1,0 +1,73 @@
+trigger: none
+
+parameters:
+- name: design_stage
+  type: object
+- name: build_stage
+  type: object
+- name: target_stages
+  type: object
+- name: all_stages
+  type: object
+- name: api_project
+  displayName: Export which API project?
+  type: string
+  values:
+  # - number_conversion
+  - ping
+  - odata_tutorial
+  # - star_wars
+  - petstore
+  # - petstore_basicauth
+  - petstore_versioning
+  - postman_echo
+  # - postman_echo_jwt
+  # - postman_echo_oauth2
+  - postman_mocking
+  # - multiple_tenants
+  # - security_alias
+  - 'other (Please specify below)'
+- name: api_project_other
+  displayName: Export which other API project?
+  type: string
+  default: 'n/a'
+- name: commitMessage
+  displayName: Message for the commit in Git?
+  type: string
+
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+
+variables:
+- group: 'Project Configuration'
+
+stages:
+- stage: ${{ parameters.design_stage.name }}
+  jobs:
+  - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_${{ parameters.design_stage.name }}'
+    environment: '${{ parameters.design_stage.name }}'
+    variables:
+    - group: ${{ parameters.design_stage.name }}_users
+    pool:
+      name: '$(pool_name)'
+      vmImage: '$(pool_image)'
+    strategy:
+      runOnce:    #rolling, canary are the other strategies that are supported
+        deploy:
+          steps:
+          - checkout: self
+            submodules: "true"
+            persistCredentials: "true"
+            clean: "true"
+          - template: /pipelines/api-export-api-steps-template.yml
+            parameters:
+              api_project: ${{parameters.api_project}}
+              source_environment: ${{ parameters.design_stage.name }}_environment.json
+              source_type: ${{ parameters.design_stage.name }}
+          - template: /pipelines/commit-template.yml
+            parameters:
+              commitMessage: ${{parameters.commitMessage}}
+          - bash: |
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+              echo "##vso[build.addbuildtag]${{ parameters.design_stage.name }}"
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{ parameters.design_stage.name }}"
+            displayName: Add build tags

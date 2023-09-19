@@ -35,33 +35,9 @@ variables:
 - group: 'Project Configuration'
 
 stages:
-- stage: DESIGN
-  jobs:
-  - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_DESIGN'
-    environment: 'DESIGN'
-    variables:
-    - group: DESIGN_users
-    pool:
-      name: '$(pool_name)'
-      vmImage: '$(pool_image)'
-    strategy:
-      runOnce:    #rolling, canary are the other strategies that are supported
-        deploy:
-          steps:
-          - checkout: self
-            submodules: "true"
-            persistCredentials: "true"
-            clean: "true"
-          - template: /pipelines/api-export-api-steps-template.yml
-            parameters:
-              api_project: ${{parameters.api_project}}
-              source_environment: DESIGN_environment.json
-              source_type: DESIGN
-          - template: /pipelines/commit-template.yml
-            parameters:
-              commitMessage: ${{parameters.commitMessage}}
-          - bash: |
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-              echo "##vso[build.addbuildtag]DESIGN"
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}_DESIGN"
-            displayName: Add build tags
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-export-api-stages-template.yml
+    parameters:
+      api_project: ${{parameters.api_project}}
+      commitMessage: ${{parameters.commitMessage}}

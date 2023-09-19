@@ -1,17 +1,15 @@
 parameters:
-- name: stage_groups
+- name: design_stage
   type: object
-- name: design_stages
-  type: object
-- name: build_stages
+- name: build_stage
   type: object
 - name: target_stages
   type: object
-- name: stages
+- name: all_stages
   type: object
 
 stages:
-- ${{ each stage in parameters.stages }}:
+- ${{ each stage in parameters.all_stages }}:
   - stage: ${{ stage.name }}
     dependsOn: []
     jobs:
@@ -39,8 +37,7 @@ stages:
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag
 
-    # - ${{ if gt(length(stage.instances),1) }}: # Configure HAFT if more than one instance per stage
-    - ${{ if startsWith(stage.name, 'PROD') }}: # Configure HAFT on PROD stages
+    - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
         environment: ${{ stage.name }}_HAFT
         variables:

@@ -1,17 +1,15 @@
 parameters:
-- name: stage_groups
+- name: design_stage
   type: object
-- name: design_stages
-  type: object
-- name: build_stages
+- name: build_stage
   type: object
 - name: target_stages
   type: object
-- name: stages
+- name: all_stages
   type: object
 
 stages:
-- ${{ each stage in parameters.stages }}:
+- ${{ each stage in parameters.all_stages }}:
   - stage: ${{ stage.name }}
     dependsOn: []
     jobs:
