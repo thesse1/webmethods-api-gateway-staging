@@ -1,8 +1,8 @@
 parameters:
 - name: job_name
   type: string
-- name: job_steps
-  type: object
+- name: job_template
+  type: string
 - name: target_stages
   type: object
   default:
