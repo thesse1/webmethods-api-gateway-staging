@@ -1,13 +1,33 @@
 parameters:
 - name: template
   type: string
+- name: DESIGN_build_instance
+  type: string
+  default: BUILD_07
+- name: DEV_INT_build_instance
+  type: string
+  default: BUILD_01
+- name: DEV_EXT_build_instance
+  type: string
+  default: BUILD_02
+- name: TEST_INT_build_instance
+  type: string
+  default: BUILD_03
+- name: TEST_EXT_build_instance
+  type: string
+  default: BUILD_04
+- name: PROD_INT_build_instance
+  type: string
+  default: BUILD_05
+- name: PROD_EXT_build_instance
+  type: string
+  default: BUILD_06
 - name: parameters
   type: object
 - name: stages
   type: object
   default:
   - name: DESIGN
-    build_instance: BUILD_07
     is_design_stage: true
     instances:
     - DESIGN
@@ -22,36 +42,30 @@ parameters:
     - BUILD_06
     - BUILD_07
   - name: DEV_INT
-    build_instance: BUILD_01
     instances:
     - DEV_INT
   - name: DEV_EXT
-    build_instance: BUILD_02
     instances:
     - DEV_EXT
   - name: TEST_INT
-    build_instance: BUILD_03
     instances:
     - TEST_INT
   - name: TEST_EXT
-    build_instance: BUILD_04
     instances:
     - TEST_EXT
   - name: PROD_INT
-    build_instance: BUILD_05
     configure_haft: true
     instances:
     - PROD_INT_01
     - PROD_INT_02
   - name: PROD_EXT
-    build_instance: BUILD_06
     configure_haft: true
     instances:
     - PROD_EXT_01
     - PROD_EXT_02
 
 stages:
-- template: ${{ parameters.template }}
+- template: ${{parameters.template}}
   parameters:
     ${{ each stage in parameters.stages }}:
       ${{ if stage.is_design_stage }}:
@@ -62,6 +76,6 @@ stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{ stage }}
-    all_stages: ${{ parameters.stages }}
+    all_stages: ${{parameters.stages}}
     ${{ each parameter in parameters.parameters}}:
       ${{ parameter.key }}: ${{ parameter.value }}
