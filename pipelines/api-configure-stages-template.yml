@@ -91,7 +91,8 @@ stages:
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag
 
-    - ${{ if gt(length(stage.instances),1) }}: # Configure HAFT if more than one instance per stage
+    # - ${{ if gt(length(stage.instances),1) }}: # Configure HAFT if more than one instance per stage
+    - ${{ if startsWith(stage.name, 'PROD') }}: # Configure HAFT on PROD stages
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
         environment: ${{ stage.name }}_HAFT
         variables:
