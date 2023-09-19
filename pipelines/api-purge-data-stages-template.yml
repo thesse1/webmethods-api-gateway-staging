@@ -27,6 +27,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
+              - download: none
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment: ${{ instance }}_environment.json
@@ -54,6 +55,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
+              - download: none
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment: ${{ instance }}_environment.json
@@ -81,6 +83,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
+              - download: none
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment: ${{ instance }}_environment.json
