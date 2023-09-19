@@ -10,7 +10,7 @@ parameters:
 
 stages:
 - ${{ each stage_group in parameters.stage_groups }}:
-  - ${{ each stage in stage_group }}:
+  - ${{ each stage in stage_group.stages }}:
     - ${{ each instance in stage.instances }}:
       - ${{ if eq(instance, parameters.source_instance) }}:
         - stage: ${{ instance }}
