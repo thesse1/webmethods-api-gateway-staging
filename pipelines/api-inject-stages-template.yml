@@ -7,7 +7,7 @@ parameters:
   type: object
   default:
   - name: DESIGN
-    build_instance: BUILD_01
+    build_instance: BUILD_07
     is_design_stage: true
     instances:
     - DESIGN
@@ -22,29 +22,29 @@ parameters:
     - BUILD_06
     - BUILD_07
   - name: DEV_INT
-    build_instance: BUILD_02
+    build_instance: BUILD_01
     instances:
     - DEV_INT
   - name: DEV_EXT
-    build_instance: BUILD_03
+    build_instance: BUILD_02
     instances:
     - DEV_EXT
   - name: TEST_INT
-    build_instance: BUILD_04
+    build_instance: BUILD_03
     instances:
     - TEST_INT
   - name: TEST_EXT
-    build_instance: BUILD_05
+    build_instance: BUILD_04
     instances:
     - TEST_EXT
   - name: PROD_INT
-    build_instance: BUILD_06
+    build_instance: BUILD_05
     configure_haft: true
     instances:
     - PROD_INT_01
     - PROD_INT_02
   - name: PROD_EXT
-    build_instance: BUILD_07
+    build_instance: BUILD_06
     configure_haft: true
     instances:
     - PROD_EXT_01
