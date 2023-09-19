@@ -13,4 +13,4 @@ variables:
 stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:
-    template: /pipelines/pi-purge-data-stages-template.yml
+    template: /pipelines/purge-data-stages-template.yml
