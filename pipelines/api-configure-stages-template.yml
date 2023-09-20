@@ -1,28 +1,27 @@
 parameters:
-- name: tenant
-  displayName: Configure API Gateway in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
-- name: stages
-  displayName: Configure API Gateway in which stages?
+- name: design_stage
+  type: object
+- name: build_stage
+  type: object
+- name: target_stages
+  type: object
+- name: all_stages
   type: object
 
 stages:
-- ${{ each stage in parameters.stages }}:
-  - stage: ${{ stage.name }}
+- ${{ each stage in parameters.all_stages }}:
+  - stage: ${{stage.name}}
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      - deployment: Configure_API_Gateway_${{ instance.name }}
-        environment: ${{ instance.name }}
+      - deployment: Configure_API_Gateway_${{instance}}
+        environment: ${{instance}}
         variables:
-        - group: ${{parameters.tenant}}_${{ instance.name }}_users
+        - group: ${{stage.name}}_users
+        - group: ${{instance}}_users
         pool:
-          name: '${{ instance.pool }}'
-          vmImage: '${{ instance.image }}'
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -33,20 +32,19 @@ stages:
               - download: none
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
-                  environment: "${{ instance.name }}_environment.json"
-                  type: ${{ stage.name }}
-                  tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{instance.name}}"
+                  environment: ${{instance}}_environment.json
+                  type: ${{stage.name}}
+              - bash: echo "##vso[build.addbuildtag]${{instance}}"
                 displayName: Add build tag
 
-    - ${{ if stage.haft }}:
-      - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
-        environment: ${{ stage.name }}_HAFT
+    - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
+      - deployment: Configure_HAFT_for_API_Gateway_${{stage.name}}
+        environment: ${{stage.name}}_HAFT
         variables:
-        - group: ${{parameters.tenant}}_${{ stage.name }}_HAFT_users
+        - group: ${{stage.name}}_HAFT_users
         pool:
-          name: '${{ stage.haft.pool }}'
-          vmImage: '${{ stage.haft.image }}'
+          name: '$(pool_name)'
+          vmImage: '$(pool_image)'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -57,7 +55,6 @@ stages:
               - download: none
               - template: /pipelines/api-configure-haft-steps-template.yml
                 parameters:
-                  type: ${{ stage.name }}
-                  tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{ stage.name }}_HAFT"
+                  type: ${{stage.name}}
+              - bash: echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
                 displayName: Add build tag

@@ -1,31 +1,14 @@
-# Pipeline template for apig configuring
-
 parameters:
   type: ''
-  tenant: ''
 
 steps:
-- bash: |
-    if [ -z "$TYPE" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"type\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-    if [ -z "$TENANT" ]; then
-      echo "##vso[task.logissue type=error;]Missing template parameter \"tenant\""
-      echo "##vso[task.complete result=Failed;]"
-    fi
-  env:
-    TYPE: ${{parameters.type}}
-    TENANT: ${{parameters.tenant}}
-  displayName: Check for required parameters
-
 - script: |
     newman run postman/collections/utilities/haft/Configure_HAFT_${{parameters.type}}.json --reporters cli \
     --env-var haft_manager_01_user='$(haft_manager_01_user)' \
     --env-var haft_manager_01_password='$(haft_manager_01_password)' \
     --env-var haft_manager_02_user='$(haft_manager_02_user)' \
     --env-var haft_manager_02_password='$(haft_manager_02_password)' \
-    -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.type}}_haft_environment.json
+    -e environments/$(project_name)/${{parameters.type}}_haft_environment.json
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'
 
@@ -38,6 +21,6 @@ steps:
     --env-var haft_manager_01_password='$(haft_manager_01_password)' \
     --env-var haft_manager_02_user='$(haft_manager_02_user)' \
     --env-var haft_manager_02_password='$(haft_manager_02_password)' \
-    -e ${{parameters.tenant}}/environments/$(project_name)/${{parameters.type}}_haft_environment.json
+    -e environments/$(project_name)/${{parameters.type}}_haft_environment.json
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Validate High Availability and Fault Tolerance for API Gateway ${{parameters.type}}'

@@ -3,54 +3,50 @@
 trigger: none
 
 parameters:
-- name: tenant
-  displayName: Export API project from API Gateway DESIGN in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: api_project
   displayName: Export which API project?
   type: string
+  values:
+  # - number_conversion
+  - ping
+  - odata_tutorial
+  # - star_wars
+  - petstore
+  # - petstore_basicauth
+  - petstore_versioning
+  - postman_echo
+  # - postman_echo_jwt
+  # - postman_echo_oauth2
+  - postman_mocking
+  # - multiple_tenants
+  # - security_alias
+  - 'other (Please specify below)'
+- name: api_project_other
+  displayName: Export which other API project?
+  type: string
+  default: 'n/a'
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
-
 variables:
 - group: 'Project Configuration'
+- ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project
+    value: ${{parameters.api_project}}
+- ${{ else }}:
+  - name: api_project
+    value: ${{parameters.api_project_other}}
+
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
-- stage: DESIGN
-  jobs:
-  - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_DESIGN'
-    environment: 'DESIGN'
-    variables:
-    - group: ${{parameters.tenant}}_DESIGN_users
-    pool:
-      name: '$(pool_name)'
-      vmImage: '$(pool_image)'
-    strategy:
-      runOnce:    #rolling, canary are the other strategies that are supported
-        deploy:
-          steps:
-          - checkout: self
-            submodules: "true"
-            persistCredentials: "true"
-            clean: "true"
-          - template: /pipelines/api-export-api-steps-template.yml
-            parameters:
-              api_project: ${{parameters.api_project}}
-              source_environment: DESIGN_environment.json
-              source_type: DESIGN
-              tenant: ${{parameters.tenant}}
-          - template: /pipelines/commit-template.yml
-            parameters:
-              commitMessage: ${{parameters.commitMessage}}
-          - bash: |
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-              echo "##vso[build.addbuildtag]DESIGN"
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}_DESIGN"
-            displayName: Add build tags
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-export-api-stages-template.yml
+    parameters:
+      ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+        api_project: ${{parameters.api_project}}
+      ${{ else }}:
+        api_project: ${{parameters.api_project_other}}
+      commitMessage: ${{parameters.commitMessage}}

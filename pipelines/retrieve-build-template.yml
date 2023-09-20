@@ -1,5 +1,3 @@
-# Pipeline template for apig staging
-
 parameters:
   target_type: ''
   api_project: ''
@@ -20,7 +18,7 @@ steps:
   displayName: Check for required parameters
 
 - download: current
-  artifact: ${{ parameters.target_type }}_${{ parameters.api_project }}
+  artifact: ${{parameters.target_type}}_${{parameters.api_project}}
   displayName: Build Download
 
 - bash: |
@@ -35,7 +33,7 @@ steps:
 #       {
 #           "files": [
 #               {
-#                   "pattern": "$(artifactoryFolder)/$(Build.BuildId)_${{ parameters.target_type }}_${{ parameters.api_project }}_export.zip",
+#                   "pattern": "$(artifactoryFolder)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip",
 #                   "target": "$(System.DefaultWorkingDirectory)/",
 #                   "flat": "true"
 #               }

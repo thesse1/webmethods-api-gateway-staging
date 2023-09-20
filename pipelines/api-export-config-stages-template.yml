@@ -1,52 +1,32 @@
 parameters:
-- name: tenant
-  displayName: Export API Gateway configuration in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
-- name: source_instance
-  displayName: Export API Gateway configuration from which API Gateway?
-  type: string
-  values:
-  - DESIGN
-  - BUILD_01
-  - BUILD_02
-  - BUILD_03
-  - BUILD_04
-  - BUILD_05
-  - BUILD_06
-  - BUILD_07
-  - DEV_INT
-  - DEV_EXT
-  - TEST_INT
-  - TEST_EXT
-  - PROD_INT_01
-  - PROD_INT_02
-  - PROD_EXT_01
-  - PROD_EXT_02
-- name: commitMessage
-  displayName: Message for the commit in Git?
-  type: string
-- name: stages
-  displayName: List of stages
+- name: design_stage
   type: object
+- name: build_stage
+  type: object
+- name: target_stages
+  type: object
+- name: all_stages
+  type: object
+- name: source_instance
+  type: string
+- name: commitMessage
+  type: string
 
 stages:
-- ${{ each stage in parameters.stages }}:
+- ${{ each stage in parameters.all_stages }}:
   - ${{ each instance in stage.instances }}:
-    - ${{ if eq(instance.name, parameters.source_instance) }}:
-      - stage: ${{ instance.name }}
-        # dependsOn: []
+    - ${{ if eq(instance, parameters.source_instance) }}:
+      - stage: ${{instance}}
+        dependsOn: []
         jobs:
-        - deployment: Export_config_from_API_Gateway_${{ instance.name }}
-          environment: ${{ instance.name }}
+        - deployment: Export_config_from_API_Gateway_${{instance}}
+          environment: ${{instance}}
           variables:
-          - group: ${{parameters.tenant}}_${{ instance.name }}_users
+          - group: ${{stage.name}}_users
+          - group: ${{instance}}_users
           pool:
-            name: '${{ instance.pool }}'
-            vmImage: '${{ instance.image }}'
+            name: '$(pool_name)'
+            vmImage: '$(pool_image)'
           strategy:
             runOnce:    #rolling, canary are the other strategies that are supported
               deploy:
@@ -56,11 +36,10 @@ stages:
                   persistCredentials: "true"
                 - template: /pipelines/api-export-config-steps-template.yml
                   parameters:
-                    environment: ${{ instance.name }}_environment.json
-                    type: ${{ stage.name }}
-                    tenant: ${{parameters.tenant}}
+                    environment: ${{instance}}_environment.json
+                    type: ${{stage.name}}
                 - template: /pipelines/commit-template.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}
-                - bash: echo "##vso[build.addbuildtag]${{instance.name}}"
+                - bash: echo "##vso[build.addbuildtag]${{instance}}"
                   displayName: Add build tag

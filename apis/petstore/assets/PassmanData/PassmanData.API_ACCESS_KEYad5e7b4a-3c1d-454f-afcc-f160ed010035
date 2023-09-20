@@ -1,0 +1,7 @@
+{
+  "id" : "API_ACCESS_KEYad5e7b4a-3c1d-454f-afcc-f160ed010035",
+  "pw" : "3ypB72u2oEa3OZ6tKdsYgo1x9wgGkKNUCxxXmb2ExaJlhiKAEkUxgI54yodsBWox",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "30h4YdUu5Acd3iTmfwdRjQ==",
+  "iterationCount" : 1
+}

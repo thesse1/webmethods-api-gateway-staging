@@ -1,15 +1,6 @@
-# Pipeline for apig staging
-
 trigger: none
 
 parameters:
-- name: tenant
-  displayName: Export API Gateway configuration in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
 - name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
@@ -38,79 +29,9 @@ variables:
 - group: 'Project Configuration'
 
 stages:
-- template: /pipelines/api-export-config-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    tenant: ${{parameters.tenant}}
-    source_instance: ${{parameters.source_instance}}
-    commitMessage: ${{parameters.commitMessage}}
-    stages:
-    - name: DESIGN
-      instances:
-      - name: DESIGN
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: BUILD
-      instances:
-      - name: BUILD_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_02
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_03
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_04
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_05
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_06
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_07
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: DEV_INT
-      instances:
-      - name: DEV_INT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: DEV_EXT
-      instances:
-      - name: DEV_EXT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: TEST_INT
-      instances:
-      - name: TEST_INT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: TEST_EXT
-      instances:
-      - name: TEST_EXT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: PROD_INT
-      instances:
-      - name: PROD_INT_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: PROD_INT_02
-        pool: $(pool_name)
-        image: $(pool_image)
-      haft:
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: PROD_EXT
-      instances:
-      - name: PROD_EXT_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: PROD_EXT_02
-        pool: $(pool_name)
-        image: $(pool_image)
-      haft:
-        pool: $(pool_name)
-        image: $(pool_image)
+    template: /pipelines/api-export-config-stages-template.yml
+    parameters:
+      source_instance: ${{parameters.source_instance}}
+      commitMessage: ${{parameters.commitMessage}}

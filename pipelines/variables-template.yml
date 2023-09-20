@@ -1,4 +1,4 @@
 # Variable template for apig staging
 
 variables:
-- group: ${{tenant}}_${{ build_instance_name }}_users
+- group: ${{build_instance_name}}_users

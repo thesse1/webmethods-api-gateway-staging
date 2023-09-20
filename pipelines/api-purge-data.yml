@@ -1,5 +1,3 @@
-# Pipeline for apig staging
-
 trigger: none
 
 resources:
@@ -12,81 +10,8 @@ variables:
 - group: 'Shutdown approval'
 - group: 'Project Configuration'
 
-parameters:
-- name: tenant
-  displayName: Purge analytics data on API Gateway stages in which tenant?
-  type: string
-  default: playground
-  values:
-  - playground
-  - realworld
-
 stages:
-- template: /pipelines/api-purge-data-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
-    tenant: ${{parameters.tenant}}
-    target_stages:
-    - name: DESIGN
-      jobs:
-      - name: DESIGN
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: BUILD
-      jobs:
-      - name: BUILD_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_02
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_03
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_04
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_05
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_06
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: BUILD_07
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: DEV_INT
-      jobs:
-      - name: DEV_INT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: DEV_EXT
-      jobs:
-      - name: DEV_EXT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: TEST_INT
-      jobs:
-      - name: TEST_INT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: TEST_EXT
-      jobs:
-      - name: TEST_EXT
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: PROD_INT
-      jobs:
-      - name: PROD_INT_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: PROD_INT_02
-        pool: $(pool_name)
-        image: $(pool_image)
-    - name: PROD_EXT
-      jobs:
-      - name: PROD_EXT_01
-        pool: $(pool_name)
-        image: $(pool_image)
-      - name: PROD_EXT_02
-        pool: $(pool_name)
-        image: $(pool_image)
+    template: /pipelines/api-purge-data-stages-template.yml
+    parameters: []

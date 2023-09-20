@@ -1,0 +1,52 @@
+trigger: none
+
+parameters:
+- name: design_stage
+  type: object
+- name: build_stage
+  type: object
+- name: target_stages
+  type: object
+- name: all_stages
+  type: object
+- name: api_project
+  type: string
+- name: commitMessage
+  type: string
+
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+
+variables:
+- group: 'Project Configuration'
+
+stages:
+- stage: ${{parameters.design_stage.name}}
+  jobs:
+  - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_${{parameters.design_stage.name}}'
+    environment: '${{parameters.design_stage.name}}'
+    variables:
+    - group: ${{parameters.design_stage.name}}_users
+    pool:
+      name: '$(pool_name)'
+      vmImage: '$(pool_image)'
+    strategy:
+      runOnce:    #rolling, canary are the other strategies that are supported
+        deploy:
+          steps:
+          - checkout: self
+            submodules: "true"
+            persistCredentials: "true"
+            clean: "true"
+          - template: /pipelines/api-export-api-steps-template.yml
+            parameters:
+              api_project: ${{parameters.api_project}}
+              source_environment: ${{parameters.design_stage.name}}_environment.json
+              source_type: ${{parameters.design_stage.name}}
+          - template: /pipelines/commit-template.yml
+            parameters:
+              commitMessage: ${{parameters.commitMessage}}
+          - bash: |
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+              echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.design_stage.name}}"
+            displayName: Add build tags
