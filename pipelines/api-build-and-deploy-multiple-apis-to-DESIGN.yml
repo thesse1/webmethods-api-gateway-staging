@@ -8,6 +8,19 @@ resources:
       tags:
       - DESIGN
 
+parameters:
+- name: DESIGN_build_instance
+  displayName: Build on which BUILD instance?
+  default: BUILD_07
+  values:
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+
 variables:
 - template: /variables/variables-aliases-template.yml
 # - template: /variables/variables-artifactory-template.yml
@@ -18,6 +31,8 @@ stages:
   parameters:
     template: /pipelines/api-build-and-deploy-stages-template.yml
     parameters:
+      build_instances:
+        DESIGN: ${{parameters.DESIGN_build_instance}}
       deployment_sets:
       - api_projects:
         # - number_conversion
