@@ -31,7 +31,7 @@ stages:
             dependsOn: []
             lockBehavior: sequential
             jobs:
-            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{ parameters.build_instances.${{target_stage}} }}'
+            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{ parameters.build_instances[target_stage] }}'
               environment: '${{ parameters.build_instances.${{target_stage}} }}'
               variables:
               - group: ${{parameters.build_stage.name}}_users
