@@ -23,11 +23,11 @@ stages:
             dependsOn: []
             lockBehavior: sequential
             jobs:
-            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{ parameters.build_instances.${{target_stage}} }}'
-              environment: '${{ parameters.build_instances.${{target_stage}} }}'
+            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{parameters.build_instances[target_stage.name]}}'
+              environment: '${{parameters.build_instances[target_stage.name]}}'
               variables:
               - group: ${{parameters.build_stage.name}}_users
-              - group: ${{ parameters.build_instances.${{target_stage}} }}_users
+              - group: ${{parameters.build_instances[target_stage.name]}}_users
               pool:
                 name: '$(pool_name)'
                 vmImage: '$(pool_image)'
@@ -42,9 +42,9 @@ stages:
                     - template: /pipelines/api-build-steps-template.yml
                       parameters:
                         api_project: ${{api_project}}
-                        build_environment: "${{ parameters.build_instances.${{target_stage}} }}_environment.json"
+                        build_environment: "${{parameters.build_instances[target_stage.name]}}_environment.json"
                         build_stage_name: ${{parameters.build_stage.name}}
-                        build_instance_name: ${{ parameters.build_instances.${{target_stage}} }}
+                        build_instance_name: ${{parameters.build_instances[target_stage.name]}}
                         target_type: ${{deployment_target}}
                         prep_condition: ${{true}}
                         test_condition: ${{ not(target_stage.is_design_stage) }}
@@ -54,8 +54,8 @@ stages:
                         api_project: ${{api_project}}
                     - bash: |
                         echo "##vso[build.addbuildtag]${{api_project}}"
-                        echo "##vso[build.addbuildtag]${{ parameters.build_instances.${{target_stage}} }}"
-                        echo "##vso[build.addbuildtag]${{api_project}}_${{ parameters.build_instances.${{target_stage}} }}"
+                        echo "##vso[build.addbuildtag]${{parameters.build_instances[target_stage.name]}}"
+                        echo "##vso[build.addbuildtag]${{api_project}}_${{parameters.build_instances[target_stage.name]}}"
                       displayName: Add build tags
                     # - template: /pipelines/store-build-artifactory-template.yml
                     #   parameters:
@@ -93,5 +93,5 @@ stages:
                           echo "##vso[build.addbuildtag]${{deploy_instance}}"
                           echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                         displayName: Add build tags
-                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{ parameters.build_instances.${{target_stage}} }}'
+                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{parameters.build_instances[target_stage.name]}}'
                 condition: succeeded()
