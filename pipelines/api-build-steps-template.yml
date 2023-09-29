@@ -23,13 +23,6 @@ steps:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip'
     artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_${{parameters.build_stage_name}}_import'
 
-# - task: FileTransform@1
-#   displayName: 'Replace hostname, ip and port in environment configuration'
-#   inputs:
-#     folderPath: '$(System.DefaultWorkingDirectory)/**/'
-#     targetFiles: '**/${{parameters.build_environment}}'
-#     fileType: json
-
 - bash: |
    echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/${{parameters.build_environment}}`"
    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/$(project_name)/${{parameters.build_environment}}`"
@@ -92,6 +85,14 @@ steps:
     folderPath: '$(System.DefaultWorkingDirectory)/**/'
     targetFiles: '**/aliases.json'
     fileType: json
+
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace alias values using placeholders'
+  inputs:
+    targetFiles: '**/aliases.json'
+    actionOnMissing: fail
+    inlineVariables: |
+      foo: bar
 
 - bash: |
     echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json`"
