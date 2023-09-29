@@ -8,6 +8,14 @@ parameters:
   test_condition: ''
 
 steps:
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens with variable values'
+  inputs:
+    targetFiles: '**/*'
+    actionOnMissing: fail
+    inlineVariables: |
+      foo: bar
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets'
@@ -85,14 +93,6 @@ steps:
     folderPath: '$(System.DefaultWorkingDirectory)/**/'
     targetFiles: '**/aliases.json'
     fileType: json
-
-- task: qetza.replacetokens.replacetokens-task.replacetokens@3
-  displayName: 'Replace alias values using placeholders'
-  inputs:
-    targetFiles: '**/aliases.json'
-    actionOnMissing: fail
-    inlineVariables: |
-      foo: bar
 
 - bash: |
     echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json`"
