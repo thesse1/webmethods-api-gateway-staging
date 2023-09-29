@@ -13,8 +13,8 @@ steps:
   inputs:
     targetFiles: '**/*'
     actionOnMissing: fail
-    inlineVariables: |
-      foo: bar
+    # inlineVariables: |
+    #   foo: bar
 
 - task: ArchiveFiles@2
   inputs:

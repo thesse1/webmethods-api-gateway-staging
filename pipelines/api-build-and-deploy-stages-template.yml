@@ -36,6 +36,7 @@ stages:
               variables:
               - group: ${{parameters.build_stage.name}}_users
               - group: ${{parameters.build_instances[target_stage.name]}}_users
+              - group: ${{target_stage.name}}_value_substitutions
               pool:
                 name: '$(pool_name)'
                 vmImage: '$(pool_image)'
