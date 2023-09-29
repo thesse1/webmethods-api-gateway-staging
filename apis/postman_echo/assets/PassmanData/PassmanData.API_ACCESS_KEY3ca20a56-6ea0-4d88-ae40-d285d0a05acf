@@ -1,7 +1,7 @@
 {
   "id" : "API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf",
-  "pw" : "ydxn/ZKe2+EjzSqxnWdaUksnsfMmd4idabBCw9q4Qk6DzUGxyadbDg==",
-  "encryptorId" : "EntrustPbePlus",
-  "saltString" : "qMMt8IUFHvpzEFe30hPfrQ==",
-  "iterationCount" : 2048
+  "pw" : "bryUPEnOLE5ikXrZdNWQW+5Tj/FZNHP7QtDhCLZoGP3XDBoW19ajOWRLkxJK5hYQ",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "SSgKI4W8Q9u1W4NEgUnLGQ==",
+  "iterationCount" : 1
 }

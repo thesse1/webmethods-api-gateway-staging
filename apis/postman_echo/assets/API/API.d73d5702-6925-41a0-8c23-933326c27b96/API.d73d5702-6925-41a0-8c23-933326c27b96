@@ -6,6 +6,7 @@
       "title" : "Postman Echo",
       "termsOfService" : "http://exmple.com/license/"
     },
+    "basePath" : "",
     "serviceRegistryDisplayName" : "PostmanEcho_1.0",
     "schemes" : [ ],
     "security" : [ ],
@@ -16,8 +17,10 @@
           "description" : "This endpoint is a Hawk Authentication protected endpoint. [Hawk authentication](https://github.com/hueniverse/hawk) is a widely used protocol for protecting API endpoints. One of Hawk's main goals is to enable HTTP authentication for services that do not use TLS (although it can be used in conjunction with TLS as well).\n\nIn order to use this endpoint, select the \"Hawk Auth\" helper inside Postman, and set the following values:\n\nHawk Auth ID: `dh37fgj492je`\n\nHawk Auth Key: `werxhqb98rpaxn39848xru",
           "operationId" : "AuthHawkGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -42,6 +45,7 @@
             "name" : "AuthHawkGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/auth/hawk",
         "enabled" : true
@@ -52,8 +56,10 @@
           "description" : "If a response of an endpoint requires to send data beyond the basic English / ASCII character set, the `charset` parameter in the `Content-Type` response header defines the character encoding policy.\n\nThis endpoint returns an `UTF8` character encoded response body with text in various languages such as Greek, Latin, East Asian, etc. Postman can interpret the character encoding and use appropriate methods to display the character set in responses.",
           "operationId" : "EncodingUtf8Get",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -78,6 +84,7 @@
             "name" : "EncodingUtf8Get"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/encoding/utf8",
         "enabled" : true
@@ -88,8 +95,10 @@
           "description" : "This endpoint simulates a **basic-auth** protected endpoint. \nThe endpoint accepts a default username and password and returns a status code of `200 ok` only if the same is provided. \nOtherwise it will return a status code `401 unauthorized`.\n\n> Username: `postman`\n> \n> Password: `password`\n\nTo use this endpoint, send a request with the header `Authorization: Basic cG9zdG1hbjpwYXNzd29yZA==`. \nThe cryptic latter half of the header value is a base64 encoded concatenation of the default username an",
           "operationId" : "BasicAuthGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -114,6 +123,7 @@
             "name" : "BasicAuthGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/basic-auth",
         "enabled" : true
@@ -124,8 +134,10 @@
           "description" : "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of th",
           "operationId" : "PostPost",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -150,6 +162,7 @@
             "name" : "PostPost"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/post",
         "enabled" : true
@@ -173,6 +186,7 @@
           } ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -197,6 +211,7 @@
             "name" : "ResponseHeadersGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/response-headers",
         "enabled" : true
@@ -207,8 +222,10 @@
           "description" : "Using this endpoint one can configure how long it takes for the server to come back with a response. Appending a number to the URL defines the time (in seconds) the server will wait before responding.\n\nNote that a maximum delay of 10 seconds is accepted by the server.",
           "operationId" : "Delay3Get",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -233,6 +250,7 @@
             "name" : "Delay3Get"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/delay/3",
         "enabled" : true
@@ -243,8 +261,10 @@
           "description" : "A `GET` request to this endpoint returns the list of all request headers as part of the response JSON.\nIn Postman, sending your own set of headers through the [Headers tab](https://www.getpostman.com/docs/requests#headers?source=echo-collection-app-onboarding) will reveal the headers as part of the response.",
           "operationId" : "HeadersGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -269,6 +289,7 @@
             "name" : "HeadersGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/headers",
         "enabled" : true
@@ -279,8 +300,10 @@
           "description" : "This endpoint returns the response using [gzip compression algoritm](https://en.wikipedia.org/wiki/Gzip).\nThe uncompressed response is a JSON string containing the details of the request sent by the client. For this endpoint to work, one should request with `Accept-encoding` header containing `gzip` as part of its value. Postman supports gzip, deflate and SDCH decoding and automatically sends them as part of the request.\n\nHTTP Compression allows the server to send responses in a compressed forma",
           "operationId" : "GzipGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -305,6 +328,7 @@
             "name" : "GzipGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/gzip",
         "enabled" : true
@@ -328,6 +352,7 @@
           } ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -352,6 +377,7 @@
             "name" : "CookiesSetGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/cookies/set",
         "enabled" : true
@@ -362,8 +388,10 @@
           "description" : "The HTTP `DELETE` method is used to delete resources on a server. The exact\nuse of `DELETE` requests depends on the server implementation. In general, \n`DELETE` requests support both, Query String parameters as well as a Request \nBody.\n\nThis endpoint accepts an HTTP `DELETE` request and provides debug information\nsuch as the HTTP headers, Query String arguments, and the Request Body.",
           "operationId" : "DeleteDelete",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -388,6 +416,7 @@
             "name" : "DeleteDelete"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/delete",
         "enabled" : true
@@ -406,6 +435,7 @@
           } ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -430,6 +460,7 @@
             "name" : "GetGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/get",
         "enabled" : true
@@ -440,8 +471,10 @@
           "description" : "The HTTP `PATCH` method is used to update resources on a server. The exact\nuse of `PATCH` requests depends on the server in question. There are a number\nof server implementations which handle `PATCH` differently. Technically, \n`PATCH` supports both Query String parameters and a Request Body.\n\nThis endpoint accepts an HTTP `PATCH` request and provides debug information\nsuch as the HTTP headers, Query String arguments, and the Request Body.",
           "operationId" : "PatchPatch",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -466,6 +499,7 @@
             "name" : "PatchPatch"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/patch",
         "enabled" : true
@@ -476,8 +510,10 @@
           "description" : "This endpoint returns the response using [deflate compression algoritm](https://en.wikipedia.org/wiki/DEFLATE). \nThe uncompressed response is a JSON string containing the details of the request sent by the client. For this endpoint to work, one should request with `Accept-encoding` header containing `deflate` as part of its value. Postman supports gzip, deflate and SDCH decoding and automatically sends them as part of the request.\n\nHTTP Compression allows the server to send responses in a compre",
           "operationId" : "DeflateGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -502,6 +538,7 @@
             "name" : "DeflateGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/deflate",
         "enabled" : true
@@ -512,8 +549,10 @@
           "description" : "OAuth1.0a is a specification that defines a protocol that can be used by one\nservice to access \"protected\" resources (endpoints) on another service. A\nmajor part of OAuth1.0 is HTTP Request Signing. This endpoint allows you to \ncheck whether the request calculation works properly in the client. \n\nThe endpoint supports the HTTP ``Authorization`` header. In case the signature\nverification fails, the endpoint provides the four debug values,\n\n* ``base_uri``\n* ``normalized_param_string``\n* ``base_str",
           "operationId" : "Oauth1Get",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -538,6 +577,7 @@
             "name" : "Oauth1Get"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/oauth1",
         "enabled" : true
@@ -548,8 +588,10 @@
           "description" : "This endpoint allows one to recieve streaming http response using [chunked transfer encoding](https://en.wikipedia.org/wiki/Chunked_transfer_encoding) of a configurable length.\n\nA streaming response does not wait for the entire response to be generated on server before flushing it out. This implies that for a fairly large response, parts of it can be streamed to the requestee as and when it is generated on server. The client can then take actions of processing this partially received data.",
           "operationId" : "Stream10Get",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -574,6 +616,7 @@
             "name" : "Stream10Get"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/stream/10",
         "enabled" : true
@@ -592,6 +635,7 @@
           } ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -616,6 +660,7 @@
             "name" : "CookiesDeleteGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/cookies/delete",
         "enabled" : true
@@ -626,8 +671,10 @@
           "description" : "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n",
           "operationId" : "PutPut",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -652,6 +699,7 @@
             "name" : "PutPut"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/put",
         "enabled" : true
@@ -662,8 +710,10 @@
           "description" : "This endpoint allows one to instruct the server which status code to respond with.\n\nEvery response is accompanied by a status code. The status code provides a summary of the nature of response sent by the server. For example, a status code of `200` means everything is okay with the response and a code of `404` implies that the requested URL does not exist on server. \nA list of all valid HTTP status code can be found at the [List of Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_",
           "operationId" : "Status200Get",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -688,6 +738,7 @@
             "name" : "Status200Get"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/status/200",
         "enabled" : true
@@ -698,8 +749,10 @@
           "description" : "Use this endpoint to get a list of all cookies that are stored with respect to this domain. Whatever key-value pairs that has been previously set by calling the \"Set Cookies\" endpoint, will be returned as response JSON.",
           "operationId" : "CookiesGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -724,6 +777,7 @@
             "name" : "CookiesGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/cookies",
         "enabled" : true
@@ -734,8 +788,10 @@
           "description" : "Performing a simple `GET` request to this endpoint returns status code `401 Unauthorized` with `WWW-Authenticate` header containing information to successfully authenticate subsequent requests.\nThe `WWW-Authenticate` header must be processed to extract `realm` and `nonce` values to hash subsequent requests.\n\nWhen this request is executed within Postman, the script attached with this request does the hard work of extracting realm and nonce from the header and set it as [global variables](https://",
           "operationId" : "DigestAuthGet",
           "produces" : [ "application/json; charset=utf-8" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
+              "headersV3" : { },
               "content" : {
                 "application/json; charset=utf-8" : {
                   "schema" : {
@@ -760,6 +816,7 @@
             "name" : "DigestAuthGet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/digest-auth",
         "enabled" : true
@@ -847,7 +904,7 @@
   } ],
   "apiName" : "PostmanEcho",
   "apiVersion" : "1.0",
-  "apiDescription" : "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
+  "apiDescription" : "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints on #{stage_name}#.\n\nThe documentation for the endpoints as well as example responses can be found at [https://echo.getpostman.com](https://echo.getpostman.com?source=echo-collection-app-onboarding)",
   "maturityState" : "Beta",
   "apiGroups" : [ "External" ],
   "isActive" : true,
@@ -861,7 +918,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-02-03 16:30:11 GMT",
-  "lastModified" : "2021-05-17 14:48:09 GMT",
+  "lastModified" : "2023-09-29 18:38:45 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "d73d5702-6925-41a0-8c23-933326c27b96"
