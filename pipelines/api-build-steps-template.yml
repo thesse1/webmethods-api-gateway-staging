@@ -11,10 +11,8 @@ steps:
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
   displayName: 'Replace tokens with variable values'
   inputs:
-    targetFiles: '**/*'
+    targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/**/*'
     actionOnMissing: fail
-    # inlineVariables: |
-    #   foo: bar
 
 - task: ArchiveFiles@2
   inputs:
