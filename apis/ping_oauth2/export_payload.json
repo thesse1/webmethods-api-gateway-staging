@@ -1,0 +1,11 @@
+{
+  "types": [
+    "api", "gateway_scope", "administrator_setting"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "cee8532f-978f-4ddd-8a80-5f701e79fccf|ff7c5b35-135d-4631-a497-a04e9e51d3b1|extended"
+    }
+  ]
+}
