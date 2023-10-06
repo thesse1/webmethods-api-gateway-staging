@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-10-06T19:08:52"/>
-    <asset name="AdministratorSetting.settings" displayName="settings" isDeployable="true">
-        <implementation.generic type="AdministratorSetting"/>
+    <buildInfo name="BuildTimestamp" value="2023-10-06T19:14:18"/>
+    <asset name="GatewayScope.ff7c5b35-135d-4631-a497-a04e9e51d3b1" displayName="Keycloak_basic:ping" isDeployable="true">
+        <implementation.generic type="GatewayScope"/>
+        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
     </asset>
     <asset name="API.cee8532f-978f-4ddd-8a80-5f701e79fccf" displayName="Ping_OAuth2[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
@@ -95,12 +96,22 @@
     <asset name="User.Administrator" displayName="Administrator" isDeployable="true">
         <implementation.generic type="User"/>
     </asset>
-    <asset name="GatewayScope.ff7c5b35-135d-4631-a497-a04e9e51d3b1" displayName="Keycloak_basic:ping" isDeployable="true">
-        <implementation.generic type="GatewayScope"/>
-        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
-    </asset>
     <asset name="Alias.832479dc-4af1-492a-bec8-9473b92449a5" displayName="Keycloak_provider" isDeployable="true">
         <implementation.generic type="Alias"/>
+    </asset>
+    <asset name="AdministratorSetting.settings" displayName="settings" isDeployable="true">
+        <implementation.generic type="AdministratorSetting"/>
+    </asset>
+    <asset name="PortalGateway.5727188f-6fd6-4d46-bafb-6f0d386712dc" displayName="azure_demo_01_design_apigateway" isDeployable="true">
+        <implementation.generic type="PortalGateway"/>
+        <dependsOn>APIGateway:PassmanData.5727188f-6fd6-4d46-bafb-6f0d386712dcAPIPORTAL</dependsOn>
+        <dependsOn>APIGateway:PassmanData.5727188f-6fd6-4d46-bafb-6f0d386712dcGATEWAY</dependsOn>
+    </asset>
+    <asset name="PassmanData.5727188f-6fd6-4d46-bafb-6f0d386712dcGATEWAY" displayName="5727188f-6fd6-4d46-bafb-6f0d386712dcGATEWAY" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="PassmanData.5727188f-6fd6-4d46-bafb-6f0d386712dcAPIPORTAL" displayName="5727188f-6fd6-4d46-bafb-6f0d386712dcAPIPORTAL" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
     </asset>
     <asset name="AdministratorSetting.extended" displayName="Extended settings" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
