@@ -11,5 +11,6 @@
       "attributeName": "configId",
       "keyword": "settings|extended|Keycloak|Keycloak_basic"
     }
-  ]
+  ],
+  "condition" : "or"
 }
