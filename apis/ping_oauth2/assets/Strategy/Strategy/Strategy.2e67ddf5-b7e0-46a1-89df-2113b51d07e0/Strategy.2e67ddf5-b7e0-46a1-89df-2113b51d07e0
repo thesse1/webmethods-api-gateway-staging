@@ -1,0 +1,34 @@
+{
+  "id" : "2e67ddf5-b7e0-46a1-89df-2113b51d07e0",
+  "type" : "OAUTH2",
+  "authServerAlias" : "Keycloak",
+  "name" : "Portal_Test_App_3b642330a-9fce-45c5-85df-fa1b3c4965ab-$sys-default-oauth",
+  "clientId" : "568d4b7d-88fd-4042-acdd-9eb4a3c06bc4",
+  "dcrConfig" : {
+    "allowedGrantTypes" : [ "implicit", "client_credentials", "authorization_code" ],
+    "clientType" : "CONFIDENTIAL",
+    "clientName" : "Portal_Test_App_3b642330a-9fce-45c5-85df-fa1b3c4965ab-$sys-default-oauth",
+    "clientVersion" : "1.0",
+    "expirationInterval" : "3600",
+    "scopes" : [ "ping" ],
+    "redirectUris" : [ "Portal_Test_App_3", "https://playconfig.devportal-aw-eu.webmethods.io/portal/rest/v1/oauth/callback" ],
+    "pkceType" : "USE_GLOBAL_SETTING"
+  },
+  "clientRegistration" : {
+    "shell" : false,
+    "clientId" : "568d4b7d-88fd-4042-acdd-9eb4a3c06bc4",
+    "name" : "Portal_Test_App_3b642330a-9fce-45c5-85df-fa1b3c4965ab-$sys-default-oauth",
+    "type" : "confidential",
+    "tokenLifetime" : 3600,
+    "tokenRefreshLimit" : 0,
+    "clientSecret" : "********************************",
+    "enabled" : false,
+    "redirectUris" : [ "Portal_Test_App_3", "https://playconfig.devportal-aw-eu.webmethods.io/portal/rest/v1/oauth/callback" ],
+    "clScopes" : [ "ping" ],
+    "authCodeAllowed" : true,
+    "implicitAllowed" : true,
+    "clientCredentialsAllowed" : true,
+    "resourceOwnerAllowed" : false,
+    "pkceType" : "USE_GLOBAL_SETTING"
+  }
+}

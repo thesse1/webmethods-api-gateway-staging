@@ -1,0 +1,41 @@
+{
+  "id" : "87bad4a9-e6d4-4480-85c8-96c66cc56128",
+  "type" : "OAUTH2_LOCAL_RSA",
+  "authServerAlias" : "Keycloak",
+  "name" : "Gateway_Test_App_1",
+  "description" : "",
+  "clientId" : "d8b97d10-a469-42ff-acd7-f5b0d7ff1d58",
+  "dcrConfig" : {
+    "allowedGrantTypes" : [ "authorization_code", "client_credentials" ],
+    "applicationType" : "web",
+    "clientType" : "CONFIDENTIAL",
+    "clientName" : "Gateway_Test_App_1",
+    "clientVersion" : "1.0",
+    "scopes" : [ "ping" ],
+    "redirectUris" : [ "https://oauth.pstmn.io/v1/callback" ],
+    "pkceType" : "USE_GLOBAL_SETTING"
+  },
+  "clientRegistration" : {
+    "shell" : false,
+    "clientId" : "d8b97d10-a469-42ff-acd7-f5b0d7ff1d58",
+    "name" : "Gateway_Test_App_1",
+    "tokenLifetime" : 0,
+    "tokenRefreshLimit" : 0,
+    "clientSecret" : "********************************",
+    "enabled" : false,
+    "redirectUris" : [ "https://oauth.pstmn.io/v1/callback" ],
+    "clScopes" : [ "ping" ],
+    "authCodeAllowed" : true,
+    "implicitAllowed" : true,
+    "clientCredentialsAllowed" : true,
+    "resourceOwnerAllowed" : false,
+    "pkceType" : "NOT_ENFORCED"
+  },
+  "jwtAuthStrategy" : {
+    "id" : "87bad4a9-e6d4-4480-85c8-96c66cc56128_embed",
+    "type" : "JWT_RSA",
+    "authServerAlias" : "Keycloak",
+    "name" : "Gateway_Test_App_1_embed",
+    "description" : " Embedded"
+  }
+}

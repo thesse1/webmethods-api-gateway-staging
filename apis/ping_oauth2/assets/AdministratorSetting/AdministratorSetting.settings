@@ -16,7 +16,7 @@
         "watt.server.oauth.requireHTTPS" : "false",
         "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
         "watt.server.threadPoolMin" : "600",
-        "watt.server.oauth.authServer.alias" : "Keycloak_basic"
+        "watt.server.oauth.authServer.alias" : "Keycloak"
       }
     },
     "savedSettings" : {
@@ -32,7 +32,7 @@
         "watt.server.oauth.requireHTTPS" : "false",
         "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
         "watt.server.threadPoolMin" : "600",
-        "watt.server.oauth.authServer.alias" : "Keycloak_basic"
+        "watt.server.oauth.authServer.alias" : "Keycloak"
       }
     }
   }
