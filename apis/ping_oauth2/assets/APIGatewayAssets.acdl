@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-10-06T06:50:45"/>
-    <asset name="GatewayScope.ff7c5b35-135d-4631-a497-a04e9e51d3b1" displayName="Keycloak_basic:ping" isDeployable="true">
-        <implementation.generic type="GatewayScope"/>
-        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
-    </asset>
+    <buildInfo name="BuildTimestamp" value="2023-10-06T08:05:42"/>
     <asset name="API.cee8532f-978f-4ddd-8a80-5f701e79fccf" displayName="Ping_OAuth2[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.671fe672-af37-4e6e-9648-b1958abbdfb6</dependsOn>
+        <dependsOn>APIGateway:Application.bb23f767-2541-40eb-9994-6219e2072788</dependsOn>
         <dependsOn>APIGateway:Policy.2c8ea450-bdc1-479a-a764-60c95b9a7463</dependsOn>
         <dependsOn>APIGateway:RegisteredApplication.671fe672-af37-4e6e-9648-b1958abbdfb6</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.bb23f767-2541-40eb-9994-6219e2072788</dependsOn>
     </asset>
     <asset name="Policy.2c8ea450-bdc1-479a-a764-60c95b9a7463" displayName="Policy For API Ping_OAuth2[1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
@@ -45,5 +43,29 @@
     </asset>
     <asset name="RegisteredApplication.671fe672-af37-4e6e-9648-b1958abbdfb6" displayName="RegisteredApplication [ Test_App_1 ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="Application.bb23f767-2541-40eb-9994-6219e2072788" displayName="Test_App_2" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYbb23f767-2541-40eb-9994-6219e2072788</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.bb23f767-2541-40eb-9994-6219e2072788</dependsOn>
+        <dependsOn>APIGateway:Strategy.5f0c460a-1027-47ca-a3bd-fc30c734d928</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEYbb23f767-2541-40eb-9994-6219e2072788" displayName="API_ACCESS_KEYbb23f767-2541-40eb-9994-6219e2072788" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="Strategy.5f0c460a-1027-47ca-a3bd-fc30c734d928" displayName="Test_App_2f4ba5538-f739-40db-9124-6c704e35df84-$sys-default-oauth" isDeployable="true">
+        <implementation.generic type="Strategy"/>
+        <dependsOn>APIGateway:PassmanData.7f87b6d5-b759-4989-b0f9-43790e6dfe6b-clientSecret</dependsOn>
+    </asset>
+    <asset name="PassmanData.7f87b6d5-b759-4989-b0f9-43790e6dfe6b-clientSecret" displayName="7f87b6d5-b759-4989-b0f9-43790e6dfe6b-clientSecret" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.bb23f767-2541-40eb-9994-6219e2072788" displayName="RegisteredApplication [ Test_App_2 ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="GatewayScope.ff7c5b35-135d-4631-a497-a04e9e51d3b1" displayName="Keycloak_basic:ping" isDeployable="true">
+        <implementation.generic type="GatewayScope"/>
+        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
     </asset>
 </asset_composite>
