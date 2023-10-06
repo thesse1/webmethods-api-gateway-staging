@@ -1,0 +1,29 @@
+{
+  "applicationID" : "671fe672-af37-4e6e-9648-b1958abbdfb6",
+  "name" : "Test_App_1",
+  "owner" : "Administrator",
+  "ownerType" : "user",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2023-10-06 06:11:10 GMT",
+  "lastModified" : "2023-10-06 06:15:52 GMT",
+  "lastUpdated" : 1696572952217,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "customFields" : { },
+  "authStrategyIds" : [ "bc388977-87b8-486e-8f44-b3a15f121465" ],
+  "primaryNode" : {
+    "hostId" : "03578740-1e36-46e5-b6b3-6c78afbd88b9",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

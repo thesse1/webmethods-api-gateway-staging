@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2023-10-06T06:50:45"/>
+    <asset name="GatewayScope.ff7c5b35-135d-4631-a497-a04e9e51d3b1" displayName="Keycloak_basic:ping" isDeployable="true">
+        <implementation.generic type="GatewayScope"/>
+        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
+    </asset>
+    <asset name="API.cee8532f-978f-4ddd-8a80-5f701e79fccf" displayName="Ping_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="API"/>
+        <dependsOn>APIGateway:Application.671fe672-af37-4e6e-9648-b1958abbdfb6</dependsOn>
+        <dependsOn>APIGateway:Policy.2c8ea450-bdc1-479a-a764-60c95b9a7463</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.671fe672-af37-4e6e-9648-b1958abbdfb6</dependsOn>
+    </asset>
+    <asset name="Policy.2c8ea450-bdc1-479a-a764-60c95b9a7463" displayName="Policy For API Ping_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.36afd6f2-780e-4494-8b1a-e98a42774158</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.9d01248b-a637-4f99-a698-8af736c8267b</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.a3fb42d0-a480-4c2e-9057-d6526f7cbd8b</dependsOn>
+    </asset>
+    <asset name="PolicyAction.9d01248b-a637-4f99-a698-8af736c8267b" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Ping_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.a3fb42d0-a480-4c2e-9057-d6526f7cbd8b" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Ping_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="PolicyAction.36afd6f2-780e-4494-8b1a-e98a42774158" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Ping_OAuth2[1.0]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="Application.671fe672-af37-4e6e-9648-b1958abbdfb6" displayName="Test_App_1" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.cee8532f-978f-4ddd-8a80-5f701e79fccf</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY671fe672-af37-4e6e-9648-b1958abbdfb6</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.671fe672-af37-4e6e-9648-b1958abbdfb6</dependsOn>
+        <dependsOn>APIGateway:Strategy.bc388977-87b8-486e-8f44-b3a15f121465</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEY671fe672-af37-4e6e-9648-b1958abbdfb6" displayName="API_ACCESS_KEY671fe672-af37-4e6e-9648-b1958abbdfb6" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="Strategy.bc388977-87b8-486e-8f44-b3a15f121465" displayName="Test_App_1" isDeployable="true">
+        <implementation.generic type="Strategy"/>
+        <dependsOn>APIGateway:PassmanData.526ee8f5-2310-4483-bcb9-15fcd65b4515-clientSecret</dependsOn>
+    </asset>
+    <asset name="PassmanData.526ee8f5-2310-4483-bcb9-15fcd65b4515-clientSecret" displayName="526ee8f5-2310-4483-bcb9-15fcd65b4515-clientSecret" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.671fe672-af37-4e6e-9648-b1958abbdfb6" displayName="RegisteredApplication [ Test_App_1 ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+</asset_composite>

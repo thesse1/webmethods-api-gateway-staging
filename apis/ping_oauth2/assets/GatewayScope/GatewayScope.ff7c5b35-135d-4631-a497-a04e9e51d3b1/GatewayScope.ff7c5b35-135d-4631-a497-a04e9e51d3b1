@@ -1,0 +1,11 @@
+{
+  "id" : "ff7c5b35-135d-4631-a497-a04e9e51d3b1",
+  "scopeName" : "Keycloak_basic:ping",
+  "scopeDescription" : "ping",
+  "audience" : "http://azure-demo-01-design-apigateway.azuredemo-softwareag.com/gateway/Ping_OAuth2/1.0",
+  "apiScopes" : [ "cee8532f-978f-4ddd-8a80-5f701e79fccf" ],
+  "requiredAuthScopes" : [ {
+    "authServerAlias" : "Keycloak_basic",
+    "scopeName" : "ping"
+  } ]
+}

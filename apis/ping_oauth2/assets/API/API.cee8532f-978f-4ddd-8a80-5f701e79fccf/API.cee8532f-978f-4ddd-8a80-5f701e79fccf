@@ -1,0 +1,76 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "description" : "Demo API for Keycloak scenario",
+      "version" : "1.0",
+      "title" : "Ping_OAuth2"
+    },
+    "basePath" : "",
+    "serviceRegistryDisplayName" : "Ping_OAuth2_1.0",
+    "schemes" : [ ],
+    "security" : [ ],
+    "paths" : {
+      "/ping" : {
+        "get" : {
+          "parameters" : [ ],
+          "responses" : { },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "requestBody"
+          }
+        },
+        "parameters" : [ ],
+        "scopes" : [ ],
+        "displayName" : "ping",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : { },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "http://localhost:5555/invoke/wm.server:ping",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : { },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "http://localhost:5555/invoke/wm.server:ping",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "Ping_OAuth2",
+  "apiVersion" : "1.0",
+  "apiDescription" : "Demo API for Keycloak scenario",
+  "maturityState" : "Beta",
+  "apiGroups" : [ "Internal", "External" ],
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "Administrator",
+  "policies" : [ "2c8ea450-bdc1-479a-a764-60c95b9a7463" ],
+  "tracingEnabled" : false,
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2023-10-06 06:04:18 GMT",
+  "lastModified" : "2023-10-06 06:08:29 GMT",
+  "systemVersion" : 1,
+  "gatewayEndpoints" : { },
+  "id" : "cee8532f-978f-4ddd-8a80-5f701e79fccf"
+}
