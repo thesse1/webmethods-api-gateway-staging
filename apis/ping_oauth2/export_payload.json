@@ -1,6 +1,6 @@
 {
   "types": [
-    "api", "gateway_scope", "administrator_setting", "alias"
+    "api", "gateway_scope", "administrator_setting", "alias", "portal_gateway"
   ],
   "scope": [
     {
