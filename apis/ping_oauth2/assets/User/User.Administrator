@@ -1,0 +1,14 @@
+{
+  "id" : "Administrator",
+  "loginId" : "Administrator",
+  "caller" : "Default",
+  "firstName" : "Administrator",
+  "lastName" : "",
+  "hashedPassword" : "{sha-256_v2}qU+L6Lw4z75Y7kLbtxJbqsPjqyCbhoIUtqde7Og7ipfwqhYPB5K2EjAxMDAw",
+  "type" : "local",
+  "emailAddresses" : [ ],
+  "allowDigestAuth" : false,
+  "active" : true,
+  "systemDefined" : true,
+  "language" : ""
+}

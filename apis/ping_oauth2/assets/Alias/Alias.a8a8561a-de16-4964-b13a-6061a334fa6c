@@ -1,0 +1,87 @@
+{
+  "id" : "a8a8561a-de16-4964-b13a-6061a334fa6c",
+  "name" : "Keycloak",
+  "type" : "authServerAlias",
+  "owner" : "Administrator",
+  "localIntrospectionConfig" : {
+    "issuer" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo",
+    "trustStoreAlias" : "",
+    "certificateAlias" : "",
+    "jwksuri" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/protocol/openid-connect/certs",
+    "useLocalClockSkew" : false,
+    "clockSkewInSeconds" : 0
+  },
+  "remoteIntrospectionConfig" : {
+    "introspectionEndpoint" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/protocol/openid-connect/token/introspect",
+    "clientId" : "apigateway",
+    "clientSecret" : "********************************",
+    "user" : "Administrator"
+  },
+  "dcrEndpoint" : {
+    "authInfo" : {
+      "type" : "client_credentials",
+      "tokenType" : "Bearer",
+      "clientId" : "apigateway",
+      "clientSecret" : "********************************"
+    },
+    "clientRegistrationEndpoint" : {
+      "endpoint" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/clients-registrations/openid-connect",
+      "headers" : { },
+      "https" : false
+    }
+  },
+  "tokenGeneratorConfig" : {
+    "expiry" : 0,
+    "accessTokenExpInterval" : 0,
+    "authCodeExpInterval" : 0,
+    "enforcePKCE" : false
+  },
+  "sslConfig" : {
+    "keyStoreAlias" : "",
+    "keyAlias" : "",
+    "trustStoreAlias" : ""
+  },
+  "metadata" : {
+    "authorizeURL" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/protocol/openid-connect/auth",
+    "accessTokenURL" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/protocol/openid-connect/token",
+    "refreshTokenURL" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/protocol/openid-connect/token"
+  },
+  "scopes" : [ {
+    "name" : "roles",
+    "description" : "roles"
+  }, {
+    "name" : "profile",
+    "description" : "profile"
+  }, {
+    "name" : "ping",
+    "description" : "ping"
+  }, {
+    "name" : "address",
+    "description" : "address"
+  }, {
+    "name" : "phone",
+    "description" : "phone"
+  }, {
+    "name" : "microprofile-jwt",
+    "description" : "microprofile-jwt"
+  }, {
+    "name" : "openid",
+    "description" : "openid"
+  }, {
+    "name" : "offline_access",
+    "description" : "offline_access"
+  }, {
+    "name" : "email",
+    "description" : "email"
+  }, {
+    "name" : "web-origins",
+    "description" : "web-origins"
+  }, {
+    "name" : "acr",
+    "description" : "acr"
+  } ],
+  "supportedGrantTypes" : [ "authorization_code", "implicit", "refresh_token", "password", "client_credentials", "urn:ietf:params:oauth:grant-type:device_code", "urn:openid:params:grant-type:ciba" ],
+  "providerName" : "Keycloak",
+  "authServerType" : "EXTERNAL",
+  "discoveryURL" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/.well-known/openid-configuration"
+}
