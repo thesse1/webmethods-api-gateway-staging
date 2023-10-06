@@ -1,0 +1,39 @@
+{
+  "configId" : "settings",
+  "userName" : "Administrator",
+  "internalPorts" : { },
+  "properties" : {
+    "preferredSettings" : {
+      "extendedKeys" : {
+        "pg_oauth2_isHTTPS" : "",
+        "pg_JWT_isHTTPS" : "",
+        "pg_OpenID_isHTTPS" : "",
+        "apiGroupingPossibleValues" : ""
+      },
+      "wattKeys" : {
+        "watt.net.maxClientKeepaliveConns" : "140",
+        "watt.server.threadPool" : "600",
+        "watt.server.oauth.requireHTTPS" : "false",
+        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
+        "watt.server.threadPoolMin" : "600",
+        "watt.server.oauth.authServer.alias" : "Keycloak_basic"
+      }
+    },
+    "savedSettings" : {
+      "extendedKeys" : {
+        "pg_oauth2_isHTTPS" : "false",
+        "pg_JWT_isHTTPS" : "false",
+        "pg_OpenID_isHTTPS" : "false",
+        "apiGroupingPossibleValues" : "Internal,External"
+      },
+      "wattKeys" : {
+        "watt.server.threadPool" : "600",
+        "watt.net.maxClientKeepaliveConns" : "140",
+        "watt.server.oauth.requireHTTPS" : "false",
+        "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
+        "watt.server.threadPoolMin" : "600",
+        "watt.server.oauth.authServer.alias" : "Keycloak_basic"
+      }
+    }
+  }
+}

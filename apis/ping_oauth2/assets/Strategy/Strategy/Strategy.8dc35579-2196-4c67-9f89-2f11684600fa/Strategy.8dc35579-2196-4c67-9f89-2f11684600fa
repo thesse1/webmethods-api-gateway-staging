@@ -1,0 +1,14 @@
+{
+  "id" : "8dc35579-2196-4c67-9f89-2f11684600fa",
+  "type" : "OAUTH2_LOCAL_RSA",
+  "authServerAlias" : "Keycloak_basic",
+  "name" : "Test_App_3a745eb82-bf7a-4bee-8a03-a9cee8dfb7c8-$sys-default-oauth-rsa",
+  "clientId" : "0cd6d98a-6004-4c11-8500-647110e4d860",
+  "jwtAuthStrategy" : {
+    "id" : "8dc35579-2196-4c67-9f89-2f11684600fa_embed",
+    "type" : "JWT_RSA",
+    "authServerAlias" : "Keycloak_basic",
+    "name" : "Test_App_3a745eb82-bf7a-4bee-8a03-a9cee8dfb7c8-$sys-default-oauth-rsa_embed",
+    "description" : "null Embedded"
+  }
+}

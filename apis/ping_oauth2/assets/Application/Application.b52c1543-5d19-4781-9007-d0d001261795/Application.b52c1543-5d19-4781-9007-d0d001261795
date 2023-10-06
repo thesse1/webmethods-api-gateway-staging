@@ -1,0 +1,39 @@
+{
+  "applicationID" : "b52c1543-5d19-4781-9007-d0d001261795",
+  "name" : "Test_App_3",
+  "description" : "Test app 3 from Dev Portal",
+  "owner" : "playconfig:fbedccc9-aa6a-3b2a-9d77-dc29c36f16e3",
+  "ownerType" : "user",
+  "identifiers" : [ {
+    "id" : "3d77fe9d-591d-4ea3-afa5-ec1ac1c4441a",
+    "key" : "jwtClaims",
+    "swaggerName" : "",
+    "swaggerValue" : [ ],
+    "namedValues" : [ {
+      "name" : "JWT default claims set",
+      "values" : [ "{\"app_id\":\"b52c1543-5d19-4781-9007-d0d001261795\"}" ]
+    } ]
+  } ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2023-10-06 08:05:55 GMT",
+  "lastUpdated" : 1696579555342,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "provider" : "APIPORTAL",
+  "isSuspended" : false,
+  "customFields" : {
+    "API_PORTAL_USERNAME" : "playconfig:sagcloud-a7a90e6d-1e22-4856-bba5-821c9fc07900"
+  },
+  "authStrategyIds" : [ "1c4b8d83-6b7f-4c46-9623-4fa80e2769e0", "ac4fec9c-d596-41b6-9f48-5f030ed09439", "8dc35579-2196-4c67-9f89-2f11684600fa" ],
+  "primaryNode" : {
+    "hostId" : "03578740-1e36-46e5-b6b3-6c78afbd88b9",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}
