@@ -81,7 +81,7 @@
     "description" : "acr"
   } ],
   "supportedGrantTypes" : [ "authorization_code", "implicit", "refresh_token", "password", "client_credentials", "urn:ietf:params:oauth:grant-type:device_code", "urn:openid:params:grant-type:ciba" ],
-  "providerName" : "Keycloak",
+  "providerName" : "Keycloak_provider",
   "authServerType" : "EXTERNAL",
   "discoveryURL" : "https://lemur-10.cloud-iam.com/auth/realms/keycloak-demo/.well-known/openid-configuration"
 }

@@ -4,7 +4,9 @@
   "type" : "clientMetadataMapping",
   "owner" : "Administrator",
   "providerName" : "Keycloak_provider",
-  "implNames" : { },
+  "implNames" : {
+    "scope" : "software_id"
+  },
   "extendedValues" : { },
   "extendedValuesV2" : [ ],
   "generateCredentials" : false,
