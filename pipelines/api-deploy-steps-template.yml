@@ -2,8 +2,6 @@ parameters:
   api_project: ''
   target_environment: ''
   target_type: ''
-  prep_condition: ''
-  test_condition: ''
 
 steps:
 - bash: |

@@ -74,8 +74,9 @@ stages:
                         build_stage_name: ${{parameters.build_stage.name}}
                         build_instance_name: $(claimed_resource)
                         target_type: ${{deployment_target}}
-                        prep_condition: ${{true}}
+                        prepare_condition: ${{true}}
                         test_condition: ${{ not(target_stage.is_design_stage) }}
+                        replace_condition: ${{ not(target_stage.is_design_stage) }}
                     - template: /pipelines/store-build-template.yml
                       parameters:
                         target_type: ${{deployment_target}}
@@ -122,8 +123,6 @@ stages:
                           api_project: ${{api_project}}
                           target_environment: ${{deploy_instance}}_environment.json
                           target_type: ${{deployment_target}}
-                          prep_condition: ${{true}}
-                          test_condition: ${{ not(target_stage.is_design_stage) }}
                       - bash: |
                           echo "##vso[build.addbuildtag]${{api_project}}"
                           echo "##vso[build.addbuildtag]${{deploy_instance}}"
