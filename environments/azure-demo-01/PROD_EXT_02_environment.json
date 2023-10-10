@@ -79,7 +79,31 @@
 		"value": "apigw-prod_ext",
 		"type": "default",
 		"enabled": true
-}
+	},
+	{
+		"key": "loadbalancer-protocol",
+		"value": "http",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-hostname",
+		"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-ip",
+		"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-port",
+		"value": "80",
+		"type": "default",
+		"enabled": true
+	}
 ],
 "timestamp": 1587036498482,
   "_postman_variable_scope": "environment",
