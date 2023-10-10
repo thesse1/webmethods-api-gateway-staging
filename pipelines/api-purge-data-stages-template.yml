@@ -29,6 +29,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
+                fetchDepth: 0
               - download: none
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:

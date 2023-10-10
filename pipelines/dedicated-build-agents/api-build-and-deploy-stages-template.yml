@@ -35,6 +35,7 @@ stages:
                     - checkout: self
                       submodules: "true"
                       persistCredentials: "true"
+                      fetchDepth: 0
                     - download: none
                     - bash: |
                         agentName=$(echo $AGENT_NAME)
@@ -79,6 +80,7 @@ stages:
                       - checkout: self
                         submodules: "true"
                         persistCredentials: "true"
+                        fetchDepth: 0
                       - template: /pipelines/retrieve-build-template.yml
                         parameters:
                           target_type: ${{deployment_target}}

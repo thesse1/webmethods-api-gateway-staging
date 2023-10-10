@@ -38,6 +38,7 @@ stages:
                     - checkout: self
                       submodules: "true"
                       persistCredentials: "true"
+                      fetchDepth: 0
                     - download: none
                     - template: /pipelines/api-build-steps-template.yml
                       parameters:
@@ -77,6 +78,7 @@ stages:
                       - checkout: self
                         submodules: "true"
                         persistCredentials: "true"
+                        fetchDepth: 0
                       - template: /pipelines/retrieve-build-template.yml
                         parameters:
                           target_type: ${{deployment_target}}
