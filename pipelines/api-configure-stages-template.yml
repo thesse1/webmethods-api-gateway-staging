@@ -53,6 +53,7 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
+                fetchDepth: 0
               - download: none
               - template: /pipelines/api-configure-haft-steps-template.yml
                 parameters:
