@@ -23,6 +23,11 @@
 							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
 							"});\r",
 							"\r",
+							"pm.test(\"Response contains httpUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.httpUrls).to.exist;\r",
+							"});\r",
+							"\r",
 							"console.log(\"HTTP Loadbalancer URL set to: \" + pm.response.json().httpUrls);\r",
 							"\r",
 							"console.log(\"HTTPS Loadbalancer URL set to: \" + pm.response.json().httpsUrls);\r",
@@ -40,9 +45,45 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4d751f4d-d4ca-472c-8ba8-430596ef4013",
+						"exec": [
+							"var protocol = pm.variables.get(\"api-protocol\")\r",
+							"var hostname = pm.variables.get(\"api-hostname\")\r",
+							"var port = pm.variables.get(\"api-port\")\r",
+							"var url = protocol+\"://\"+hostname+\":\"+port;\r",
+							"\r",
+							"var httpUrls = [];\r",
+							"var httpsUrls = [];\r",
+							"if (protocol == \"http\")\r",
+							"    httpUrls.push(url);\r",
+							"if (protocol == \"https\")\r",
+							"    httpsUrls.push(url);\r",
+							"\r",
+							"var protocol = pm.variables.get(\"loadbalancer-protocol\")\r",
+							"var hostname = pm.variables.get(\"loadbalancer-hostname\")\r",
+							"var port = pm.variables.get(\"loadbalancer-port\")\r",
+							"var url = protocol+\"://\"+hostname+\":\"+port;\r",
+							"\r",
+							"if (protocol == \"http\")\r",
+							"    httpUrls.push(url);\r",
+							"if (protocol == \"https\")\r",
+							"    httpsUrls.push(url);\r",
+							"\r",
+							"pm.variables.set(\"httpUrls\", JSON.stringify(httpUrls));\r",
+							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
+							"\r",
+							"// console.log(httpUrls);\r",
+							"// console.log(httpsUrls);"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
-			"id": "926e1941-ac88-4867-9469-0b2c1e7f574c",
+			"id": "1f1882c3-70d8-4249-911f-e035659abb32",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -61,7 +102,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://{{api-hostname}}\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://{{api-hostname}}\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": {{httpsUrls}},\r\n    \"httpUrls\": {{httpUrls}}\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
