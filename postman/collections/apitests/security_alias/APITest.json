@@ -22,7 +22,7 @@
 							"});\r",
 							"pm.test(\"Correct Authorization echoed in payload\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fQ09ORklHOk15UGFzc3dvcmRfQ09ORklH\");\r",
+							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVTSUdOOk15UGFzc3dvcmRfREVTSUdO\");\r",
 							"});"
 						],
 						"type": "text/javascript",
