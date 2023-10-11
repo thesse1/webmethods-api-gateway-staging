@@ -23,7 +23,7 @@ steps:
     actionOnMissing: fail
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
-- bash: "! cat $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json"
+- bash: cat $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json || echo File not found
   displayName: Log local aliases.json after value substitution
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
@@ -34,7 +34,7 @@ steps:
     actionOnMissing: fail
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
-- bash: "! cat $(System.DefaultWorkingDirectory)/apis/aliases.json"
+- bash: cat $(System.DefaultWorkingDirectory)/apis/aliases.json || echo File not found
   displayName: Log global aliases.json after value substitution
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
