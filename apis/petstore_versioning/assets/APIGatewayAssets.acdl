@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-06-23T16:53:33"/>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2023-10-11T12:14:41"/>
     <asset name="API.4bd552e3-064f-444a-bc77-7560059c9955" displayName="Petstore_Versioning[1.0.9]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
@@ -24,7 +24,7 @@
     <asset name="Alias.eab70f61-16ba-4c5a-9575-140fbe5763c6" displayName="PetStore_Routing_Alias_1_0_9" isDeployable="true">
         <implementation.generic type="Alias"/>
         <property name="value for Simple alias PetStore_Routing_Alias_1_0_9" many="false" isSecure="false" displayName="value for Simple alias PetStore_Routing_Alias_1_0_9">
-            <value>https://petstore.swagger.io/v2</value>
+            <value>#{petstore_route}#</value>
         </property>
     </asset>
     <asset name="PolicyAction.e9a88f87-ae72-4751-bb81-7787c5bebb3a" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Petstore_Versioning[1.0.9]" isDeployable="true">
@@ -39,6 +39,9 @@
         <dependsOn>APIGateway:API.4ea2dcf0-66c5-469b-b822-fe4707c6f899</dependsOn>
         <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
         <dependsOn>APIGateway:RegisteredApplication.429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
     </asset>
     <asset name="API.4ea2dcf0-66c5-469b-b822-fe4707c6f899" displayName="Petstore_Versioning[1.0.8]" isDeployable="true">
         <implementation.generic type="API"/>
@@ -63,7 +66,7 @@
     <asset name="Alias.b0b54919-fdbc-4571-b087-89a7a60109fd" displayName="PetStore_Routing_Alias_1_0_8" isDeployable="true">
         <implementation.generic type="Alias"/>
         <property name="value for Simple alias PetStore_Routing_Alias_1_0_8" many="false" isSecure="false" displayName="value for Simple alias PetStore_Routing_Alias_1_0_8">
-            <value>https://petstore.swagger.io/v2</value>
+            <value>#{petstore_route}#</value>
         </property>
     </asset>
     <asset name="PolicyAction.cd3c3876-ff28-410c-9f3b-9a1ddd33891d" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Petstore_Versioning[1.0.8]" isDeployable="true">
@@ -100,8 +103,5 @@
     </asset>
     <asset name="RegisteredApplication.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="RegisteredApplication [ Petstore_Versioning_App_PROD ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
-    </asset>
-    <asset name="PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" isDeployable="true">
-        <implementation.generic type="PassmanData"/>
     </asset>
 </asset_composite>

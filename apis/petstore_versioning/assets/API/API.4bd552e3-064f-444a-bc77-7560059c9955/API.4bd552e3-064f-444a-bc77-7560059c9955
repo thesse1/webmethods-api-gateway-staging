@@ -13,6 +13,7 @@
         "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
+    "basePath" : "",
     "serviceRegistryDisplayName" : "SwaggerPetstore_1.0.9",
     "tags" : [ {
       "name" : "pet",
@@ -43,6 +44,7 @@
           "operationId" : "updatePet",
           "consumes" : [ "application/json", "application/xml" ],
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "400" : {
               "description" : "Invalid ID supplied",
@@ -120,6 +122,7 @@
           "operationId" : "addPet",
           "consumes" : [ "application/json", "application/xml" ],
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "405" : {
               "description" : "Invalid input",
@@ -162,6 +165,7 @@
             "name" : "addPet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet",
         "enabled" : true
@@ -370,6 +374,7 @@
             "name" : "deleteUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/{username}",
         "enabled" : true
@@ -453,6 +458,7 @@
             "name" : "findPetsByStatus"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/findByStatus",
         "enabled" : true
@@ -465,6 +471,7 @@
           "operationId" : "createUsersWithListInput",
           "consumes" : [ "application/json" ],
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -499,6 +506,7 @@
             "name" : "createUsersWithListInput"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/createWithList",
         "enabled" : true
@@ -566,6 +574,7 @@
             "name" : "uploadFile"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/{petId}/uploadImage",
         "enabled" : true
@@ -577,6 +586,7 @@
           "description" : "Returns a map of status codes to quantities",
           "operationId" : "getInventory",
           "produces" : [ "application/json" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
@@ -613,6 +623,7 @@
             "name" : "getInventory"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/store/inventory",
         "enabled" : true
@@ -698,6 +709,7 @@
             "name" : "loginUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/login",
         "enabled" : true
@@ -710,6 +722,7 @@
           "operationId" : "createUser",
           "consumes" : [ "application/json" ],
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -743,6 +756,7 @@
             "name" : "createUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user",
         "enabled" : true
@@ -755,6 +769,7 @@
           "operationId" : "createUsersWithArrayInput",
           "consumes" : [ "application/json" ],
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -789,6 +804,7 @@
             "name" : "createUsersWithArrayInput"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/createWithArray",
         "enabled" : true
@@ -873,6 +889,7 @@
             "name" : "findPetsByTags"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/findByTags",
         "enabled" : true
@@ -885,6 +902,7 @@
           "operationId" : "placeOrder",
           "consumes" : [ "application/json" ],
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
@@ -945,6 +963,7 @@
             "name" : "placeOrder"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/store/order",
         "enabled" : true
@@ -956,6 +975,7 @@
           "description" : "",
           "operationId" : "logoutUser",
           "produces" : [ "application/json", "application/xml" ],
+          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation",
@@ -982,6 +1002,7 @@
             "name" : "logoutUser"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/user/logout",
         "enabled" : true
@@ -1200,6 +1221,7 @@
             "name" : "deletePet"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/pet/{petId}",
         "enabled" : true
@@ -1348,6 +1370,7 @@
             "name" : "deleteOrder"
           }
         },
+        "parameters" : [ ],
         "scopes" : [ ],
         "displayName" : "/store/order/{orderId}",
         "enabled" : true
