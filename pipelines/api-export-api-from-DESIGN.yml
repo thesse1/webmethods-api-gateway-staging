@@ -6,18 +6,18 @@ parameters:
   type: string
   values:
   # - number_conversion
-  - ping
   - odata_tutorial
+  - ping
   # - star_wars
   - petstore
-  # - petstore_basicauth
+  - petstore_basicauth
   - petstore_versioning
   - postman_echo
   # - postman_echo_jwt
   # - postman_echo_oauth2
   - postman_mocking
-  # - multiple_tenants
-  # - security_alias
+  - multiple_tenants
+  - security_alias
   - 'other (Please specify below)'
 - name: api_project_other
   displayName: Export which other API project?
