@@ -17,7 +17,7 @@ parameters:
   # - postman_echo_oauth2
   - postman_mocking
   # - multiple_tenants
-  # - security_alias
+  - security_alias
   - 'other (Please specify below)'
 - name: api_project_other
   displayName: Deploy which other API project?
