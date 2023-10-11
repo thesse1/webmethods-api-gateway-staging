@@ -29,7 +29,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_${{parameters.build_stage_name}}_import'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_build_import'
 
 - bash: |
    echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/${{parameters.build_environment}}`"
@@ -141,7 +141,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_export'
+    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_build_export'
 
 - task: PublishTestResults@2
   inputs:
