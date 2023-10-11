@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.7" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2021-07-07T08:28:54"/>
-    <asset name="User.f162fb3b-2429-48fb-983b-3fb7f7a15cae" displayName="testuser_01" isDeployable="true">
-        <implementation.generic type="User"/>
-    </asset>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2023-10-11T12:20:32"/>
     <asset name="Group.e5d1d6c9-5eee-4f21-b26a-531a88740eeb" displayName="testgroup_02" isDeployable="true">
         <implementation.generic type="Group"/>
         <dependsOn>APIGateway:User.db4f4f95-6678-4272-a245-160f2cae0b36</dependsOn>
     </asset>
     <asset name="User.db4f4f95-6678-4272-a245-160f2cae0b36" displayName="testuser_02" isDeployable="true">
+        <implementation.generic type="User"/>
+    </asset>
+    <asset name="User.f162fb3b-2429-48fb-983b-3fb7f7a15cae" displayName="testuser_01" isDeployable="true">
         <implementation.generic type="User"/>
     </asset>
     <asset name="AccessProfile.eb85bb2b-136e-4d14-a5cd-8186d6b49647" displayName="testteam_03" isDeployable="true">
@@ -41,7 +41,7 @@
     <asset name="Alias.a593c88b-4e0a-4e4e-85ec-7e19d90ca332" displayName="PetStore_Routing_Alias" isDeployable="true">
         <implementation.generic type="Alias"/>
         <property name="value for Simple alias PetStore_Routing_Alias" many="false" isSecure="false" displayName="value for Simple alias PetStore_Routing_Alias">
-            <value>https://petstore.swagger.io/v2</value>
+            <value>#{petstore_route}#</value>
         </property>
     </asset>
     <asset name="PolicyAction.ab9a8555-3c55-4e34-82aa-c710b84af379" displayName="Policy Action [Identify &amp; Authorize] -&gt; Policy For API Petstore_BasicAuth[1.0.8]" isDeployable="true">
