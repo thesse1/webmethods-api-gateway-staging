@@ -1,8 +1,8 @@
 {
   "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
   "name" : "PetStore_Routing_Alias",
-  "description" : "Petstore alias on DESIGN",
+  "description" : "Petstore alias on #{stage_name}#",
   "type" : "simple",
   "owner" : "Administrator",
-  "value" : "https://petstore.swagger.io/v2"
+  "value" : "#{petstore_route}#"
 }
