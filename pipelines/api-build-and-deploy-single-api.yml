@@ -25,8 +25,6 @@ parameters:
   default: 'n/a'
 
 variables:
-- template: /variables/variables-aliases-template.yml
-# - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
   - name: api_project

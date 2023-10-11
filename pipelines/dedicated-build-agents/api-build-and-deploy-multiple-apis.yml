@@ -7,8 +7,6 @@ resources:
     trigger: true
 
 variables:
-- template: /variables/variables-aliases-template.yml
-# - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
 stages:

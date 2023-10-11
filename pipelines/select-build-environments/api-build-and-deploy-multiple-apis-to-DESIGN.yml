@@ -22,8 +22,6 @@ parameters:
   - BUILD_07
 
 variables:
-- template: /variables/variables-aliases-template.yml
-# - template: /variables/variables-artifactory-template.yml
 - group: 'Project Configuration'
 
 stages:
