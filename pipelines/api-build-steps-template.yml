@@ -10,9 +10,23 @@ parameters:
 
 steps:
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
-  displayName: 'Replace tokens with variable values'
+  displayName: 'Replace tokens with variable values in assets'
   inputs:
-    targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/**/*'
+    targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets/**/*'
+    actionOnMissing: fail
+  condition: ${{parameters.replace_condition}}
+
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens with variable values in local aliases.json'
+  inputs:
+    targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json'
+    actionOnMissing: fail
+  condition: ${{parameters.replace_condition}}
+
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens with variable values in global aliases.json'
+  inputs:
+    targetFiles: '$(System.DefaultWorkingDirectory)/apis/aliases.json'
     actionOnMissing: fail
   condition: ${{parameters.replace_condition}}
 
@@ -87,12 +101,12 @@ steps:
     artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_test_results'
   condition: ${{parameters.test_condition}}
 
-- task: FileTransform@1
-  displayName: 'Replace alias values using pipeline variables'
-  inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)/**/'
-    targetFiles: '**/aliases.json'
-    fileType: json
+# - task: FileTransform@1
+#   displayName: 'Replace alias values using pipeline variables'
+#   inputs:
+#     folderPath: '$(System.DefaultWorkingDirectory)/**/'
+#     targetFiles: '**/aliases.json'
+#     fileType: json
 
 - bash: |
     echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json`"
