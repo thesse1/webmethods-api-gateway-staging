@@ -32,6 +32,7 @@ files[] = {"id":"3558839-7f92ae4a-2246-4784-ad9f-274f2f558ede","path":"apitests/
 files[] = {"id":"3558839-84466664-cf95-4d1b-a641-2347de239871","path":"apitests/playground/security_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-770b3642-2663-49ae-b514-ac84a58b1e29","path":"apitests/playground/star_wars/APITest.json","metaData":{}}
 files[] = {"id":"3558839-cdbc7300-353b-468f-99a1-af4d739a50bc","path":"apitests/playground/test_failure/APITest.json","metaData":{}}
+files[] = {"id":"3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439","path":"apitests/security_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-2006ceb7-a747-4ce3-ade3-eb4aab3582e9","path":"utilities/haft/Configure_HAFT_PROD_EXT.json","metaData":{}}
 files[] = {"id":"3558839-9e06268d-3bc3-4e1a-b7dd-f5b1061c3ea1","path":"utilities/haft/Configure_HAFT_PROD_INT.json","metaData":{}}
 files[] = {"id":"3558839-0625d153-bc2a-498b-a393-0740b739e34b","path":"utilities/haft/Validate_HAFT_PROD_EXT.json","metaData":{}}

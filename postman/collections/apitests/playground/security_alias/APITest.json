@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "796f5bf8-c2ad-48cf-acf7-de13bc7ae439",
+		"_postman_id": "84466664-cf95-4d1b-a641-2347de239871",
 		"name": "API Test for security-alias",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439"
+		"_uid": "3558839-84466664-cf95-4d1b-a641-2347de239871"
 	},
 	"item": [
 		{
@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "95a59336-f4e8-4410-a86f-69051a5260e6",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -25,12 +26,14 @@
 							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVTSUdOOk15UGFzc3dvcmRfREVTSUdO\");\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "32275f85-3547-4ade-b5f6-5a3105b8a860"
+						"type": "text/javascript"
 					}
 				}
 			],
-			"id": "ab763486-5387-4556-a5c0-baff2c0a11ed",
+			"id": "4e633bec-d857-48a2-9c37-2e7ccd5ae017",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "POST",
 				"header": [
@@ -80,6 +83,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "c1675d2e-72e6-4550-b2d7-442468851b1e",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -93,12 +97,14 @@
 							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVTSUdOOk15UGFzc3dvcmRfREVTSUdO\");\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "9da52bdf-22a4-45ab-b014-0f92d4a794ca"
+						"type": "text/javascript"
 					}
 				}
 			],
-			"id": "cc6facc3-19db-4c1c-b5fa-77f2190e6f97",
+			"id": "52d1a46b-dcb8-4c3c-bf9a-5f38a3e12692",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -145,6 +151,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "1f400aab-07e5-4012-8113-2cae4eb2a189",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -154,12 +161,14 @@
 							"    pm.expect(jsonData.headers.authorization).to.eql(\"Basic UG9zdG1hbkVjaG9fREVTSUdOOk15UGFzc3dvcmRfREVTSUdO\");\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "2faae3c3-c5b6-4285-b383-de6fe7559c29"
+						"type": "text/javascript"
 					}
 				}
 			],
-			"id": "359c5a49-b19b-4ad5-a455-b26b61881d2b",
+			"id": "92fec25e-e4ef-4817-9ebc-67a3ff18ff30",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "DELETE",
 				"header": [
