@@ -9,8 +9,8 @@
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_DEV_EXT",
-        "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
       }
     },
     "TEST_EXT": {
@@ -21,8 +21,8 @@
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_TEST_EXT",
-        "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
       }
     },
     "PROD_EXT": {
@@ -33,8 +33,8 @@
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_PROD_EXT",
-        "password" : "TXlQYXNzd29yZF9QUk9ELUVYVA=="
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
       }
     }
   }
