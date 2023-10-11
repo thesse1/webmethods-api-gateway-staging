@@ -23,12 +23,18 @@ steps:
     actionOnMissing: fail
   condition: ${{parameters.replace_condition}}
 
+- bash: cat $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json
+  displayName: Log local aliases.json after value substitution
+
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
   displayName: 'Replace tokens with variable values in global aliases.json'
   inputs:
     targetFiles: '$(System.DefaultWorkingDirectory)/apis/aliases.json'
     actionOnMissing: fail
   condition: ${{parameters.replace_condition}}
+
+- bash: cat $(System.DefaultWorkingDirectory)/apis/aliases.json
+  displayName: Log global aliases.json after value substitution
 
 - task: ArchiveFiles@2
   inputs:
