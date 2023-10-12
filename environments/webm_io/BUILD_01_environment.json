@@ -61,24 +61,6 @@
 			"value": "",
 			"type": "default",
 			"enabled": true
-		},
-		{
-			"key": "elasticsearch-protocol",
-			"value": "https",
-			"type": "default",
-			"enabled": true
-		},
-		{
-			"key": "elasticsearch-hostname",
-			"value": "azure-demo-01-elasticsearch.es.westeurope.azure.elastic-cloud.com",
-			"type": "default",
-			"enabled": true
-		},
-		{
-			"key": "elasticsearch-indexname",
-			"value": "apigw-build",
-			"type": "default",
-			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",

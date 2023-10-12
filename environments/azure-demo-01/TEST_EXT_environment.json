@@ -79,7 +79,7 @@
 		"value": "apigw-test_ext",
 		"type": "default",
 		"enabled": true
-}
+	}
 ],
 "timestamp": 1587036498482,
   "_postman_variable_scope": "environment",
