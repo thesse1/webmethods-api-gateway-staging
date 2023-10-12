@@ -75,6 +75,7 @@ stages:
 
             - ${{ each deploy_instance in target_stage.instances }}:
               - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance}}'
+                continueOnError: true
                 environment: ${{deploy_instance}}
                 variables:
                 - group: ${{target_stage.name}}_users
@@ -90,6 +91,8 @@ stages:
                         submodules: "true"
                         persistCredentials: "true"
                         fetchDepth: 0
+                      - bash: cat $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json
+                        displayName: Check if environment.json file exists
                       - template: /pipelines/retrieve-build-template.yml
                         parameters:
                           target_type: ${{deployment_target}}
