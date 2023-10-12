@@ -43,6 +43,7 @@ stages:
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
       - deployment: Configure_HAFT_for_API_Gateway_${{stage.name}}
+        continueOnError: true
         environment: ${{stage.name}}_HAFT
         variables:
         - group: ${{stage.name}}_HAFT_users
