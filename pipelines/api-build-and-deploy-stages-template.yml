@@ -7,16 +7,6 @@ parameters:
   type: object
 - name: all_stages
   type: object
-- name: build_instances
-  type: object
-  default:
-    DESIGN: BUILD_07
-    DEV_INT: BUILD_01
-    DEV_EXT: BUILD_02
-    TEST_INT: BUILD_03
-    TEST_EXT: BUILD_04
-    PROD_INT: BUILD_05
-    PROD_EXT: BUILD_06
 - name: deployment_sets
   displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
@@ -31,11 +21,10 @@ stages:
             dependsOn: []
             lockBehavior: sequential
             jobs:
-            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{parameters.build_instances[target_stage.name]}}'
-              environment: '${{parameters.build_instances[target_stage.name]}}'
+            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}'
+              environment: '${{parameters.build_stage.name}}_instances'
               variables:
               - group: ${{parameters.build_stage.name}}_users
-              - group: ${{parameters.build_instances[target_stage.name]}}_users
               - ${{ if not(target_stage.is_design_stage) }}:
                 - group: ${{target_stage.name}}_value_substitutions
               pool:
@@ -50,12 +39,42 @@ stages:
                       persistCredentials: "true"
                       fetchDepth: 0
                     - download: none
+                    - script: |
+                        echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+                        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].id)
+                        resource_name="null"
+                        claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{deployment_target}}_${{api_project}}"
+                        # Loop until a resource is available
+                        while [ "$resource_name" == "null" ]; do
+                          resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+                          if [ "$resource_name" == "null" ]; then
+                            echo "No available resource found. Waiting..."
+                            sleep 60
+                          else
+                            echo "Resource found: $resource_name"
+                            az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
+                            sleep 5
+                            claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].variables.$resource_name.value -o tsv)
+                            if [ "$claimtext_read" == "$claimtext" ]; then
+                              echo "Resource claimed: $claimtext"
+                            else
+                              echo "Resource taken by another agent: $claimtext_read"
+                              echo "Expected claimtext: $claimtext"
+                              echo "Trying again..."
+                              resource_name="null"
+                            fi
+                          fi
+                        done
+                        echo "Selected Resource: $resource_name"
+                        echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
+                      name: claim_resource
+                      displayName: 'Claim Resource'
                     - template: /pipelines/api-build-steps-template.yml
                       parameters:
                         api_project: ${{api_project}}
-                        build_environment: "${{parameters.build_instances[target_stage.name]}}_environment.json"
+                        build_environment: "$(claimed_resource)_environment.json"
                         build_stage_name: ${{parameters.build_stage.name}}
-                        build_instance_name: ${{parameters.build_instances[target_stage.name]}}
+                        build_instance_name: $(claimed_resource)
                         target_type: ${{deployment_target}}
                         prepare_condition: ${{true}}
                         test_condition: ${{ not(target_stage.is_design_stage) }}
@@ -66,12 +85,19 @@ stages:
                         api_project: ${{api_project}}
                     - bash: |
                         echo "##vso[build.addbuildtag]${{api_project}}"
-                        echo "##vso[build.addbuildtag]${{parameters.build_instances[target_stage.name]}}"
-                        echo "##vso[build.addbuildtag]${{api_project}}_${{parameters.build_instances[target_stage.name]}}"
+                        echo "##vso[build.addbuildtag]$(claimed_resource)"
+                        echo "##vso[build.addbuildtag]${{api_project}}_$(claimed_resource)"
                       displayName: Add build tags
                     # - template: /pipelines/store-build-artifactory-template.yml
                     #   parameters:
                     #     target_type: $(targetType)
+                    - script: |
+                        echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+                        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].id)
+                        az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
+                        echo "Released Claimed Resource: $(claimed_resource)"
+                      displayName: 'Release Resource'
+                      condition: always() # Release lock even if build was not successful
 
             - ${{ each deploy_instance in target_stage.instances }}:
               - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance}}'
@@ -104,5 +130,5 @@ stages:
                           echo "##vso[build.addbuildtag]${{deploy_instance}}"
                           echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                         displayName: Add build tags
-                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{parameters.build_instances[target_stage.name]}}'
+                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
                 condition: succeeded()
