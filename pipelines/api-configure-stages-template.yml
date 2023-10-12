@@ -15,6 +15,7 @@ stages:
     jobs:
     - ${{ each instance in stage.instances }}:
       - deployment: Configure_API_Gateway_${{instance}}
+        continueOnError: true
         environment: ${{instance}}
         variables:
         - group: ${{stage.name}}_users
@@ -31,15 +32,12 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              - bash: test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json
-              - bash: echo "##vso[task.setvariable variable=environment_present]`test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json`"
+              - bash: cat -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json
               - template: /pipelines/api-configure-steps-template.yml
-                condition: and(succeeded(), eq(${{environment_present}}, 0))
                 parameters:
                   environment: ${{instance}}_environment.json
                   type: ${{stage.name}}
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
-                condition: and(succeeded(), eq(${{environment_present}}, 0))
                 displayName: Add build tag
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
