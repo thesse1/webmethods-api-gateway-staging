@@ -25,6 +25,8 @@ stages:
               environment: '${{parameters.build_stage.name}}_instances'
               variables:
               - group: ${{parameters.build_stage.name}}_users
+              - ${{ if not(target_stage.is_design_stage) }}:
+                - group: ${{target_stage.name}}_value_substitutions
               pool:
                 name: '$(pool_name)'
                 vmImage: '$(pool_image)'
