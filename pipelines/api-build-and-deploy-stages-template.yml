@@ -10,13 +10,13 @@ parameters:
 - name: build_instances
   type: object
   default:
-    DESIGN: BUILD_01
+    DESIGN: BUILD_07
     DEV_INT: BUILD_01
-    DEV_EXT: BUILD_01
-    TEST_INT: BUILD_01
-    TEST_EXT: BUILD_01
-    PROD_INT: BUILD_01
-    PROD_EXT: BUILD_01
+    DEV_EXT: BUILD_02
+    TEST_INT: BUILD_03
+    TEST_EXT: BUILD_04
+    PROD_INT: BUILD_05
+    PROD_EXT: BUILD_06
 - name: deployment_sets
   displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
