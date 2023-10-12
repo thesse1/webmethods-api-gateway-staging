@@ -32,7 +32,7 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              - bash: cat -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json
+              - bash: cat $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json
                 displayName: Check if environment.json file exists
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
