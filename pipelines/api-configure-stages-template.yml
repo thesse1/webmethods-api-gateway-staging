@@ -31,6 +31,8 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
+              - bash: test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json
+              - bash: echo "##vso[task.setvariable variable=environment_present]`test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json`"
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
                   environment: ${{instance}}_environment.json
