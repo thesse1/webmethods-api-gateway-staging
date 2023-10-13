@@ -9,7 +9,7 @@ parameters:
   type: object
 
 jobs:
-- deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}_on_${{parameters.build_instances_mapping[deployment_target]}}'
+- deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
   environment: '${{parameters.build_instances_mapping[deployment_target]}}'
   variables:
   - group: ${{parameters.build_stage.name}}_users

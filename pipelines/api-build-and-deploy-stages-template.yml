@@ -32,50 +32,10 @@ stages:
                 deployment_target: ${{deployment_target}}
                 build_instances_mapping: ${{parameters.build_instances_mapping}}
 
-            - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{parameters.build_instances_mapping[target_stage.name]}}'
-              environment: '${{parameters.build_instances_mapping[target_stage.name]}}'
-              variables:
-              - group: ${{parameters.build_stage.name}}_users
-              - group: ${{parameters.build_instances_mapping[target_stage.name]}}_users
-              - ${{ if not(target_stage.is_design_stage) }}:
-                - group: ${{target_stage.name}}_value_substitutions
-              pool:
-                name: '$(pool_name)'
-                vmImage: '$(pool_image)'
-              strategy:
-                runOnce:    #rolling, canary are the other strategies that are supported
-                  deploy:
-                    steps:
-                    - checkout: self
-                      submodules: "true"
-                      persistCredentials: "true"
-                      fetchDepth: 0
-                    - download: none
-                    - template: /pipelines/api-build-steps-template.yml
-                      parameters:
-                        api_project: ${{api_project}}
-                        build_environment: "${{parameters.build_instances_mapping[target_stage.name]}}_environment.json"
-                        build_stage_name: ${{parameters.build_stage.name}}
-                        build_instance_name: ${{parameters.build_instances_mapping[target_stage.name]}}
-                        target_type: ${{deployment_target}}
-                        prepare_condition: ${{true}}
-                        test_condition: ${{ not(target_stage.is_design_stage) }}
-                        replace_condition: ${{ not(target_stage.is_design_stage) }}
-                    - template: /pipelines/store-build-template.yml
-                      parameters:
-                        target_type: ${{deployment_target}}
-                        api_project: ${{api_project}}
-                    - bash: |
-                        echo "##vso[build.addbuildtag]${{api_project}}"
-                        echo "##vso[build.addbuildtag]${{parameters.build_instances_mapping[target_stage.name]}}"
-                        echo "##vso[build.addbuildtag]${{api_project}}_${{parameters.build_instances_mapping[target_stage.name]}}"
-                      displayName: Add build tags
-                    # - template: /pipelines/store-build-artifactory-template.yml
-                    #   parameters:
-                    #     target_type: $(targetType)
-
             - ${{ each deploy_instance in target_stage.instances }}:
               - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance}}'
+                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
+                condition: succeeded()
                 continueOnError: true
                 environment: ${{deploy_instance}}
                 variables:
@@ -108,5 +68,3 @@ stages:
                           echo "##vso[build.addbuildtag]${{deploy_instance}}"
                           echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                         displayName: Add build tags
-                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{parameters.build_instances_mapping[target_stage.name]}}'
-                condition: succeeded()
