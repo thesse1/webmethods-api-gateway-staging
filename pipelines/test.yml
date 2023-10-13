@@ -1,0 +1,12 @@
+trigger: none
+
+variables:
+- group: 'Project Configuration'
+
+stages:
+- stage: MyStage
+  jobs:
+    - job: MyJob
+      steps:
+      - bash: |
+          echo Test
