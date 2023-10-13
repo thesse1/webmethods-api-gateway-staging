@@ -15,7 +15,7 @@ stages:
     jobs:
     - ${{ each instance in stage.instances }}:
       - deployment: Configure_API_Gateway_${{instance}}
-        continueOnError: true
+        # continueOnError: true
         environment: ${{instance}}
         variables:
         - group: ${{stage.name}}_users
@@ -32,13 +32,22 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              - bash: cat $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json
+              - bash: |
+                  if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json; then
+                    echo "##vso[task.setvariable variable=environment_file_exists]true"
+                  else
+                    echo "##vso[task.setvariable variable=environment_file_exists]false"
+                    echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json"
+                    echo "##vso[task.complete result=SucceededWithIssues;]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json"
+                  fi
                 displayName: Check if environment.json file exists
               - template: /pipelines/api-configure-steps-template.yml
+                condition: and(succeeded(), eq(${{environment_file_exists}}, "true"))
                 parameters:
                   environment: ${{instance}}_environment.json
                   type: ${{stage.name}}
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                condition: and(succeeded(), eq(${{environment_file_exists}}, "true"))
                 displayName: Add build tag
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
