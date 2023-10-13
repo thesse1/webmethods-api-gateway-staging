@@ -9,7 +9,7 @@ resources:
       - DESIGN
 
 variables:
-- group: 'Project Configuration'
+- group: Project_configuration
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml

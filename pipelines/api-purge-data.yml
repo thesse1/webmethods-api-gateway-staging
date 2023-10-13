@@ -8,7 +8,7 @@ resources:
 
 variables:
 - group: 'Shutdown approval'
-- group: 'Project Configuration'
+- group: Project_configuration
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml

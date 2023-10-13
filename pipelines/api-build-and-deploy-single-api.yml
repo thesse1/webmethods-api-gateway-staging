@@ -25,7 +25,7 @@ parameters:
   default: 'n/a'
 
 variables:
-- group: 'Project Configuration'
+- group: Project_configuration
 - ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
   - name: api_project
     value: ${{parameters.api_project}}
