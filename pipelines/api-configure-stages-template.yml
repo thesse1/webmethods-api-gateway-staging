@@ -50,7 +50,7 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              - bash: "Debug: $[dependencies.Check_environment_file_for_${{instance}}.outputs['Check_environment_file.environment_file_exists']]"
+              # - bash: "Debug: $[dependencies.Check_environment_file_for_${{instance}}.outputs['Check_environment_file.environment_file_exists']]"
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
                   environment: ${{instance}}_environment.json
@@ -94,7 +94,7 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              - bash: "Debug: $[dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists']]"
+              # - bash: "Debug: $[dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists']]"
               - template: /pipelines/api-configure-haft-steps-template.yml
                 parameters:
                   type: ${{stage.name}}
