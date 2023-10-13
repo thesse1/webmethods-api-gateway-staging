@@ -23,7 +23,7 @@ stages:
             jobs:
             - ${{ each build_instance in parameters.build_stage.instances }}:
               - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{build_instance}}'
-                condition: eq('${{build_instance}}', variables[${{deployment_target}}])
+                condition: eq('${{build_instance}}', variables['${{deployment_target}}'])
                 environment: '${{build_instance}}'
                 variables:
                 - group: ${{parameters.build_stage.name}}_users
