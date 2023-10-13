@@ -20,6 +20,8 @@ stages:
           - stage: ${{deployment_target}}_${{api_project}}
             dependsOn: []
             lockBehavior: sequential
+            variables:
+            - group: Build_instances_mapping
             jobs:
             - ${{ each build_instance in parameters.build_stage.instances }}:
               - deployment: 'Build_${{api_project}}_for_${{deployment_target}}_on_${{build_instance}}'
