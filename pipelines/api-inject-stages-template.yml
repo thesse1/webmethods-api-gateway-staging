@@ -53,7 +53,8 @@ parameters:
     PROD_INT: BUILD_06
     PROD_EXT: BUILD_07
 - name: build_instance
-  type: object
+  type: string
+  default: Default
 
 stages:
 - template: ${{parameters.template}}
