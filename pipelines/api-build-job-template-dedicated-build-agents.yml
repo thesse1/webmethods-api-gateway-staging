@@ -11,7 +11,7 @@ parameters:
   type: object
 
 jobs:
-- deployment: 'Build_{{parameters.api_project}}_for_{{parameters.deployment_target}}'
+- deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
   environment: '${{parameters.build_stage.name}}_instances'
   variables:
   - group: ${{parameters.build_stage.name}}_users
