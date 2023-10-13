@@ -13,3 +13,5 @@ stages:
       steps:
       - bash: |
           echo Test
+          echo "##vso[task.logissue type=error]Something went very wrong."
+          echo End Test
