@@ -42,12 +42,12 @@ stages:
                   fi
                 displayName: Check if environment.json file exists
               - template: /pipelines/api-configure-steps-template.yml
-                condition: and(succeeded(), eq(${{environment_file_exists}}, "true"))
+                condition: and(succeeded(), eq($(environment_file_exists), "true"))
                 parameters:
                   environment: ${{instance}}_environment.json
                   type: ${{stage.name}}
               - bash: echo "##vso[build.addbuildtag]${{instance}}"
-                condition: and(succeeded(), eq(${{environment_file_exists}}, "true"))
+                condition: and(succeeded(), eq($(environment_file_exists), "true"))
                 displayName: Add build tag
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
