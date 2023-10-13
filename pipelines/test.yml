@@ -15,3 +15,5 @@ stages:
           echo Test
           echo "##vso[task.complete result=SucceededWithIssues;]DONE"
           echo End Test
+      - bash: |
+          echo Step after task.complete
