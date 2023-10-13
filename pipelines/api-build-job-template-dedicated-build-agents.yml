@@ -1,6 +1,8 @@
 parameters:
 - name: build_stage
   type: object
+- name: target_stage
+  type: object
 - name: api_project
   type: string
 - name: deployment_target
@@ -13,6 +15,8 @@ jobs:
   environment: '${{parameters.build_stage.name}}_instances'
   variables:
   - group: ${{parameters.build_stage.name}}_users
+  - ${{ if not(parameters.target_stage.is_design_stage) }}:
+    - group: ${{parameters.deployment_target}}_value_substitutions
   pool:
     name: '$(build_pool_name)'
     vmImage: '$(build_pool_image)'
@@ -38,8 +42,8 @@ jobs:
             build_instance_name: $(agent_name)
             target_type: ${{parameters.deployment_target}}
             prepare_condition: ${{true}}
-            test_condition: ${{ not(target_stage.is_design_stage) }}
-            replace_condition: ${{ not(target_stage.is_design_stage) }}
+            test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
+            replace_condition: ${{ not(parameters.target_stage.is_design_stage) }}
         - template: /pipelines/store-build-template.yml
           parameters:
             target_type: ${{parameters.deployment_target}}
