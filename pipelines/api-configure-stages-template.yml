@@ -19,6 +19,10 @@ stages:
           name: '$(pool_name)'
           vmImage: '$(pool_image)'
         steps:
+        - checkout: self
+          submodules: "true"
+          persistCredentials: "true"
+          fetchDepth: 0
         - bash: |
             if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json; then
               echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json exists
@@ -64,6 +68,10 @@ stages:
           name: '$(pool_name)'
           vmImage: '$(pool_image)'
         steps:
+        - checkout: self
+          submodules: "true"
+          persistCredentials: "true"
+          fetchDepth: 0
         - bash: |
             if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json; then
               echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json exists
