@@ -65,4 +65,4 @@ stages:
         - TEST_EXT
         - PROD_INT
         - PROD_EXT
-      build_instance: ${{parameters.build_instance}}
+    build_instance: ${{parameters.build_instance}}

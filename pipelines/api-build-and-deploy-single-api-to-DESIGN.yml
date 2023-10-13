@@ -60,4 +60,4 @@ stages:
           - ${{parameters.api_project_other}}
         targets:
         - DESIGN
-      build_instance: ${{parameters.build_instance}}
+    build_instance: ${{parameters.build_instance}}

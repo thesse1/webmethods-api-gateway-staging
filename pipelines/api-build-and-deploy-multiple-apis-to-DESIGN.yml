@@ -47,4 +47,4 @@ stages:
         - security_alias
         targets:
         - DESIGN
-      build_instance: ${{parameters.build_instance}}
+    build_instance: ${{parameters.build_instance}}
