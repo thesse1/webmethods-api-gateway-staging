@@ -7,6 +7,8 @@ parameters:
   type: object
 - name: all_stages
   type: object
+- name: build_instances_mapping
+  type: object
 - name: source_instance
   type: string
 - name: commitMessage
