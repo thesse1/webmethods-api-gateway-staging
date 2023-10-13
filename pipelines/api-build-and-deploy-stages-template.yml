@@ -28,6 +28,7 @@ stages:
             # - template: /pipelines/api-build-job-template-resource-pooling.yml
               parameters:
                 build_stage: ${{parameters.build_stage}}
+                target_stage: ${{target_stage}}
                 api_project: ${{api_project}}
                 deployment_target: ${{deployment_target}}
                 build_instances_mapping: ${{parameters.build_instances_mapping}}
