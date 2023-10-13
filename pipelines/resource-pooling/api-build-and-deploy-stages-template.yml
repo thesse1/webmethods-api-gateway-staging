@@ -41,12 +41,12 @@ stages:
                     - download: none
                     - script: |
                         echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-                        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].id)
+                        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
                         resource_name="null"
                         claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{deployment_target}}_${{api_project}}"
                         # Loop until a resource is available
                         while [ "$resource_name" == "null" ]; do
-                          resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+                          resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
                           if [ "$resource_name" == "null" ]; then
                             echo "No available resource found. Waiting..."
                             sleep 60
@@ -54,7 +54,7 @@ stages:
                             echo "Resource found: $resource_name"
                             az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
                             sleep 5
-                            claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].variables.$resource_name.value -o tsv)
+                            claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables.$resource_name.value -o tsv)
                             if [ "$claimtext_read" == "$claimtext" ]; then
                               echo "Resource claimed: $claimtext"
                             else
@@ -93,7 +93,7 @@ stages:
                     #     target_type: $(targetType)
                     - script: |
                         echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-                        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build instances" --query [0].id)
+                        group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
                         az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
                         echo "Released Claimed Resource: $(claimed_resource)"
                       displayName: 'Release Resource'
