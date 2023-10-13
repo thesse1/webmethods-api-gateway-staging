@@ -42,6 +42,16 @@ parameters:
     instances:
     - PROD_EXT_01
     - PROD_EXT_02
+- name: build_instances_mapping
+  type: object
+  default:
+    DESIGN: BUILD_01
+    DEV_INT: BUILD_02
+    DEV_EXT: BUILD_03
+    TEST_INT: BUILD_04
+    TEST_EXT: BUILD_05
+    PROD_INT: BUILD_06
+    PROD_EXT: BUILD_07
 
 stages:
 - template: ${{parameters.template}}
@@ -56,5 +66,6 @@ stages:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{stage}}
     all_stages: ${{parameters.stages}}
+    build_instances_mapping: ${{parameters.build_instances_mapping}}
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}
