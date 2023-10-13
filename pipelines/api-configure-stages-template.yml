@@ -21,8 +21,10 @@ stages:
         steps:
         - bash: |
             if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json; then
+              echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json exists
               echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
             else
+              echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json does not exist, skipping next job
               echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
               echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json"
               echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{instance}}_environment.json"
@@ -48,6 +50,7 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
+              - bash: "Debug: $[dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists']]"
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
                   environment: ${{instance}}_environment.json
