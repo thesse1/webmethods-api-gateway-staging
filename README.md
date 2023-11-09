@@ -122,7 +122,6 @@ The batch script can also be used for importing and exporting general API Gatewa
 | Parameter | README |
 | ------ | ------ |
 | importconfig or exportconfig |  To import or export from/to the flat file representation |
-| tenant |  The name of the tenant: playground or realworld |
 | environment | The type of the environment to import or export (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
 | apigateway_url |  API Gateway URL to import to or export from |
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportconfig and --importconfig option |
@@ -131,13 +130,13 @@ The batch script can also be used for importing and exporting general API Gatewa
 Sample Usage for importing the configuration that is present as flat file representation under /playground/configuration/DESIGN/assets into API Gateway server at https://apigw-config.acme.com
 
 ```sh
-bin>gateway_import_export_utils.bat --importconfig --tenant playground --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --importconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
 Sample Usage for exporting the configuration that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /playground/configuration/DESIGN/assets
 
 ```sh
-bin>gateway_import_export_utils.bat --exportconfig --tenant playground --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
 ## export_payload.json export query for API projects
@@ -1270,7 +1269,7 @@ Let's consider this example: An API developer wants to make a change to the Pets
   - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
-bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
   - The API Developer makes the necessary changes to the Petstore API on the local development environment or the central DESIGN environment. 
@@ -1282,7 +1281,7 @@ bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name p
   - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
 
   ```sh 
-bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder.
@@ -1332,7 +1331,7 @@ Let's consider this example: An API developer wants to create a new API and add 
   - The developer would first have to update the API Gateway artifacts of the existing API project on the local development environment or the central DESIGN environment. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import the existing API project (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
-bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
   - The developer would then create the new API on the local development environment or the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
@@ -1346,7 +1345,7 @@ bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name p
   - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
 
   ```sh 
-bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder.
@@ -1406,7 +1405,7 @@ Let's consider this example: An API developer wants to create a new API and add 
   - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
 
   ```sh 
-bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder.
