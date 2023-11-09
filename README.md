@@ -105,13 +105,13 @@ The gateway_import_export_utils.bat can be used for importing and exporting APIs
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportapi and --importapi option |
 | password | The API Gateway user password |
 
-Sample Usage for importing the Petstore API that is present as flat file representation under /playground/apis/petstore/assets into API Gateway server at https://apigw-config.acme.com
+Sample Usage for importing the Petstore API that is present as flat file representation under /apis/petstore/assets into API Gateway server at https://apigw-config.acme.com
 
 ```sh
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-Sample Usage for exporting the Petstore API that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /playground/apis/petstore/assets
+Sample Usage for exporting the Petstore API that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /apis/petstore/assets
 
 ```sh
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -127,13 +127,13 @@ The batch script can also be used for importing and exporting general API Gatewa
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportconfig and --importconfig option |
 | password | The API Gateway user password |
 
-Sample Usage for importing the configuration that is present as flat file representation under /playground/configuration/DESIGN/assets into API Gateway server at https://apigw-config.acme.com
+Sample Usage for importing the configuration that is present as flat file representation under /configuration/DESIGN/assets into API Gateway server at https://apigw-config.acme.com
 
 ```sh
 bin>gateway_import_export_utils.bat --importconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-Sample Usage for exporting the configuration that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /playground/configuration/DESIGN/assets
+Sample Usage for exporting the configuration that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /configuration/DESIGN/assets
 
 ```sh
 bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -143,7 +143,7 @@ bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigat
 
 The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the export_api_from_config pipeline) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
-The /playground/apis folder contains sample API projects with the following export_payload.json files:
+The /apis folder contains sample API projects with the following export_payload.json files:
 
 ### petstore
 
@@ -551,7 +551,7 @@ Examples:
 }
 ```
 
-The global aliases.json file in the /playground/apis folder contains alias values for the respective DEV, TEST and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
+The global aliases.json file in the /apis folder contains alias values for the respective DEV, TEST and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
 
 ### petstore-versioning
 
@@ -748,7 +748,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 }
 ```
 
-This file contains environment-specific values for the PetStore_Routing_Alias alias which is already overwritten by the global aliases.json file in the /playground/apis root folder. The build pipeline will detect this and return with an error message.
+This file contains environment-specific values for the PetStore_Routing_Alias alias which is already overwritten by the global aliases.json file in the /apis root folder. The build pipeline will detect this and return with an error message.
 
 ### alias-not-found
 
@@ -936,7 +936,7 @@ Replacement values for secret alias values like passwords can and should be stor
 
 The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the export_configuration_from_stage pipeline) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
-The /playground/configuration folder contains sample configurations for DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for example:
+The /configuration folder contains sample configurations for DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for example:
 
 ### DESIGN
 
@@ -991,7 +991,7 @@ More configuration assets can be added later.
 
 Each API Gateway configuration can include one scopes.json file in the configuration root folder specifying the OAuth2 scopes intended for the APIs on this API Gateway instance. The file will be parsed right before importing the other API Gateway assets of the API Gateway configuration and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
 
-Each /playground/configuration folder contains a scopes.json file for demonstrating this feature, for example:
+Each /configuration folder contains a scopes.json file for demonstrating this feature, for example:
 
 ### DESIGN
 
@@ -1022,7 +1022,7 @@ Each API project must include one Postman test collection under the name APITest
 
 > Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement. So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
 
-The /playground/apis folder contains sample API projects with the following test collections:
+The /apis folder contains sample API projects with the following test collections:
 
 ### petstore
 
@@ -1266,7 +1266,7 @@ Let's consider this example: An API developer wants to make a change to the Pets
 
 ### Option A: Using a local repository
 
-  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
+  - All of the APIs of the organization are available in VCS in the /apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1278,7 +1278,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1300,7 +1300,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
 ### Option B: Using the export/import pipelines
 
-  - All of the APIs of the organization are available in VCS in the /playground/apis folder. This flat file representation of the APIs should be converted and imported into the central DESIGN environment for changes to be made. The developer executes the deploy_to_config pipeline for the petstore API project.
+  - All of the APIs of the organization are available in VCS in the /apis folder. This flat file representation of the APIs should be converted and imported into the central DESIGN environment for changes to be made. The developer executes the deploy_to_config pipeline for the petstore API project.
 
   - The API Developer makes the necessary changes to the Petstore API on the central DESIGN environment. 
 
@@ -1342,7 +1342,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1400,9 +1400,9 @@ Let's consider this example: An API developer wants to create a new API and add 
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder which will later hold the asset definitions exported from the local development environment or the central DESIGN environment.
+  - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder which will later hold the asset definitions exported from the local development environment or the central DESIGN environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /playground/apis folder. This can be done by executing the following command.
+  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1430,7 +1430,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - The developer will now have to create a new API project folder under /playground/apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
+  - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
 
   - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the export_api_from_config pipeline for the petstore API project.
 
@@ -1486,7 +1486,6 @@ All five deployment pipeline templates need the following parameters to be set i
 | target_type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
 | test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT and ${{false}} for DESIGN |
 | prepare_condition | Whether to prepare the API Gateway artifacts for the target environment (${{true}} or ${{false}}), should be ${{true}} for all environments |
-| tenant | playground or realworld |
 
 The export pipeline template needs the following parameters:
 
@@ -1495,7 +1494,6 @@ The export pipeline template needs the following parameters:
 | api_project | Case-sensitive name of the API project to be exported |
 | source_environment | Name of the environment definition file in /environments folder for the source environment, e.g., config_environment_demo.json |
 | source_type | DESIGN |
-| tenant | playground or realworld |
 
 The commit pipeline template needs the following parameter:
 
@@ -1591,7 +1589,6 @@ The configuration pipeline template needs the following parameters to be set in 
 | ------ | ------ |
 | environment | Name of the environment definition file in /environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type to be configured or updated (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
-| tenant | playground or realworld |
 
 The export pipeline template needs the following parameters:
 
@@ -1599,7 +1596,6 @@ The export pipeline template needs the following parameters:
 | ------ | ------ |
 | environment | Name of the environment definition file in /environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
-| tenant | playground or realworld |
 
 The commit pipeline template needs the following parameter:
 
@@ -1659,7 +1655,6 @@ The pipeline template needs the following parameters to be set in the calling pi
 | ------ | ------ |
 | environment | Name of the environment definition file in /environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
-| tenant | playground or realworld |
 
 The pipeline template executes the following major steps:
 
