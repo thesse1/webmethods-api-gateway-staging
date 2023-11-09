@@ -16,6 +16,20 @@ This solution is based on https://github.com/thesse1/webmethods-api-gateway-devo
 
 As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change, and those changes have to be propagated to other external products like API Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is a key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
 
+This CI/CD or DevOps approach can be achieved in multiple ways:
+
+### Using webMethods Deployer and Asset Build Environment
+
+API Gateway asset binaries can be build using Asset Build Environment and promoted across stages using WmDeployer. More information on this way of CI/CD and DevOps automation can be found at https://tech.forums.softwareag.com/t/staging-promotion-and-devops-of-api-gateway-assets/237040.
+
+### Using Promotion Management APIs
+
+The promotion APIs that are exposed by API Gateway can be used for the DevOps automation. More information on these APIs can be found at https://github.com/SoftwareAG/webmethods-api-gateway/blob/master/apigatewayservices/APIGatewayPromotionManagement.json.
+
+### Directly using the API Gateway Archive Service API for exporting and importing asset definitions
+
+This approach is followed in this solution. Using the API Gateway Archive Service API, API Gateway assets and configuration items are exported from the source stage, stored and managed in Git, and then imported on the target stages.
+
 ![GitHub Logo](/images/Overview.png)
 
 In addition to this, the solution includes an automatic validation and adjustment of API Gateway assets for the deployment on different stages. It implements the following "design-time policies":
@@ -55,22 +69,6 @@ The following API Gateway assets and configurations can be moved across API Gate
  - Security configurations
  - Destination configurations
  - External accounts configurations
- 
-## DevOps and CI/CD in webMethods API Gateway
-
-The CI/CD and DevOps flow can be achieved in multiple ways.
-
-### Using webMethods Deployer and Asset Build Environment
-
-API Gateway asset binaries can be build using Asset Build Environment and promoted across stages using WmDeployer. More information on this way of CI/CD and DevOps automation can be found at https://tech.forums.softwareag.com/t/staging-promotion-and-devops-of-api-gateway-assets/237040.
-
-### Using Promotion Management APIs
-
-The promotion APIs that are exposed by API Gateway can be used for the DevOps automation. More information on these APIs can be found at https://github.com/SoftwareAG/webmethods-api-gateway/blob/master/apigatewayservices/APIGatewayPromotionManagement.json.
-
-### Directly using the API Gateway Archive Service API for exporting and importing asset definitions
-
-This approach is followed in this solution.
 
 ## About this repository
 
