@@ -95,12 +95,11 @@ Alternatively, the developer can also use the `Export API project from DESIGN` p
 
 ## gateway_import_export_utils.bat
 
-The gateway_import_export_utils.bat can be used for importing and exporting APIs (projects) in a flat file representation. The export_payload.json file in each project folder under /{tenant}/apis defines which API Gateway assets belong to this project. The assets will be imported/exported into/from their respective project folders under /{tenant}/apis.
+The gateway_import_export_utils.bat can be used for importing and exporting APIs (projects) in a flat file representation. The export_payload.json file in each project folder under /apis defines which API Gateway assets belong to this project. The assets will be imported/exported into/from their respective project folders under /apis.
 
 | Parameter | README |
 | ------ | ------ |
 | importapi or exportapi |  To import or export from/to the flat file representation |
-| tenant |  The name of the tenant: playground or realworld |
 | api_name | The name of the API project to import or export |
 | apigateway_url |  API Gateway URL to import to or export from |
 | username |  The API Gateway username. The user must have the "Export assets" or "Import assets" privilege, respectively, for the --exportapi and --importapi option |
@@ -109,16 +108,16 @@ The gateway_import_export_utils.bat can be used for importing and exporting APIs
 Sample Usage for importing the Petstore API that is present as flat file representation under /playground/apis/petstore/assets into API Gateway server at https://apigw-config.acme.com
 
 ```sh
-bin>gateway_import_export_utils.bat --importapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
 Sample Usage for exporting the Petstore API that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /playground/apis/petstore/assets
 
 ```sh
-bin>gateway_import_export_utils.bat --exportapi --tenant playground --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
+bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-The batch script can also be used for importing and exporting general API Gateway configurations in a flat file representation. The export_payload.json file in each folder under /{tenant}/configuration defines which API Gateway assets belong to this configuration. The assets will be imported/exported into/from their respective folders under /{tenant}/configuration.
+The batch script can also be used for importing and exporting general API Gateway configurations in a flat file representation. The export_payload.json file in each folder under /configuration defines which API Gateway assets belong to this configuration. The assets will be imported/exported into/from their respective folders under /configuration.
 
 | Parameter | README |
 | ------ | ------ |
@@ -465,11 +464,11 @@ The JSON array can include multiple scope definitions.
 
 ## aliases.json configuration of environment-specific alias values
 
-Each API project can include one aliases.json file in the API project root folder specifying aliases used by the API(s) in the API project which should be overwritten with environment-specific values. In addition to that, there can be one global aliases.json file in the /{tenant}/apis root folder for overwriting values of aliases used by APIs in multiple API projects.
+Each API project can include one aliases.json file in the API project root folder specifying aliases used by the API(s) in the API project which should be overwritten with environment-specific values. In addition to that, there can be one global aliases.json file in the /apis root folder for overwriting values of aliases used by APIs in multiple API projects.
 
 For each target environment, the aliases.json files must include JSON objects applicable for the API Gateway Alias Management Service API PUT /alias/{aliasId} request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal.64Fa0Y3xEesvtQKdtApwNA.-1.
 
-In order to avoid conflicts, each alias may only be configured to be overwritten either in the global aliases.json file in the /{tenant}/apis root folder or in the aliases.json files in the API project root folders.
+In order to avoid conflicts, each alias may only be configured to be overwritten either in the global aliases.json file in the /apis root folder or in the aliases.json files in the API project root folders.
 
 Alias names cannot be changed by this functionality.
 
@@ -1014,7 +1013,7 @@ The next common scenario for an API developer is to assert the changes made to t
 
 Each API project must include one Postman test collection under the name APITest.json in its root folder. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's root folder under the name APITest.json.
 
-> Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definition for the central DESIGN environment in the Postman REST client at /{tenant}/environments/config_environment_demo.json.
+> Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definition for the central DESIGN environment in the Postman REST client at /environments/config_environment_demo.json.
 
 | Environment variable | README |
 | ------ | ------ |
@@ -1483,8 +1482,8 @@ All five deployment pipeline templates need the following parameters to be set i
 | Parameter | README |
 | ------ | ------ |
 | api_project | Case-sensitive name of the API project to be propagated |
-| build_environment | Name of the environment definition file in /{tenant}/environments folder for the BUILD environment, e.g., build_environment_demo.json |
-| target_environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, dev_int_environment_demo.json etc. |
+| build_environment | Name of the environment definition file in /environments folder for the BUILD environment, e.g., build_environment_demo.json |
+| target_environment | Name of the environment definition file in /environments folder for the target environment, e.g., config_environment_demo.json, dev_int_environment_demo.json etc. |
 | target_type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
 | test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT and ${{false}} for DESIGN |
 | prepare_condition | Whether to prepare the API Gateway artifacts for the target environment (${{true}} or ${{false}}), should be ${{true}} for all environments |
@@ -1495,7 +1494,7 @@ The export pipeline template needs the following parameters:
 | Parameter | README |
 | ------ | ------ |
 | api_project | Case-sensitive name of the API project to be exported |
-| source_environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json |
+| source_environment | Name of the environment definition file in /environments folder for the source environment, e.g., config_environment_demo.json |
 | source_type | DESIGN |
 | tenant | playground or realworld |
 
@@ -1518,7 +1517,7 @@ The pipeline templates execute the following major steps:
 | Run tests on API Gateway BUILD (if test_condition is ${{true}}) | Executing the APITest.json Postman collection in the API project's root folder |
 | Replace alias values using pipeline variables | Using FileTransform@1 Azure DevOps standard task for replacing the values in all aliases.json files |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
-| Prepare list of global aliases to be updated | Parse aliases.json in /{tenant}/apis root folder using jq |
+| Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
 | Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prepare_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
@@ -1591,7 +1590,7 @@ The configuration pipeline template needs the following parameters to be set in 
 
 | Parameter | README |
 | ------ | ------ |
-| environment | Name of the environment definition file in /{tenant}/environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
+| environment | Name of the environment definition file in /environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type to be configured or updated (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
 | tenant | playground or realworld |
 
@@ -1599,7 +1598,7 @@ The export pipeline template needs the following parameters:
 
 | Parameter | README |
 | ------ | ------ |
-| environment | Name of the environment definition file in /{tenant}/environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
+| environment | Name of the environment definition file in /environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
 | tenant | playground or realworld |
 
@@ -1659,7 +1658,7 @@ The pipeline template needs the following parameters to be set in the calling pi
 
 | Parameter | README |
 | ------ | ------ |
-| environment | Name of the environment definition file in /{tenant}/environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
+| environment | Name of the environment definition file in /environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | type | Case-sensitive name of the environment type (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
 | tenant | playground or realworld |
 
@@ -1710,7 +1709,7 @@ Each variable group holds variable values specific for one API Gateway environme
 | ------ | ------ |
 | agent_pool | The Azure DevOps agent pool to be used for accessing the API Gateway environment. For Microsoft-hosted agents: "Azure Pipelines". Select the right pool for self-hosted agents |
 | agent_pool_vmImage | The VM image for Microsoft-hosted agents in the Azure Pipelines pool. For Microsoft-hosted agents: "$(pool_image)". Leave blank for self-hosted agents |
-| environment | Name of the JSON file in the /{tenant}/environments folder for the API Gateway environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
+| environment | Name of the JSON file in the /environments folder for the API Gateway environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | exporter_user | User for exporting assets from API Gateway, e.g., Exporter. The user must have the "Export assets" privilege |
 | exporter_password | The API Gateway password for the exporter user |
 | importer_user | User for importing assets in API Gateway, e.g., Importer. The user must have the "Import assets" privilege |
@@ -1744,7 +1743,7 @@ These variable groups are used by the deployment pipelines for API projects. The
 
 ## Environment configurations
 
-The environments used in the API Gateway Staging solution are configured in the /{tenant}/environments folder. For each environment (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT), there is a Postman environment definition JSON file, for example:
+The environments used in the API Gateway Staging solution are configured in the /environments folder. For each environment (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT), there is a Postman environment definition JSON file, for example:
 
 ### build_environment_demo.json
 
