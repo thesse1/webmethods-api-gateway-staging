@@ -30,8 +30,6 @@ The promotion APIs that are exposed by API Gateway can be used for the DevOps au
 
 This approach is followed in this solution. Using the API Gateway Archive Service API, API Gateway assets and configuration items are exported from the source stage, stored and managed in Git, and then imported on the target stages.
 
-![GitHub Logo](/images/Overview.png)
-
 In addition to this, the solution includes an automatic validation and adjustment of API Gateway assets for the deployment on different stages. It implements the following "design-time policies":
  - APIs should have separate sets of applications (with different identifiers) on different stages. The correct deployment of these applications should be enforced automatically. All applications are created on a local development environment or the central DESIGN environment with names ending with "_DEV", "_TEST" or "_PROD" indicating their intended usage. All applications should be exported and managed in Git, but only the intended applications should be imported on the respective DEV, TEST and PROD environments.
  - APIs must not contain any local, API-level Log Invocation policies in order to prevent any privacy issues caused by too detailed transaction logging
@@ -39,6 +37,8 @@ In addition to this, the solution includes an automatic validation and adjustmen
  - Text values in other API Gateway assets (like APIs, policies and applications) are set to environment-specific values
  - API mocking is turned off for deployments on TEST and PROD environments
  - API tags are added to all APIs indicating the build ID, the build name and the pipeline name (for auditability)
+
+![GitHub Logo](/images/Overview.png)
 
 This is implemented by validating and manipulating the assets on dedicated BUILD environments: Initially, all assets (including all applications) are imported on the BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values and test values in other assets are overwritten, API tags are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and, if applicable, API mocking turned off) and imported on the target environment.
 
