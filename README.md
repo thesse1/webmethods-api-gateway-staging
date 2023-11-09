@@ -72,30 +72,26 @@ The following API Gateway assets and configurations can be moved across API Gate
 
 ## About this repository
 
-This repository provides assets/scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive Service API (and other API Gateway Service APIs) for automation of the DevOps flow. The repository contains two sets of tenant-specific folders for playground environments and for real-world environments.
+This repository provides assets/scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive Service API (and other API Gateway Service APIs) for automation of the DevOps flow.
 
 The repository has the following top-level folders:
+  - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets
   - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system
-  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
-  - playground: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for playground environments
-  - realworld: Contains environment definitions, APIs, gateway configurations and Azure DevOps variable templates for real-world environments
-  - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
-
-The folders playground and realworld have the following sub-folders:
-  - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets and API tests (Postman collections)
   - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
   - environments: Postman environment definitions for API Gateway DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments
-  - variables: Azure DevOps variable templates with tenant-specific variables or references to tenant-specific variable groups
+  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
+  - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
+  - postman/collections/apitests: Contains Postman collections with API tests for every API project which are executed automatically for every API deployment
 
-The repository content can be committed to the Azure DevOps repository (or GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the Azure DevOps repository (or GitHub repository) can be imported back to a local development environment, to the central DESIGN environment or promoted to DEV, TEST or PROD.
+The repository content can be committed to a Git repository (e.g., the Azure DevOps repository or a GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the repository can be imported back to a local development environment, to the central DESIGN environment or promoted to DEV, TEST or PROD.
 
 ## Develop and test APIs using API Gateway
 
-The most common use case for an API Developer is to develop APIs in their local development environments or the central DESIGN environment and then export them to a flat file representation such that they can be integrated to any VCS. Also, developers need to import their APIs from a VCS (flat file representation) to their local development environments for further updates.
+The most common use case for an API Developer is to develop APIs in their local development environments or the central DESIGN environment, export them to a flat file representation and commit this to Git. Also, developers need to import their APIs from Git to their local development environments for further updates.
 
-The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central DESIGN environment to their VCS local repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
+The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central DESIGN environment to their local Git repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
 
-Alternatively, the developer can also use the export_api_from_config pipeline to export APIs from the central DESIGN environment into the VCS. In addition to that, the export_configuration_from_stage pipeline and the configure_stages pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
+Alternatively, the developer can also use the `Export API project from DESIGN` pipeline to export APIs from the central DESIGN environment into Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
 ## gateway_import_export_utils.bat
 
@@ -1162,7 +1158,7 @@ When queuing a deployment pipeline, you can select the specific commit that shou
 
 ![GitHub Logo](/images/Copy_full_SHA.png)
 
-- Go back to the pipeline and click on ``Run pipeline``. Paste the value from the clipboard into the Commit form entry field
+- Go back to the pipeline and click on `Run pipeline`. Paste the value from the clipboard into the Commit form entry field
 
 ![GitHub Logo](/images/Paste.png)
 
