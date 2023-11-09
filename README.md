@@ -78,7 +78,9 @@ The repository has the following top-level folders:
   - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets
   - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system
   - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
-  - environments: Postman environment definitions for API Gateway DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments
+  - environments: Contains folders with Postman environment definitions for API Gateway DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments. Each folder includes the definitions for one set of environments. The solution comes with two sample sets:
+    - azure-demo-01: Set of API Gateway instances and clusters deployed to an Azure Kubernetes Service cluster
+    - webm_io: Set of webMethods.io API Gateways hosted on the Software AG cloud
   - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
   - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
   - postman/collections/apitests: Contains Postman collections with API tests for every API project which are executed automatically for every API deployment
