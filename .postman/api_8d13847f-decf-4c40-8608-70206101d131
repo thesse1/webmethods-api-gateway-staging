@@ -29,7 +29,6 @@ files[] = {"id":"3558839-1d22c618-28a5-4386-bce7-ea247afbae5d","path":"apitests/
 files[] = {"id":"3558839-6931aa38-1801-4814-a724-eab880d34c71","path":"apitests/playground/postman_echo_jwt/APITest.json","metaData":{}}
 files[] = {"id":"3558839-4f47ffec-ffd9-43ff-aba2-8362cdd4cae9","path":"apitests/playground/postman_echo_oauth2/APITest.json","metaData":{}}
 files[] = {"id":"3558839-7f92ae4a-2246-4784-ad9f-274f2f558ede","path":"apitests/playground/postman_mocking/APITest.json","metaData":{}}
-files[] = {"id":"3558839-84466664-cf95-4d1b-a641-2347de239871","path":"apitests/playground/security_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-770b3642-2663-49ae-b514-ac84a58b1e29","path":"apitests/playground/star_wars/APITest.json","metaData":{}}
 files[] = {"id":"3558839-cdbc7300-353b-468f-99a1-af4d739a50bc","path":"apitests/playground/test_failure/APITest.json","metaData":{}}
 files[] = {"id":"3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439","path":"apitests/security_alias/APITest.json","metaData":{}}
