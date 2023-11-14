@@ -54,7 +54,7 @@ parameters:
     PROD_EXT: BUILD_07
 - name: build_instance
   type: string
-  default: Default
+  default: Default Mapping
 
 stages:
 - template: ${{parameters.template}}

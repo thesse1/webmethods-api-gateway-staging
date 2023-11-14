@@ -9,9 +9,9 @@ resources:
 parameters:
 - name: build_instance
   displayName: Build on which BUILD instance?
-  default: Default
+  default: Default Mapping
   values:
-  - Default
+  - Default Mapping
   - BUILD_01
   - BUILD_02
   - BUILD_03
