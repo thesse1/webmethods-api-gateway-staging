@@ -69,7 +69,7 @@ stages:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{stage}}
     all_stages: ${{parameters.stages}}
-    ${{ if eq(parameters.build_instance, 'Default')}}:
+    ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
       build_instances_mapping: ${{parameters.build_instances_mapping}}
     ${{ else }}:
       build_instances_mapping:
