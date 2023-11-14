@@ -547,7 +547,7 @@
 							"    postman.setNextRequest(\"Get all Strategies\");\r",
 							"} else {\r",
 							"    let applicationsToBeDeleted = applications.filter(function(application, index, arr){ \r",
-							"        return !(application.name.endsWith(\"_TEST\");\r",
+							"        return !(application.name.endsWith(\"_TEST\"));\r",
 							"    });\r",
 							"    if (applicationsToBeDeleted.length === 0) {\r",
 							"        let applicationsToBeUnsuspended = applications.filter(function(application, index, arr){ \r",
