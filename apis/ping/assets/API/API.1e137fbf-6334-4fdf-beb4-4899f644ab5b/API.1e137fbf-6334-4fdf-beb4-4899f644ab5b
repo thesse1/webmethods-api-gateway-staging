@@ -6,9 +6,6 @@
     },
     "basePath" : "",
     "serviceRegistryDisplayName" : "Ping_1.0",
-    "tags" : [ {
-      "name" : "demo"
-    } ],
     "schemes" : [ ],
     "security" : [ ],
     "paths" : {
@@ -93,7 +90,6 @@
       "links" : { },
       "callbacks" : { }
     },
-    "apiTags" : [ "demo" ],
     "type" : "rest"
   },
   "nativeEndpoint" : [ {
