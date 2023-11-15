@@ -3,7 +3,7 @@
   "name" : "PostmanEcho_Routing_Alias",
   "description" : "PostmanEcho alias on DESIGN",
   "type" : "endpoint",
-  "owner" : "Administrator",
+  "owner" : "testuser",
   "endPointURI" : "https://postman-echo.com",
   "connectionTimeout" : 100,
   "readTimeout" : 100,
