@@ -6,6 +6,9 @@
     },
     "basePath" : "",
     "serviceRegistryDisplayName" : "Ping_1.0",
+    "tags" : [ {
+      "name" : "demo"
+    } ],
     "schemes" : [ ],
     "security" : [ ],
     "paths" : {
@@ -90,6 +93,7 @@
       "links" : { },
       "callbacks" : { }
     },
+    "apiTags" : [ "demo" ],
     "type" : "rest"
   },
   "nativeEndpoint" : [ {
@@ -111,7 +115,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-18 12:46:12 GMT",
-  "lastModified" : "2023-09-03 12:26:21 GMT",
+  "lastModified" : "2023-11-15 15:01:08 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
