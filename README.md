@@ -950,7 +950,7 @@ The /configuration folder contains sample configurations for DESIGN, BUILD, DEV_
   "scope": [
     {
       "attributeName": "id",
-      "keyword": "GlobalLogInvocationPolicy|GLOBAL_GATEWAY_ENDPOINT"
+      "keyword": "GlobalLogInvocationPolicy"
     },
     {
       "attributeName": "entityId",

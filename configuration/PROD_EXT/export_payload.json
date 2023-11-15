@@ -5,7 +5,7 @@
   "scope": [
     {
       "attributeName": "id",
-      "keyword": "GlobalLogInvocationPolicy|GLOBAL_GATEWAY_ENDPOINT"
+      "keyword": "GlobalLogInvocationPolicy"
     },
     {
       "attributeName": "entityId",
