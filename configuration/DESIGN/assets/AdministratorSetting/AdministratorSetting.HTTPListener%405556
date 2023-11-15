@@ -1,6 +1,6 @@
 {
   "configId" : "HTTPListener@5556",
-  "userName" : "Administrator",
+  "userName" : "testuser",
   "internalPorts" : { },
   "properties" : {
     "configURL" : "/WmRoot/configHTTP.dsp",
