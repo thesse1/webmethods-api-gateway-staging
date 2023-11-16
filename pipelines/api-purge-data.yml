@@ -1,10 +1,10 @@
 trigger: none
 
-resources:
-  pipelines:
-  - pipeline: trigger-pipeline # Name of the pipeline resource.
-    source: 'Execute JMeter Load Test' # The name of the pipeline referenced by this pipeline resource.
-    trigger: true
+# resources:
+#   pipelines:
+#   - pipeline: trigger-pipeline # Name of the pipeline resource.
+#     source: 'Execute JMeter Load Test' # The name of the pipeline referenced by this pipeline resource.
+#     trigger: true
 
 variables:
 - group: Shutdown_approval
