@@ -55,7 +55,7 @@ stages:
         # - postman_echo_oauth2
         - postman_mocking
         # - multiple_tenants
-        # - security_alias
+        - security_alias
         targets:
         - DEV_EXT
         - TEST_EXT
