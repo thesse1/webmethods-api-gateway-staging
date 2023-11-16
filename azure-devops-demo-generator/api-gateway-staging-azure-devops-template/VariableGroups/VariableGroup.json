@@ -1022,7 +1022,7 @@
       },
       "id": "69",
       "type": "Vsts",
-      "name": "Shutdown_approval",
+      "name": "Log_purging_approval",
       "isShared": false
     },
     {

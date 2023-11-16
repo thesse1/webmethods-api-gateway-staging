@@ -7,7 +7,7 @@ trigger: none
 #     trigger: true
 
 variables:
-- group: Shutdown_approval
+- group: Log_purging_approval
 - group: Project_configuration
 
 stages:
