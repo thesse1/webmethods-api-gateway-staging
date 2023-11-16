@@ -1,5 +1,5 @@
 {
-  "count": 30,
+  "count": 29,
   "value": [
     {
       "variables": {
@@ -1018,17 +1018,6 @@
       "id": "73",
       "type": "Vsts",
       "name": "DESIGN_users",
-      "isShared": false
-    },
-    {
-      "variables": {
-        "foo": {
-          "value": "bar"
-        }
-      },
-      "id": "69",
-      "type": "Vsts",
-      "name": "Log_purging_approval",
       "isShared": false
     },
     {
