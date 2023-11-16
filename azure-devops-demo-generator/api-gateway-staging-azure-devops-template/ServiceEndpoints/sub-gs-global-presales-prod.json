@@ -1,0 +1,23 @@
+{
+  "data": {
+    "environment": "AzureCloud",
+    "subscriptionId": "36a0586d-20d5-4424-b681-13990de0c505",
+    "subscriptionName": "sub-gs-global-presales-prod",
+    "scopeLevel": "Subscription"
+  },
+  "name": "sub-gs-global-presales-prod",
+  "type": "azurerm",
+  "url": "https://management.azure.com/",
+  "authorization": {
+    "parameters": {
+      "tenantId": "d9662eb9-ad98-4e74-a8a2-04ed5d544db6",
+      "servicePrincipalId": "3f802b61-e674-4b13-85ab-67db63c32d5a",
+      "authenticationType": "spnKey",
+      "servicePrincipalKey": "spnKey"
+    },
+    "scheme": "ServicePrincipal"
+  },
+  "isShared": false,
+  "isReady": true,
+  "owner": "Library"
+}

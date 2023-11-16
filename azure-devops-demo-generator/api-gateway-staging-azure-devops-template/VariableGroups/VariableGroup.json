@@ -1,0 +1,1073 @@
+{
+  "count": 30,
+  "value": [
+    {
+      "variables": {
+        "petstore_route": {
+          "value": "https://petstore.swagger.io/v2"
+        },
+        "postman_echo_route": {
+          "value": "https://postman-echo.com"
+        },
+        "stage_name": {
+          "value": "PROD_INT"
+        },
+        "postman_echo_readTimeout": {
+          "value": "200"
+        }
+      },
+      "id": "106",
+      "type": "Vsts",
+      "name": "PROD_INT_value_substitutions",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "petstore_route": {
+          "value": "https://petstore.swagger.io/v2"
+        },
+        "postman_echo_route": {
+          "value": "https://postman-echo.com"
+        },
+        "stage_name": {
+          "value": "TEST_INT"
+        },
+        "postman_echo_readTimeout": {
+          "value": "500"
+        }
+      },
+      "id": "105",
+      "type": "Vsts",
+      "name": "TEST_INT_value_substitutions",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "postman_echo_password_base64": {
+          "value": "Password_for_TEST_EXT"
+        },
+        "postman_echo_readTimeout": {
+          "value": "500"
+        },
+        "postman_echo_route": {
+          "value": "https://postman-echo.com"
+        },
+        "postman_echo_username": {
+          "value": "PostmanEcho_TEST_EXT"
+        },
+        "stage_name": {
+          "value": "TEST_EXT"
+        }
+      },
+      "id": "104",
+      "type": "Vsts",
+      "name": "TEST_EXT_value_substitutions",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "postman_echo_password_base64": {
+          "value": "Password_for_PROD_EXT"
+        },
+        "postman_echo_readTimeout": {
+          "value": "200"
+        },
+        "postman_echo_route": {
+          "value": "https://postman-echo.com"
+        },
+        "postman_echo_username": {
+          "value": "PostmanEcho_PROD_EXT"
+        },
+        "stage_name": {
+          "value": "PROD_EXT"
+        }
+      },
+      "id": "103",
+      "type": "Vsts",
+      "name": "PROD_EXT_value_substitutions",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "postman_echo_password_base64": {
+          "value": "Password_for_DEV_EXT"
+        },
+        "postman_echo_readTimeout": {
+          "value": "1000"
+        },
+        "postman_echo_route": {
+          "value": "https://postman-echo.com"
+        },
+        "postman_echo_username": {
+          "value": "PostmanEcho_DEV_EXT"
+        },
+        "stage_name": {
+          "value": "DEV_EXT"
+        }
+      },
+      "id": "102",
+      "type": "Vsts",
+      "name": "DEV_EXT_value_substitutions",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "petstore_route": {
+          "value": "https://petstore.swagger.io/v2"
+        },
+        "postman_echo_route": {
+          "value": "https://postman-echo.com"
+        },
+        "stage_name": {
+          "value": "DEV_INT"
+        },
+        "postman_echo_readTimeout": {
+          "value": "1000"
+        }
+      },
+      "id": "101",
+      "type": "Vsts",
+      "name": "DEV_INT_value_substitutions",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "BUILD_01": {
+          "value": "Available"
+        },
+        "BUILD_02": {
+          "value": "Available"
+        },
+        "BUILD_03": {
+          "value": "Available"
+        },
+        "BUILD_04": {
+          "value": "Available"
+        },
+        "BUILD_05": {
+          "value": "Available"
+        },
+        "BUILD_06": {
+          "value": "Available"
+        },
+        "BUILD_07": {
+          "value": "Available"
+        }
+      },
+      "id": "100",
+      "type": "Vsts",
+      "name": "Build_instances_availability",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "99",
+      "type": "Vsts",
+      "name": "BUILD_01_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "98",
+      "type": "Vsts",
+      "name": "PROD_EXT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "97",
+      "type": "Vsts",
+      "name": "PROD_INT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "haft_manager_01_password": {
+          "value": "Manage12345!"
+        },
+        "haft_manager_01_user": {
+          "value": "testuser"
+        },
+        "haft_manager_02_password": {
+          "value": "Manage12345!"
+        },
+        "haft_manager_02_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "96",
+      "type": "Vsts",
+      "name": "PROD_EXT_HAFT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "haft_manager_01_password": {
+          "value": "Manage12345!"
+        },
+        "haft_manager_01_user": {
+          "value": "testuser"
+        },
+        "haft_manager_02_password": {
+          "value": "Manage12345!"
+        },
+        "haft_manager_02_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "95",
+      "type": "Vsts",
+      "name": "PROD_INT_HAFT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "94",
+      "type": "Vsts",
+      "name": "BUILD_07_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "93",
+      "type": "Vsts",
+      "name": "BUILD_06_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "92",
+      "type": "Vsts",
+      "name": "BUILD_05_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "91",
+      "type": "Vsts",
+      "name": "BUILD_04_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "89",
+      "type": "Vsts",
+      "name": "BUILD_03_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "88",
+      "type": "Vsts",
+      "name": "BUILD_02_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "87",
+      "type": "Vsts",
+      "name": "BUILD_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "85",
+      "type": "Vsts",
+      "name": "PROD_EXT_01_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "84",
+      "type": "Vsts",
+      "name": "PROD_INT_02_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "build_pool_image": {
+          "value": "ubuntu-latest"
+        },
+        "build_pool_name": {
+          "value": "buildagents"
+        },
+        "pool_image": {
+          "value": "ubuntu-latest"
+        },
+        "pool_name": {
+          "value": "vmsspoolagents-04"
+        },
+        "project_name": {
+          "value": "azure-demo-01"
+        }
+      },
+      "id": "83",
+      "type": "Vsts",
+      "name": "Project_configuration",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "78",
+      "type": "Vsts",
+      "name": "PROD_EXT_02_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "77",
+      "type": "Vsts",
+      "name": "PROD_INT_01_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "76",
+      "type": "Vsts",
+      "name": "TEST_INT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "75",
+      "type": "Vsts",
+      "name": "TEST_EXT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "74",
+      "type": "Vsts",
+      "name": "DEV_INT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "73",
+      "type": "Vsts",
+      "name": "DESIGN_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "69",
+      "type": "Vsts",
+      "name": "Shutdown_approval",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": "manage"
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": "Manage12345!"
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": "Manage12345!"
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": "Manage12345!"
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": "Manage12345!"
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": "Manage12345!"
+        },
+        "purger_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "66",
+      "type": "Vsts",
+      "name": "DEV_EXT_users",
+      "isShared": false
+    }
+  ]
+}

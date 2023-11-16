@@ -1,0 +1,9 @@
+{
+  "parameters": {
+    "gitSource": {
+      "url": "https://dev.azure.com/pswm-inno-api-management/azure-demo/_git/azure-demo"
+    },
+    "serviceEndpointId": "$azure-demo-code$",
+    "deleteServiceEndpointAfterImportIsDone": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "data": {
+    "environment": "AzureCloud",
+    "subscriptionId": "be00adf5-5989-4b87-be22-acd95a279cc5",
+    "subscriptionName": "Visual Studio Professional Subscription",
+    "scopeLevel": "Subscription"
+  },
+  "name": "Visual Studio Professional Subscription THES",
+  "type": "azurerm",
+  "url": "https://management.azure.com/",
+  "authorization": {
+    "parameters": {
+      "tenantId": "d9662eb9-ad98-4e74-a8a2-04ed5d544db6",
+      "servicePrincipalId": "3f802b61-e674-4b13-85ab-67db63c32d5a",
+      "authenticationType": "spnKey",
+      "servicePrincipalKey": "spnKey"
+    },
+    "scheme": "ServicePrincipal"
+  },
+  "isShared": false,
+  "isReady": true,
+  "owner": "Library"
+}

@@ -1,0 +1,17 @@
+{
+  "data": {
+    "acceptUntrustedCerts": ""
+  },
+  "name": "GitHubSAG",
+  "type": "githubenterprise",
+  "url": "https://github.softwareag.com",
+  "authorization": {
+    "parameters": {
+      "apitoken": "apitoken"
+    },
+    "scheme": "Token"
+  },
+  "isShared": false,
+  "isReady": true,
+  "owner": "Library"
+}
