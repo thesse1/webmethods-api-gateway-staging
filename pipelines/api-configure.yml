@@ -3,11 +3,11 @@ trigger: none
   #   include:
   #   - azure-demo
 
-resources:
-  pipelines:
-  - pipeline: trigger-pipeline # Name of the pipeline resource.
-    source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
-    trigger: true
+# resources:
+#   pipelines:
+#   - pipeline: trigger-pipeline # Name of the pipeline resource.
+#     source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
+#     trigger: true
 
 variables:
 - group: Project_configuration
