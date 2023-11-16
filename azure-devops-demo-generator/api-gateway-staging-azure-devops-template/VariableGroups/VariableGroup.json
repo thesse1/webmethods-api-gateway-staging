@@ -814,7 +814,7 @@
           "value": "ubuntu-latest"
         },
         "pool_name": {
-          "value": "vmsspoolagents-04"
+          "value": "Azure Pipelines"
         },
         "project_name": {
           "value": "azure-demo-01"
