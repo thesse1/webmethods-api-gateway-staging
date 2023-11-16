@@ -162,37 +162,43 @@
     {
       "variables": {
         "elasticsearch_password": {
-          "value": "manage"
+          "value": "manage",
+          "isSecret": true
         },
         "elasticsearch_user": {
           "value": "apigw"
         },
         "exporter_password": {
-          "value": "Manage12345!"
+          "value": "Manage12345!",
+          "isSecret": true
         },
         "exporter_user": {
           "value": "testuser"
         },
         "importer_password": {
-          "value": "Manage12345!"
+          "value": "Manage12345!",
+          "isSecret": true
         },
         "importer_user": {
           "value": "testuser"
         },
         "initializer_password": {
-          "value": "Manage12345!"
+          "value": "Manage12345!",
+          "isSecret": true
         },
         "initializer_user": {
           "value": "testuser"
         },
         "preparer_password": {
-          "value": "Manage12345!"
+          "value": "Manage12345!",
+          "isSecret": true
         },
         "preparer_user": {
           "value": "testuser"
         },
         "purger_password": {
-          "value": "Manage12345!"
+          "value": "Manage12345!",
+          "isSecret": true
         },
         "purger_user": {
           "value": "testuser"
