@@ -1,36 +1,12 @@
 {
   "Extensions": [
     {
-      "extensionName": "Azure Load Testing",
-      "link": "<a href='https://marketplace.visualstudio.com/items?itemName=AzloadTest.AzloadTesting' target='_blank'><b>Azure Load Testing</b></a>",
-      "publisherId": "AzloadTest",
-      "extensionId": "AzloadTesting",
-      "publisherName": "Microsoft",
-      "License": "<a href='https://marketplace.visualstudio.com/items?itemName=AzloadTest.AzloadTesting' target='_blank'>License Terms</a>"
-    },
-    {
-      "extensionName": "Azure Pipelines Terraform Tasks",
-      "link": "<a href='https://marketplace.visualstudio.com/items?itemName=charleszipp.azure-pipelines-tasks-terraform' target='_blank'><b>Azure Pipelines Terraform Tasks</b></a>",
-      "publisherId": "charleszipp",
-      "extensionId": "azure-pipelines-tasks-terraform",
-      "publisherName": "Charles Zipp",
-      "License": "<a href='https://marketplace.visualstudio.com/items?itemName=charleszipp.azure-pipelines-tasks-terraform' target='_blank'>License Terms</a>"
-    },
-    {
       "extensionName": "Replace Tokens",
       "link": "<a href='https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens' target='_blank'><b>Replace Tokens</b></a>",
       "publisherId": "qetza",
       "extensionId": "replacetokens",
       "publisherName": "Guillaume Rouchon",
       "License": "<a href='https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens' target='_blank'>License Terms</a>"
-    },
-    {
-      "extensionName": "Code Search",
-      "link": "<a href='https://marketplace.visualstudio.com/items?itemName=ms.vss-code-search' target='_blank'><b>Code Search</b></a>",
-      "publisherId": "ms",
-      "extensionId": "vss-code-search",
-      "publisherName": "Microsoft",
-      "License": "<a href='https://marketplace.visualstudio.com/items?itemName=ms.vss-code-search' target='_blank'>License Terms</a>"
     }
   ]
 }
