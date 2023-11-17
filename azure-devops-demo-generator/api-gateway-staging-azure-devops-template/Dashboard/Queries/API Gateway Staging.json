@@ -1,4 +1,0 @@
-{
-  "name": "API Gateway Staging",
-  "wiql": "select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] from WorkItems where [System.TeamProject] = '$projectId$' and [System.WorkItemType] = 'Issue' and [System.State] <> '' and [System.Title] contains words 'API Gateway Staging:' order by [System.State]"
-}

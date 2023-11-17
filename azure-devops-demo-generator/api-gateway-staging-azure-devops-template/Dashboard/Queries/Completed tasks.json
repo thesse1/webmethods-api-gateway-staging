@@ -1,4 +1,0 @@
-{
-  "name": "Completed tasks",
-  "wiql": "select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] from WorkItems where [System.TeamProject] = '$projectId$' and ([System.State] = 'Closed' or [System.State] = 'Completed' or [System.State] = 'Done')"
-}
