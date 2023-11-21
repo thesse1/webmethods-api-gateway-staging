@@ -605,59 +605,6 @@
 			"response": []
 		},
 		{
-			"name": "14. Sort a collection",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript",
-						"id": "a67b048c-d950-43ac-9059-b50fb1102ed3"
-					}
-				}
-			],
-			"id": "185dddfa-3220-40c7-b142-a69adb16c31a",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Host",
-						"value": "{{api-hostname}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/TripPinService/1/People?$orderby=length(FirstName) desc,UserName",
-					"protocol": "{{api-protocol}}",
-					"host": [
-						"{{api-ip}}"
-					],
-					"port": "{{api-port}}",
-					"path": [
-						"gateway",
-						"TripPinService",
-						"1",
-						"People"
-					],
-					"query": [
-						{
-							"key": "$orderby",
-							"value": "length(FirstName) desc,UserName"
-						}
-					]
-				},
-				"description": "You can use the $orderby system query option to specify ordering criteria. You can use many of the functions usable in $filter in $orderby as well."
-			},
-			"response": []
-		},
-		{
 			"name": "15. Client-side paging",
 			"event": [
 				{
