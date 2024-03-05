@@ -41,8 +41,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/portalGateways",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/portalGateways",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -177,8 +177,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/fetchMetadata?portalGatewayId={{portalId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/fetchMetadata?portalGatewayId={{portalId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -252,8 +252,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/portalGateways/communities?portalGatewayId={{portalId}}&apiId={{apiId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/portalGateways/communities?portalGatewayId={{portalId}}&apiId={{apiId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
@@ -336,8 +336,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/publish?portalGatewayId={{portalId}}",
-					"protocol": "https",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/publish?portalGatewayId={{portalId}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
 					],
