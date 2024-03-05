@@ -35,3 +35,13 @@ steps:
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_type}}'
   env:
     no_proxy: $(target_environment_ip)
+
+- script: |
+    newman run postman/collections/utilities/publish/Republish_from_${{parameters.target_type}}.json --reporters cli \
+    --env-var publisher_user='$(publisher_user)' \
+    --env-var publisher_password='$(publisher_password)' \
+    $(target_environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Republish all APIs from API Gateway ${{parameters.target_type}}'
+  env:
+    no_proxy: $(target_environment_ip)
