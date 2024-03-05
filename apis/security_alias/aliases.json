@@ -1,0 +1,41 @@
+{
+  "postman-echo-security-alias": {
+    "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
+    "DEV_EXT": {
+      "name" : "PostmanEcho_Security_Alias",
+      "description" : "PostmanEcho security alias on DEV_EXT",
+      "type" : "httpTransportSecurityAlias",
+      "owner" : "Administrator",
+      "authType" : "HTTP_BASIC",
+      "authMode" : "NEW",
+      "httpAuthCredentials" : {
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
+      }
+    },
+    "TEST_EXT": {
+      "name" : "PostmanEcho_Security_Alias",
+      "description" : "PostmanEcho security alias on TEST_EXT",
+      "type" : "httpTransportSecurityAlias",
+      "owner" : "Administrator",
+      "authType" : "HTTP_BASIC",
+      "authMode" : "NEW",
+      "httpAuthCredentials" : {
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
+      }
+    },
+    "PROD_EXT": {
+      "name" : "PostmanEcho_Security_Alias",
+      "description" : "PostmanEcho security alias on PROD_EXT",
+      "type" : "httpTransportSecurityAlias",
+      "owner" : "Administrator",
+      "authType" : "HTTP_BASIC",
+      "authMode" : "NEW",
+      "httpAuthCredentials" : {
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
+      }
+    }
+  }
+}

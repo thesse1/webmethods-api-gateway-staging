@@ -1,0 +1,685 @@
+{
+	"info": {
+		"_postman_id": "42172810-894f-48f8-9571-d9ea871e5371",
+		"name": "API Test for petstore-basicauth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-42172810-894f-48f8-9571-d9ea871e5371"
+	},
+	"item": [
+		{
+			"name": "testuser_01",
+			"item": [
+				{
+					"name": "PostPet_01",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Pet ID is 123\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(123);\r",
+									"});\r",
+									"\r",
+									"postman.setNextRequest(\"PostPet_02\"); // workaround because Petstore API is not working correctly"
+								],
+								"type": "text/javascript",
+								"id": "2f979e89-cbad-4761-b9e9-fa289fe28fb0"
+							}
+						}
+					],
+					"id": "c3521992-3607-4314-b7d5-0fd0cf223da7",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_01",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPet_01",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Pet ID is 123\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(123);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "191f7652-da77-4f49-9109-93354c23de97"
+							}
+						}
+					],
+					"id": "66501836-e5da-4dae-9a41-1c18110c0278",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_01",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePet_01",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "138e9358-18ab-4cac-a2b3-bcfd63856bd2"
+							}
+						}
+					],
+					"id": "cbf4d850-023c-4822-a5b1-24597f711740",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_01",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "59562dc1-9d73-4650-88da-a326d272566b"
+		},
+		{
+			"name": "testgroup_02",
+			"item": [
+				{
+					"name": "PostPet_02",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Pet ID is 123\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(123);\r",
+									"});\r",
+									"\r",
+									"postman.setNextRequest(\"PostPet_03\"); // workaround because Petstore API is not working correctly"
+								],
+								"type": "text/javascript",
+								"id": "02441e34-cd71-406a-ba40-0ecad10adcad"
+							}
+						}
+					],
+					"id": "5a73a667-a134-4888-af21-329c65e7167f",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_02",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPet_02",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Pet ID is 123\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(123);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "74a688a5-5840-40b5-9a26-832847b92178"
+							}
+						}
+					],
+					"id": "6ea8b97a-d625-4b3a-90d3-303343ebc36d",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_02",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePet_02",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "1dae2a40-e503-4a33-b07c-11558370efbe"
+							}
+						}
+					],
+					"id": "3f0bfe7e-4826-4fc5-926d-3502fd268638",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_02",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "283ff9d0-cc51-45f2-9e76-b6f7b37e52e0"
+		},
+		{
+			"name": "testteam_03",
+			"item": [
+				{
+					"name": "PostPet_03",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Pet ID is 123\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(123);\r",
+									"});\r",
+									"\r",
+									"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
+								],
+								"type": "text/javascript",
+								"id": "7d920bdb-a3ac-415d-a24b-8bf4f04637cf"
+							}
+						}
+					],
+					"id": "1a1c9ff4-5c2f-452c-8019-5727a3e6004e",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_03",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 123,\r\n    \"category\": {\r\n        \"id\": 2,\r\n        \"name\": \"Dog\"\r\n    },\r\n    \"name\": \"Doggy\",\r\n    \"photoUrls\": [\r\n        \"https://upload.wikimedia.org/wikipedia/commons/0/03/Kurzhaardackel.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"children-friendly\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPet_03",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Pet ID is 123\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(123);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "2a3e3822-043e-4a11-8df1-a97634ee4d1c"
+							}
+						}
+					],
+					"id": "76bc7a79-acb4-4e25-9b56-66be7967b26b",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_03",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePet_03",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "1ddc4cde-8ac9-417c-a95d-216d8cbe95b8"
+							}
+						}
+					],
+					"id": "a8177a2a-2d70-46b3-aa47-02086d744c04",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "testuser_03",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "manage",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Petstore_BasicAuth",
+								"1.0.8",
+								"pet",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "67b3696c-61f7-4656-90f0-fd06fd4de996"
+		}
+	]
+}

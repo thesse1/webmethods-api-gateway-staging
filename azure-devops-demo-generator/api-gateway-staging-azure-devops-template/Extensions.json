@@ -1,0 +1,12 @@
+{
+  "Extensions": [
+    {
+      "extensionName": "Replace Tokens",
+      "link": "<a href='https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens' target='_blank'><b>Replace Tokens</b></a>",
+      "publisherId": "qetza",
+      "extensionId": "replacetokens",
+      "publisherName": "Guillaume Rouchon",
+      "License": "<a href='https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens' target='_blank'>License Terms</a>"
+    }
+  ]
+}

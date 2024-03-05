@@ -1,12 +1,7 @@
-# Pipeline template for apig staging
-
 parameters:
   target_type: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
-
 - bash: |
     if [ -z "$TARGET_TYPE" ]; then
       echo "##vso[task.logissue type=error;]Missing template parameter \"target_type\""
@@ -24,7 +19,7 @@ steps:
       {
         "files": [
           {
-            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_for_${{parameters.target_type}}.zip",
+            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip",
             "target": "$(artifactoryFolder)/"
           }
         ]

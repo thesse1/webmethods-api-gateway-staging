@@ -1,0 +1,7 @@
+{
+  "id" : "oauth2_introspectionEndpoint_a8a8561a-de16-4964-b13a-6061a334fa6c",
+  "pw" : "wGJAge0qSanf7mDh2EYbxg==",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "AnOoD+632vRu2huTNyEPYw==",
+  "iterationCount" : 1
+}

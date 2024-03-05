@@ -1,0 +1,12 @@
+{
+  "children": [
+    {
+      "name": "Sprint 1",
+      "structureType": "iteration",
+      "hasChildren": false
+    }
+  ],
+  "name": "azure-demo",
+  "structureType": "iteration",
+  "hasChildren": true
+}

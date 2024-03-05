@@ -1,0 +1,739 @@
+{
+	"info": {
+		"_postman_id": "b1bde7d1-5016-496f-aa26-3cb576b78121",
+		"name": "Prepare_BUILD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-b1bde7d1-5016-496f-aa26-3cb576b78121"
+	},
+	"item": [
+		{
+			"name": "Get all Applications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a289ddfd-c77a-477c-91a6-82c956ec6a6f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let applications = apiResponse.applications;\r",
+							"if (applications === undefined || applications === null || applications.length === 0) {\r",
+							"    postman.setNextRequest(\"Get all APIs\");\r",
+							"} else {\r",
+							"    pm.globals.set(\"applicationId\", applications[0].id);\r",
+							"\r",
+							"    console.log(\"Delete application\");\r",
+							"    console.log(\"ID: \" + applications[0].id);\r",
+							"    console.log(\"Name: \" + applications[0].name);\r",
+							"    console.log(\"Version: \" + applications[0].version);\r",
+							"\r",
+							"    postman.setNextRequest(\"Delete one Application\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "ddb4a1ff-835c-4d96-8d70-d3aa9d4abec5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/applications",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"applications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Application",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b141b08-746c-41db-bcba-ad7a11f7f488",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Applications\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "2ae2ef68-d700-4e03-b981-5dd648562769",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/applications/{{applicationId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"applications",
+						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all APIs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "270972f4-73c8-415b-9258-febdc2d4c3ba",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apis = JSON.parse(responseBody).apiResponse;\r",
+							"if (apis === undefined || apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
+							"    postman.setNextRequest(\"Get all Scopes\");\r",
+							"} else {\r",
+							"    pm.globals.set(\"apiId\", apis[0].api.id);\r",
+							"    if (apis[0].api.isActive) {\r",
+							"        postman.setNextRequest(\"Deactivate one API\");\r",
+							"        console.log(\"Deactivate and delete API\");\r",
+							"    } else {\r",
+							"        postman.setNextRequest(\"Delete one API\");\r",
+							"        console.log(\"Delete API\");\r",
+							"    }\r",
+							"    console.log(\"ID: \" + apis[0].api.id);\r",
+							"    console.log(\"Name: \" + apis[0].api.apiName);\r",
+							"    console.log(\"Version: \" + apis[0].api.apiVersion);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e65284e4-d3ea-4346-99e3-4f96cfed490f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate one API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8cac60dc-4c30-4324-959e-dfcbca442820",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains apiResponse\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.apiResponse).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains api\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.apiResponse.api).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains isActive\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.apiResponse.api.isActive).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"API is inactive\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.apiResponse.api.isActive).to.be.false;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "855f9931-a13c-49ea-9951-7bfeb3571a8b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}/deactivate",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"{{apiId}}",
+						"deactivate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac62e77f-36d7-4dd3-a419-9c89c379d71b",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all APIs\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4543f337-3bc5-449e-94ba-7e7afb7c54be",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"{{apiId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Scopes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e670b1b-c413-49a7-9667-5263231eba53",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let scopes = JSON.parse(responseBody).scopes;\r",
+							"if (scopes === undefined || scopes === null || scopes.length === 0) {\r",
+							"    postman.setNextRequest(\"Get all Aliases\");\r",
+							"} else {\r",
+							"    pm.globals.set(\"scopeId\", scopes[0].id);\r",
+							"\r",
+							"    console.log(\"Delete scope\");\r",
+							"    console.log(\"ID: \" + scopes[0].id);\r",
+							"    console.log(\"Name: \" + scopes[0].scopeName);\r",
+							"    console.log(\"Description: \" + scopes[0].scopeDescription);\r",
+							"\r",
+							"    postman.setNextRequest(\"Delete one Scope\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c49e731e-d67e-4923-b224-15887fc4eefc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/scopes",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"scopes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Scope",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f053642-f0bf-4a4c-bfb7-b4dcba95dfa6",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Scopes\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "8f564d19-5c50-47f3-8067-d3755762de33",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/scopes/{{scopeId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"scopes",
+						"{{scopeId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Aliases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6e164f2-3d6e-446b-9a28-b0b7d3855890",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"Get all Strategies\");\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let aliases = apiResponse.alias;\r",
+							"// console.log(aliases);\r",
+							"if (aliases === undefined || aliases === null) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    for (i in aliases) {\r",
+							"//        console.log(aliases[i]);\r",
+							"        if (![\"ServiceConsulDefault\",\"EurekaDefault\",\"OKTA\",\"PingFederate\",\"local\"].includes(aliases[i].id)) {\r",
+							"            pm.globals.set(\"aliasId\", aliases[i].id);\r",
+							"\r",
+							"            console.log(\"Delete alias\");\r",
+							"            console.log(\"ID: \" + aliases[i].id);\r",
+							"            console.log(\"Name: \" + aliases[i].name);\r",
+							"            console.log(\"Description: \" + aliases[i].description);\r",
+							"\r",
+							"            postman.setNextRequest(\"Delete one Alias\");\r",
+							"            break;\r",
+							"        }\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "853f52ec-a072-4f42-9518-40340963a9c7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56fc7764-0afb-4183-8add-1459514e5b24",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Aliases\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9da212d8-e649-4f4f-9426-d287fc2a7d00",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/{{aliasId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"{{aliasId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Strategies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "42e8014d-71f5-4b36-aec1-87e0fd16513f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apiResponse=JSON.parse(responseBody);\r",
+							"let strategies = apiResponse.strategies;\r",
+							"if (strategies === undefined || strategies === null || strategies.length === 0) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    pm.globals.set(\"strategyId\", strategies[0].id);\r",
+							"\r",
+							"    console.log(\"Delete strategy\");\r",
+							"    console.log(\"ID: \" + strategies[0].id);\r",
+							"    console.log(\"Name: \" + strategies[0].name);\r",
+							"    console.log(\"Decription: \" + strategies[0].description);\r",
+							"\r",
+							"    postman.setNextRequest(\"Delete one Strategy\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9dd039ac-5cb6-47f4-9f00-ee06442e7191",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/strategies",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Strategy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0e6b59a-047c-4e55-8b32-b898342650b4",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"if (pm.response.code === 204) {\r",
+							"    postman.setNextRequest(\"Get all Strategies\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "68b40fa4-d24b-40e1-9580-3949f50dbe21",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/strategies/{{strategyId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"strategies",
+						"{{strategyId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{preparer_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{preparer_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "54eb9a1e-72c9-4172-bc62-106d4531ca22"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "334181c4-c665-4c90-90fc-eb5f2313fd5a"
+			}
+		}
+	]
+}

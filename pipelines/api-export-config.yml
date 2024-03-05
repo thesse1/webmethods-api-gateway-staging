@@ -1,0 +1,37 @@
+trigger: none
+
+parameters:
+- name: source_instance
+  displayName: Export API Gateway configuration from which API Gateway?
+  type: string
+  values:
+  - DESIGN
+  - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
+  - DEV_INT
+  - DEV_EXT
+  - TEST_INT
+  - TEST_EXT
+  - PROD_INT_01
+  - PROD_INT_02
+  - PROD_EXT_01
+  - PROD_EXT_02
+- name: commitMessage
+  displayName: Message for the commit in Git?
+  type: string
+
+variables:
+- group: Project_configuration
+
+stages:
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-export-config-stages-template.yml
+    parameters:
+      source_instance: ${{parameters.source_instance}}
+      commitMessage: ${{parameters.commitMessage}}

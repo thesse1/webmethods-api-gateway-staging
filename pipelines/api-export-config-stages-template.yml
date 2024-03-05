@@ -1,0 +1,48 @@
+parameters:
+- name: design_stage
+  type: object
+- name: build_stage
+  type: object
+- name: target_stages
+  type: object
+- name: all_stages
+  type: object
+- name: build_instances_mapping
+  type: object
+- name: source_instance
+  type: string
+- name: commitMessage
+  type: string
+
+stages:
+- ${{ each stage in parameters.all_stages }}:
+  - ${{ each instance in stage.instances }}:
+    - ${{ if eq(instance, parameters.source_instance) }}:
+      - stage: ${{instance}}
+        dependsOn: []
+        jobs:
+        - deployment: Export_config_from_API_Gateway_${{instance}}
+          environment: ${{instance}}
+          variables:
+          - group: ${{stage.name}}_users
+          - group: ${{instance}}_users
+          pool:
+            name: '$(pool_name)'
+            vmImage: '$(pool_image)'
+          strategy:
+            runOnce:    #rolling, canary are the other strategies that are supported
+              deploy:
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                  fetchDepth: 0
+                - template: /pipelines/api-export-config-steps-template.yml
+                  parameters:
+                    environment: ${{instance}}_environment.json
+                    type: ${{stage.name}}
+                - template: /pipelines/commit-template.yml
+                  parameters:
+                    commitMessage: ${{parameters.commitMessage}}
+                - bash: echo "##vso[build.addbuildtag]${{instance}}"
+                  displayName: Add build tag

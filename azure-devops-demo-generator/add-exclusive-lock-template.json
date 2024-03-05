@@ -1,0 +1,10 @@
+{
+    "type": {
+        "id": "2ef31ad6-baa0-403a-8b45-2cbc9b4e5563",
+        "name": "ExclusiveLock"
+    },
+    "resource": {
+        "type": "environment",
+        "id": ""
+    }
+}

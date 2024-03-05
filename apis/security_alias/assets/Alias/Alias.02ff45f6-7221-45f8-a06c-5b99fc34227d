@@ -1,0 +1,13 @@
+{
+  "id" : "02ff45f6-7221-45f8-a06c-5b99fc34227d",
+  "name" : "PostmanEcho_Security_Alias",
+  "description" : "PostmanEcho security alias on DESIGN",
+  "type" : "httpTransportSecurityAlias",
+  "owner" : "Administrator",
+  "authType" : "HTTP_BASIC",
+  "authMode" : "NEW",
+  "httpAuthCredentials" : {
+    "userName" : "PostmanEcho_DESIGN",
+    "password" : "KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKio="
+  }
+}

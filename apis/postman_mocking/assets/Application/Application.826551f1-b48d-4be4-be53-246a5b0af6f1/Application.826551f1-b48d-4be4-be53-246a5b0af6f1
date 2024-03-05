@@ -1,0 +1,29 @@
+{
+  "applicationID" : "826551f1-b48d-4be4-be53-246a5b0af6f1",
+  "name" : "PostmanEcho_Mocking_PROD",
+  "description" : "This application should be used on PROD environments",
+  "owner" : "Administrator",
+  "ownerType" : "user",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2021-05-20 10:12:15 GMT",
+  "lastModified" : "2021-06-23 14:48:19 GMT",
+  "lastUpdated" : 1699515786840,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "162f948e-5480-4249-8321-ca2d7a8365b5",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

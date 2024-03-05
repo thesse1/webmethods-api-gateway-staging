@@ -1,0 +1,29 @@
+{
+  "applicationID" : "88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d",
+  "name" : "Petstore_Versioning_App_PROD",
+  "description" : "This application should be used on PROD environment",
+  "owner" : "Administrator",
+  "ownerType" : "user",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2021-04-07 10:36:55 GMT",
+  "lastModified" : "2021-06-23 14:48:55 GMT",
+  "lastUpdated" : 1697019604870,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "100561bd-f333-4477-97a4-d767c8f2d5a8",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

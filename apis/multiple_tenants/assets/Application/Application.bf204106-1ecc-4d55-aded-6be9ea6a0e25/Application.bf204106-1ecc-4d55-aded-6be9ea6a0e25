@@ -1,0 +1,28 @@
+{
+  "applicationID" : "bf204106-1ecc-4d55-aded-6be9ea6a0e25",
+  "name" : "Tenant2_App_TEST",
+  "description" : "This application should be used on TEST environment for testing",
+  "owner" : "Administrator",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "0cd854346b9eda99ad9c064fdeb51bea7c5f230b335c2fc072ed6e754d55838c"
+    }
+  },
+  "creationDate" : "2021-03-12 08:47:28 GMT",
+  "lastModified" : "2021-06-23 14:47:38 GMT",
+  "lastUpdated" : 1624459658116,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : true,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "c246199d-44bc-4253-8396-db33c4d58b8d",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

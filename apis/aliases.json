@@ -1,0 +1,47 @@
+{
+  "postman-echo-routing-alias": {
+    "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
+    "DEV_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on DEV_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 100,
+      "readTimeout" : #{postman_echo_readTimeout}#,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "TEST_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on TEST_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 50,
+      "readTimeout" : #{postman_echo_readTimeout}#,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "PROD_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on PROD_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 20,
+      "readTimeout" : #{postman_echo_readTimeout}#,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    }
+  }
+}

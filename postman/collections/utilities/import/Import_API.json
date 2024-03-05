@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "c8f60e6b-8d23-44dd-820a-93c3dfab2bf4",
+		"name": "Import_API",
+		"description": "This Collection deploys the API to API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-c8f60e6b-8d23-44dd-820a-93c3dfab2bf4"
+	},
+	"item": [
+		{
+			"name": "Get local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "725ed9c2-fd11-4e9d-94e1-2c0a5cf78612",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains alias\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias).to.exist;\r",
+							"});\r",
+							"\r",
+							"let scopesString = pm.variables.get(\"scopes\");\r",
+							"\r",
+							"// console.log(\"scopes Postman variable: \" + scopesString);\r",
+							"\r",
+							"if (scopesString === undefined || scopesString === null || scopesString === \"\") {\r",
+							"    postman.setNextRequest(\"ImportAPI\");\r",
+							"} else {\r",
+							"    let scopes = JSON.parse(pm.variables.get(\"scopes\"));\r",
+							"\r",
+							"//    console.log(\"Parsed scopes Postman variable: \" + JSON.stringify(scopes));\r",
+							"\r",
+							"    if (scopes.length === 0) {\r",
+							"        postman.setNextRequest(\"ImportAPI\");\r",
+							"    } else {\r",
+							"        let alias = JSON.parse(responseBody).alias;\r",
+							"\r",
+							"        alias.scopes = alias.scopes || [];\r",
+							"\r",
+							"        console.log(\"Adding scopes to OAuth2 local Authorization Server alias\");\r",
+							"        console.log(\"Existing scopes: \" + JSON.stringify(alias.scopes));\r",
+							"        console.log(\"Adding scopes: \" + JSON.stringify(scopes));\r",
+							"\r",
+							"        for (var i=0; i<scopes.length; i++) {\r",
+							"            let newscope = scopes[i];\r",
+							"            let index = alias.scopes.findIndex(scope => scope.name === newscope.name);\r",
+							"            if (index === -1) {\r",
+							"                alias.scopes.push(newscope);\r",
+							"            } else {\r",
+							"                alias.scopes[index] = newscope;\r",
+							"            }\r",
+							"        }\r",
+							"\r",
+							"        console.log(\"New scopes: \" + JSON.stringify(alias.scopes));\r",
+							"\r",
+							"        let aliasString = JSON.stringify(alias);\r",
+							"        pm.globals.set(\"alias\", aliasString);\r",
+							"        postman.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "78ad5918-ea0e-4092-8f57-2fb3669003c9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{initializer_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{initializer_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ced43f8b-6806-4927-87eb-f536a47f0fae",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains alias\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains OAuth2 scopes\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.scopes).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"OAuth2 scopes set to: \" + JSON.stringify(pm.response.json().alias.scopes));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "da043104-6ad5-4168-bf4e-0f39ae6e5b4b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{initializer_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{initializer_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{alias}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ImportAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4af49964-4a80-41df-959d-e0a7c9f16065",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3a2527d4-b9a2-40e4-bf3c-2a12ea895113",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{importer_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{importer_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/zip"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "{{file_Loc}}"
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"archive"
+					],
+					"query": [
+						{
+							"key": "overwrite",
+							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

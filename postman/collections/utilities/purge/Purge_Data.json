@@ -1,0 +1,808 @@
+{
+	"info": {
+		"_postman_id": "c70566b3-5db6-4b78-93d9-6a3efd1b605c",
+		"name": "Purge_Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-c70566b3-5db6-4b78-93d9-6a3efd1b605c"
+	},
+	"item": [
+		{
+			"name": "Delete transactionalEvents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c689b276-b8b1-45fd-b387-8edb531fd82a",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6d64d619-de69-4fd0-9bcb-2f1e2f32d865",
+						"exec": [
+							"pm.globals.set(\"olderThan\", \"28d\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "f78373b5-c104-46f9-b0c6-7984244e60b7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=transactionalEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "transactionalEvents"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete monitorEvents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5edf53d3-ba55-4f4c-a0c8-97a086dfe2a3",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "06cfc667-3637-46ec-83e6-e8c9d01f076c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=monitorEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "monitorEvents"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete errorEvents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ece005f1-3b1a-4e7e-8233-bcbead31fe98",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b8e1f503-56c6-40b1-aaac-e1864c631d00",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=errorEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "errorEvents"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete performanceMetrics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a7d37d4-db8b-4303-b7ff-e27e9d096762",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "fa9f2164-59ac-4e54-a069-11df2c4b1238",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=performanceMetrics&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "performanceMetrics"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete threatProtectionEvents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bef5b0f1-f9c5-4b61-941f-aa47fe9f59cb",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "76fced92-d885-4088-80cb-f550f2beda10",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=threatProtectionEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "threatProtectionEvents"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete lifecycleEvents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f68828f-75b0-452a-b967-940424de5634",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "5cd0fb11-8c68-4668-93f4-79d6c1ce3453",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=lifecycleEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "lifecycleEvents"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete policyViolationEvents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94306fb9-da94-42e4-b3b5-217e0f4fb7d8",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "48c1d9cf-42c5-49e1-9cf4-69b29dc56154",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=policyViolationEvents&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "policyViolationEvents"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete applicationlogs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3ad0f2-fbf5-484c-bde6-8035d5a160a4",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "196fd613-d4fc-42f7-9b31-e88fcc8f6463",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=applicationlogs&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "applicationlogs"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete mediatorTraceSpan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82dbcb7c-88f2-4319-bddd-4b5d9ec11b8f",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "d2612e2b-6da6-40e1-b3e2-ea7b7e2d6c85",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=mediatorTraceSpan&objectType=Analytics&until=&olderThan={{olderThan}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "mediatorTraceSpan"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": ""
+						},
+						{
+							"key": "olderThan",
+							"value": "{{olderThan}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete auditlogs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9615dc09-fe94-4ed1-8468-872765e1475a",
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains jobId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.jobId).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Purge job started: \" + pm.response.json().jobId);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c06b4274-1bb5-4e0f-bf1e-ae75e719a939",
+						"exec": [
+							"var year = new Date().getFullYear()-1;\r",
+							"pm.globals.set(\"until\", year + \"-01-01%2000:00:00\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "dea9baf6-6d33-4064-b8ec-b73dd36a76ae",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apitransactions?eventType=auditlogs&objectType=Analytics&until={{until}}&olderThan=",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apitransactions"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "auditlogs"
+						},
+						{
+							"key": "objectType",
+							"value": "Analytics"
+						},
+						{
+							"key": "until",
+							"value": "{{until}}"
+						},
+						{
+							"key": "olderThan",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{purger_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{purger_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "9b4cb496-f0df-44b4-a608-f400268d1094"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "5d6d5bc5-ee29-4dcd-95e7-5ff3784b3d48"
+			}
+		}
+	]
+}

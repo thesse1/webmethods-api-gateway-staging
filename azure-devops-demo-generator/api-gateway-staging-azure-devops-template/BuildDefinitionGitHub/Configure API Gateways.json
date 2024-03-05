@@ -1,0 +1,148 @@
+{
+  "options": [
+    {
+      "enabled": false,
+      "definition": {
+        "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+      },
+      "inputs": {
+        "branchFilters": "[\"+refs/heads/*\"]",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": {
+        "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+      },
+      "inputs": {
+        "workItemType": "Issue",
+        "assignToRequestor": "true",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": {
+        "id": "57578776-4c22-4526-aeb0-86b6da17ee9c"
+      },
+      "inputs": {}
+    }
+  ],
+  "triggers": [
+    {
+      "branchFilters": [],
+      "pathFilters": [],
+      "settingsSourceType": 2,
+      "batchChanges": false,
+      "maxConcurrentBuildsPerBranch": 1,
+      "triggerType": "continuousIntegration"
+    },
+    {
+      "settingsSourceType": 2,
+      "branchFilters": [
+        "+7-use-ado-environments-whenever-accessing-api-gateway-stages"
+      ],
+      "forks": {
+        "enabled": true,
+        "allowSecrets": false,
+        "allowFullAccessToken": false
+      },
+      "pathFilters": [],
+      "requireCommentsForNonTeamMembersOnly": false,
+      "requireCommentsForNonTeamMemberAndNonContributors": false,
+      "isCommentRequiredForPullRequest": false,
+      "pipelineTriggerSettings": {
+        "forkProtectionEnabled": false,
+        "buildsEnabledForForks": false,
+        "enforceJobAuthScopeForForks": false,
+        "enforceNoAccessToSecretsFromForks": false,
+        "isCommentRequiredForPullRequest": false,
+        "requireCommentsForNonTeamMembersOnly": false,
+        "requireCommentsForNonTeamMemberAndNonContributors": false
+      },
+      "triggerType": "pullRequest"
+    }
+  ],
+  "properties": {},
+  "tags": [],
+  "_links": "{}",
+  "comment": "Enable pipeline",
+  "jobAuthorizationScope": "projectCollection",
+  "jobTimeoutInMinutes": 60,
+  "jobCancelTimeoutInMinutes": 5,
+  "badgeEnabled": true,
+  "process": {
+    "yamlFilename": "pipelines/api-configure.yml",
+    "type": 2
+  },
+  "repository": {
+    "properties": {
+      "apiUrl": "https://api.github.com/repos/$username$/webmethods-api-gateway-staging",
+      "branchesUrl": "https://api.github.com/repos/$username$/webmethods-api-gateway-staging/branches",
+      "cloneUrl": "https://github.com/$username$/webmethods-api-gateway-staging.git",
+      "connectedServiceId": "$GitHub_f8b90f81$",
+      "defaultBranch": "main",
+      "fullName": "repository",
+      "hasAdminPermissions": "False",
+      "isFork": "False",
+      "isPrivate": "False",
+      "lastUpdated": "01/19/2023 11:13:04",
+      "manageUrl": "https://github.com/$username$/webmethods-api-gateway-staging",
+      "nodeId": "MDEwOlJlcG9zaXRvcnkzNDg5NzQxMTY=",
+      "ownerId": "20128287",
+      "orgName": "thesse1",
+      "refsUrl": "https://api.github.com/repos/thesse1/webmethods-api-gateway-staging/git/refs",
+      "safeRepository": "thesse1/webmethods-api-gateway-staging",
+      "shortName": "webmethods-api-gateway-staging",
+      "ownerAvatarUrl": "https://avatars.githubusercontent.com/u/20128287?v=4",
+      "archived": "False",
+      "externalId": "348974116",
+      "ownerIsAUser": "True",
+      "checkoutNestedSubmodules": "false",
+      "cleanOptions": "0",
+      "fetchDepth": "1",
+      "gitLfsSupport": "false",
+      "reportBuildStatus": "true",
+      "skipSyncSource": "false",
+      "fetchTags": "true",
+      "labelSourcesFormat": "$(build.buildNumber)",
+      "labelSources": "0"
+    },
+    "id": "$username$/webmethods-api-gateway-staging",
+    "type": "GitHub",
+    "name": "$username$/webmethods-api-gateway-staging",
+    "url": "https://github.com/$username$/webmethods-api-gateway-staging.git",
+    "defaultBranch": "refs/heads/azure-demo",
+    "clean": "true",
+    "checkoutSubmodules": false
+  },
+  "quality": "definition",
+  "authoredBy": "{}",
+  "drafts": [],
+  "queue": {
+    "_links": {
+      "self": {
+        "href": "https://dev.azure.com/pswm-inno-api-management/_apis/build/Queues/54"
+      }
+    },
+    "id": 54,
+    "name": "Azure Pipelines",
+    "url": "https://dev.azure.com/pswm-inno-api-management/_apis/build/Queues/54",
+    "pool": {
+      "id": "",
+      "name": "Azure Pipelines",
+      "isHosted": true
+    }
+  },
+  "id": "",
+  "name": "Configure API Gateways",
+  "url": "",
+  "uri": "",
+  "path": "\\Deploy API Gateway configuration",
+  "type": "build",
+  "queueStatus": "enabled",
+  "revision": 66,
+  "createdDate": "",
+  "project": "{}"
+}

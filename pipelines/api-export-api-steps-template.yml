@@ -1,0 +1,47 @@
+parameters:
+  api_project: ''
+  source_environment: ''
+  source_type: ''
+
+steps:
+- bash: |
+   echo "##vso[task.setvariable variable=source_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+   echo "##vso[task.setvariable variable=source_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/$(project_name)/${{parameters.source_environment}}`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Read and parse API Gateway ${{parameters.source_type}} configuration, extract ip, hostname, port and insecureflag'
+
+- bash: |
+   curl -v $(source_environment_insecureflag) \
+          -d @"apis/${{parameters.api_project}}/export_payload.json" \
+          --output $(Build.BuildId)_export_from_${{parameters.source_type}}.zip \
+          -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
+          --user '$(exporter_user)':'$(exporter_password)' \
+          $(source_environment_protocol)://$(source_environment_hostname):$(source_environment_port)/rest/apigateway/archive
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Export the Deployable from API Gateway ${{parameters.source_type}}'
+  env:
+    no_proxy: $(source_environment_hostname)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
+    artifactName: '${{parameters.source_type}}_${{parameters.api_project}}_export'
+
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.source_type}}.zip'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets'
+    cleanDestinationFolder: true
+    overwriteExistingFiles: false
+    #pathToSevenZipTool: 
+  displayName: 'Extract the flat representation from the API Deployable for API project ${{parameters.api_project}}'
+
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '$(Build.BuildId)_export_from_${{parameters.source_type}}.zip' 
+    #RemoveSourceFolder: # Optional
+  displayName: 'Remove the API Deployable again'

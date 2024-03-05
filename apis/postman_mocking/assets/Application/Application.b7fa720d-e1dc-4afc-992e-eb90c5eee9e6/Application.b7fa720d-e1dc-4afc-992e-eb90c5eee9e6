@@ -1,0 +1,29 @@
+{
+  "applicationID" : "b7fa720d-e1dc-4afc-992e-eb90c5eee9e6",
+  "name" : "PostmanEcho_Mocking_DEV",
+  "description" : "This application should be used on DEV environments for mock testing",
+  "owner" : "Administrator",
+  "ownerType" : "user",
+  "identifiers" : [ ],
+  "contactEmails" : [ ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2021-05-20 10:11:11 GMT",
+  "lastModified" : "2021-06-23 14:48:13 GMT",
+  "lastUpdated" : 1699515787222,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "properties" : { },
+  "isSuspended" : false,
+  "authStrategyIds" : [ ],
+  "primaryNode" : {
+    "hostId" : "162f948e-5480-4249-8321-ca2d7a8365b5",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

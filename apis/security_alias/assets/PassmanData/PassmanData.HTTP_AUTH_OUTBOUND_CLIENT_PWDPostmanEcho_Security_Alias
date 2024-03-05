@@ -1,0 +1,7 @@
+{
+  "id" : "HTTP_AUTH_OUTBOUND_CLIENT_PWDPostmanEcho_Security_Alias",
+  "pw" : "eu2IbWJafe6n8uD2Zps2x0dnnAiLKCws+Z1bHMCFYEc=",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "IyFYvnYj7JBtJwdCtP/9kQ==",
+  "iterationCount" : 1
+}

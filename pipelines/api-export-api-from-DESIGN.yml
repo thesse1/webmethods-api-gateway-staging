@@ -1,0 +1,50 @@
+trigger: none
+
+parameters:
+- name: api_project
+  displayName: Export which API project?
+  type: string
+  values:
+  # - number_conversion
+  - odata_tutorial
+  - ping
+  # - star_wars
+  - petstore
+  - petstore_basicauth
+  - petstore_versioning
+  - postman_echo
+  # - postman_echo_jwt
+  # - postman_echo_oauth2
+  - postman_mocking
+  - multiple_tenants
+  - security_alias
+  - 'other (Please specify below)'
+- name: api_project_other
+  displayName: Export which other API project?
+  type: string
+  default: 'n/a'
+- name: commitMessage
+  displayName: Message for the commit in Git?
+  type: string
+
+variables:
+- group: Project_configuration
+- ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+  - name: api_project
+    value: ${{parameters.api_project}}
+- ${{ else }}:
+  - name: api_project
+    value: ${{parameters.api_project_other}}
+
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
+
+stages:
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-export-api-stages-template.yml
+    parameters:
+      ${{ if ne(parameters.api_project, 'other (Please specify below)') }}:
+        api_project: ${{parameters.api_project}}
+      ${{ else }}:
+        api_project: ${{parameters.api_project_other}}
+      commitMessage: ${{parameters.commitMessage}}

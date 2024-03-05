@@ -1,0 +1,14 @@
+{
+  "id" : "832479dc-4af1-492a-bec8-9473b92449a5",
+  "name" : "Keycloak_provider",
+  "type" : "clientMetadataMapping",
+  "owner" : "Administrator",
+  "providerName" : "Keycloak_provider",
+  "implNames" : {
+    "scope" : "software_id"
+  },
+  "extendedValues" : { },
+  "extendedValuesV2" : [ ],
+  "generateCredentials" : false,
+  "supportedApplicationTypes" : [ "web", "native" ]
+}

@@ -1,0 +1,20 @@
+{
+  "types": [
+    "policy", "url_alias", "proxy_bypass", "administrator_setting"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "GlobalLogInvocationPolicy"
+    },
+    {
+      "attributeName": "entityId",
+      "keyword": "proxyBypass"
+    },
+    {
+      "attributeName": "configId",
+      "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|keystore|settings|extended|HTTPListener@5556"
+    }
+  ],
+  "condition" : "or"
+}

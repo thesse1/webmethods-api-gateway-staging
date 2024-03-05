@@ -1,0 +1,54 @@
+parameters:
+- name: build_stage
+  type: object
+- name: target_stage
+  type: object
+- name: api_project
+  type: string
+- name: deployment_target
+  type: string
+- name: build_instances_mapping
+  type: object
+
+jobs:
+- deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
+  environment: '${{parameters.build_instances_mapping[parameters.deployment_target]}}'
+  variables:
+  - group: ${{parameters.build_stage.name}}_users
+  - group: ${{parameters.build_instances_mapping[parameters.deployment_target]}}_users
+  - ${{ if not(parameters.target_stage.is_design_stage) }}:
+    - group: ${{parameters.deployment_target}}_value_substitutions
+  pool:
+    name: '$(pool_name)'
+    vmImage: '$(pool_image)'
+  strategy:
+    runOnce:    #rolling, canary are the other strategies that are supported
+      deploy:
+        steps:
+        - checkout: self
+          submodules: "true"
+          persistCredentials: "true"
+          fetchDepth: 0
+        - download: none
+        - template: /pipelines/api-build-steps-template.yml
+          parameters:
+            api_project: ${{parameters.api_project}}
+            build_environment: "${{parameters.build_instances_mapping[parameters.deployment_target]}}_environment.json"
+            build_stage_name: ${{parameters.build_stage.name}}
+            build_instance_name: ${{parameters.build_instances_mapping[parameters.deployment_target]}}
+            target_type: ${{parameters.deployment_target}}
+            prepare_condition: ${{true}}
+            test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
+            replace_condition: ${{ not(parameters.target_stage.is_design_stage) }}
+        - template: /pipelines/store-build-template.yml
+          parameters:
+            target_type: ${{parameters.deployment_target}}
+            api_project: ${{parameters.api_project}}
+        - bash: |
+            echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+            echo "##vso[build.addbuildtag]${{parameters.build_instances_mapping[parameters.deployment_target]}}"
+            echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_instances_mapping[parameters.deployment_target]}}"
+          displayName: Add build tags
+        # - template: /pipelines/store-build-artifactory-template.yml
+        #   parameters:
+        #     target_type: $(targetType)

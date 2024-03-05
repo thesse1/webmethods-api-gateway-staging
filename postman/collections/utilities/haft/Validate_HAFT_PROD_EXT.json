@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "0625d153-bc2a-498b-a393-0740b739e34b",
+		"name": "Validate_HAFT_PROD_EXT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-0625d153-bc2a-498b-a393-0740b739e34b"
+	},
+	"item": [
+		{
+			"name": "Get dataspace status on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c23ea6c-6c85-4781-97e5-e08f03a727e7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "45b4c807-e036-4d05-9b10-cce8844492ae",
+						"exec": [
+							"// console.log(\"Waiting one minute for ring forming\");\r",
+							"// setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "d2882696-669c-4e00-b9ad-3473a8588b15",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_01_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_01_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_01}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_01}}://{{ip_01}}:{{port_01}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_01}}",
+					"host": [
+						"{{ip_01}}"
+					],
+					"port": "{{port_01}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace status on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "4e1d62ed-42b6-4251-a1c9-65c03b9036f0"
+					}
+				}
+			],
+			"id": "181b4b7c-9f98-478c-9a45-63291b992a1f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_02_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_02_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname_02}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol_02}}://{{ip_02}}:{{port_02}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol_02}}",
+					"host": [
+						"{{ip_02}}"
+					],
+					"port": "{{port_02}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "8ab674c4-2d00-457b-8c84-9811d31c5c35"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let requests = pm.globals.has('requests') ?  JSON.parse(pm.globals.get('requests')) : [];",
+					"request = {};",
+					"request.method = pm.request.method;",
+					"request.url = pm.request.url;",
+					"request.body = pm.request.body;",
+					"response = {};",
+					"response.status = pm.response.status;",
+					"response.body = pm.response.json();",
+					"requests.push({\"request\": request, \"response\": response});",
+					"pm.globals.set('requests', JSON.stringify(requests));"
+				],
+				"id": "80d340c9-fb48-4c15-84ca-7a96e5f37723"
+			}
+		}
+	]
+}
