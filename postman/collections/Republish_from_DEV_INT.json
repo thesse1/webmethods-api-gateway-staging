@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "8e1445ff-1a02-4d0a-8c46-075f9562be07",
+		"name": "Republish_from_DEV_INT",
+		"description": "This Collection deploys the API to API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-8e1445ff-1a02-4d0a-8c46-075f9562be07"
+	},
+	"item": [
+		{
+			"name": "Get portal ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c842afd-e89a-4d4b-b222-5a24675c6447",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var portalId = jsonData.portalGatewayResponse[0].id;\r",
+							"pm.globals.set(\"portalId\", portalId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7e111034-c6e9-47d9-a514-f5e93f9c9f27",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/portalGateways",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"portalGateways"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all APIs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "112021e7-5556-495b-8096-7fbffbc6061c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apis = JSON.parse(responseBody).apiResponse;\r",
+							"if (apis === undefined || apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiIds = apis.map(api => api.api.id);\r",
+							"    let apiId = apiIds.pop();\r",
+							"    let apiIdsString = JSON.stringify(apiIds);\r",
+							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"    pm.globals.set(\"apiId\", apiId);\r",
+							"    postman.setNextRequest(\"Get API metadata\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "64b3b2a3-bb4b-405c-8825-a3ba5746c005",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get API metadata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c842afd-e89a-4d4b-b222-5a24675c6447",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var gatewayEndpointsList = jsonData.apiResponse.portalGatewayDataEntries.gatewayEndpointsList;\r",
+							"\r",
+							"console.log(gatewayEndpointsList);\r",
+							"\r",
+							"var gatewayEndPoints = gatewayEndpointsList.filter(function (item) {\r",
+							"    return item.status == \"PUBLISHED\";\r",
+							"}).map(function (item) {\r",
+							"    return item.gatewayEndpoint;\r",
+							"});\r",
+							"\r",
+							"console.log(gatewayEndPoints);\r",
+							"\r",
+							"pm.globals.set(\"gatewayEndPoints\", JSON.stringify(gatewayEndPoints));\r",
+							"\r",
+							"if (gatewayEndPoints === undefined || gatewayEndPoints === null || gatewayEndPoints.length === 0) {\r",
+							"    let apiIds = JSON.parse(pm.globals.get(\"apiIds\"));\r",
+							"    if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"        postman.setNextRequest(null);\r",
+							"    } else {\r",
+							"        let apiId = apiIds.pop();\r",
+							"        let apiIdsString = JSON.stringify(apiIds);\r",
+							"        pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"        pm.globals.set(\"apiId\", apiId);\r",
+							"        postman.setNextRequest(\"Get API metadata\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "5be23f45-5a42-48dc-bc20-480c15cce97e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/fetchMetadata?portalGatewayId={{portalId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						":apiId",
+						"fetchMetadata"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "{{portalId}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "apiId",
+							"value": "{{apiId}}",
+							"description": "(Required) API Id for the API to be retrieved"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get communities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c842afd-e89a-4d4b-b222-5a24675c6447",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var communitiesList = jsonData.portalGatewayResponse.communities.portalCommunities;\r",
+							"\r",
+							"console.log(communitiesList);\r",
+							"\r",
+							"var communities = communitiesList.filter(function (item) {\r",
+							"    return item.status == \"PUBLISHED\";\r",
+							"}).map(function (item) {\r",
+							"    return item.id;\r",
+							"});\r",
+							"\r",
+							"console.log(communities);\r",
+							"\r",
+							"pm.globals.set(\"communities\", JSON.stringify(communities));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "deda707b-fe4e-4fb1-97e5-864bd7129427",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/portalGateways/communities?portalGatewayId={{portalId}}&apiId={{apiId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"portalGateways",
+						"communities"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "{{portalId}}"
+						},
+						{
+							"key": "apiId",
+							"value": "{{apiId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7b5e72ca-59dc-497d-ab43-1522be149a08",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let apiIds = JSON.parse(pm.globals.get(\"apiIds\"));\r",
+							"if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiId = apiIds.pop();\r",
+							"    let apiIdsString = JSON.stringify(apiIds);\r",
+							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"    pm.globals.set(\"apiId\", apiId);\r",
+							"    postman.setNextRequest(\"Get API metadata\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "60d54607-ed25-4d54-bf1b-fc602a57f184",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/zip",
+						"disabled": true
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"communities\": {{communities}},\r\n    \"endpoints\": {{gatewayEndPoints}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/publish?portalGatewayId={{portalId}}",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						":apiId",
+						"publish"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "{{portalId}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "apiId",
+							"value": "{{apiId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{publisher_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{publisher_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d15c3307-d6c6-479b-b29a-216d608e77d0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "dfb18680-02a7-4dd3-9d53-42b31ef02612",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,18 +1,18 @@
 {
 	"info": {
-		"_postman_id": "2c54a057-65e2-41a4-bbf2-2e7202ccc3ad",
+		"_postman_id": "7f58c953-6d27-4644-9a14-ea5520a6884d",
 		"name": "Initialize_DEV_INT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-2c54a057-65e2-41a4-bbf2-2e7202ccc3ad"
+		"_uid": "3558839-7f58c953-6d27-4644-9a14-ea5520a6884d"
 	},
 	"item": [
 		{
-			"name": "Put loadbalancer configuration",
+			"name": "Put loadbalancer configuration for publish demo",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "36c7f9d3-9973-4758-92b2-4bcb93a8d151",
+						"id": "8f4d5eec-14e8-41b0-8785-717e8becd1c7",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -49,41 +49,15 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "4d751f4d-d4ca-472c-8ba8-430596ef4013",
+						"id": "bbeeb139-9688-4f4b-8e86-1571624e2e1a",
 						"exec": [
-							"var protocol = pm.variables.get(\"api-protocol\")\r",
-							"var hostname = pm.variables.get(\"api-hostname\")\r",
-							"var port = pm.variables.get(\"api-port\")\r",
-							"var url = protocol+\"://\"+hostname+\":\"+port;\r",
-							"\r",
-							"var httpUrls = [];\r",
-							"var httpsUrls = [];\r",
-							"if (protocol == \"http\")\r",
-							"    httpUrls.push(url);\r",
-							"if (protocol == \"https\")\r",
-							"    httpsUrls.push(url);\r",
-							"\r",
-							"var protocol = pm.variables.get(\"loadbalancer-protocol\")\r",
-							"var hostname = pm.variables.get(\"loadbalancer-hostname\")\r",
-							"var port = pm.variables.get(\"loadbalancer-port\")\r",
-							"var url = protocol+\"://\"+hostname+\":\"+port;\r",
-							"\r",
-							"if (protocol == \"http\")\r",
-							"    httpUrls.push(url);\r",
-							"if (protocol == \"https\")\r",
-							"    httpsUrls.push(url);\r",
-							"\r",
-							"pm.variables.set(\"httpUrls\", JSON.stringify(httpUrls));\r",
-							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
-							"\r",
-							"// console.log(httpUrls);\r",
-							"// console.log(httpsUrls);"
+							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"id": "163aa3e3-30fe-432e-ad18-f6985b8630d7",
+			"id": "fa9f96f3-dfd3-4e78-92a2-bf5bb143b782",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -102,7 +76,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": {{httpsUrls}},\r\n    \"httpUrls\": {{httpUrls}}\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://lb-001:443\",\r\n        \"https://lb-002:443\",\r\n        \"https://lb-003:443\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://lb-001:80\",\r\n        \"http://lb-002:80\",\r\n        \"http://lb-003:80\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,7 +106,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "773ae4f6-29a6-4b70-a8e0-8f075f6b1362",
+						"id": "ec71470e-5131-4eb0-8684-9852c27d209a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -154,7 +128,7 @@
 					}
 				}
 			],
-			"id": "92ac2566-693f-44a5-bd92-7214662eb26e",
+			"id": "073823a5-9774-4d99-9d19-1aafa5e663ec",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -204,7 +178,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e86202ff-06cd-4fd1-948b-46acc6fafbdc",
+						"id": "8de79e08-efd4-49a1-8679-791614d105aa",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -214,7 +188,7 @@
 					}
 				}
 			],
-			"id": "89f34dd6-12cc-4371-9615-808004aff121",
+			"id": "cfa08b7c-d1f8-4b07-926a-f9fe6240941b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -264,7 +238,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b3c2f5ba-f9f4-4bb8-a192-02beaa07569c",
+						"id": "729a6bf6-ff41-4855-abe0-d4303edacd66",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -296,7 +270,7 @@
 					}
 				}
 			],
-			"id": "da20ec5f-0543-47c7-bf20-6ccdbe775688",
+			"id": "f285d761-c263-450c-a81a-dee3b1681122",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -345,7 +319,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d041cfeb-2e04-40f3-9275-29400a337dc6",
+						"id": "5fafa908-7774-4d87-aa91-c035167b6c51",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -384,7 +358,7 @@
 					}
 				}
 			],
-			"id": "bcb5d443-8d1d-4f5c-b52d-f6419cd6d4f8",
+			"id": "cb3132d3-43eb-44b4-aa48-e1d8fb89b12c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -426,6 +400,115 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Put loadbalancer configuration for publish demo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f4d5eec-14e8-41b0-8785-717e8becd1c7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains httpsUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains httpUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.httpUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"HTTP Loadbalancer URL set to: \" + pm.response.json().httpUrls);\r",
+							"\r",
+							"console.log(\"HTTPS Loadbalancer URL set to: \" + pm.response.json().httpsUrls);\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"let elasticsearchHostname = pm.variables.get(\"elasticsearch-hostname\");\r",
+							"if (elasticsearchHostname == null || elasticsearchHostname == undefined) {\r",
+							"    if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
+							"        postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
+							"    } else {\r",
+							"        postman.setNextRequest(\"Update HTTPS_Proxy\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bbeeb139-9688-4f4b-8e86-1571624e2e1a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "d929f543-01ee-4ae6-82c8-f1a2e8cbbc94",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{initializer_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{initializer_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://lb-001:443\",\r\n        \"https://lb-002:443\",\r\n        \"https://lb-003:443\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://lb-001:80\",\r\n        \"http://lb-002:80\",\r\n        \"http://lb-003:80\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"loadBalancer"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -451,7 +534,7 @@
 				"exec": [
 					""
 				],
-				"id": "a0cd802b-f1d7-4deb-96a6-1f6d63797c3e"
+				"id": "3568a625-7b10-4f55-87f5-9a866696c1b7"
 			}
 		},
 		{
@@ -461,7 +544,7 @@
 				"exec": [
 					""
 				],
-				"id": "94803531-84bd-4cae-8be4-944acf6e0299"
+				"id": "7a3649d1-9212-43bd-90b2-d7487d03d57e"
 			}
 		}
 	]
