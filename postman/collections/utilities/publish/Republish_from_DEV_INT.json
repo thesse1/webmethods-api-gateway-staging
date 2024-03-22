@@ -70,7 +70,7 @@
 							"\r",
 							"postman.setNextRequest(null);\r",
 							"\r",
-							"let apis_to_be_published = JSON.parse(pm.globals.get(\"apis_to_be_published\"));\r",
+							"let apis_to_be_published = JSON.parse(pm.variables.get(\"apis_to_be_published\"));\r",
 							"console.log(apis_to_be_published);\r",
 							"let apis = JSON.parse(responseBody).apiResponse;\r",
 							"console.log(apis);\r",
