@@ -9,8 +9,11 @@ parameters:
   replace_condition: ''
 
 steps:
-- bash: tree ~ -J -L ? -P '?' -d --noreport
-  displayName: 'Check if tree is present'
+- bash: echo "##vso[task.setvariable variable=apis_to_be_published]`echo -n { && ls -mQ && echo -n }`"
+  displayName: 'Generate API list as JSON array'
+
+- bash: echo $(apis_to_be_published)
+  displayName: 'DEBUG'
 
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
   displayName: 'Replace tokens with variable values in assets'
