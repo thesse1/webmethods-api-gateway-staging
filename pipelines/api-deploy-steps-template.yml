@@ -41,6 +41,7 @@ steps:
     newman run postman/collections/utilities/publish/Republish_from_${{parameters.target_type}}.json --reporters cli \
     --env-var publisher_user='$(publisher_user)' \
     --env-var publisher_password='$(publisher_password)' \
+    --env-var apis_to_be_published='["1e137fbf-6334-4fdf-beb4-4899f644ab5b"]' \
     -e environments/$(project_name)/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
