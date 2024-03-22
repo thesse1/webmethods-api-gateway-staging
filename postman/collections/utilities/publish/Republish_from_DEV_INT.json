@@ -77,7 +77,7 @@
 							"if (apis === undefined || apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
 							"    postman.setNextRequest(null);\r",
 							"} else {\r",
-							"    let apiIds = apis.map(api => api.api.id).filter(id => apis_to_be_published.includes(id));\r",
+							"    let apiIds = apis.map(api => api.api.id).filter(id => apis_to_be_published.includes(\"API.\" + id));\r",
 							"    console.log(apiIds);\r",
 							"    if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
 							"        postman.setNextRequest(null);\r",
