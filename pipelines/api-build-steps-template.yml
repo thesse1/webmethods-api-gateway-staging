@@ -9,6 +9,9 @@ parameters:
   replace_condition: ''
 
 steps:
+- bash: tree ~ -J -L ? -P '?' -d --noreport
+  displayName: 'Check if tree is present'
+
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
   displayName: 'Replace tokens with variable values in assets'
   inputs:
