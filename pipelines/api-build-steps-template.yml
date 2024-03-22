@@ -9,7 +9,7 @@ parameters:
   replace_condition: ''
 
 steps:
-- bash: echo `echo -n [ && ls -mQ && echo -n ]` > apis_to_be_published.txt
+- bash: echo `echo -n [ && ls -mQ apis/${{parameters.api_project}} && echo -n ]` > apis_to_be_published.txt
   displayName: 'DEBUG'
 
 - bash: echo "##vso[task.setvariable variable=apis_to_be_published]`cat apis_to_be_published.txt`"
