@@ -37,7 +37,7 @@ steps:
   env:
     no_proxy: $(target_environment_ip)
 
-- bash: echo `echo -n [ && ls -mQ apis/${{parameters.api_project}}/assets/API && echo -n ]` > apis_to_be_published.txt
+- bash: echo `echo -n [ && ls -mQ apis/${{parameters.api_project}}/assets/API && echo -n ]` | jq -c . > apis_to_be_published.txt
   displayName: 'Generate API list as JSON array'
 
 - bash: cat apis_to_be_published.txt
