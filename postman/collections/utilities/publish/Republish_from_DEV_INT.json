@@ -70,19 +70,28 @@
 							"\r",
 							"postman.setNextRequest(null);\r",
 							"\r",
+							"let apis_to_be_published = JSON.parse(pm.globals.get(\"apis_to_be_published\"));\r",
+							"console.log(apis_to_be_published);\r",
 							"let apis = JSON.parse(responseBody).apiResponse;\r",
+							"console.log(apis);\r",
 							"if (apis === undefined || apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
 							"    postman.setNextRequest(null);\r",
 							"} else {\r",
-							"    let apiIds = apis.map(api => api.api.id);\r",
-							"    let apiId = apiIds.pop();\r",
-							"    let apiIdsString = JSON.stringify(apiIds);\r",
-							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
-							"    pm.globals.set(\"apiId\", apiId);\r",
-							"    postman.setNextRequest(\"Get API metadata\");\r",
+							"    let apiIds = apis.map(api => api.api.id).filter(id => apis_to_be_published.includes(id));\r",
+							"    console.log(apiIds);\r",
+							"    if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"        postman.setNextRequest(null);\r",
+							"    } else {\r",
+							"        let apiId = apiIds.pop();\r",
+							"        let apiIdsString = JSON.stringify(apiIds);\r",
+							"        pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"        pm.globals.set(\"apiId\", apiId);\r",
+							"        postman.setNextRequest(\"Get API metadata\");\r",
+							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -301,7 +310,8 @@
 							"    postman.setNextRequest(\"Get API metadata\");\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
