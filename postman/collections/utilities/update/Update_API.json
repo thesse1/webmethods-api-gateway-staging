@@ -1,67 +1,66 @@
 {
 	"info": {
+		"_postman_id": "e6a4c6a1-cc54-43cb-addc-e4c7a2383bcc",
 		"name": "Update_API",
 		"description": "This Collection updates an API on API Gateway",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-e6a4c6a1-cc54-43cb-addc-e4c7a2383bcc"
 	},
 	"item": [
 		{
-			"name": "ImportAPI",
+			"name": "ReadAPI",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "3a01dc9a-ee39-488b-9005-2cf85a8ea7e5",
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});"
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let apiResponse = JSON.parse(responseBody).apiResponse;\r",
+							"\r",
+							"console.log(apiResponse);\r",
+							"\r",
+							"let apiName = apiResponse.api.apiName;\r",
+							"let apiVersion = apiResponse.api.apiVersion;\r",
+							"let apiDescription = apiResponse.api.apiDescription;\r",
+							"let isActive = apiResponse.api.isActive;\r",
+							"\r",
+							"pm.globals.set(\"apiName\", apiName);\r",
+							"pm.globals.set(\"apiVersion\", apiVersion);\r",
+							"pm.globals.set(\"apiDescription\", apiDescription);\r",
+							"pm.globals.set(\"isActive\", isActive);\r",
+							"\r",
+							"if (!isActive) {\r",
+							"    postman.setNextRequest(\"UpdateAPI\");\r",
+							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
+			"id": "9fa1b553-384a-45ba-90d9-bcc80174990f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{{importer_password}}",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "{{importer_user}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
+				"method": "GET",
 				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/zip"
-					},
 					{
 						"key": "Host",
 						"value": "{{hostname}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "file",
-					"file": {
-						"src": "{{file_Loc}}"
-					}
-				},
 				"url": {
-					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/archive?overwrite=apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
@@ -70,17 +69,242 @@
 					"path": [
 						"rest",
 						"apigateway",
-						"archive"
+						"apis",
+						"f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeactivateAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a01dc9a-ee39-488b-9005-2cf85a8ea7e5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "7377182c-f6f0-4fb9-b4b4-315df1c04035",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5/deactivate",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5",
+						"deactivate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a01dc9a-ee39-488b-9005-2cf85a8ea7e5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let isActive = pm.globals.get(\"isActive\");\r",
+							"\r",
+							"if (isActive === false) {\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "446bd1bd-3068-4b8d-bed9-902973cdc873",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"apiVersion\": \"{{apiVersion}}\",\r\n    \"url\": \"https://petstore.swagger.io/v2/swagger.json\",\r\n    \"apiName\": \"{{apiName}}\",\r\n    \"apiDescription\": \"{{apiDescription}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5?overwriteTags=null",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"
 					],
 					"query": [
 						{
-							"key": "overwrite",
-							"value": "apis,policies,policyactions,applications,users,groups,accessProfiles,gatewayScopes,aliases"
+							"key": "overwriteTags",
+							"value": "null"
 						}
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "ActivateAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a01dc9a-ee39-488b-9005-2cf85a8ea7e5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "1837e4aa-7c1c-4f02-98ea-558142e5a95f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5/activate",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{updater_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{updater_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "492c9584-3ab6-4cc0-a186-84e43c129074",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a873daba-e22b-4a64-8829-3d370ed16eed",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
