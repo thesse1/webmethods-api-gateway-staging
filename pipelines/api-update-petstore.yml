@@ -79,6 +79,7 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             fetchDepth: 0
+          - bash: printenv | sort
           - template: /pipelines/api-update-steps-template.yml
             parameters:
               api_id: ${{parameters.api_id}}
