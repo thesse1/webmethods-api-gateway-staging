@@ -12,26 +12,26 @@ parameters:
   displayName: Import and export which API project?
   type: string
   default: petstore
-  values:
-  - petstore
 - name: build_instance
   displayName: Build on which BUILD instance?
   type: string
   default: BUILD_01
   values:
   - BUILD_01
+  - BUILD_02
+  - BUILD_03
+  - BUILD_04
+  - BUILD_05
+  - BUILD_06
+  - BUILD_07
 - name: api_id
   displayName: Update which API?
   type: string
   default: f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5
-  values:
-  - f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5
 - name: update_url
   displayName: Update using which URL?
   type: string
   default: https://petstore.swagger.io/v2/swagger.json
-  values:
-  - https://petstore.swagger.io/v2/swagger.json
 
 variables:
 - group: Project_configuration
