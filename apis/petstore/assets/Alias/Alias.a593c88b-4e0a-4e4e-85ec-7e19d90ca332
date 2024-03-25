@@ -4,5 +4,6 @@
   "description" : "Petstore alias on #{stage_name}#",
   "type" : "simple",
   "owner" : "Administrator",
-  "value" : "#{petstore_route}#"
+  "value" : "#{petstore_route}#",
+  "_docType" : "aliases"
 }
