@@ -33,16 +33,16 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
-# - template: /pipelines/api-inject-stages-template.yml
-#   parameters:
-#     template: /pipelines/api-build-and-deploy-stages-template.yml
-#     parameters:
-#       deployment_sets:
-#       - api_projects:
-#         - ${{parameters.api_project}}
-#         targets:
-#         - DESIGN
-#     build_instance: ${{parameters.build_instance}}
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      deployment_sets:
+      - api_projects:
+        - ${{parameters.api_project}}
+        targets:
+        - DESIGN
+    build_instance: ${{parameters.build_instance}}
 
 - stage: DESIGN_Update
   jobs:
