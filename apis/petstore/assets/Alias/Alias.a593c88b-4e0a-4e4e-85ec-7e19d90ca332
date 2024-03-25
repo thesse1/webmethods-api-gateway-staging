@@ -3,7 +3,7 @@
   "name" : "PetStore_Routing_Alias",
   "description" : "Petstore alias on #{stage_name}#",
   "type" : "simple",
-  "owner" : "Administrator",
+  "owner" : "testuser",
   "value" : "#{petstore_route}#",
   "_docType" : "aliases"
 }
