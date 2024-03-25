@@ -5,7 +5,11 @@ resources:
   - pipeline: trigger-pipeline # Name of the pipeline resource.
     source: trigger-pipeline # The name of the pipeline referenced by this pipeline resource.
     project: trigger-project # Required only if the source pipeline is in another project
-    trigger: true # Run app-ci pipeline when any run of security-lib-ci completes
+    trigger: 
+      branches:
+        include: 
+        - republish
+        - main
 
 parameters:
 - name: api_project
