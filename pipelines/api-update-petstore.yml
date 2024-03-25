@@ -40,6 +40,8 @@ parameters:
   displayName: Message for the commit in Git?
   type: string
   default: Update triggered by trigger-pipeline
+  values:
+    - Update triggered by trigger-pipeline
 
 variables:
 - group: Project_configuration
