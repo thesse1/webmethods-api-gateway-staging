@@ -1,0 +1,416 @@
+{
+	"info": {
+		"_postman_id": "84752584-cb36-4b3b-8691-108c802d768c",
+		"name": "Republish_from_DESIGN",
+		"description": "This Collection deploys the API to API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-84752584-cb36-4b3b-8691-108c802d768c"
+	},
+	"item": [
+		{
+			"name": "Get portal ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f42d4dd-205c-49a8-99a4-44f5248ded0d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var portalId = jsonData.portalGatewayResponse[0].id;\r",
+							"pm.globals.set(\"portalId\", portalId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "23e6d79f-6106-46d7-bae7-4ce6641b7584",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/portalGateways",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"portalGateways"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all APIs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "820608f0-5a97-4083-a77f-cd539e40d87b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(null);\r",
+							"\r",
+							"let apis_to_be_published = JSON.parse(pm.variables.get(\"apis_to_be_published\"));\r",
+							"console.log(apis_to_be_published);\r",
+							"let apis = JSON.parse(responseBody).apiResponse;\r",
+							"console.log(apis);\r",
+							"if (apis === undefined || apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiIds = apis.map(api => api.api.id).filter(id => apis_to_be_published.includes(\"API.\" + id));\r",
+							"    console.log(apiIds);\r",
+							"    if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"        postman.setNextRequest(null);\r",
+							"    } else {\r",
+							"        let apiId = apiIds.pop();\r",
+							"        let apiIdsString = JSON.stringify(apiIds);\r",
+							"        pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"        pm.globals.set(\"apiId\", apiId);\r",
+							"        postman.setNextRequest(\"Get API metadata\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2ff1660a-aef1-491c-93bb-8634504f4264",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get API metadata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f4c9159-8eb4-43e1-ba59-262b6dd6c174",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var gatewayEndpointsList = jsonData.apiResponse.portalGatewayDataEntries.gatewayEndpointsList;\r",
+							"\r",
+							"console.log(gatewayEndpointsList);\r",
+							"\r",
+							"var gatewayEndPoints = gatewayEndpointsList.filter(function (item) {\r",
+							"    return item.status == \"PUBLISHED\";\r",
+							"}).map(function (item) {\r",
+							"    return item.gatewayEndpoint;\r",
+							"});\r",
+							"\r",
+							"console.log(gatewayEndPoints);\r",
+							"\r",
+							"pm.globals.set(\"gatewayEndPoints\", JSON.stringify(gatewayEndPoints));\r",
+							"\r",
+							"if (gatewayEndPoints === undefined || gatewayEndPoints === null || gatewayEndPoints.length === 0) {\r",
+							"    let apiIds = JSON.parse(pm.globals.get(\"apiIds\"));\r",
+							"    if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"        postman.setNextRequest(null);\r",
+							"    } else {\r",
+							"        let apiId = apiIds.pop();\r",
+							"        let apiIdsString = JSON.stringify(apiIds);\r",
+							"        pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"        pm.globals.set(\"apiId\", apiId);\r",
+							"        postman.setNextRequest(\"Get API metadata\");\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "41f1875c-79e5-436b-a3f2-3dc13fe679bf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/fetchMetadata?portalGatewayId={{portalId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						":apiId",
+						"fetchMetadata"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "{{portalId}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "apiId",
+							"value": "{{apiId}}",
+							"description": "(Required) API Id for the API to be retrieved"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get communities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b11eb0ad-45cb-410e-9903-da8d97d35b1b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"var communitiesList = jsonData.portalGatewayResponse.communities.portalCommunities;\r",
+							"\r",
+							"console.log(communitiesList);\r",
+							"\r",
+							"var communities = communitiesList.filter(function (item) {\r",
+							"    return item.status == \"PUBLISHED\";\r",
+							"}).map(function (item) {\r",
+							"    return item.id;\r",
+							"});\r",
+							"\r",
+							"console.log(communities);\r",
+							"\r",
+							"pm.globals.set(\"communities\", JSON.stringify(communities));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "64397c20-578c-4ea1-94e3-7f20187bc60f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/portalGateways/communities?portalGatewayId={{portalId}}&apiId={{apiId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"portalGateways",
+						"communities"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "{{portalId}}"
+						},
+						{
+							"key": "apiId",
+							"value": "{{apiId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56050328-2b42-4e43-b901-a86affde1913",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let apiIds = JSON.parse(pm.globals.get(\"apiIds\"));\r",
+							"if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiId = apiIds.pop();\r",
+							"    let apiIdsString = JSON.stringify(apiIds);\r",
+							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"    pm.globals.set(\"apiId\", apiId);\r",
+							"    postman.setNextRequest(\"Get API metadata\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2bb0dec9-a2ca-49d1-991b-30fe01637cdf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/zip",
+						"disabled": true
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"communities\": {{communities}},\r\n    \"endpoints\": {{gatewayEndPoints}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/:apiId/publish?portalGatewayId={{portalId}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						":apiId",
+						"publish"
+					],
+					"query": [
+						{
+							"key": "portalGatewayId",
+							"value": "{{portalId}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "apiId",
+							"value": "{{apiId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{publisher_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{publisher_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "76c30cac-7c6a-4946-9d08-19b792c60d11",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6bf8c2be-b199-4c63-8eed-b0b49a79372f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
