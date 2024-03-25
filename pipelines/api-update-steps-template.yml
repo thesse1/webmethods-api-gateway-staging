@@ -17,8 +17,8 @@ steps:
     newman run postman/collections/utilities/update/Update_API.json --reporters cli \
     --env-var updater_user='$(updater_user)' \
     --env-var updater_password='$(updater_password)' \
-    --env-var apiId='$(api_id)' \
-    --env-var updateUrl='$(update_url)' \
+    --env-var apiId='${{parameters.api_id}}' \
+    --env-var updateUrl='${{parameters.update_url}}' \
     -e environments/$(project_name)/DESIGN_environment.json \
     $(design_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
