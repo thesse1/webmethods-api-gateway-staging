@@ -6,10 +6,6 @@ resources:
     source: trigger-pipeline # The name of the pipeline referenced by this pipeline resource.
     project: trigger-project # Required only if the source pipeline is in another project
     trigger: true
-      # branches:
-      #   include: 
-      #   - republish
-      #   - main
 
 parameters:
 - name: api_project
@@ -36,12 +32,6 @@ parameters:
   default: https://petstore.swagger.io/v2/swagger.json
   values:
   - https://petstore.swagger.io/v2/swagger.json
-- name: commitMessage
-  displayName: Message for the commit in Git?
-  type: string
-  default: Update triggered by trigger-pipeline
-  values:
-    - Update triggered by trigger-pipeline
 
 variables:
 - group: Project_configuration
@@ -79,7 +69,8 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             fetchDepth: 0
-          - bash: printenv | sort
+          - bash: printenv | grep RESOURCES_PIPELINE_ | sort
+            displayName: Print pipeline resource variables
           - template: /pipelines/api-update-steps-template.yml
             parameters:
               api_id: ${{parameters.api_id}}
@@ -90,4 +81,4 @@ stages:
     template: /pipelines/api-export-api-stages-template.yml
     parameters:
       api_project: ${{parameters.api_project}}
-      commitMessage: ${{parameters.commitMessage}}
+      commitMessage: Update ${{parameters.api_project}} API triggered by run $(resources.pipeline.trigger-pipeline.runName) of pipeline $(resources.pipeline.trigger-pipeline.pipelineName)
