@@ -1,0 +1,27 @@
+parameters:
+  api_id: ''
+  update_url: ''
+
+steps:
+- bash: |
+   echo "##vso[task.setvariable variable=design_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/$(project_name)/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/$(project_name)/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/$(project_name)/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/$(project_name)/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/$(project_name)/DESIGN_environment.json`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Read and parse API Gateway ${{parameters.build_instance_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
+
+- script: |
+    newman run postman/collections/utilities/update/Update_API.json --reporters cli \
+    --env-var updater_user='$(updater_user)' \
+    --env-var updater_password='$(updater_password)' \
+    --env-var apiId='$(api_id)' \
+    --env-var updateUrl='$(update_url)' \
+    -e environments/$(project_name)/DESIGN \
+    $(design_environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Update API on API Gateway DESIGN'
+  env:
+    no_proxy: $(design_environment_ip)

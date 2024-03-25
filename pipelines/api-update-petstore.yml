@@ -1,0 +1,74 @@
+trigger: none
+
+parameters:
+- name: api_project
+  displayName: Import and export which API project?
+  type: string
+  values:
+  - petstore
+- name: build_instance
+  displayName: Build on which BUILD instance?
+  default: BUILD_01
+  values:
+  - BUILD_01
+- name: api_id
+  displayName: Update which API?
+  type: string
+  values:
+  - f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5
+- name: update_url
+  displayName: Update using which URL?
+  type: string
+  values:
+  - https://petstore.swagger.io/v2/swagger.json
+- name: commitMessage
+  displayName: Message for the commit in Git?
+  type: string
+
+variables:
+- group: Project_configuration
+- name: api_project
+  value: ${{parameters.api_project}}
+
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
+
+stages:
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-build-and-deploy-stages-template.yml
+    parameters:
+      deployment_sets:
+      - api_projects:
+        - ${{parameters.api_project}}
+        targets:
+        - DESIGN
+    build_instance: ${{parameters.build_instance}}
+
+- stage: Update API
+  jobs:
+  - deployment: Update_API_on_API_Gateway_DESIGN
+    environment: DESIGN
+    variables:
+    - group: DESIGN_users
+    pool:
+      name: '$(pool_name)'
+      vmImage: '$(pool_image)'
+    strategy:
+      runOnce:    #rolling, canary are the other strategies that are supported
+        deploy:
+          steps:
+          - checkout: self
+            submodules: "true"
+            persistCredentials: "true"
+            fetchDepth: 0
+          - template: /pipelines/api-update-steps-template.yml
+            parameters:
+              api_id: ${{parameters.api_id}}
+              update_url: ${{parameters.update_url}}
+
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-export-api-stages-template.yml
+    parameters:
+      api_project: ${{parameters.api_project}}
+      commitMessage: ${{parameters.commitMessage}}
