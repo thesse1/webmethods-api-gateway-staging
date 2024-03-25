@@ -19,7 +19,7 @@ steps:
     --env-var updater_password='$(updater_password)' \
     --env-var apiId='$(api_id)' \
     --env-var updateUrl='$(update_url)' \
-    -e environments/$(project_name)/DESIGN \
+    -e environments/$(project_name)/DESIGN_environment.json \
     $(design_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Update API on API Gateway DESIGN'
