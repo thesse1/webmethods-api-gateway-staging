@@ -37,6 +37,7 @@ stages:
                   submodules: "true"
                   persistCredentials: "true"
                   fetchDepth: 0
+                - download: none
                 - template: /pipelines/api-export-config-steps-template.yml
                   parameters:
                     environment: ${{instance}}_environment.json

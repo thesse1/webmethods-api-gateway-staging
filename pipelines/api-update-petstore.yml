@@ -69,6 +69,7 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             fetchDepth: 0
+          - download: none
           - bash: printenv | grep RESOURCES_PIPELINE_ | sort
             displayName: Print pipeline resource variables
           - template: /pipelines/api-update-steps-template.yml

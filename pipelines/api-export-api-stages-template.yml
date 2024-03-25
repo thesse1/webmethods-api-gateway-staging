@@ -33,6 +33,7 @@ stages:
             persistCredentials: "true"
             clean: "true"
             fetchDepth: 0
+          - download: none
           - template: /pipelines/api-export-api-steps-template.yml
             parameters:
               api_project: ${{parameters.api_project}}
