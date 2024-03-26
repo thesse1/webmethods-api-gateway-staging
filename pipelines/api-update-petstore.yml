@@ -12,18 +12,6 @@ parameters:
   displayName: Import and export which API project?
   type: string
   default: petstore
-- name: build_instance
-  displayName: Build on which BUILD instance?
-  type: string
-  default: BUILD_01
-  values:
-  - BUILD_01
-  - BUILD_02
-  - BUILD_03
-  - BUILD_04
-  - BUILD_05
-  - BUILD_06
-  - BUILD_07
 - name: api_id
   displayName: Update which API?
   type: string
@@ -41,45 +29,8 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
+- template: /pipelines/api-update-stages-template.yml
   parameters:
-    template: /pipelines/api-build-and-deploy-stages-template.yml
-    parameters:
-      deployment_sets:
-      - api_projects:
-        - ${{parameters.api_project}}
-        targets:
-        - DESIGN
-    build_instance: ${{parameters.build_instance}}
-
-- stage: Update_${{parameters.api_project}}_on_DESIGN
-  jobs:
-  - deployment: Update_API_on_API_Gateway_DESIGN
-    environment: DESIGN
-    variables:
-    - group: DESIGN_users
-    pool:
-      name: '$(pool_name)'
-      vmImage: '$(pool_image)'
-    strategy:
-      runOnce:    #rolling, canary are the other strategies that are supported
-        deploy:
-          steps:
-          - checkout: self
-            submodules: "true"
-            persistCredentials: "true"
-            fetchDepth: 0
-          - download: none
-          - bash: printenv | grep RESOURCES_PIPELINE_ | sort
-            displayName: Print pipeline resource variables
-          - template: /pipelines/api-update-steps-template.yml
-            parameters:
-              api_id: ${{parameters.api_id}}
-              update_url: ${{parameters.update_url}}
-
-- template: /pipelines/api-inject-stages-template.yml
-  parameters:
-    template: /pipelines/api-export-api-stages-template.yml
-    parameters:
-      api_project: ${{parameters.api_project}}
-      commitMessage: Update ${{parameters.api_project}} API triggered by run $(resources.pipeline.trigger-pipeline.runName) of pipeline $(resources.pipeline.trigger-pipeline.pipelineName)
+    api_project: ${{parameters.api_project}}
+    api_id: ${{parameters.api_id}}
+    update_url: ${{parameters.update_url}}
