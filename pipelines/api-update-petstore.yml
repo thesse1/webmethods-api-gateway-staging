@@ -2,7 +2,7 @@ trigger: none
 
 resources:
   pipelines:
-  - pipeline: trigger # Name of the pipeline resource.
+  - pipeline: trigger-pipeline-in-trigger-project # Name of the pipeline resource.
     source: trigger-pipeline # The name of the pipeline referenced by this pipeline resource.
     project: trigger-project # Required only if the source pipeline is in another project
     trigger: true
