@@ -177,7 +177,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"apiVersion\": \"{{apiVersion}}\",\r\n    \"url\": \"{{updateUrl}}\",\r\n    \"apiName\": \"{{apiName}}\",\r\n    \"apiDescription\": \"{{apiDescription}}\"\r\n}",
+					"raw": "{\r\n    \"apiVersion\": \"{{apiVersion}}\",\r\n    \"url\": \"{{updateUrl}}\",\r\n    \"apiName\": \"{{apiName}}\",\r\n    \"apiDescription\": \"{{apiDescription}}\",\r\n    \"authorizationValue\": {\r\n        \"type\":\"header\",\r\n        \"keyName\":\"Authorization\",\r\n        \"value\":\"Basic {{updateCredentials}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
