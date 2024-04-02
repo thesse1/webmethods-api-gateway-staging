@@ -35,7 +35,7 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             fetchDepth: 0
-          # - download: none
+          - download: petstore_swagger_updated.json
           - bash: printenv | grep RESOURCES_PIPELINE_ | sort
             displayName: Print pipeline resource variables
           - bash: |
