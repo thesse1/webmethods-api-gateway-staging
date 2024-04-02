@@ -396,7 +396,6 @@
           "description" : "Returns a map of status codes to quantities",
           "operationId" : "getInventory",
           "produces" : [ "application/json" ],
-          "parameters" : [ ],
           "responses" : {
             "200" : {
               "description" : "successful operation",
@@ -665,7 +664,6 @@
           "description" : "",
           "operationId" : "logoutUser",
           "produces" : [ "application/json", "application/xml" ],
-          "parameters" : [ ],
           "responses" : {
             "default" : {
               "description" : "successful operation"
@@ -1111,7 +1109,7 @@
   "apiDescription" : "This is a sample server Petstore server on #{stage_name}#.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
   "maturityState" : "Experimental",
   "apiGroups" : [ "Internal" ],
-  "isActive" : true,
+  "isActive" : false,
   "type" : "REST",
   "owner" : "Administrator",
   "policies" : [ "479e023e-526e-4bd7-a423-fbf092368e13" ],
@@ -1122,7 +1120,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-17 07:22:07 GMT",
-  "lastModified" : "2024-04-02 11:14:09 GMT",
+  "lastModified" : "2024-04-02 15:59:44 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5",
