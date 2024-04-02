@@ -43,10 +43,10 @@ stages:
             displayName: Print pipeline resource variables
           - bash: |
               echo "Directory:"
-              ls -l
+              ls -l $(Pipeline.Workspace)
               echo
               echo "Swagger:"
-              cat petstore_swagger_updated.json
+              cat $(Pipeline.Workspace)/petstore_swagger_updated.json
           - template: /pipelines/api-update-steps-template.yml
             parameters:
               api_id: ${{parameters.api_id}}
