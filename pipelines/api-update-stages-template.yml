@@ -35,9 +35,18 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             fetchDepth: 0
-          - download: none
+          # - download: none
           - bash: printenv | grep RESOURCES_PIPELINE_ | sort
             displayName: Print pipeline resource variables
+          - bash: |
+              echo "Variable foo:"
+              echo $(foo)
+              echo
+              echo "Directory:"
+              ls -l
+              echo
+              echo "Swagger:"
+              cat petstore_swagger_updated.json
           - template: /pipelines/api-update-steps-template.yml
             parameters:
               api_id: ${{parameters.api_id}}
