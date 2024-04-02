@@ -5,6 +5,8 @@ parameters:
   type: string
 - name: update_url
   type: string
+- name: update_username
+- name: update_password
 
 stages:
 # - template: /pipelines/api-inject-stages-template.yml
@@ -51,6 +53,8 @@ stages:
             parameters:
               api_id: ${{parameters.api_id}}
               update_url: ${{parameters.update_url}}
+              update_username: ${{parameters.update_username}}
+              update_password: ${{parameters.update_password}}
 
 - template: /pipelines/api-inject-stages-template.yml
   parameters:

@@ -20,6 +20,8 @@ parameters:
   displayName: Update using which URL?
   type: string
   default: https://petstore.swagger.io/v2/swagger.json
+- name: update_username
+- name: update_password
 
 variables:
 - group: Project_configuration
@@ -34,3 +36,5 @@ stages:
     api_project: ${{parameters.api_project}}
     api_id: ${{parameters.api_id}}
     update_url: ${{parameters.update_url}}
+    update_username: ${{parameters.update_username}}
+    update_password: ${{parameters.update_password}}
