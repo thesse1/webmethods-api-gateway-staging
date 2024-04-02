@@ -149,7 +149,6 @@
 							"});\r",
 							"\r",
 							"console.log(pm.request.body);\r",
-							"\r",
 							"console.log(pm.response.text());\r",
 							"\r",
 							"let isActive = pm.globals.get(\"isActive\");\r",
