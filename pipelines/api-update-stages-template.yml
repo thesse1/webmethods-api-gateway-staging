@@ -37,7 +37,8 @@ stages:
             submodules: "true"
             persistCredentials: "true"
             fetchDepth: 0
-          - download: trigger-pipeline-in-trigger-project
+          - download: none
+          # - download: trigger-pipeline-in-trigger-project
           - bash: printenv | grep RESOURCES_PIPELINE_ | sort
             displayName: Print pipeline resource variables
           - bash: |
