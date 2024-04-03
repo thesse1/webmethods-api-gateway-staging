@@ -137,7 +137,7 @@
 			"response": []
 		},
 		{
-			"name": "UpdateAPI",
+			"name": "UpdateAPI_URL",
 			"event": [
 				{
 					"listen": "test",
@@ -181,6 +181,101 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"apiVersion\": \"{{apiVersion}}\",\r\n    \"url\": \"{{updateUrl}}\",\r\n    \"apiName\": \"{{apiName}}\",\r\n    \"apiDescription\": \"{{apiDescription}}\",\r\n    \"authorizationValue\": {\r\n        \"type\":\"header\",\r\n        \"keyName\":\"Authorization\",\r\n        \"value\":\"Basic {{updateCredentials}}\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}?overwriteTags=null",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"{{apiId}}"
+					],
+					"query": [
+						{
+							"key": "overwriteTags",
+							"value": "null"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateAPI_File",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a01dc9a-ee39-488b-9005-2cf85a8ea7e5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// console.log(pm.request.body);\r",
+							"console.log(pm.response.text());\r",
+							"\r",
+							"let isActive = pm.globals.get(\"isActive\");\r",
+							"\r",
+							"if (isActive === false) {\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "104bb25d-d92a-43cd-88c0-01ab7c29f198",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "apiVersion",
+							"value": "{{apiVersion}}",
+							"type": "text"
+						},
+						{
+							"key": "apiName",
+							"value": "{{apiName}}",
+							"type": "text"
+						},
+						{
+							"key": "apiDescription",
+							"value": "{{apiDescription}}",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/THES/OneDrive - Software AG/Documents/SEW/petstore_swagger.json"
+						}
+					],
 					"options": {
 						"raw": {
 							"language": "json"
