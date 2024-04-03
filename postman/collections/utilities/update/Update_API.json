@@ -25,7 +25,7 @@
 							"\r",
 							"let apiName = apiResponse.api.apiName;\r",
 							"let apiVersion = apiResponse.api.apiVersion;\r",
-							"let apiDescription = apiResponse.api.apiDescription;\r",
+							"let apiDescription = apiResponse.api.apiDescription.trim();\r",
 							"let isActive = apiResponse.api.isActive;\r",
 							"\r",
 							"pm.globals.set(\"apiName\", apiName);\r",
