@@ -273,7 +273,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/THES/OneDrive - Software AG/Documents/SEW/petstore_swagger.json"
+							"src": "{{updateFile}}"
 						}
 					],
 					"options": {
