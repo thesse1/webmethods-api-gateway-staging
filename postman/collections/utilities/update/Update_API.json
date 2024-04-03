@@ -33,8 +33,10 @@
 							"pm.globals.set(\"apiDescription\", apiDescription);\r",
 							"pm.globals.set(\"isActive\", isActive);\r",
 							"\r",
+							"let updateType = pm.variables.get(\"updateType\");\r",
+							"\r",
 							"if (!isActive) {\r",
-							"    postman.setNextRequest(\"UpdateAPI\");\r",
+							"    postman.setNextRequest(updateType);\r",
 							"}"
 						],
 						"type": "text/javascript",
@@ -86,7 +88,11 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"let updateType = pm.variables.get(\"updateType\");\r",
+							"\r",
+							"postman.setNextRequest(updateType);"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -148,13 +154,15 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"// console.log(pm.request.body);\r",
+							"console.log(pm.request.body);\r",
 							"console.log(pm.response.text());\r",
 							"\r",
 							"let isActive = pm.globals.get(\"isActive\");\r",
 							"\r",
 							"if (isActive === false) {\r",
 							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    postman.setNextRequest(\"ActivateAPI\");\r",
 							"}"
 						],
 						"type": "text/javascript",
