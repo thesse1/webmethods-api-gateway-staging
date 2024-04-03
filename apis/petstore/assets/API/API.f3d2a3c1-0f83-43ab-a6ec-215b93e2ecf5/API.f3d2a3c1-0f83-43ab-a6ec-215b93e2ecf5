@@ -22,13 +22,6 @@
         "description" : "Find out more",
         "url" : "http://swagger.io"
       }
-    }, {
-      "name" : "user",
-      "description" : "Operations about user",
-      "externalDocs" : {
-        "description" : "Find out more about our store",
-        "url" : "http://swagger.io"
-      }
     } ],
     "schemes" : [ "https", "http" ],
     "security" : [ ],
@@ -155,8 +148,7 @@
               "description" : "User not found"
             }
           },
-          "enabled" : true,
-          "scopes" : [ ]
+          "enabled" : true
         },
         "put" : {
           "tags" : [ "user" ],
@@ -185,7 +177,6 @@
             }
           },
           "enabled" : true,
-          "scopes" : [ ],
           "requestBody" : {
             "description" : "Updated user object",
             "content" : {
@@ -223,11 +214,9 @@
               "description" : "User not found"
             }
           },
-          "enabled" : true,
-          "scopes" : [ ]
+          "enabled" : true
         },
         "parameters" : [ ],
-        "scopes" : [ ],
         "enabled" : true
       },
       "/pet/findByStatus" : {
@@ -304,7 +293,6 @@
             }
           },
           "enabled" : true,
-          "scopes" : [ ],
           "requestBody" : {
             "description" : "List of user object",
             "content" : {
@@ -321,7 +309,6 @@
           }
         },
         "parameters" : [ ],
-        "scopes" : [ ],
         "enabled" : true
       },
       "/pet/{petId}/uploadImage" : {
@@ -480,11 +467,9 @@
               "description" : "Invalid username/password supplied"
             }
           },
-          "enabled" : true,
-          "scopes" : [ ]
+          "enabled" : true
         },
         "parameters" : [ ],
-        "scopes" : [ ],
         "enabled" : true
       },
       "/user" : {
@@ -502,7 +487,6 @@
             }
           },
           "enabled" : true,
-          "scopes" : [ ],
           "requestBody" : {
             "description" : "Created user object",
             "content" : {
@@ -516,7 +500,6 @@
           }
         },
         "parameters" : [ ],
-        "scopes" : [ ],
         "enabled" : true
       },
       "/user/createWithArray" : {
@@ -534,7 +517,6 @@
             }
           },
           "enabled" : true,
-          "scopes" : [ ],
           "requestBody" : {
             "description" : "List of user object",
             "content" : {
@@ -551,7 +533,6 @@
           }
         },
         "parameters" : [ ],
-        "scopes" : [ ],
         "enabled" : true
       },
       "/pet/findByTags" : {
@@ -669,11 +650,9 @@
               "description" : "successful operation"
             }
           },
-          "enabled" : true,
-          "scopes" : [ ]
+          "enabled" : true
         },
         "parameters" : [ ],
-        "scopes" : [ ],
         "enabled" : true
       },
       "/pet/{petId}" : {
@@ -1120,7 +1099,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-03-17 07:22:07 GMT",
-  "lastModified" : "2024-04-03 06:57:35 GMT",
+  "lastModified" : "2024-04-03 11:39:57 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5",
