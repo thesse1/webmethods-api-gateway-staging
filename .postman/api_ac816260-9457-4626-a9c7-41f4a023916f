@@ -55,6 +55,7 @@ files[] = {"id":"3558839-1033e559-0c64-4672-8456-e042fa8eb190","path":"utilities
 files[] = {"id":"3558839-08340339-a660-4ba1-b80d-fc0cdece6caf","path":"utilities/prepare/Prepare_for_TEST_EXT.json","metaData":{}}
 files[] = {"id":"3558839-fb49d68d-f9e8-4480-87e7-9353e034d8fe","path":"utilities/prepare/Prepare_for_TEST_INT.json","metaData":{}}
 files[] = {"id":"3558839-84752584-cb36-4b3b-8691-108c802d768c","path":"utilities/publish/Republish_from_DESIGN.json","metaData":{}}
+files[] = {"id":"3558839-a11c5dac-ad05-48e8-ac32-a5bd80c0cb74","path":"utilities/publish/Republish_from_DEV_INT.json","metaData":{}}
 files[] = {"id":"3558839-c70566b3-5db6-4b78-93d9-6a3efd1b605c","path":"utilities/purge/Purge_Data.json","metaData":{}}
 files[] = {"id":"3558839-e6a4c6a1-cc54-43cb-addc-e4c7a2383bcc","path":"utilities/update/Update_API.json","metaData":{}}
 
