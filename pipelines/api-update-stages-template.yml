@@ -40,15 +40,15 @@ stages:
           - download: trigger-pipeline-in-trigger-project
           - bash: printenv | grep RESOURCES_PIPELINE_ | sort
             displayName: Print pipeline resource variables
-          - bash: |
-              echo "Directories:"
-              ls -l $(Pipeline.Workspace)
-              ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project
-              ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job
-              echo
-              echo "Swagger:"
-              cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
-            displayName: Print asset downloaded from upstream pipeline
+          # - bash: |
+          #     echo "Directories:"
+          #     ls -l $(Pipeline.Workspace)
+          #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project
+          #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job
+          #     echo
+          #     echo "Swagger:"
+          #     cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
+          #   displayName: Print asset downloaded from upstream pipeline
           - template: /pipelines/api-update-steps-template.yml
             parameters:
               api_id: ${{parameters.api_id}}
