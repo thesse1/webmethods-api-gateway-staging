@@ -13,13 +13,7 @@ parameters:
   - name: BUILD
     is_build_stage: true
     instances:
-    - BUILD_01
-    - BUILD_02
-    - BUILD_03
-    - BUILD_04
-    - BUILD_05
-    - BUILD_06
-    - BUILD_07
+    - BUILD
   - name: DEV_INT
     instances:
     - DEV_INT
@@ -35,23 +29,21 @@ parameters:
   - name: PROD_INT
     configure_haft: true
     instances:
-    - PROD_INT_01
-    - PROD_INT_02
+    - PROD_INT
   - name: PROD_EXT
     configure_haft: true
     instances:
-    - PROD_EXT_01
-    - PROD_EXT_02
+    - PROD_EXT
 - name: build_instances_mapping
   type: object
   default:
-    DESIGN: BUILD_01
-    DEV_INT: BUILD_02
-    DEV_EXT: BUILD_03
-    TEST_INT: BUILD_04
-    TEST_EXT: BUILD_05
-    PROD_INT: BUILD_06
-    PROD_EXT: BUILD_07
+    DESIGN: BUILD
+    DEV_INT: BUILD
+    DEV_EXT: BUILD
+    TEST_INT: BUILD
+    TEST_EXT: BUILD
+    PROD_INT: BUILD
+    PROD_EXT: BUILD
 - name: build_instance
   type: string
   default: Default Mapping
@@ -69,16 +61,6 @@ stages:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{stage}}
     all_stages: ${{parameters.stages}}
-    ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
-      build_instances_mapping: ${{parameters.build_instances_mapping}}
-    ${{ else }}:
-      build_instances_mapping:
-        DESIGN: ${{parameters.build_instance}}
-        DEV_INT: ${{parameters.build_instance}}
-        DEV_EXT: ${{parameters.build_instance}}
-        TEST_INT: ${{parameters.build_instance}}
-        TEST_EXT: ${{parameters.build_instance}}
-        PROD_INT: ${{parameters.build_instance}}
-        PROD_EXT: ${{parameters.build_instance}}
+    build_instances_mapping: ${{parameters.build_instances_mapping}}
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}
