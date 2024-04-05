@@ -21,9 +21,11 @@
 							"\r",
 							"var jsonData = pm.response.json();\r",
 							"var portalId = jsonData.portalGatewayResponse[0].id;\r",
+							"console.log(portalId);\r",
 							"pm.globals.set(\"portalId\", portalId);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -73,7 +75,7 @@
 							"let apis_to_be_published = JSON.parse(pm.variables.get(\"apis_to_be_published\"));\r",
 							"console.log(apis_to_be_published);\r",
 							"let apis = JSON.parse(responseBody).apiResponse;\r",
-							"console.log(apis);\r",
+							"// console.log(apis);\r",
 							"if (apis === undefined || apis === null || apis.length === 0 || apis[0].responseStatus === \"NOT_FOUND\") {\r",
 							"    postman.setNextRequest(null);\r",
 							"} else {\r",
