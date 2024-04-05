@@ -41,7 +41,7 @@ steps:
   displayName: 'Generate API list as JSON array'
 
 - script: |
-    newman run postman/collections/utilities/publish/Republish.json --reporters cli \
+    newman run postman/collections/utilities/publish/Republish_APIs.json --reporters cli \
     --env-var publisher_user='$(publisher_user)' \
     --env-var publisher_password='$(publisher_password)' \
     --env-var apis_to_be_published=`cat apis_to_be_published.txt` \
