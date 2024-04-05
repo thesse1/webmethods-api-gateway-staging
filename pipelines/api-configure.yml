@@ -9,6 +9,14 @@ trigger: none
 #     source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
 #     trigger: true
 
+parameters:
+- name: environment_set
+  displayName: Configure API Gateway in which environment set?
+  default: webm_io
+  values:
+  - webm_io
+  - azure-demo-01
+
 variables:
 - group: Project_configuration
 
@@ -17,3 +25,4 @@ stages:
   parameters:
     template: /pipelines/api-configure-stages-template.yml
     parameters: []
+    environment_set: ${{ parameters.environment_set }}
