@@ -59,7 +59,7 @@ stages:
               #     name: Check_environment_file
 
               - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance}}'
-                dependsOn: Check_environment_file_for_${{deploy_instance}}
+                # dependsOn: Check_environment_file_for_${{deploy_instance}}
                 # condition: and(succeeded(), eq(dependencies.Check_environment_file_for_${{deploy_instance}}.outputs['Check_environment_file.environment_file_exists'], 'true'))
                 environment: ${{deploy_instance}}
                 variables:
