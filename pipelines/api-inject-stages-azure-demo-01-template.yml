@@ -64,21 +64,32 @@ stages:
         design_stage: ${{stage}}
       ${{ if stage.is_build_stage }}:
         build_stage: ${{stage}}
+        ${{ if containsValue(stage.instances, parameters.build_instance) }}:
+          build_instances_mapping:
+            DESIGN: ${{parameters.build_instance}}
+            DEV_INT: ${{parameters.build_instance}}
+            DEV_EXT: ${{parameters.build_instance}}
+            TEST_INT: ${{parameters.build_instance}}
+            TEST_EXT: ${{parameters.build_instance}}
+            PROD_INT: ${{parameters.build_instance}}
+            PROD_EXT: ${{parameters.build_instance}}
+        ${{ else }}:
+          build_instances_mapping: ${{parameters.build_instances_mapping}}
     target_stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{stage}}
     all_stages: ${{parameters.stages}}
-    ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
-      build_instances_mapping: ${{parameters.build_instances_mapping}}
-    ${{ else }}:
-      build_instances_mapping:
-        DESIGN: ${{parameters.build_instance}}
-        DEV_INT: ${{parameters.build_instance}}
-        DEV_EXT: ${{parameters.build_instance}}
-        TEST_INT: ${{parameters.build_instance}}
-        TEST_EXT: ${{parameters.build_instance}}
-        PROD_INT: ${{parameters.build_instance}}
-        PROD_EXT: ${{parameters.build_instance}}
+    # ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
+    #   build_instances_mapping: ${{parameters.build_instances_mapping}}
+    # ${{ else }}:
+    #   build_instances_mapping:
+    #     DESIGN: ${{parameters.build_instance}}
+    #     DEV_INT: ${{parameters.build_instance}}
+    #     DEV_EXT: ${{parameters.build_instance}}
+    #     TEST_INT: ${{parameters.build_instance}}
+    #     TEST_EXT: ${{parameters.build_instance}}
+    #     PROD_INT: ${{parameters.build_instance}}
+    #     PROD_EXT: ${{parameters.build_instance}}
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}
