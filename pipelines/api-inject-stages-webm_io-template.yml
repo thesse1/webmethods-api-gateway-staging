@@ -42,6 +42,7 @@ parameters:
     TEST_EXT: BUILD
     PROD_INT: BUILD
     PROD_EXT: BUILD
+- name: environment_set
 - name: build_instance
   type: string
   default: Default Mapping

@@ -52,6 +52,7 @@ parameters:
     TEST_EXT: BUILD_05
     PROD_INT: BUILD_06
     PROD_EXT: BUILD_07
+- name: environment_set
 - name: build_instance
   type: string
   default: Default Mapping

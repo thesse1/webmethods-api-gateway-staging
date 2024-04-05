@@ -3,10 +3,10 @@ parameters:
   type: object
 - name: parameters
   type: object
-- name: build_instance
-  default: Default Mapping
 - name: environment_set
   default: webm_io
+- name: build_instance
+  default: Default Mapping
 
 stages:
 - template: api-inject-stages-${{parameters.environment_set}}-template.yml
