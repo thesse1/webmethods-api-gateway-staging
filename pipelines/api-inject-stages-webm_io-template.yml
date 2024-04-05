@@ -27,11 +27,9 @@ parameters:
     instances:
     - TEST_EXT
   - name: PROD_INT
-    configure_haft: true
     instances:
     - PROD_INT
   - name: PROD_EXT
-    configure_haft: true
     instances:
     - PROD_EXT
 - name: build_instances_mapping
