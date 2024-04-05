@@ -19,7 +19,7 @@ stages:
     - ${{ each deployment_target in deployment_set.targets }}:
       - ${{ if eq(target_stage.name, deployment_target) }}:
         - ${{ each api_project in deployment_set.api_projects }}:
-          - stage: Build_${{api_project}}_and_deploy_on_${{deployment_target}}
+          - stage: Build_${{api_project}}_and_deploy_it_on_${{deployment_target}}
             dependsOn: []
             lockBehavior: sequential
             jobs:

@@ -12,7 +12,7 @@ parameters:
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
-  - stage: ${{stage.name}}
+  - stage: Configure_${{stage.name}}
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
