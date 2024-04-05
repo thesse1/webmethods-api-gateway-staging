@@ -15,7 +15,6 @@ parameters:
     instances:
     - BUILD
   - name: DEV_INT
-    is_build_stage: true
     instances:
     - DEV_INT
   - name: DEV_EXT
