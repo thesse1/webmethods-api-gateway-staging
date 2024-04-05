@@ -1,6 +1,8 @@
 parameters:
 - name: template
+  type: object
 - name: parameters
+  type: object
 
 stages:
 - template: api-inject-stages-webm_io-template.yml
