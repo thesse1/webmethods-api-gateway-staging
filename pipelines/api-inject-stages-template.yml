@@ -1,4 +1,6 @@
-parameters: []
+parameters:
+- name: template
+- name: parameters
 
 stages:
 - template: api-inject-stages-webm_io-template.yml
