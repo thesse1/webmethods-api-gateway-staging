@@ -3,6 +3,7 @@ parameters:
   type: object
 - name: parameters
   type: object
+- name: build_instance
 
 stages:
 - template: api-inject-stages-webm_io-template.yml
