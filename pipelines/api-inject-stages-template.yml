@@ -7,4 +7,5 @@ parameters:
 
 stages:
 - template: api-inject-stages-webm_io-template.yml
-  parameters: ${{parameters}}
+  parameters: ${{parameters.parameters}}
+  build_instance: ${{parameters.build_instance}}
