@@ -12,8 +12,9 @@ trigger: none
 parameters:
 - name: environment_set
   displayName: Configure API Gateway in which environment set?
-  default: webm_io
+  default: Default
   values:
+  - Default
   - webm_io
   - azure-demo-01
 
@@ -25,4 +26,5 @@ stages:
   parameters:
     template: /pipelines/api-configure-stages-template.yml
     parameters: []
-    environment_set: ${{ parameters.environment_set }}
+    ${{ if ne(parameters.environment_set, "Default")}}:
+      environment_set: ${{ parameters.environment_set }}
