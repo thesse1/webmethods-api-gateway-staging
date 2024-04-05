@@ -4,6 +4,7 @@ parameters:
 - name: parameters
   type: object
 - name: build_instance
+  default: Default Mapping
 
 stages:
 - template: api-inject-stages-webm_io-template.yml
