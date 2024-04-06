@@ -32,4 +32,4 @@ stages:
     #   environment_set: ${{ parameters.environment_set }}
     # ${{ else }}:
     #   environment_set: ${{ variables['Build.Reason'] }}
-    environment_set: ${{ variables.project_name }}
+    environment_set: ${{ variables['Build.Reason'] }}
