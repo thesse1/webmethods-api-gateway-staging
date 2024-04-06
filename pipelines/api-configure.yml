@@ -21,7 +21,7 @@ parameters:
 variables:
 - group: Project_configuration
 - name: foo
-  value: $(project_name)
+  value: ${{ variables.project_name }}
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml
