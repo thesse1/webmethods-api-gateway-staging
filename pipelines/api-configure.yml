@@ -24,12 +24,13 @@ variables:
   value: bar
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
-  parameters:
-    template: /pipelines/api-configure-stages-template.yml
-    parameters: []
-    # ${{ if ne(parameters.environment_set, 'Default')}}:
-    #   environment_set: ${{ parameters.environment_set }}
-    # ${{ else }}:
-    #   environment_set: ${{ variables['Build.Reason'] }}
-    environment_set: ${{ variables['Pipeline.Workspace'] }}
+- ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+  - template: /pipelines/api-inject-stages-template.yml
+    parameters:
+      template: /pipelines/api-configure-stages-template.yml
+      parameters: []
+      # ${{ if ne(parameters.environment_set, 'Default')}}:
+      #   environment_set: ${{ parameters.environment_set }}
+      # ${{ else }}:
+      #   environment_set: ${{ variables['Build.Reason'] }}
+      environment_set: treffer
