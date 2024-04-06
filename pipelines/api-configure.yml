@@ -11,6 +11,7 @@ trigger: none
 
 variables:
 - group: Project_configuration
+- foo: bar
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml
