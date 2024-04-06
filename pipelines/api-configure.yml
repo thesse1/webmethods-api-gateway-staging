@@ -26,7 +26,11 @@ stages:
   parameters:
     template: /pipelines/api-configure-stages-template.yml
     parameters: []
-    ${{ if ne(parameters.environment_set, 'Default')}}:
-      environment_set: ${{ parameters.environment_set }}
+    # ${{ if ne(parameters.environment_set, 'Default')}}:
+    #   environment_set: ${{ parameters.environment_set }}
+    # ${{ else }}:
+    #   environment_set: ${{ variables['Build.Reason'] }}
+    ${{ if eq(variables['project_name'], 'webm_io')}}:
+      environment_set: treffer
     ${{ else }}:
-      environment_set: ${{ variables['Build.Reason'] }}
+      environment_set: niete
