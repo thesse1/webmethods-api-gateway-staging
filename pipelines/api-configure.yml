@@ -9,38 +9,11 @@ trigger: none
 #     source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
 #     trigger: true
 
-parameters:
-- name: environment_set
-  displayName: Configure API Gateway in which environment set?
-  default: Default
-  values:
-  - Default
-  - webm_io
-  - azure-demo-01
-
 variables:
 - group: Project_configuration
-- name: foo
-  value: bar
 
 stages:
-- ${{ if eq(variables['Build.Reason'], '') }}:
-  - template: /pipelines/api-inject-stages-template.yml
-    parameters:
-      template: /pipelines/api-configure-stages-template.yml
-      parameters: []
-      # ${{ if ne(parameters.environment_set, 'Default')}}:
-      #   environment_set: ${{ parameters.environment_set }}
-      # ${{ else }}:
-      #   environment_set: ${{ variables['Build.Reason'] }}
-      environment_set: treffer
-- ${{ else }}:
-  - template: /pipelines/api-inject-stages-template.yml
-    parameters:
-      template: /pipelines/api-configure-stages-template.yml
-      parameters: []
-      # ${{ if ne(parameters.environment_set, 'Default')}}:
-      #   environment_set: ${{ parameters.environment_set }}
-      # ${{ else }}:
-      #   environment_set: ${{ variables['Build.Reason'] }}
-      environment_set: niete
+- template: /pipelines/api-inject-stages-template.yml
+  parameters:
+    template: /pipelines/api-configure-stages-template.yml
+    parameters: []
