@@ -24,7 +24,7 @@ variables:
   value: bar
 
 stages:
-- ${{ if eq(variables['Build.Reason'], 'Manual') }}:
+- ${{ if eq(variables['Build.Reason'], '') }}:
   - template: /pipelines/api-inject-stages-template.yml
     parameters:
       template: /pipelines/api-configure-stages-template.yml
