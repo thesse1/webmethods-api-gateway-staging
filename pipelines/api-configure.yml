@@ -26,5 +26,5 @@ stages:
   parameters:
     template: /pipelines/api-configure-stages-template.yml
     parameters: []
-    ${{ if ne(parameters.environment_set, "Default")}}:
+    ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
