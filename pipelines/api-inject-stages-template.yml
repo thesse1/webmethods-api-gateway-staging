@@ -11,7 +11,7 @@ parameters:
 stages:
 # - template: api-inject-stages-${{parameters.environment_set}}-template.yml
 #   parameters: ${{parameters}}
-- ${{ if eq('', '' ) }}:
+- ${{ if eq('0', '1' ) }}:
   - template: api-inject-stages-treffer-template.yml
     parameters: ${{parameters}}
 - ${{ else }}:
