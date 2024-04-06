@@ -8,6 +8,10 @@ parameters:
 - name: build_instance
   default: Default Mapping
 
+variables:
+- name: foo
+  value: bar
+
 stages:
 # - template: api-inject-stages-${{parameters.environment_set}}-template.yml
 #   parameters: ${{parameters}}
