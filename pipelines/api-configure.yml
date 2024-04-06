@@ -20,8 +20,8 @@ parameters:
 
 variables:
 - group: Project_configuration
-- name: foo
-  value: bar
+# - name: foo
+#   value: bar
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml
