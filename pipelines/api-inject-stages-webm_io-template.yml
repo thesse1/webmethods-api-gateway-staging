@@ -82,5 +82,6 @@ stages:
     #     TEST_EXT: ${{parameters.build_instance}}
     #     PROD_INT: ${{parameters.build_instance}}
     #     PROD_EXT: ${{parameters.build_instance}}
+    environment_set: ${{parameters.environment_set}}
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}

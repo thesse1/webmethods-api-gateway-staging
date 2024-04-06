@@ -66,31 +66,31 @@ stages:
                 displayName: Add build tag
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
-      - job: Check_environment_file_haft
-        pool:
-          name: '$(pool_name)'
-          vmImage: '$(pool_image)'
-        steps:
-        - checkout: self
-          submodules: "true"
-          persistCredentials: "true"
-          fetchDepth: 0
-        - bash: |
-            if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json; then
-              echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json exists
-              echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
-            else
-              echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json does not exist, skipping next job
-              echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
-              echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json.json"
-              echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json.json"
-            fi
-          displayName: Check if environment.json file exists
-          name: Check_environment_file
+      # - job: Check_environment_file_haft
+      #   pool:
+      #     name: '$(pool_name)'
+      #     vmImage: '$(pool_image)'
+      #   steps:
+      #   - checkout: self
+      #     submodules: "true"
+      #     persistCredentials: "true"
+      #     fetchDepth: 0
+      #   - bash: |
+      #       if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json; then
+      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json exists
+      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
+      #       else
+      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json does not exist, skipping next job
+      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
+      #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json.json"
+      #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{stage.name}}_haft_environment.json.json"
+      #       fi
+      #     displayName: Check if environment.json file exists
+      #     name: Check_environment_file
 
       - deployment: Configure_HAFT_for_API_Gateway_${{stage.name}}
-        dependsOn: Check_environment_file_haft
-        condition: and(succeeded(), eq(dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists'], 'true'))
+        # dependsOn: Check_environment_file_haft
+        # condition: and(succeeded(), eq(dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists'], 'true'))
         environment: ${{stage.name}}_HAFT
         variables:
         - group: ${{stage.name}}_HAFT_users
