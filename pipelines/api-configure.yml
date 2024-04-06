@@ -29,4 +29,4 @@ stages:
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
     ${{ else }}:
-      environment_set: ${{ variables.project_name }}
+      environment_set: ${{ variables['project_name'] }}
