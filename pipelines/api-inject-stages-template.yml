@@ -9,11 +9,5 @@ parameters:
   default: Default Mapping
 
 stages:
-# - template: api-inject-stages-${{parameters.environment_set}}-template.yml
-#   parameters: ${{parameters}}
-- ${{ if eq(variables.foo, '') }}:
-  - template: api-inject-stages-treffer-template.yml
-    parameters: ${{parameters}}
-- ${{ else }}:
-  - template: api-inject-stages-niete-template.yml
-    parameters: ${{parameters}}
+- template: api-inject-stages-${{parameters.environment_set}}-template.yml
+  parameters: ${{parameters}}
