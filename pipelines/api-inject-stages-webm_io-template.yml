@@ -138,8 +138,7 @@ stages:
     deployment_sets:
     - ${{ each eligible_target in parameters.eligible_targets }}:
       - api_projects: ${{ eligible_target.api_projects }}
-        targets:
-        - DUMMY
+        targets: ${{ eligible_target.targets }}
         # - ${{ each target in eligible_target.targets }}:
         #   - ${{ if eq(parameters.selected_targets, target) }}:
         #     - target
