@@ -34,39 +34,7 @@ stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:
     template: /pipelines/api-build-and-deploy-stages-template.yml
-    parameters:
-      deployment_sets:
-      - api_projects:
-        # - number_conversion
-        - ping
-        - odata_tutorial
-        # - star_wars
-        targets:
-        - DEV_INT
-        - DEV_EXT
-        - TEST_INT
-        - TEST_EXT
-        - PROD_INT
-        - PROD_EXT
-      - api_projects:
-        - petstore
-        # - petstore_basicauth
-        - petstore_versioning
-        targets:
-        - DEV_INT
-        - TEST_INT
-        - PROD_INT
-      - api_projects:
-        - postman_echo
-        # - postman_echo_jwt
-        # - postman_echo_oauth2
-        - postman_mocking
-        # - multiple_tenants
-        - security_alias
-        targets:
-        - DEV_EXT
-        - TEST_EXT
-        - PROD_EXT
+    parameters: []
     build_instance: ${{parameters.build_instance}}
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
