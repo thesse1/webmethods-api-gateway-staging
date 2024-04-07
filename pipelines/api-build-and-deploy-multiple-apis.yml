@@ -42,12 +42,11 @@ variables:
 - group: Project_configuration
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
+- template: /pipelines/ap-injiect-stages-template.yml
   parameters:
     template: /pipelines/api-build-and-deploy-stages-template.yml
     parameters: []
     build_instance: ${{parameters.build_instance}}
-    # selected_targets: ${{parameters.selected_targets}}
-    selected_targets: ABC
+    selected_targets: ${{parameters.selected_targets}}
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}

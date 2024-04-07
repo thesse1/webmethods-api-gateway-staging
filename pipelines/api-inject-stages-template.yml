@@ -5,6 +5,8 @@ parameters:
   type: object
 - name: environment_set
   default: webm_io
+- name: selected_targets
+  default: All
 - name: build_instance
   default: Default Mapping
 
