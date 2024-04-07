@@ -12,6 +12,7 @@ parameters:
 - name: deployment_sets
   displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
+- name: environment_set
 
 stages:
 - ${{ each target_stage in parameters.target_stages }}:
@@ -27,6 +28,7 @@ stages:
             # - template: /pipelines/api-build-job-template-dedicated-build-agents.yml
             # - template: /pipelines/api-build-job-template-resource-pooling.yml
               parameters:
+                environment_set: ${{parameters.environment_set}}
                 build_stage: ${{parameters.build_stage}}
                 target_stage: ${{target_stage}}
                 api_project: ${{api_project}}
@@ -46,14 +48,14 @@ stages:
               #     persistCredentials: "true"
               #     fetchDepth: 0
               #   - bash: |
-              #       if test -f $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json; then
-              #         echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json exists
+              #       if test -f $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json; then
+              #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json exists
               #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
               #       else
-              #         echo Environment file $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json does not exist, skipping next job
+              #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json does not exist, skipping next job
               #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
-              #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json"
-              #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json"
+              #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json"
+              #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json"
               #       fi
               #     displayName: Check if environment.json file exists
               #     name: Check_environment_file
@@ -77,7 +79,7 @@ stages:
                         submodules: "true"
                         persistCredentials: "true"
                         fetchDepth: 0
-                      - bash: cat $(System.DefaultWorkingDirectory)/environments/$(project_name)/${{deploy_instance}}_environment.json
+                      - bash: cat $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json
                         displayName: Check if environment.json file exists
                       - template: /pipelines/retrieve-build-template.yml
                         parameters:
@@ -85,6 +87,7 @@ stages:
                           api_project: ${{api_project}}
                       - template: /pipelines/api-deploy-steps-template.yml
                         parameters:
+                          environment_set: ${{parameters.environment_set}}
                           api_project: ${{api_project}}
                           target_environment: ${{deploy_instance}}_environment.json
                           target_type: ${{deployment_target}}

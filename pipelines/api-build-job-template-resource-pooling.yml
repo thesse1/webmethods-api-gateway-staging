@@ -9,6 +9,7 @@ parameters:
   type: string
 - name: build_instances_mapping
   type: object
+- name: environment_set
 
 jobs:
 - deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
@@ -62,6 +63,7 @@ jobs:
           displayName: 'Claim Resource'
         - template: /pipelines/api-build-steps-template.yml
           parameters:
+            environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
             build_environment: "$(claimed_resource)_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
