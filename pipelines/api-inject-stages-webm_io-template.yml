@@ -139,13 +139,12 @@ stages:
     - ${{ each eligible_target in parameters.eligible_targets }}:
       - api_projects: ${{ eligible_target.api_projects }}
         targets: # ${{ eligible_target.targets }}
-        - DEV_INT
-        # - ${{ each target in eligible_target.targets }}:
-        #   - ${{ if eq(parameters.selected_targets, target) }}:
-        #     - target
-        #   - ${{ elseif eq(parameters.selected_targets, 'All') }}:
-        #     - target
-        #   - ${{ elseif and(eq(parameters.selected_targets, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
-        #     - target
+        - ${{ each target in eligible_target.targets }}:
+          - ${{ if eq(parameters.selected_targets, target) }}:
+            - ${{target}}
+          # - ${{ elseif eq(parameters.selected_targets, 'All') }}:
+          #   - target
+          # - ${{ elseif and(eq(parameters.selected_targets, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
+          #   - target
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}
