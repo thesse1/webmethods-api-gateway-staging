@@ -42,7 +42,7 @@ variables:
 - group: Project_configuration
 
 stages:
-- template: /pipelines/ap-injiect-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
     template: /pipelines/api-build-and-deploy-stages-template.yml
     parameters: []
