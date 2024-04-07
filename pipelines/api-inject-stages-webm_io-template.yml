@@ -43,6 +43,7 @@ parameters:
     PROD_INT: BUILD
     PROD_EXT: BUILD
 - name: environment_set
+- name: selected_targets
 - name: build_instance
   type: string
   default: Default Mapping
@@ -137,6 +138,13 @@ stages:
     deployment_sets:
     - ${{ each eligible_target in parameters.eligible_targets }}:
       - api_projects: ${{ eligible_target.api_projects }}
-        targets: ${{ eligible_target.targets }}
+        targets:
+        - ${{ each target in eligible_target.targets }}:
+          - ${{ if eq(selected_target, target) }}
+            - target
+          - ${{ elseif eq(selected_target, 'All') }}
+            - target
+          - ${{ elseif and(eq(selected_target, 'All (execpt DESIGN)'), ne(target, 'DESIGN') }}
+            - target
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}

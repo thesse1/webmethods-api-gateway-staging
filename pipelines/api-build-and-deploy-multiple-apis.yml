@@ -14,6 +14,17 @@ parameters:
   - Default
   - webm_io
   - azure-demo-01
+- name: selected_targets
+  displayName: Deploy on which targets?
+  default: 'All (execpt DESIGN)'
+  values:
+  - 'All (execpt DESIGN)'
+  - DEV_INT
+  - DEV_EXT
+  - TEST_INT
+  - TEST_EXT
+  - PROD_INT
+  - PROD_EXT
 - name: build_instance
   displayName: Build on which BUILD instance?
   default: Default Mapping
@@ -36,5 +47,6 @@ stages:
     template: /pipelines/api-build-and-deploy-stages-template.yml
     parameters: []
     build_instance: ${{parameters.build_instance}}
+    selected_targets: ${{parameters.selected_targets}}
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
