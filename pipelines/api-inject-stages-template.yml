@@ -6,7 +6,7 @@ parameters:
 - name: environment_set
   default: webm_io
 - name: selected_targets
-  default: All
+  default: 'All (including DESIGN)'
 - name: build_instance
   default: Default Mapping
 
