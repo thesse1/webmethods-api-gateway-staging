@@ -64,8 +64,10 @@ stages:
                   environment_set: ${{parameters.environment_set}}
                   environment: ${{instance}}_environment.json
                   type: ${{stage.name}}
-              - bash: echo "##vso[build.addbuildtag]${{instance}}"
-                displayName: Add build tag
+              - bash: |
+                  echo "##vso[build.addbuildtag]${{instance}}"
+                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}
+                displayName: Add build tags
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
       # - job: Check_environment_file_haft
@@ -112,5 +114,7 @@ stages:
               - template: /pipelines/api-configure-haft-steps-template.yml
                 parameters:
                   type: ${{stage.name}}
-              - bash: echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
-                displayName: Add build tag
+              - bash: |
+                  echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
+                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}
+                displayName: Add build tags

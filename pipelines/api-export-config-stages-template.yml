@@ -45,5 +45,7 @@ stages:
                 - template: /pipelines/commit-template.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}
-                - bash: echo "##vso[build.addbuildtag]${{instance}}"
-                  displayName: Add build tag
+                - bash: |
+                    echo "##vso[build.addbuildtag]${{instance}}"
+                    echo "##vso[build.addbuildtag]${{parameters.environment_set}}
+                  displayName: Add build tags
