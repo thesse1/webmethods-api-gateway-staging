@@ -41,6 +41,6 @@ stages:
   parameters:
     template: /pipelines/api-export-config-stages-template.yml
     parameters:
-      environment_set: ${{ split(parameters.source, ' ')[0] }}
       source_instance: ${{ split(parameters.source, ' ')[1] }}
       commitMessage: ${{parameters.commitMessage}}
+    environment_set: ${{ split(parameters.source, ' ')[0] }}
