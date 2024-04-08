@@ -12,7 +12,7 @@ parameters:
 - name: environment_set
   type: string
 - name: deployment_sets
-  type: string
+  type: object
 - name: source_instance
   type: string
 - name: commitMessage
