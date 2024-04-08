@@ -11,6 +11,8 @@ parameters:
   default: 'All (including DESIGN)'
 - name: build_instance
   default: Default Mapping
+- name: eligible_targets
+  type: object
 
 stages:
 - template: api-inject-stages-${{parameters.environment_set}}-template.yml
