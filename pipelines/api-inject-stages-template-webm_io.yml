@@ -77,7 +77,7 @@ stages:
         - ${{stage}}
     all_stages: # ${{parameters.stages}}
     - ${{ each stage in parameters.stages }}:
-      - ${{ if eq(parameters.selected_stage, stage) }}:
+      - ${{ if eq(parameters.selected_stage, stage.name) }}:
         - ${{stage}}
       - ${{ elseif eq(parameters.selected_stage, 'All') }}:
         - ${{stage}}
