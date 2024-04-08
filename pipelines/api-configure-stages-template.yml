@@ -10,6 +10,7 @@ parameters:
 - name: build_instances_mapping
   type: object
 - name: environment_set
+- name: deployment_sets
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
