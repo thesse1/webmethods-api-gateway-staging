@@ -63,5 +63,5 @@ stages:
                   type: ${{stage.name}}
               - bash: |
                   echo "##vso[build.addbuildtag]${{instance}}"
-                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}
+                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                 displayName: Add build tags

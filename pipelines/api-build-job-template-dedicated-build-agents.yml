@@ -54,7 +54,7 @@ jobs:
             echo "##vso[build.addbuildtag]${{parameters.api_project}}"
             echo "##vso[build.addbuildtag]$(agent_name)"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(agent_name)"
-            echo "##vso[build.addbuildtag]${{parameters.environment_set}}
+            echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
           displayName: Add build tags
         # - template: /pipelines/store-build-artifactory-template.yml
         #   parameters:

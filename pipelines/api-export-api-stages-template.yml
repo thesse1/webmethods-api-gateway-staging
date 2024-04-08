@@ -49,5 +49,5 @@ stages:
               echo "##vso[build.addbuildtag]${{parameters.api_project}}"
               echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
               echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.design_stage.name}}"
-              echo "##vso[build.addbuildtag]${{parameters.environment_set}}
+              echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
             displayName: Add build tags
