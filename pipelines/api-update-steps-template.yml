@@ -8,12 +8,12 @@ parameters:
 
 steps:
 - bash: |
-   echo "##vso[task.setvariable variable=design_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/$(project_name)/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/$(project_name)/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/$(project_name)/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/$(project_name)/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/$(project_name)/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/$(project_name)/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=design_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.build_instance_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
 
@@ -26,7 +26,7 @@ steps:
     --env-var updateUrl='${{parameters.update_url}}' \
     --env-var updateCredentials=`echo -n ${{parameters.update_username}}:${{parameters.update_password}} | base64` \
     --env-var updateFile='$(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/${{parameters.update_file}}' \
-    -e environments/$(project_name)/DESIGN_environment.json \
+    -e environments/${{parameters.environment_set}}/DESIGN_environment.json \
     $(design_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Update API on API Gateway DESIGN'

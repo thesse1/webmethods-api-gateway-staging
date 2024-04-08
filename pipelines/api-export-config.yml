@@ -1,36 +1,34 @@
 trigger: none
 
 parameters:
-- name: environment_set
-  displayName: Export API Gateway configuration from an API Gateway in which environment set?
-  default: Default
-  values:
-  - Default
-  - webm_io
-  - azure_demo_01
-- name: source_instance
+- name: source
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
   values:
-  - DESIGN
-  - BUILD
-  - BUILD_01
-  - BUILD_02
-  - BUILD_03
-  - BUILD_04
-  - BUILD_05
-  - BUILD_06
-  - BUILD_07
-  - DEV_INT
-  - DEV_EXT
-  - TEST_INT
-  - TEST_EXT
-  - PROD_INT
-  - PROD_INT_01
-  - PROD_INT_02
-  - PROD_EXT
-  - PROD_EXT_01
-  - PROD_EXT_02
+  - webm_io DESIGN
+  - webm_io BUILD
+  - webm_io DEV_INT
+  - webm_io DEV_EXT
+  - webm_io TEST_INT
+  - webm_io TEST_EXT
+  - webm_io PROD_INT
+  - webm_io PROD_EXT
+  - azure_demo_01 DESIGN
+  - azure_demo_01 BUILD_01
+  - azure_demo_01 BUILD_02
+  - azure_demo_01 BUILD_03
+  - azure_demo_01 BUILD_04
+  - azure_demo_01 BUILD_05
+  - azure_demo_01 BUILD_06
+  - azure_demo_01 BUILD_07
+  - azure_demo_01 DEV_INT
+  - azure_demo_01 DEV_EXT
+  - azure_demo_01 TEST_INT
+  - azure_demo_01 TEST_EXT
+  - azure_demo_01 PROD_INT_01
+  - azure_demo_01 PROD_INT_02
+  - azure_demo_01 PROD_EXT_01
+  - azure_demo_01 PROD_EXT_02
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
@@ -43,5 +41,6 @@ stages:
   parameters:
     template: /pipelines/api-export-config-stages-template.yml
     parameters:
-      source_instance: ${{parameters.source_instance}}
+      environment_set: ${{ split(parameters.source, ' ')[0] }}
+      source_instance: ${{ split(parameters.source, ' ')[1] }}
       commitMessage: ${{parameters.commitMessage}}

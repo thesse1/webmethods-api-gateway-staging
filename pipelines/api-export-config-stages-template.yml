@@ -9,6 +9,8 @@ parameters:
   type: object
 - name: build_instances_mapping
   type: object
+- name: environment_set
+  type: string
 - name: source_instance
   type: string
 - name: commitMessage
@@ -40,6 +42,7 @@ stages:
                 - download: none
                 - template: /pipelines/api-export-config-steps-template.yml
                   parameters:
+                    environment_set: ${{parameters.environment_set}}
                     environment: ${{instance}}_environment.json
                     type: ${{stage.name}}
                 - template: /pipelines/commit-template.yml
