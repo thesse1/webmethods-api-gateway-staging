@@ -9,5 +9,6 @@
     "templateKey" : "protocol",
     "values" : [ "http", "https" ]
   } ],
-  "active" : false
+  "active" : false,
+  "_docType" : "policyactions"
 }
