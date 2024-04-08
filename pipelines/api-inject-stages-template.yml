@@ -9,6 +9,8 @@ parameters:
   default: webm_io
 - name: selected_target
   default: 'All (including DESIGN)'
+- name: selected_stage
+  default: 'All'
 - name: build_instance
   default: Default Mapping
 - name: eligible_targets

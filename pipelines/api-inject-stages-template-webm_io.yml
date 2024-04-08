@@ -45,6 +45,7 @@ parameters:
 - name: api_project
 - name: environment_set
 - name: selected_target
+- name: selected_stage
 - name: build_instance
   type: string
   default: Default Mapping
@@ -74,7 +75,13 @@ stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{stage}}
-    all_stages: ${{parameters.stages}}
+    all_stages: # ${{parameters.stages}}
+    - ${{ each stage in parameters.stages }}:
+      - ${{ if eq(parameters.selected_stage, stage) }}:
+        - ${{stage}}
+      - ${{ elseif eq(parameters.selected_stage, 'All') }}:
+        - ${{stage}}
+      
     # ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
     #   build_instances_mapping: ${{parameters.build_instances_mapping}}
     # ${{ else }}:

@@ -17,6 +17,18 @@ parameters:
   - Default
   - webm_io
   - azure-demo-01
+- name: selected_stage
+  displayName: Configure which API Gateway stage(s)?
+  default: 'All'
+  values:
+  - 'All'
+  - DESIGN
+  - DEV_INT
+  - DEV_EXT
+  - TEST_INT
+  - TEST_EXT
+  - PROD_INT
+  - PROD_EXT
 
 variables:
 - group: Project_configuration
@@ -28,3 +40,4 @@ stages:
     parameters: []
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
+    selected_stage: ${{ parameters.selected_stage }}
