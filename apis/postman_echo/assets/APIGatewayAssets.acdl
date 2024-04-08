@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-11-15T14:57:31"/>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="11.0" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2024-04-08T13:30:34"/>
     <asset name="API.d73d5702-6925-41a0-8c23-933326c27b96" displayName="PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.3ca20a56-6ea0-4d88-ae40-d285d0a05acf</dependsOn>
@@ -45,18 +45,6 @@
     <asset name="PolicyAction.9f0a6436-fd9e-46ff-ab2d-76188523583b" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API PostmanEcho[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="Application.3ca20a56-6ea0-4d88-ae40-d285d0a05acf" displayName="MyPostmanEchoApp_DEV" isDeployable="true">
-        <implementation.generic type="Application"/>
-        <dependsOn>APIGateway:API.d73d5702-6925-41a0-8c23-933326c27b96</dependsOn>
-        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf</dependsOn>
-        <dependsOn>APIGateway:RegisteredApplication.3ca20a56-6ea0-4d88-ae40-d285d0a05acf</dependsOn>
-    </asset>
-    <asset name="PassmanData.API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf" displayName="API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf" isDeployable="true">
-        <implementation.generic type="PassmanData"/>
-    </asset>
-    <asset name="RegisteredApplication.3ca20a56-6ea0-4d88-ae40-d285d0a05acf" displayName="RegisteredApplication [ MyPostmanEchoApp_DEV ]" isDeployable="true">
-        <implementation.generic type="RegisteredApplication"/>
-    </asset>
     <asset name="Application.604dc2cb-c185-4c8d-8720-bb44b03cab60" displayName="MyPostmanEchoApp_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.d73d5702-6925-41a0-8c23-933326c27b96</dependsOn>
@@ -67,6 +55,18 @@
         <implementation.generic type="PassmanData"/>
     </asset>
     <asset name="RegisteredApplication.604dc2cb-c185-4c8d-8720-bb44b03cab60" displayName="RegisteredApplication [ MyPostmanEchoApp_TEST ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="Application.3ca20a56-6ea0-4d88-ae40-d285d0a05acf" displayName="MyPostmanEchoApp_DEV" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.d73d5702-6925-41a0-8c23-933326c27b96</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.3ca20a56-6ea0-4d88-ae40-d285d0a05acf</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf" displayName="API_ACCESS_KEY3ca20a56-6ea0-4d88-ae40-d285d0a05acf" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="RegisteredApplication.3ca20a56-6ea0-4d88-ae40-d285d0a05acf" displayName="RegisteredApplication [ MyPostmanEchoApp_DEV ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.7fb297dc-e24e-46fa-be04-0c9bc974fc22" displayName="MyPostmanEchoApp_PROD" isDeployable="true">

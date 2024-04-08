@@ -21,5 +21,6 @@
       "values" : [ "apiKey" ]
     } ]
   } ],
-  "active" : false
+  "active" : false,
+  "_docType" : "policyactions"
 }
