@@ -3,9 +3,11 @@ parameters:
   type: object
 - name: parameters
   type: object
+- name: api_project
+  default: All
 - name: environment_set
   default: webm_io
-- name: selected_targets
+- name: selected_target
   default: 'All (including DESIGN)'
 - name: build_instance
   default: Default Mapping

@@ -42,8 +42,9 @@ parameters:
     TEST_EXT: BUILD
     PROD_INT: BUILD
     PROD_EXT: BUILD
+- name: api_project
 - name: environment_set
-- name: selected_targets
+- name: selected_target
 - name: build_instance
   type: string
   default: Default Mapping
@@ -137,14 +138,19 @@ stages:
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
     - ${{ each eligible_target in parameters.eligible_targets }}:
-      - api_projects: ${{ eligible_target.api_projects }}
+      - api_projects: # ${{ eligible_target.api_projects }}
+        - ${{ each api_project in eligible_target.api_projects }}:
+          - ${{ if eq(parameters.api_project, api_project) }}:
+            - ${{api_project}}
+          - ${{ elseif eq(parameters.api_project, 'All') }}:
+            - ${{api_project}}
         targets: # ${{ eligible_target.targets }}
         - ${{ each target in eligible_target.targets }}:
-          - ${{ if eq(parameters.selected_targets, target) }}:
+          - ${{ if eq(parameters.selected_target, target) }}:
             - ${{target}}
-          - ${{ elseif eq(parameters.selected_targets, 'All (including DESIGN)') }}:
+          - ${{ elseif eq(parameters.selected_target, 'All (including DESIGN)') }}:
             - ${{target}}
-          - ${{ elseif and(eq(parameters.selected_targets, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
+          - ${{ elseif and(eq(parameters.selected_target, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
             - ${{target}}
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}

@@ -7,6 +7,9 @@ trigger: none
 #     trigger: true
 
 parameters:
+- name: api_project
+  displayName: Deploy which API project?
+  type: string
 - name: environment_set
   displayName: Deploy APIs on API Gateways in which environment set?
   default: Default
@@ -14,8 +17,8 @@ parameters:
   - Default
   - webm_io
   - azure-demo-01
-- name: selected_targets
-  displayName: Deploy on which targets?
+- name: selected_target
+  displayName: Deploy on which target(s)?
   default: 'All (execpt DESIGN)'
   values:
   - 'All (execpt DESIGN)'
@@ -25,6 +28,7 @@ parameters:
   - TEST_EXT
   - PROD_INT
   - PROD_EXT
+  - DESIGN
   - 'All (including DESIGN)'
 - name: build_instance
   displayName: Build on which BUILD instance?
@@ -42,12 +46,15 @@ parameters:
 variables:
 - group: Project_configuration
 
+name: $(Date:yyyyMMdd).$(Rev:r)-$(api_project)
+
 stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:
     template: /pipelines/api-build-and-deploy-stages-template.yml
     parameters: []
     build_instance: ${{parameters.build_instance}}
-    selected_targets: ${{parameters.selected_targets}}
+    api_project: ${{parameters.api_project}}
+    selected_target: ${{parameters.selected_target}}
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
