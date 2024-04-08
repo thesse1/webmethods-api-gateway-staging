@@ -1,11 +1,19 @@
 trigger: none
 
 parameters:
+- name: environment_set
+  displayName: Export API Gateway configuration from an API Gateway in which environment set?
+  default: Default
+  values:
+  - Default
+  - webm_io
+  - azure_demo_01
 - name: source_instance
   displayName: Export API Gateway configuration from which API Gateway?
   type: string
   values:
   - DESIGN
+  - BUILD
   - BUILD_01
   - BUILD_02
   - BUILD_03
@@ -17,8 +25,10 @@ parameters:
   - DEV_EXT
   - TEST_INT
   - TEST_EXT
+  - PROD_INT
   - PROD_INT_01
   - PROD_INT_02
+  - PROD_EXT
   - PROD_EXT_01
   - PROD_EXT_02
 - name: commitMessage

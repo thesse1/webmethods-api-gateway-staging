@@ -25,7 +25,7 @@ parameters:
   values:
   - Default
   - webm_io
-  - azure-demo-01
+  - azure_demo_01
 - name: selected_target
   displayName: Deploy on which target(s)?
   default: 'All (execpt DESIGN)'

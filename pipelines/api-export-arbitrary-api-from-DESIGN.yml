@@ -10,7 +10,7 @@ parameters:
   values:
   - Default
   - webm_io
-  - azure-demo-01
+  - azure_demo_01
 - name: commitMessage
   displayName: Message for the commit in Git?
   type: string
