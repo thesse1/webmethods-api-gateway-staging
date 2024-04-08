@@ -11,6 +11,7 @@ parameters:
   type: object
 - name: environment_set
 - name: deployment_sets
+  type: object
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
