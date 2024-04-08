@@ -64,5 +64,5 @@ parameters:
     - DESIGN
 
 stages:
-- template: api-inject-stages-${{parameters.environment_set}}-template.yml
+- template: api-inject-stages-template-${{parameters.environment_set}}.yml
   parameters: ${{parameters}}
