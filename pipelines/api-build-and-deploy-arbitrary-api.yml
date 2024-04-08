@@ -55,6 +55,17 @@ stages:
     parameters: []
     build_instance: ${{parameters.build_instance}}
     api_project: ${{parameters.api_project}}
+    eligible_targets:
+    - api_projects:
+      - ${{parameters.api_project}}
+      targets:
+      - DEV_INT
+      - DEV_EXT
+      - TEST_INT
+      - TEST_EXT
+      - PROD_INT
+      - PROD_EXT
+      - DESIGN
     selected_target: ${{parameters.selected_target}}
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
