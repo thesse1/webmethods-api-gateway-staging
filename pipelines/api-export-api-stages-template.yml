@@ -13,6 +13,9 @@ parameters:
   type: string
 - name: commitMessage
   type: string
+- name: deployment_sets
+  type: object
+- name: environment_set
 
 stages:
 - stage: Export_${{parameters.api_project}}_from_${{parameters.design_stage.name}}

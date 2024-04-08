@@ -10,7 +10,6 @@ parameters:
 - name: build_instances_mapping
   type: object
 - name: deployment_sets
-  displayName: Deploy which sets of API projects on which API Gateway stages?
   type: object
 - name: environment_set
 
