@@ -1,10 +1,15 @@
-# azure-pipeline.yml
-parameters:
-- template: parameters-template.yml
+trigger:
+- main
 
-stages:
-- stage: Build
-  jobs:
-  - job: Build
-    steps:
-    - script: echo "Building in ${{ parameters.environment }} environment"
+prereqs:
+- script: |
+    #!/bin/bash
+    # Fetch parameters.yml and update pipeline YAML files
+    ./scripts/update_yaml.sh
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "This is the actual pipeline execution"
+  displayName: 'Pipeline Execution'
