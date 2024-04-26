@@ -1,0 +1,10 @@
+# parameters-template.yml
+parameters:
+- name: environment
+  displayName: Environment
+  type: string
+  default: 'development'
+  values:
+  - development
+  - staging
+  - production
