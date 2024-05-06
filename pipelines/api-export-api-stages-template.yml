@@ -16,6 +16,7 @@ parameters:
 - name: deployment_sets
   type: object
 - name: environment_set
+  type: string
 
 stages:
 - stage: Export_${{parameters.api_project}}_from_${{parameters.design_stage.name}}
@@ -39,6 +40,7 @@ stages:
           - download: none
           - template: /pipelines/api-export-api-steps-template.yml
             parameters:
+              environment_set: ${{parameters.environment_set}}
               api_project: ${{parameters.api_project}}
               source_environment: ${{parameters.design_stage.name}}_environment.json
               source_type: ${{parameters.design_stage.name}}
