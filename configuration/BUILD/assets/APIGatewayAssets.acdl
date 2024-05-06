@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-11-15T14:19:05"/>
-    <asset name="AdministratorSetting.HTTPListener@5556" displayName="HTTPListener@5556" isDeployable="true">
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="11.0" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2024-05-06T16:04:09"/>
+    <asset name="AdministratorSetting.gatewayDestinationConfig" displayName="API Gateway" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
     </asset>
-    <asset name="AdministratorSetting.gatewayDestinationConfig" displayName="API Gateway" isDeployable="true">
+    <asset name="AdministratorSetting.errorProcessing" displayName="Service fault" isDeployable="true">
+        <implementation.generic type="AdministratorSetting"/>
+    </asset>
+    <asset name="AdministratorSetting.keystore" displayName="Keystore/Truststore" isDeployable="true">
+        <implementation.generic type="AdministratorSetting"/>
+    </asset>
+    <asset name="ProxyBypass.proxyBypass" displayName="proxyBypass" isDeployable="true">
+        <implementation.generic type="ProxyBypass"/>
+    </asset>
+    <asset name="AdministratorSetting.settings" displayName="settings" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
     </asset>
     <asset name="AdministratorSetting.extended" displayName="Extended settings" isDeployable="true">
@@ -17,19 +26,10 @@
     <asset name="PolicyAction.GlobalLogInvocationPolicyAction" displayName="Policy Action [Log Invocation] -&gt; Transaction logging" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="AdministratorSetting.settings" displayName="settings" isDeployable="true">
-        <implementation.generic type="AdministratorSetting"/>
-    </asset>
-    <asset name="AdministratorSetting.errorProcessing" displayName="Service fault" isDeployable="true">
+    <asset name="AdministratorSetting.HTTPListener@5556" displayName="HTTPListener@5556" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
     </asset>
     <asset name="AdministratorSetting.logConfig" displayName="logConfig" isDeployable="true">
         <implementation.generic type="AdministratorSetting"/>
-    </asset>
-    <asset name="AdministratorSetting.keystore" displayName="Keystore/Truststore" isDeployable="true">
-        <implementation.generic type="AdministratorSetting"/>
-    </asset>
-    <asset name="ProxyBypass.proxyBypass" displayName="proxyBypass" isDeployable="true">
-        <implementation.generic type="ProxyBypass"/>
     </asset>
 </asset_composite>
