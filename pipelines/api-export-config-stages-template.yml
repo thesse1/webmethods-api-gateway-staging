@@ -22,7 +22,7 @@ stages:
 - ${{ each stage in parameters.all_stages }}:
   - ${{ each instance in stage.instances }}:
     - ${{ if eq(instance, parameters.source_instance) }}:
-      - stage: ${{instance}}
+      - stage: Export_from_${{instance}}
         dependsOn: []
         jobs:
         - deployment: Export_config_from_API_Gateway_${{instance}}
