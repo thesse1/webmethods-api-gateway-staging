@@ -23,6 +23,7 @@ parameters:
   values:
   - 'All'
   - DESIGN
+  - BUILD
   - DEV_INT
   - DEV_EXT
   - TEST_INT
