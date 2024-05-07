@@ -1,0 +1,40 @@
+trigger: none
+
+# resources:
+#   pipelines:
+#   - pipeline: trigger-pipeline-in-trigger-project # Name of the pipeline resource.
+#     source: trigger-pipeline_File # The name of the pipeline referenced by this pipeline resource.
+#     project: trigger-project # Required only if the source pipeline is in another project
+#     trigger: true
+
+parameters:
+- name: api_project
+  displayName: Import and export which API project?
+  type: string
+  default: petstore
+- name: api_id
+  displayName: Update which API?
+  type: string
+  default: f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5
+- name: update_file
+  displayName: Update using which file?
+  type: string
+  default: petstore_swagger_updated.json
+
+variables:
+- group: Project_configuration
+- name: api_project
+  value: ${{parameters.api_project}}
+
+name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+
+stages:
+- template: /pipelines/api-update-stages-template.yml
+  parameters:
+    api_project: ${{parameters.api_project}}
+    api_id: ${{parameters.api_id}}
+    update_type: "UpdateAPI_File"
+    update_url: ""
+    update_username: ""
+    update_password: ""
+    update_file: ${{parameters.update_file}}
