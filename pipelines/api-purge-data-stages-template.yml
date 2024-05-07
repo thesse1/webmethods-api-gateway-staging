@@ -19,38 +19,14 @@ stages:
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      # - job: Check_environment_file_for_${{instance}}
-      #   pool:
-      #     name: '$(pool_name)'
-      #     vmImage: '$(pool_image)'
-      #   steps:
-      #   - checkout: self
-      #     submodules: "true"
-      #     persistCredentials: "true"
-      #     fetchDepth: 0
-      #   - bash: |
-      #       if test -f $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json; then
-      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json exists
-      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
-      #       else
-      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json does not exist, skipping next job
-      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
-      #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json"
-      #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json"
-      #       fi
-      #     displayName: Check if environment.json file exists
-      #     name: Check_environment_file
-
       - deployment: Purge_Data_on_API_Gateway_${{instance}}
-        # dependsOn: Check_environment_file_for_${{instance}}
-        # condition: and(succeeded(), eq(dependencies.Check_environment_file_for_${{instance}}.outputs['Check_environment_file.environment_file_exists'], 'true'))
-        environment: ${{instance}}
+        environment: ${{instance.name}}
         variables:
         - group: ${{stage.name}}_users
-        - group: ${{instance}}_users
+        - group: ${{instance.name}}_users
         pool:
-          name: '$(pool_name)'
-          vmImage: '$(pool_image)'
+          name: ${{instance.pool_name}}
+          vmImage: ${{instance.pool_image}}
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -59,13 +35,15 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
                 fetchDepth: 0
+
               - download: none
+
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
                   environment: ${{instance}}_environment.json
                   type: ${{stage.name}}
               - bash: |
-                  echo "##vso[build.addbuildtag]${{instance}}"
+                  echo "##vso[build.addbuildtag]${{instance.name}}"
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                 displayName: Add build tags
