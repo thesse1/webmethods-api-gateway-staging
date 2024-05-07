@@ -8,6 +8,13 @@ trigger: none
 #     trigger: true
 
 parameters:
+- name: environment_set
+  displayName: Update API in which environment set?
+  default: Default
+  values:
+  - Default
+  - webm_io
+  - azure_demo_01
 - name: api_project
   displayName: Import and export which API project?
   type: string
@@ -31,6 +38,8 @@ name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 stages:
 - template: /pipelines/api-update-stages-template.yml
   parameters:
+    ${{ if ne(parameters.environment_set, 'Default')}}:
+      environment_set: ${{ parameters.environment_set }}
     api_project: ${{parameters.api_project}}
     api_id: ${{parameters.api_id}}
     update_type: "UpdateAPI_File"
