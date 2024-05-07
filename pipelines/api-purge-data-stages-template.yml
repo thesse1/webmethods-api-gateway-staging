@@ -19,7 +19,7 @@ stages:
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      - deployment: Purge_Data_on_API_Gateway_${{instance}}
+      - deployment: Purge_Data_on_API_Gateway_${{instance.name}}
         environment: API_Gateway_${{instance.name}}
         variables:
         - group: ${{stage.name}}_users
@@ -41,7 +41,7 @@ stages:
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
-                  environment: ${{instance}}_environment.json
+                  environment: ${{instance.name}}_environment.json
                   type: ${{stage.name}}
               - bash: |
                   echo "##vso[build.addbuildtag]${{instance.name}}"
