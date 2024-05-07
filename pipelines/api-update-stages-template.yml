@@ -60,10 +60,9 @@ stages:
               update_username: ${{parameters.update_username}}
               update_password: ${{parameters.update_password}}
               update_file: ${{parameters.update_file}}
-
-# - template: /pipelines/api-inject-stages-template.yml
-#   parameters:
-#     template: /pipelines/api-export-api-stages-template.yml
-#     parameters:
-#       api_project: ${{parameters.api_project}}
-#       commitMessage: Update ${{parameters.api_project}} API triggered by run $(resources.pipeline.trigger-pipeline-in-trigger-project.runName) of pipeline $(resources.pipeline.trigger-pipeline-in-trigger-project.pipelineName)
+          - bash: |
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+              echo "##vso[build.addbuildtag]DESIGN"
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}_DESIGN"
+              echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
+            displayName: Add build tags
