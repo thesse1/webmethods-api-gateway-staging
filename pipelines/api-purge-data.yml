@@ -1,5 +1,12 @@
 trigger: none
 
+schedules:
+- cron: '0 0 * * *'
+  displayName: Daily 1am CET
+  branches:
+    include:
+    - main
+
 # resources:
 #   pipelines:
 #   - pipeline: trigger-pipeline # Name of the pipeline resource.
