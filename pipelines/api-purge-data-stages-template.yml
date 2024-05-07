@@ -20,7 +20,7 @@ stages:
     jobs:
     - ${{ each instance in stage.instances }}:
       - deployment: Purge_Data_on_API_Gateway_${{instance}}
-        environment: ${{instance.name}}
+        environment: API_Gateway_${{instance.name}}
         variables:
         - group: ${{stage.name}}_users
         - group: ${{instance.name}}_users
