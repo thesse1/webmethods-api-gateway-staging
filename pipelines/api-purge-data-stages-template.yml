@@ -9,10 +9,13 @@ parameters:
   type: object
 - name: build_instances_mapping
   type: object
+- name: environment_set
+- name: deployment_sets
+  type: object
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
-  - stage: ${{stage.name}}
+  - stage: Purge_Data_on_${{stage.name}}
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
@@ -38,7 +41,7 @@ stages:
       #     displayName: Check if environment.json file exists
       #     name: Check_environment_file
 
-      - deployment: Purge_Data_on_${{instance}}
+      - deployment: Purge_Data_on_API_Gateway_${{instance}}
         # dependsOn: Check_environment_file_for_${{instance}}
         # condition: and(succeeded(), eq(dependencies.Check_environment_file_for_${{instance}}.outputs['Check_environment_file.environment_file_exists'], 'true'))
         environment: ${{instance}}
@@ -59,6 +62,7 @@ stages:
               - download: none
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
+                  environment_set: ${{parameters.environment_set}}
                   environment: ${{instance}}_environment.json
                   type: ${{stage.name}}
               - bash: |

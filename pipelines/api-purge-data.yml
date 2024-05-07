@@ -6,6 +6,28 @@ trigger: none
 #     source: 'Execute JMeter Load Test' # The name of the pipeline referenced by this pipeline resource.
 #     trigger: true
 
+parameters:
+- name: environment_set
+  displayName: Purge data from API Gateway in which environment set?
+  default: Default
+  values:
+  - Default
+  - webm_io
+  - azure_demo_01
+- name: selected_stage
+  displayName: Purge data from which API Gateway stage(s)?
+  default: 'All'
+  values:
+  - 'All'
+  - DESIGN
+  - BUILD
+  - DEV_INT
+  - DEV_EXT
+  - TEST_INT
+  - TEST_EXT
+  - PROD_INT
+  - PROD_EXT
+
 variables:
 - group: Project_configuration
 
@@ -14,3 +36,6 @@ stages:
   parameters:
     template: /pipelines/api-purge-data-stages-template.yml
     parameters: []
+    ${{ if ne(parameters.environment_set, 'Default')}}:
+      environment_set: ${{ parameters.environment_set }}
+    selected_stage: ${{ parameters.selected_stage }}
