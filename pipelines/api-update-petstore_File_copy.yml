@@ -28,16 +28,13 @@ variables:
 
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
-steps:
-- bash: echo Hello
-
-# stages:
-# - template: /pipelines/api-update-stages-template.yml
-#   parameters:
-#     api_project: ${{parameters.api_project}}
-#     api_id: ${{parameters.api_id}}
-#     update_type: "UpdateAPI_File"
-#     update_url: ""
-#     update_username: ""
-#     update_password: ""
-#     update_file: ${{parameters.update_file}}
+stages:
+- template: /pipelines/api-update-stages-template.yml
+  parameters:
+    api_project: ${{parameters.api_project}}
+    api_id: ${{parameters.api_id}}
+    update_type: "UpdateAPI_File"
+    update_url: ""
+    update_username: ""
+    update_password: ""
+    update_file: ${{parameters.update_file}}
