@@ -1,0 +1,66 @@
+parameters:
+- name: api_project
+- name: api_id
+- name: update_type
+- name: update_url
+- name: update_username
+- name: update_password
+- name: update_file
+
+stages:
+# - template: /pipelines/api-inject-stages-template.yml
+#   parameters:
+#     template: /pipelines/api-build-and-deploy-stages-template.yml
+#     parameters:
+#       deployment_sets:
+#       - api_projects:
+#         - ${{parameters.api_project}}
+#         targets:
+#         - DESIGN
+#     build_instance: BUILD_01
+
+- stage: Update_${{parameters.api_project}}_on_DESIGN
+  jobs:
+  - deployment: Update_API_on_API_Gateway_DESIGN
+    environment: DESIGN
+    variables:
+    - group: DESIGN_users
+    pool:
+      name: '$(pool_name)'
+      vmImage: '$(pool_image)'
+    strategy:
+      runOnce:    #rolling, canary are the other strategies that are supported
+        deploy:
+          steps:
+          - checkout: self
+            submodules: "true"
+            persistCredentials: "true"
+            fetchDepth: 0
+          # - download: none
+          - download: trigger-pipeline-in-trigger-project
+          - bash: printenv | grep RESOURCES_PIPELINE_ | sort
+            displayName: Print pipeline resource variables
+          # - bash: |
+          #     echo "Directories:"
+          #     ls -l $(Pipeline.Workspace)
+          #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project
+          #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job
+          #     echo
+          #     echo "Swagger:"
+          #     cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
+          #   displayName: Print asset downloaded from upstream pipeline
+          - template: /pipelines/api-update-steps-template.yml
+            parameters:
+              api_id: ${{parameters.api_id}}
+              update_type: ${{parameters.update_type}}
+              update_url: ${{parameters.update_url}}
+              update_username: ${{parameters.update_username}}
+              update_password: ${{parameters.update_password}}
+              update_file: ${{parameters.update_file}}
+
+# - template: /pipelines/api-inject-stages-template.yml
+#   parameters:
+#     template: /pipelines/api-export-api-stages-template.yml
+#     parameters:
+#       api_project: ${{parameters.api_project}}
+#       commitMessage: Update ${{parameters.api_project}} API triggered by run $(resources.pipeline.trigger-pipeline-in-trigger-project.runName) of pipeline $(resources.pipeline.trigger-pipeline-in-trigger-project.pipelineName)

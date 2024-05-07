@@ -29,7 +29,7 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
-- template: /pipelines/api-update-stages-template.yml
+- template: /pipelines/api-update-stages-template_copy.yml
   parameters:
     api_project: ${{parameters.api_project}}
     api_id: ${{parameters.api_id}}
