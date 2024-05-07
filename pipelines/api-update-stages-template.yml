@@ -38,8 +38,8 @@ stages:
             fetchDepth: 0
           - download: none
           # - download: trigger-pipeline-in-trigger-project
-          - bash: printenv | grep RESOURCES_PIPELINE_ | sort
-            displayName: Print pipeline resource variables
+          # - bash: printenv | grep RESOURCES_PIPELINE_ | sort
+          #   displayName: Print pipeline resource variables
           # - bash: |
           #     echo "Directories:"
           #     ls -l $(Pipeline.Workspace)
