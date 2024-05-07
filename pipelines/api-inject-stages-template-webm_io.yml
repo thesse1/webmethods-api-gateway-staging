@@ -7,31 +7,65 @@ parameters:
   type: object
   default:
   - name: DESIGN
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
     is_design_stage: true
     instances:
-    - DESIGN
+    - name: DESIGN
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: BUILD
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
     is_build_stage: true
     instances:
-    - BUILD
+    - name: BUILD
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: DEV_INT
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
     instances:
-    - DEV_INT
+    - name: DEV_INT
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: DEV_EXT
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
     instances:
-    - DEV_EXT
+    - name: DEV_EXT
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: TEST_INT
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
     instances:
-    - TEST_INT
+    - name: TEST_INT
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: TEST_EXT
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
     instances:
-    - TEST_EXT
+    - name: TEST_EXT
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: PROD_INT
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
+    configure_haft: true
     instances:
-    - PROD_INT
+    - name: PROD_INT
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: PROD_EXT
+    pool_name: vmsspoolagents-04
+    pool_image: ubuntu-latest
+    configure_haft: true
     instances:
-    - PROD_EXT
+    - name: PROD_EXT
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
 - name: build_instances_mapping
   type: object
   default:
@@ -60,17 +94,17 @@ stages:
         design_stage: ${{stage}}
       ${{ if stage.is_build_stage }}:
         build_stage: ${{stage}}
-        ${{ if containsValue(stage.instances, parameters.build_instance) }}:
-          build_instances_mapping:
-            DESIGN: ${{parameters.build_instance}}
-            DEV_INT: ${{parameters.build_instance}}
-            DEV_EXT: ${{parameters.build_instance}}
-            TEST_INT: ${{parameters.build_instance}}
-            TEST_EXT: ${{parameters.build_instance}}
-            PROD_INT: ${{parameters.build_instance}}
-            PROD_EXT: ${{parameters.build_instance}}
-        ${{ else }}:
-          build_instances_mapping: ${{parameters.build_instances_mapping}}
+        # ${{ if containsValue(stage.instances, parameters.build_instance) }}:
+        #   build_instances_mapping:
+        #     DESIGN: ${{parameters.build_instance}}
+        #     DEV_INT: ${{parameters.build_instance}}
+        #     DEV_EXT: ${{parameters.build_instance}}
+        #     TEST_INT: ${{parameters.build_instance}}
+        #     TEST_EXT: ${{parameters.build_instance}}
+        #     PROD_INT: ${{parameters.build_instance}}
+        #     PROD_EXT: ${{parameters.build_instance}}
+        # ${{ else }}:
+        #   build_instances_mapping: ${{parameters.build_instances_mapping}}
     target_stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if not(stage.is_build_stage) }}:
@@ -82,17 +116,17 @@ stages:
       - ${{ elseif eq(parameters.selected_stage, 'All') }}:
         - ${{stage}}
       
-    # ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
-    #   build_instances_mapping: ${{parameters.build_instances_mapping}}
-    # ${{ else }}:
-    #   build_instances_mapping:
-    #     DESIGN: ${{parameters.build_instance}}
-    #     DEV_INT: ${{parameters.build_instance}}
-    #     DEV_EXT: ${{parameters.build_instance}}
-    #     TEST_INT: ${{parameters.build_instance}}
-    #     TEST_EXT: ${{parameters.build_instance}}
-    #     PROD_INT: ${{parameters.build_instance}}
-    #     PROD_EXT: ${{parameters.build_instance}}
+    ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
+      build_instances_mapping: ${{parameters.build_instances_mapping}}
+    ${{ else }}:
+      build_instances_mapping:
+        DESIGN: ${{parameters.build_instance}}
+        DEV_INT: ${{parameters.build_instance}}
+        DEV_EXT: ${{parameters.build_instance}}
+        TEST_INT: ${{parameters.build_instance}}
+        TEST_EXT: ${{parameters.build_instance}}
+        PROD_INT: ${{parameters.build_instance}}
+        PROD_EXT: ${{parameters.build_instance}}
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
     - ${{ each eligible_target in parameters.eligible_targets }}:

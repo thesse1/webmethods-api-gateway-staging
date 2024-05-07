@@ -1,6 +1,6 @@
 parameters:
 - name: template
-  type: object
+  type: string
 - name: parameters
   type: object
 - name: api_project
@@ -12,6 +12,7 @@ parameters:
 - name: selected_stage
   default: 'All'
 - name: build_instance
+  type: string
   default: Default Mapping
 - name: eligible_targets
   displayName: Which sets of API projects can be deployed on which API Gateway stages?
