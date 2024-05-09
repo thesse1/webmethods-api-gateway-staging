@@ -1,7 +1,7 @@
 parameters:
-  environment_set: ''
-  environment: ''
-  instance: ''
+- name: environment_set
+- name: environment
+- name: instance
 
 steps:
 - bash: |
