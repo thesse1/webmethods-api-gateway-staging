@@ -15,7 +15,7 @@ steps:
     --env-var haft_manager_user='$(haft_manager_user)' \
     --env-var haft_manager_password='$(haft_manager_password)' \
     -e environments/${{parameters.environment_set}}/${{parameters.environment}} \
-    -g environments/${{parameters.environment_set}}/API_Gateway_${{parameters.type}}_haft_globals.json \
+    -g environments/${{parameters.environment_set}}/API_Gateway_${{parameters.stage_name}}_haft_globals.json \
     --global-var nodeName_01=$(node_name_01) \
     --global-var nodeName_02=$(node_name_02) \
     $(environment_insecureflag)
