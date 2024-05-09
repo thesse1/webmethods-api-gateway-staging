@@ -53,7 +53,7 @@ parameters:
   - name: PROD_INT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    configure_haft: true
+    configure_haft: false
     instances:
     - name: PROD_INT
       pool_name: vmsspoolagents-04
@@ -61,7 +61,7 @@ parameters:
   - name: PROD_EXT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    configure_haft: true
+    configure_haft: false
     instances:
     - name: PROD_EXT
       pool_name: vmsspoolagents-04
