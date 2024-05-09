@@ -19,38 +19,14 @@ stages:
     dependsOn: []
     jobs:
     - ${{ each instance in stage.instances }}:
-      # - job: Check_environment_file_for_${{instance}}
-      #   pool:
-      #     name: '$(pool_name)'
-      #     vmImage: '$(pool_image)'
-      #   steps:
-      #   - checkout: self
-      #     submodules: "true"
-      #     persistCredentials: "true"
-      #     fetchDepth: 0
-      #   - bash: |
-      #       if test -f $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json; then
-      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json exists
-      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
-      #       else
-      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json does not exist, skipping next job
-      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
-      #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json"
-      #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{instance}}_environment.json"
-      #       fi
-      #     displayName: Check if environment.json file exists
-      #     name: Check_environment_file
-
-      - deployment: Configure_API_Gateway_${{instance}}
-        # dependsOn: Check_environment_file_for_${{instance}}
-        # condition: and(succeeded(), eq(dependencies.Check_environment_file_for_${{instance}}.outputs['Check_environment_file.environment_file_exists'], 'true'))
-        environment: ${{instance}}
+      - deployment: Configure_API_Gateway_${{instance.name}}
+        environment: API_Gateway_${{instance.name}}
         variables:
         - group: ${{stage.name}}_users
-        - group: ${{instance}}_users
+        - group: ${{instance.name}}_users
         pool:
-          name: '$(pool_name)'
-          vmImage: '$(pool_image)'
+          name: ${{instance.pool_name}}
+          vmImage: ${{instance.pool_image}}
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -60,63 +36,111 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              # - bash: "Debug: $[dependencies.Check_environment_file_for_${{instance}}.outputs['Check_environment_file.environment_file_exists']]"
+              # - bash: "Debug: $[dependencies.Check_environment_file_for_${{instance.name}}.outputs['Check_environment_file.environment_file_exists']]"
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
                   environment: ${{instance}}_environment.json
+                  instance: ${{instance.name}}
                   type: ${{stage.name}}
               - bash: |
-                  echo "##vso[build.addbuildtag]${{instance}}"
+                  echo "##vso[build.addbuildtag]${{stage.name}}"
+                  echo "##vso[build.addbuildtag]${{instance.name}}"
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                 displayName: Add build tags
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
-      # - job: Check_environment_file_haft
-      #   pool:
-      #     name: '$(pool_name)'
-      #     vmImage: '$(pool_image)'
-      #   steps:
-      #   - checkout: self
-      #     submodules: "true"
-      #     persistCredentials: "true"
-      #     fetchDepth: 0
-      #   - bash: |
-      #       if test -f $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{stage.name}}_haft_environment.json; then
-      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{stage.name}}_haft_environment.json exists
-      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
-      #       else
-      #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{stage.name}}_haft_environment.json does not exist, skipping next job
-      #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
-      #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{stage.name}}_haft_environment.json.json"
-      #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{stage.name}}_haft_environment.json.json"
-      #       fi
-      #     displayName: Check if environment.json file exists
-      #     name: Check_environment_file
+      - ${{ each instance in stage.instances }}:
+        - deployment: Configure_HAFT_listener_for_API_Gateway_${{instance.name}}
+          dependsOn: Configure_API_Gateway_${{instance.name}}
+          environment: API_Gateway_${{instance.name}}
+          variables:
+          - group: ${{instance.name}}_users
+          pool:
+            name: ${{instance.pool_name}}
+            vmImage: ${{instance.pool_image}}
+          strategy:
+            runOnce:    #rolling, canary are the other strategies that are supported
+              deploy:
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                  fetchDepth: 0
 
-      - deployment: Configure_HAFT_for_API_Gateway_${{stage.name}}
-        # dependsOn: Check_environment_file_haft
-        # condition: and(succeeded(), eq(dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists'], 'true'))
-        environment: ${{stage.name}}_HAFT
-        variables:
-        - group: ${{stage.name}}_HAFT_users
-        pool:
-          name: '$(pool_name)'
-          vmImage: '$(pool_image)'
-        strategy:
-          runOnce:    #rolling, canary are the other strategies that are supported
-            deploy:
-              steps:
-              - checkout: self
-                submodules: "true"
-                persistCredentials: "true"
-                fetchDepth: 0
-              - download: none
-              # - bash: "Debug: $[dependencies.Check_environment_file_haft.outputs['Check_environment_file.environment_file_exists']]"
-              - template: /pipelines/api-configure-haft-steps-template.yml
-                parameters:
-                  type: ${{stage.name}}
-              - bash: |
-                  echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
-                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
-                displayName: Add build tags
+                - download: none
+
+                - template: /pipelines/api-configure-haft-listener-steps-template.yml
+                  parameters:
+                    instance: ${{instance.name}}
+                    type: ${{stage.name}}
+
+        - deployment: Configure_HAFT_ring_for_API_Gateway_${{instance.name}}
+          dependsOn:
+          - Configure_HAFT_listener_for_API_Gateway_PRODUCTION
+          - Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION
+          environment: API_Gateway_${{instance.name}}
+          variables:
+          - group: ${{instance.name}}_users
+          - name: node_name_01
+            # value: $[stageDependencies.PRODUCTION_HAFT_listeners.Configure_HAFT_listener_for_API_Gateway_PRODUCTION.outputs['Configure_HAFT_listener_for_API_Gateway_PRODUCTION.setoutputvar.node_name']]
+            value: $[dependencies.Configure_HAFT_listener_for_API_Gateway_PRODUCTION.outputs['Configure_HAFT_listener_for_API_Gateway_PRODUCTION.setoutputvar.node_name']]
+          - name: node_name_02
+            # value: $[stageDependencies.PRODUCTION_HAFT_listeners.Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION.outputs['Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION.setoutputvar.node_name']]
+            value: $[dependencies.Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION.outputs['Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION.setoutputvar.node_name']]
+          pool:
+            name: ${{instance.pool_name}}
+            vmImage: ${{instance.pool_image}}
+          strategy:
+            runOnce:    #rolling, canary are the other strategies that are supported
+              deploy:
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                  fetchDepth: 0
+
+                - download: none
+
+                - template: /pipelines/api-configure-haft-ring-steps-template.yml
+                  parameters:
+                    instance: ${{instance.name}}
+                    type: ${{stage.name}}
+
+      - job: Wait_for_HAFT_ring_to_form
+        pool: server # note: the value 'server' is a reserved keyword which indicates this is an agentless job
+        dependsOn:
+        - Configure_HAFT_ring_for_API_Gateway_PRODUCTION
+        - Configure_HAFT_ring_for_API_Gateway_GEOPRODUCTION
+        steps:
+        - task: Delay@1
+          inputs:
+            delayForMinutes: '5'
+
+      - ${{ each instance in stage.instances }}:
+        - deployment: Validate_HAFT_ring_for_API_Gateway_${{instance.name}}
+          dependsOn: Wait_for_HAFT_ring_to_form
+          environment: API_Gateway_${{instance.name}}
+          variables:
+          - group: ${{instance.name}}_users
+          pool:
+            name: ${{instance.pool_name}}
+            vmImage: ${{instance.pool_image}}
+          strategy:
+            runOnce:    #rolling, canary are the other strategies that are supported
+              deploy:
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                  fetchDepth: 0
+
+                - download: none
+
+                - template: /pipelines/api-validate-haft-ring-steps-template.yml
+                  parameters:
+                    instance: ${{instance.name}}
+                    type: ${{stage.name}}
+
+                - bash: echo "##vso[build.addbuildtag]${{instance.name}}_HAFT"
+                  displayName: Add build tag
