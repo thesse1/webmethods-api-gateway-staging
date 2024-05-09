@@ -110,8 +110,8 @@ stages:
       - job: Wait_for_HAFT_ring_to_form
         pool: server # note: the value 'server' is a reserved keyword which indicates this is an agentless job
         dependsOn:
-        - Configure_HAFT_ring_for_API_Gateway_PRODUCTION
-        - Configure_HAFT_ring_for_API_Gateway_GEOPRODUCTION
+        - ${{ each otherinstance in stage.instances }}:
+          - Configure_HAFT_ring_for_API_Gateway_${{otherinstance.name}}
         steps:
         - task: Delay@1
           inputs:
