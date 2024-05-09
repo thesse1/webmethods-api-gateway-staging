@@ -29,7 +29,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.instance_name}}.zip'
-    artifactName: '${{parameters.target}}_export'
+    artifactName: '${{parameters.stage_name}}_export'
   displayName: 'Publish export result to pipeline build'
 
 - task: ExtractFiles@1
