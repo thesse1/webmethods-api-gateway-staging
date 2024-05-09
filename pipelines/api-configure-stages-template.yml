@@ -40,7 +40,7 @@ stages:
               - template: /pipelines/api-configure-steps-template.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
-                  environment: ${{instance}}_environment.json
+                  environment: ${{instance.name}}_environment.json
                   instance: ${{instance.name}}
                   stage: ${{stage.name}}
               - bash: |
