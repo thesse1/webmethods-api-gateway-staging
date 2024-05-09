@@ -77,8 +77,8 @@ stages:
 
         - deployment: Configure_HAFT_ring_for_API_Gateway_${{instance.name}}
           dependsOn:
-          - Configure_HAFT_listener_for_API_Gateway_PRODUCTION
-          - Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION
+          - {{ each instance in stage.instances }}:
+            - Configure_HAFT_listener_for_API_Gateway_${{instance.name}}
           environment: API_Gateway_${{instance.name}}
           variables:
           - group: ${{instance.name}}_users
