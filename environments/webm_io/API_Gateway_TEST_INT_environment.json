@@ -1,6 +1,6 @@
 {
   "id": "f313be5f-2640-22f7-36b6-3e79bbadc9e2",
-  "name": "TEST_EXT_environment",
+  "name": "API_Gateway_TEST_INT_environment",
   "values": [
 	{
 		"key": "protocol",
@@ -10,13 +10,13 @@
 	},
 	{
 		"key": "hostname",
-		"value": "playstageext.apigw-aw-eu.webmethods.io",
+		"value": "playstageint.apigw-aw-eu.webmethods.io",
 		"type": "text",
 		"enabled": true
 	},
 	{
 		"key": "ip",
-		"value": "playstageext.apigw-aw-eu.webmethods.io",
+		"value": "playstageint.apigw-aw-eu.webmethods.io",
 		"type": "text",
 		"enabled": true
 	},
@@ -40,13 +40,13 @@
 	},
 	{
 		"key": "api-hostname",
-		"value": "playstageext.apigw-aw-eu.webmethods.io",
+		"value": "playstageint.apigw-aw-eu.webmethods.io",
 		"type": "default",
 		"enabled": true
 	},
 	{
 		"key": "api-ip",
-		"value": "playstageext.apigw-aw-eu.webmethods.io",
+		"value": "playstageint.apigw-aw-eu.webmethods.io",
 		"type": "default",
 		"enabled": true
 	},

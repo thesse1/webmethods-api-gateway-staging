@@ -1,6 +1,6 @@
 {
 	"id": "9b28aa8d-10ad-4404-a8c5-250088a78139",
-	"name": "BUILD_01_environment",
+	"name": "API_Gateway_BUILD_06_environment",
 	"values": [
 		{
 			"key": "protocol",
@@ -10,13 +10,13 @@
 		},
 		{
 			"key": "hostname",
-			"value": "azure-demo-01-build-01-apigateway-admin.azuredemo-softwareag.com",
+			"value": "azure-demo-01-build-06-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "azure-demo-01-build-01-apigateway-admin.azuredemo-softwareag.com",
+			"value": "azure-demo-01-build-06-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
@@ -40,13 +40,13 @@
 		},
 		{
 			"key": "api-hostname",
-			"value": "azure-demo-01-build-01-apigateway.azuredemo-softwareag.com",
+			"value": "azure-demo-01-build-06-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api-ip",
-			"value": "azure-demo-01-build-01-apigateway.azuredemo-softwareag.com",
+			"value": "azure-demo-01-build-06-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},

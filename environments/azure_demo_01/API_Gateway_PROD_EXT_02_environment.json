@@ -1,6 +1,6 @@
 {
   "id": "f313be5f-2640-22f7-36b6-3e79bbadc9e2",
-  "name": "TEST_INT_environment",
+  "name": "API_Gateway_PROD_EXT_02_environment",
   "values": [
 	{
 		"key": "protocol",
@@ -10,13 +10,13 @@
 	},
 	{
 		"key": "hostname",
-		"value": "azure-demo-01-test-int-apigateway-admin.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
 	{
 		"key": "ip",
-		"value": "azure-demo-01-test-int-apigateway-admin.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
@@ -40,13 +40,13 @@
 	},
 	{
 		"key": "api-hostname",
-		"value": "azure-demo-01-test-int-apigateway.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway.azuredemo-softwareag.com",
 		"type": "default",
 		"enabled": true
 	},
 	{
 		"key": "api-ip",
-		"value": "azure-demo-01-test-int-apigateway.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway.azuredemo-softwareag.com",
 		"type": "default",
 		"enabled": true
 	},
@@ -76,7 +76,31 @@
 	},
 	{
 		"key": "elasticsearch-indexname",
-		"value": "apigw-test_int",
+		"value": "apigw-prod_ext",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-protocol",
+		"value": "http",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-hostname",
+		"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-ip",
+		"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "loadbalancer-port",
+		"value": "80",
 		"type": "default",
 		"enabled": true
 	}

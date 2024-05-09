@@ -1,6 +1,6 @@
 {
   "id": "f313be5f-2640-22f7-36b6-3e79bbadc9e2",
-  "name": "PROD_INT_haft_environment",
+  "name": "API_Gateway_PROD_EXT_haft_environment",
   "values": [
 	{
 		"key": "protocol_01",
@@ -10,13 +10,13 @@
 	},
 	{
 		"key": "hostname_01",
-		"value": "azure-demo-01-prod-int-01-apigateway-admin.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-01-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
 	{
 		"key": "ip_01",
-		"value": "azure-demo-01-prod-int-01-apigateway-admin.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-01-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
@@ -40,13 +40,13 @@
 	},
 	{
 		"key": "hostname_02",
-		"value": "azure-demo-01-prod-int-02-apigateway-admin.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
 	{
 		"key": "ip_02",
-		"value": "azure-demo-01-prod-int-02-apigateway-admin.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway-admin.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
@@ -64,7 +64,7 @@
 	},
 	{
 		"key": "ip_grpc_01",
-		"value": "azure-demo-01-prod-int-01-apigateway-grpc.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-01-apigateway-grpc.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},
@@ -76,7 +76,7 @@
 	},
 	{
 		"key": "ip_grpc_02",
-		"value": "azure-demo-01-prod-int-02-apigateway-grpc.azuredemo-softwareag.com",
+		"value": "azure-demo-01-prod-ext-02-apigateway-grpc.azuredemo-softwareag.com",
 		"type": "text",
 		"enabled": true
 	},

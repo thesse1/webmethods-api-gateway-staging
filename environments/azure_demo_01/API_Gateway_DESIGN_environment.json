@@ -1,64 +1,82 @@
 {
 	"id": "7772870f-1e65-4969-8b5b-289d9dc0c768",
-	"name": "DESIGN_environment",
+	"name": "API_Gateway_DESIGN_environment",
 	"values": [
 		{
 			"key": "protocol",
-			"value": "https",
+			"value": "http",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "hostname",
-			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"value": "azure-demo-01-design-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"value": "azure-demo-01-design-apigateway-admin.azuredemo-softwareag.com",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "port",
-			"value": "443",
+			"value": "80",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "insecureflag",
-			"value": "",
+			"value": "--insecure",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "api-protocol",
-			"value": "https",
+			"value": "http",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "api-hostname",
-			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"value": "azure-demo-01-design-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api-ip",
-			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"value": "azure-demo-01-design-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api-port",
-			"value": "443",
+			"value": "80",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api-insecureflag",
-			"value": "",
+			"value": "--insecure",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "elasticsearch-protocol",
+			"value": "https",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "elasticsearch-hostname",
+			"value": "azure-demo-01-elasticsearch.es.westeurope.azure.elastic-cloud.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "elasticsearch-indexname",
+			"value": "apigw-design",
 			"type": "default",
 			"enabled": true
 		}

@@ -42,7 +42,7 @@ stages:
                   environment_set: ${{parameters.environment_set}}
                   stage_name: ${{stage.name}}
                   instance_name: ${{instance.name}}
-                  environment: ${{instance.name}}_environment.json
+                  environment: API_Gateway_${{instance.name}}_environment.json
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"
@@ -73,7 +73,7 @@ stages:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                    environment: ${{instance.name}}_environment.json
+                    environment: API_Gateway_${{instance.name}}_environment.json
 
         - deployment: Configure_HAFT_ring_for_API_Gateway_${{instance.name}}
           dependsOn:
@@ -105,7 +105,7 @@ stages:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                    environment: ${{instance.name}}_environment.json
+                    environment: API_Gateway_${{instance.name}}_environment.json
 
       - job: Wait_for_HAFT_ring_to_form
         pool: server # note: the value 'server' is a reserved keyword which indicates this is an agentless job
@@ -140,6 +140,6 @@ stages:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                    environment: ${{instance.name}}_environment.json
+                    environment: API_Gateway_${{instance.name}}_environment.json
                 - bash: echo "##vso[build.addbuildtag]${{instance.name}}_HAFT"
                   displayName: Add build tag
