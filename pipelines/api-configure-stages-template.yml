@@ -44,9 +44,9 @@ stages:
                   instance: ${{instance.name}}
                   type: ${{stage.name}}
               - bash: |
+                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"
                   echo "##vso[build.addbuildtag]${{instance.name}}"
-                  echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                 displayName: Add build tags
 
     - ${{ if stage.configure_haft }}: # Configure HAFT on PROD stages
