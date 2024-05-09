@@ -24,7 +24,7 @@ stages:
 - stage: Update_${{parameters.api_project}}_on_DESIGN
   jobs:
   - deployment: Update_API_on_API_Gateway_DESIGN
-    environment: DESIGN
+    environment: API_Gateway_DESIGN
     variables:
     - group: DESIGN_users
     pool:
