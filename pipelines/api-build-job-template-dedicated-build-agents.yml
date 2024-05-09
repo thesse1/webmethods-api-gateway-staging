@@ -39,23 +39,24 @@ jobs:
           parameters:
             environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
-            build_environment: "$(agent_name)_environment.json"
+            build_environment: "API_Gateway_$(agent_name)_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
             build_instance_name: $(agent_name)
             target_type: ${{parameters.deployment_target}}
             prepare_condition: ${{true}}
             test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
             replace_condition: ${{ not(parameters.target_stage.is_design_stage) }}
-        - template: /pipelines/store-build-template.yml
+        - template: /pipelines/api-store-build-template.yml
           parameters:
             target_type: ${{parameters.deployment_target}}
             api_project: ${{parameters.api_project}}
         - bash: |
+            echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
+            echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}"
             echo "##vso[build.addbuildtag]$(agent_name)"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(agent_name)"
-            echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
           displayName: Add build tags
-        # - template: /pipelines/store-build-artifactory-template.yml
+        # - template: /pipelines/api-store-build-artifactory-template.yml
         #   parameters:
         #     target_type: $(targetType)

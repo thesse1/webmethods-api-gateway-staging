@@ -55,7 +55,8 @@ steps:
     --env-var initializer_password='$(initializer_password)' \
     --env-var elasticsearch_user='$(apigw_analytics_user)' \
     --env-var elasticsearch_password='$(apigw_analytics_password)' \
-    --env-var file_Loc=$(Build.BuildId)_configuration.zip -e environments/${{parameters.environment_set}}/${{parameters.environment}} \
+    --env-var file_Loc=$(Build.BuildId)_configuration.zip \
+    -e environments/${{parameters.environment_set}}/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize API Gateway ${{parameters.instance_name}}'

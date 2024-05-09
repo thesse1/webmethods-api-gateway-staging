@@ -1,8 +1,8 @@
 parameters:
-  api_project: ''
-  target_environment: ''
-  target_type: ''
-  environment_set: ''
+- name: api_project
+- name: target_environment
+- name: target_stage_name
+- name: environment_set
 
 steps:
 - bash: |
@@ -11,12 +11,13 @@ steps:
    echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment}}`"
    echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.target_type}} configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.target_stage_name}} configuration, extract ip, hostname, port and insecureflag'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_deploy_import'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_deploy_import'
+  displayName: 'Publish build result to pipeline build'
 
 - bash: |
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/scopes.json`"
@@ -30,7 +31,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip \
+    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'

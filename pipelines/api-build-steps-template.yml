@@ -1,13 +1,13 @@
 parameters:
-  api_project: ''
-  build_environment: ''
-  build_stage_name: ''
-  build_instance_name: ''
-  target_type: ''
-  prepare_condition: ''
-  test_condition: ''
-  replace_condition: ''
-  environment_set: ''
+- name: api_project
+- name: build_environment
+- name: build_stage_name
+- name: build_instance_name
+- name: target_stage_name
+- name: prepare_condition
+- name: test_condition
+- name: replace_condition
+- name: environment_set
 
 steps:
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
@@ -44,15 +44,16 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip'
+    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip'
     replaceExistingArchive: true
     verbose: true
   displayName: 'Create the API Deployable from the flat representation for API project ${{parameters.api_project}}'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_build_import'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_build_import'
+  displayName: 'Publish the API Deployable to pipeline build'
 
 - bash: |
    echo "##vso[task.setvariable variable=build_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment}}`"
@@ -87,7 +88,8 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_import.zip -e environments/${{parameters.environment_set}}/${{parameters.build_environment}} \
+    --env-var file_Loc=$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip \
+    -e environments/${{parameters.environment_set}}/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.build_instance_name}}'
@@ -107,7 +109,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_test_results'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
   condition: ${{parameters.test_condition}}
 
 # - task: FileTransform@1
@@ -118,17 +120,17 @@ steps:
 #     fileType: json
 
 - bash: |
-    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json`"
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_stage_name}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
 - bash: |
-    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_type}}"}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
+    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_stage_name}}"}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
 
 - script: |
-    newman run postman/collections/utilities/prepare/Prepare_for_${{parameters.target_type}}.json --reporters cli \
+    newman run postman/collections/utilities/prepare/Prepare_for_${{parameters.target_stage_name}}.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
     --env-var buildId=$(Build.BuildId) \
@@ -144,7 +146,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Validate and prepare assets for ${{parameters.target_type}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
+  displayName: 'Validate and prepare assets for ${{parameters.target_stage_name}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
   env:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.prepare_condition}})
@@ -152,7 +154,7 @@ steps:
 - bash: |
    curl $(build_environment_insecureflag) \
           -d @"apis/${{parameters.api_project}}/export_payload.json" \
-          --output $(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip \
+          --output $(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
@@ -163,13 +165,14 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_type}}_${{parameters.api_project}}_export.zip'
-    artifactName: '${{parameters.target_type}}_${{parameters.api_project}}_build_export'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_build_export'
+  displayName: 'Publish build result to pipeline build'
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' 
     testResultsFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
-    testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_type}}'
+    testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_stage_name}}'
     publishRunAttachments: false
   condition: always()
