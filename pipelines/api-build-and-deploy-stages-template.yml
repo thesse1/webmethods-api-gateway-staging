@@ -54,14 +54,14 @@ stages:
                         fetchDepth: 0
                       - template: /pipelines/api-retrieve-build-template.yml
                         parameters:
-                          target_type: ${{deployment_target}}
+                          target_stage_name: ${{deployment_target}}
                           api_project: ${{api_project}}
                       - template: /pipelines/api-deploy-steps-template.yml
                         parameters:
                           environment_set: ${{parameters.environment_set}}
                           api_project: ${{api_project}}
                           target_environment: API_Gateway_${{deploy_instance.name}}_environment.json
-                          target_type: ${{deployment_target}}
+                          target_stage_name: ${{deployment_target}}
 
                       - bash: |
                           echo "##vso[build.addbuildtag]${{parameters.environment_set}}"

@@ -35,7 +35,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Import the Deployable To API Gateway ${{parameters.target_type}}'
+  displayName: 'Import the Deployable To API Gateway ${{parameters.target_stage_name}}'
   env:
     no_proxy: $(target_environment_ip)
 
@@ -50,6 +50,6 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Republish all ${{parameters.api_project}} APIs from API Gateway ${{parameters.target_type}}'
+  displayName: 'Republish all ${{parameters.api_project}} APIs from API Gateway ${{parameters.target_stage_name}}'
   env:
     no_proxy: $(target_environment_ip)
