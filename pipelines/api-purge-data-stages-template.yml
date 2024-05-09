@@ -39,8 +39,8 @@ stages:
               - template: /pipelines/api-purge-data-steps-template.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
+                  instance_name: ${{instance.name}}
                   environment: ${{instance.name}}_environment.json
-                  instance: ${{instance.name}}
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"
