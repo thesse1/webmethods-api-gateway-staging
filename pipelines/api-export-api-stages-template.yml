@@ -21,8 +21,8 @@ parameters:
 stages:
 - stage: Export_${{parameters.api_project}}_from_${{parameters.design_stage.name}}
   jobs:
-  - deployment: 'Export_${{parameters.api_project}}_from_API_Gateway_${{parameters.design_stage.name}}'
-    environment: '${{parameters.design_stage.name}}'
+  - deployment: Export_${{parameters.api_project}}_from_API_Gateway_${{parameters.design_stage.name}}
+    environment: API_Gateway_${{parameters.design_stage.name}}
     variables:
     - group: ${{parameters.design_stage.name}}_users
     pool:

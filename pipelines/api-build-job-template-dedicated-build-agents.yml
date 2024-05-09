@@ -12,8 +12,8 @@ parameters:
 - name: environment_set
 
 jobs:
-- deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
-  environment: '${{parameters.build_stage.name}}_instances'
+- deployment: Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}
+  environment: API_Gateway_${{parameters.build_stage.name}}_instances
   variables:
   - group: ${{parameters.build_stage.name}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
