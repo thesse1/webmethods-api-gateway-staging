@@ -1,7 +1,7 @@
 parameters:
   environment_set: ''
   environment: ''
-  type: ''
+  instance: ''
 
 steps:
 - bash: |
@@ -10,7 +10,7 @@ steps:
    echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
    echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.instance}} configuration, extract ip, hostname, port and insecureflag'
 
 - script: |
     newman run postman/collections/utilities/purge/Purge_Data.json --reporters cli \
@@ -19,6 +19,6 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.environment}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Purge Data on API Gateway ${{parameters.type}}'
+  displayName: 'Purge Data on API Gateway ${{parameters.instance}}'
   env:
     no_proxy: $(environment_ip)
