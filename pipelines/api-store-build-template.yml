@@ -1,0 +1,23 @@
+parameters:
+- name: target_stage
+- name: api_project
+
+
+steps:
+- publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage}}_${{parameters.api_project}}_export.zip"
+  artifact: ${{parameters.target_stage}}_${{parameters.api_project}}
+  displayName: Build Upload
+
+# - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2
+#   displayName: 'Artifactory Build Upload'
+#   inputs:
+#     artifactoryService: '$(artifactoryService)'
+#     fileSpec: |
+#       {
+#         "files": [
+#           {
+#             "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage}}_${{parameters.api_project}}_export.zip",
+#             "target": "$(artifactoryFolder)/"
+#           }
+#         ]
+#       }

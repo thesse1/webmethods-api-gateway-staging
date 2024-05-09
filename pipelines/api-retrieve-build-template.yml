@@ -1,0 +1,27 @@
+parameters:
+- name: target_stage
+- name: api_project
+
+steps:
+- download: current
+  artifact: ${{parameters.target_stage}}_${{parameters.api_project}}
+  displayName: Build Download
+
+- bash: |
+    cp $(Pipeline.Workspace)/${{parameters.target_stage}}_${{parameters.api_project}}/* $(System.DefaultWorkingDirectory)
+  displayName: Copy artifact into working directory
+
+# - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-download.ArtifactoryGenericDownload@3
+#   displayName: 'Artifactory Build Download'
+#   inputs:
+#     connection: '$(artifactoryService)'
+#     fileSpec: |
+#       {
+#           "files": [
+#               {
+#                   "pattern": "$(artifactoryFolder)/$(Build.BuildId)_${{parameters.target_stage}}_${{parameters.api_project}}_export.zip",
+#                   "target": "$(System.DefaultWorkingDirectory)/",
+#                   "flat": "true"
+#               }
+#           ]
+#       }
