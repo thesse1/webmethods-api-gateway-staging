@@ -9,6 +9,8 @@ parameters:
   type: object
 - name: build_instances_mapping
   type: object
+- name: deployment_sets
+  type: object
 - name: environment_set
   default: webm_io
 - name: api_id
