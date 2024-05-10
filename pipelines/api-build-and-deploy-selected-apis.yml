@@ -52,9 +52,6 @@ parameters:
   - BUILD_06
   - BUILD_07
 
-variables:
-- group: Project_configuration
-
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
