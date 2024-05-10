@@ -35,9 +35,6 @@ parameters:
   - PROD_INT
   - PROD_EXT
 
-variables:
-- group: Project_configuration
-
 stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:
