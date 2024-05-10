@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "60be0db2-8609-4bb7-aa03-c7c27b58b485",
+		"name": "Configure_HAFT_listener_on_PROD_EXT_02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "32359734-60be0db2-8609-4bb7-aa03-c7c27b58b485"
+	},
+	"item": [
+		{
+			"name": "Get dataspace from node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e9e83a-2976-4c69-b1da-c32ba1a6053a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    pm.expect(pm.response.json()[\"listener.active\"].listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"nodeName_02\", pm.response.json()[\"listener.active\"].listener.nodeName);\r",
+							"pm.globals.set(\"nodeName\", pm.response.json()[\"listener.active\"].listener.nodeName);\r",
+							"\r",
+							"console.log(pm.response.json())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "2a4ea46e-f296-4eb7-8557-e8794967ffa0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configure listener on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7981d35d-15d3-460f-837f-ed08e27be2fc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.request.body)\r",
+							"console.log(pm.response.json())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7f34d0dd-fba9-41bc-9f58-bbbba88ce081",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"listener\": {\r\n            \"nodeName\": \"{{nodeName_02}}\",\r\n            \"host\": \"{{ip_grpc_02}}\", \r\n            \"port\": {{port_grpc_02}}\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/dataspace/listener",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"listener"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "bf2ba35e-be28-48c5-b432-27e693cf433e"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let requests = pm.globals.has('requests') ?  JSON.parse(pm.globals.get('requests')) : [];",
+					"request = {};",
+					"request.method = pm.request.method;",
+					"request.url = pm.request.url;",
+					"request.body = pm.request.body;",
+					"response = {};",
+					"response.status = pm.response.status;",
+					"response.body = pm.response.json();",
+					"requests.push({\"request\": request, \"response\": response});",
+					"pm.globals.set('requests', JSON.stringify(requests));"
+				],
+				"id": "4cb11ef1-0ca1-4728-8e12-27e4757b6c4a"
+			}
+		}
+	]
+}

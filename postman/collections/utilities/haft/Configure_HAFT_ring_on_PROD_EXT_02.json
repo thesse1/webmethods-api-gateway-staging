@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "591e5e07-36b7-482a-bb67-338041b167e0",
+		"name": "Configure_HAFT_ring_on_PROD_EXT_02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "32359734-591e5e07-36b7-482a-bb67-338041b167e0"
+	},
+	"item": [
+		{
+			"name": "Configure ring on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "da288e97-2b5d-44b3-b15d-168671c81f4b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.request.body)\r",
+							"console.log(pm.response.json())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "1b80665d-c91e-49e7-a093-a528fe8e677f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ring\": [\r\n        {\r\n            \"nodeName\": \"{{nodeName_01}}\",\r\n            \"host\": \"{{ip_grpc_01}}\",\r\n            \"port\": {{port_grpc_01}}\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/dataspace/ring",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"ring"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate ring on node 02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "756ff3ae-cb59-4bab-9a10-9ba1a845d221",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.request.body)\r",
+							"console.log(pm.response.json())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e26f5b5c-3c1b-45d1-ada9-de948b0825ff",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"mode\": \"ACTIVE_RING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/dataspace/activate",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dataspace from node 02 again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51c20d03-7e3a-4f72-a878-2ce5a6e7acd6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains nodeName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.listener.listener.nodeName).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.json())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4e9454b0-7246-4f72-abe4-b2ba72cf2b51",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/dataspace",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "e47939e2-988b-4491-b5ee-0e26f1ecd24c"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let requests = pm.globals.has('requests') ?  JSON.parse(pm.globals.get('requests')) : [];",
+					"request = {};",
+					"request.method = pm.request.method;",
+					"request.url = pm.request.url;",
+					"request.body = pm.request.body;",
+					"response = {};",
+					"response.status = pm.response.status;",
+					"response.body = pm.response.json();",
+					"requests.push({\"request\": request, \"response\": response});",
+					"pm.globals.set('requests', JSON.stringify(requests));"
+				],
+				"id": "dd8dec41-9e87-47a3-a0c1-725612c0c0fb"
+			}
+		}
+	]
+}
