@@ -24,9 +24,6 @@ parameters:
   type: string
   default: petstore_swagger_updated.json
 
-variables:
-- group: Project_configuration
-
 stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:
