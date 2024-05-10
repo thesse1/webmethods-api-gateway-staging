@@ -1,0 +1,33 @@
+{
+	"id": "d215f2ea-506b-49dc-89f2-25fe6f0c4290",
+	"values": [
+		{
+			"key": "ip_grpc_01",
+			"value": "azure-demo-01-prod-int-01-apigateway-admin.azuredemo-softwareag.com",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "port_grpc_01",
+			"value": "4440",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "ip_grpc_02",
+			"value": "azure-demo-01-prod-int-02-apigateway-admin.azuredemo-softwareag.com",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "port_grpc_02",
+			"value": "4440",
+			"type": "text",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-01-16T19:47:58.101Z",
+	"_postman_exported_using": "Postman/10.22.2"
+}
