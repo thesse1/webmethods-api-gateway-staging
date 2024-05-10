@@ -9,5 +9,6 @@
     "templateKey" : "schemaValidationFlag",
     "values" : [ "true" ]
   } ],
-  "active" : false
+  "active" : false,
+  "_docType" : "policyactions"
 }
