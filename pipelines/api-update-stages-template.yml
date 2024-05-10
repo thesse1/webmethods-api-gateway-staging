@@ -1,5 +1,5 @@
 parameters:
-- name: ${{parameters.design_stage.name}}_stage
+- name: design_stage
   type: object
 - name: build_stage
   type: object
