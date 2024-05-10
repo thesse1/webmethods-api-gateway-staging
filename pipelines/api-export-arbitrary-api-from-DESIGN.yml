@@ -15,9 +15,6 @@ parameters:
   displayName: Message for the commit in Git?
   type: string
 
-variables:
-- group: Project_configuration
-
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
