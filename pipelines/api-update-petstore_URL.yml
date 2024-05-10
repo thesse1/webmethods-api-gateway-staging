@@ -36,14 +36,17 @@ variables:
 name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
 
 stages:
-- template: /pipelines/api-update-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
+    template: /pipelines/api-update-stages-template.yml
+    parameters:
+      commitMessage: ${{parameters.commitMessage}}
+      api_project: ${{parameters.api_project}}
+      api_id: ${{parameters.api_id}}
+      update_type: "UpdateAPI_URL"
+      update_url: ${{parameters.update_url}}
+      update_username: $(update_username_petstore)
+      update_password: $(update_password_petstore)
+      update_file: ""
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
-    api_project: ${{parameters.api_project}}
-    api_id: ${{parameters.api_id}}
-    update_type: "UpdateAPI_URL"
-    update_url: ${{parameters.update_url}}
-    update_username: $(update_username_petstore)
-    update_password: $(update_password_petstore)
-    update_file: ""

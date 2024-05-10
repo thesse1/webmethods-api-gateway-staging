@@ -1,4 +1,14 @@
 parameters:
+- name: ${{parameters.design_stage.name}}_stage
+  type: object
+- name: build_stage
+  type: object
+- name: target_stages
+  type: object
+- name: all_stages
+  type: object
+- name: build_instances_mapping
+  type: object
 - name: environment_set
   default: webm_io
 - name: api_project
@@ -18,18 +28,18 @@ stages:
 #       - api_projects:
 #         - ${{parameters.api_project}}
 #         targets:
-#         - DESIGN
+#         - ${{parameters.design_stage.name}}
 #     build_instance: BUILD_01
 
-- stage: Update_${{parameters.api_project}}_on_DESIGN
+- stage: Update_${{parameters.api_project}}_on_${{parameters.design_stage.name}}
   jobs:
-  - deployment: Update_API_on_API_Gateway_DESIGN
-    environment: API_Gateway_DESIGN
+  - deployment: Update_API_on_API_Gateway_${{parameters.design_stage.name}}
+    environment: API_Gateway_${{parameters.design_stage.name}}
     variables:
-    - group: DESIGN_users
+    - group: ${{parameters.design_stage.name}}_users
     pool:
-      name: '$(pool_name)'
-      vmImage: '$(pool_image)'
+      name: ${{parameters.${{parameters.design_stage.name}}_stage.pool_name}}
+      vmImage: ${{parameters.${{parameters.design_stage.name}}_stage.pool_image}}
     strategy:
       runOnce:    #rolling, canary are the other strategies that are supported
         deploy:
@@ -54,7 +64,9 @@ stages:
           - template: /pipelines/api-update-steps-template.yml
             parameters:
               environment_set: ${{parameters.environment_set}}
-              environment: API_Gateway_DESIGN_environment.json
+              environment: API_Gateway_${{parameters.design_stage.name}}_environment.json
+              stage_name: ${{parameters.design_stage.name}}
+              instance_name: ${{parameters.design_stage.name}}
               api_id: ${{parameters.api_id}}
               update_type: ${{parameters.update_type}}
               update_url: ${{parameters.update_url}}
@@ -63,7 +75,7 @@ stages:
               update_file: ${{parameters.update_file}}
           - bash: |
               echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-              echo "##vso[build.addbuildtag]DESIGN"
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}_DESIGN"
+              echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
+              echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.design_stage.name}}"
               echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
             displayName: Add build tags
