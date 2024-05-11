@@ -19,8 +19,8 @@ jobs:
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
     - group: ${{parameters.deployment_target}}_value_substitutions
   pool:
-    name: '$(build_pool_name)'
-    vmImage: '$(build_pool_image)'
+    name: ${{parameters.build_stage.dedicated_pool_name}}
+    vmImage: ${{parameters.build_stage.dedicated_pool_image}}
   strategy:
     runOnce:    #rolling, canary are the other strategies that are supported
       deploy:

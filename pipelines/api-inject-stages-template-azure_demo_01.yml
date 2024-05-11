@@ -17,6 +17,8 @@ parameters:
   - name: BUILD
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
+    dedicated_pool_name: vmsspoolagents-build
+    dedicated_pool_image: ubuntu-latest
     is_build_stage: true
     instances:
     - name: BUILD_01
