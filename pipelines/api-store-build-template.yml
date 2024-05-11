@@ -4,7 +4,7 @@ parameters:
 
 steps:
 - publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip"
-  artifact: ${{parameters.target_stage_name}}_${{parameters.api_project}}
+  artifact: ${{parameters.target_stage_name}}_${{parameters.api_project}}_build_result
   displayName: Build Upload
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-upload.ArtifactoryGenericUpload@2

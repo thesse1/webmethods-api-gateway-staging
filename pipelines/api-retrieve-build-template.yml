@@ -4,7 +4,7 @@ parameters:
 
 steps:
 - download: current
-  artifact: ${{parameters.target_stage_name}}_${{parameters.api_project}}
+  artifact: ${{parameters.target_stage_name}}_${{parameters.api_project}}_build_result
   displayName: Build Download
 
 - bash: |
