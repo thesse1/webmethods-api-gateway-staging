@@ -52,7 +52,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip'
-    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_build_import'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}'
   displayName: 'Publish the API Deployable to pipeline build'
 
 - bash: |
@@ -109,7 +109,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
-    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}'
   condition: ${{parameters.test_condition}}
 
 # - task: FileTransform@1
@@ -163,11 +163,11 @@ steps:
   env:
     no_proxy: $(build_environment_hostname)
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip'
-    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_build_export'
-  displayName: 'Publish build result to pipeline build'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip'
+#     artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}'
+#   displayName: 'Publish build result to pipeline build'
 
 - task: PublishTestResults@2
   inputs:

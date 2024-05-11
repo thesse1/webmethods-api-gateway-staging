@@ -58,6 +58,3 @@ jobs:
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_stage.name}}"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(agent_name)"
           displayName: Add build tags
-        # - template: /pipelines/api-store-build-artifactory-template.yml
-        #   parameters:
-        #     target_stage_name: $(targetType)
