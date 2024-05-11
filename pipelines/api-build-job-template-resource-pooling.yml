@@ -40,7 +40,7 @@ jobs:
             AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
           inputs:
             azureSubscription: sub-ps-wminno-container-sbx
-            scriptType: pscore
+            scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
               az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability"
