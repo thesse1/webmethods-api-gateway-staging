@@ -117,7 +117,7 @@ stages:
 
       - ${{ each instance in stage.instances }}:
         - deployment: Validate_HAFT_ring_for_API_Gateway_${{instance.name}}
-          dependsOn: Wait_for_HAFT_ring_to_form
+          dependsOn: Wait_for_HAFT_ring_on_${{stage.name}}_to_form
           environment: API_Gateway_${{instance.name}}
           variables:
           - group: ${{instance.name}}_users
