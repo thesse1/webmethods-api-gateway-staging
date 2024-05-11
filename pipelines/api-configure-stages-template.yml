@@ -105,7 +105,7 @@ stages:
                     instance_name: ${{instance.name}}
                     environment: API_Gateway_${{instance.name}}_environment.json
 
-      - job: Wait_for_HAFT_ring_on_${{stage.name}}_to_form
+      - job: Wait_for_HAFT_ring_on_${{stage.name}}
         pool: server # note: the value 'server' is a reserved keyword which indicates this is an agentless job
         dependsOn:
         - ${{ each otherinstance in stage.instances }}:
@@ -117,7 +117,7 @@ stages:
 
       - ${{ each instance in stage.instances }}:
         - deployment: Validate_HAFT_ring_for_API_Gateway_${{instance.name}}
-          dependsOn: Wait_for_HAFT_ring_on_${{stage.name}}_to_form
+          dependsOn: Wait_for_HAFT_ring_on_${{stage.name}}
           environment: API_Gateway_${{instance.name}}
           variables:
           - group: ${{instance.name}}_users
