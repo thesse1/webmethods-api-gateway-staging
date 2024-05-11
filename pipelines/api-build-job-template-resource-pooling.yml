@@ -126,10 +126,23 @@ jobs:
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_stage.name}}"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(claimed_resource)"
           displayName: Add build tags
-        - script: |
-            echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-            group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
-            az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
-            echo "Released Claimed Resource: $(claimed_resource)"
-          displayName: 'Release Resource'
+        - task: AzureCLI@2
+          displayName: Release Resource
+          env:
+            AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+          inputs:
+            azureSubscription: sub-ps-wminno-container-sbx
+            scriptType: bash
+            scriptLocation: inlineScript
+            inlineScript: |
+              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
+              az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
+              echo "Released Claimed Resource: $(claimed_resource)"
           condition: always() # Release lock even if build was not successful
+        # - script: |
+        #     echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
+        #     az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
+        #     echo "Released Claimed Resource: $(claimed_resource)"
+        #   displayName: 'Release Resource'
+        #   condition: always() # Release lock even if build was not successful
