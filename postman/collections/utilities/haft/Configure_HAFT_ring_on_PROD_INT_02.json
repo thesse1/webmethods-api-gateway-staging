@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "591e5e07-36b7-482a-bb67-338041b167e0",
+		"_postman_id": "52ffebdb-ad9d-44a0-99ae-8bec092079ad",
 		"name": "Configure_HAFT_ring_on_PROD_INT_02",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "32359734-591e5e07-36b7-482a-bb67-338041b167e0"
+		"_uid": "3558839-52ffebdb-ad9d-44a0-99ae-8bec092079ad"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "da288e97-2b5d-44b3-b15d-168671c81f4b",
+						"id": "1411581e-5aff-4526-949e-f574b133c044",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -25,7 +25,7 @@
 					}
 				}
 			],
-			"id": "1b80665d-c91e-49e7-a093-a528fe8e677f",
+			"id": "0dc349b0-53ab-4385-8676-fb24f1d5cb4f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -89,7 +89,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "756ff3ae-cb59-4bab-9a10-9ba1a845d221",
+						"id": "2a81006a-03ab-4400-a574-2bd083885bda",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -102,7 +102,7 @@
 					}
 				}
 			],
-			"id": "e26f5b5c-3c1b-45d1-ada9-de948b0825ff",
+			"id": "6f8664db-de67-4569-825b-a0b75ed19777",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -166,7 +166,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "51c20d03-7e3a-4f72-a878-2ce5a6e7acd6",
+						"id": "02b067eb-ea47-4c61-bce4-bd9e9612e5e6",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -183,7 +183,7 @@
 					}
 				}
 			],
-			"id": "4e9454b0-7246-4f72-abe4-b2ba72cf2b51",
+			"id": "cb289152-13f9-46a1-bacb-dceb38b06ffa",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -240,7 +240,7 @@
 				"exec": [
 					""
 				],
-				"id": "e47939e2-988b-4491-b5ee-0e26f1ecd24c"
+				"id": "11f5da44-2d9a-4990-a54d-c2bf6517c754"
 			}
 		},
 		{
@@ -259,7 +259,7 @@
 					"requests.push({\"request\": request, \"response\": response});",
 					"pm.globals.set('requests', JSON.stringify(requests));"
 				],
-				"id": "dd8dec41-9e87-47a3-a0c1-725612c0c0fb"
+				"id": "7831e650-a853-449c-9d46-94cd29c49a1d"
 			}
 		}
 	]

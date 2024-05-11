@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "84752584-cb36-4b3b-8691-108c802d768c",
+		"_postman_id": "ccf4db2d-7a19-42cc-9e0b-6f62f350e852",
 		"name": "Republish_APIs",
 		"description": "This Collection deploys the API to API Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-84752584-cb36-4b3b-8691-108c802d768c"
+		"_uid": "3558839-ccf4db2d-7a19-42cc-9e0b-6f62f350e852"
 	},
 	"item": [
 		{
@@ -13,23 +13,29 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2f42d4dd-205c-49a8-99a4-44f5248ded0d",
+						"id": "f8936224-6412-4627-bb4b-45feae25dc98",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
 							"var jsonData = pm.response.json();\r",
-							"var portalId = jsonData.portalGatewayResponse[0].id;\r",
-							"console.log(portalId);\r",
-							"pm.globals.set(\"portalId\", portalId);"
+							"\r",
+							"if (jsonData.portalGatewayResponse === undefined || jsonData.portalGatewayResponse.length === 0) {\r",
+							"    console.log(\"No portal configured\");\r",
+							"    postman.setNextRequest(null);\r",
+							"} else {\r",
+							"    var portalId = jsonData.portalGatewayResponse[0].id;\r",
+							"    console.log(portalId);\r",
+							"    pm.globals.set(\"portalId\", portalId);\r",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
 					}
 				}
 			],
-			"id": "23e6d79f-6106-46d7-bae7-4ce6641b7584",
+			"id": "8935446b-d8af-49b2-a10e-d90bc35a3bc8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -38,8 +44,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"url": {
@@ -64,7 +69,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "820608f0-5a97-4083-a77f-cd539e40d87b",
+						"id": "da35009c-667a-430b-ae63-ddfd4b97487d",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -97,7 +102,7 @@
 					}
 				}
 			],
-			"id": "2ff1660a-aef1-491c-93bb-8634504f4264",
+			"id": "10702555-1294-4aaa-ae34-461314020a78",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -106,8 +111,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -136,7 +140,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1f4c9159-8eb4-43e1-ba59-262b6dd6c174",
+						"id": "7dae5237-0ff6-4054-94b4-24044ef4ad05",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -174,7 +178,7 @@
 					}
 				}
 			],
-			"id": "41f1875c-79e5-436b-a3f2-3dc13fe679bf",
+			"id": "4e218938-9cc6-47a3-b5ec-167763b826e3",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -183,8 +187,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"url": {
@@ -224,7 +227,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b11eb0ad-45cb-410e-9903-da8d97d35b1b",
+						"id": "53679885-1c9a-4cce-9120-60a42bae0f62",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -249,7 +252,7 @@
 					}
 				}
 			],
-			"id": "64397c20-578c-4ea1-94e3-7f20187bc60f",
+			"id": "e1bac2c9-0991-43cd-94d2-c89208da6cc9",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -258,8 +261,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"url": {
@@ -295,7 +297,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "56050328-2b42-4e43-b901-a86affde1913",
+						"id": "5492d6e2-2d4c-4e71-832e-7ea90ea12443",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -320,7 +322,7 @@
 					}
 				}
 			],
-			"id": "2bb0dec9-a2ca-49d1-991b-30fe01637cdf",
+			"id": "857d6ef1-c936-4071-a205-9c2139881392",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -400,7 +402,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "76c30cac-7c6a-4946-9d08-19b792c60d11",
+				"id": "85fbeddc-0ef1-42dc-b511-e8d680d5b171",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -410,7 +412,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6bf8c2be-b199-4c63-8eed-b0b49a79372f",
+				"id": "47b36463-5a15-4015-a1e3-0db1f7983228",
 				"type": "text/javascript",
 				"exec": [
 					""

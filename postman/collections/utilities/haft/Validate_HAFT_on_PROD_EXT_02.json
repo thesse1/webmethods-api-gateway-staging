@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b9f2a94a-5886-4c0f-8b93-c41b0238c94d",
+		"_postman_id": "d129393a-6fbe-43cf-b2d8-00c6688ff897",
 		"name": "Validate_HAFT_on_PROD_EXT_02",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "32359734-b9f2a94a-5886-4c0f-8b93-c41b0238c94d"
+		"_uid": "3558839-d129393a-6fbe-43cf-b2d8-00c6688ff897"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d64f89d0-8bff-49cc-890e-1c44bcc5a5bb",
+						"id": "34c6806a-1735-4215-8d3e-8362ef7ffc24",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -24,7 +24,7 @@
 					}
 				}
 			],
-			"id": "d16226d4-cc21-4dd6-bc28-797869958110",
+			"id": "b813dfb0-4270-4276-80c6-d0dfaad00c6a",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -82,7 +82,7 @@
 				"exec": [
 					""
 				],
-				"id": "d484ed96-f3ec-47b5-8b06-64461e91af90"
+				"id": "afe2b541-03c1-4866-a145-f76fa1e28f29"
 			}
 		},
 		{
@@ -101,7 +101,7 @@
 					"requests.push({\"request\": request, \"response\": response});",
 					"pm.globals.set('requests', JSON.stringify(requests));"
 				],
-				"id": "9ad30733-c1b6-46d0-9f9f-dc597298ec31"
+				"id": "2415d7db-f4ee-4e5a-8409-48cd741182f8"
 			}
 		}
 	]

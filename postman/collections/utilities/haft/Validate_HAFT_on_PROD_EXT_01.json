@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2c4cc7f5-926a-463f-83f7-1af140054752",
+		"_postman_id": "14e0b521-cf6c-4f88-b3dd-7c1e3a449b4f",
 		"name": "Validate_HAFT_on_PROD_EXT_01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "32359734-2c4cc7f5-926a-463f-83f7-1af140054752"
+		"_uid": "3558839-14e0b521-cf6c-4f88-b3dd-7c1e3a449b4f"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b7bd696c-8331-4edc-b968-f552016747f3",
+						"id": "c1cc6fbc-2ccc-4aca-9de8-ba246d3e0ab5",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -26,7 +26,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "2dbc7088-c801-424b-87f0-bea0911e2ea7",
+						"id": "9259c664-5056-4afc-87fc-e7613c614b79",
 						"exec": [
 							"// console.log(\"Waiting one minute for ring forming\");\r",
 							"// setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
@@ -36,7 +36,7 @@
 					}
 				}
 			],
-			"id": "7186a375-6e27-4c22-8150-b684eb846f3e",
+			"id": "b0f02bc0-e92b-439e-bfda-097eb98755b7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -94,7 +94,7 @@
 				"exec": [
 					""
 				],
-				"id": "f0e787bb-a831-4fb0-99eb-958431ad8f89"
+				"id": "eb0d0384-6b6d-4343-acd4-f8685eee9ab3"
 			}
 		},
 		{
@@ -113,7 +113,7 @@
 					"requests.push({\"request\": request, \"response\": response});",
 					"pm.globals.set('requests', JSON.stringify(requests));"
 				],
-				"id": "017250de-14ee-49df-b4e2-c23a000a654c"
+				"id": "fa3e6582-fa1f-42cf-9272-63fc35a18c43"
 			}
 		}
 	]
