@@ -8,7 +8,7 @@ steps:
   displayName: Build Download
 
 - bash: |
-    cp $(Pipeline.Workspace)/${{parameters.target_stage_name}}_${{parameters.api_project}}/* $(System.DefaultWorkingDirectory)
+    cp $(Pipeline.Workspace)/${{parameters.target_stage_name}}_${{parameters.api_project}}_build_result/* $(System.DefaultWorkingDirectory)
   displayName: Copy artifact into working directory
 
 # - task: JFrog.jfrog-artifactory-vsts-extension.artifactory-generic-download.ArtifactoryGenericDownload@3
