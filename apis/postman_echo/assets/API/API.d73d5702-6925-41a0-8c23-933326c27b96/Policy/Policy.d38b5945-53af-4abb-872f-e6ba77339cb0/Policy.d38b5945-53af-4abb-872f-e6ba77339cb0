@@ -32,6 +32,6 @@
   } ],
   "policyScope" : "SERVICE",
   "global" : false,
-  "active" : false,
-  "systemPolicy" : false
+  "systemPolicy" : false,
+  "active" : false
 }
