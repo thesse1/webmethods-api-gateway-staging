@@ -141,5 +141,7 @@ stages:
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
                     environment: API_Gateway_${{instance.name}}_environment.json
-                - bash: echo "##vso[build.addbuildtag]${{instance.name}}_HAFT"
+                - bash: | 
+                    echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
+                    echo "##vso[build.addbuildtag]${{instance.name}}_HAFT"
                   displayName: Add build tag
