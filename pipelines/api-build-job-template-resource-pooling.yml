@@ -33,6 +33,19 @@ jobs:
         - download: none
         - bash: echo "$(PAT)"
           displayName: DEBUG
+
+        - task: AzureCLI@2
+          displayName: "DEBUG2"
+          env:
+            AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+          inputs:
+            azureSubscription: 309065ca-a060-4592-8096-b74694126b61
+            scriptType: pscore
+            scriptLocation: inlineScript
+            inlineScript: |
+              az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability"
+
+
         - script: |
             echo "$(PAT)"
             export AZURE_DEVOPS_EXT_PAT=$(PAT)
