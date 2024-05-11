@@ -1,5 +1,4 @@
 {
   "entityId" : "proxyBypass",
-  "proxyBypassAddresses" : [ "localhost" ],
-  "_docType" : "proxyBypass"
+  "proxyBypassAddresses" : [ "localhost" ]
 }

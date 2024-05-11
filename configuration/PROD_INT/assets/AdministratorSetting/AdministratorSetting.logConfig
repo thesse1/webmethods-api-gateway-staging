@@ -12,10 +12,9 @@
     "kibanaLogger" : "silent",
     "enableSecurityLogger" : "false",
     "sagOsgiLogger" : "info",
-    "enableSessionLogger" : "false",
     "port" : "",
+    "enableSessionLogger" : "false",
     "apigatewayLogger" : "info",
     "elasticSearchLogger" : "info"
-  },
-  "_docType" : "configurations"
+  }
 }

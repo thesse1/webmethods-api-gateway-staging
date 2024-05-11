@@ -32,6 +32,5 @@
         "watt.server.threadPoolMin" : "600"
       }
     }
-  },
-  "_docType" : "configurations"
+  }
 }

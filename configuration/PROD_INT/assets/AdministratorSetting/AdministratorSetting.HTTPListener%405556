@@ -1,23 +1,18 @@
 {
   "configId" : "HTTPListener@5556",
+  "userName" : "testuser",
   "internalPorts" : { },
   "properties" : {
     "configURL" : "/WmRoot/configHTTP.dsp",
     "maxQueue" : "200",
     "listenerType" : "Regular",
-    "accessMode" : "allow",
-    "threadPriority" : "5",
     "pkg" : "WmRoot",
     "ssl" : "false",
     "targets" : "0",
-    "hostsList" : [ ],
     "enabled" : "true",
-    "minThread" : "20",
     "protocol" : "HTTP",
     "provider" : "webMethods",
-    "threadPool" : "true",
     "portAlias" : "HTTP_5556",
-    "usedThreadCount" : "0",
     "key" : "HTTPListener@5556",
     "uniqueID" : "2780c1ae6bcc48a996f88ca1a5c8821f",
     "curDelay" : "0",
@@ -25,15 +20,10 @@
     "listenerKey" : "HTTPListener@5556",
     "portDescription" : "Integration Server HTTP port: 5556",
     "internalPort" : "-1",
-    "requestServiceStatus" : "true",
-    "maxThread" : "300",
-    "services" : [ ],
-    "ipAccessType" : "global",
     "suspended" : "false",
     "port" : 5556,
     "factoryKey" : "webMethods/HTTP",
     "clientAuth" : "none",
     "stepsize" : "10000"
-  },
-  "_docType" : "configurations"
+  }
 }
