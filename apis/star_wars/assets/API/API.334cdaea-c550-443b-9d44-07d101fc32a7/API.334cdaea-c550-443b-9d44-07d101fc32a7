@@ -4903,6 +4903,5 @@
   "lastModified" : "2023-06-08 10:42:28 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
-  "id" : "334cdaea-c550-443b-9d44-07d101fc32a7",
-  "_docType" : "apis"
+  "id" : "334cdaea-c550-443b-9d44-07d101fc32a7"
 }

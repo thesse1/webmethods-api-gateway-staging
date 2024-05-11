@@ -13,7 +13,7 @@
   },
   "creationDate" : "2021-02-03 16:31:52 GMT",
   "lastModified" : "2021-06-23 14:01:32 GMT",
-  "lastUpdated" : 1712482508668,
+  "lastUpdated" : 1700050054854,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",
@@ -21,10 +21,9 @@
   "isSuspended" : true,
   "authStrategyIds" : [ ],
   "primaryNode" : {
-    "hostId" : "ad297cc2-4c30-4cbc-95c4-2ba68ae71106",
+    "hostId" : "f4fb2c77-d566-4907-8626-f09b6092951a",
     "replica" : 0
   },
   "subscription" : false,
-  "shell" : false,
-  "_docType" : "applications"
+  "shell" : false
 }

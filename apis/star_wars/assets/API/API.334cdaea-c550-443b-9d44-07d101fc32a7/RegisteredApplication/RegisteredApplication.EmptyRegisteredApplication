@@ -1,7 +1,5 @@
 {
   "applicationId" : "EmptyRegisteredApplication",
   "apiIds" : [ "334cdaea-c550-443b-9d44-07d101fc32a7" ],
-  "lastUpdated" : 0,
-  "registeredApplicationId" : "EmptyRegisteredApplication_334cdaea-c550-443b-9d44-07d101fc32a7",
-  "_docType" : "registeredapplications"
+  "lastUpdated" : 0
 }
