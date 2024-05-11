@@ -37,7 +37,7 @@ jobs:
           env:
             AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
           inputs:
-            azureSubscription: sub-ps-wminno-container-sbx
+            azureSubscription: $(azureSubscription)
             scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
@@ -131,7 +131,7 @@ jobs:
           env:
             AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
           inputs:
-            azureSubscription: sub-ps-wminno-container-sbx
+            azureSubscription: $(azureSubscription)
             scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
