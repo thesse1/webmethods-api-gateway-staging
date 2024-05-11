@@ -39,7 +39,7 @@ jobs:
           env:
             AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
           inputs:
-            azureSubscription: 309065ca-a060-4592-8096-b74694126b61
+            azureSubscription: sub-ps-wminno-container-sbx
             scriptType: pscore
             scriptLocation: inlineScript
             inlineScript: |
