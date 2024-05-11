@@ -83,10 +83,8 @@ stages:
           variables:
           - group: ${{instance.name}}_users
           - name: node_name_01
-            # value: $[stageDependencies.PRODUCTION_HAFT_listeners.Configure_HAFT_listener_for_API_Gateway_PRODUCTION.outputs['Configure_HAFT_listener_for_API_Gateway_PRODUCTION.setoutputvar.node_name']]
             value: $[dependencies.Configure_HAFT_listener_for_API_Gateway_${{ stage.instances[0].name }}.outputs['Configure_HAFT_listener_for_API_Gateway_${{ stage.instances[0].name }}.setoutputvar.node_name']]
           - name: node_name_02
-            # value: $[stageDependencies.PRODUCTION_HAFT_listeners.Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION.outputs['Configure_HAFT_listener_for_API_Gateway_GEOPRODUCTION.setoutputvar.node_name']]
             value: $[dependencies.Configure_HAFT_listener_for_API_Gateway_${{ stage.instances[1].name }}.outputs['Configure_HAFT_listener_for_API_Gateway_${{ stage.instances[1].name }}.setoutputvar.node_name']]
           pool:
             name: ${{instance.pool_name}}
@@ -107,7 +105,7 @@ stages:
                     instance_name: ${{instance.name}}
                     environment: API_Gateway_${{instance.name}}_environment.json
 
-      - job: Wait_for_HAFT_ring_to_form
+      - job: Wait_for_HAFT_ring_on_${{stage.name}}_to_form
         pool: server # note: the value 'server' is a reserved keyword which indicates this is an agentless job
         dependsOn:
         - ${{ each otherinstance in stage.instances }}:
