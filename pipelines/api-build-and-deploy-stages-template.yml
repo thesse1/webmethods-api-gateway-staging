@@ -24,8 +24,8 @@ stages:
             lockBehavior: sequential
             jobs:
             # - template: /pipelines/api-build-job-template-fixed-build-environments.yml
-            # - template: /pipelines/api-build-job-template-dedicated-build-agents.yml
-            - template: /pipelines/api-build-job-template-resource-pooling.yml
+            - template: /pipelines/api-build-job-template-dedicated-build-agents.yml
+            # - template: /pipelines/api-build-job-template-resource-pooling.yml
               parameters:
                 environment_set: ${{parameters.environment_set}}
                 build_stage: ${{parameters.build_stage}}
