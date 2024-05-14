@@ -13,14 +13,14 @@ parameters:
 
 jobs:
 - deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
-  environment: '${{parameters.build_stage.name}}_instances'
+  environment: API_Gateway_${{parameters.build_stage.name}}_instances
   variables:
   - group: ${{parameters.build_stage.name}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
     - group: ${{parameters.deployment_target}}_value_substitutions
   pool:
-    name: '$(pool_name)'
-    vmImage: '$(pool_image)'
+    name: ${{parameters.build_stage.pool_name}}
+    vmImage: ${{parameters.build_stage.pool_image}}
   strategy:
     runOnce:    #rolling, canary are the other strategies that are supported
       deploy:
@@ -30,65 +30,118 @@ jobs:
           persistCredentials: "true"
           fetchDepth: 0
         - download: none
-        - script: |
-            echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-            group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
-            echo group_id: $group_id
-            resource_name="null"
-            claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{parameters.deployment_target}}_${{parameters.api_project}}"
-            # Loop until a resource is available
-            while [ "$resource_name" == "null" ]; do
-              resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
-              if [ "$resource_name" == "null" ]; then
-                echo "No available resource found. Waiting..."
-                sleep 60
-              else
-                echo "Resource found: $resource_name"
-                az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
-                sleep 5
-                claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables.$resource_name.value -o tsv)
-                if [ "$claimtext_read" == "$claimtext" ]; then
-                  echo "Resource claimed: $claimtext"
-                else
-                  echo "Resource taken by another agent: $claimtext_read"
-                  echo "Expected claimtext: $claimtext"
-                  echo "Trying again..."
-                  resource_name="null"
-                fi
-              fi
-            done
-            echo "Selected Resource: $resource_name"
-            echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
+        - task: AzureCLI@2
+          displayName: Claim Resource
           name: claim_resource
-          displayName: 'Claim Resource'
+          env:
+            AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+          inputs:
+            azureSubscription: $(azureSubscription)
+            scriptType: bash
+            scriptLocation: inlineScript
+            inlineScript: |
+              az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability"
+              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
+              echo group_id: $group_id
+              resource_name="null"
+              claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{parameters.deployment_target}}_${{parameters.api_project}}"
+              # Loop until a resource is available
+              while [ "$resource_name" == "null" ]; do
+                resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+                if [ "$resource_name" == "null" ]; then
+                  echo "No available resource found. Waiting..."
+                  sleep 60
+                else
+                  echo "Resource found: $resource_name"
+                  az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
+                  sleep 5
+                  claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables.$resource_name.value -o tsv)
+                  if [ "$claimtext_read" == "$claimtext" ]; then
+                    echo "Resource claimed: $claimtext"
+                  else
+                    echo "Resource taken by another agent: $claimtext_read"
+                    echo "Expected claimtext: $claimtext"
+                    echo "Trying again..."
+                    resource_name="null"
+                  fi
+                fi
+              done
+              echo "Selected Resource: $resource_name"
+              echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
+        # - script: |
+        #     echo "$(PAT)"
+        #     export AZURE_DEVOPS_EXT_PAT=$(PAT)
+        #     # echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+        #     # echo After login
+        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
+        #     echo group_id: $group_id
+        #     resource_name="null"
+        #     claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{parameters.deployment_target}}_${{parameters.api_project}}"
+        #     # Loop until a resource is available
+        #     while [ "$resource_name" == "null" ]; do
+        #       resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+        #       if [ "$resource_name" == "null" ]; then
+        #         echo "No available resource found. Waiting..."
+        #         sleep 60
+        #       else
+        #         echo "Resource found: $resource_name"
+        #         az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
+        #         sleep 5
+        #         claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].variables.$resource_name.value -o tsv)
+        #         if [ "$claimtext_read" == "$claimtext" ]; then
+        #           echo "Resource claimed: $claimtext"
+        #         else
+        #           echo "Resource taken by another agent: $claimtext_read"
+        #           echo "Expected claimtext: $claimtext"
+        #           echo "Trying again..."
+        #           resource_name="null"
+        #         fi
+        #       fi
+        #     done
+        #     echo "Selected Resource: $resource_name"
+        #     echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
+        #   name: claim_resource
+        #   displayName: 'Claim Resource'
         - template: /pipelines/api-build-steps-template.yml
           parameters:
             environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
-            build_environment: "$(claimed_resource)_environment.json"
+            build_environment: API_Gateway_"$(claimed_resource)_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
             build_instance_name: $(claimed_resource)
-            target_type: ${{parameters.deployment_target}}
+            target_stage_name: ${{parameters.deployment_target}}
             prepare_condition: ${{true}}
             test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
             replace_condition: ${{ not(parameters.target_stage.is_design_stage) }}
-        - template: /pipelines/store-build-template.yml
+        - template: /pipelines/api-store-build-template.yml
           parameters:
-            target_type: ${{parameters.deployment_target}}
+            target_stage_name: ${{parameters.deployment_target}}
             api_project: ${{parameters.api_project}}
         - bash: |
-            echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-            echo "##vso[build.addbuildtag]$(claimed_resource)"
-            echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(claimed_resource)"
             echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
+            echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
+            echo "##vso[build.addbuildtag]$(claimed_resource)"
+            echo "##vso[build.addbuildtag]${{parameters.api_project}}"
+            echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_stage.name}}"
+            echo "##vso[build.addbuildtag]${{parameters.api_project}}_$(claimed_resource)"
           displayName: Add build tags
-        # - template: /pipelines/store-build-artifactory-template.yml
-        #   parameters:
-        #     target_type: $(targetType)
-        - script: |
-            echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-            group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
-            az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
-            echo "Released Claimed Resource: $(claimed_resource)"
-          displayName: 'Release Resource'
+        - task: AzureCLI@2
+          displayName: Release Resource
+          env:
+            AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+          inputs:
+            azureSubscription: $(azureSubscription)
+            scriptType: bash
+            scriptLocation: inlineScript
+            inlineScript: |
+              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
+              az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
+              echo "Released Claimed Resource: $(claimed_resource)"
           condition: always() # Release lock even if build was not successful
+        # - script: |
+        #     echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
+        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "Build_instances_availability" --query [0].id)
+        #     az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
+        #     echo "Released Claimed Resource: $(claimed_resource)"
+        #   displayName: 'Release Resource'
+        #   condition: always() # Release lock even if build was not successful

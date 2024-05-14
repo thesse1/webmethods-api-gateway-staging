@@ -101,7 +101,7 @@
   } ],
   "apiName" : "Ping",
   "apiVersion" : "1.0",
-  "apiDescription" : "DEMO: This is a simple ping service invoking wm.server:ping IS service on http://localhost:5555. It is tagged as internal and external API, so it can be deployed on all API Gateway instances",
+  "apiDescription" : "This is a simple ping service invoking wm.server:ping IS service on http://localhost:5555. It is tagged as internal and external API, so it can be deployed on all API Gateway instances",
   "maturityState" : "Beta",
   "apiGroups" : [ "Internal", "External" ],
   "isActive" : true,
@@ -115,6 +115,5 @@
   "lastModified" : "2023-11-16 17:42:57 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
-  "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b",
-  "_docType" : "apis"
+  "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"
 }

@@ -1,5 +1,12 @@
 trigger: none
 
+schedules:
+- cron: '0 0 * * *'
+  displayName: Daily 1am CET
+  branches:
+    include:
+    - main
+
 # resources:
 #   pipelines:
 #   - pipeline: trigger-pipeline # Name of the pipeline resource.
@@ -27,9 +34,6 @@ parameters:
   - TEST_EXT
   - PROD_INT
   - PROD_EXT
-
-variables:
-- group: Project_configuration
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml

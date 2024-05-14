@@ -1,0 +1,23 @@
+parameters:
+- name: environment_set
+- name: stage_name
+- name: instance_name
+- name: environment
+
+steps:
+- bash: |
+    echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Read and parse API Gateway ${{parameters.instance_name}} configuration, extract insecureflag'
+
+- script: |
+    newman run postman/collections/utilities/haft/Configure_HAFT_ring_on_${{parameters.instance_name}}.json --reporters cli \
+    --env-var haft_manager_user='$(haft_manager_user)' \
+    --env-var haft_manager_password='$(haft_manager_password)' \
+    -e environments/${{parameters.environment_set}}/${{parameters.environment}} \
+    -g environments/${{parameters.environment_set}}/API_Gateway_${{parameters.stage_name}}_haft_globals.json \
+    --global-var nodeName_01=$(node_name_01) \
+    --global-var nodeName_02=$(node_name_02) \
+    $(environment_insecureflag)
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Initialize High Availability and Fault Tolerance (HAFT) ring for API Gateway ${{parameters.instance_name}}'

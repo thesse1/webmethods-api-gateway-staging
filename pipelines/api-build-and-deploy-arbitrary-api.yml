@@ -46,7 +46,7 @@ parameters:
 variables:
 - group: Project_configuration
 
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
+name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}"
 
 stages:
 - template: /pipelines/api-inject-stages-template.yml

@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "be5a0fb7-3d41-4a17-bd98-ffb2997fd5d7",
+		"name": "Validate_HAFT_on_PROD_INT_01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-be5a0fb7-3d41-4a17-bd98-ffb2997fd5d7"
+	},
+	"item": [
+		{
+			"name": "Get dataspace status on node 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "726339d2-86d3-4483-a219-800b8757fed6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.json())"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1548a290-16d9-4304-ac5c-628846ecc90d",
+						"exec": [
+							"// console.log(\"Waiting one minute for ring forming\");\r",
+							"// setTimeout(() => {  console.log(\"Done!\"); }, 60000);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "944effc4-e96e-43a6-b086-2eea78fb7bda",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{haft_manager_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{haft_manager_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/dataspace/status",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"dataspace",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "718a57be-e8a4-4f3e-8f60-fe1f24c416a8"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let requests = pm.globals.has('requests') ?  JSON.parse(pm.globals.get('requests')) : [];",
+					"request = {};",
+					"request.method = pm.request.method;",
+					"request.url = pm.request.url;",
+					"request.body = pm.request.body;",
+					"response = {};",
+					"response.status = pm.response.status;",
+					"response.body = pm.response.json();",
+					"requests.push({\"request\": request, \"response\": response});",
+					"pm.globals.set('requests', JSON.stringify(requests));"
+				],
+				"id": "2eb73ef8-b6f4-4fe3-855b-c5e38a7f5721"
+			}
+		}
+	]
+}

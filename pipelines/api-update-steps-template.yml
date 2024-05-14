@@ -1,22 +1,24 @@
 parameters:
-  environment_set: ''
-  api_id: ''
-  update_type: ''
-  update_url: ''
-  update_username: ''
-  update_password: ''
-  update_file: ''
+- name: environment_set
+- name: environment
+- name: stage_name
+- name: instance_name
+- name: api_id
+- name: update_type
+- name: update_url
+- name: update_username
+- name: update_password
+- name: update_file
 
 steps:
 - bash: |
-   echo "##vso[task.setvariable variable=design_environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
-   echo "##vso[task.setvariable variable=design_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/${{parameters.environment_set}}/DESIGN_environment.json`"
+   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.build_instance_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.instance_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
 
 - script: |
     newman run postman/collections/utilities/update/Update_API.json --reporters cli \
@@ -27,9 +29,9 @@ steps:
     --env-var updateUrl='${{parameters.update_url}}' \
     --env-var updateCredentials=`echo -n ${{parameters.update_username}}:${{parameters.update_password}} | base64` \
     --env-var updateFile='$(System.DefaultWorkingDirectory)/schemas/${{parameters.update_file}}' \
-    -e environments/${{parameters.environment_set}}/DESIGN_environment.json \
-    $(design_environment_insecureflag)
+    -e environments/${{parameters.environment_set}}/${{parameters.environment}} \
+    $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Update API on API Gateway DESIGN'
+  displayName: 'Update API on API Gateway ${{parameters.instance_name}}'
   env:
-    no_proxy: $(design_environment_ip)
+    no_proxy: $(environment_ip)

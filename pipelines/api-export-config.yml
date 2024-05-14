@@ -33,9 +33,6 @@ parameters:
   displayName: Message for the commit in Git?
   type: string
 
-variables:
-- group: Project_configuration
-
 stages:
 - template: /pipelines/api-inject-stages-template.yml
   parameters:

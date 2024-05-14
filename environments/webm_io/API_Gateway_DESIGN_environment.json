@@ -1,0 +1,69 @@
+{
+	"id": "7772870f-1e65-4969-8b5b-289d9dc0c768",
+	"name": "API_Gateway_DESIGN_environment",
+	"values": [
+		{
+			"key": "protocol",
+			"value": "https",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "hostname",
+			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "ip",
+			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "port",
+			"value": "443",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "insecureflag",
+			"value": "",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "api-protocol",
+			"value": "https",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "api-hostname",
+			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-ip",
+			"value": "playconfig.apigw-aw-eu.webmethods.io",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-port",
+			"value": "443",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "api-insecureflag",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-07-05T11:04:42.135Z",
+	"_postman_exported_using": "Postman/10.15.6"
+}

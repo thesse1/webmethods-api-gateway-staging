@@ -15,10 +15,6 @@ parameters:
   - Default
   - webm_io
   - azure_demo_01
-- name: api_project
-  displayName: Import and export which API project?
-  type: string
-  default: petstore
 - name: api_id
   displayName: Update which API?
   type: string
@@ -28,22 +24,16 @@ parameters:
   type: string
   default: https://petstore.swagger.io/v2/swagger.json
 
-variables:
-- group: Project_configuration
-- name: api_project
-  value: ${{parameters.api_project}}
-
-name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}
-
 stages:
-- template: /pipelines/api-update-stages-template.yml
+- template: /pipelines/api-inject-stages-template.yml
   parameters:
+    template: /pipelines/api-update-stages-template.yml
+    parameters:
+      api_id: ${{parameters.api_id}}
+      update_type: "UpdateAPI_URL"
+      update_url: ${{parameters.update_url}}
+      update_username: $(update_username_petstore)
+      update_password: $(update_password_petstore)
+      update_file: ""
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
-    api_project: ${{parameters.api_project}}
-    api_id: ${{parameters.api_id}}
-    update_type: "UpdateAPI_URL"
-    update_url: ${{parameters.update_url}}
-    update_username: $(update_username_petstore)
-    update_password: $(update_password_petstore)
-    update_file: ""

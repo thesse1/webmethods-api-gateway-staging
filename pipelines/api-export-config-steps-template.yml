@@ -1,7 +1,8 @@
 parameters:
-  environment_set: ''
-  environment: ''
-  type: ''
+- name: environment_set
+- name: environment
+- name: stage_name
+- name: instance_name
 
 steps:
 - bash: |
@@ -11,29 +12,30 @@ steps:
    echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
    echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.instance_name}} configuration, extract ip, hostname, port and insecureflag'
 
 - bash: |
    curl -v $(environment_insecureflag) \
-          -d @"configuration/${{parameters.type}}/export_payload.json" \
-          --output $(Build.BuildId)_export_from_${{parameters.type}}.zip \
+          -d @"configuration/${{parameters.stage_name}}/export_payload.json" \
+          --output $(Build.BuildId)_export_from_${{parameters.instance_name}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(environment_protocol)://$(environment_hostname):$(environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Export the Deployable from API Gateway ${{parameters.type}}'
+  displayName: 'Export the Deployable from API Gateway ${{parameters.instance_name}}'
   env:
     no_proxy: $(environment_hostname)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.type}}.zip'
-    artifactName: '${{parameters.target}}_export'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.instance_name}}.zip'
+    artifactName: '${{parameters.stage_name}}_export'
+  displayName: 'Publish export result to pipeline build'
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.type}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/configuration/${{parameters.type}}/assets'
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.instance_name}}.zip'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/configuration/${{parameters.stage_name}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
@@ -42,6 +44,6 @@ steps:
 - task: DeleteFiles@1
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: '$(Build.BuildId)_export_from_${{parameters.type}}.zip' 
+    Contents: '$(Build.BuildId)_export_from_${{parameters.instance_name}}.zip' 
     #RemoveSourceFolder: # Optional
   displayName: 'Remove the API Deployable again'

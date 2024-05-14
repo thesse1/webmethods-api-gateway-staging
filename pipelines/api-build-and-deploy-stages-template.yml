@@ -35,41 +35,15 @@ stages:
                 build_instances_mapping: ${{parameters.build_instances_mapping}}
 
             - ${{ each deploy_instance in target_stage.instances }}:
-              # - job: Check_environment_file_for_${{deploy_instance}}
-              #   dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
-              #   condition: succeeded()
-              #   pool:
-              #     name: '$(pool_name)'
-              #     vmImage: '$(pool_image)'
-              #   steps:
-              #   - checkout: self
-              #     submodules: "true"
-              #     persistCredentials: "true"
-              #     fetchDepth: 0
-              #   - bash: |
-              #       if test -f $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json; then
-              #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json exists
-              #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]true"
-              #       else
-              #         echo Environment file $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json does not exist, skipping next job
-              #         echo "##vso[task.setvariable variable=environment_file_exists;isoutput=true]false"
-              #         echo "##vso[task.logissue type=warning]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json"
-              #         echo "##vso[task.complete result=SucceededWithIssues]Environment file not found: $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json"
-              #       fi
-              #     displayName: Check if environment.json file exists
-              #     name: Check_environment_file
-
-              - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance}}'
+              - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance.name}}'
                 dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
-                # dependsOn: Check_environment_file_for_${{deploy_instance}}
-                # condition: and(succeeded(), eq(dependencies.Check_environment_file_for_${{deploy_instance}}.outputs['Check_environment_file.environment_file_exists'], 'true'))
-                environment: ${{deploy_instance}}
+                environment: API_Gateway_${{deploy_instance.name}}
                 variables:
                 - group: ${{target_stage.name}}_users
-                - group: ${{deploy_instance}}_users
+                - group: ${{deploy_instance.name}}_users
                 pool:
-                  name: '$(pool_name)'
-                  vmImage: '$(pool_image)'
+                  name: ${{deploy_instance.pool_name}}
+                  vmImage: ${{deploy_instance.pool_image}}
                 strategy:
                   runOnce:    #rolling, canary are the other strategies that are supported
                     deploy:
@@ -78,21 +52,22 @@ stages:
                         submodules: "true"
                         persistCredentials: "true"
                         fetchDepth: 0
-                      - bash: cat $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{deploy_instance}}_environment.json
-                        displayName: Check if environment.json file exists
-                      - template: /pipelines/retrieve-build-template.yml
+                      - template: /pipelines/api-retrieve-build-template.yml
                         parameters:
-                          target_type: ${{deployment_target}}
+                          target_stage_name: ${{deployment_target}}
                           api_project: ${{api_project}}
                       - template: /pipelines/api-deploy-steps-template.yml
                         parameters:
                           environment_set: ${{parameters.environment_set}}
                           api_project: ${{api_project}}
-                          target_environment: ${{deploy_instance}}_environment.json
-                          target_type: ${{deployment_target}}
+                          target_environment: API_Gateway_${{deploy_instance.name}}_environment.json
+                          target_stage_name: ${{deployment_target}}
+
                       - bash: |
-                          echo "##vso[build.addbuildtag]${{api_project}}"
-                          echo "##vso[build.addbuildtag]${{deploy_instance}}"
-                          echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance}}"
                           echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
+                          echo "##vso[build.addbuildtag]${{deployment_target}}"
+                          echo "##vso[build.addbuildtag]${{deploy_instance.name}}"
+                          echo "##vso[build.addbuildtag]${{api_project}}"
+                          echo "##vso[build.addbuildtag]${{api_project}}_${{deployment_target}}"
+                          echo "##vso[build.addbuildtag]${{api_project}}_${{deploy_instance.name}}"
                         displayName: Add build tags
