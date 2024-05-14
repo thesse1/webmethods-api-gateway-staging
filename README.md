@@ -4,9 +4,9 @@
 
 > Note: This version of the API Gateway Staging solution depends on Azure DevOps Service. An older version of the solution which supports Azure DevOps Server 2019 can be found in the azure_devops_server_2019 branch: https://github.com/thesse1/webmethods-api-gateway-staging/tree/azure_devops_server_2019.
 
-The webMethods API Gateway Staging solution allows to extract API Gateway assets from a DESIGN environment (local or shared/central), add them to a Git repository and automatically promote them to DEV, TEST and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections). After that procedure, the modified assets are exported again from BUILD environment and imported on the target environment (DEV, TEST or PROD).
+The webMethods API Gateway Staging solution allows to extract API Gateway assets from a DESIGN environment (local or shared/central), add them to a Git repository and automatically promote them to DEV, TEST and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections). After this procedure, the modified assets are exported again from BUILD environment and imported on the target environment (DEV, TEST or PROD).
 
-The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway instances. This includes the configuration of the API Gateway destination, the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway instances using Azure DevOps build pipelines for quickly setting up new API Gateway instances or for updating existing instances.
+The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway instances. This includes the configuration of the API Gateway destination, the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway instances using Azure DevOps build pipelines for quickly setting up new API Gateway instances or for resetting existing instances.
 
 Finally, the solution also includes an Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database. This pipeline can be configured to run in defined iterations, e.g., once every day.
 
@@ -14,7 +14,7 @@ This solution is based on https://github.com/thesse1/webmethods-api-gateway-devo
 
 ## Some background
 
-As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change, and those changes have to be propagated to other external products like API Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is a key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
+As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change, and those changes have to be propagated to other external products like API Portal / Developer Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is a key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
 
 This CI/CD or DevOps approach can be achieved in multiple ways:
 
@@ -42,7 +42,7 @@ In addition to this, the solution includes an automatic validation and adjustmen
 
 This is implemented by validating and manipulating the assets on dedicated BUILD environments: Initially, all assets (including all applications) are imported on the BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values and test values in other assets are overwritten, API tags are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and, if applicable, API mocking turned off) and imported on the target environment.
 
-More of these design-time policies could easily be developed by extending the Postman collections.
+More of these design-time policies could easily be developed by extending the underlying Postman collections.
 
 In addition to the deployment ("promotion") of assets to DEV, TEST and PROD, the solution also includes pipelines for deploying API projects to the central DESIGN environment - without validations, manipulations and API tests. This allows for (re-)setting the DESIGN environment to the current (or some former) state of the API development - selectively for the assets defined in one API project. Older states (Git commits) can be retrieved temporarily for inspecting former stages of the development or permanently for re-basing the development of the API project on an earlier version.
 
@@ -52,7 +52,7 @@ The solution supports separate stages for hosting internal and external APIs. Th
 
 The solution supports target stages with multiple "instances", for example in different regions. (Each instance can itself be an API Gateway cluster.) The "instances" within one stage will always get the same configuration and the same set of APIs. Applications can by synchronized within stages using HAFT, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-haft_reference_arch.html.
 
-> Note: The solution only supports additive promotion of new assets or asset changes. It does not support the promotion of asset deletions. Assets can be deleted directly on the target environment (in the API Gateway UI or through the respective API Gateway asset management REST API).
+> Note: The solution only supports additive promotion of new assets or asset changes. It does not support the promotion of asset deletions. Assets can be deleted directly on the target environment (in the API Gateway UI or through the respective API Gateway asset management REST API). The recommended procedure for decommissioning APIs is to deactivate the API on the DESIGN environment and propagate that change to the target stages. This makes the decommissioning process more transparent and traceable.
 
 ## webMethods API Gateway assets and configurations
 
@@ -72,28 +72,36 @@ The following API Gateway assets and configurations can be moved across API Gate
 
 ## About this repository
 
-This repository provides assets/scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive Service API (and other API Gateway Service APIs) for automation of the DevOps flow.
+This repository provides assets and scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive Service API (and other API Gateway Service APIs) for automation of the DevOps flow.
 
 The repository has the following top-level folders:
-  - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets
-  - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system
-  - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
-  - environments: Contains folders with Postman environment definitions for API Gateway DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments. Each folder includes the definitions for one set of environments. The solution comes with two sample sets:
-    - azure-demo-01: Set of API Gateways deployed to an Azure Kubernetes Service cluster
+  - .postman: Created and managed directly by Postman when managing the Postman collections in a Postman workspace
+  - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets as well as alias and scope definitions
+  - azure-devops-demo-generator: Template definition and supporting files for creating demo/seed ADO projects using the [Azure DevOps Demo Generator](https://azuredevopsdemogenerator.azurewebsites.net/)
+  - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system (local clone of the Git repository)
+  - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT instances along with the definition of the exported asset sets
+  - environments: Contains folders with Postman environment definitions for API Gateway instances in the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT stages. Each folder includes the definitions for one set of environments. The solution comes with two sample sets:
     - webm_io: Set of webMethods.io API Gateways hosted on the Software AG cloud
-  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for exporting assets and for log purging
+    - azure_demo_01: Set of API Gateways deployed to Azure Kubernetes Service clusters
+  - images: Diagrams and screenshots used in this documentation
+  - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for initializing the environments, for exporting assets, for updating API definitions, for configuring HAFT, for publishing APIs to API Portal / Developer Portal and for log purging
   - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
   - postman/collections/apitests: Contains Postman collections with API tests for every API project which are executed automatically for every API deployment
 
 The repository content can be committed to a Git repository (e.g., the Azure DevOps repository or a GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the repository can be imported back to a local development environment, to the central DESIGN environment or promoted to DEV, TEST or PROD.
 
+Larger organizations implementing the API Gateway Staging solution tend to split the content of this repository into separate repos for different groups working on the content. For example, you can create separate repos with the following folders:
+ - pipelines and postman/collections/utilities for the pipeline developers
+ - configuration and environments for the API Gateway administrators
+ - apis and postman/collections/apitests for the API providers
+
 ## Develop and test APIs using API Gateway
 
-The most common use case for an API Developer is to develop APIs in their local development environments or the central DESIGN environment, export them to a flat file representation and commit this to Git. Also, developers need to import their APIs from Git to their local development environments for further updates.
+The most common use case for an API Developer is to develop APIs on the central DESIGN environment (or on their local development environments), export them to a flat file representation and commit this to Git. Also, developers need to import their APIs from Git to the central DESIGN environment (or their local development environments) for further updates.
 
-The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from their local development API Gateway or the central DESIGN environment to their local Git repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
+The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from the central DESIGN environment (or their local development API Gateway) to their local Git repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
 
-Alternatively, the developer can also use the `Export API project from DESIGN` pipeline to export APIs from the central DESIGN environment into Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
+Alternatively, the developer can also use the `Export arbitrary/selected API project from DESIGN` pipelines to export APIs from the central DESIGN environment into Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
 ## gateway_import_export_utils.bat
 
@@ -143,9 +151,11 @@ bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigat
 
 ## export_payload.json export query for API projects
 
-The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export API project from DESIGN` pipeline) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` pipelines) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html%23wwconnect_header. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 The /apis folder contains sample API projects with the following export_payload.json files:
+
+TODO
 
 ### petstore
 
@@ -1166,7 +1176,21 @@ When queuing a deployment pipeline, you can select the specific commit that shou
 
 > Note: It will not work with the shortened commit ID displayed in the UI. You have to use the "full SHA".
 
-### `Export API project from DESIGN`
+### `Export arbitrary API project from DESIGN`
+
+This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
+
+The following parameters can/must be provided for this pipeline:
+
+| Parameter | README |
+| ------ | ------ |
+| Branch | Select the Git branch into which the assets should be committed |
+| Commit | Leave this blank |
+| tenant | Tenant in which to export the API project |
+| api_project | Case-sensitive name of the API project to be exported |
+| commitMessage | The change will be committed with this commit message |
+
+### `Export seletced API project from DESIGN`
 
 This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
 
@@ -1260,7 +1284,7 @@ The following parameters can/must be provided for this pipeline:
 
 # Usage examples
 
-When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway DESIGN stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway DESIGN stage using the `Export API project from DESIGN` / deploy_to_config pipelines.
+When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway DESIGN stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway DESIGN stage using the `Export arbitrary/selected API project from DESIGN` / `Deploy arbitrary/selected API project` pipelines.
 
 ## Example 1: Change an existing API
 
@@ -1310,7 +1334,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export API project from DESIGN` pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export arbitrary/selected API project from DESIGN` pipeline for the petstore API project.
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1376,7 +1400,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export API project from DESIGN` pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export arbitrary/selected API project from DESIGN` pipeline for the petstore API project.
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1434,7 +1458,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the `Export API project from DESIGN` pipeline for the petstore API project.
+  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the `Export arbitrary/selected API project from DESIGN` pipeline for the petstore API project.
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1458,7 +1482,8 @@ The pipeline definition files (YAML) for the three Azure DevOps pipelines for AP
 | ------ | ------ | ------ |
 | deploy_to_stages | api-deploy-to-stages.yml | |
 | deploy_to_config | api-deploy-to-DESIGN.yml | |
-| `Export API project from DESIGN` | api-export-api-from-DESIGN.yml | |
+| `Export arbitrary API project from DESIGN` | api-export-arbitrary-api-from-DESIGN.yml | |
+| `Export selected API project from DESIGN` | api-export-selected-api-from-DESIGN.yml | |
 
 The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-DESIGN.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
 
@@ -1476,7 +1501,7 @@ The deployment pipeline deploy_to_stages contains six stages for deploying an AP
 
 The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
-The export pipeline `Export API project from DESIGN` invokes api-export-api-template.yml and commit-template.yml sequentially in one stage in one job on one agent.
+The export pipelines `Export arbitrary/selected API project from DESIGN` invoke api-export-arbitrary-api-from-DESIGN.yml/api-export-selected-api-from-DESIGN.yml and commit-template.yml sequentially in one stage in one job on one agent.
 
 All five deployment pipeline templates need the following parameters to be set in the calling pipeline (where applicable):
 
