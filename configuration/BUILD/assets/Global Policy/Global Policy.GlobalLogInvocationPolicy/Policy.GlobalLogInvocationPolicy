@@ -43,6 +43,7 @@
     "stageKey" : "LMT"
   } ],
   "policyScope" : "GLOBAL",
+  "systemPolicy" : true,
   "global" : true,
   "active" : true
 }
