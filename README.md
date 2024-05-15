@@ -150,6 +150,73 @@ Sample Usage for exporting the configuration that is present on the API Gateway 
 bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
+## Target-stage-specific value substitutions
+
+The API Gateway Staging solution offers three mechanisms for injecting target-stage-specific values into the definitions of the API Gateway assets when they are prepared on the BUILD environment for their target stages:
+
+### Value substitution using using Azure DevOps Replace Tokens extension
+
+Any text field in any asset on the DESIGN stage can include placeholders in the format `#{placeholder_name}#` at any point in the text field content. These placeholders will be replaced during the build phase on the BUILD environment by the `Deploy arbitrary/selected API projects` pipelines by values specific for the intended target stage of this build. The values are pulled from Azure DevOps pipeline variables which can be managed in the Azure DevOps variable groups DEV_INT_value_substitutions, DEV_EXT_value_substitutions, TEST_INT_value_substitutions, TEST_EXT_value_substitutions, PROD_INT_value_substitutions and TEST_EXT_value_substitutions.
+
+This facilitates a separation of concern between API configuration experts managing the asset definitions in API Gateway and API providers managing the actual parameter values for their APIs on the different target stages directly in Azure DevOps without having to work on the API Gateway DESIGN (or in the repository code). On the other hand, this means that the target-stage-specific values will not be managed in Git, but directly in the Azure DevOps project.
+
+Confidential values like passwords in outbound authentication policies can be secured by hiding their values in the Azure DevOps variable groups.
+
+> Note: Placeholders are only allowed in text fields. If you try to place placeholders in numeric fields, the API Gateway UI will not let you save the asset.
+
+> Note: Placing placeholders into asset definitions on the DESIGN environment might result in the API not working on the DESIGN stage anymore. For example, placing a placeholder into the API description does not cause any problem, but placing a placeholder into the endpoint URI in a routing policy will break the policy. The API will not be testable anymore on DESIGN, but it will work fine on the target stages and also on BUILD for the automatic test cases. (Replacing the placeholders takes place before running the automatic test scenario.)
+
+> Note: You can find a sample for this mechanism in the sample SwaggerPetstore API, see below.
+
+### aliases.json configuration of target-stage-specific alias values
+
+Each API project can include one aliases.json file in the API project root folder specifying aliases used by the API(s) in the API project which should be overwritten with environment-specific values. In addition to that, there can be one global aliases.json file in the /apis root folder for overwriting values of aliases used by APIs in multiple API projects.
+
+For each target environment, the aliases.json files must include JSON objects applicable for the API Gateway Alias Management Service API PUT /alias/{aliasId} request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-restapi_alias_mgmt.html.
+
+In order to avoid conflicts, each alias may only be configured to be overwritten either in the global aliases.json file in the /apis root folder or in the aliases.json files in the API project root folders.
+
+Alias names cannot be changed by this functionality.
+
+Aliases for which no values are defined (for the current target environment) in the global aliases.json file or in the API project's aliases.json file will be deployed with their original alias values from the DESIGN environment.
+
+This facilitates the setting of specific alias values for every target stage directly in the code. All values for one alias can conveniently be managed in one place - for text fields as well as for numeric or boolean values and without breaking the testability of the API on the DESIGN environment.
+
+> Note: Automatic tests on BUILD will be executed with the alias values as defined on the DESIGN environment. The target-stage-specific replacement of alias values based on the aliases.json files takes place after the execution of the automatic test scenario.
+
+> Note: Confidential values should not be managed using this mechanism as they would be included in clear text in the aliases.json files in Git.
+
+> Note: You can find a sample for this mechanism in the sample Ping API, see below.
+
+### Value substitution using using Azure DevOps Replace Tokens extension for aliases.json files
+
+Both the global and the API-project-specific aliases.json files can also include placeholders in the format `#{placeholder_name}#`.
+
+This allows for a mix of the first and the second mechanism for injecting target-stage-specific values. You can define alias definitions for all target stages with some fixed values in the aliases.json files including some placeholders for values which should be replaced based on Azure DevOps pipeline variables (maybe for a better separation of concern or for better hiding confidential values).
+
+> Note: Automatic tests on BUILD will be executed with the alias values as defined on the DESIGN environment. The target-stage-specific replacement of alias values based on the aliases.json files takes place after the execution of the automatic test scenario.
+
+> Note: Inside the aliases.json files, placeholders can be placed inside the values of text fields, but also in numeric and boolean field values.
+
+> Note: Technically, an aliases.json file with placeholders in the values of numeric or boolean fields does not represent a valid JSON document, so your editor might complain when opening or saving such a file. But the placeholders will be replaced by the correct numeric or boolean values before the files are interpreted as JSON documents, so this does not cause any problem at pipeline runtime.
+
+> Note: You can find a sample for this mechanism in the sample PostmanEcho API, see below.
+
+### TODO: Place this in the respective sample description
+
+For example,
+ - the value of the variable petstore-routing-alias.DEV_INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV_INT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable postman-echo-routing-alias.TEST_EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on TEST_EXT, overwriting the value defined in the global aliases.json file,
+ - the value of the variable petstore-routing-alias-108.PROD_INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD_INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
+ - the value of the variable postman-echo-security-alias.TEST_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on TEST_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+
+For example,
+ - the value of the variable postman-echo-security-alias.PROD_EXT.httpAuthCredentials.password will automatically replace the password stored in the PostmanEcho_Security_Alias on PROD_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
+
+> Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form, so the value of the (secret) replacement variable must also be provided in base-64-encoded form.
+
+# Sample content included in this repository
+
 ## export_payload.json export query for API projects
 
 The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` pipelines) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
@@ -474,19 +541,7 @@ The postman-echo-oauth2 sample project includes the following scopes.json file c
 
 The JSON array can include multiple scope definitions.
 
-## aliases.json configuration of environment-specific alias values
-
-Each API project can include one aliases.json file in the API project root folder specifying aliases used by the API(s) in the API project which should be overwritten with environment-specific values. In addition to that, there can be one global aliases.json file in the /apis root folder for overwriting values of aliases used by APIs in multiple API projects.
-
-For each target environment, the aliases.json files must include JSON objects applicable for the API Gateway Alias Management Service API PUT /alias/{aliasId} request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-restapi_alias_mgmt.html.
-
-In order to avoid conflicts, each alias may only be configured to be overwritten either in the global aliases.json file in the /apis root folder or in the aliases.json files in the API project root folders.
-
-Alias names cannot be changed by this functionality.
-
-Aliases for which no values are defined (for the current target environment) in the global aliases.json file or in the API project's aliases.json file will be deployed with their original alias values from the DESIGN environment.
-
-Examples:
+## TODO aliases.json configuration of environment-specific alias values
 
 ### Global aliases.json file
 
@@ -926,25 +981,6 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases, but the alias names are missing. The build pipeline will detect this and return with an error message.
 
-## Overwrite alias values with pipeline variables
-
-All alias values defined in the global aliases.json file or in API-specific aliases.json files in the API projects can be replaced during pipeline execution by pipeline variables. These pipeline variables can be defined and set when queueing the pipeline or in variable groups. Every API deployment pipeline imports the variable group specified in /{tenant}/variables/variables-aliases-template.yml which can be used for assembling the variables used for replacing alias values. Names of these variables must represent the full JSON path of the value to be replaced in its aliases.json file. For every variable following this naming convention, the pipeline will automatically replace the corresponding value in its aliases.json file by the value of the replacement variable.
-
-For example,
- - the value of the variable petstore-routing-alias.DEV_INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV_INT, overwriting the value defined in the global aliases.json file,
- - the value of the variable postman-echo-routing-alias.TEST_EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on TEST_EXT, overwriting the value defined in the global aliases.json file,
- - the value of the variable petstore-routing-alias-108.PROD_INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD_INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
- - the value of the variable postman-echo-security-alias.TEST_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on TEST_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
-
-Overwriting alias values with pipeline variables was mainly developed for replacing secret alias values like passwords in security aliases.
-
-For example,
- - the value of the variable postman-echo-security-alias.PROD_EXT.httpAuthCredentials.password will automatically replace the password stored in the PostmanEcho_Security_Alias on PROD_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
-
-Replacement values for secret alias values like passwords can and should be stored in secret variables.
-
-> Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form, so the value of the (secret) replacement variable must also be provided in base-64-encoded form.
-
 ## export_payload.json export query for API Gateway configurations
 
 The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the export_configuration_from_stage pipeline) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
@@ -1082,6 +1118,8 @@ The security-alias test collection sends POST, GET and DELETE requests against t
 ### test-failure
 
 The test-failure test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. The requests include tests which are designed to fail: The POST and the GET request tests are asking for an unexpected status code or petId, respectively. The DELETE request includes an incorrect API key provoking an Unauthorized application request error. The build pipeline will detect this and reject the API project with an error message.
+
+# Azure DevOps pipelines
 
 ## Pipelines for API projects
 
