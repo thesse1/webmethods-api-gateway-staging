@@ -31,8 +31,8 @@ The promotion APIs that are exposed by API Gateway can be used for the DevOps au
 This approach is followed in this solution. Using the API Gateway Archive Service API, API Gateway assets and configuration items are exported from the source stage, stored and managed in Git, and then imported on the target stages.
 
 In addition to this, the solution includes an automatic validation and adjustment of API Gateway assets for the deployment on different stages. It implements the following "design-time policies":
- - Alias values are set to target-stage-specific values
- - Text values in other API Gateway assets (like APIs, policies and applications) are set to target-stage-specific values
+ - Alias values are set to target stage-specific values
+ - Text values in other API Gateway assets (like APIs, policies and applications) are set to target stage-specific values
  - APIs should have separate sets of applications (with different identifiers) on different stages. The correct deployment of these applications should be enforced automatically. All applications are created on a local development environment or the central DESIGN environment with names ending with "_DEV", "_TEST" or "_PROD" indicating their intended usage. All applications should be exported and managed in Git, but only the intended applications should be imported on the respective DEV, TEST and PROD environments.
  - APIs must not contain any local, API-level Log Invocation policies in order to prevent any privacy issues caused by too detailed transaction logging
  - API mocking is turned off for deployments on TEST and PROD environments
@@ -148,15 +148,15 @@ Sample Usage for exporting the configuration that is present on the API Gateway 
 bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-## Target-stage-specific value substitutions
+## Target stage-specific value substitutions
 
-The API Gateway Staging solution offers three mechanisms for injecting target-stage-specific values into the definitions of the API Gateway assets when they are prepared on the BUILD environment for their target stages:
+The API Gateway Staging solution offers three mechanisms for injecting target stage-specific values into the definitions of the API Gateway assets when they are prepared on the BUILD environment for their target stages:
 
 ### Value substitution using using Azure DevOps Replace Tokens extension
 
 Any text field in any asset on the DESIGN stage can include placeholders in the format `#{placeholder_name}#` at any point in the text field content. These placeholders will be replaced during the build phase on the BUILD environment by the `Deploy arbitrary/selected API projects` pipelines by values specific for the intended target stage of this build. The values are pulled from Azure DevOps pipeline variables which can be managed in the Azure DevOps variable groups DEV_INT_value_substitutions, DEV_EXT_value_substitutions, TEST_INT_value_substitutions, TEST_EXT_value_substitutions, PROD_INT_value_substitutions and TEST_EXT_value_substitutions.
 
-This facilitates a separation of concern between API configuration experts managing the asset definitions in API Gateway and API providers managing the actual parameter values for their APIs on the different target stages directly in Azure DevOps without having to work on the API Gateway DESIGN (or in the repository code). On the other hand, this means that the target-stage-specific values will not be managed in Git, but directly in the Azure DevOps project.
+This facilitates a separation of concern between API configuration experts managing the asset definitions in API Gateway and API providers managing the actual parameter values for their APIs on the different target stages directly in Azure DevOps without having to work on the API Gateway DESIGN (or in the repository code). On the other hand, this means that the target stage-specific values will not be managed in Git, but directly in the Azure DevOps project.
 
 Confidential values like passwords in outbound authentication policies can be secured by hiding their values in the Azure DevOps variable groups.
 
@@ -166,7 +166,7 @@ Confidential values like passwords in outbound authentication policies can be se
 
 > Note: You can find a sample for this mechanism in the sample SwaggerPetstore API, see below.
 
-### aliases.json configuration of target-stage-specific alias values
+### aliases.json configuration of target stage-specific alias values
 
 Each API project can include one aliases.json file in the API project root folder specifying aliases used by the API(s) in the API project which should be overwritten with environment-specific values. In addition to that, there can be one global aliases.json file in the /apis root folder for overwriting values of aliases used by APIs in multiple API projects.
 
@@ -180,7 +180,7 @@ Aliases for which no values are defined (for the current target environment) in 
 
 This facilitates the setting of specific alias values for every target stage directly in the code. All values for one alias can conveniently be managed in one place - for text fields as well as for numeric or boolean values and without breaking the testability of the API on the DESIGN environment.
 
-> Note: Automatic tests on BUILD will be executed with the alias values as defined on the DESIGN environment. The target-stage-specific replacement of alias values based on the aliases.json files takes place after the execution of the automatic test scenario.
+> Note: Automatic tests on BUILD will be executed with the alias values as defined on the DESIGN environment. The target stage-specific replacement of alias values based on the aliases.json files takes place after the execution of the automatic test scenario.
 
 > Note: Confidential values should not be managed using this mechanism as they would be included in clear text in the aliases.json files in Git.
 
@@ -190,9 +190,9 @@ This facilitates the setting of specific alias values for every target stage dir
 
 Both the global and the API-project-specific aliases.json files can also include placeholders in the format `#{placeholder_name}#`.
 
-This allows for a mix of the first and the second mechanism for injecting target-stage-specific values. You can define alias definitions for all target stages with some fixed values in the aliases.json files including some placeholders for values which should be replaced based on Azure DevOps pipeline variables (maybe for a better separation of concern or for better hiding confidential values).
+This allows for a mix of the first and the second mechanism for injecting target stage-specific values. You can define alias definitions for all target stages with some fixed values in the aliases.json files including some placeholders for values which should be replaced based on Azure DevOps pipeline variables (maybe for a better separation of concern or for better hiding confidential values).
 
-> Note: Automatic tests on BUILD will be executed with the alias values as defined on the DESIGN environment. The target-stage-specific replacement of alias values based on the aliases.json files takes place after the execution of the automatic test scenario.
+> Note: Automatic tests on BUILD will be executed with the alias values as defined on the DESIGN environment. The target stage-specific replacement of alias values based on the aliases.json files takes place after the execution of the automatic test scenario.
 
 > Note: Inside the aliases.json files, placeholders can be placed inside the values of text fields, but also in numeric and boolean field values.
 
