@@ -1,0 +1,89 @@
+{
+  "ping-routing-alias": {
+    "id" : "02ee4daf-e735-4193-9fe1-50f94dafe92d",
+    "DEV_INT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on DEV_INT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 100,
+      "readTimeout" : 1000,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "DEV_EXT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on DEV_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 100,
+      "readTimeout" : 1000,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "TEST_INT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on TEST_INT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 50,
+      "readTimeout" : 500,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "TEST_EXT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on TEST_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 50,
+      "readTimeout" : 500,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "PROD_INT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on PROD_INT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 20,
+      "readTimeout" : 200,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "PROD_EXT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on PROD_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 20,
+      "readTimeout" : 200,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    }
+  }
+}
