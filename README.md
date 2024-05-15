@@ -52,10 +52,6 @@ The solution supports separate stages for hosting internal and external APIs. Th
 
 The solution supports target stages with multiple "instances", for example in different regions. (Each instance can itself be an API Gateway cluster.) The "instances" within one stage will always get the same configuration and the same set of APIs. Applications can by synchronized within stages using HAFT, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-haft_reference_arch.html.
 
-> Note: The solution only supports additive promotion of new assets or asset changes. It does not support the promotion of asset deletions. Assets can be deleted directly on the target environment (in the API Gateway UI or through the respective API Gateway asset management REST API). The recommended procedure for decommissioning APIs is to deactivate the API on the DESIGN environment and propagate that change to the target stages. This makes the decommissioning process more transparent and traceable.
-
-## webMethods API Gateway assets and configurations
-
 The following API Gateway assets and configurations can be moved across API Gateway stages:
  - Gateway APIs 
  - Policy Definitions/Policy Templates/Global Policies
@@ -69,6 +65,8 @@ The following API Gateway assets and configurations can be moved across API Gate
  - Security configurations
  - Destination configurations
  - External accounts configurations
+
+> Note: The solution only supports additive promotion of new assets or asset changes. It does not support the promotion of asset deletions. Assets can be deleted directly on the target environment (in the API Gateway UI or through the respective API Gateway asset management REST API). The recommended procedure for decommissioning APIs is to deactivate the API on the DESIGN environment and propagate that change to the target stages. This makes the decommissioning process more transparent and traceable.
 
 ## About this repository
 
