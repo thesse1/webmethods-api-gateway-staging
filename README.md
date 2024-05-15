@@ -263,7 +263,11 @@ In addition to that, the value of the PetStore_Routing_Alias contains the placeh
 
 This example showcases HTTP Basic Authentication for the Petstore demo API. The following user, group and team are authorized to use the API: testuser_01, testgroup_02 (with testuser_02) and testteam_03 (assigned to testgroup_03 with testuser_03). API Gateway will not automatically include the authorized user, group and team in the export. Therefore, testuser_01, testgroup_02 and testteam_03 must be included in export_payload.json explicitly. The dependent assets (testuser_02, testgroup_03 and testuser_03) will be included automatically.
 
+This API is also using the PetStore_Routing_Alias with the `#{stage_name}#` and `#{petstore_route}#` placeholders in its description and value, respectively.
+
 > Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not support the Authorize User policy, but it can be deployed in the azure_demo_01 target environments.
+
+> Note: Because of the `#{petstore_route}#` in the PetStore_Routing_Alias, the API cannot be tested on DESIGN, but the placeholder will be replaced by the correct variable value during build before the automatic regression tests.
 
 ### petstore-versioning
 
@@ -275,13 +279,22 @@ This example showcases HTTP Basic Authentication for the Petstore demo API. The 
   "scope": [
     {
       "attributeName": "id",
-      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899|4bd552e3-064f-444a-bc77-7560059c9955"
+      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899"
+    },
+    {
+      "attributeName": "id",
+      "keyword": "4bd552e3-064f-444a-bc77-7560059c9955"
     }
-  ]
+  ],
+  "condition" : "or"
 }
 ```
 
 This API project includes two APIs, actually two versions of the same API. They must be configured separately in the export_payload.json of the API project. The two API versions are using two different (simple) aliases, PetStore_Routing_Alias_1_0_8 and PetStore_Routing_Alias_1_0_9, for routing API requests to the native Petstore API.
+
+The aliases PetStore_Routing_Alias_1_0_8 and PetStore_Routing_Alias_1_0_9 also contain the `#{stage_name}#` and `#{petstore_route}#` placeholders in their description and value, respectively.
+
+> Note: Because of the `#{petstore_route}#` in the aliases, the APIs cannot be tested on DESIGN, but the placeholder will be replaced by the correct variable value during build before the automatic regression tests.
 
 ### postman-echo
 
