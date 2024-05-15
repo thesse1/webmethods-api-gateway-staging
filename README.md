@@ -1098,45 +1098,45 @@ The petstore test collection sends POST, GET and DELETE requests against the Swa
 
 > Note: As of 15.06.2021, we have detected a malfunction in the native Petstore API breaking the GET and DELETE requests defined in the APITest.json Postman test collection for Petstore APIs: The GET and DELETE requests will intermittently (ca. 50% of the time) fail to address the pet by id. We have therefore manipulated all APITest.json Postman test collections for Petstore APIs skipping the GET and DELETE requests and only running the POST requests. The original versions of the test collections are retained as APITest_full_test.json.
 
-### petstore-basicauth
+### petstore_basicauth
 
-The petstore-basicauth test collection invokes POST, GET and DELETE requests for testuser_01, testuser_02 (member of testgroup_02) and testuser_03 (member of testgroup_03, assigned to testteam_03).
+The petstore_basicauth test collection invokes POST, GET and DELETE requests for testuser_01, testuser_02 (member of testgroup_02) and testuser_03 (member of testgroup_03, assigned to testteam_03).
 
-### petstore-versioning
+### petstore_versioning
 
-The petstore-versioning test collection invokes POST, GET and DELETE requests for both API versions.
+The petstore_versioning test collection invokes POST, GET and DELETE requests for both API versions.
 
-### postman-echo
+### postman_echo
 
-The postman-echo test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body.
+The postman_echo test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body.
 
-### postman-mocking
+### postman_mocking
 
-The postman-mocking test collection sends POST, GET and DELETE requests against the Postman Echo Mock API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body and the "source" attribute included only in the mock response.
+The postman_mocking test collection sends POST, GET and DELETE requests against the Postman Echo Mock API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body and the "source" attribute included only in the mock response.
 
-### multiple-tenants
+### multiple_tenants
 
-The multiple-tenants test collection invokes all three APIs for Tenant1 and Tenant2, respectively. The requests contain tests for the correct tenant query parameter echoed in the response body.
+The multiple_tenants test collection invokes all three APIs for Tenant1 and Tenant2, respectively. The requests contain tests for the correct tenant query parameter echoed in the response body.
 
-### postman-echo-oauth2
+### postman_echo_oauth2
 
-The postman-echo-oauth2 test collection invokes the API Gateway pub.apigateway.oauth2/getAccessToken service to retrieve an OAuth2 token. It stores the token in a Postman variable and uses it in the subsequent POST, GET and DELETE requests against the API.
+The postman_echo_oauth2 test collection invokes the API Gateway pub.apigateway.oauth2/getAccessToken service to retrieve an OAuth2 token. It stores the token in a Postman variable and uses it in the subsequent POST, GET and DELETE requests against the API.
 
-### postman-echo-jwt
+### postman_echo_jwt
 
-The postman-echo-jwt test collection invokes the API Gateway /rest/pub/apigateway/jwt/getJsonWebToken endpoint to retrieve a JSON Web Token. It stores the token in a Postman variable and uses it in the subsequent POST, GET and DELETE requests against the API.
+The postman_echo_jwt test collection invokes the API Gateway /rest/pub/apigateway/jwt/getJsonWebToken endpoint to retrieve a JSON Web Token. It stores the token in a Postman variable and uses it in the subsequent POST, GET and DELETE requests against the API.
 
 ### ping
 
 The ping test collection invokes the Ping API GET request and validates the response code and the presence of the date attribute returned by the ping request.
 
-### security-alias
+### security_alias
 
-The security-alias test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter and Authorization HTTP request header set by the Outbound Authentication policy using the PostmanEcho_Security_Alias HTTP Transport security alias) in the response body.
+The security_alias test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter and Authorization HTTP request header set by the Outbound Authentication policy using the PostmanEcho_Security_Alias HTTP Transport security alias) in the response body.
 
-### test-failure
+### test_failure
 
-The test-failure test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. The requests include tests which are designed to fail: The POST and the GET request tests are asking for an unexpected status code or petId, respectively. The DELETE request includes an incorrect API key provoking an Unauthorized application request error. The build pipeline will detect this and reject the API project with an error message.
+The test_failure test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. The requests include tests which are designed to fail: The POST and the GET request tests are asking for an unexpected status code or petId, respectively. The DELETE request includes an incorrect API key provoking an Unauthorized application request error. The build pipeline will detect this and reject the API project with an error message.
 
 # Azure DevOps pipelines
 
