@@ -413,7 +413,7 @@ This API is using JSON Web Tokens (JWT) for inbound authentication. It is config
 }
 ```
 
-The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway without using any routing alias. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
+The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway using Ping_Routing_Alias (simple alias). The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
 ### number-conversion
 
