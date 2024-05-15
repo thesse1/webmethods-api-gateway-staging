@@ -100,11 +100,11 @@ Larger organizations implementing the API Gateway Staging solution tend to split
 
 The most common use case for an API Developer is to develop APIs on the central DESIGN environment (or on their local development environments), export them to a flat file representation and commit this to Git. Also, developers need to import their APIs from Git to the central DESIGN environment (or their local development environments) for further updates.
 
-The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export APIs from the central DESIGN environment (or their local development API Gateway) to their local Git repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
+The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export/import APIs from/to the central DESIGN environment (or their local development API Gateway) to/from their local Git repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
 
-Alternatively, the developer can also use the `Export arbitrary/selected API project from DESIGN` pipelines to export APIs from the central DESIGN environment into Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
+Alternatively, the developer can also use the `Export arbitrary/selected API project from DESIGN` pipelines and the `Deploy arbitrary/selected API projects` pipelines to export/import APIs from/to the central DESIGN environment into/from Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
-## gateway_import_export_utils.bat
+### gateway_import_export_utils.bat
 
 The gateway_import_export_utils.bat can be used for importing and exporting APIs (projects) in a flat file representation. The export_payload.json file in each project folder under /apis defines which API Gateway assets belong to this project. The assets will be imported/exported into/from their respective project folders under /apis.
 
