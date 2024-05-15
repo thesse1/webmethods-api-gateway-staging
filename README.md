@@ -269,7 +269,7 @@ This API is also using the PetStore_Routing_Alias with the `#{stage_name}#` and 
 
 > Note: Because of the `#{petstore_route}#` in the PetStore_Routing_Alias, the API cannot be tested on DESIGN, but the placeholder will be replaced by the correct variable value during build before the automatic regression tests.
 
-### petstore-versioning
+### petstore_versioning
 
 ```
 {
@@ -296,7 +296,7 @@ The aliases PetStore_Routing_Alias_1_0_8 and PetStore_Routing_Alias_1_0_9 also c
 
 > Note: Because of the `#{petstore_route}#` in the aliases, the APIs cannot be tested on DESIGN, but the placeholder will be replaced by the correct variable value during build before the automatic regression tests.
 
-### postman-echo
+### postman_echo
 
 ```
 {
@@ -314,7 +314,9 @@ The aliases PetStore_Routing_Alias_1_0_8 and PetStore_Routing_Alias_1_0_9 also c
 
 This example features the Postman Echo API (https://learning.postman.com/docs/developer/echo-api/) which is often used for demonstrating API Management features. For each request type (POST, GET, DELETE), it extracts the header, query and path parameters and the request body from the request and echoes them back in the response payload. The API is using the PostmanEcho_Routing_Alias endpoint alias configured for routing API requests to the native PostmanEcho API at https://postman-echo.com. This API and all other instances of the PostmanEcho API are assigned to the External API group, so they can be deployed on DEV_EXT, TEST_EXT and PROD_EXT.
 
-### postman-mocking
+The description of the API contains a placeholder `#{stage_name}#` which will be populated during build by the content of the stage_name pipeline variable.
+
+### postman_mocking
 
 ```
 {
@@ -332,7 +334,7 @@ This example features the Postman Echo API (https://learning.postman.com/docs/de
 
 This API project contains an instance of the Postman Echo API with API mocking enabled. API tests will be executed on the BUILD environment against the Mock API, and the API will be deployed on DEV with mocking enabled. For the deployment on TEST and PROD, mocking will be disabled.
 
-### multiple-tenants
+### multiple_tenants
 
 ```
 {
@@ -359,7 +361,7 @@ And the API project contains an API which can be used by both Tenant1 and Tenant
 
 This API will automatically identify the tenant by the incoming API key, and then it will "route" the request to the right endpoint by adding tenant=Tenant1 or tenant=Tenant2 to the native endpoint in a Context-based Routing policy.
 
-### postman-echo-oauth2
+### postman_echo_oauth2
 
 ```
 {
@@ -379,7 +381,7 @@ This API is using OAuth2 for inbound authentication. Therefore, the developer mu
 
 > Note: The local OAuth2 scope itself cannot be promoted from stage to stage using this mechanism, because it is configured in the general "local" system alias for the internal OAuth2 Authorization Server. OAuth2 scopes needed for the API(s) in an API project can be configured in the API project's scopes.json file, see below.
 
-### postman-echo-jwt
+### postman_echo_jwt
 
 ```
 {
@@ -415,7 +417,7 @@ This API is using JSON Web Tokens (JWT) for inbound authentication. It is config
 
 The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway using Ping_Routing_Alias (simple alias). The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-### number-conversion
+### number_conversion
 
 ```
 {
@@ -433,7 +435,7 @@ The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local u
 
 This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-### odata-tutorial
+### odata_tutorial
 
 ```
 {
@@ -451,7 +453,7 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
 
 This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-### star-wars
+### star_wars
 
 ```
 {
@@ -469,7 +471,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 
 This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-### internal-external
+### internal_external
 
 ```
 {
@@ -487,7 +489,7 @@ This is an example for a GraphQL API incl. test request in APITest.json. The API
 
 This API project includes an instance of the internal Petstore API and an instance of the external PostmanEcho API. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
-### invalid-app-name
+### invalid_app_name
 
 ```
 {
@@ -505,7 +507,7 @@ This API project includes an instance of the internal Petstore API and an instan
 
 This API project includes an instance of the PostmanEcho API with an application called "Invalid_App_Name_INVALID". Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
-### invalid-logging-policy
+### invalid_logging_policy
 
 ```
 {
@@ -523,7 +525,7 @@ This API project includes an instance of the PostmanEcho API with an application
 
 This API project includes an instance of the PostmanEcho API with an unwanted local, API-level Log Invocation policy. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
-### missing-api-group
+### missing_api_group
 
 ```
 {
@@ -638,7 +640,7 @@ The JSON array can include multiple scope definitions.
 
 The global aliases.json file in the /apis folder contains alias values for the respective DEV, TEST and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
 
-### petstore-versioning
+### petstore_versioning
 
 ```
 {
@@ -695,7 +697,7 @@ The global aliases.json file in the /apis folder contains alias values for the r
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases used only by the two API versions in this API project.
 
-### security-alias
+### security_alias
 
 ```
 {
@@ -745,7 +747,7 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
 
 > Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form.
 
-### incorrect-alias-name
+### incorrect_alias_name
 
 ```
 {
@@ -802,7 +804,7 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases with incorrect names not matching with the names in the original alias definitions. The build pipeline will detect this and return with an error message.
 
-### duplicate-alias
+### duplicate_alias
 
 ```
 {
@@ -835,7 +837,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 
 This file contains environment-specific values for the PetStore_Routing_Alias alias which is already overwritten by the global aliases.json file in the /apis root folder. The build pipeline will detect this and return with an error message.
 
-### alias-not-found
+### alias_not_found
 
 ```
 {
@@ -892,7 +894,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases which are not included in this API project. The build pipeline will detect this and return with an error message.
 
-### missing-alias-id
+### missing_alias_id
 
 ```
 {
@@ -947,7 +949,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases, but the alias IDs are missing. The build pipeline will detect this and return with an error message.
 
-### missing-alias-name
+### missing_alias_name
 
 ```
 {
