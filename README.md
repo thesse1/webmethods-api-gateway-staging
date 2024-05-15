@@ -453,6 +453,8 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
 
 This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
+> Note: This sample API cannot be deployed on any target environment in the azure_demo_01 environment set, because the ingress controller on the Kubernetes cluster is configured to accept only calls to /gateway, but it can be deployed in the wm_io target environments.
+
 ### star_wars
 
 ```
@@ -470,6 +472,8 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 ```
 
 This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
+
+> Note: This sample API cannot be deployed on any target environment in the azure_demo_01 environment set, because the ingress controller on the Kubernetes cluster is configured to accept only calls to /gateway, but it can be deployed in the wm_io target environments.
 
 ### internal_external
 

@@ -114,10 +114,10 @@ parameters:
   type: object
   default:
   - api_projects:
-    - number_conversion
+    # - number_conversion
     - ping
     - odata_tutorial
-    - star_wars
+    # - star_wars
     targets:
     - DEV_INT
     - DEV_EXT
