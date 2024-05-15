@@ -1,0 +1,15 @@
+{
+  "id" : "02ee4daf-e735-4193-9fe1-50f94dafe92d",
+  "name" : "Ping_Routing_Alias",
+  "description" : "Ping alias on DESIGN",
+  "type" : "endpoint",
+  "owner" : "Administrator",
+  "endPointURI" : "http://localhost:5555",
+  "connectionTimeout" : 100,
+  "readTimeout" : 100,
+  "suspendDurationOnFailure" : 0,
+  "optimizationTechnique" : "None",
+  "passSecurityHeaders" : false,
+  "keystoreAlias" : "",
+  "truststoreAlias" : ""
+}

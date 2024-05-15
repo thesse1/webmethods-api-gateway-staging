@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2024-05-11T11:27:19"/>
+    <buildInfo name="BuildTimestamp" value="2024-05-15T16:06:05"/>
     <asset name="API.1e137fbf-6334-4fdf-beb4-4899f644ab5b" displayName="Ping[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Policy.4956a703-0ffd-4736-ae1f-25bb8ed1f702</dependsOn>
@@ -14,6 +14,25 @@
     </asset>
     <asset name="PolicyAction.6e85fef9-e32e-42a9-b9ee-eef4f546445f" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API Ping[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.02ee4daf-e735-4193-9fe1-50f94dafe92d</dependsOn>
+    </asset>
+    <asset name="Alias.02ee4daf-e735-4193-9fe1-50f94dafe92d" displayName="Ping_Routing_Alias" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="Endpoint URI for Endpoint alias Ping_Routing_Alias" many="false" isSecure="false" displayName="Endpoint URI for Endpoint alias Ping_Routing_Alias">
+            <value>http://localhost:5555</value>
+        </property>
+        <property name="Optimization technique for Endpoint alias Ping_Routing_Alias" many="false" isSecure="false" displayName="Optimization technique for Endpoint alias Ping_Routing_Alias">
+            <value>None</value>
+        </property>
+        <property name="Connection timeout for Endpoint alias Ping_Routing_Alias" many="false" isSecure="false" displayName="Connection timeout for Endpoint alias Ping_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Read timeout for Endpoint alias Ping_Routing_Alias" many="false" isSecure="false" displayName="Read timeout for Endpoint alias Ping_Routing_Alias">
+            <value>100</value>
+        </property>
+        <property name="Pass WS-Security Headers for Endpoint alias Ping_Routing_Alias" many="false" isSecure="false" displayName="Pass WS-Security Headers for Endpoint alias Ping_Routing_Alias">
+            <value>false</value>
+        </property>
     </asset>
     <asset name="PolicyAction.d362e092-d0b4-45cd-bd17-87e4fc41f231" displayName="Policy Action [Monitor Performance] -&gt; Policy For API Ping[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
