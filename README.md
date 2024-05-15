@@ -221,8 +221,6 @@ For example,
 
 The /apis folder contains sample API projects with the following export_payload.json files:
 
-TODO
-
 ### petstore
 
 ```
@@ -239,9 +237,15 @@ TODO
 }
 ```
 
-This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the Petstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV_INT, TEST_INT and PROD_INT.
+This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the SwaggerPetstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV_INT, TEST_INT and PROD_INT.
 
-### petstore-basicauth
+The description of the API and the description of the PetStore_Routing_Alias contain a placeholder `#{stage_name}#` which will be populated during build by the content of the stage_name pipeline variable.
+
+In addition to that, the value of the PetStore_Routing_Alias contains the placeholder `#{petstore_route}#` which will be populated during build by the content of the petstore_route pipeline variable.
+
+> Note: Because of the `#{petstore_route}#` in the PetStore_Routing_Alias, the API cannot be tested on DESIGN, but the placeholder will be replaced by the correct variable value during build before the automatic regression tests.
+
+### petstore_basicauth
 
 ```
 {
@@ -258,6 +262,8 @@ This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2e
 ```
 
 This example showcases HTTP Basic Authentication for the Petstore demo API. The following user, group and team are authorized to use the API: testuser_01, testgroup_02 (with testuser_02) and testteam_03 (assigned to testgroup_03 with testuser_03). API Gateway will not automatically include the authorized user, group and team in the export. Therefore, testuser_01, testgroup_02 and testteam_03 must be included in export_payload.json explicitly. The dependent assets (testuser_02, testgroup_03 and testuser_03) will be included automatically.
+
+> Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not support the Authorize User policy, but it can be deployed in the azure_demo_01 target environments.
 
 ### petstore-versioning
 
