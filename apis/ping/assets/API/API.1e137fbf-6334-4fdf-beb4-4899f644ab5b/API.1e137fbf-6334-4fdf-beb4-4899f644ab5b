@@ -6,7 +6,6 @@
     },
     "basePath" : "",
     "serviceRegistryDisplayName" : "Ping_1.0",
-    "tags" : [ ],
     "schemes" : [ ],
     "security" : [ ],
     "paths" : {
@@ -112,7 +111,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2021-05-18 12:46:12 GMT",
-  "lastModified" : "2023-11-16 17:42:57 GMT",
+  "lastModified" : "2024-05-15 16:04:46 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "1e137fbf-6334-4fdf-beb4-4899f644ab5b"

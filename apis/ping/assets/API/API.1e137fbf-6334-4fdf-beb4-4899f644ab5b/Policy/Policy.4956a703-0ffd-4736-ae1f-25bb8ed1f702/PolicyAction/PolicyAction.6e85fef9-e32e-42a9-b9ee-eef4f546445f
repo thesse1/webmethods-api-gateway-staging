@@ -7,7 +7,7 @@
   "templateKey" : "straightThroughRouting",
   "parameters" : [ {
     "templateKey" : "endpointUri",
-    "values" : [ "http://localhost:5555/invoke/wm.server:ping/${sys:resource_path}" ]
+    "values" : [ "${Ping_Routing_Alias}/invoke/wm.server:ping/${sys:resource_path}" ]
   }, {
     "templateKey" : "method",
     "values" : [ "CUSTOM" ]
