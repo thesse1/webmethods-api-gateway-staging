@@ -127,7 +127,7 @@ parameters:
     - PROD_EXT
   - api_projects:
     - petstore
-    # - petstore_basicauth
+    - petstore_basicauth
     - petstore_versioning
     targets:
     - DEV_INT
