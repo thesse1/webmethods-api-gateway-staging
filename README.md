@@ -102,6 +102,8 @@ The gateway_import_export_utils.bat under /bin can be used for this. Using this 
 
 Alternatively, the developer can also use the `Export arbitrary/selected API project from DESIGN` pipelines and the `Deploy arbitrary/selected API projects` pipelines to export/import APIs from/to the central DESIGN environment into/from Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
+The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` pipelines) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+
 ### gateway_import_export_utils.bat
 
 The gateway_import_export_utils.bat can be used for importing and exporting APIs (projects) in a flat file representation. The export_payload.json file in each project folder under /apis defines which API Gateway assets belong to this project. The assets will be imported/exported into/from their respective project folders under /apis.
@@ -216,8 +218,6 @@ For example,
 # Sample content included in this repository
 
 ## export_payload.json export query for API projects
-
-The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` pipelines) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 The /apis folder contains sample API projects with the following export_payload.json files:
 
