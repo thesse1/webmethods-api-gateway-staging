@@ -10,14 +10,14 @@ parameters:
 - name: environment_set
 
 steps:
-- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+- task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in assets'
   inputs:
     targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets/**/*'
     actionOnMissing: fail
   condition: ${{parameters.replace_condition}}
 
-- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+- task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in local aliases.json'
   inputs:
     targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json'
@@ -28,7 +28,7 @@ steps:
   displayName: Log local aliases.json after value substitution
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
-- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+- task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in global aliases.json'
   inputs:
     targetFiles: '$(System.DefaultWorkingDirectory)/apis/aliases.json'
