@@ -202,16 +202,6 @@ This allows for a mix of the first and the second mechanism for injecting target
 
 > Note: You can find a sample for this mechanism in the sample PostmanEcho API, see below.
 
-### TODO: Place this in the respective sample description
-
-For example,
- - the value of the variable postman-echo-security-alias.TEST_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on TEST_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
-
-For example,
- - the value of the variable postman-echo-security-alias.PROD_EXT.httpAuthCredentials.password will automatically replace the password stored in the PostmanEcho_Security_Alias on PROD_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
-
-> Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form, so the value of the (secret) replacement variable must also be provided in base-64-encoded form.
-
 # Sample content included in this repository
 
 ## export_payload.json export query for sample API projects
@@ -897,7 +887,7 @@ This file contains environment-specific values for the PostmanEcho_Security_Alia
 
 Note that the userName and password attributes are represented by placeholders. They are replaced during build by the content of the respective pipeline variables.
 
-> Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form.
+> Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form, so the value of the (secret) replacement variable must also be provided in base-64-encoded form.
 
 ## aliases.json configuration of environment-specific alias values for negative test cases
 
