@@ -1,17 +1,18 @@
 {
 	"info": {
-		"_postman_id": "770b3642-2663-49ae-b514-ac84a58b1e29",
+		"_postman_id": "2efe3f36-4b60-4a0d-9779-edfa70aa6dd3",
 		"name": "API Test for countries",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-770b3642-2663-49ae-b514-ac84a58b1e29"
+		"_uid": "3558839-2efe3f36-4b60-4a0d-9779-edfa70aa6dd3"
 	},
 	"item": [
 		{
-			"name": "Get all films",
+			"name": "Get all countries",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "7264dee8-09b7-4ffe-968a-aa2f68d275c9",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -23,25 +24,30 @@
 							"});"
 						],
 						"type": "text/javascript",
-						"id": "ca9ec03a-44c5-41d5-8cc3-f82565ed2618"
+						"packages": {}
 					}
 				}
 			],
-			"id": "fc898884-13bd-4eef-a91c-f5d4067ab088",
+			"id": "4f14ef2e-ba70-40f6-8850-224032c22f30",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
-						"type": "text"
+						"value": "{{api-hostname}}"
 					}
 				],
 				"body": {
-					"mode": "graphql"
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  countries {\r\n    name\r\n    continent {\r\n      name\r\n    }\r\n  }\r\n}"
+					}
 				},
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gql/StarWarsDemoAPI/1",
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gql/Countries/1.0",
 					"protocol": "{{api-protocol}}",
 					"host": [
 						"{{api-ip}}"
@@ -49,8 +55,8 @@
 					"port": "{{api-port}}",
 					"path": [
 						"gql",
-						"StarWarsDemoAPI",
-						"1"
+						"Countries",
+						"1.0"
 					]
 				}
 			},
