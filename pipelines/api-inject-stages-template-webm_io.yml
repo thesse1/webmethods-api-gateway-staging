@@ -188,7 +188,7 @@ stages:
               - ${{stage.name}}
             - ${{ elseif eq(parameters.selected_target, 'All (including DESIGN)') }}:
               - ${{stage.name}}
-            - ${{ elseif and(eq(parameters.selected_target, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
+            - ${{ elseif and(eq(parameters.selected_target, 'All (execpt DESIGN)'), ne(stage.name, 'DESIGN')) }}:
               - ${{stage.name}}
     - ${{ else }}:
       - ${{ each eligible_target in parameters.eligible_targets }}:
