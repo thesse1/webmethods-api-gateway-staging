@@ -689,36 +689,12 @@ The postman-echo-oauth2 sample project includes the following scopes.json file c
 
 The JSON array can include multiple scope definitions.
 
-## TODO aliases.json configuration of environment-specific alias values
+## aliases.json configuration of environment-specific alias values
 
 ### Global aliases.json file
 
 ```
 {
-  "petstore-routing-alias": {
-    "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
-    "DEV_INT": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "TEST_INT": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on TEST_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "PROD_INT": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    }
-  },
   "postman-echo-routing-alias": {
     "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
     "DEV_EXT": {
@@ -728,7 +704,7 @@ The JSON array can include multiple scope definitions.
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
       "connectionTimeout" : 100,
-      "readTimeout" : 100,
+      "readTimeout" : #{postman_echo_readTimeout}#,
       "suspendDurationOnFailure" : 0,
       "optimizationTechnique" : "None",
       "passSecurityHeaders" : false,
@@ -742,7 +718,7 @@ The JSON array can include multiple scope definitions.
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
       "connectionTimeout" : 50,
-      "readTimeout" : 50,
+      "readTimeout" : #{postman_echo_readTimeout}#,
       "suspendDurationOnFailure" : 0,
       "optimizationTechnique" : "None",
       "passSecurityHeaders" : false,
@@ -756,7 +732,7 @@ The JSON array can include multiple scope definitions.
       "owner" : "Administrator",
       "endPointURI" : "https://postman-echo.com",
       "connectionTimeout" : 20,
-      "readTimeout" : 20,
+      "readTimeout" : #{postman_echo_readTimeout}#,
       "suspendDurationOnFailure" : 0,
       "optimizationTechnique" : "None",
       "passSecurityHeaders" : false,
@@ -767,64 +743,109 @@ The JSON array can include multiple scope definitions.
 }
 ```
 
-The global aliases.json file in the /apis folder contains alias values for the respective DEV, TEST and PROD environments for the PetStore_Routing_Alias simple alias used in (most of the) Petstore APIs and for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
+The global aliases.json file in the /apis folder contains alias values for the DEV_EXT, TEST_EXT and PROD_EXT target stages for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
 
-### petstore_versioning
+Note that the description and connectionTimeout attributes are set to different values for the three target stages. These values will be injected into the actual alias before importing it on the target environments.
+
+Note that the readTimeout on all three target stages is represented by the placeholder `#{postman_echo_readTimeout}#`. It is replaced during build by the content of the postman_echo_readTimeout pipeline variable.
+
+### ping
 
 ```
 {
-  "petstore-routing-alias-108": {
-    "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
+  "ping-routing-alias": {
+    "id" : "02ee4daf-e735-4193-9fe1-50f94dafe92d",
     "DEV_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
-      "type" : "simple",
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on DEV_INT",
+      "type" : "endpoint",
       "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 100,
+      "readTimeout" : 1000,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "DEV_EXT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on DEV_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 100,
+      "readTimeout" : 1000,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
     },
     "TEST_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
-      "type" : "simple",
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on TEST_INT",
+      "type" : "endpoint",
       "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 50,
+      "readTimeout" : 500,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "TEST_EXT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on TEST_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 50,
+      "readTimeout" : 500,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
     },
     "PROD_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_8",
-      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
-      "type" : "simple",
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on PROD_INT",
+      "type" : "endpoint",
       "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    }
-  },
-  "petstore-routing-alias-109": {
-    "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 20,
+      "readTimeout" : 200,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
     },
-    "TEST_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
-      "type" : "simple",
+    "PROD_EXT": {
+      "name" : "Ping_Routing_Alias",
+      "description" : "Ping alias on PROD_EXT",
+      "type" : "endpoint",
       "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "PROD_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_9",
-      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
+      "endPointURI" : "http://localhost:5555",
+      "connectionTimeout" : 20,
+      "readTimeout" : 200,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
     }
   }
 }
 ```
 
-This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases used only by the two API versions in this API project.
+The local aliases.json file in the /apis/ping folder contains alias values for all six target stages for the Ping_Routing_Alias endpoint alias used in the Ping API.
+
+Note that the description, connectionTimeout and readTimeout attributes are set to different values for target stages. These values will be injected into the actual alias before importing it on the target environments.
 
 ### postman_echo_security_alias
 
@@ -840,8 +861,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_DEV_EXT",
-        "password" : "TXlQYXNzd29yZF9ERVYtRVhU"
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
       }
     },
     "TEST_EXT": {
@@ -852,8 +873,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_TEST_EXT",
-        "password" : "TXlQYXNzd29yZF9TVEFHRS1FWFQ="
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
       }
     },
     "PROD_EXT": {
@@ -864,8 +885,8 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
       "authType" : "HTTP_BASIC",
       "authMode" : "NEW",
       "httpAuthCredentials" : {
-        "userName" : "PostmanEcho_PROD_EXT",
-        "password" : "TXlQYXNzd29yZF9QUk9ELUVYVA=="
+        "userName" : "#{postman_echo_username}#",
+        "password" : "#{postman_echo_password_base64}#"
       }
     }
   }
@@ -874,99 +895,13 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 
 This file contains environment-specific values for the PostmanEcho_Security_Alias HTTP Transport security alias used only by the PostmanEcho_Security_Alias API in this API project.
 
+Note that the userName and password attributes are represented by placeholders. They are replaced during build by the content of the respective pipeline variables.
+
 > Note: The password in an HTTP Transport security alias must be provided in base-64-encoded form.
 
-### incorrect_alias_name
+## aliases.json configuration of environment-specific alias values for negative test cases
 
-```
-{
-  "petstore-routing-alias-108": {
-    "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
-    "DEV_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "TEST_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "PROD_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_8_XXX",
-      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    }
-  },
-  "petstore-routing-alias-109": {
-    "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
-    "DEV_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "TEST_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "PROD_INT": {
-      "name" : "PetStore_Routing_Alias_1_0_9_XXX",
-      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    }
-  }
-}
-```
-
-This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases with incorrect names not matching with the names in the original alias definitions. The build pipeline will detect this and return with an error message.
-
-### duplicate_alias
-
-```
-{
-  "petstore-routing-alias": {
-    "id" : "a593c88b-4e0a-4e4e-85ec-7e19d90ca332",
-    "DEV_INT": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on DEV_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "TEST_INT": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on TEST_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    },
-    "PROD_INT": {
-      "name" : "PetStore_Routing_Alias",
-      "description" : "Petstore alias on PROD_INT",
-      "type" : "simple",
-      "owner" : "Administrator",
-      "value" : "https://petstore.swagger.io/v2"
-    }
-  }
-}
-```
-
-This file contains environment-specific values for the PetStore_Routing_Alias alias which is already overwritten by the global aliases.json file in the /apis root folder. The build pipeline will detect this and return with an error message.
-
-### alias_not_found
+### zzz_alias_not_found
 
 ```
 {
@@ -1023,7 +958,118 @@ This file contains environment-specific values for the PetStore_Routing_Alias al
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases which are not included in this API project. The build pipeline will detect this and return with an error message.
 
-### missing_alias_id
+### zzz_duplicate_alias
+
+```
+{
+  "postman-echo-routing-alias": {
+    "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
+    "DEV_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on DEV_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 100,
+      "readTimeout" : 100,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "TEST_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on TEST_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 50,
+      "readTimeout" : 50,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    },
+    "PROD_EXT": {
+      "name" : "PostmanEcho_Routing_Alias",
+      "description" : "PostmanEcho alias on PROD_EXT",
+      "type" : "endpoint",
+      "owner" : "Administrator",
+      "endPointURI" : "https://postman-echo.com",
+      "connectionTimeout" : 20,
+      "readTimeout" : 20,
+      "suspendDurationOnFailure" : 0,
+      "optimizationTechnique" : "None",
+      "passSecurityHeaders" : false,
+      "keystoreAlias" : "",
+      "truststoreAlias" : ""
+    }
+  }
+}
+```
+
+This file contains environment-specific values for the PostmanEcho_Routing_Alias alias which is already overwritten by the global aliases.json file in the /apis root folder. The build pipeline will detect this and return with an error message.
+
+### zzz_incorrect_alias_name
+
+```
+{
+  "petstore-routing-alias-108": {
+    "id" : "b0b54919-fdbc-4571-b087-89a7a60109fd",
+    "DEV_INT": {
+      "name" : "PetStore_Routing_Alias_1_0_8_XXX",
+      "description" : "Petstore alias for API version 1.0.8 on DEV_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "TEST_INT": {
+      "name" : "PetStore_Routing_Alias_1_0_8_XXX",
+      "description" : "Petstore alias for API version 1.0.8 on TEST_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD_INT": {
+      "name" : "PetStore_Routing_Alias_1_0_8_XXX",
+      "description" : "Petstore alias for API version 1.0.8 on PROD_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  },
+  "petstore-routing-alias-109": {
+    "id" : "eab70f61-16ba-4c5a-9575-140fbe5763c6",
+    "DEV_INT": {
+      "name" : "PetStore_Routing_Alias_1_0_9_XXX",
+      "description" : "Petstore alias for API version 1.0.9 on DEV_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "TEST_INT": {
+      "name" : "PetStore_Routing_Alias_1_0_9_XXX",
+      "description" : "Petstore alias for API version 1.0.9 on TEST_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    },
+    "PROD_INT": {
+      "name" : "PetStore_Routing_Alias_1_0_9_XXX",
+      "description" : "Petstore alias for API version 1.0.9 on PROD_INT",
+      "type" : "simple",
+      "owner" : "Administrator",
+      "value" : "https://petstore.swagger.io/v2"
+    }
+  }
+}
+```
+
+This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases with incorrect names not matching with the names in the original alias definitions. The build pipeline will detect this and return with an error message.
+
+### zzz_missing_alias_id
 
 ```
 {
@@ -1078,7 +1124,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases, but the alias IDs are missing. The build pipeline will detect this and return with an error message.
 
-### missing_alias_name
+### zzz_missing_alias_name
 
 ```
 {
