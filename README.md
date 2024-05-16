@@ -205,9 +205,6 @@ This allows for a mix of the first and the second mechanism for injecting target
 ### TODO: Place this in the respective sample description
 
 For example,
- - the value of the variable petstore-routing-alias.DEV_INT.description will automatically replace the description of the PetStore_Routing_Alias on DEV_INT, overwriting the value defined in the global aliases.json file,
- - the value of the variable postman-echo-routing-alias.TEST_EXT.readTimeout will automatically replace the readTimeout value of the PostmanEcho_Routing_Alias on TEST_EXT, overwriting the value defined in the global aliases.json file,
- - the value of the variable petstore-routing-alias-108.PROD_INT.description will automatically replace the description of the PetStore_Routing_Alias_1_0_8 for the API version 1.0.8 on PROD_INT, overwriting the value defined in the aliases.json file of the petstore-versioning API project,
  - the value of the variable postman-echo-security-alias.TEST_EXT.httpAuthCredentials.userName will automatically replace the username stored in the PostmanEcho_Security_Alias on TEST_EXT, overwriting the value defined in the aliases.json file of the security-alias API project.
 
 For example,
@@ -316,7 +313,7 @@ This example features the Postman Echo API (https://learning.postman.com/docs/de
 
 The description of the API contains a placeholder `#{stage_name}#` which will be populated during build by the content of the stage_name pipeline variable.
 
-### postman_mocking
+### postman_echo_mocking
 
 ```
 {
@@ -334,7 +331,7 @@ The description of the API contains a placeholder `#{stage_name}#` which will be
 
 This API project contains an instance of the Postman Echo API with API mocking enabled. API tests will be executed on the BUILD environment against the Mock API, and the API will be deployed on DEV with mocking enabled. For the deployment on TEST and PROD, mocking will be disabled.
 
-### multiple_tenants
+### postman_echo_multiple_tenants
 
 ```
 {
@@ -1112,13 +1109,13 @@ The petstore_versioning test collection invokes POST, GET and DELETE requests fo
 
 The postman_echo test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body.
 
-### postman_mocking
+### postman_echo_mocking
 
-The postman_mocking test collection sends POST, GET and DELETE requests against the Postman Echo Mock API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body and the "source" attribute included only in the mock response.
+The postman_echo_mocking test collection sends POST, GET and DELETE requests against the Postman Echo Mock API. It contains tests validating the response code and the echoed request elements (payload and query parameter) in the response body and the "source" attribute included only in the mock response.
 
-### multiple_tenants
+### postman_echo_multiple_tenants
 
-The multiple_tenants test collection invokes all three APIs for Tenant1 and Tenant2, respectively. The requests contain tests for the correct tenant query parameter echoed in the response body.
+The postman_echo_multiple_tenants test collection invokes all three APIs for Tenant1 and Tenant2, respectively. The requests contain tests for the correct tenant query parameter echoed in the response body.
 
 ### postman_echo_oauth2
 

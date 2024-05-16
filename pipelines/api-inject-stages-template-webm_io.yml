@@ -109,8 +109,8 @@ parameters:
     - postman_echo
     - postman_echo_jwt
     - postman_echo_oauth2
-    - postman_mocking
-    - multiple_tenants
+    - postman_echo_mocking
+    - postman_echo_multiple_tenants
     - security_alias
     targets:
     - DEV_EXT
@@ -127,8 +127,8 @@ parameters:
     - postman_echo
     - postman_echo_jwt
     - postman_echo_oauth2
-    - postman_mocking
-    - multiple_tenants
+    - postman_echo_mocking
+    - postman_echo_multiple_tenants
     - security_alias
     targets:
     - DESIGN
