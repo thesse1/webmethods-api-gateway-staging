@@ -214,7 +214,7 @@ For example,
 
 # Sample content included in this repository
 
-## export_payload.json export query for API projects
+## export_payload.json export query for sample API projects
 
 The /apis folder contains sample API projects with the following export_payload.json files:
 
@@ -396,6 +396,24 @@ This API is using OAuth2 for inbound authentication. Therefore, the developer mu
 
 This API is using JSON Web Tokens (JWT) for inbound authentication. It is configured to authorize requests with JWTs issued to the user testuser_jwt. The user itself must be included explicitly in the export set.
 
+### postman_echo_security_alias
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "6831e46d-9f45-4096-a2cc-84dca749fbd4"
+    }
+  ]
+}
+```
+
+In addition to the PostmanEcho_Routing_Alias, this API makes use of the PostmanEcho_Security_Alias defining username and password credentials used in an Outbound Auth - Transport policy.
+
 ### ping
 
 ```
@@ -470,7 +488,11 @@ This is an example for a GraphQL API incl. test request in APITest.json. The API
 
 > Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not seem to support GraphQL APIs, but it can be deployed in the azure_demo_01 target environments.
 
-### internal_external
+## export_payload.json export query for API projects representing negative test cases
+
+These API projects cannot be deployed on any (target) stages. They are included in this collection to demonstrate various failure conditions and to test the API Gateway Staging solution's mechanisms for failure detection and error handling. 
+
+### zzz_internal_external
 
 ```
 {
@@ -488,7 +510,7 @@ This is an example for a GraphQL API incl. test request in APITest.json. The API
 
 This API project includes an instance of the internal Petstore API and an instance of the external PostmanEcho API. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
-### invalid_app_name
+### zzz_invalid_app_name
 
 ```
 {
@@ -506,7 +528,7 @@ This API project includes an instance of the internal Petstore API and an instan
 
 This API project includes an instance of the PostmanEcho API with an application called "Invalid_App_Name_INVALID". Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
-### invalid_logging_policy
+### zzz_invalid_logging_policy
 
 ```
 {
@@ -524,7 +546,7 @@ This API project includes an instance of the PostmanEcho API with an application
 
 This API project includes an instance of the PostmanEcho API with an unwanted local, API-level Log Invocation policy. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
-### missing_api_group
+### zzz_missing_api_group
 
 ```
 {
@@ -541,6 +563,114 @@ This API project includes an instance of the PostmanEcho API with an unwanted lo
 ```
 
 This API project includes an instance of the PostmanEcho API which is not assigned to any API group. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
+
+### zzz_alias_not_found
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"
+    }
+  ]
+}
+```
+
+This API project includes an invalid aliases.json file, see below.
+
+### zzz_duplicate_alias
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"
+    }
+  ]
+}
+```
+
+This API project includes an invalid aliases.json file, see below.
+
+### zzz_incorrect_alias_name
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899|4bd552e3-064f-444a-bc77-7560059c9955"
+    }
+  ]
+}
+```
+
+This API project includes an invalid aliases.json file, see below.
+
+### zzz_missing_alias_id
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899|4bd552e3-064f-444a-bc77-7560059c9955"
+    }
+  ]
+}
+```
+
+This API project includes an invalid aliases.json file, see below.
+
+### zzz_incorrect_alias_name
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899|4bd552e3-064f-444a-bc77-7560059c9955"
+    }
+  ]
+}
+```
+
+This API project includes an invalid aliases.json file, see below.
+
+### zzz_test_failure
+
+```
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "id",
+      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899|4bd552e3-064f-444a-bc77-7560059c9955"
+    }
+  ]
+}
+```
+
+This API project is companioned by an invalid test case, see below.
 
 ## scopes.json configuration of OAuth2 scopes for API projects
 
