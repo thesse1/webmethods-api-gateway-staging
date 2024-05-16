@@ -917,7 +917,9 @@
   "nativeEndpoint" : [ ],
   "apiName" : "Countries",
   "apiVersion" : "1.0",
+  "apiDescription" : "Sample GraphQL API",
   "maturityState" : "Beta",
+  "apiGroups" : [ "Internal", "External" ],
   "isActive" : true,
   "type" : "GRAPHQL",
   "owner" : "Administrator",
@@ -929,7 +931,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2024-05-15 21:35:55 GMT",
-  "lastModified" : "2024-05-16 05:49:26 GMT",
+  "lastModified" : "2024-05-16 07:28:12 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "1cfe70d9-7723-4d79-91f4-30596fc9ba3e"
