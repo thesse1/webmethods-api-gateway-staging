@@ -139,7 +139,7 @@ parameters:
     - postman_echo_oauth2
     - postman_echo_mocking
     - postman_echo_multiple_tenants
-    - security_alias
+    - postman_echo_security_alias
     targets:
     - DEV_EXT
     - TEST_EXT
@@ -157,7 +157,7 @@ parameters:
     - postman_echo_oauth2
     - postman_echo_mocking
     - postman_echo_multiple_tenants
-    - security_alias
+    - postman_echo_security_alias
     targets:
     - DESIGN
 - name: ignore_eligible_targets

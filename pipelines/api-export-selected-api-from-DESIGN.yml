@@ -17,7 +17,7 @@ parameters:
   - postman_echo_oauth2
   - postman_echo_mocking
   - postman_echo_multiple_tenants
-  - security_alias
+  - postman_echo_security_alias
 - name: environment_set
   displayName: Export API from DESIGN API Gateway in which environment set?
   default: Default

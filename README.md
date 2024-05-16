@@ -696,7 +696,7 @@ The global aliases.json file in the /apis folder contains alias values for the r
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases used only by the two API versions in this API project.
 
-### security_alias
+### postman_echo_security_alias
 
 ```
 {
@@ -1129,9 +1129,9 @@ The postman_echo_jwt test collection invokes the API Gateway /rest/pub/apigatewa
 
 The ping test collection invokes the Ping API GET request and validates the response code and the presence of the date attribute returned by the ping request.
 
-### security_alias
+### postman_echo_security_alias
 
-The security_alias test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter and Authorization HTTP request header set by the Outbound Authentication policy using the PostmanEcho_Security_Alias HTTP Transport security alias) in the response body.
+The postman_echo_security_alias test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter and Authorization HTTP request header set by the Outbound Authentication policy using the PostmanEcho_Security_Alias HTTP Transport security alias) in the response body.
 
 ### test_failure
 
