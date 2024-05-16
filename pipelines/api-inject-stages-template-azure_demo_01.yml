@@ -208,7 +208,7 @@ stages:
     deployment_sets:
     - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:
       - api_projects:
-        - ${{api_project}}
+        - ${{parameters.api_project}}
         targets:
         - ${{ each stage in parameters.stages }}:
           - ${{ if not(stage.is_build_stage) }}:
