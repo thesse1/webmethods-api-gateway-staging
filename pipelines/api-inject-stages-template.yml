@@ -14,6 +14,8 @@ parameters:
 - name: build_instance
   type: string
   default: Default Mapping
+- name: ignore_eligible_targets
+  type: string
 
 stages:
 - template: api-inject-stages-template-${{parameters.environment_set}}.yml

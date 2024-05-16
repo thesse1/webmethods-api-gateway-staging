@@ -160,6 +160,8 @@ parameters:
     - security_alias
     targets:
     - DESIGN
+- name: ignore_eligible_targets
+  type: string
 
 stages:
 - template: ${{parameters.template}}
@@ -204,20 +206,33 @@ stages:
         PROD_EXT: ${{parameters.build_instance}}
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
-    - ${{ each eligible_target in parameters.eligible_targets }}:
-      - api_projects: # ${{ eligible_target.api_projects }}
-        - ${{ each api_project in eligible_target.api_projects }}:
-          - ${{ if eq(parameters.api_project, api_project) }}:
-            - ${{api_project}}
-          - ${{ elseif eq(parameters.api_project, 'All') }}:
-            - ${{api_project}}
-        targets: # ${{ eligible_target.targets }}
-        - ${{ each target in eligible_target.targets }}:
-          - ${{ if eq(parameters.selected_target, target) }}:
-            - ${{target}}
-          - ${{ elseif eq(parameters.selected_target, 'All (including DESIGN)') }}:
-            - ${{target}}
-          - ${{ elseif and(eq(parameters.selected_target, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
-            - ${{target}}
+    - ${{ if eq(parameters.ignore_eligible_targets, "true") }}:
+      - api_projects:
+        - ${{api_project}}
+        targets:
+        - ${{ each stage in parameters.stages }}:
+          - ${{ if not(stage.is_build_stage) }}:
+            - ${{ if eq(parameters.selected_target, stage.name) }}:
+              - ${{stage.name}}
+            - ${{ elseif eq(parameters.selected_target, 'All (including DESIGN)') }}:
+              - ${{stage.name}}
+            - ${{ elseif and(eq(parameters.selected_target, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
+              - ${{stage.name}}
+    - ${{ else }}:
+      - ${{ each eligible_target in parameters.eligible_targets }}:
+        - api_projects:
+          - ${{ each api_project in eligible_target.api_projects }}:
+            - ${{ if eq(parameters.api_project, api_project) }}:
+              - ${{api_project}}
+            - ${{ elseif eq(parameters.api_project, 'All') }}:
+              - ${{api_project}}
+          targets:
+          - ${{ each target in eligible_target.targets }}:
+            - ${{ if eq(parameters.selected_target, target) }}:
+              - ${{target}}
+            - ${{ elseif eq(parameters.selected_target, 'All (including DESIGN)') }}:
+              - ${{target}}
+            - ${{ elseif and(eq(parameters.selected_target, 'All (execpt DESIGN)'), ne(target, 'DESIGN')) }}:
+              - ${{target}}
     ${{ each parameter in parameters.parameters}}:
       ${{parameter.key}}: ${{parameter.value}}

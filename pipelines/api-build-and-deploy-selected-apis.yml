@@ -67,3 +67,4 @@ stages:
     selected_target: ${{parameters.selected_target}}
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}
+    ignore_eligible_targets: "false"
