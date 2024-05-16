@@ -33,7 +33,6 @@ files[] = {"id":"3558839-7f92ae4a-2246-4784-ad9f-274f2f558ede","path":"apitests/
 files[] = {"id":"3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439","path":"apitests/security_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-770b3642-2663-49ae-b514-ac84a58b1e29","path":"apitests/star_wars/APITest.json","metaData":{}}
 files[] = {"id":"3558839-cdbc7300-353b-468f-99a1-af4d739a50bc","path":"apitests/test_failure/APITest.json","metaData":{}}
-files[] = {"id":"3558839-a07abc2b-f261-43ae-b59e-7bc979c22bd7","path":"New Collection.json","metaData":{}}
 files[] = {"id":"3558839-cdc26a59-490a-4ec2-aa21-d321d02d4c23","path":"utilities/haft/Configure_HAFT_listener_on_PROD_EXT_01.json","metaData":{}}
 files[] = {"id":"3558839-e1943ac5-a8fd-47ab-8431-d83a48886662","path":"utilities/haft/Configure_HAFT_listener_on_PROD_EXT_02.json","metaData":{}}
 files[] = {"id":"3558839-27c0932b-a9e2-4a6b-9f22-9fecfa0be363","path":"utilities/haft/Configure_HAFT_listener_on_PROD_INT_01.json","metaData":{}}
