@@ -89,7 +89,7 @@ parameters:
     - number_conversion
     - ping
     - odata_tutorial
-    - countries
+    # - countries
     targets:
     - DEV_INT
     - DEV_EXT
