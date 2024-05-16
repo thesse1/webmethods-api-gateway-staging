@@ -1,0 +1,936 @@
+{
+  "apiDefinition" : {
+    "baseSchema" : "type Continent {\n  code: ID!\n  countries: [Country!]!\n  name: String!\n}\n\ninput ContinentFilterInput {\n  code: StringQueryOperatorInput\n}\n\ntype Country {\n  awsRegion: String!\n  capital: String\n  code: ID!\n  continent: Continent!\n  currencies: [String!]!\n  currency: String\n  emoji: String!\n  emojiU: String!\n  languages: [Language!]!\n  name(lang: String): String!\n  native: String!\n  phone: String!\n  phones: [String!]!\n  states: [State!]!\n  subdivisions: [Subdivision!]!\n}\n\ninput CountryFilterInput {\n  code: StringQueryOperatorInput\n  continent: StringQueryOperatorInput\n  currency: StringQueryOperatorInput\n  name: StringQueryOperatorInput\n}\n\ntype Language {\n  code: ID!\n  name: String!\n  native: String!\n  rtl: Boolean!\n}\n\ninput LanguageFilterInput {\n  code: StringQueryOperatorInput\n}\n\ntype Query {\n  continent(code: ID!): Continent\n  continents(filter: ContinentFilterInput = {}): [Continent!]!\n  countries(filter: CountryFilterInput = {}): [Country!]!\n  country(code: ID!): Country\n  language(code: ID!): Language\n  languages(filter: LanguageFilterInput = {}): [Language!]!\n}\n\ntype State {\n  code: String\n  country: Country!\n  name: String!\n}\n\ninput StringQueryOperatorInput {\n  eq: String\n  in: [String!]\n  ne: String\n  nin: [String!]\n  regex: String\n}\n\ntype Subdivision {\n  code: ID!\n  emoji: String\n  name: String!\n}\n",
+    "sdlDefinitions" : {
+      "types" : {
+        "CountryFilterInput" : {
+          "@type" : "InputObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "CountryFilterInput",
+          "inputValueDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "StringQueryOperatorInput"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "continent",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "StringQueryOperatorInput"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "currency",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "StringQueryOperatorInput"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "name",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "StringQueryOperatorInput"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          } ],
+          "directives" : [ ],
+          "directivesByName" : { }
+        },
+        "StringQueryOperatorInput" : {
+          "@type" : "InputObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "StringQueryOperatorInput",
+          "inputValueDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "eq",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "in",
+            "type" : {
+              "@type" : "ListType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "NonNullType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "TypeName",
+                  "comments" : [ ],
+                  "name" : "String"
+                }
+              }
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "ne",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "nin",
+            "type" : {
+              "@type" : "ListType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "NonNullType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "TypeName",
+                  "comments" : [ ],
+                  "name" : "String"
+                }
+              }
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "regex",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          } ],
+          "directives" : [ ],
+          "directivesByName" : { }
+        },
+        "Continent" : {
+          "@type" : "ObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "Continent",
+          "directives" : [ ],
+          "fieldDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "ID"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "countries",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "Country"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "name",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          } ],
+          "implements" : [ ],
+          "directivesByName" : { }
+        },
+        "Language" : {
+          "@type" : "ObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "Language",
+          "directives" : [ ],
+          "fieldDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "ID"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "name",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "native",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "rtl",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "Boolean"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          } ],
+          "implements" : [ ],
+          "directivesByName" : { }
+        },
+        "Query" : {
+          "@type" : "ObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "Query",
+          "directives" : [ ],
+          "fieldDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "continent",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "Continent"
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "code",
+              "type" : {
+                "@type" : "NonNullType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "TypeName",
+                  "comments" : [ ],
+                  "name" : "ID"
+                }
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "continents",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "Continent"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "filter",
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "ContinentFilterInput"
+              },
+              "defaultValue" : {
+                "@type" : "ObjectValue",
+                "comments" : [ ],
+                "objectFields" : [ ]
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "countries",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "Country"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "filter",
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "CountryFilterInput"
+              },
+              "defaultValue" : {
+                "@type" : "ObjectValue",
+                "comments" : [ ],
+                "objectFields" : [ ]
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "country",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "Country"
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "code",
+              "type" : {
+                "@type" : "NonNullType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "TypeName",
+                  "comments" : [ ],
+                  "name" : "ID"
+                }
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "language",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "Language"
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "code",
+              "type" : {
+                "@type" : "NonNullType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "TypeName",
+                  "comments" : [ ],
+                  "name" : "ID"
+                }
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "languages",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "Language"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "filter",
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "LanguageFilterInput"
+              },
+              "defaultValue" : {
+                "@type" : "ObjectValue",
+                "comments" : [ ],
+                "objectFields" : [ ]
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          } ],
+          "implements" : [ ],
+          "directivesByName" : { }
+        },
+        "State" : {
+          "@type" : "ObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "State",
+          "directives" : [ ],
+          "fieldDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "country",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "Country"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "name",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          } ],
+          "implements" : [ ],
+          "directivesByName" : { }
+        },
+        "LanguageFilterInput" : {
+          "@type" : "InputObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "LanguageFilterInput",
+          "inputValueDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "StringQueryOperatorInput"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          } ],
+          "directives" : [ ],
+          "directivesByName" : { }
+        },
+        "Country" : {
+          "@type" : "ObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "Country",
+          "directives" : [ ],
+          "fieldDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "awsRegion",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "capital",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "ID"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "continent",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "Continent"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "currencies",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "String"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "currency",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "emoji",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "emojiU",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "languages",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "Language"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "name",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ {
+              "comments" : [ ],
+              "name" : "lang",
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              },
+              "directives" : [ ],
+              "directivesByName" : { }
+            } ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "native",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "phone",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "phones",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "String"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "states",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "State"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "subdivisions",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "ListType",
+                "comments" : [ ],
+                "type" : {
+                  "@type" : "NonNullType",
+                  "comments" : [ ],
+                  "type" : {
+                    "@type" : "TypeName",
+                    "comments" : [ ],
+                    "name" : "Subdivision"
+                  }
+                }
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          } ],
+          "implements" : [ ],
+          "directivesByName" : { }
+        },
+        "Subdivision" : {
+          "@type" : "ObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "Subdivision",
+          "directives" : [ ],
+          "fieldDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "ID"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "emoji",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "String"
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          }, {
+            "comments" : [ ],
+            "name" : "name",
+            "type" : {
+              "@type" : "NonNullType",
+              "comments" : [ ],
+              "type" : {
+                "@type" : "TypeName",
+                "comments" : [ ],
+                "name" : "String"
+              }
+            },
+            "inputValueDefinitions" : [ ],
+            "directives" : [ ],
+            "enabled" : true,
+            "directivesByName" : { }
+          } ],
+          "implements" : [ ],
+          "directivesByName" : { }
+        },
+        "ContinentFilterInput" : {
+          "@type" : "InputObjectTypeDefinition",
+          "comments" : [ ],
+          "name" : "ContinentFilterInput",
+          "inputValueDefinitions" : [ {
+            "comments" : [ ],
+            "name" : "code",
+            "type" : {
+              "@type" : "TypeName",
+              "comments" : [ ],
+              "name" : "StringQueryOperatorInput"
+            },
+            "directives" : [ ],
+            "directivesByName" : { }
+          } ],
+          "directives" : [ ],
+          "directivesByName" : { }
+        }
+      },
+      "scalarTypes" : { },
+      "directiveDefinitions" : { },
+      "objectTypeExtensions" : { },
+      "interfaceTypeExtensions" : { },
+      "unionTypeExtensions" : { },
+      "enumTypeExtensions" : { },
+      "scalarTypeExtensions" : { },
+      "inputObjectTypeExtensions" : { }
+    },
+    "nativeEndpoints" : [ ],
+    "serviceRegistryDisplayName" : "Countries_1.0",
+    "type" : "graphql"
+  },
+  "nativeEndpoint" : [ ],
+  "apiName" : "Countries",
+  "apiVersion" : "1.0",
+  "maturityState" : "Beta",
+  "isActive" : true,
+  "type" : "GRAPHQL",
+  "owner" : "Administrator",
+  "policies" : [ "78e7718e-65a3-4038-aaea-a1d386dfc7ec" ],
+  "referencedFiles" : {
+    "countries.schema.graphql" : "type Continent {\n  code: ID!\n  countries: [Country!]!\n  name: String!\n}\n\ninput ContinentFilterInput {\n  code: StringQueryOperatorInput\n}\n\ntype Country {\n  awsRegion: String!\n  capital: String\n  code: ID!\n  continent: Continent!\n  currencies: [String!]!\n  currency: String\n  emoji: String!\n  emojiU: String!\n  languages: [Language!]!\n  name(lang: String): String!\n  native: String!\n  phone: String!\n  phones: [String!]!\n  states: [State!]!\n  subdivisions: [Subdivision!]!\n}\n\ninput CountryFilterInput {\n  code: StringQueryOperatorInput\n  continent: StringQueryOperatorInput\n  currency: StringQueryOperatorInput\n  name: StringQueryOperatorInput\n}\n\ntype Language {\n  code: ID!\n  name: String!\n  native: String!\n  rtl: Boolean!\n}\n\ninput LanguageFilterInput {\n  code: StringQueryOperatorInput\n}\n\ntype Query {\n  continent(code: ID!): Continent\n  continents(filter: ContinentFilterInput = {}): [Continent!]!\n  countries(filter: CountryFilterInput = {}): [Country!]!\n  country(code: ID!): Country\n  language(code: ID!): Language\n  languages(filter: LanguageFilterInput = {}): [Language!]!\n}\n\ntype State {\n  code: String\n  country: Country!\n  name: String!\n}\n\ninput StringQueryOperatorInput {\n  eq: String\n  in: [String!]\n  ne: String\n  nin: [String!]\n  regex: String\n}\n\ntype Subdivision {\n  code: ID!\n  emoji: String\n  name: String!\n}\n"
+  },
+  "tracingEnabled" : false,
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2024-05-15 21:35:55 GMT",
+  "lastModified" : "2024-05-16 05:49:26 GMT",
+  "systemVersion" : 1,
+  "gatewayEndpoints" : { },
+  "id" : "1cfe70d9-7723-4d79-91f4-30596fc9ba3e"
+}
