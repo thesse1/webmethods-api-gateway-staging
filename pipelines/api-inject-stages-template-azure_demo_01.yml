@@ -206,7 +206,7 @@ stages:
         PROD_EXT: ${{parameters.build_instance}}
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
-    - ${{ if eq(parameters.ignore_eligible_targets, "true") }}:
+    - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:
       - api_projects:
         - ${{api_project}}
         targets:
