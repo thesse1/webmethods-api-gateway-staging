@@ -399,6 +399,11 @@ This API is using OAuth2 for inbound authentication. Therefore, the developer mu
 
 This API is using JSON Web Tokens (JWT) for inbound authentication. It is configured to authorize requests with JWTs issued to the user testuser_jwt. The user itself must be included explicitly in the export set.
 
+TODO:
+
+> Note: This sample API cannot be deployed on any target environment in the azure_demo_01 environment set, because the ingress controller on the Kubernetes cluster is configured to accept only calls to /gateway, but it can be deployed in the wm_io target environments.
+
+
 ### ping
 
 ```
