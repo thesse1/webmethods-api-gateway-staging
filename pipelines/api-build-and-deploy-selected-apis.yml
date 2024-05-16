@@ -9,7 +9,7 @@ parameters:
   - number_conversion
   - ping
   - odata_tutorial
-  - star_wars
+  - countries
   - petstore
   - petstore_basicauth
   - petstore_versioning

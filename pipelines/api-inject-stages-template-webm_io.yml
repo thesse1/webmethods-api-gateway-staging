@@ -89,7 +89,7 @@ parameters:
     - number_conversion
     - ping
     - odata_tutorial
-    - star_wars
+    - countries
     targets:
     - DEV_INT
     - DEV_EXT
@@ -120,7 +120,7 @@ parameters:
     - number_conversion
     - odata_tutorial
     - ping
-    - star_wars
+    - countries
     - petstore
     - petstore_basicauth
     - petstore_versioning

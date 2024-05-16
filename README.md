@@ -399,11 +399,6 @@ This API is using OAuth2 for inbound authentication. Therefore, the developer mu
 
 This API is using JSON Web Tokens (JWT) for inbound authentication. It is configured to authorize requests with JWTs issued to the user testuser_jwt. The user itself must be included explicitly in the export set.
 
-TODO:
-
-> Note: This sample API cannot be deployed on any target environment in the azure_demo_01 environment set, because the ingress controller on the Kubernetes cluster is configured to accept only calls to /gateway, but it can be deployed in the wm_io target environments.
-
-
 ### ping
 
 ```
@@ -458,9 +453,7 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
 
 This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-> Note: This sample API cannot be deployed on any target environment in the azure_demo_01 environment set, because the ingress controller on the Kubernetes cluster is configured to accept only calls to /gateway, but it can be deployed in the wm_io target environments.
-
-### star_wars
+### countries
 
 ```
 {
@@ -470,15 +463,13 @@ This is an example for an OData API incl. test requests in APITest.json. The API
   "scope": [
     {
       "attributeName": "id",
-      "keyword": "334cdaea-c550-443b-9d44-07d101fc32a7"
+      "keyword": "1cfe70d9-7723-4d79-91f4-30596fc9ba3e"
     }
   ]
 }
 ```
 
 This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
-
-> Note: This sample API cannot be deployed on any target environment in the azure_demo_01 environment set, because the ingress controller on the Kubernetes cluster is configured to accept only calls to /gateway, but it can be deployed in the wm_io target environments.
 
 ### internal_external
 
