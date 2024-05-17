@@ -1,9 +1,0 @@
-{
-	"info": {
-		"_postman_id": "770b3642-2663-49ae-b514-ac84a58b1e29",
-		"name": "API Test for star-wars",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-770b3642-2663-49ae-b514-ac84a58b1e29"
-	},
-	"item": []
-}

@@ -23,7 +23,6 @@ files[] = {"id":"3558839-7f92ae4a-2246-4784-ad9f-274f2f558ede","path":"apitests/
 files[] = {"id":"3558839-c5b9196a-e263-4f28-b8df-b905c18d0e13","path":"apitests/postman_echo_multiple_tenants/APITest.json","metaData":{}}
 files[] = {"id":"3558839-4f47ffec-ffd9-43ff-aba2-8362cdd4cae9","path":"apitests/postman_echo_oauth2/APITest.json","metaData":{}}
 files[] = {"id":"3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439","path":"apitests/postman_echo_security_alias/APITest.json","metaData":{}}
-files[] = {"id":"3558839-770b3642-2663-49ae-b514-ac84a58b1e29","path":"apitests/star_wars/APITest.json","metaData":{}}
 files[] = {"id":"3558839-990ae353-bdf3-4e51-a2a0-f8aecde1ead9","path":"apitests/zzz_alias_not_found/APITest.json","metaData":{}}
 files[] = {"id":"3558839-06160db0-f584-4245-a230-c15f0ea0242f","path":"apitests/zzz_duplicate_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-ba467f35-856c-426c-9570-c75b48769c8b","path":"apitests/zzz_incorrect_alias_name/APITest.json","metaData":{}}
