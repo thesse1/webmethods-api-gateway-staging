@@ -6,19 +6,19 @@ parameters:
   type: string
   values:
   - All
-  - number_conversion
-  - ping
-  - odata_tutorial
-  - countries
   - petstore
   - petstore_basicauth
   - petstore_versioning
   - postman_echo
-  - postman_echo_jwt
-  - postman_echo_oauth2
   - postman_echo_mocking
   - postman_echo_multiple_tenants
+  - postman_echo_jwt
+  - postman_echo_oauth2
   - postman_echo_security_alias
+  - ping
+  - number_conversion
+  - odata_tutorial
+  - countries
 - name: environment_set
   displayName: Deploy APIs on API Gateways in which environment set?
   default: Default
