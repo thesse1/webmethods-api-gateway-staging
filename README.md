@@ -1398,15 +1398,16 @@ This pipeline will propagate the APIs and other API Gateway assets in the select
 
 The following parameters can/must be provided for this pipeline:
 
-TODO
-
 | Parameter | README |
 | ------ | ------ |
 | Branch | Select the Git branch from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project(s)? | By default ("All"), this parameter selects all 13 demo APIs for deployment. Alternatively, the user can select one single API project for deployment |
-| Deploy APIs on API Gateways in which environment set? | By default ("Default"), this parameter selects the webm_io environment set. Alternatively, the user can also select the azure_demo_01 environment set |
-| Deploy on which target(s)? | DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
+| Deploy APIs on API Gateways in which environment set? | webm_io (default) or azure_demo_01 |
+| Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
+| Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution |
+
+TODO
 
 
 
