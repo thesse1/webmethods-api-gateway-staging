@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3a80bb75-c48d-4dad-891a-cf5f1e13b093",
-		"name": "API Test for invalid-logging-policy",
+		"name": "API Test for zzz_invalid_logging_policy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-3a80bb75-c48d-4dad-891a-cf5f1e13b093"
 	},

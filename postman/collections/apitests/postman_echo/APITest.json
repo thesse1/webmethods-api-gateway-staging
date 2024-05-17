@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "1d22c618-28a5-4386-bce7-ea247afbae5d",
-		"name": "API Test for postman-echo",
+		"name": "API Test for postman_echo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-1d22c618-28a5-4386-bce7-ea247afbae5d"
 	},

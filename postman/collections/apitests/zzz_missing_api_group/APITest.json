@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "238e6225-2a84-45f1-91af-fd7935e7022e",
-		"name": "API Test for missing-api-group",
+		"name": "API Test for zzz_missing_api_group",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-238e6225-2a84-45f1-91af-fd7935e7022e"
 	},

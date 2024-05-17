@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "103b2b7c-8861-4516-add4-9bd695b36429",
-		"name": "API Test for number-conversion",
+		"name": "API Test for number_conversion",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-103b2b7c-8861-4516-add4-9bd695b36429"
 	},

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "796f5bf8-c2ad-48cf-acf7-de13bc7ae439",
-		"name": "API Test for security-alias",
+		"name": "API Test for postman_echo_security_alias",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439"
 	},

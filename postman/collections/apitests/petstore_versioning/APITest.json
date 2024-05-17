@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "b99dc53f-3f09-4f58-92f2-658bfbcee909",
-		"name": "API Test for petstore-versioning",
+		"name": "API Test for petstore_versioning",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-b99dc53f-3f09-4f58-92f2-658bfbcee909"
 	},

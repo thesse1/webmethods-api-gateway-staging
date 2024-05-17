@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "42172810-894f-48f8-9571-d9ea871e5371",
-		"name": "API Test for petstore-basicauth",
+		"name": "API Test for petstore_basicauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-42172810-894f-48f8-9571-d9ea871e5371"
 	},

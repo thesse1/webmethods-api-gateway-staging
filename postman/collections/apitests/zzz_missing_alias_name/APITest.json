@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "82e23c79-b448-477c-ac73-1dd7b1ee3ead",
-		"name": "API Test for missing-alias-name",
+		"name": "API Test for zzz_missing_alias_name",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-82e23c79-b448-477c-ac73-1dd7b1ee3ead"
 	},

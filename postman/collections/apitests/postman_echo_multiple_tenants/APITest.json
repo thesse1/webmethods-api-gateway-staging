@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "c5b9196a-e263-4f28-b8df-b905c18d0e13",
-		"name": "API Test for multiple-tenants",
+		"name": "API Test for postman_echo_multiple_tenants",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-c5b9196a-e263-4f28-b8df-b905c18d0e13"
 	},

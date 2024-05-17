@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "f48d6a18-d01b-43b4-979d-4f6ba857594b",
-		"name": "API Test for invalid-app-name",
+		"name": "API Test for zzz_invalid_app_name",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "3558839-f48d6a18-d01b-43b4-979d-4f6ba857594b"
 	},
