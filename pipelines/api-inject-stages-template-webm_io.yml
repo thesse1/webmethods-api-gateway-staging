@@ -165,17 +165,14 @@ stages:
       - ${{ elseif eq(parameters.selected_stage, 'All') }}:
         - ${{stage}}
       
-    ${{ if eq(parameters.build_instance, 'Default Mapping')}}:
-      build_instances_mapping: ${{parameters.build_instances_mapping}}
-    ${{ else }}:
-      build_instances_mapping:
-        DESIGN: ${{parameters.build_instance}}
-        DEV_INT: ${{parameters.build_instance}}
-        DEV_EXT: ${{parameters.build_instance}}
-        TEST_INT: ${{parameters.build_instance}}
-        TEST_EXT: ${{parameters.build_instance}}
-        PROD_INT: ${{parameters.build_instance}}
-        PROD_EXT: ${{parameters.build_instance}}
+    build_instances_mapping:
+      DESIGN: BUILD
+      DEV_INT: BUILD
+      DEV_EXT: BUILD
+      TEST_INT: BUILD
+      TEST_EXT: BUILD
+      PROD_INT: BUILD
+      PROD_EXT: BUILD
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
     - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:
