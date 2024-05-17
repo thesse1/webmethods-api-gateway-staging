@@ -43,7 +43,8 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				},
 				{
@@ -53,7 +54,8 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -66,8 +68,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -76,7 +77,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": [\r\n        \"https://lb-001:443\",\r\n        \"https://lb-002:443\",\r\n        \"https://lb-003:443\"\r\n    ],\r\n    \"httpUrls\": [\r\n        \"http://lb-001:80\",\r\n        \"http://lb-002:80\",\r\n        \"http://lb-003:80\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"websocketUrls\": [],\r\n    \"httpsUrls\": {{httpsUrls}},\r\n    \"httpUrls\": {{httpUrls}}\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -137,13 +138,11 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
+						"value": "{{hostname}}"
 					}
 				],
 				"body": {
@@ -197,7 +196,6 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
@@ -279,7 +277,6 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
@@ -367,7 +364,6 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
