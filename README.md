@@ -1249,17 +1249,18 @@ Each API project must include one Postman test collection under the name APITest
 
 > Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definitions in the Postman REST client from the /environments folder.
 
-TODO
-
 | Environment variable | README |
 | ------ | ------ |
-| {{ip}} |  IP address of the API Gateway, must be used in the URL line of the test requests, e.g., https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| {{port}} |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., https://{{ip}}:{{port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| {{hostname}} | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{hostname}} |
+| {{api-protocol}} |  Protocol to be used for the test (http or https), must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| {{api-ip}} |  IP address of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| {{api-port}} |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| {{api-hostname}} | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{api-hostname}} |
 
-> Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement. So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
+The distinction between {{api-ip}} and {{api-hostname}} enables supporting API Gateway instances which are not (yet) properly represented in DNS.
 
-The /apis folder contains sample API projects with the following test collections:
+> Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement (but after replacement of placeholders). So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
+
+The /postman/collections/apitests folder contains API tests folders with APITest.json test collections for the following sample API projects:
 
 ### petstore
 
@@ -1295,17 +1296,29 @@ The postman_echo_oauth2 test collection invokes the API Gateway pub.apigateway.o
 
 The postman_echo_jwt test collection invokes the API Gateway /rest/pub/apigateway/jwt/getJsonWebToken endpoint to retrieve a JSON Web Token. It stores the token in a Postman variable and uses it in the subsequent POST, GET and DELETE requests against the API.
 
-### ping
-
-The ping test collection invokes the Ping API GET request and validates the response code and the presence of the date attribute returned by the ping request.
-
 ### postman_echo_security_alias
 
 The postman_echo_security_alias test collection sends POST, GET and DELETE requests against the Postman Echo API. It contains tests validating the response code and the echoed request elements (payload and query parameter and Authorization HTTP request header set by the Outbound Authentication policy using the PostmanEcho_Security_Alias HTTP Transport security alias) in the response body.
 
-### test_failure
+### ping
 
-The test_failure test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. The requests include tests which are designed to fail: The POST and the GET request tests are asking for an unexpected status code or petId, respectively. The DELETE request includes an incorrect API key provoking an Unauthorized application request error. The build pipeline will detect this and reject the API project with an error message.
+The ping test collection invokes the Ping API GET request and validates the response code and the presence of the date attribute returned by the ping request.
+
+### number_conversion
+
+The number_conversion test collection includes one POST request invoking the NumberToWords operation of the NumberConversion SOAP API. It validates the response code and the result of the number-to-words conversion.
+
+### odata_tutorial
+
+The odata_tutorial test collection includes 17 GET requests invoking the TripPinService OData API. It validates the response code for every request.
+
+### countries
+
+The countries test collection includes one POST request invoking the Countries GraphQL API sending a query for all countries with country names and the names of the countries' continents. It validates the response code and the name of the first country and its continent.
+
+### zzz_test_failure
+
+The zzz_test_failure test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. The requests include tests which are designed to fail: The POST and the GET request tests are asking for an unexpected status code or petId, respectively. The DELETE request includes an incorrect API key provoking an Unauthorized application request error. The build pipeline will detect this and reject the API project with an error message.
 
 # Azure DevOps pipelines
 
