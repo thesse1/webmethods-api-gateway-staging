@@ -1346,7 +1346,9 @@ For a deployment to DESIGN, the pipeline will execute only one step to prepare O
 
 More manipulations or tests (e.g., enforcement of API standards) can be added later.
 
-Finally, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target environment (DESIGN, DEV, TEST or PROD).
+Finally, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple instances, the assets will automatically be imported on each instance of the target stage.
+
+The azure_demo_01 environment set includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every deployment on PROD_INT or PROD_EXT, the assets will be imported on PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 > Note: If the imported assets already exist on the target environment (i.e., assets with same IDs), they will be overwritten for the following asset types: APIs, policies, policy actions, applications, scope mappings, aliases, users, groups and teams. Any assets of any other types, like configuration items, will not be overwritten.
 
@@ -1355,7 +1357,7 @@ Every deployment pipeline will publish the following artifacts:
 - {{target_stage}}_{{api_project}}_build_result: The API Gateway asset archive (ZIP file) containing the assets exported from the BUILD environment (after manipulations) and imported on the target stage
 - {{target_stage}}_{{api_project}}_test_results: The results of the Postman tests in junitReport.xml form
 
-The export pipeline will publish the following artifact:
+The export pipelines will publish the following artifact:
 - DESIGN_{{api_project}}_export: The API Gateway asset archive (ZIP file) containing the assets exported from the DESIGN environment
 
 These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
@@ -1451,12 +1453,12 @@ The following parameters can/must be provided for this pipeline:
 | Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | tenant | Tenant in which to export the API project |
-| Export which API project? | Case-sensitive name of the API project to be exported |
+| Export which API project? | Select the API project to be exported |
 | commitMessage | The change will be committed with this commit message |
 
 ### `Export arbitrary API project from DESIGN`
 
-This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Git repository.
+This pipeline will export the APIs and other API Gateway assets in the specified API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Git repository.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1468,18 +1470,19 @@ The following parameters can/must be provided for this pipeline:
 | Export which API project? | Case-sensitive name of the API project to be exported |
 | commitMessage | The change will be committed with this commit message |
 
-### Drop-down list for api_project
-
-As an alternative for the api_project free-text field, it would also be possible to define the names of existing API projects as possible values in the pipeline definition. Azure DevOps would then present a drop-down list which lets the user select the API project to be deployed from a configurable list of candidates which would be more convenient and less error-prone than having to type the full name of the API project correctly in the form entry field. But this candidate list would have to be updated for every new/renamed/removed API project.
+This pipeline can be used for exporting new versions of the zzz_ negative test cases.
 
 ## Pipelines for API Gateway configurations
 
-The API Gateway Staging solution includes one Azure DevOps build pipeline for deploying API Gateway configurations from the Azure DevOps repository (or GitHub repository) to DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT environments and one pipeline for exporting the API Gateway configurations from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT into the Azure DevOps repository (or GitHub repository).
+The API Gateway Staging solution includes one Azure DevOps build pipeline for deploying API Gateway configurations from the Git repository to DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT environments and one pipeline for exporting the API Gateway configurations from DESIGN, BUILD (BUILD_01, ..., BUILD_07), DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT (PROD_INT_01, PROD_INT_02) or PROD_EXT (PROD_EXT_01, PROD_EXT_02) into the Git repository.
 
-In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on / exported from the target environment.
+In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on or exported from the target environment stage/instance.
 
-Every pipeline will publish the following artifact:
-- DESIGN_configuration, BUILD_configuration etc.: The API Gateway asset archive (ZIP file) containing the assets imported on DESIGN, BUILD etc.
+The configuration pipeline will publish the following artifact:
+- DESIGN_import, BUILD_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on DESIGN, BUILD etc.
+
+The configuration export pipeline will publish the following artifact:
+- DESIGN_export, BUILD_export etc.: The API Gateway asset archive (ZIP file) containing the assets exported from DESIGN, BUILD etc.
 
 These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
 
