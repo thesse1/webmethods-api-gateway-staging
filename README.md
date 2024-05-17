@@ -1405,7 +1405,7 @@ The following parameters can/must be provided for this pipeline:
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project(s)? | By default ("All"), this parameter selects all 13 demo APIs for deployment. Alternatively, the user can select one single API project for deployment |
-| Deploy APIs on API Gateways in which environment set? | webm_io (default) or azure_demo_01 |
+| Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
 | Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
 
@@ -1428,7 +1428,7 @@ The following parameters can/must be provided for this pipeline:
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project? | Case-sensitive name of the API project to be deployed |
-| Deploy APIs on API Gateways in which environment set? | webm_io (default) or azure_demo_01 |
+| Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
 | Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
 
@@ -1452,9 +1452,9 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
-| tenant | Tenant in which to export the API project |
 | Export which API project? | Select the API project to be exported |
-| commitMessage | The change will be committed with this commit message |
+| Export API(s) from DESIGN API Gateway in which environment set? | webm_io (default) or azure_demo_01 |
+| Message for the commit in Git? | The change will be committed with this commit message |
 
 ### `Export arbitrary API project from DESIGN`
 
@@ -1466,9 +1466,9 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
-| tenant | Tenant in which to export the API project |
 | Export which API project? | Case-sensitive name of the API project to be exported |
-| commitMessage | The change will be committed with this commit message |
+| Export API(s) from DESIGN API Gateway in which environment set? | webm_io (default) or azure_demo_01 |
+| Message for the commit in Git? | The change will be committed with this commit message |
 
 This pipeline can be used for exporting new versions of the zzz_ negative test cases.
 
@@ -1487,19 +1487,26 @@ The configuration export pipeline will publish the following artifact:
 These artifacts will be stored by Azure DevOps for some time. They will enable auditing and bug fixing of pipeline builds.
 
 After importing the API Gateway assets, the configuration deployment pipelines will execute some steps for initializing the API Gateway:
-- Configuration of environment-specific loadbalancer URL
-- Configuration of environment-specific proxy
+- Configuration of environment-specific loadbalancer URLs
+- Configuration of the (external) Elasticsearch destination
+- Configuration of an environment-specific proxy server
 - Configuration of environment-specific OAuth2 and JWT configuration parameters in the local Authorization Server and JWT Provider alias
   - OAuth2 authorization code and access token expiration interval
   - JWT issuer, signing algorithm, token expiration interval, keystore alias and key alias
 
 Further configuration steps can be added later.
 
-All pipelines must be triggered manually by clicking on `Run pipeline`. No triggers are defined to start the pipelines automatically.
+When configuring PROD_INT or PROD_EXT on the azure_demo_01 environment set, the pipeline will finally configure a HAFT ring between PROD_INT_01 and PROD_INT_02, or between PROD_EXT_01 and PROD_EXT_02, respectively.
 
-### configure_stages
+All pipelines must be triggered manually by clicking on `Run pipeline`. It is also possible to define triggers to start the pipelines automatically for specific events, e.g., Git commit, PR, successful completion of some other Azure DevOps pipeline (even in another Azure DevOps project in the same organization).
 
-This pipeline will import the API Gateway configuration assets on the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT environment.
+### `Configure API Gateway(s)`
+
+This pipeline will import the API Gateway configuration assets on the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT stages.
+
+If any stage spans multiple instances, the assets will automatically be imported on each instance of the stage.
+
+The azure_demo_01 environment set includes seven BUILD environment instances BUILD_01, ..., BUILD_07 and it includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every configuration of BUILD or PROD_INT or PROD_EXT, the assets will be imported on BUILD_01, ..., BUILD_07, or PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1507,12 +1514,16 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
-| tenant | Tenant in which to import the API Gateway configuration |
-| Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
+| Configure API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
+| Configure which API Gateway stage(s)? | By default ("All"), this parameter selects all eight stages for configuration. Alternatively, the user can select one single stage |
+
+Based on the selected parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution.
+
+As an advanced feature, the user can click on `Stages to run` and select/deselect the ADO stages that should actually be executed in the pipeline run. For example, the user could select "All" stages and then freely decide under `Stages to run` which stage(s) should be configured in this pipeline run.
 
 ### `Export API Gateway Configuration`
 
-This pipeline will export the API Gateway configuration assets from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
+This pipeline will export the API Gateway configuration assets from DESIGN, BUILD (BUILD_01, ..., BUILD_07), DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT (PROD_INT_01, PROD_INT_02) or PROD_EXT (PROD_EXT_01, PROD_EXT_02), and it will automatically commit the changes to the HEAD of the selected branch of the Git repository.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1520,25 +1531,26 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
-| tenant | Tenant in which to export the API Gateway configuration |
-| sourceType | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
-| commitMessage | The change will be committed with this commit message |
+| Export API Gateway configuration from which API Gateway? | All webm_io and azure_demo_01 instances |
+| Message for the commit in Git? | The change will be committed with this commit message |
 
 ## Pipeline for log purging
 
-The API Gateway Staging solution includes one Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. It will purge
+The API Gateway Staging solution includes one Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database on DESIGN, BUILD (BUILD_01, ..., BUILD_07), DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT (PROD_INT_01, PROD_INT_02) and/or PROD_EXT (PROD_EXT_01, PROD_EXT_02). It will purge
  - all logs (except for audit logs) older than 28 days: transactionalEvents, monitorEvents, errorEvents, performanceMetrics, threatProtectionEvents, lifecycleEvents, policyViolationEvents, applicationlogs, mediatorTraceSpan
  - all audit logs older than Jan. 1st of the preceding calendar year: auditlogs. (This is implementing the requirement to purge all audit data on the end of the following calendar year.)
 
-### purge_data_from_stages
+The pipeline can be triggered manually by clicking on `Run pipeline`. It is also configured to run automatically every day at 12:00am GMT (for webm_io on all stages).
 
-This pipeline can be configured to run in defined iterations, e.g., once every day:
-
-![GitHub Logo](/images/run_schedule.png)
+### `Purge API Gateway Analytics Data`
 
 Please note that the "Only schedule builds if the source or pipeline has changed" option should be disabled. Otherwise, the pipeline would only run after changes in the repository.
 
-The API Gateway Staging solution was developed for Azure DevOps Server 2019. In later versions, it will be possible to configure the schedule directly in the pipeline definition YAML file.
+TODO: Try this out!
+
+If any stage spans multiple instances, the logs will automatically be purged on each instance of the stage.
+
+The azure_demo_01 environment set includes seven BUILD environment instances BUILD_01, ..., BUILD_07 and it includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every log purging of BUILD or PROD_INT or PROD_EXT, the logs will be purged on BUILD_01, ..., BUILD_07, or PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1546,8 +1558,8 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch/tag | Select any branch or tag |
 | Commit | Leave this blank |
-| tenant | Tenant in which to purge the API Gateway analytics data |
-| Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
+| Purge data from API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
+| Purge data from which API Gateway stage(s)? | By default ("All"), this parameter selects all eight stages for configuration. Alternatively, the user can select one single stage |
 
 # Usage examples
 
@@ -1862,7 +1874,7 @@ The pipeline definition files (YAML) for the two Azure DevOps pipelines for API 
 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
-| configure_stages | api-configure-stages.yml | |
+| `Configure API Gateway(s)` | api-configure-stages.yml | |
 | `Export API Gateway Configuration` | api-export-config-from-stage.yml | |
 
 The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
@@ -1873,7 +1885,7 @@ The configuration pipeline definition api-configure-stages.yml is using a centra
 | api-export-config-template.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
 | commit-template.yml | Commits the results to the repository |
 
-The import pipeline configure_stages contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
+The import pipeline `Configure API Gateway(s)` contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
 
 The export pipeline `Export API Gateway Configuration` contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
 
