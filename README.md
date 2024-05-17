@@ -100,9 +100,9 @@ The most common use case for an API Developer is to develop APIs on the central 
 
 The gateway_import_export_utils.bat under /bin can be used for this. Using this batch script, the developers can export/import APIs from/to the central DESIGN environment (or their local development API Gateway) to/from their local Git repository and vice versa. In addition to that, the gateway_import_export_utils.bat batch script can also be used for exporting or importing a defined set of general configuration assets from/to local development environments, DESIGN, BUILD, DEV, TEST or PROD.
 
-Alternatively, the developer can also use the `Export arbitrary/selected API project from DESIGN` pipelines and the `Deploy arbitrary/selected API projects` pipelines to export/import APIs from/to the central DESIGN environment into/from Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
+Alternatively, the developer can also use the `Export selected/arbitrary API project from DESIGN` pipelines and the `Deploy selected/arbitrary API project(s)` pipelines to export/import APIs from/to the central DESIGN environment into/from Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateway(s)` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
-The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` and `Export API Gateway Configuration` pipelines) is defined by the export_payload.json in the API project or the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export selected/arbitrary API project from DESIGN` and `Export API Gateway Configuration` pipelines) is defined by the export_payload.json in the API project or the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 ### gateway_import_export_utils.bat
 
@@ -164,7 +164,7 @@ The API Gateway Staging solution offers three mechanisms for injecting target st
 
 ### Value substitution using using Azure DevOps Replace Tokens extension
 
-Any text field in any asset on the DESIGN stage can include placeholders in the format `#{placeholder_name}#` at any point in the text field content. These placeholders will be replaced during the build phase on the BUILD environment by the `Deploy arbitrary/selected API projects` pipelines by values specific for the intended target stage of this build. The values are pulled from Azure DevOps pipeline variables which can be managed in the Azure DevOps variable groups DEV_INT_value_substitutions, DEV_EXT_value_substitutions, TEST_INT_value_substitutions, TEST_EXT_value_substitutions, PROD_INT_value_substitutions and TEST_EXT_value_substitutions.
+Any text field in any asset on the DESIGN stage can include placeholders in the format `#{placeholder_name}#` at any point in the text field content. These placeholders will be replaced during the build phase on the BUILD environment by the `Deploy selected/arbitrary API project(s)` pipelines by values specific for the intended target stage of this build. The values are pulled from Azure DevOps pipeline variables which can be managed in the Azure DevOps variable groups DEV_INT_value_substitutions, DEV_EXT_value_substitutions, TEST_INT_value_substitutions, TEST_EXT_value_substitutions, PROD_INT_value_substitutions and TEST_EXT_value_substitutions.
 
 This facilitates a separation of concern between API configuration experts managing the asset definitions in API Gateway and API providers managing the actual parameter values for their APIs on the different target stages directly in Azure DevOps without having to work on the API Gateway DESIGN (or in the repository code). On the other hand, this means that the target stage-specific values will not be managed in Git, but directly in the Azure DevOps project.
 
@@ -1392,7 +1392,7 @@ Each deployment pipeline consists of two jobs for build and deployment which can
 
 Please check the implementation notes section below on how to configure which agent pool is used for each API Gateway instance.
 
-### `Deploy selected API projects`
+### `Deploy selected API project(s)`
 
 This pipeline will propagate the APIs and other API Gateway assets in the selected API project(s) to the selected target stage(s).
 
@@ -1400,91 +1400,72 @@ The following parameters can/must be provided for this pipeline:
 
 | Parameter | README |
 | ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
+| Branch/tag | Select the Git branch or tag from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project(s)? | By default ("All"), this parameter selects all 13 demo APIs for deployment. Alternatively, the user can select one single API project for deployment |
 | Deploy APIs on API Gateways in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
-| Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution |
+| Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
 
-TODO
+Based on the selected parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution. Each ADO stage will represent a combination of an API project to be deployed on a target stage, e.g. `Build_petstore_and_deploy_it_on_DEV_INT`. This list will include all valid combinations of the selected API project(s) with the selected target stage(s), excluding invalid combinations, i.e., excluding
+ - API projects with internal-only APIs on DEV_EXT, TEST_EXT or PROD_EXT
+ - API projects with external-only APIs on DEV_INT, TEST_INT or PROD_INT
+ - API project petstore_basicauth on any target environment in the webm_io environment set
+ - API project countries on any target environment in the webm_io environment set
 
+As an advanced feature, the user can click on `Stages to run` and select/deselect the ADO stages that should actually be executed in the pipeline run. For example, the user could select "All" api projects and "All (including DESIGN)" target stages and then freely decide under `Stages to run` which API project(s) should actually be deployed on which target stage(s) in this pipeline run.
 
+### `Deploy arbitrary API project`
 
-
-
-### deploy_to_stages
-
-This pipeline will propagate the APIs and other API Gateway assets in the selected API project to the selected target environment.
-
-The following parameters can/must be provided for this pipeline:
-
-| Parameter | README |
-| ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
-| tenant | Tenant in which to deploy the API project |
-| api_project | Case-sensitive name of the API project to be propagated |
-| Stages to run | DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
-
-### deploy_to_config
-
-This pipeline will import the APIs and other API Gateway assets in the selected API project to the DESIGN environment. It will not execute any tests, and it will not validate or prepare the assets for the target environment (no deletion of applications, no unsuspending of applications, no API tagging). The purpose of this pipeline is to reset the DESIGN environment to a defined (earlier) state.
+This pipeline will propagate the APIs and other API Gateway assets in the specified API project to the selected target stage(s).
 
 The following parameters can/must be provided for this pipeline:
 
 | Parameter | README |
 | ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
+| Branch/tag | Select the Git branch or tag from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
-| tenant | Tenant in which to deploy the API project |
-| api_project | Case-sensitive name of the API project to be propagated |
+| Deploy which API project? | Case-sensitive name of the API project to be deployed |
+| Deploy APIs on API Gateways in which environment set? | webm_io (default) or azure_demo_01 |
+| Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
+| Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
+
+Based on the selected and specified parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution. Each ADO stage will represent a combination of an API project to be deployed on a target stage, e.g. `Build_petstore_and_deploy_it_on_DEV_INT`. This list will include all combinations of the specified API project with the selected target stage(s), without filtering for valid/invalid combinations. This pipeline can be used for executing the zzz_ negative test cases.
+
+As an advanced feature, the user can click on `Stages to run` and select/deselect the ADO stages that should actually be executed in the pipeline run. For example, the user could select "All (including DESIGN)" target stages and then freely decide under `Stages to run` on which target stage(s) the specified API project should be deployed in this pipeline run.
 
 ### Selecting a specific commit to be deployed
 
-When queuing a deployment pipeline, you can select the specific commit that should be checked out on the build agent, i.e., the configuration of the API Gateway assets to be imported to the BUILD environment. You have to provide the commit's full SHA which can be found out like this:
-- In the repository history identify the selected commit and click on ``More Actions...``
+When queuing a deployment pipeline, you can select the specific commit that should be checked out on the build agent, i.e., the configuration of the API Gateway assets to be imported to the BUILD environment. You have to provide the commit's full SHA. This way, you can always easily roll-back to any earlier state of the selected/specified API project.
 
-![GitHub Logo](/images/More_Actions.png)
-
-- Select ``Copy full SHA``
-
-![GitHub Logo](/images/Copy_full_SHA.png)
-
-- Go back to the pipeline and click on `Run pipeline`. Paste the value from the clipboard into the Commit form entry field
-
-![GitHub Logo](/images/Paste.png)
-
-![GitHub Logo](/images/SHA_pasted.png)
-
-> Note: It will not work with the shortened commit ID displayed in the UI. You have to use the "full SHA".
-
-### `Export arbitrary API project from DESIGN`
-
-This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
-
-The following parameters can/must be provided for this pipeline:
-
-| Parameter | README |
-| ------ | ------ |
-| Branch | Select the Git branch into which the assets should be committed |
-| Commit | Leave this blank |
-| tenant | Tenant in which to export the API project |
-| api_project | Case-sensitive name of the API project to be exported |
-| commitMessage | The change will be committed with this commit message |
+> Note: It will not work with the shortened commit ID displayed in the GitHub or Azure DevOps UI. You have to use the full SHA.
 
 ### `Export seletced API project from DESIGN`
 
-This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
+This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Git repository.
 
 The following parameters can/must be provided for this pipeline:
 
 | Parameter | README |
 | ------ | ------ |
-| Branch | Select the Git branch into which the assets should be committed |
+| Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | tenant | Tenant in which to export the API project |
-| api_project | Case-sensitive name of the API project to be exported |
+| Export which API project? | Case-sensitive name of the API project to be exported |
+| commitMessage | The change will be committed with this commit message |
+
+### `Export arbitrary API project from DESIGN`
+
+This pipeline will export the APIs and other API Gateway assets in the selected API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Git repository.
+
+The following parameters can/must be provided for this pipeline:
+
+| Parameter | README |
+| ------ | ------ |
+| Branch/tag | Select the Git branch into which the assets should be committed |
+| Commit | Leave this blank |
+| tenant | Tenant in which to export the API project |
+| Export which API project? | Case-sensitive name of the API project to be exported |
 | commitMessage | The change will be committed with this commit message |
 
 ### Drop-down list for api_project
@@ -1521,7 +1502,7 @@ The following parameters can/must be provided for this pipeline:
 
 | Parameter | README |
 | ------ | ------ |
-| Branch | Select the Git branch from which the assets should be imported |
+| Branch/tag | Select the Git branch or tag from which the assets should be imported |
 | Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
 | tenant | Tenant in which to import the API Gateway configuration |
 | Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
@@ -1534,7 +1515,7 @@ The following parameters can/must be provided for this pipeline:
 
 | Parameter | README |
 | ------ | ------ |
-| Branch | Select the Git branch into which the assets should be committed |
+| Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
 | tenant | Tenant in which to export the API Gateway configuration |
 | sourceType | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
@@ -1560,14 +1541,14 @@ The following parameters can/must be provided for this pipeline:
 
 | Parameter | README |
 | ------ | ------ |
-| Branch | Select the master branch |
+| Branch/tag | Select any branch or tag |
 | Commit | Leave this blank |
 | tenant | Tenant in which to purge the API Gateway analytics data |
 | Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
 
 # Usage examples
 
-When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway DESIGN stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway DESIGN stage using the `Export arbitrary/selected API project from DESIGN` / `Deploy arbitrary/selected API project` pipelines.
+When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway DESIGN stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway DESIGN stage using the `Export selected/arbitrary API project from DESIGN` / `Deploy selected/arbitrary API project(s)` pipelines.
 
 ## Example 1: Change an existing API
 
@@ -1617,7 +1598,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export arbitrary/selected API project from DESIGN` pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1683,7 +1664,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export arbitrary/selected API project from DESIGN` pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1741,7 +1722,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the `Export arbitrary/selected API project from DESIGN` pipeline for the petstore API project.
+  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
   - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
 
@@ -1784,7 +1765,7 @@ The deployment pipeline deploy_to_stages contains six stages for deploying an AP
 
 The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
-The export pipelines `Export arbitrary/selected API project from DESIGN` invoke api-export-arbitrary-api-from-DESIGN.yml/api-export-selected-api-from-DESIGN.yml and commit-template.yml sequentially in one stage in one job on one agent.
+The export pipelines `Export selected/arbitrary API project from DESIGN` invoke api-export-arbitrary-api-from-DESIGN.yml/api-export-selected-api-from-DESIGN.yml and commit-template.yml sequentially in one stage in one job on one agent.
 
 All five deployment pipeline templates need the following parameters to be set in the calling pipeline (where applicable):
 
