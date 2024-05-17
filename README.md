@@ -102,7 +102,7 @@ The gateway_import_export_utils.bat under /bin can be used for this. Using this 
 
 Alternatively, the developer can also use the `Export arbitrary/selected API project from DESIGN` pipelines and the `Deploy arbitrary/selected API projects` pipelines to export/import APIs from/to the central DESIGN environment into/from Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateways` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
-The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` pipelines) is defined by the export_payload.json in the API project root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export arbitrary/selected API project from DESIGN` and `Export API Gateway Configuration` pipelines) is defined by the export_payload.json in the API project or the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 ### gateway_import_export_utils.bat
 
@@ -476,7 +476,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 
 This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-> Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not seem to support GraphQL APIs, but it can be deployed in the azure_demo_01 target environments.
+> Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not seem to support GraphQL APIs (as of 16.05.2024), but it can be deployed in the azure_demo_01 target environments.
 
 ## export_payload.json export query for API projects representing negative test cases
 
@@ -1167,8 +1167,6 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
 
 ## export_payload.json export query for API Gateway configurations
 
-The set of assets exported by gateway_import_export_utils.bat --exportconfig (and by the export_configuration_from_stage pipeline) is defined by the export_payload.json in the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://api.webmethodscloud.eu/#sagapis/apiDetails/c.restObject.API-Portal._N0usdLdEelRUwr3rpYDZg.-1. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
-
 The /configuration folder contains sample configurations for DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for example:
 
 ### DESIGN
@@ -1189,14 +1187,14 @@ The /configuration folder contains sample configurations for DESIGN, BUILD, DEV_
     },
     {
       "attributeName": "configId",
-      "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|elasticsearchDestinationConfig|keystore|settings|extended"
+      "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|keystore|settings|extended|HTTPListener@5556"
     }
   ],
   "condition" : "or"
 }
 ```
 
-This configuration includes the standard Transaction logging global policy configured (see below) and enabled, the global URL alias set to `api/${apiName}/${apiVersion}`, the proxy bypass addresses (only localhost), the API fault configured to the standard API Gateway error message template, the application logs configured as per the API Gateway standard (but with Kibana logger silent), the API Gateway destination (internal Elasticsearch database) events configuration as per the API Gateway standard (but with performance data publish interval of 5 minutes), the Elasticsearch destination (external Elasticsearch database) configuration, the default outbound and inbound keystores and truststores, and the (extended) settings.
+This configuration includes the standard Transaction logging global policy configured (see below) and enabled, the proxy bypass addresses (only localhost), the API fault configured to the standard API Gateway error message template, the application logs configured as per the API Gateway standard (but with Kibana logger silent), the API Gateway destination (internal Elasticsearch database) events configuration as per the API Gateway standard (but with performance data publish interval of 5 minutes), the default outbound and inbound keystores and truststores, and the (extended) settings.
 
 The Transaction logging global policy is configured differently on the eight environments:
 
@@ -1239,7 +1237,7 @@ Each /configuration folder contains a scopes.json file for demonstrating this fe
 
 The JSON array can include multiple scope definitions.
 
-## APITest.json Postman test collection
+## APITest.json Postman test collections
 
 The next common scenario for an API developer is to assert the changes made to the APIs do not break their customer scenarios. This is achieved using Postman test collections, cf. https://learning.postman.com/docs/getting-started/introduction/. In a Postman test collection, the developer can group test requests that should be executed against the API under test every time a change is to be propagated to DEV, TEST or PROD. The collection can be defined and executed in a local instance of the Postman REST client, cf. https://learning.postman.com/docs/sending-requests/intro-to-collections/. The requests in a test collection should include scripted test cases asserting that the API response is as expected (response status, payload elements, headers etc.), cf. https://learning.postman.com/docs/writing-scripts/test-scripts/. Test scripts can also extract values from the response and store them in Postman variable for later use, https://learning.postman.com/docs/sending-requests/variables/. For example, the first request might request and get an OAuth2 access token and store it in a Postman variable; later requests can use the token in the variable for authenticating against their API. Test collections can even define request workflows including branches and loops, cf. https://learning.postman.com/docs/running-collections/building-workflows/. The automatic execution of Postman collections can be tested in the Postman REST client itself, cf. https://learning.postman.com/docs/running-collections/intro-to-collection-runs/.
 
@@ -1466,7 +1464,7 @@ The following parameters can/must be provided for this pipeline:
 | tenant | Tenant in which to import the API Gateway configuration |
 | Stages to run | DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT |
 
-### export_configuration_from_stage
+### `Export API Gateway Configuration`
 
 This pipeline will export the API Gateway configuration assets from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT, and it will automatically commit the changes to the HEAD of the selected branch of the Azure DevOps repository (or GitHub repository).
 
@@ -1819,7 +1817,7 @@ The pipeline definition files (YAML) for the two Azure DevOps pipelines for API 
 | Pipeline | Pipeline definition | README |
 | ------ | ------ | ------ |
 | configure_stages | api-configure-stages.yml | |
-| export_configuration_from_stage | api-export-config-from-stage.yml | |
+| `Export API Gateway Configuration` | api-export-config-from-stage.yml | |
 
 The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
 
@@ -1831,7 +1829,7 @@ The configuration pipeline definition api-configure-stages.yml is using a centra
 
 The import pipeline configure_stages contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
 
-The export pipeline export_configuration_from_stage contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
+The export pipeline `Export API Gateway Configuration` contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
 
 The configuration pipeline template needs the following parameters to be set in the calling pipeline:
 
