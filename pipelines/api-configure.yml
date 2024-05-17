@@ -11,7 +11,7 @@ trigger: none
 
 parameters:
 - name: environment_set
-  displayName: Configure API Gateway in which environment set?
+  displayName: Configure API Gateway(s) in which environment set?
   default: webm_io
   values:
   - webm_io

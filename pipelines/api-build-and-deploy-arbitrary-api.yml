@@ -11,7 +11,7 @@ parameters:
   displayName: Deploy which API project?
   type: string
 - name: environment_set
-  displayName: Deploy APIs on API Gateways in which environment set?
+  displayName: Deploy API(s) on API Gateway(s) in which environment set?
   default: webm_io
   values:
   - webm_io

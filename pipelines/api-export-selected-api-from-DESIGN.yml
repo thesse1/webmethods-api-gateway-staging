@@ -19,7 +19,7 @@ parameters:
   - odata_tutorial
   - countries
 - name: environment_set
-  displayName: Export API from DESIGN API Gateway in which environment set?
+  displayName: Export API(s) from DESIGN API Gateway in which environment set?
   default: webm_io
   values:
   - webm_io
