@@ -18,7 +18,7 @@
     "sendErrorEvent" : "true",
     "sendAuditlogGroupManagementEvent" : "true",
     "sendAuditlogRuleManagementEvent" : "true",
-    "metricsPublishInterval" : "1",
+    "metricsPublishInterval" : "5",
     "sendAuditlogAccessProfileManagementEvent" : "true",
     "sendAuditlogAPIManagementEvent" : "true",
     "sendAuditlogPromotionManagementEvent" : "true"
