@@ -133,7 +133,7 @@ stages:
                   persistCredentials: "true"
                   fetchDepth: 0
                 - download: none
-                - template: /pipelines/api-validate-haft-ring-steps-template.yml
+                - template: /pipelines/api-configure-haft-ring-validation-steps-template.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
