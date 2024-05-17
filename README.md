@@ -260,7 +260,7 @@ This example showcases HTTP Basic Authentication for the Petstore demo API. The 
 
 This API is also using the PetStore_Routing_Alias with the `#{stage_name}#` and `#{petstore_route}#` placeholders in its description and value, respectively.
 
-> Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not support the Authorize User policy, but it can be deployed in the azure_demo_01 target environments.
+> Note: This sample API cannot be deployed on any target environment in the webm_io environment set, because webMethods.io API does not support the Authorize User policy, but it can be deployed in the azure_demo_01 target environments.
 
 > Note: Because of the `#{petstore_route}#` in the PetStore_Routing_Alias, the API cannot be tested on DESIGN, but the placeholder will be replaced by the correct variable value during build before the automatic regression tests.
 
@@ -484,7 +484,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 
 This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
 
-> Note: This sample API cannot be deployed on any target environment in the wm_io environment set, because webMethods.io API does not seem to support GraphQL APIs (as of 16.05.2024), but it can be deployed in the azure_demo_01 target environments.
+> Note: This sample API cannot be deployed on any target environment in the webm_io environment set, because webMethods.io API does not seem to support GraphQL APIs (as of 16.05.2024), but it can be deployed in the azure_demo_01 target environments.
 
 ## export_payload.json export query for API projects representing negative test cases
 
@@ -1366,7 +1366,7 @@ All pipelines must be triggered manually by clicking on `Run pipeline`. It is al
 
 Parallel running build jobs using the same BUILD environment must be avoided because they might interfere with each other. By default, the API Gateway Staging solution will use Azure DevOps pipeline environments with exclusive locks in order to avoid running multiple build jobs on the same BUILD environment in parallel.
 
-On the wm_io environment set with only one BUILD environment instance, this means that Azure DevOps will always only run one build job at a time.
+On the webm_io environment set with only one BUILD environment instance, this means that Azure DevOps will always only run one build job at a time.
 
 The azure_demo_01 environment set includes seven BUILD environment instances BUILD_01, ..., BUILD_07 allowing for up to seven build jobs running in parallel. By default, the build jobs will be assigned to BUILD environments by target stages:
 
