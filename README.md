@@ -150,6 +150,14 @@ Sample Usage for exporting the configuration that is present on the API Gateway 
 bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
+## scopes.json configuration of OAuth2 scopes for API projects
+
+Each API project can include one scopes.json file in the API project root folder specifying the OAuth2 scopes needed by the API(s) in the API project. The file will be parsed right before importing the other API Gateway assets of the API project and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
+
+## scopes.json configuration of OAuth2 scopes for API Gateway configurations
+
+Each API Gateway configuration can include one scopes.json file in the configuration root folder specifying the OAuth2 scopes intended for the APIs on this API Gateway instance. The file will be parsed right before importing the other API Gateway assets of the API Gateway configuration and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
+
 ## Target stage-specific value substitutions
 
 The API Gateway Staging solution offers three mechanisms for injecting target stage-specific values into the definitions of the API Gateway assets when they are prepared on the BUILD environment for their target stages:
@@ -366,7 +374,7 @@ This API will automatically identify the tenant by the incoming API key, and the
 
 This API is using OAuth2 for inbound authentication. Therefore, the developer must also include the scope mapping ("gateway_scope") in the export set.
 
-> Note: The local OAuth2 scope itself cannot be promoted from stage to stage using this mechanism, because it is configured in the general "local" system alias for the internal OAuth2 Authorization Server. OAuth2 scopes needed for the API(s) in an API project can be configured in the API project's scopes.json file, see below.
+> Note: The local OAuth2 scope itself cannot be promoted from stage to stage using this mechanism, because it is configured in the general "local" system alias for the internal OAuth2 Authorization Server. OAuth2 scopes needed for the API(s) in an API project can be configured in the API project's scopes.json file.
 
 ### postman_echo_jwt
 
@@ -663,8 +671,6 @@ This API project includes an invalid aliases.json file, see below.
 This API project is companioned by an invalid test case, see below.
 
 ## scopes.json configuration of OAuth2 scopes for API projects
-
-Each API project can include one scopes.json file in the API project root folder specifying the OAuth2 scopes needed by the API(s) in the API project. The file will be parsed right before importing the other API Gateway assets of the API project and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
 
 The postman-echo-oauth2 sample project includes the following scopes.json file configuring the scope name and description user by the API:
 
@@ -1220,8 +1226,6 @@ More configuration assets can be added later.
 
 ## scopes.json configuration of OAuth2 scopes for API Gateway configurations
 
-Each API Gateway configuration can include one scopes.json file in the configuration root folder specifying the OAuth2 scopes intended for the APIs on this API Gateway instance. The file will be parsed right before importing the other API Gateway assets of the API Gateway configuration and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
-
 Each /configuration folder contains a scopes.json file for demonstrating this feature, for example:
 
 ### DESIGN
@@ -1241,9 +1245,11 @@ The JSON array can include multiple scope definitions.
 
 The next common scenario for an API developer is to assert the changes made to the APIs do not break their customer scenarios. This is achieved using Postman test collections, cf. https://learning.postman.com/docs/getting-started/introduction/. In a Postman test collection, the developer can group test requests that should be executed against the API under test every time a change is to be propagated to DEV, TEST or PROD. The collection can be defined and executed in a local instance of the Postman REST client, cf. https://learning.postman.com/docs/sending-requests/intro-to-collections/. The requests in a test collection should include scripted test cases asserting that the API response is as expected (response status, payload elements, headers etc.), cf. https://learning.postman.com/docs/writing-scripts/test-scripts/. Test scripts can also extract values from the response and store them in Postman variable for later use, https://learning.postman.com/docs/sending-requests/variables/. For example, the first request might request and get an OAuth2 access token and store it in a Postman variable; later requests can use the token in the variable for authenticating against their API. Test collections can even define request workflows including branches and loops, cf. https://learning.postman.com/docs/running-collections/building-workflows/. The automatic execution of Postman collections can be tested in the Postman REST client itself, cf. https://learning.postman.com/docs/running-collections/intro-to-collection-runs/.
 
-Each API project must include one Postman test collection under the name APITest.json in its root folder. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's root folder under the name APITest.json.
+Each API project must include one Postman test collection under the name APITest.json in its API tests folder under /postman/collections/apitests. The name of the API tests folder under /postman/collections/apitests must be identical to the name of the corresponding API folder under /apis. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's tests folder under the name APITest.json.
 
 > Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definitions in the Postman REST client from the /environments folder.
+
+TODO
 
 | Environment variable | README |
 | ------ | ------ |
