@@ -21,9 +21,8 @@ parameters:
   - countries
 - name: environment_set
   displayName: Deploy APIs on API Gateways in which environment set?
-  default: Default
+  default: webm_io
   values:
-  - Default
   - webm_io
   - azure_demo_01
 - name: selected_target

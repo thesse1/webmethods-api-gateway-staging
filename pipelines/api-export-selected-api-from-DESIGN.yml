@@ -20,9 +20,8 @@ parameters:
   - postman_echo_security_alias
 - name: environment_set
   displayName: Export API from DESIGN API Gateway in which environment set?
-  default: Default
+  default: webm_io
   values:
-  - Default
   - webm_io
   - azure_demo_01
 - name: commitMessage

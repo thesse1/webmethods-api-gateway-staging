@@ -10,9 +10,8 @@ trigger: none
 parameters:
 - name: environment_set
   displayName: Update API in which environment set?
-  default: Default
+  default: webm_io
   values:
-  - Default
   - webm_io
   - azure_demo_01
 - name: api_id
