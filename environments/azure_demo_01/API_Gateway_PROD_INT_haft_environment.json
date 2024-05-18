@@ -3,66 +3,6 @@
   "name": "azure_demo_01 PROD_INT_haft",
   "values": [
 	{
-		"key": "protocol_01",
-		"value": "http",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "hostname_01",
-		"value": "azure-demo-01-prod-int-01-apigateway-admin.azuredemo-softwareag.com",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "ip_01",
-		"value": "azure-demo-01-prod-int-01-apigateway-admin.azuredemo-softwareag.com",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "port_01",
-		"value": "80",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "insecureflag_01",
-		"value": "--insecure",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "protocol_02",
-		"value": "http",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "hostname_02",
-		"value": "azure-demo-01-prod-int-02-apigateway-admin.azuredemo-softwareag.com",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "ip_02",
-		"value": "azure-demo-01-prod-int-02-apigateway-admin.azuredemo-softwareag.com",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "port_02",
-		"value": "80",
-		"type": "text",
-		"enabled": true
-	},
-	{
-		"key": "insecureflag_02",
-		"value": "--insecure",
-		"type": "text",
-		"enabled": true
-	},
-	{
 		"key": "ip_grpc_01",
 		"value": "azure-demo-01-prod-int-01-apigateway-grpc.azuredemo-softwareag.com",
 		"type": "text",
