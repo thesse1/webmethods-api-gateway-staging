@@ -1346,11 +1346,15 @@ For a deployment to DESIGN, the pipeline will execute only one step to prepare O
 
 More manipulations or tests (e.g., enforcement of API standards) can be added later.
 
-Finally, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple instances, the assets will automatically be imported on each instance of the target stage.
+After this, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple instances, the assets will automatically be imported on each instance of the target stage.
 
 The azure_demo_01 environment set includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every deployment on PROD_INT or PROD_EXT, the assets will be imported on PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 > Note: If the imported assets already exist on the target environment (i.e., assets with same IDs), they will be overwritten for the following asset types: APIs, policies, policy actions, applications, scope mappings, aliases, users, groups and teams. Any assets of any other types, like configuration items, will not be overwritten.
+
+Finally, if an API Portal / Developer Portal is configured on the target stage, the pipeline will iterate over all APIs included in the API project and republish every API to the API Portal / Developer Portal (if it is already published). It will republish the API with the same configuration (endpoints and communities) as it is currently published. API which are not (yes) published, will be skipped.
+
+> Note: You cannot use this functionality for publishing new APIs. But once an API has been published by other means (e.g., manually) from the target environment to an API Portal / Developer Portal, its published version will automatically be kept in sync by this feature of the API Gateway Staging solution.
 
 Every deployment pipeline will publish the following artifacts:
 - {{target_stage}}_{{api_project}}_build_import: The API Gateway asset archive (ZIP file) containing the assets initially imported on the BUILD environment
@@ -1365,6 +1369,8 @@ These artifacts will be stored by Azure DevOps for some time. They will enable a
 In addition to that, the test results are published into the Azure DevOps test results framework.
 
 All pipelines must be triggered manually by clicking on `Run pipeline`. It is also possible to define triggers to start the pipelines automatically for specific events, e.g., Git commit, PR, successful completion of some other Azure DevOps pipeline (even in another Azure DevOps project in the same organization).
+
+You might want to configure an API deployment pipeline (for DEV) to be triggered automatically by an API export. This will automatically test every new API (version) and keep the DEV environment in sync with the API configurations in the Git repository.
 
 Parallel running build jobs using the same BUILD environment must be avoided because they might interfere with each other. By default, the API Gateway Staging solution will use Azure DevOps pipeline environments with exclusive locks in order to avoid running multiple build jobs on the same BUILD environment in parallel.
 
@@ -1556,6 +1562,38 @@ The following parameters can/must be provided for this pipeline:
 | Commit | Leave this blank |
 | Purge data from API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Purge data from which API Gateway stage(s)? | By default ("All"), this parameter selects all eight stages for configuration. Alternatively, the user can select one single stage |
+
+## Pipelines for API updates
+
+The API Gateway Staging solution includes two pipelines for demonstrating how API updating can be automated. They are hard-coded to update the SwaggerPetstore API on DESIGN based on an OpenAPI specification file stored in this repository in the /schemas folder or downloaded from https://petstore.swagger.io/v2/swagger.json. In order to demonstrate the effect of updating the API, the OpenAPI specification file in the /schemas folder (petstore_swagger_updated.json) only includes the endpoints starting with /pet, leaving out the endpoints starting with /store and /user. When you update the API with the local file and then with the URL, you can see on the DESIGN stage that the /store and /user endpoints are removed and then added again.
+
+The pipelines must be triggered manually by clicking on `Run pipeline`. It is also possible to define triggers to start the pipelines automatically for specific events, e.g., Git commit, PR, successful completion of some other Azure DevOps pipeline (even in another Azure DevOps project in the same organization). For example, it could be triggered automatically for every new build of the underlying native API.
+
+You might want to configure an API export pipeline to be triggered automatically by the API update.
+
+### `Update Petstore API by File`
+
+The following parameters can/must be provided for this pipeline:
+
+| Parameter | README |
+| ------ | ------ |
+| Branch/tag | Select any branch or tag |
+| Commit | Leave this blank |
+| Update API in which environment set? | webm_io (default) or azure_demo_01 |
+| Update which API? | By default ("f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"), the pipeline will update the SwaggerPetstore API with this ID. Alternatively, the user can provide another API ID |
+| Update using which file? | By default ("petstore_swagger_updated.json"), the pipeline will update the SwaggerPetstore API with this OpenAPI (Swagger 2.0) specification file. Alternatively, the user can provide another filename |
+
+### `Update Petstore API by URL`
+
+The following parameters can/must be provided for this pipeline:
+
+| Parameter | README |
+| ------ | ------ |
+| Branch/tag | Select any branch or tag |
+| Commit | Leave this blank |
+| Update API in which environment set? | webm_io (default) or azure_demo_01 |
+| Update which API? | By default ("f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"), the pipeline will update the SwaggerPetstore API with this ID. Alternatively, the user can provide another API ID |
+| Update using which URL? | By default ("https://petstore.swagger.io/v2/swagger.json"), the pipeline will update the SwaggerPetstore API with the OpenAPI (Swagger 2.0) specification under this URL. Alternatively, the user can provide another URL |
 
 # Usage examples
 
