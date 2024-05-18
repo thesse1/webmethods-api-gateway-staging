@@ -1,8 +1,8 @@
 trigger: none
 
 schedules:
-- cron: '0 0,6,12,18 * * *'
-  displayName: Daily 1am CET
+- cron: '0 0 * * *'
+  displayName: Daily 12am UTC
   branches:
     include:
     - main
