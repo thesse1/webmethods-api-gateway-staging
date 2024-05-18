@@ -1595,6 +1595,8 @@ The following parameters can/must be provided for this pipeline:
 | Update which API? | By default ("f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5"), the pipeline will update the SwaggerPetstore API with this ID. Alternatively, the user can provide another API ID |
 | Update using which URL? | By default ("https://petstore.swagger.io/v2/swagger.json"), the pipeline will update the SwaggerPetstore API with the OpenAPI (Swagger 2.0) specification under this URL. Alternatively, the user can provide another URL |
 
+TODO: Remove api-inject-stages-template.yml (if possible)
+
 # Usage examples
 
 When using the API Gateway Staging solution, there are two options for exporting/importing from/to the API Gateway DESIGN stage (or a local development environment): Developers can either use a local repository (clone), export/import the API projects using the gateway_import_export_utils.bat script and synchronize their local repository (pull/push) with the central repository used by the Azure DevOps pipelines, or they can directly export/import API projects from/to the API Gateway DESIGN stage using the `Export selected/arbitrary API project from DESIGN` / `Deploy selected/arbitrary API project(s)` pipelines.
