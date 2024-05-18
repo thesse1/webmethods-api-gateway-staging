@@ -1432,7 +1432,7 @@ The following parameters can/must be provided for this pipeline:
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
 | Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
 
-Based on the selected and specified parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution. Each ADO stage will represent a combination of an API project to be deployed on a target stage, e.g. `Build_petstore_and_deploy_it_on_DEV_INT`. This list will include all combinations of the specified API project with the selected target stage(s), without filtering for valid/invalid combinations. This pipeline can be used for executing the zzz_ negative test cases.
+Based on the selected and specified parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution. Each ADO stage will represent a combination of an API project to be deployed on a target stage, e.g. `Build_petstore_and_deploy_it_on_DEV_INT`. This list will include all combinations of the specified API project with the selected target stage(s), without filtering for valid/invalid combinations. This pipeline can be used for executing the zzz_ negative test cases. It can also be used for new API projects which have not yet been accounted for in the definition of the `Deploy selected API project(s)` pipeline.
 
 As an advanced feature, the user can click on `Stages to run` and select/deselect the ADO stages that should actually be executed in the pipeline run. For example, the user could select "All (including DESIGN)" target stages and then freely decide under `Stages to run` on which target stage(s) the specified API project should be deployed in this pipeline run.
 
@@ -1470,7 +1470,7 @@ The following parameters can/must be provided for this pipeline:
 | Export API(s) from DESIGN API Gateway in which environment set? | webm_io (default) or azure_demo_01 |
 | Message for the commit in Git? | The change will be committed with this commit message |
 
-This pipeline can be used for exporting new versions of the zzz_ negative test cases.
+This pipeline can be used for exporting new versions of the zzz_ negative test cases. It can also be used for new API projects which have not yet been accounted for in the definition of the `Export seletced API project from DESIGN` pipeline.
 
 ## Pipelines for API Gateway configurations
 
