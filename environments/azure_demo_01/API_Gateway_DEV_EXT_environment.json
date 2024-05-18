@@ -1,6 +1,6 @@
 {
 	"id": "95b754ba-7f6e-44f2-a64b-aacefc52acca",
-	"name": "API_Gateway_DEV_EXT_environment",
+	"name": "azure_demo_01 DEV_EXT",
 	"values": [
 		{
 			"key": "protocol",
