@@ -1540,13 +1540,9 @@ The API Gateway Staging solution includes one Azure DevOps build pipeline for au
  - all logs (except for audit logs) older than 28 days: transactionalEvents, monitorEvents, errorEvents, performanceMetrics, threatProtectionEvents, lifecycleEvents, policyViolationEvents, applicationlogs, mediatorTraceSpan
  - all audit logs older than Jan. 1st of the preceding calendar year: auditlogs. (This is implementing the requirement to purge all audit data on the end of the following calendar year.)
 
-The pipeline can be triggered manually by clicking on `Run pipeline`. It is also configured to run automatically every day at 12:00am GMT (for webm_io on all stages).
+The pipeline can be triggered manually by clicking on `Run pipeline`. It is also configured to run automatically every day at 12:00am UTC (for webm_io on all stages).
 
 ### `Purge API Gateway Analytics Data`
-
-Please note that the "Only schedule builds if the source or pipeline has changed" option should be disabled. Otherwise, the pipeline would only run after changes in the repository.
-
-TODO: Try this out!
 
 If any stage spans multiple instances, the logs will automatically be purged on each instance of the stage.
 
