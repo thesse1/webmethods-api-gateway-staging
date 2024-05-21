@@ -11,5 +11,6 @@
   "optimizationTechnique" : "None",
   "passSecurityHeaders" : false,
   "keystoreAlias" : "",
-  "truststoreAlias" : ""
+  "truststoreAlias" : "",
+  "_docType" : "aliases"
 }

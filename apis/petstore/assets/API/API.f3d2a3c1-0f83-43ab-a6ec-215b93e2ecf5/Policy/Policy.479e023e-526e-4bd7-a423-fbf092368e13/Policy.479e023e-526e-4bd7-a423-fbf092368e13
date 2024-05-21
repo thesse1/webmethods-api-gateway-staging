@@ -39,5 +39,6 @@
   "policyScope" : "SERVICE",
   "systemPolicy" : false,
   "global" : false,
-  "active" : false
+  "active" : false,
+  "_docType" : "policy"
 }

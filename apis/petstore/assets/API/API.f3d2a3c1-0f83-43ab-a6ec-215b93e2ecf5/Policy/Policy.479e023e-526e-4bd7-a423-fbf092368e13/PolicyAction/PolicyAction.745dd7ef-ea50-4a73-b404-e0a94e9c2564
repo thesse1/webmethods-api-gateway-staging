@@ -24,5 +24,6 @@
     "templateKey" : "headersValidationFlag",
     "values" : [ "false" ]
   } ],
-  "active" : false
+  "active" : false,
+  "_docType" : "policyactions"
 }
