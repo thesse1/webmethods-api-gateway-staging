@@ -39,7 +39,7 @@ jobs:
           parameters:
             environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
-            build_environment: "API_Gateway_$(agent_name)_environment.json"
+            build_environment_file: "API_Gateway_$(agent_name)_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
             build_instance_name: $(agent_name)
             target_stage_name: ${{parameters.deployment_target}}
