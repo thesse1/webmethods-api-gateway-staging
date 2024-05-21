@@ -22,5 +22,6 @@
     "sendAuditlogAccessProfileManagementEvent" : "true",
     "sendAuditlogAPIManagementEvent" : "true",
     "sendAuditlogPromotionManagementEvent" : "true"
-  }
+  },
+  "_docType" : "configurations"
 }
