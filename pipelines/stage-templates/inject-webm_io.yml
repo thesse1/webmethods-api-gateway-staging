@@ -139,8 +139,6 @@ parameters:
     - postman_echo_security_alias
     targets:
     - DESIGN
-- name: ignore_eligible_targets
-  type: string
 
 stages:
 - template: ${{parameters.template}}
