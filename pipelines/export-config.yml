@@ -34,7 +34,7 @@ parameters:
   type: string
 
 stages:
-- template: /pipelines/stage-templates/inject.yml
+- template: /pipelines/stage-templates/inject-${{parameters.environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/export-config.yml
     parameters:
