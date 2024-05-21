@@ -20,7 +20,7 @@ stages:
     jobs:
     - ${{ each instance in stage.instances }}:
       - deployment: Configure_API_Gateway_${{instance.name}}
-        environment: API_Gateway_${{instance.name}}
+        environment: ${{parameters.environment_set}}_${{instance.name}}
         variables:
         - group: ${{stage.name}}_users
         - group: ${{instance.name}}_users
@@ -42,7 +42,7 @@ stages:
                   environment_set: ${{parameters.environment_set}}
                   stage_name: ${{stage.name}}
                   instance_name: ${{instance.name}}
-                  environment: API_Gateway_${{instance.name}}_environment.json
+                  environment: ${{parameters.environment_set}}_${{instance.name}}_environment.json
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"
@@ -53,7 +53,7 @@ stages:
       - ${{ each instance in stage.instances }}:
         - deployment: Configure_HAFT_listener_for_API_Gateway_${{instance.name}}
           dependsOn: Configure_API_Gateway_${{instance.name}}
-          environment: API_Gateway_${{instance.name}}
+          environment: ${{parameters.environment_set}}_${{instance.name}}
           variables:
           - group: ${{instance.name}}_users
           pool:
@@ -73,13 +73,13 @@ stages:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                    environment: API_Gateway_${{instance.name}}_environment.json
+                    environment: ${{parameters.environment_set}}_${{instance.name}}_environment.json
 
         - deployment: Configure_HAFT_ring_for_API_Gateway_${{instance.name}}
           dependsOn:
           - ${{ each otherinstance in stage.instances }}:
             - Configure_HAFT_listener_for_API_Gateway_${{otherinstance.name}}
-          environment: API_Gateway_${{instance.name}}
+          environment: ${{parameters.environment_set}}_${{instance.name}}
           variables:
           - group: ${{instance.name}}_users
           - name: node_name_01
@@ -103,7 +103,7 @@ stages:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                    environment: API_Gateway_${{instance.name}}_environment.json
+                    environment: ${{parameters.environment_set}}_${{instance.name}}_environment.json
 
       - job: Wait_for_HAFT_ring_on_${{stage.name}}
         pool: server # note: the value 'server' is a reserved keyword which indicates this is an agentless job
@@ -118,7 +118,7 @@ stages:
       - ${{ each instance in stage.instances }}:
         - deployment: Validate_HAFT_ring_for_API_Gateway_${{instance.name}}
           dependsOn: Wait_for_HAFT_ring_on_${{stage.name}}
-          environment: API_Gateway_${{instance.name}}
+          environment: ${{parameters.environment_set}}_${{instance.name}}
           variables:
           - group: ${{instance.name}}_users
           pool:
@@ -138,7 +138,7 @@ stages:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                    environment: API_Gateway_${{instance.name}}_environment.json
+                    environment: ${{parameters.environment_set}}_${{instance.name}}_environment.json
                 - bash: | 
                     echo "##vso[build.addbuildtag]${{stage.name}}_HAFT"
                     echo "##vso[build.addbuildtag]${{instance.name}}_HAFT"

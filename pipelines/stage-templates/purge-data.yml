@@ -20,7 +20,7 @@ stages:
     jobs:
     - ${{ each instance in stage.instances }}:
       - deployment: Purge_Data_on_API_Gateway_${{instance.name}}
-        environment: API_Gateway_${{instance.name}}
+        environment: ${{parameters.environment_set}}_${{instance.name}}
         variables:
         - group: ${{stage.name}}_users
         - group: ${{instance.name}}_users
@@ -40,7 +40,7 @@ stages:
                 parameters:
                   environment_set: ${{parameters.environment_set}}
                   instance_name: ${{instance.name}}
-                  environment: API_Gateway_${{instance.name}}_environment.json
+                  environment: ${{parameters.environment_set}}_${{instance.name}}_environment.json
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"
