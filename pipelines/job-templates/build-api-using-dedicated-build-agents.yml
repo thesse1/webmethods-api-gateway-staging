@@ -13,7 +13,7 @@ parameters:
 
 jobs:
 - deployment: Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}
-  environment: ${{parameters.environment_set}}_${{parameters.build_stage.name}}_instances
+  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_instances
   variables:
   - group: ${{parameters.build_stage.name}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:

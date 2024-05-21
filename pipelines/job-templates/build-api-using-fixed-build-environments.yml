@@ -13,7 +13,7 @@ parameters:
 
 jobs:
 - deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
-  environment: ${{parameters.environment_set}}_${{parameters.build_instances_mapping[parameters.deployment_target]}}
+  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_instances_mapping[parameters.deployment_target]}}
   variables:
   - group: ${{parameters.build_stage.name}}_users
   - group: ${{parameters.build_instances_mapping[parameters.deployment_target]}}_users
@@ -35,7 +35,7 @@ jobs:
           parameters:
             environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
-            build_environment: ${{parameters.environment_set}}_"${{parameters.build_instances_mapping[parameters.deployment_target]}}_environment.json"
+            build_environment: API_Gateway_${{parameters.environment_set}}_"${{parameters.build_instances_mapping[parameters.deployment_target]}}_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
             build_instance_name: ${{parameters.build_instances_mapping[parameters.deployment_target]}}
             target_stage_name: ${{parameters.deployment_target}}

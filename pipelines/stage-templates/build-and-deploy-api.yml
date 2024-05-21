@@ -37,7 +37,7 @@ stages:
             - ${{ each deploy_instance in target_stage.instances }}:
               - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_instance.name}}'
                 dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
-                environment: ${{parameters.environment_set}}_${{deploy_instance.name}}
+                environment: API_Gateway_${{parameters.environment_set}}_${{deploy_instance.name}}
                 variables:
                 - group: ${{target_stage.name}}_users
                 - group: ${{deploy_instance.name}}_users
@@ -60,7 +60,7 @@ stages:
                         parameters:
                           environment_set: ${{parameters.environment_set}}
                           api_project: ${{api_project}}
-                          target_environment: ${{parameters.environment_set}}_${{deploy_instance.name}}_environment.json
+                          target_environment: API_Gateway_${{parameters.environment_set}}_${{deploy_instance.name}}_environment.json
                           target_stage_name: ${{deployment_target}}
 
                       - bash: |

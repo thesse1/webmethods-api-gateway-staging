@@ -24,7 +24,7 @@ stages:
 - stage: Update_API_on_${{parameters.design_stage.name}}
   jobs:
   - deployment: Update_API_on_API_Gateway_${{parameters.design_stage.name}}
-    environment: ${{parameters.environment_set}}_${{parameters.design_stage.name}}
+    environment: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}
     variables:
     - group: ${{parameters.design_stage.name}}_users
     pool:
@@ -54,7 +54,7 @@ stages:
           - template: /pipelines/step-templates/update-api.yml
             parameters:
               environment_set: ${{parameters.environment_set}}
-              environment: ${{parameters.environment_set}}_${{parameters.design_stage.name}}_environment.json
+              environment: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_environment.json
               stage_name: ${{parameters.design_stage.name}}
               instance_name: ${{parameters.design_stage.name}}
               api_id: ${{parameters.api_id}}

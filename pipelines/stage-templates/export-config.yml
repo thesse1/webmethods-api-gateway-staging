@@ -26,7 +26,7 @@ stages:
         dependsOn: []
         jobs:
         - deployment: Export_config_from_API_Gateway_${{instance.name}}
-          environment: ${{parameters.environment_set}}_${{instance.name}}
+          environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
           variables:
           - group: ${{stage.name}}_users
           - group: ${{instance.name}}_users
@@ -44,7 +44,7 @@ stages:
                 - template: /pipelines/step-templates/export-config.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
-                    environment: ${{parameters.environment_set}}_${{instance.name}}_environment.json
+                    environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_environment.json
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
                 - template: /pipelines/step-templates/commit.yml
