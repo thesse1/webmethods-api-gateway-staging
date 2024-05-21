@@ -3,6 +3,20 @@ parameters:
   type: string
 - name: parameters
   type: object
+- name: api_project
+  default: All
+- name: environment_set
+  default: azure_demo_01
+- name: selected_target
+  default: 'All (including DESIGN)'
+- name: selected_stage
+  default: 'All'
+- name: build_instance
+  type: string
+  default: 'Default Mapping'
+- name: ignore_eligible_targets
+  type: string
+  default: false
 - name: stages
   type: object
   default:
@@ -102,13 +116,6 @@ parameters:
     TEST_EXT: BUILD_05
     PROD_INT: BUILD_06
     PROD_EXT: BUILD_07
-- name: api_project
-- name: environment_set
-- name: selected_target
-- name: selected_stage
-- name: build_instance
-  type: string
-  default: Default Mapping
 - name: eligible_targets
   displayName: Which sets of API projects can be deployed on which API Gateway stages?
   type: object
@@ -160,8 +167,6 @@ parameters:
     - postman_echo_security_alias
     targets:
     - DESIGN
-- name: ignore_eligible_targets
-  type: string
 
 stages:
 - template: ${{parameters.template}}

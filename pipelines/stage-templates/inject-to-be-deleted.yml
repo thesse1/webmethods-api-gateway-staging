@@ -13,7 +13,7 @@ parameters:
   default: 'All'
 - name: build_instance
   type: string
-  default: Default Mapping
+  default: 'Default Mapping'
 - name: ignore_eligible_targets
   type: string
   default: false
