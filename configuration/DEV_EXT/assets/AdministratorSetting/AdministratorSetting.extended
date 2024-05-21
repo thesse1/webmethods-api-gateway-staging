@@ -3,9 +3,10 @@
   "internalPorts" : { },
   "properties" : {
     "pg_Cache_maxCacheSize" : "1048576",
+    "strictTrailingSlashValidation" : "false",
     "apig_schemaValidationPoolSize" : "10",
-    "retainSOAPResponseStatus" : "true",
     "pg.soapToRest.addNilAttribute" : "false",
+    "retainSOAPResponseStatus" : "true",
     "storeBinaryPayloadInEvents" : "true",
     "pg.security.allowedhostnames" : "",
     "maxRegexLengthInSearchQuery" : "37000",
@@ -19,6 +20,7 @@
     "xmlToJSONConversion_keepString" : "true",
     "pgmen.quotaSurvival.interval" : "1",
     "wwwAuthenticateWithSpace" : "true",
+    "oauth2_getAccessToken_allowOnlyPost" : "false",
     "pg.bulkhead.statusCode" : "",
     "eventsRefreshInterval" : "10s",
     "pg.3pSnmpSender.sendDelay" : "0",
@@ -77,13 +79,13 @@
     "pg.bulkhead.statusMessage" : "",
     "pg.soapToRest.removeWhitespaces" : "true",
     "backupSharedFileLocation" : "",
-    "allowedTracerCount" : "100",
     "pg.nativeServer.validatePrivateIPs" : "false",
     "maxWindowSize" : "10000",
     "return408ForConnectionTimeout" : "true",
     "defaultSearchResultSize" : "1000",
     "startDayOfTheWeek" : "MONDAY",
     "apiDocumentsRestrictedExtension" : "exe,dll,bat,bin",
+    "RestToSoap_readNullAsString" : "false",
     "apiMaturityStatePossibleValues" : "Beta,Deprecated,Experimental,Production,Test",
     "pg.security.honourPortAccessModeSettings" : "false",
     "enableTeamWork" : "false",
@@ -91,6 +93,7 @@
     "pg.cs.snmpTarget.maxRequestSize" : "10485760",
     "maxAllowedZipFileSize" : "100000000",
     "wsdlPortLayout" : "service-port",
+    "setSamesiteCookieAttribute" : "false",
     "allowExceedMaxWindowSize" : "true",
     "apiKeyExpirationPeriod" : "",
     "securityRealmForBasicBearerAuth" : "Integration Server",
@@ -123,6 +126,5 @@
     "apig_rest_service_redirect" : "false",
     "forwardQueryParams" : "false",
     "eventsBatchPayloadSizeInMB" : "10"
-  },
-  "_docType" : "configurations"
+  }
 }
