@@ -51,7 +51,7 @@ stages:
           #     echo "Swagger:"
           #     cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
           #   displayName: Print asset downloaded from upstream pipeline
-          - template: /pipelines/step-templates/update.yml
+          - template: /pipelines/step-templates/update-api.yml
             parameters:
               environment_set: ${{parameters.environment_set}}
               environment: API_Gateway_${{parameters.design_stage.name}}_environment.json
