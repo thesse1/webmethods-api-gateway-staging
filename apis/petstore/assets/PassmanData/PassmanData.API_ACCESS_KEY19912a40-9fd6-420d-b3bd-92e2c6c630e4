@@ -1,7 +1,8 @@
 {
   "id" : "API_ACCESS_KEY19912a40-9fd6-420d-b3bd-92e2c6c630e4",
-  "pw" : "Cinhgls3kwJ+tkypRkMvZIN6erQh6mqt2Yytyd3EHRs0NVsOq0s4WnL6mK1SICkC",
+  "pw" : "C+4rvlLfDDTySDJHRb6NvL2pLV++Z79LCmaHaSVEc4Qpvgj9kt8wvzPe+8lb0JnW",
   "encryptorId" : "EntrustAes",
-  "saltString" : "qvBCHTDuUDIWi1qAq7SrhQ==",
-  "iterationCount" : 1
+  "saltString" : "2LUDVgyViIkcdXKZmnPjqw==",
+  "iterationCount" : 1,
+  "_docType" : "passmanData"
 }
