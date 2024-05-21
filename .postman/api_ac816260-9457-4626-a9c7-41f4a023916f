@@ -10,7 +10,6 @@ id = ac816260-9457-4626-a9c7-41f4a023916f
 [config.relations.collections]
 rootDirectory = postman/collections
 files[] = {"id":"3558839-2efe3f36-4b60-4a0d-9779-edfa70aa6dd3","path":"apitests/countries/APITest.json","metaData":{}}
-files[] = {"id":"3558839-c5b9196a-e263-4f28-b8df-b905c18d0e13","path":"apitests/multiple_tenants/APITest.json","metaData":{}}
 files[] = {"id":"3558839-103b2b7c-8861-4516-add4-9bd695b36429","path":"apitests/number_conversion/APITest.json","metaData":{}}
 files[] = {"id":"3558839-09261dcc-ad25-4138-8bf7-b2156f9591b9","path":"apitests/odata_tutorial/APITest.json","metaData":{}}
 files[] = {"id":"3558839-c1de69b9-81f1-4300-8bd5-8ecb832db92b","path":"apitests/petstore/APITest.json","metaData":{}}
@@ -20,7 +19,7 @@ files[] = {"id":"3558839-926704f6-3570-4c7d-a18b-cba3625b7f47","path":"apitests/
 files[] = {"id":"3558839-1d22c618-28a5-4386-bce7-ea247afbae5d","path":"apitests/postman_echo/APITest.json","metaData":{}}
 files[] = {"id":"3558839-6931aa38-1801-4814-a724-eab880d34c71","path":"apitests/postman_echo_jwt/APITest.json","metaData":{}}
 files[] = {"id":"3558839-7f92ae4a-2246-4784-ad9f-274f2f558ede","path":"apitests/postman_echo_mocking/APITest.json","metaData":{}}
-files[] = {"id":"3558839-b23c3b18-187f-4ddc-8934-52416f21d72b","path":"apitests/postman_echo_multiple_tenants/APITest.json","metaData":{}}
+files[] = {"id":"3558839-c5b9196a-e263-4f28-b8df-b905c18d0e13","path":"apitests/postman_echo_multiple_tenants/APITest.json","metaData":{}}
 files[] = {"id":"3558839-4f47ffec-ffd9-43ff-aba2-8362cdd4cae9","path":"apitests/postman_echo_oauth2/APITest.json","metaData":{}}
 files[] = {"id":"3558839-796f5bf8-c2ad-48cf-acf7-de13bc7ae439","path":"apitests/postman_echo_security_alias/APITest.json","metaData":{}}
 files[] = {"id":"3558839-990ae353-bdf3-4e51-a2a0-f8aecde1ead9","path":"apitests/zzz_alias_not_found/APITest.json","metaData":{}}
