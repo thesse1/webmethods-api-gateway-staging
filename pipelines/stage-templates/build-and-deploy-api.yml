@@ -39,8 +39,8 @@ stages:
                 dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
                 environment: API_Gateway_${{parameters.environment_set}}_${{deploy_instance.name}}
                 variables:
-                - group: ${{target_stage.name}}_users
-                - group: ${{deploy_instance.name}}_users
+                - group: API_Gateway_${{parameters.environment_set}}_${{target_stage.name}}_users
+                - group: API_Gateway_${{parameters.environment_set}}_${{deploy_instance.name}}_users
                 pool:
                   name: ${{deploy_instance.pool_name}}
                   vmImage: ${{deploy_instance.pool_image}}

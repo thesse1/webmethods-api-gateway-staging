@@ -28,8 +28,8 @@ stages:
         - deployment: Export_config_from_API_Gateway_${{instance.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
           variables:
-          - group: ${{stage.name}}_users
-          - group: ${{instance.name}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
           pool:
             name: ${{instance.pool_name}}
             vmImage: ${{instance.pool_image}}

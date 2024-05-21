@@ -24,7 +24,7 @@ stages:
   - deployment: Export_${{parameters.api_project}}_from_API_Gateway_${{parameters.design_stage.name}}
     environment: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}
     variables:
-    - group: ${{parameters.design_stage.name}}_users
+    - group: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_users
     pool:
       name: ${{parameters.design_stage.pool_name}}
       vmImage: ${{parameters.design_stage.pool_image}}

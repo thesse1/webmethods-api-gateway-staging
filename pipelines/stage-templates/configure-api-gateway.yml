@@ -22,8 +22,8 @@ stages:
       - deployment: Configure_API_Gateway_${{instance.name}}
         environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
         variables:
-        - group: ${{stage.name}}_users
-        - group: ${{instance.name}}_users
+        - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
+        - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
         pool:
           name: ${{instance.pool_name}}
           vmImage: ${{instance.pool_image}}
@@ -55,7 +55,7 @@ stages:
           dependsOn: Configure_API_Gateway_${{instance.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
           variables:
-          - group: ${{instance.name}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
           pool:
             name: ${{instance.pool_name}}
             vmImage: ${{instance.pool_image}}
@@ -81,7 +81,7 @@ stages:
             - Configure_HAFT_listener_for_API_Gateway_${{otherinstance.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
           variables:
-          - group: ${{instance.name}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
           - name: node_name_01
             value: $[dependencies.Configure_HAFT_listener_for_API_Gateway_${{ stage.instances[0].name }}.outputs['Configure_HAFT_listener_for_API_Gateway_${{ stage.instances[0].name }}.setoutputvar.node_name']]
           - name: node_name_02
@@ -120,7 +120,7 @@ stages:
           dependsOn: Wait_for_HAFT_ring_on_${{stage.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
           variables:
-          - group: ${{instance.name}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
           pool:
             name: ${{instance.pool_name}}
             vmImage: ${{instance.pool_image}}

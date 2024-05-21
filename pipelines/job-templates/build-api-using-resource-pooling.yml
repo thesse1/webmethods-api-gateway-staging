@@ -15,9 +15,9 @@ jobs:
 - deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
   environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_instances
   variables:
-  - group: ${{parameters.build_stage.name}}_users
+  - group: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
-    - group: ${{parameters.deployment_target}}_value_substitutions
+    - group: API_Gateway_${{parameters.deployment_target}}_value_substitutions
   pool:
     name: ${{parameters.build_stage.pool_name}}
     vmImage: ${{parameters.build_stage.pool_image}}
