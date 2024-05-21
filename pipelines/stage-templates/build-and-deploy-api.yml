@@ -23,9 +23,9 @@ stages:
             dependsOn: []
             lockBehavior: sequential
             jobs:
-            - template: /pipelines/api-build-job-template-fixed-build-environments.yml
-            # - template: /pipelines/api-build-job-template-dedicated-build-agents.yml
-            # - template: /pipelines/api-build-job-template-resource-pooling.yml
+            - template: /pipelines/job-templates/build-api-using-fixed-build-environments.yml
+            # - template: /pipelines/job-templates/build-api-using-dedicated-build-agents.yml
+            # - template: /pipelines/job-templates/build-api-using-resource-pooling.yml
               parameters:
                 environment_set: ${{parameters.environment_set}}
                 build_stage: ${{parameters.build_stage}}
@@ -52,11 +52,11 @@ stages:
                         submodules: "true"
                         persistCredentials: "true"
                         fetchDepth: 0
-                      - template: /pipelines/api-retrieve-build-template.yml
+                      - template: /pipelines/step-templates/retrieve-build.yml
                         parameters:
                           target_stage_name: ${{deployment_target}}
                           api_project: ${{api_project}}
-                      - template: /pipelines/api-deploy-steps-template.yml
+                      - template: /pipelines/step-templates/deploy-api.yml
                         parameters:
                           environment_set: ${{parameters.environment_set}}
                           api_project: ${{api_project}}

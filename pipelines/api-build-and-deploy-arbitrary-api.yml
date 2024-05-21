@@ -48,9 +48,9 @@ variables:
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}"
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
+- template: /pipelines/inject.yml
   parameters:
-    template: /pipelines/api-build-and-deploy-stages-template.yml
+    template: /pipelines/stage-templates/build-and-deploy-api.yml
     parameters: []
     build_instance: ${{parameters.build_instance}}
     api_project: ${{parameters.api_project}}

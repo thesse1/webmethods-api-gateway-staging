@@ -31,9 +31,9 @@ parameters:
   - PROD_EXT
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
+- template: /pipelines/inject.yml
   parameters:
-    template: /pipelines/api-configure-stages-template.yml
+    template: /pipelines/stage-templates/configure-api-gateway.yml
     parameters: []
     ${{ if ne(parameters.environment_set, 'Default')}}:
       environment_set: ${{ parameters.environment_set }}

@@ -41,13 +41,13 @@ stages:
                   submodules: "true"
                   persistCredentials: "true"
                   fetchDepth: 0
-                - template: /pipelines/api-export-config-steps-template.yml
+                - template: /pipelines/step-templates/export-config.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
                     environment: API_Gateway_${{instance.name}}_environment.json
                     stage_name: ${{stage.name}}
                     instance_name: ${{instance.name}}
-                - template: /pipelines/api-commit-template.yml
+                - template: /pipelines/step-templates/commit.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}
                 - bash: |

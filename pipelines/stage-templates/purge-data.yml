@@ -36,7 +36,7 @@ stages:
                 persistCredentials: "true"
                 fetchDepth: 0
               - download: none
-              - template: /pipelines/api-purge-data-steps-template.yml
+              - template: /pipelines/step-templates/purge-data.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
                   instance_name: ${{instance.name}}

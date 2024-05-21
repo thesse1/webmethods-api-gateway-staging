@@ -19,5 +19,5 @@ parameters:
   default: false
 
 stages:
-- template: api-inject-stages-template-${{parameters.environment_set}}.yml
+- template: inject-${{parameters.environment_set}}.yml
   parameters: ${{parameters}}

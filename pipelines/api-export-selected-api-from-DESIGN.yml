@@ -31,9 +31,9 @@ parameters:
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}"
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
+- template: /pipelines/inject.yml
   parameters:
-    template: /pipelines/api-export-api-stages-template.yml
+    template: /pipelines/stage-templates/export-api.yml
     parameters:
       commitMessage: ${{parameters.commitMessage}}
       api_project: ${{parameters.api_project}}

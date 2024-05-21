@@ -34,9 +34,9 @@ parameters:
   type: string
 
 stages:
-- template: /pipelines/api-inject-stages-template.yml
+- template: /pipelines/inject.yml
   parameters:
-    template: /pipelines/api-export-config-stages-template.yml
+    template: /pipelines/stage-templates/export-config.yml
     parameters:
       source_instance: ${{ split(parameters.source, ' ')[1] }}
       commitMessage: ${{parameters.commitMessage}}

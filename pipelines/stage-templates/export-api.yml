@@ -38,14 +38,14 @@ stages:
             clean: "true"
             fetchDepth: 0
           - download: none
-          - template: /pipelines/api-export-api-steps-template.yml
+          - template: /pipelines/step-templates/export-api.yml
             parameters:
               environment_set: ${{parameters.environment_set}}
               api_project: ${{parameters.api_project}}
               environment: API_Gateway_${{parameters.design_stage.name}}_environment.json
               stage_name: ${{parameters.design_stage.name}}
               instance_name: ${{parameters.design_stage.name}}
-          - template: /pipelines/api-commit-template.yml
+          - template: /pipelines/step-templates/commit.yml
             parameters:
               commitMessage: ${{parameters.commitMessage}}
           - bash: |

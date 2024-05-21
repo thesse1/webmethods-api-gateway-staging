@@ -21,17 +21,6 @@ parameters:
 - name: update_file
 
 stages:
-# - template: /pipelines/api-inject-stages-template.yml
-#   parameters:
-#     template: /pipelines/api-build-and-deploy-stages-template.yml
-#     parameters:
-#       deployment_sets:
-#       - api_projects:
-#         - ${{parameters.api_project}}
-#         targets:
-#         - ${{parameters.design_stage.name}}
-#     build_instance: BUILD_01
-
 - stage: Update_API_on_${{parameters.design_stage.name}}
   jobs:
   - deployment: Update_API_on_API_Gateway_${{parameters.design_stage.name}}
@@ -62,7 +51,7 @@ stages:
           #     echo "Swagger:"
           #     cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
           #   displayName: Print asset downloaded from upstream pipeline
-          - template: /pipelines/api-update-steps-template.yml
+          - template: /pipelines/step-templates/update.yml
             parameters:
               environment_set: ${{parameters.environment_set}}
               environment: API_Gateway_${{parameters.design_stage.name}}_environment.json

@@ -102,7 +102,7 @@ jobs:
         #     echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
         #   name: claim_resource
         #   displayName: 'Claim Resource'
-        - template: /pipelines/api-build-steps-template.yml
+        - template: /pipelines/step-templates/build-api.yml
           parameters:
             environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
@@ -113,7 +113,7 @@ jobs:
             prepare_condition: ${{true}}
             test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
             replace_condition: ${{ not(parameters.target_stage.is_design_stage) }}
-        - template: /pipelines/api-store-build-template.yml
+        - template: /pipelines/step-templates/store-build.yml
           parameters:
             target_stage_name: ${{parameters.deployment_target}}
             api_project: ${{parameters.api_project}}

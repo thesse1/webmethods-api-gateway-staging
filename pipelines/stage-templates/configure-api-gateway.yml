@@ -37,7 +37,7 @@ stages:
                 fetchDepth: 0
               - download: none
               # - bash: "Debug: $[dependencies.Check_environment_file_for_${{instance.name}}.outputs['Check_environment_file.environment_file_exists']]"
-              - template: /pipelines/api-configure-steps-template.yml
+              - template: /pipelines/step-templates/configure-api-gateway.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
                   stage_name: ${{stage.name}}
@@ -68,7 +68,7 @@ stages:
                   persistCredentials: "true"
                   fetchDepth: 0
                 - download: none
-                - template: /pipelines/api-configure-haft-listener-steps-template.yml
+                - template: /pipelines/step-templates/configure-haft-listener.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
@@ -98,7 +98,7 @@ stages:
                   persistCredentials: "true"
                   fetchDepth: 0
                 - download: none
-                - template: /pipelines/api-configure-haft-ring-steps-template.yml
+                - template: /pipelines/step-templates/configure-haft-ring.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
@@ -133,7 +133,7 @@ stages:
                   persistCredentials: "true"
                   fetchDepth: 0
                 - download: none
-                - template: /pipelines/api-configure-haft-ring-validation-steps-template.yml
+                - template: /pipelines/step-templates/configure-haft-ring-validation.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
                     stage_name: ${{stage.name}}
