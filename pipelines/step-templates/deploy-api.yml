@@ -1,15 +1,15 @@
 parameters:
 - name: api_project
-- name: target_environment
+- name: target_environment_file
 - name: target_stage_name
 - name: environment_set
 
 steps:
 - bash: |
-   echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment}}`"
-   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment}}`"
+   echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
+   echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
+   echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
+   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.target_stage_name}} configuration, extract ip, hostname, port and insecureflag'
 
@@ -32,7 +32,7 @@ steps:
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
-    -e environments/${{parameters.environment_set}}/${{parameters.target_environment}} \
+    -e environments/${{parameters.environment_set}}/${{parameters.target_environment_file}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_stage_name}}'
@@ -47,7 +47,7 @@ steps:
     --env-var publisher_user='$(publisher_user)' \
     --env-var publisher_password='$(publisher_password)' \
     --env-var apis_to_be_published=`cat apis_to_be_published.txt` \
-    -e environments/${{parameters.environment_set}}/${{parameters.target_environment}} \
+    -e environments/${{parameters.environment_set}}/${{parameters.target_environment_file}} \
     $(target_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Republish all ${{parameters.api_project}} APIs from API Gateway ${{parameters.target_stage_name}}'

@@ -42,7 +42,7 @@ stages:
                   environment_set: ${{parameters.environment_set}}
                   stage_name: ${{stage.name}}
                   instance_name: ${{instance.name}}
-                  environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_environment.json
+                  environment_file: API_Gateway_${{instance.name}}_environment.json
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"

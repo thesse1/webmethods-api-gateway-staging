@@ -1,16 +1,16 @@
 parameters:
 - name: environment_set
-- name: environment
+- name: environment_file
 - name: stage_name
 - name: instance_name
 
 steps:
 - bash: |
-   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment}}`"
+   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
+   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
+   echo "##vso[task.setvariable variable=environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
+   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
+   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.instance_name}} configuration, extract ip, hostname, port and insecureflag'
 
