@@ -1,9 +1,0 @@
-{
-  "applicationId" : "476dcf37-b6e9-40c1-a06a-b4692cecc483",
-  "apiIds" : [ "d73d5702-6925-41a0-8c23-933326c27b96", "f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5" ],
-  "lastUpdated" : 1715706734642,
-  "primaryNode" : {
-    "hostId" : "331d243b-ca98-4114-acaf-1d23767fbbbe",
-    "replica" : 0
-  }
-}
