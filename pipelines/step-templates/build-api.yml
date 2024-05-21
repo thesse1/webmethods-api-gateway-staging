@@ -175,4 +175,4 @@ steps:
     testResultsFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
     testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_stage_name}}'
     publishRunAttachments: false
-  condition: always()
+  condition: ${{parameters.test_condition}}
