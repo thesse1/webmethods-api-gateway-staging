@@ -1,7 +1,7 @@
 {
-  "id" : "479e023e-526e-4bd7-a423-fbf092368e13",
+  "id" : "d38b5945-53af-4abb-872f-e6ba77339cb0",
   "names" : [ {
-    "value" : "Default Policy for API SwaggerPetstore",
+    "value" : "Default Policy for API PostmanEcho",
     "locale" : "English"
   } ],
   "descriptions" : [ {
@@ -13,25 +13,19 @@
   },
   "policyEnforcements" : [ {
     "enforcements" : [ {
-      "enforcementObjectId" : "745dd7ef-ea50-4a73-b404-e0a94e9c2564",
-      "order" : "0"
-    } ],
-    "stageKey" : "requestPayloadProcessing"
-  }, {
-    "enforcements" : [ {
-      "enforcementObjectId" : "c7aa28d6-70f5-4fb1-8d8b-804970d504be",
+      "enforcementObjectId" : "6efb6e08-a976-40bb-aa31-e11c8be8b534",
       "order" : "0"
     } ],
     "stageKey" : "routing"
   }, {
     "enforcements" : [ {
-      "enforcementObjectId" : "eabb4119-8d77-4b38-ac97-9a1c36c316be",
+      "enforcementObjectId" : "0e1c4bfe-71ec-4658-90bb-cff4d81222a6",
       "order" : "0"
     } ],
     "stageKey" : "IAM"
   }, {
     "enforcements" : [ {
-      "enforcementObjectId" : "a486bfd1-59e8-4ef3-8fc6-14e2b14e88ba",
+      "enforcementObjectId" : "9f0a6436-fd9e-46ff-ab2d-76188523583b",
       "order" : "0"
     } ],
     "stageKey" : "transport"

@@ -1,7 +1,7 @@
 {
-  "applicationID" : "b5a89c36-58a7-4ff6-8f1f-62c8de8c354e",
-  "name" : "MySwaggerPetstoreApp_PROD",
-  "description" : "This application should be used on PROD environments",
+  "applicationID" : "3ca20a56-6ea0-4d88-ae40-d285d0a05acf",
+  "name" : "MyPostmanEchoApp_DEV",
+  "description" : "This application should be used on DEV environments for testing",
   "owner" : "Administrator",
   "ownerType" : "user",
   "identifiers" : [ ],
@@ -11,14 +11,14 @@
       "apiAccessKey" : "********************************"
     }
   },
-  "creationDate" : "2020-12-08 09:47:21 GMT",
-  "lastModified" : "2021-06-23 14:46:56 GMT",
-  "lastUpdated" : 1715859795297,
+  "creationDate" : "2021-02-03 16:31:28 GMT",
+  "lastModified" : "2021-06-23 14:00:59 GMT",
+  "lastUpdated" : 1715860016229,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",
   "properties" : { },
-  "isSuspended" : true,
+  "isSuspended" : false,
   "authStrategyIds" : [ ],
   "primaryNode" : {
     "hostId" : "331d243b-ca98-4114-acaf-1d23767fbbbe",
