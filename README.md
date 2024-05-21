@@ -6,7 +6,7 @@
 
 The webMethods API Gateway Staging solution allows to extract API Gateway assets from a DESIGN environment (local or shared/central), add them to a Git repository and automatically promote them to DEV, TEST and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections). After this procedure, the modified assets are exported again from BUILD environment and imported on the target environment (DEV, TEST or PROD).
 
-The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway instances. This includes the configuration of the API Gateway destination, the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway instances using Azure DevOps build pipelines for quickly setting up new API Gateway instances or for resetting existing instances.
+The solution also includes a script (and pipelines) for automatically extracting the general configuration of API Gateway environments. This includes the configuration of the API Gateway destination, the Transaction logging global policy and multiple administrative settings. The configuration can be added to the repository and imported on API Gateway environments using Azure DevOps build pipelines for quickly setting up new API Gateway environments or for resetting existing environments.
 
 Finally, the solution also includes an Azure DevOps build pipeline for automatically purging the API Gateway logs stored in the internal Elasticsearch database. This pipeline can be configured to run in defined iterations, e.g., once every day.
 
@@ -48,9 +48,9 @@ In addition to the deployment ("promotion") of assets to DEV, TEST and PROD, the
 
 Finally, the solution also includes a pipeline for exporting API projects from the central DESIGN environment. The pipeline will automatically commit the exported project to the HEAD of the selected repository branch.
 
-The solution supports separate stages for hosting internal and external APIs. The respective stages are called DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT. Both internal and external APIs can be configured on the same local development instance or the central DESIGN instance. They must be assigned to the "Internal" and/or the "External" API group in order to be eligible for deployment to internal and/or external API Gateway DEV/TEST/PROD instances. ("Internal" and "External" must be added to the apiGroupingPossibleValues extended setting in API Gateway for making these values eligible as API groups.) APIs assigned to both the "Internal" and the "External" API group are eligible for deployment on internal and external API Gateway instances.
+The solution supports separate stages for hosting internal and external APIs. The respective stages are called DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT. Both internal and external APIs can be configured on the same local development environment or the central DESIGN environment. They must be assigned to the "Internal" and/or the "External" API group in order to be eligible for deployment to internal and/or external API Gateway DEV/TEST/PROD environments. ("Internal" and "External" must be added to the apiGroupingPossibleValues extended setting in API Gateway for making these values eligible as API groups.) APIs assigned to both the "Internal" and the "External" API group are eligible for deployment on internal and external API Gateway environments.
 
-The solution supports target stages with multiple "instances", for example in different regions. (Each instance can itself be an API Gateway cluster.) The "instances" within one stage will always get the same configuration and the same set of APIs. Applications can by synchronized within stages using HAFT, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-haft_reference_arch.html.
+The solution supports target stages with multiple environments, for example in different regions. (Each environment can itself be a single API Gateway instance or an API Gateway cluster.) The environments within one stage will always get the same configuration and the same set of APIs. Applications can by synchronized within stages using HAFT, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-haft_reference_arch.html.
 
 The following API Gateway assets and configurations can be moved across API Gateway stages:
  - Gateway APIs 
@@ -77,13 +77,13 @@ The repository has the following top-level folders:
   - apis: Contains projects with the API Gateway assets exported from DESIGN environment along with the definition of the projects' asset sets as well as alias and scope definitions
   - azure-devops-demo-generator: Template definition and supporting files for creating demo/seed ADO projects using the [Azure DevOps Demo Generator](https://azuredevopsdemogenerator.azurewebsites.net/)
   - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system (local clone of the Git repository)
-  - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT instances along with the definition of the exported asset sets
-  - environments: Contains folders with Postman environment definitions for API Gateway instances in the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT stages. Each folder includes the definitions for one set of environments. The solution comes with two sample sets:
+  - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
+  - environments: Contains folders with Postman environment definition files for API Gateway environments in the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT stages. Each folder includes the definitions for one set of environments. The solution comes with two sample sets:
     - webm_io: Set of webMethods.io API Gateways hosted on the Software AG cloud
     - azure_demo_01: Set of API Gateways deployed to Azure Kubernetes Service clusters
   - images: Diagrams and screenshots used in this documentation
   - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for initializing the environments, for exporting assets, for updating API definitions, for configuring HAFT, for publishing APIs to API Portal / Developer Portal and for log purging
-  - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway instances with environment-specific configurations, and for log purging
+  - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway environments with environment-specific configurations, and for log purging
   - postman/collections/apitests: Contains Postman collections with API tests for every API project which are executed automatically for every API deployment
   - schemas: Contains an updated version of the Petstore API Swagger API specification for demonstrating automatic API update
 
@@ -156,7 +156,7 @@ Each API project can include one scopes.json file in the API project root folder
 
 ## scopes.json configuration of OAuth2 scopes for API Gateway configurations
 
-Each API Gateway configuration can include one scopes.json file in the configuration root folder specifying the OAuth2 scopes intended for the APIs on this API Gateway instance. The file will be parsed right before importing the other API Gateway assets of the API Gateway configuration and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
+Each API Gateway configuration can include one scopes.json file in the configuration root folder specifying the OAuth2 scopes intended for the APIs on this API Gateway environment. The file will be parsed right before importing the other API Gateway assets of the API Gateway configuration and the scopes are injected into the local OAuth2 Authorization Server configuration. ("UPSERT": Existing scope definitions with the same name will be overwritten, new scope definitions with new names will be added.)
 
 ## Target stage-specific value substitutions
 
@@ -428,7 +428,7 @@ In addition to the PostmanEcho_Routing_Alias, this API makes use of the PostmanE
 }
 ```
 
-The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway using Ping_Routing_Alias (simple alias). The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
+The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway using Ping_Routing_Alias (simple alias). The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 ### number_conversion
 
@@ -446,7 +446,7 @@ The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local u
 }
 ```
 
-This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
+This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 ### odata_tutorial
 
@@ -464,7 +464,7 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
 }
 ```
 
-This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
+This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 ### countries
 
@@ -482,7 +482,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 }
 ```
 
-This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD instances.
+This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 > Note: This sample API cannot be deployed on any target environment in the webm_io environment set, because webMethods.io API does not seem to support GraphQL APIs (as of 16.05.2024), but it can be deployed in the azure_demo_01 target environments.
 
@@ -1256,7 +1256,7 @@ Each API project must include one Postman test collection under the name APITest
 | {{api-port}} |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
 | {{api-hostname}} | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{api-hostname}} |
 
-The distinction between {{api-ip}} and {{api-hostname}} enables supporting API Gateway instances which are not (yet) properly represented in DNS.
+The distinction between {{api-ip}} and {{api-hostname}} enables supporting API Gateway environments which are not (yet) properly represented in DNS.
 
 > Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement (but after replacement of placeholders). So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
 
@@ -1328,7 +1328,7 @@ The key to proper DevOps is continuous integration and continuous deployment. Or
 
 The API Gateway Staging solution includes two Azure DevOps build pipelines for deploying API projects from a Git repository to DESIGN, DEV, TEST and PROD environments and two pipelines for exporting API projects from DESIGN into the Git repository.
 
-In each deployment pipeline, the API Gateway assets configured in the API project will be imported on the BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, TEST and PROD, it will then execute the API tests configured in the API project's APITest.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to DESIGN.)
+In each deployment pipeline, the API Gateway assets configured in the API project will be imported on a BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, TEST and PROD, it will then execute the API tests configured in the API project's APITest.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to DESIGN.)
 
 For a deployment to DEV, TEST and PROD, the pipeline will now validate and manipulate the assets on the BUILD environment (using API Gateway's own APIs) to prepare them for the target environment:
 - All policy actions will be scanned for unwanted API-level Log Invocation policies
@@ -1346,9 +1346,9 @@ For a deployment to DESIGN, the pipeline will execute only one step to prepare O
 
 More manipulations or tests (e.g., enforcement of API standards) can be added later.
 
-After this, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple instances, the assets will automatically be imported on each instance of the target stage.
+After this, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple environments, the assets will automatically be imported on each environment of the target stage.
 
-The azure_demo_01 environment set includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every deployment on PROD_INT or PROD_EXT, the assets will be imported on PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
+The azure_demo_01 environment set includes two PROD_INT environments PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environments PROD_EXT_01 and PROD_EXT_02. For every deployment on PROD_INT or PROD_EXT, the assets will be imported on PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 > Note: If the imported assets already exist on the target environment (i.e., assets with same IDs), they will be overwritten for the following asset types: APIs, policies, policy actions, applications, scope mappings, aliases, users, groups and teams. Any assets of any other types, like configuration items, will not be overwritten.
 
@@ -1374,11 +1374,11 @@ You might want to configure an API deployment pipeline (for DEV) to be triggered
 
 Parallel running build jobs using the same BUILD environment must be avoided because they might interfere with each other. By default, the API Gateway Staging solution will use Azure DevOps pipeline environments with exclusive locks in order to avoid running multiple build jobs on the same BUILD environment in parallel.
 
-On the webm_io environment set with only one BUILD environment instance, this means that Azure DevOps will always only run one build job at a time.
+On the webm_io environment set with only one BUILD environment, this means that Azure DevOps will always only run one build job at a time.
 
-The azure_demo_01 environment set includes seven BUILD environment instances BUILD_01, ..., BUILD_07 allowing for up to seven build jobs running in parallel. By default, the build jobs will be assigned to BUILD environments by target stages:
+The azure_demo_01 environment set includes seven BUILD environments BUILD_01, ..., BUILD_07 allowing for up to seven build jobs running in parallel. By default, the build jobs will be assigned to BUILD environments by target stages:
 
-| Target stage | Assigned BUILD environment instance |
+| Target stage | Assigned BUILD environment |
 | ------ | ------ |
 | DESIGN | BUILD_01 |
 | DEV_INT | BUILD_02 |
@@ -1388,17 +1388,17 @@ The azure_demo_01 environment set includes seven BUILD environment instances BUI
 | PROD_INT | BUILD_06 |
 | PROD_EXT | BUILD_07 |
 
-Users can overwrite this behavior with the `Build on which BUILD instance?` parameter in the deployment pipelines. Instead of the default value (`Default Mapping`), they can directly select one of the seven BUILD instances. All build jobs in this pipeline will then use the selected build environment for building the API projects. Users can use this feature to speed up the deployment process by selecting a BUILD environment instance that is currently idle, bypassing the default mechansim of assigning build jobs to BUILD environment instances by target stage.
+Users can overwrite this behavior with the `Build on which BUILD environment?` parameter in the deployment pipelines. Instead of the default value (`Default Mapping`), they can directly select one of the seven BUILD environments. All build jobs in this pipeline will then use the selected build environment for building the API projects. Users can use this feature to speed up the deployment process by selecting a BUILD environment that is currently idle, bypassing the default mechansim of assigning build jobs to BUILD environments by target stage.
 
-In addition to this mechanism (fixed build environments), the API Gateway Staging solution offers two alternative mechanisms for assigning build jobs to BUILD environment instances:
- - Dedicated build agents: This mechanism uses a separate Azure DevOps agent pool with seven build agents, each one assigned to one of the seven BUILD environment instances. Instead of assigning BUILD environment instances by target stage, this mechanism lets every build agent use its own, assigned BUILD environment instance when executing a build job. Azure DevOps will automatically assign the next build job to the next free build agent, leading to an optimal utilization of the seven BUILD environment instances.
- - Resource pooling (experimental): This mechanism tries to reach the same goal without using a separate agent pool for the build jobs. In this mechanism, each build job will try to pull a free BUILD environment instance from a pool of seven instances managed by an Azure DevOps variable group (API_Gateway_Build_instances_availability). If there is currently no free instance available, the job will wait until a new instance becomes available.
+In addition to this mechanism (fixed build environments), the API Gateway Staging solution offers two alternative mechanisms for assigning build jobs to BUILD environments:
+ - Dedicated build agents: This mechanism uses a separate Azure DevOps agent pool with seven build agents, each one assigned to one of the seven BUILD environments. Instead of assigning BUILD environments by target stage, this mechanism lets every build agent use its own, assigned BUILD environment when executing a build job. Azure DevOps will automatically assign the next build job to the next free build agent, leading to an optimal utilization of the seven BUILD environments.
+ - Resource pooling (experimental): This mechanism tries to reach the same goal without using a separate agent pool for the build jobs. In this mechanism, each build job will try to pull a free BUILD environment from a pool of seven environments managed by an Azure DevOps variable group (API_Gateway_Build_environments_availability). If there is currently no free environment available, the job will wait until a new environment becomes available.
 
 Please check the implementation notes section below on how to configure and activate one of these two alternative mechanisms.
 
-Each deployment pipeline consists of two jobs for build and deployment which can be executed on different agents, possibly from different agent pools. Each job only contains steps connecting the agent with one API Gateway instance (either BUILD/BUILD_01/.../BUILD_07 or DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_INT_01/PROD_INT_02/PROD_EXT/PROD_EXT_01/PROD_EXT_02). This way, the pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway instances.
+Each deployment pipeline consists of two jobs for build and deployment which can be executed on different agents, possibly from different agent pools. Each job only contains steps connecting the agent with one API Gateway environment (either BUILD/BUILD_01/.../BUILD_07 or DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_INT_01/PROD_INT_02/PROD_EXT/PROD_EXT_01/PROD_EXT_02). This way, the pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
-Please check the implementation notes section below on how to configure which agent pool is used for each API Gateway instance.
+Please check the implementation notes section below on how to configure which agent pool is used for each API Gateway environment.
 
 ### `Deploy selected API project(s)`
 
@@ -1413,7 +1413,7 @@ The following parameters can/must be provided for this pipeline:
 | Deploy which API project(s)? | By default ("All"), this parameter selects all 13 demo APIs for deployment. Alternatively, the user can select one single API project for deployment |
 | Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
-| Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
+| Build on which BUILD environment? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environments by target stage, see above. Alternatively, the user can select a specific BUILD environment for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
 
 Based on the selected parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution. Each ADO stage will represent a combination of an API project to be deployed on a target stage, e.g. `Build_petstore_and_deploy_it_on_DEV_INT`. This list will include all valid combinations of the selected API project(s) with the selected target stage(s), excluding invalid combinations, i.e., excluding
  - API projects with internal-only APIs on DEV_EXT, TEST_EXT or PROD_EXT
@@ -1436,7 +1436,7 @@ The following parameters can/must be provided for this pipeline:
 | Deploy which API project? | Case-sensitive name of the API project to be deployed |
 | Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
-| Build on which BUILD instance? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environment instances by target stage, see above. Alternatively, the user can select a specific BUILD environment instance for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
+| Build on which BUILD environment? | Only relevant for the webm_io environment set: By default ("Default Mapping"), the build jobs will be assigned to BUILD environments by target stage, see above. Alternatively, the user can select a specific BUILD environment for all build jobs in this pipeline execution. For the webm_io environment set, this parameter will be ignored |
 
 Based on the selected and specified parameter values, Azure DevOps (ADO) will create a list of ADO stages for the pipeline execution. Each ADO stage will represent a combination of an API project to be deployed on a target stage, e.g. `Build_petstore_and_deploy_it_on_DEV_INT`. This list will include all combinations of the specified API project with the selected target stage(s), without filtering for valid/invalid combinations. This pipeline can be used for executing the zzz_ negative test cases. It can also be used for new API projects which have not yet been accounted for in the definition of the `Deploy selected API project(s)` pipeline.
 
@@ -1482,7 +1482,7 @@ This pipeline can be used for exporting new versions of the zzz_ negative test c
 
 The API Gateway Staging solution includes one Azure DevOps build pipeline for deploying API Gateway configurations from the Git repository to DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT environments and one pipeline for exporting the API Gateway configurations from DESIGN, BUILD (BUILD_01, ..., BUILD_07), DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT (PROD_INT_01, PROD_INT_02) or PROD_EXT (PROD_EXT_01, PROD_EXT_02) into the Git repository.
 
-In each pipeline, the API Gateway assets configured in the environment configuration folder will be imported on or exported from the target environment stage/instance.
+In each pipeline, the API Gateway assets configured in the environment configuration folder(s) will be imported on the target stage(s) or exported from the source environment.
 
 The configuration pipeline will publish the following artifact:
 - DESIGN_import, BUILD_import etc.: The API Gateway asset archive (ZIP file) containing the assets imported on DESIGN, BUILD etc.
@@ -1510,9 +1510,9 @@ All pipelines must be triggered manually by clicking on `Run pipeline`. It is al
 
 This pipeline will import the API Gateway configuration assets on the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT stages.
 
-If any stage spans multiple instances, the assets will automatically be imported on each instance of the stage.
+If any stage spans multiple environments, the assets will automatically be imported on each environment of the stage.
 
-The azure_demo_01 environment set includes seven BUILD environment instances BUILD_01, ..., BUILD_07 and it includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every configuration of BUILD or PROD_INT or PROD_EXT, the assets will be imported on BUILD_01, ..., BUILD_07, or PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
+The azure_demo_01 environment set includes seven BUILD environments BUILD_01, ..., BUILD_07 and it includes two PROD_INT environments PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environments PROD_EXT_01 and PROD_EXT_02. For every configuration of BUILD or PROD_INT or PROD_EXT, the assets will be imported on BUILD_01, ..., BUILD_07, or PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 The following parameters can/must be provided for this pipeline:
 
@@ -1537,7 +1537,7 @@ The following parameters can/must be provided for this pipeline:
 | ------ | ------ |
 | Branch/tag | Select the Git branch into which the assets should be committed |
 | Commit | Leave this blank |
-| Export API Gateway configuration from which API Gateway? | All webm_io and azure_demo_01 instances |
+| Export API Gateway configuration from which API Gateway? | All webm_io and azure_demo_01 environments |
 | Message for the commit in Git? | The change will be committed with this commit message |
 
 ## Pipeline for log purging
@@ -1550,9 +1550,9 @@ The pipeline can be triggered manually by clicking on `Run pipeline`. It is also
 
 ### `Purge API Gateway Analytics Data`
 
-If any stage spans multiple instances, the logs will automatically be purged on each instance of the stage.
+If any stage spans multiple environments, the logs will automatically be purged on each environment of the stage.
 
-The azure_demo_01 environment set includes seven BUILD environment instances BUILD_01, ..., BUILD_07 and it includes two PROD_INT environment instances PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environment instances PROD_EXT_01 and PROD_EXT_02. For every log purging of BUILD or PROD_INT or PROD_EXT, the logs will be purged on BUILD_01, ..., BUILD_07, or PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
+The azure_demo_01 environment set includes seven BUILD environments BUILD_01, ..., BUILD_07 and it includes two PROD_INT environments PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environments PROD_EXT_01 and PROD_EXT_02. For every log purging of BUILD or PROD_INT or PROD_EXT, the logs will be purged on BUILD_01, ..., BUILD_07, or PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
 The following parameters can/must be provided for this pipeline:
 
