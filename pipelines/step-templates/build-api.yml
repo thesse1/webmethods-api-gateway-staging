@@ -2,7 +2,7 @@ parameters:
 - name: api_project
 - name: build_environment_file
 - name: build_stage_name
-- name: build_instance_name
+- name: build_environment_name
 - name: target_stage_name
 - name: prepare_condition
 - name: test_condition
@@ -63,7 +63,7 @@ steps:
    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.build_instance_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.build_environment_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
 
 - script: |
     newman run postman/collections/utilities/prepare/Prepare_${{parameters.build_stage_name}}.json --reporters cli \
@@ -72,7 +72,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway ${{parameters.build_instance_name}}'
+  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
 
@@ -92,7 +92,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Import the Deployable To API Gateway ${{parameters.build_instance_name}}'
+  displayName: 'Import the Deployable To API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
 
@@ -101,7 +101,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Run tests on API Gateway ${{parameters.build_instance_name}}'
+  displayName: 'Run tests on API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.test_condition}})
@@ -159,7 +159,7 @@ steps:
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Export the Deployable from API Gateway ${{parameters.build_instance_name}}'
+  displayName: 'Export the Deployable from API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_hostname)
 

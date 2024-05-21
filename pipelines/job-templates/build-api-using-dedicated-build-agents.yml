@@ -7,13 +7,13 @@ parameters:
   type: string
 - name: deployment_target
   type: string
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
 - name: environment_set
 
 jobs:
 - deployment: Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}
-  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_instances
+  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_environments
   variables:
   - group: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
@@ -41,7 +41,7 @@ jobs:
             api_project: ${{parameters.api_project}}
             build_environment_file: "API_Gateway_$(agent_name)_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
-            build_instance_name: $(agent_name)
+            build_environment_name: $(agent_name)
             target_stage_name: ${{parameters.deployment_target}}
             prepare_condition: ${{true}}
             test_condition: ${{ not(parameters.target_stage.is_design_stage) }}

@@ -7,7 +7,7 @@ parameters:
   type: object
 - name: all_stages
   type: object
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
 - name: environment_set
 - name: deployment_sets
@@ -18,15 +18,15 @@ stages:
   - stage: Purge_Data_on_${{stage.name}}
     dependsOn: []
     jobs:
-    - ${{ each instance in stage.instances }}:
-      - deployment: Purge_Data_on_API_Gateway_${{instance.name}}
-        environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
+    - ${{ each environment in stage.environments }}:
+      - deployment: Purge_Data_on_API_Gateway_${{environment.name}}
+        environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
         variables:
         - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
-        - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
+        - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
         pool:
-          name: ${{instance.pool_name}}
-          vmImage: ${{instance.pool_image}}
+          name: ${{environment.pool_name}}
+          vmImage: ${{environment.pool_image}}
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -39,10 +39,10 @@ stages:
               - template: /pipelines/step-templates/purge-data.yml
                 parameters:
                   environment_set: ${{parameters.environment_set}}
-                  instance_name: ${{instance.name}}
-                  environment_file: API_Gateway_${{instance.name}}_environment.json
+                  environment_name: ${{environment.name}}
+                  environment_file: API_Gateway_${{environment.name}}_environment.json
               - bash: |
                   echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                   echo "##vso[build.addbuildtag]${{stage.name}}"
-                  echo "##vso[build.addbuildtag]${{instance.name}}"
+                  echo "##vso[build.addbuildtag]${{environment.name}}"
                 displayName: Add build tags

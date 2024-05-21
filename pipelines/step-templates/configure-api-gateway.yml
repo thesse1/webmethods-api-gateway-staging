@@ -1,7 +1,7 @@
 parameters:
 - name: environment_set
 - name: stage_name
-- name: instance_name
+- name: environment_name
 - name: environment_file
 
 steps:
@@ -27,7 +27,7 @@ steps:
    echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
    echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.instance_name}} configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecureflag'
 
 - bash: |
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/configuration/${{parameters.stage_name}}/scopes.json`"
@@ -45,7 +45,7 @@ steps:
     -e $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{parameters.environment_file}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Import the Deployable To API Gateway ${{parameters.instance_name}}'
+  displayName: 'Import the Deployable To API Gateway ${{parameters.environment_name}}'
   env:
     no_proxy: $(environment_ip)
 
@@ -58,6 +58,6 @@ steps:
     -e $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{parameters.environment_file}} \
     $(environment_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Initialize API Gateway ${{parameters.instance_name}}'
+  displayName: 'Initialize API Gateway ${{parameters.environment_name}}'
   env:
     no_proxy: $(environment_ip)

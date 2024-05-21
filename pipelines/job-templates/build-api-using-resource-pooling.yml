@@ -7,13 +7,13 @@ parameters:
   type: string
 - name: deployment_target
   type: string
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
 - name: environment_set
 
 jobs:
 - deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
-  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_instances
+  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_environments
   variables:
   - group: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
@@ -40,14 +40,14 @@ jobs:
             scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
-              az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability"
-              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].id)
+              az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability"
+              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].id)
               echo group_id: $group_id
               resource_name="null"
               claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{parameters.deployment_target}}_${{parameters.api_project}}"
               # Loop until a resource is available
               while [ "$resource_name" == "null" ]; do
-                resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+                resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
                 if [ "$resource_name" == "null" ]; then
                   echo "No available resource found. Waiting..."
                   sleep 60
@@ -55,7 +55,7 @@ jobs:
                   echo "Resource found: $resource_name"
                   az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
                   sleep 5
-                  claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].variables.$resource_name.value -o tsv)
+                  claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].variables.$resource_name.value -o tsv)
                   if [ "$claimtext_read" == "$claimtext" ]; then
                     echo "Resource claimed: $claimtext"
                   else
@@ -73,13 +73,13 @@ jobs:
         #     export AZURE_DEVOPS_EXT_PAT=$(PAT)
         #     # echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
         #     # echo After login
-        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].id)
+        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].id)
         #     echo group_id: $group_id
         #     resource_name="null"
         #     claimtext="Claimed by $(Build.DefinitionName)-$(Build.BuildNumber) for ${{parameters.deployment_target}}_${{parameters.api_project}}"
         #     # Loop until a resource is available
         #     while [ "$resource_name" == "null" ]; do
-        #       resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
+        #       resource_name=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].variables | jq -r "[ to_entries[] | select (.value.value==\"Available\") ][0].key")
         #       if [ "$resource_name" == "null" ]; then
         #         echo "No available resource found. Waiting..."
         #         sleep 60
@@ -87,7 +87,7 @@ jobs:
         #         echo "Resource found: $resource_name"
         #         az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$resource_name" --value "$claimtext"
         #         sleep 5
-        #         claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].variables.$resource_name.value -o tsv)
+        #         claimtext_read=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].variables.$resource_name.value -o tsv)
         #         if [ "$claimtext_read" == "$claimtext" ]; then
         #           echo "Resource claimed: $claimtext"
         #         else
@@ -108,7 +108,7 @@ jobs:
             api_project: ${{parameters.api_project}}
             build_environment_file: "API_Gateway_$(claimed_resource)_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
-            build_instance_name: $(claimed_resource)
+            build_environment_name: $(claimed_resource)
             target_stage_name: ${{parameters.deployment_target}}
             prepare_condition: ${{true}}
             test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
@@ -134,13 +134,13 @@ jobs:
             scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
-              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].id)
+              group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].id)
               az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
               echo "Released Claimed Resource: $(claimed_resource)"
           condition: always() # Release lock even if build was not successful
         # - script: |
         #     echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
-        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_instances_availability" --query [0].id)
+        #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_Build_environments_availability" --query [0].id)
         #     az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
         #     echo "Released Claimed Resource: $(claimed_resource)"
         #   displayName: 'Release Resource'

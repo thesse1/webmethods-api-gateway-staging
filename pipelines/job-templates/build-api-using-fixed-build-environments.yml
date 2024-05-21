@@ -7,16 +7,16 @@ parameters:
   type: string
 - name: deployment_target
   type: string
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
 - name: environment_set
 
 jobs:
 - deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
-  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_instances_mapping[parameters.deployment_target]}}
+  environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_environments_mapping[parameters.deployment_target]}}
   variables:
   - group: API_Gateway_${{parameters.environment_set}}_${{parameters.build_stage.name}}_users
-  - group: API_Gateway_${{parameters.environment_set}}_${{parameters.build_instances_mapping[parameters.deployment_target]}}_users
+  - group: API_Gateway_${{parameters.environment_set}}_${{parameters.build_environments_mapping[parameters.deployment_target]}}_users
   - ${{ if not(parameters.target_stage.is_design_stage) }}:
     - group: API_Gateway_${{parameters.deployment_target}}_value_substitutions
   pool:
@@ -35,9 +35,9 @@ jobs:
           parameters:
             environment_set: ${{parameters.environment_set}}
             api_project: ${{parameters.api_project}}
-            build_environment_file: "API_Gateway_${{parameters.build_instances_mapping[parameters.deployment_target]}}_environment.json"
+            build_environment_file: "API_Gateway_${{parameters.build_environments_mapping[parameters.deployment_target]}}_environment.json"
             build_stage_name: ${{parameters.build_stage.name}}
-            build_instance_name: ${{parameters.build_instances_mapping[parameters.deployment_target]}}
+            build_environment_name: ${{parameters.build_environments_mapping[parameters.deployment_target]}}
             target_stage_name: ${{parameters.deployment_target}}
             prepare_condition: ${{true}}
             test_condition: ${{ not(parameters.target_stage.is_design_stage) }}
@@ -49,8 +49,8 @@ jobs:
         - bash: |
             echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
             echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
-            echo "##vso[build.addbuildtag]${{parameters.build_instances_mapping[parameters.deployment_target]}}"
+            echo "##vso[build.addbuildtag]${{parameters.build_environments_mapping[parameters.deployment_target]}}"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}"
             echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_stage.name}}"
-            echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_instances_mapping[parameters.deployment_target]}}"
+            echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.build_environments_mapping[parameters.deployment_target]}}"
           displayName: Add build tags

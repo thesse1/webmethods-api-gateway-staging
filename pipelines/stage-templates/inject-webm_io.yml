@@ -11,7 +11,7 @@ parameters:
   default: 'All (including DESIGN)'
 - name: selected_stage
   default: 'All'
-- name: build_instance
+- name: build_environment
   type: string
   default: 'Default Mapping'
 - name: ignore_eligible_targets
@@ -24,7 +24,7 @@ parameters:
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
     is_design_stage: true
-    instances:
+    environments:
     - name: DESIGN
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
@@ -32,53 +32,53 @@ parameters:
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
     is_build_stage: true
-    instances:
+    environments:
     - name: BUILD
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: DEV_INT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    instances:
+    environments:
     - name: DEV_INT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: DEV_EXT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    instances:
+    environments:
     - name: DEV_EXT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: TEST_INT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    instances:
+    environments:
     - name: TEST_INT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: TEST_EXT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    instances:
+    environments:
     - name: TEST_EXT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_INT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    instances:
+    environments:
     - name: PROD_INT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_EXT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
-    instances:
+    environments:
     - name: PROD_EXT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
   default:
     DESIGN: BUILD
@@ -148,17 +148,17 @@ stages:
         design_stage: ${{stage}}
       ${{ if stage.is_build_stage }}:
         build_stage: ${{stage}}
-        # ${{ if containsValue(stage.instances, parameters.build_instance) }}:
-        #   build_instances_mapping:
-        #     DESIGN: ${{parameters.build_instance}}
-        #     DEV_INT: ${{parameters.build_instance}}
-        #     DEV_EXT: ${{parameters.build_instance}}
-        #     TEST_INT: ${{parameters.build_instance}}
-        #     TEST_EXT: ${{parameters.build_instance}}
-        #     PROD_INT: ${{parameters.build_instance}}
-        #     PROD_EXT: ${{parameters.build_instance}}
+        # ${{ if containsValue(stage.environments, parameters.build_environment) }}:
+        #   build_environments_mapping:
+        #     DESIGN: ${{parameters.build_environment}}
+        #     DEV_INT: ${{parameters.build_environment}}
+        #     DEV_EXT: ${{parameters.build_environment}}
+        #     TEST_INT: ${{parameters.build_environment}}
+        #     TEST_EXT: ${{parameters.build_environment}}
+        #     PROD_INT: ${{parameters.build_environment}}
+        #     PROD_EXT: ${{parameters.build_environment}}
         # ${{ else }}:
-        #   build_instances_mapping: ${{parameters.build_instances_mapping}}
+        #   build_environments_mapping: ${{parameters.build_environments_mapping}}
     target_stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if not(stage.is_build_stage) }}:
@@ -170,7 +170,7 @@ stages:
       - ${{ elseif eq(parameters.selected_stage, 'All') }}:
         - ${{stage}}
       
-    build_instances_mapping:
+    build_environments_mapping:
       DESIGN: BUILD
       DEV_INT: BUILD
       DEV_EXT: BUILD

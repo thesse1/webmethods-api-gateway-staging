@@ -38,6 +38,6 @@ stages:
   parameters:
     template: /pipelines/stage-templates/export-config.yml
     parameters:
-      source_instance: ${{ split(parameters.source, ' ')[1] }}
+      source_environment: ${{ split(parameters.source, ' ')[1] }}
       commitMessage: ${{parameters.commitMessage}}
     environment_set: ${{ split(parameters.source, ' ')[0] }}

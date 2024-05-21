@@ -7,32 +7,32 @@ parameters:
   type: object
 - name: all_stages
   type: object
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
 - name: environment_set
   type: string
 - name: deployment_sets
   type: object
-- name: source_instance
+- name: source_environment
   type: string
 - name: commitMessage
   type: string
 
 stages:
 - ${{ each stage in parameters.all_stages }}:
-  - ${{ each instance in stage.instances }}:
-    - ${{ if eq(instance.name, parameters.source_instance) }}:
+  - ${{ each environment in stage.environments }}:
+    - ${{ if eq(environment.name, parameters.source_environment) }}:
       - stage: Export_from_${{stage.name}}
         dependsOn: []
         jobs:
-        - deployment: Export_config_from_API_Gateway_${{instance.name}}
-          environment: API_Gateway_${{parameters.environment_set}}_${{instance.name}}
+        - deployment: Export_config_from_API_Gateway_${{environment.name}}
+          environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
           variables:
           - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
-          - group: API_Gateway_${{parameters.environment_set}}_${{instance.name}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
           pool:
-            name: ${{instance.pool_name}}
-            vmImage: ${{instance.pool_image}}
+            name: ${{environment.pool_name}}
+            vmImage: ${{environment.pool_image}}
           strategy:
             runOnce:    #rolling, canary are the other strategies that are supported
               deploy:
@@ -44,14 +44,14 @@ stages:
                 - template: /pipelines/step-templates/export-config.yml
                   parameters:
                     environment_set: ${{parameters.environment_set}}
-                    environment_file: API_Gateway_${{instance.name}}_environment.json
+                    environment_file: API_Gateway_${{environment.name}}_environment.json
                     stage_name: ${{stage.name}}
-                    instance_name: ${{instance.name}}
+                    environment_name: ${{environment.name}}
                 - template: /pipelines/step-templates/commit.yml
                   parameters:
                     commitMessage: ${{parameters.commitMessage}}
                 - bash: |
                     echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                     echo "##vso[build.addbuildtag]${{stage.name}}"
-                    echo "##vso[build.addbuildtag]${{instance.name}}"
+                    echo "##vso[build.addbuildtag]${{environment.name}}"
                   displayName: Add build tags

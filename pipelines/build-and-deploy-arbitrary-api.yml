@@ -29,8 +29,8 @@ parameters:
   - PROD_EXT
   - DESIGN
   - 'All (including DESIGN)'
-- name: build_instance
-  displayName: Build on which BUILD instance?
+- name: build_environment
+  displayName: Build on which BUILD environment?
   default: Default Mapping
   values:
   - Default Mapping
@@ -52,7 +52,7 @@ stages:
   parameters:
     template: /pipelines/stage-templates/build-and-deploy-api.yml
     parameters: []
-    build_instance: ${{parameters.build_instance}}
+    build_environment: ${{parameters.build_environment}}
     api_project: ${{parameters.api_project}}
     selected_target: ${{parameters.selected_target}}
     ${{ if ne(parameters.environment_set, 'Default')}}:

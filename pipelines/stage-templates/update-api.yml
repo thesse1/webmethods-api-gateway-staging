@@ -7,7 +7,7 @@ parameters:
   type: object
 - name: all_stages
   type: object
-- name: build_instances_mapping
+- name: build_environments_mapping
   type: object
 - name: deployment_sets
   type: object
@@ -56,7 +56,7 @@ stages:
               environment_set: ${{parameters.environment_set}}
               environment_file: API_Gateway_${{parameters.design_stage.name}}_environment.json
               stage_name: ${{parameters.design_stage.name}}
-              instance_name: ${{parameters.design_stage.name}}
+              environment_name: ${{parameters.design_stage.name}}
               api_id: ${{parameters.api_id}}
               update_type: ${{parameters.update_type}}
               update_url: ${{parameters.update_url}}
