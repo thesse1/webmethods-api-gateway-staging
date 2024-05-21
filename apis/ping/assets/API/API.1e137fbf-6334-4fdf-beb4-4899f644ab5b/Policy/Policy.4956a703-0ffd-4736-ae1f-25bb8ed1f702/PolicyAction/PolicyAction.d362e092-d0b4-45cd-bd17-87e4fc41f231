@@ -42,6 +42,5 @@
       "values" : [ "ELASTICSEARCH" ]
     } ]
   } ],
-  "active" : false,
-  "_docType" : "policyactions"
+  "active" : false
 }
