@@ -36,7 +36,7 @@ parameters:
   - PROD_EXT
 
 stages:
-- template: /pipelines/inject.yml
+- template: /pipelines/stage-templates/inject.yml
   parameters:
     template: /pipelines/stage-templates/purge-data.yml
     parameters: []
