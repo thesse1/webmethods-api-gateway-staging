@@ -12,5 +12,6 @@
     "templateKey" : "method",
     "values" : [ "CUSTOM" ]
   } ],
-  "active" : false
+  "active" : false,
+  "_docType" : "policyactions"
 }
