@@ -60,7 +60,7 @@ stages:
                         parameters:
                           environment_set: ${{parameters.environment_set}}
                           api_project: ${{api_project}}
-                          target_environment: API_Gateway_${{parameters.environment_set}}_${{deploy_instance.name}}_environment.json
+                          target_environment_file: API_Gateway_${{deploy_instance.name}}_environment.json
                           target_stage_name: ${{deployment_target}}
 
                       - bash: |
