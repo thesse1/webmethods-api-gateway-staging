@@ -1797,7 +1797,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
 # Implementation notes
 
-All pipeline definitions (YAML files) are making use of stage-level, job-level and step-level pipeline templates for implementing the pipeline functionality in small, re-usable components.
+All pipeline definitions (YAML files) are making use of stage-level, job-level and step-level pipeline templates for implementing the pipeline functionality in small, re-usable components. Some of these templates are re-used in all pipeline definitions:
 
 ## Shared pipeline templates
 
