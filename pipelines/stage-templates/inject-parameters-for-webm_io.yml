@@ -20,8 +20,6 @@ parameters:
   type: object
   default:
   - name: DESIGN
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     is_design_stage: true
     environments:
     - name: DESIGN
@@ -33,46 +31,32 @@ parameters:
     is_build_stage: true
     environments:
     - name: BUILD
-      pool_name: vmsspoolagents-04
-      pool_image: ubuntu-latest
   - name: DEV_INT
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     environments:
     - name: DEV_INT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: DEV_EXT
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     environments:
     - name: DEV_EXT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: TEST_INT
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     environments:
     - name: TEST_INT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: TEST_EXT
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     environments:
     - name: TEST_EXT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_INT
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     environments:
     - name: PROD_INT
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_EXT
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
     environments:
     - name: PROD_EXT
       pool_name: vmsspoolagents-04
