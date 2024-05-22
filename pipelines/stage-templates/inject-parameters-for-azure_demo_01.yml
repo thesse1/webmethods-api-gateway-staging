@@ -92,7 +92,7 @@ parameters:
   default: false
 - name: build_job_assignment_mechanism
   type: string
-  default: fixed_build_environments
+  default: dedicated_build_agents
   values:
   - fixed_build_environments
   - dedicated_build_agents
