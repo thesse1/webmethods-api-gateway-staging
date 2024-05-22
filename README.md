@@ -1603,9 +1603,11 @@ When using the API Gateway Staging solution, there are two options for exporting
 
 Let's consider this example: An API developer wants to make a change to the Petstore API.
 
-### Option A: Using a local repository
+### Option A: Using a local Git repository
 
-  - All of the APIs of the organization are available in VCS in the /apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
+  - The API developer should first pull the latest changes from the central Git repository into his/her local repository.
+
+  - All of the APIs of the organization are available in Git in the /apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
@@ -1615,65 +1617,67 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The API developer needs to ensure that the change that was made does not cause regressions. For this, the user needs to run the set of function/regression tests over his change in Postman REST client before the change gets propagated to the next stage.
 
-  - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
+  - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
-  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder.
+  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API tests folder under /postman/collections/apitests.
   
-  - After this is done, the changes from the developer's local repository are committed to the VCS.
+  - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The changed API can now be tested on TEST_INT or TEST_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - All of the APIs of the organization are available in VCS in the /apis folder. This flat file representation of the APIs should be converted and imported into the central DESIGN environment for changes to be made. The developer executes the deploy_to_config pipeline for the petstore API project.
+  - All of the APIs of the organization are available in Git in the /apis folder. This flat file representation of the APIs should be converted and imported into the central DESIGN environment for changes to be made. The developer executes the `Deploy selected/arbitrary API project(s)` pipeline to deploy the petstore API project on DESIGN.
 
   - The API Developer makes the necessary changes to the Petstore API on the central DESIGN environment. 
 
   - The API developer needs to ensure that the change that was made does not cause regressions. For this, the user needs to run the set of function/regression tests over his change in Postman REST client before the change gets propagated to the next stage.
 
-  - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
+  - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
   - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The changed API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The changed API can now be tested on TEST_INT or TEST_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
 ## Example 2: Create a new API in an existing API project
 
 Let's consider this example: An API developer wants to create a new API and add it to an existing API project.
 
-### Option A: Using a local repository
+### Option A: Using a local Git repository
 
-  - The developer would first have to update the API Gateway artifacts of the existing API project on the local development environment or the central DESIGN environment. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import the existing API project (and related assets like applications) to the local development environment or the central DESIGN environment.
+  - The API developer should first pull the latest changes from the central Git repository into his/her local repository.
+
+  - The developer would then have to update the API Gateway artifacts of the existing API project on the local development environment or the central DESIGN environment. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import the existing API project (and related assets like applications) to the local development environment or the central DESIGN environment.
 
   ```sh 
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
-  - The developer would then create the new API on the local development environment or the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
+  - The developer would then create the new API on the local development environment or the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group and does not include any API-level Log Invocation policy.
 
   - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
 
@@ -1681,85 +1685,87 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
+  - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests.
 
-  - After this is done, the changes from the developer's local repository are committed to the VCS.
+  - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
 ### Option B: Using the export/import pipelines
 
-  - The developer would first have to update the API Gateway artifacts of the existing API project on the central DESIGN environment. The developer executes the deploy_to_config pipeline for the petstore API project.
+  - The developer would first have to update the API Gateway artifacts of the existing API project on the central DESIGN environment. The developer executes the `Deploy selected/arbitrary API project(s)` pipeline to deploy the petstore API project on DESIGN.
 
-  - The developer would then create the new API on the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group.
+  - The developer would then create the new API on the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group and does not include any API-level Log Invocation policy.
 
   - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
 
-  - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
+  - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
-  - Now this change made by the API developer has to be pushed back to the VCS system such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
+  - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests and commit the change.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
   - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
 ## Example 3: Create a new API in a new API project
 
 Let's consider this example: An API developer wants to create a new API and add it to a new API project.
 
-### Option A: Using a local repository
+### Option A: Using a local Git repository
+
+  - The API developer should first pull the latest changes from the central Git repository into his/her local repository.
 
   - The developer would create the new API on the local development environment or the central DESIGN environment.
 
   - The developer would then create a new collection of function/regression tests for the API project in the local Postman REST client with requests and tests for the new API.
 
-  - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
+  - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
   - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder which will later hold the asset definitions exported from the local development environment or the central DESIGN environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
+  - Now the new API has to be committed to Git such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
   ```sh 
 bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
   ```
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests.
   
-  - After this is done, the changes from the developer's local repository are committed to the VCS.
+  - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy arbitrary API project` pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the `Deploy arbitrary API project` pipeline.
 
   - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
 ### Option B: Using the export/import pipelines
 
@@ -1767,23 +1773,27 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - The developer would then create a new collection of function/regression tests for the API project in the local Postman REST client with requests and tests for the new API.
 
-  - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
+  - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
-  - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an empty assets folder in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
+  - The developer will now have to create a new API project folder under /apis with a new export_payload.json file including the ID of the new API and commit the change. The API ID can be extracted from the URL of the API details page in the API Gateway UI. The developer will also have to create an assets folder with a dummy file in the API project root folder and commit the change. The folder will later hold the asset definitions exported from the central DESIGN environment.
 
-  - Now the new API has to be committed to the VCS system such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
+> Note: The dummy file is necessary because Git will not include an empty folder in the commit. It will be overwritten automatically be the first export of the API project.
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API project root folder and commit the change.
+  - Now the new API has to be committed to Git such that it propagates to the next stage. The developer executes the `Export arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the deploy_to_stages pipeline.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests and commit the change.
+
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy arbitrary API project` pipeline.
 
   - The new API can now be tested on DEV_INT or DEV_EXT environment.
 
-  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the deploy_to_stages pipeline.
+  - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to TEST_INT or TEST_EXT using the `Deploy arbitrary API project` pipeline.
 
   - The new API can now be tested on TEST_INT or TEST_EXT environment.
 
-  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the deploy_to_stages pipeline.
+  - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
+
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the implementation notes section below on how to include the new API project in the pipeline definitions.
 
 # Implementation notes
 
