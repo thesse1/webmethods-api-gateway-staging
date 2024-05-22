@@ -10,7 +10,7 @@ parameters:
   values:
   - webm_io
   - azure_demo_01
-- name: commitMessage
+- name: commit_message
   displayName: Message for the commit in Git?
   type: string
 
@@ -21,6 +21,6 @@ stages:
   parameters:
     template: /pipelines/stage-templates/export-api.yml
     parameters:
-      commitMessage: ${{parameters.commitMessage}}
+      commit_message: ${{parameters.commit_message}}
       api_project: ${{parameters.api_project}}
     environment_set: ${{parameters.environment_set}}

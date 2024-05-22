@@ -18,7 +18,7 @@ parameters:
 
 - name: source_environment
   type: string
-- name: commitMessage
+- name: commit_message
   type: string
 
 stages:
@@ -52,7 +52,7 @@ stages:
                     environment_name: ${{environment.name}}
                 - template: /pipelines/step-templates/commit.yml
                   parameters:
-                    commitMessage: ${{parameters.commitMessage}}
+                    commit_message: ${{parameters.commit_message}}
                 - bash: |
                     echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
                     echo "##vso[build.addbuildtag]${{stage.name}}"

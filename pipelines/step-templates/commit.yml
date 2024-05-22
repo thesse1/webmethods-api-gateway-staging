@@ -1,5 +1,5 @@
 parameters:
-- name: commitMessage
+- name: commit_message
   type: string
 
 steps:
@@ -10,6 +10,6 @@ steps:
 
 - bash: |
     git add .
-    git commit -m '${{parameters.commitMessage}}'
+    git commit -m '${{parameters.commit_message}}'
     git push origin 'HEAD:$(Build.SourceBranchName)'
   displayName: "Git add, commit and push"

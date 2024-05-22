@@ -1865,7 +1865,7 @@ In addition to the parameters injected by the façade templates, the export-api.
 | Parameter | README |
 | ------ | ------ |
 | api_project | Case-sensitive name of the API project to be exported |
-| commitMessage | The change will be committed with this commit message
+| commit_message | The change will be committed with this commit message
 
 ### Job templates
 
@@ -1923,7 +1923,7 @@ The commit pipeline template needs the following parameter:
 
 | Parameter | README |
 | ------ | ------ |
-| commitMessage | The change will be committed with this commit message |
+| commit_message | The change will be committed with this commit message |
 
 The pipeline templates execute the following major steps:
 
@@ -2025,7 +2025,7 @@ The commit pipeline template needs the following parameter:
 
 | Parameter | README |
 | ------ | ------ |
-| commitMessage | The change will be committed with this commit message |
+| commit_message | The change will be committed with this commit message |
 
 The pipeline templates execute the following major steps:
 
