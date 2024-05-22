@@ -40,6 +40,5 @@ stages:
   parameters:
     template: /pipelines/stage-templates/purge-data.yml
     parameters: []
-    ${{ if ne(parameters.environment_set, 'Default')}}:
-      environment_set: ${{ parameters.environment_set }}
-    selected_stage: ${{ parameters.selected_stage }}
+    environment_set: ${{parameters.environment_set}}
+    selected_stage: ${{parameters.selected_stage}}

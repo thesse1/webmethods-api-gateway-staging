@@ -34,5 +34,4 @@ stages:
       update_username: $(update_username_petstore)
       update_password: $(update_password_petstore)
       update_file: ""
-    ${{ if ne(parameters.environment_set, 'Default')}}:
-      environment_set: ${{ parameters.environment_set }}
+    environment_set: ${{parameters.environment_set}}

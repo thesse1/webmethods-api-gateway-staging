@@ -52,9 +52,8 @@ stages:
   parameters:
     template: /pipelines/stage-templates/build-and-deploy-api.yml
     parameters: []
-    build_environment: ${{parameters.build_environment}}
     api_project: ${{parameters.api_project}}
+    environment_set: ${{parameters.environment_set}}
     selected_target: ${{parameters.selected_target}}
-    ${{ if ne(parameters.environment_set, 'Default')}}:
-      environment_set: ${{ parameters.environment_set }}
+    selected_build_environment: ${{parameters.selected_build_environment}}
     ignore_eligible_targets: "true"

@@ -34,5 +34,4 @@ stages:
       update_username: ""
       update_password: ""
       update_file: ${{parameters.update_file}}
-    ${{ if ne(parameters.environment_set, 'Default')}}:
-      environment_set: ${{ parameters.environment_set }}
+    environment_set: ${{parameters.environment_set}}
