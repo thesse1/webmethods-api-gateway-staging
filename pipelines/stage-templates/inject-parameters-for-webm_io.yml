@@ -160,7 +160,7 @@ stages:
         - ${{stage}}
       - ${{ elseif eq(parameters.selected_stage, 'All') }}:
         - ${{stage}}
-    ${{ if or(eq(parameters.ignore_selected_build_environment, 'true'), eq(parameters.selected_build_environment, 'Default Mapping') }}:
+    ${{ if or(eq(parameters.ignore_selected_build_environment, 'true'), eq(parameters.selected_build_environment, 'Default Mapping')) }}:
       build_environments_mapping: ${{parameters.build_environments_mapping}}
     ${{ else }}:
       build_environments_mapping:
