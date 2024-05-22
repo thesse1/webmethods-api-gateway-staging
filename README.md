@@ -1810,6 +1810,19 @@ The following stage-level templates are used in all pipeline definitions for set
 | inject-parameters-for-webm_io.yml | Façade template injecting parameters for the webm_io environment set |
 | inject-parameters-for-azure_demo_01.yml | Façade template injecting parameters for the azure_demo_01 environment set |
 
+These templates take the following input parameters:
+
+| Parameter | README |
+| ------ | ------ |
+| template | Name of the template to be invoked through the façade |
+| parameters | Additional parameters to be forwarded to the template behind the façade |
+| selected_api_project | Name of the selected API project or "All" (default) |
+| selected_environment_set | webm_io or azure_demo_01 |
+| selected_target | Name of the selected target stage or "All (execpt DESIGN)" (default) or "All (including DESIGN)" |
+| selected_stage | Name of the selected stage or "All" (default) |
+| selected_build_environment | Name of the selected BUILD environment (BUILD_01, ..., BUILD_07) or "Default Mapping" (default) |
+| ignore_eligible_targets | Whether or not to restrict the deployment sets to valid combinations of API projects and target stages |
+
 These templates are setting the following parameter values for all stage templates invoked through them:
 
 | Parameter | README |
@@ -1867,6 +1880,8 @@ In addition to the parameters injected by the façade templates, the export-api.
 | api_project | Case-sensitive name of the API project to be exported |
 | commit_message | The change will be committed with this commit message
 
+The build-and-deploy-api.yml template does not have any additional parameters.
+
 ### Job templates
 
 The job-level pipeline templates used in these pipelines can be found in the /pipelines/job-templates folder:
@@ -1900,34 +1915,9 @@ The storing of build artifacts in JFrog Artifactory is commented out. It can be 
 
 The export-api.yml stage template invokes export-api.yml and commit.yml sequentially in one stage in one job on one agent.
 
-All five deployment pipeline templates need the following parameters to be set in the calling pipeline (where applicable):
-
-| Parameter | README |
-| ------ | ------ |
-| api_project | Case-sensitive name of the API project to be propagated |
-| build_environment | Name of the environment definition file in /environments folder for the BUILD environment, e.g., build_environment_demo.json |
-| target_environment | Name of the environment definition file in /environments folder for the target environment, e.g., config_environment_demo.json, dev_int_environment_demo.json etc. |
-| target_type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
-| test_condition | Whether to execute the automatic tests (${{true}} or ${{false}}), should be ${{true}} for DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT and ${{false}} for DESIGN |
-| prepare_condition | Whether to prepare the API Gateway artifacts for the target environment (${{true}} or ${{false}}), should be ${{true}} for all environments |
-
-The export pipeline template needs the following parameters:
-
-| Parameter | README |
-| ------ | ------ |
-| api_project | Case-sensitive name of the API project to be exported |
-| source_environment | Name of the environment definition file in /environments folder for the source environment, e.g., config_environment_demo.json |
-| source_type | DESIGN |
-
-The commit pipeline template needs the following parameter:
-
-| Parameter | README |
-| ------ | ------ |
-| commit_message | The change will be committed with this commit message |
-
 The pipeline templates execute the following major steps:
 
-### api-build.yml
+### build-api.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1942,24 +1932,11 @@ The pipeline templates execute the following major steps:
 | Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prepare_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
-### api-deploy.yml
-
-| Step | README |
-| ------ | ------ |
-| Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
-
 ### store-build.yml
 
 | Step | README |
 | ------ | ------ |
 | Build Upload | Using publish task |
-
-### store-build-artifactory.yml
-
-| Step | README |
-| ------ | ------ |
-| Artifactory Build Upload | Using ArtifactoryGenericUpload@2 Artifactory plug-in task |
 
 ### retrieve-build.yml
 
@@ -1967,7 +1944,14 @@ The pipeline templates execute the following major steps:
 | ------ | ------ |
 | Build Download | Using download task |
 
-### api-export-api.yml
+### deploy-api.yml
+
+| Step | README |
+| ------ | ------ |
+| Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
+| Import the Deployable to API Gateway DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
+
+### export-api.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1982,7 +1966,7 @@ The pipeline templates execute the following major steps:
 | Set Git user e-mail and name | Set Git user e-mail and name to the e-mail and name of the Azure DevOps user who triggered the build pipeline |
 | Git add, commit and push | Add and commit all changes and push to the HEAD of the selected repository branch |
 
-The status and logs for each step can be inspected on the build details page in Azure DevOps Server. The imported/exported API Gateway archives and the test results can be inspected by clicking on `Artifacts`. The test results can be inspected in the `Tests` tab.
+The status and logs for each step can be inspected on the build details page in Azure DevOps. The imported/exported API Gateway archives and the test results can be inspected by clicking on `Artifacts`. The test results can be inspected in the `Tests` tab.
 
 The Postman collections are executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 
