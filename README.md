@@ -1830,7 +1830,7 @@ These templates are setting the following parameter values for all stage templat
 | design_stage | Parameter object representing the DESIGN stage |
 | build_stage | Parameter object representing the BUILD stage |
 | target_stages | List of objects representing the target stages (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT) |
-| all_stages | List of objects representing all stages (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT) |
+| all_stages | List of objects representing all stages (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT) if selected_stage = "All", otherwise list of one object representing the selected stage |
 | build_environments_mapping | Parameter object representing the BUILD environments to be used for each target stage |
 | build_job_assignment_mechanism | fixed_build_environments, dedicated_build_agents or resource_pooling |
 | environment_set | webm_io or azure_demo_01 |
