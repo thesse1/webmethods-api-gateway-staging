@@ -1797,34 +1797,108 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
 # Implementation notes
 
-## Pipeline definitions and pipeline templates for API projects
+All pipeline definitions (YAML files) are making use of stage-level, job-level and step-level pipeline templates for implementing the pipeline functionality in small, re-usable components.
 
-The pipeline definition files (YAML) for the three Azure DevOps pipelines for API projects can be found in the /pipelines folder.
+## Shared pipeline templates
 
-| Pipeline | Pipeline definition | README |
-| ------ | ------ | ------ |
-| deploy_to_stages | api-deploy-to-stages.yml | |
-| deploy_to_config | api-deploy-to-DESIGN.yml | |
-| `Export arbitrary API project from DESIGN` | api-export-arbitrary-api-from-DESIGN.yml | |
-| `Export selected API project from DESIGN` | api-export-selected-api-from-DESIGN.yml | |
+### Stage templates
 
-The three deployment pipeline definitions are using central pipeline templates defined in api-build-template.yml, api-deploy-template.yml, store-build-template.yml, store-build-artifactory-template.yml and retrieve-build-template.yml, and the export pipeline definition api-export-api-from-DESIGN.yml is using the api-export-api-template.yml and the commit-template.yml pipeline templates:
+The following stage-level templates are used in all pipeline definitions for setting parameter values based on the selected environment set. They can be found in the /pipelines/stage-templates folder:
 
 | Template | README |
 | ------ | ------ |
-| api-build-template.yml | Includes all steps for preparing the deployable on the BUILD environment (including import, test execution, asset manipulation and export) |
-| api-deploy-template.yml | Includes all steps for importing the deployable on the DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
-| store-build-template.yml | Stores the deployable in Azure DevOps |
-| store-build-artifactory-template.yml | Stores the deployable in Artifactory (optional) |
-| retrieve-build-template.yml | Retrieves the deployable from Azure DevOps |
-| api-export-api-template.yml | Exports the API project from the DESIGN environment |
-| commit-template.yml | Commits the results to the repository |
+| inject-parameters-for-webm_io.yml | Façade template injecting parameters for the webm_io environment set |
+| inject-parameters-for-azure_demo_01.yml | Façade template injecting parameters for the azure_demo_01 environment set |
 
-The deployment pipeline deploy_to_stages contains six stages for deploying an API project to DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. The deployment pipeline deploy_to_config contains one stage for deployment to DESIGN. It is extracted into a separate pipeline in order to avoid accidental overwriting of API assets on DESIGN. Each stage in these pipelines invokes api-build-template.yml and store-build-template.yml in one job on one agent, and then retrieve-build-template.yml and api-deploy-template.yml in another job (potentially) on another agent.
+These templates are setting the following parameter values for all stage templates invoked through them:
 
-The invocation of store-build-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
+| Parameter | README |
+| ------ | ------ |
+| design_stage | Parameter object representing the DESIGN stage |
+| build_stage | Parameter object representing the BUILD stage |
+| target_stages | List of objects representing the target stages (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT) |
+| all_stages | List of objects representing all stages (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT) |
+| build_environments_mapping | Parameter object representing the BUILD environments to be used for each target stage |
+| build_job_assignment_mechanism | fixed_build_environments, dedicated_build_agents or resource_pooling |
+| environment_set | webm_io or azure_demo_01 |
+| deployment_sets | List of objects defining which API projects should be deployed on which target stages |
 
-The export pipelines `Export selected/arbitrary API project from DESIGN` invoke api-export-arbitrary-api-from-DESIGN.yml/api-export-selected-api-from-DESIGN.yml and commit-template.yml sequentially in one stage in one job on one agent.
+Every parameter object representing an API Gateway stage contains the stage name and a list of sub-objects representing the API Gateway environments in this stage. Each of these environment objects contains the environment name and the pool_name and pool_image parameters defining the agent pool used for communicating with the API Gateway environment.
+
+Exception: For the BUILD stage, the pool_name and pool_image parameters are set on the stage level, not on the level of the individual environments. All BUILD envirionments of an environment set must be reachable from the same agent pool.
+
+Additional parameter values:
+ - The DESIGN stage and the BUILD stage objects contain boolean marker parameters is_design_stage and is_build_stage, respectively
+ - In addition to pool_name and pool_image, the BUILD stage object contains dedicated_pool_name and dedicated_pool_image parameters for the dedicated agent pool used in the dedicated_build_agents assignment mechanism for BUILD environments
+ - The PROD_INT and the PROD_EXT stage objects for the azure_demo_01 environment set contain boolean parameters configure_haft for indicating whether of not HAFT should be configured in this stage
+
+Each object representing a deployment set contains two values:
+ - api_projects: List of names of API projects
+ - targets: List of names of target stages
+
+## Pipeline definitions and pipeline templates for API projects
+
+### Pipeline definitions
+
+The pipeline definition files (YAML) for the four Azure DevOps pipelines for API projects can be found in the /pipelines folder.
+
+| Pipeline | Pipeline definition |
+| ------ | ------ |
+| `Deploy selected API project(s)` | build-and-deploy-selected-apis.yml |
+| `Deploy arbitrary API project` | build-and-deploy-arbitrary-api.yml |
+| `Export selected API project from DESIGN` | export-selected-api-from-DESIGN.yml |
+| `Export arbitrary API project from DESIGN` | export-arbitrary-api-from-DESIGN.yml |
+
+### Stage templates
+
+The stage-level pipeline templates used in these pipelines can be found in the /pipelines/stage-templates folder:
+
+| Template | README |
+| ------ | ------ |
+| inject-parameters-for-webm_io.yml | Façade template injecting parameters for the webm_io environment set |
+| inject-parameters-for-azure_demo_01.yml | Façade template injecting parameters for the azure_demo_01 environment set |
+| build-and-deploy-api.yml | Stage template implementing the necessary stages for building and deploying the selected/specified API project(s) on the selected target stage(s) |
+| export-api.yml | Stage template implementing the necessary steps for exporting the selected/specified API project from DESIGN stage and committing its content to Git |
+
+In addition to the parameters injected by the façade templates, the export-api.yml template has the following input parameters:
+
+| Parameter | README |
+| ------ | ------ |
+| api_project | Case-sensitive name of the API project to be exported |
+| commitMessage | The change will be committed with this commit message
+
+### Job templates
+
+The job-level pipeline templates used in these pipelines can be found in the /pipelines/job-templates folder:
+
+| Template | README |
+| ------ | ------ |
+| build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see above) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
+| build-api-using-dedicated_build_agents.yml | Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are executed on a separate ADO agent pool. This agent pool must have seven build agents named BUILD_01, ..., BUILD_07. Build jobs will be assigned to BUILD environments based on the name of the ADO build agent on which it is running, making sure that only one build agent is using a BUILD environment at one point in time. |
+| build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_Build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. |
+
+You can switch between the three mechanisms by setting the default value for the build_job_assignment_mechanism parameter in inject-parameters-for-azure_demo_01.yml to fixed_build_environments, dedicated_build_agents or resource_pooling.
+
+> Note: Please note that the three assignment mechanisms do not know about each other. Therefore, please wait and make sure that no build job is running and no build job is scheduled before switching the assignment mechanism. Otherwise, you might have multiple build jobs trying to use the same BUILD environment at the same point in time.
+
+### Step templates
+
+The step-level pipeline templates used in these pipelines can be found in the /pipelines/step-templates folder:
+
+| Template | README |
+| ------ | ------ |
+| build-api.yml | Includes all steps for preparing the deployable on the BUILD environment (including import, test execution, asset manipulation and export) |
+| store-build.yml | Stores the deployable in Azure DevOps |
+| retrieve-build.yml | Retrieves the deployable from Azure DevOps |
+| deploy-api.yml | Includes all steps for importing the deployable on the target stage (DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT) |
+| export-api.yml | Exports the API project from the DESIGN environment |
+| commit.yml | Commits the results to the repository |
+
+Each ADO stage in the build-and-deploy-api.yml stage template invokes build-api.yml and store-build.yml in one job on one agent, and then retrieve-build.yml and deploy-api.yml in another job (potentially) on another agent.
+
+The storing of build artifacts in JFrog Artifactory is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
+
+The export-api.yml stage template invokes export-api.yml and commit.yml sequentially in one stage in one job on one agent.
 
 All five deployment pipeline templates need the following parameters to be set in the calling pipeline (where applicable):
 
@@ -1853,7 +1927,7 @@ The commit pipeline template needs the following parameter:
 
 The pipeline templates execute the following major steps:
 
-### api-build-template.yml
+### api-build.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1868,32 +1942,32 @@ The pipeline templates execute the following major steps:
 | Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prepare_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
-### api-deploy-template.yml
+### api-deploy.yml
 
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
 | Import the Deployable to API Gateway DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
 
-### store-build-template.yml
+### store-build.yml
 
 | Step | README |
 | ------ | ------ |
 | Build Upload | Using publish task |
 
-### store-build-artifactory-template.yml
+### store-build-artifactory.yml
 
 | Step | README |
 | ------ | ------ |
 | Artifactory Build Upload | Using ArtifactoryGenericUpload@2 Artifactory plug-in task |
 
-### retrieve-build-template.yml
+### retrieve-build.yml
 
 | Step | README |
 | ------ | ------ |
 | Build Download | Using download task |
 
-### api-export-api-template.yml
+### api-export-api.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1901,7 +1975,7 @@ The pipeline templates execute the following major steps:
 | Extract the flat representation from the API Deployable for API project xxx | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
-### commit-template.yml
+### commit.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1921,17 +1995,17 @@ The pipeline definition files (YAML) for the two Azure DevOps pipelines for API 
 | `Configure API Gateway(s)` | api-configure-stages.yml | |
 | `Export API Gateway Configuration` | api-export-config-from-stage.yml | |
 
-The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure-template.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config-template.yml and the commit-template.yml pipeline templates:
+The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config.yml and the commit.yml pipeline templates:
 
 | Template | README |
 | ------ | ------ |
-| api-configure-template.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
-| api-export-config-template.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
-| commit-template.yml | Commits the results to the repository |
+| api-configure.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
+| api-export-config.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+| commit.yml | Commits the results to the repository |
 
-The import pipeline `Configure API Gateway(s)` contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure-template.yml in one single job.
+The import pipeline `Configure API Gateway(s)` contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure.yml in one single job.
 
-The export pipeline `Export API Gateway Configuration` contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config-template.yml and commit-template.yml sequentially in one job on one agent.
+The export pipeline `Export API Gateway Configuration` contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config.yml and commit.yml sequentially in one job on one agent.
 
 The configuration pipeline template needs the following parameters to be set in the calling pipeline:
 
@@ -1955,7 +2029,7 @@ The commit pipeline template needs the following parameter:
 
 The pipeline templates execute the following major steps:
 
-### api-configure-template.yml
+### api-configure.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1964,7 +2038,7 @@ The pipeline templates execute the following major steps:
 | Import the Deployable to API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
 | Initialize API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the Initialize_DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
 
-### api-export-config-template.yml
+### api-export-config.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1972,7 +2046,7 @@ The pipeline templates execute the following major steps:
 | Extract the flat representation from the API Deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
-### commit-template.yml
+### commit.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1991,11 +2065,11 @@ The pipeline definition file (YAML) for the Azure DevOps pipeline for log purgin
 | ------ | ------ | ------ |
 | purge_data_from_stages | api-purge-data-from-stages.yml | |
 
-The pipeline definition is using a pipeline template defined in api-purge-data-template.yml:
+The pipeline definition is using a pipeline template defined in api-purge-data.yml:
 
 | Template | README |
 | ------ | ------ |
-| api-purge-data-template.yml | Purges the log data on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+| api-purge-data.yml | Purges the log data on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
 
 The pipeline invokes the template eight times in eight separate stages on separate agents - once for every environment.
 
@@ -2008,7 +2082,7 @@ The pipeline template needs the following parameters to be set in the calling pi
 
 The pipeline template executes the following major steps:
 
-### api-purge-data-template.yml
+### api-purge-data.yml
 
 | Step | README |
 | ------ | ------ |
@@ -2024,18 +2098,18 @@ All variable groups are referenced in the variable templates in /{tenant}/variab
 
 | Variable template | Referenced variable group for playground tenant | Referenced variable group for realworld tenant |
 | ------ | ------ | ------ |
-| /{tenant}/variables/BUILD/variables-template.yml | wm_test_apigw_staging_build | wm_environment_build |
-| /{tenant}/variables/DESIGN/variables-template.yml | wm_test_apigw_staging_config | wm_environment_config |
-| /{tenant}/variables/DEV_INT/variables-template.yml | wm_test_apigw_staging_dev_int | wm_environment_dev_intern |
-| /{tenant}/variables/DEV_EXT/variables-template.yml | wm_test_apigw_staging_dev_ext | wm_environment_dev_extern |
-| /{tenant}/variables/TEST_INT/variables-template.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
-| /{tenant}/variables/TEST_EXT/variables-template.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
-| /{tenant}/variables/PROD_INT/variables-template.yml | wm_test_apigw_staging_prod_int | wm_environment_prod_intern |
-| /{tenant}/variables/PROD_EXT/variables-template.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
-| /{tenant}/variables/variables-aliases-template.yml | wm_test_apigw_staging_aliases | wm_apigw_staging_aliases |
-| /{tenant}/variables/variables-artifactory-template.yml | wm_test_apigw_staging_artifactory | wm_apigw_staging_artifactory |
+| /{tenant}/variables/BUILD/variables.yml | wm_test_apigw_staging_build | wm_environment_build |
+| /{tenant}/variables/DESIGN/variables.yml | wm_test_apigw_staging_config | wm_environment_config |
+| /{tenant}/variables/DEV_INT/variables.yml | wm_test_apigw_staging_dev_int | wm_environment_dev_intern |
+| /{tenant}/variables/DEV_EXT/variables.yml | wm_test_apigw_staging_dev_ext | wm_environment_dev_extern |
+| /{tenant}/variables/TEST_INT/variables.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
+| /{tenant}/variables/TEST_EXT/variables.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
+| /{tenant}/variables/PROD_INT/variables.yml | wm_test_apigw_staging_prod_int | wm_environment_prod_intern |
+| /{tenant}/variables/PROD_EXT/variables.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
+| /{tenant}/variables/variables-aliases.yml | wm_test_apigw_staging_aliases | wm_apigw_staging_aliases |
+| /{tenant}/variables/variables-artifactory.yml | wm_test_apigw_staging_artifactory | wm_apigw_staging_artifactory |
 
-The reference of variables-artifactory-template.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
+The reference of variables-artifactory.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
 This allows you to use variable groups with different names (or add further variables directly in the variable templates). The correct names of the variable groups would only have to be provided in the respective pipeline templates.
 
@@ -2176,7 +2250,7 @@ The API Gateway Staging solution is using the following API Gateway Service APIs
 Direct invocation (curl) in the gateway_import_export_utils.bat script:
  - API Gateway Archive Service API for importing and exporting API Gateway assets
 
-Direct invocation (curl) in the api-build-template.yml, api-export-api-template.yml and api-export-config-template.yml pipeline templates:
+Direct invocation (curl) in the api-build.yml, api-export-api.yml and api-export-config.yml pipeline templates:
  - API Gateway Archive Service API for exporting API Gateway assets
 
 In the ImportAPI.json and the ImportConfig.json Postman collections:
