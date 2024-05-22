@@ -9,13 +9,16 @@ parameters:
   type: object
 - name: build_environments_mapping
   type: object
-- name: api_project
+- name: build_job_assignment_mechanism
   type: string
-- name: commitMessage
+- name: environment_set
   type: string
 - name: deployment_sets
   type: object
-- name: environment_set
+
+- name: api_project
+  type: string
+- name: commitMessage
   type: string
 
 stages:

@@ -9,9 +9,12 @@ parameters:
   type: object
 - name: build_environments_mapping
   type: object
+- name: build_job_assignment_mechanism
+  type: string
+- name: environment_set
+  type: string
 - name: deployment_sets
   type: object
-- name: environment_set
 
 stages:
 - ${{ each target_stage in parameters.target_stages }}:
@@ -23,9 +26,7 @@ stages:
             dependsOn: []
             lockBehavior: sequential
             jobs:
-            # - template: /pipelines/job-templates/build-api-using-fixed-build-environments.yml
-            - template: /pipelines/job-templates/build-api-using-dedicated-build-agents.yml
-            # - template: /pipelines/job-templates/build-api-using-resource-pooling.yml
+            - template: /pipelines/job-templates/build-api-using-${{parameters.build_job_assignment_mechanism}}.yml
               parameters:
                 environment_set: ${{parameters.environment_set}}
                 build_stage: ${{parameters.build_stage}}

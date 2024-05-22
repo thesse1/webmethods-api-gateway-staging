@@ -90,6 +90,13 @@ parameters:
 - name: ignore_selected_build_environment
   type: string
   default: false
+- name: build_job_assignment_mechanism
+  type: string
+  default: fixed_build_environments
+  values:
+  - fixed_build_environments
+  - dedicated_build_agents
+  - resource_pooling
 - name: eligible_targets
   displayName: Which sets of API projects can be deployed on which API Gateway stages?
   type: object
@@ -171,6 +178,7 @@ stages:
         TEST_EXT: ${{parameters.selected_build_environment}}
         PROD_INT: ${{parameters.selected_build_environment}}
         PROD_EXT: ${{parameters.selected_build_environment}}
+    build_job_assignment_mechanism: ${{parameters.build_job_assignment_mechanism}}
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
     - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:

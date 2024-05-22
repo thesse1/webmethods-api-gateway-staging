@@ -9,16 +9,25 @@ parameters:
   type: object
 - name: build_environments_mapping
   type: object
+- name: build_job_assignment_mechanism
+  type: string
+- name: environment_set
+  type: string
 - name: deployment_sets
   type: object
-- name: environment_set
-  default: webm_io
+
 - name: api_id
+  type: string
 - name: update_type
+  type: string
 - name: update_url
+  type: string
 - name: update_username
+  type: string
 - name: update_password
+  type: string
 - name: update_file
+  type: string
 
 stages:
 - stage: Update_API_on_${{parameters.design_stage.name}}
