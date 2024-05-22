@@ -192,13 +192,13 @@ stages:
       build_environments_mapping: ${{parameters.build_environments_mapping}}
     ${{ else }}:
       build_environments_mapping:
-        DESIGN: ${{parameters.build_environment}}
-        DEV_INT: ${{parameters.build_environment}}
-        DEV_EXT: ${{parameters.build_environment}}
-        TEST_INT: ${{parameters.build_environment}}
-        TEST_EXT: ${{parameters.build_environment}}
-        PROD_INT: ${{parameters.build_environment}}
-        PROD_EXT: ${{parameters.build_environment}}
+        DESIGN: ${{parameters.selected_build_environment}}
+        DEV_INT: ${{parameters.selected_build_environment}}
+        DEV_EXT: ${{parameters.selected_build_environment}}
+        TEST_INT: ${{parameters.selected_build_environment}}
+        TEST_EXT: ${{parameters.selected_build_environment}}
+        PROD_INT: ${{parameters.selected_build_environment}}
+        PROD_EXT: ${{parameters.selected_build_environment}}
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
     - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:
