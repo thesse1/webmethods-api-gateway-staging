@@ -16,7 +16,7 @@ parameters:
 - name: deployment_sets
   type: object
 
-- name: api_project
+- name: selected_api_project
   type: string
 - name: commit_message
   type: string

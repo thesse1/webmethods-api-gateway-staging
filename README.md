@@ -1877,7 +1877,7 @@ In addition to the parameters injected by the façade templates, the export-api.
 
 | Parameter | README |
 | ------ | ------ |
-| api_project | Case-sensitive name of the API project to be exported |
+| selected_api_project | Case-sensitive name of the API project to be exported |
 | commit_message | The change will be committed with this commit message
 
 The build-and-deploy-api.yml template does not have any additional parameters.
