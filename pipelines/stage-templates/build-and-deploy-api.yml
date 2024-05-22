@@ -23,8 +23,8 @@ stages:
             dependsOn: []
             lockBehavior: sequential
             jobs:
-            - template: /pipelines/job-templates/build-api-using-fixed-build-environments.yml
-            # - template: /pipelines/job-templates/build-api-using-dedicated-build-agents.yml
+            # - template: /pipelines/job-templates/build-api-using-fixed-build-environments.yml
+            - template: /pipelines/job-templates/build-api-using-dedicated-build-agents.yml
             # - template: /pipelines/job-templates/build-api-using-resource-pooling.yml
               parameters:
                 environment_set: ${{parameters.environment_set}}
