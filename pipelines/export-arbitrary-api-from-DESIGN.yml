@@ -1,10 +1,10 @@
 trigger: none
 
 parameters:
-- name: api_project
+- name: selected_api_project
   displayName: Export which API project?
   type: string
-- name: environment_set
+- name: selected_environment_set
   displayName: Export API(s) from DESIGN API Gateway in which environment set?
   default: webm_io
   values:
@@ -14,13 +14,13 @@ parameters:
   displayName: Message for the commit in Git?
   type: string
 
-name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}"
+name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
 stages:
-- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.environment_set}}.yml
+- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.selected_environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/export-api.yml
     parameters:
       commit_message: ${{parameters.commit_message}}
-      api_project: ${{parameters.api_project}}
-    environment_set: ${{parameters.environment_set}}
+      selected_api_project: ${{parameters.selected_api_project}}
+    selected_environment_set: ${{parameters.selected_environment_set}}

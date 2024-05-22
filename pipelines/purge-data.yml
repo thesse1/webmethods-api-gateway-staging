@@ -15,7 +15,7 @@ schedules:
 #     trigger: true
 
 parameters:
-- name: environment_set
+- name: selected_environment_set
   displayName: Purge data from API Gateway(s) in which environment set?
   default: webm_io
   values:
@@ -36,9 +36,9 @@ parameters:
   - PROD_EXT
 
 stages:
-- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.environment_set}}.yml
+- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.selected_environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/purge-data.yml
     parameters: []
-    environment_set: ${{parameters.environment_set}}
+    selected_environment_set: ${{parameters.selected_environment_set}}
     selected_stage: ${{parameters.selected_stage}}

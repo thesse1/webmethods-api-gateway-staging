@@ -8,7 +8,7 @@ trigger: none
 #     trigger: true
 
 parameters:
-- name: environment_set
+- name: selected_environment_set
   displayName: Update API in which environment set?
   default: webm_io
   values:
@@ -24,7 +24,7 @@ parameters:
   default: https://petstore.swagger.io/v2/swagger.json
 
 stages:
-- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.environment_set}}.yml
+- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.selected_environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/update-api.yml
     parameters:
@@ -34,4 +34,4 @@ stages:
       update_username: $(update_username_petstore)
       update_password: $(update_password_petstore)
       update_file: ""
-    environment_set: ${{parameters.environment_set}}
+    selected_environment_set: ${{parameters.selected_environment_set}}

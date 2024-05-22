@@ -3,12 +3,16 @@ parameters:
   type: string
 - name: parameters
   type: object
-- name: api_project
+- name: selected_api_project
+  type: string
   default: All
-- name: environment_set
+- name: selected_environment_set
+  type: string
 - name: selected_target
-  default: 'All (including DESIGN)'
+  type: string
+  default: 'All (execpt DESIGN)'
 - name: selected_stage
+  type: string
   default: 'All'
 - name: selected_build_environment
   type: string
@@ -161,11 +165,11 @@ stages:
         PROD_INT: ${{parameters.selected_build_environment}}
         PROD_EXT: ${{parameters.selected_build_environment}}
     build_job_assignment_mechanism: ${{parameters.build_job_assignment_mechanism}}
-    environment_set: ${{parameters.environment_set}}
+    environment_set: ${{parameters.selected_environment_set}}
     deployment_sets:
     - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:
       - api_projects:
-        - ${{parameters.api_project}}
+        - ${{parameters.selected_api_project}}
         targets:
         - ${{ each stage in parameters.stages }}:
           - ${{ if not(stage.is_build_stage) }}:
@@ -179,9 +183,9 @@ stages:
       - ${{ each eligible_target in parameters.eligible_targets }}:
         - api_projects:
           - ${{ each api_project in eligible_target.api_projects }}:
-            - ${{ if eq(parameters.api_project, api_project) }}:
+            - ${{ if eq(parameters.selected_api_project, api_project) }}:
               - ${{api_project}}
-            - ${{ elseif eq(parameters.api_project, 'All') }}:
+            - ${{ elseif eq(parameters.selected_api_project, 'All') }}:
               - ${{api_project}}
           targets:
           - ${{ each target in eligible_target.targets }}:

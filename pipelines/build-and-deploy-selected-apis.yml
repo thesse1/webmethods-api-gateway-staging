@@ -1,7 +1,7 @@
 trigger: none
 
 parameters:
-- name: api_project
+- name: selected_api_project
   displayName: Deploy which API project(s)?
   type: string
   values:
@@ -19,7 +19,7 @@ parameters:
   - number_conversion
   - odata_tutorial
   - countries
-- name: environment_set
+- name: selected_environment_set
   displayName: Deploy API(s) on API Gateway(s) in which environment set?
   default: webm_io
   values:
@@ -54,15 +54,15 @@ parameters:
 variables:
 - group: Project_configuration
 
-name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.api_project}}"
+name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
 stages:
-- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.environment_set}}.yml
+- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.selected_selected_environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/build-and-deploy-api.yml
     parameters: []
-    api_project: ${{parameters.api_project}}
-    environment_set: ${{parameters.environment_set}}
+    selected_api_project: ${{parameters.selected_api_project}}
+    selected_environment_set: ${{parameters.selected_environment_set}}
     selected_target: ${{parameters.selected_target}}
     selected_build_environment: ${{parameters.selected_build_environment}}
     ignore_eligible_targets: "false"

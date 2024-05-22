@@ -40,4 +40,4 @@ stages:
     parameters:
       source_environment: ${{ split(parameters.source, ' ')[1] }}
       commit_message: ${{parameters.commit_message}}
-    environment_set: ${{ split(parameters.source, ' ')[0] }}
+    selected_environment_set: ${{ split(parameters.source, ' ')[0] }}
