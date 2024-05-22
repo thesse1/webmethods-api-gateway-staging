@@ -6,12 +6,11 @@ parameters:
 - name: api_project
   default: All
 - name: environment_set
-  default: webm_io
 - name: selected_target
   default: 'All (including DESIGN)'
 - name: selected_stage
   default: 'All'
-- name: build_environment
+- name: selected_build_environment
   type: string
   default: 'Default Mapping'
 - name: ignore_eligible_targets
@@ -31,9 +30,29 @@ parameters:
   - name: BUILD
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
+    dedicated_pool_name: vmsspoolagents-build
+    dedicated_pool_image: ubuntu-latest
     is_build_stage: true
     environments:
-    - name: BUILD
+    - name: BUILD_01
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: BUILD_02
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: BUILD_03
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: BUILD_04
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: BUILD_05
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: BUILD_06
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: BUILD_07
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: DEV_INT
@@ -67,27 +86,38 @@ parameters:
   - name: PROD_INT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
+    configure_haft: true
     environments:
-    - name: PROD_INT
+    - name: PROD_INT_01
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: PROD_INT_02
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_EXT
     pool_name: vmsspoolagents-04
     pool_image: ubuntu-latest
+    configure_haft: true
     environments:
-    - name: PROD_EXT
+    - name: PROD_EXT_01
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
+    - name: PROD_EXT_02
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
 - name: build_environments_mapping
   type: object
   default:
-    DESIGN: BUILD
-    DEV_INT: BUILD
-    DEV_EXT: BUILD
-    TEST_INT: BUILD
-    TEST_EXT: BUILD
-    PROD_INT: BUILD
-    PROD_EXT: BUILD
+    DESIGN: BUILD_01
+    DEV_INT: BUILD_02
+    DEV_EXT: BUILD_03
+    TEST_INT: BUILD_04
+    TEST_EXT: BUILD_05
+    PROD_INT: BUILD_06
+    PROD_EXT: BUILD_07
+- name: ignore_selected_build_environment
+  type: string
+  default: false
 - name: eligible_targets
   displayName: Which sets of API projects can be deployed on which API Gateway stages?
   type: object
@@ -96,7 +126,7 @@ parameters:
     - number_conversion
     - ping
     - odata_tutorial
-    # - countries
+    - countries
     targets:
     - DEV_INT
     - DEV_EXT
@@ -106,7 +136,7 @@ parameters:
     - PROD_EXT
   - api_projects:
     - petstore
-    # - petstore_basicauth
+    - petstore_basicauth
     - petstore_versioning
     targets:
     - DEV_INT
@@ -148,36 +178,27 @@ stages:
         design_stage: ${{stage}}
       ${{ if stage.is_build_stage }}:
         build_stage: ${{stage}}
-        # ${{ if containsValue(stage.environments, parameters.build_environment) }}:
-        #   build_environments_mapping:
-        #     DESIGN: ${{parameters.build_environment}}
-        #     DEV_INT: ${{parameters.build_environment}}
-        #     DEV_EXT: ${{parameters.build_environment}}
-        #     TEST_INT: ${{parameters.build_environment}}
-        #     TEST_EXT: ${{parameters.build_environment}}
-        #     PROD_INT: ${{parameters.build_environment}}
-        #     PROD_EXT: ${{parameters.build_environment}}
-        # ${{ else }}:
-        #   build_environments_mapping: ${{parameters.build_environments_mapping}}
     target_stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if not(stage.is_build_stage) }}:
         - ${{stage}}
-    all_stages: # ${{parameters.stages}}
+    all_stages:
     - ${{ each stage in parameters.stages }}:
       - ${{ if eq(parameters.selected_stage, stage.name) }}:
         - ${{stage}}
       - ${{ elseif eq(parameters.selected_stage, 'All') }}:
         - ${{stage}}
-      
-    build_environments_mapping:
-      DESIGN: BUILD
-      DEV_INT: BUILD
-      DEV_EXT: BUILD
-      TEST_INT: BUILD
-      TEST_EXT: BUILD
-      PROD_INT: BUILD
-      PROD_EXT: BUILD
+    ${{ if or(eq(parameters.ignore_selected_build_environment, 'true'), eq(parameters.selected_build_environment, 'Default Mapping') }}:
+      build_environments_mapping: ${{parameters.build_environments_mapping}}
+    ${{ else }}:
+      build_environments_mapping:
+        DESIGN: ${{parameters.build_environment}}
+        DEV_INT: ${{parameters.build_environment}}
+        DEV_EXT: ${{parameters.build_environment}}
+        TEST_INT: ${{parameters.build_environment}}
+        TEST_EXT: ${{parameters.build_environment}}
+        PROD_INT: ${{parameters.build_environment}}
+        PROD_EXT: ${{parameters.build_environment}}
     environment_set: ${{parameters.environment_set}}
     deployment_sets:
     - ${{ if eq(parameters.ignore_eligible_targets, 'true') }}:

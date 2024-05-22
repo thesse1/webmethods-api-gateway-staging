@@ -24,7 +24,7 @@ parameters:
   default: https://petstore.swagger.io/v2/swagger.json
 
 stages:
-- template: /pipelines/stage-templates/inject-${{parameters.environment_set}}.yml
+- template: /pipelines/stage-templates/inject-parameters-for-${{parameters.environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/update-api.yml
     parameters:
