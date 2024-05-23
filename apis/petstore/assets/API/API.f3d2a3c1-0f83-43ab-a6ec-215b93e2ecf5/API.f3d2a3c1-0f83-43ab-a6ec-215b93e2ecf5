@@ -1086,12 +1086,12 @@
   },
   "nativeEndpoint" : [ {
     "passSecurityHeaders" : true,
-    "uri" : "https://petstore.swagger.io/v2",
+    "uri" : "http://petstore.swagger.io/v2",
     "connectionTimeoutDuration" : 0,
     "alias" : false
   }, {
     "passSecurityHeaders" : true,
-    "uri" : "http://petstore.swagger.io/v2",
+    "uri" : "https://petstore.swagger.io/v2",
     "connectionTimeoutDuration" : 0,
     "alias" : false
   } ],
