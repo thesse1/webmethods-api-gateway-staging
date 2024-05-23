@@ -1767,6 +1767,8 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section below on how to include the new API project in the pipeline definitions.
+
 ### Option B: Using the export/import pipelines
 
   - The developer would create the new API on the central DESIGN environment.
@@ -1793,7 +1795,18 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
-> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the implementation notes section below on how to include the new API project in the pipeline definitions.
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section below on how to include the new API project in the pipeline definitions.
+
+### Add new API project to deployment and export pipelines
+
+In order to add the new project to the `Export selected API project from DESIGN` and the `Deploy selected API project(s)` pipelines, you have to add the new project's name to the following pipeline definitions and pipeline templates:
+ - /pipelines/export-selected-api-from-DESIGN.yml as a new possible value for the selected_api_project parameter
+ - /pipelines/build-and-deploy-selected-apis.yml as a new possible value for the selected_api_project parameter
+ - /pipelines/stage-templates/inject-parameters-for-azure_demo_01.yml and /pipelines/stage-templates/inject-parameters-for-webm_io.yml in the default values for the eligible_targets parameter:
+   - If the new API is internal and external, add it to the api_projects list attribute marked with the comment "API projects with APIs that are both internal and external"
+   - If the new API is internal only, add it to the api_projects list attribute marked with the comment "API projects with APIs that are internal only"
+   - If the new API is external only, add it to the api_projects list attribute marked with the comment "API projects with APIs that are external only"
+   - In any case, add it to the api_projects list attribute marked with the comment "API projects with APIs that are external only"
 
 # Implementation notes
 
@@ -1834,7 +1847,7 @@ These templates are setting the following parameter values for all stage templat
 | build_environments_mapping | Parameter object representing the BUILD environments to be used for each target stage |
 | build_job_assignment_mechanism | fixed_build_environments, dedicated_build_agents or resource_pooling |
 | environment_set | webm_io or azure_demo_01 |
-| deployment_sets | List of objects defining which API projects should be deployed on which target stages |
+| deployment_sets | List of objects defining which API projects should be deployed on which target stages, based on selected_api_project, selected_target and ignore_eligible_targets |
 
 Every parameter object representing an API Gateway stage contains the stage name and a list of sub-objects representing the API Gateway environments in this stage. Each of these environment objects contains the environment name and the pool_name and pool_image parameters defining the agent pool used for communicating with the API Gateway environment.
 
@@ -1868,10 +1881,8 @@ The stage-level pipeline templates used in these pipelines can be found in the /
 
 | Template | README |
 | ------ | ------ |
-| inject-parameters-for-webm_io.yml | Façade template injecting parameters for the webm_io environment set |
-| inject-parameters-for-azure_demo_01.yml | Façade template injecting parameters for the azure_demo_01 environment set |
-| build-and-deploy-api.yml | Stage template implementing the necessary stages for building and deploying the selected/specified API project(s) on the selected target stage(s) |
-| export-api.yml | Stage template implementing the necessary steps for exporting the selected/specified API project from DESIGN stage and committing its content to Git |
+| build-and-deploy-api.yml | Stage template implementing the stages for building and deploying the selected/specified API project(s) on the selected target stage(s) |
+| export-api.yml | Stage template implementing the stage for exporting the selected/specified API project from DESIGN stage and committing its content to Git |
 
 In addition to the parameters injected by the façade templates, the export-api.yml template has the following input parameters:
 
@@ -1917,7 +1928,7 @@ The export-api.yml stage template invokes export-api.yml and commit.yml sequenti
 
 The pipeline templates execute the following major steps:
 
-### build-api.yml
+#### build-api.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1932,26 +1943,26 @@ The pipeline templates execute the following major steps:
 | Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prepare_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
 
-### store-build.yml
+#### store-build.yml
 
 | Step | README |
 | ------ | ------ |
 | Build Upload | Using publish task |
 
-### retrieve-build.yml
+#### retrieve-build.yml
 
 | Step | README |
 | ------ | ------ |
 | Build Download | Using download task |
 
-### deploy-api.yml
+#### deploy-api.yml
 
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
 | Import the Deployable to API Gateway DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
 
-### export-api.yml
+#### export-api.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1959,7 +1970,7 @@ The pipeline templates execute the following major steps:
 | Extract the flat representation from the API Deployable for API project xxx | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
-### commit.yml
+#### commit.yml
 
 | Step | README |
 | ------ | ------ |
@@ -1972,19 +1983,27 @@ The Postman collections are executed using the Postman command-line execution co
 
 ## Pipeline definitions and pipeline templates for API Gateway configurations
 
+### Pipeline definitions
+
 The pipeline definition files (YAML) for the two Azure DevOps pipelines for API Gateway configurations can also be found in the /pipelines folder.
 
-| Pipeline | Pipeline definition | README |
-| ------ | ------ | ------ |
-| `Configure API Gateway(s)` | api-configure-stages.yml | |
-| `Export API Gateway Configuration` | api-export-config-from-stage.yml | |
+| Pipeline | Pipeline definition |
+| ------ | ------ |
+| `Configure API Gateway(s)` | configure-api-gateway.yml |
+| `Export API Gateway Configuration` | export-config.yml |
 
-The configuration pipeline definition api-configure-stages.yml is using a central pipeline template defined in api-configure.yml, and the export pipeline definition api-export-config-from-stage.yml is using the api-export-config.yml and the commit.yml pipeline templates:
+### Stage templates
+
+The stage-level pipeline templates used in these pipelines can be found in the /pipelines/stage-templates folder:
 
 | Template | README |
 | ------ | ------ |
-| api-configure.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
-| api-export-config.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+| configure-api-gateway.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
+| export-config.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+
+
+
+
 | commit.yml | Commits the results to the repository |
 
 The import pipeline `Configure API Gateway(s)` contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure.yml in one single job.

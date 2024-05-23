@@ -105,7 +105,7 @@ parameters:
   displayName: Which sets of API projects can be deployed on which API Gateway stages?
   type: object
   default:
-  - api_projects:
+  - api_projects: # API projects with APIs that are both internal and external
     - number_conversion
     - ping
     - odata_tutorial
@@ -117,7 +117,7 @@ parameters:
     - TEST_EXT
     - PROD_INT
     - PROD_EXT
-  - api_projects:
+  - api_projects: # API projects with APIs that are internal only
     - petstore
     - petstore_basicauth
     - petstore_versioning
@@ -125,7 +125,7 @@ parameters:
     - DEV_INT
     - TEST_INT
     - PROD_INT
-  - api_projects:
+  - api_projects: # API projects with APIs that are external only
     - postman_echo
     - postman_echo_jwt
     - postman_echo_oauth2
@@ -136,7 +136,7 @@ parameters:
     - DEV_EXT
     - TEST_EXT
     - PROD_EXT
-  - api_projects:
+  - api_projects: # All API projects
     - number_conversion
     - odata_tutorial
     - ping
