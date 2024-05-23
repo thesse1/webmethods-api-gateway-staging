@@ -47,7 +47,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							},
 							{
@@ -66,12 +66,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Tenant1_PostmanEcho/1.0/post",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Tenant1_PostmanEcho/1.0/post",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Tenant1_PostmanEcho",
@@ -120,7 +120,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							},
 							{
@@ -139,12 +139,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Tenant2_PostmanEcho/1.0/post",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Tenant2_PostmanEcho/1.0/post",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Tenant2_PostmanEcho",
@@ -199,7 +199,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							},
 							{
@@ -218,12 +218,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Common_PostmanEcho",
@@ -272,7 +272,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							},
 							{
@@ -291,12 +291,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Common_PostmanEcho",

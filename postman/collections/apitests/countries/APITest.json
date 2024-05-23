@@ -42,7 +42,7 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}"
+						"value": "{{api_hostname}}"
 					}
 				],
 				"body": {
@@ -52,12 +52,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gql/Countries/1.0",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gql/Countries/1.0",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gql",
 						"Countries",

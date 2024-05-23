@@ -34,7 +34,7 @@
 							"\r",
 							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
 							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
-							"let elasticsearchHostname = pm.variables.get(\"elasticsearch-hostname\");\r",
+							"let elasticsearchHostname = pm.variables.get(\"elasticsearch_hostname\");\r",
 							"if (elasticsearchHostname == null || elasticsearchHostname == undefined) {\r",
 							"    if (httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined) {\r",
 							"        postman.setNextRequest(\"Get local OAuth2 Authorization Server alias\");\r",
@@ -52,9 +52,9 @@
 					"script": {
 						"id": "bbeeb139-9688-4f4b-8e86-1571624e2e1a",
 						"exec": [
-							"var protocol = pm.variables.get(\"api-protocol\")\r",
-							"var hostname = pm.variables.get(\"api-hostname\")\r",
-							"var port = pm.variables.get(\"api-port\")\r",
+							"var protocol = pm.variables.get(\"api_protocol\")\r",
+							"var hostname = pm.variables.get(\"api_hostname\")\r",
+							"var port = pm.variables.get(\"api_port\")\r",
 							"var url = protocol+\"://\"+hostname+\":\"+port;\r",
 							"\r",
 							"var httpUrls = [];\r",
@@ -64,9 +64,9 @@
 							"if (protocol == \"https\")\r",
 							"    httpsUrls.push(url);\r",
 							"\r",
-							"var protocol = pm.variables.get(\"loadbalancer-protocol\")\r",
-							"var hostname = pm.variables.get(\"loadbalancer-hostname\")\r",
-							"var port = pm.variables.get(\"loadbalancer-port\")\r",
+							"var protocol = pm.variables.get(\"loadbalancer_protocol\")\r",
+							"var hostname = pm.variables.get(\"loadbalancer_hostname\")\r",
+							"var port = pm.variables.get(\"loadbalancer_port\")\r",
 							"var url = protocol+\"://\"+hostname+\":\"+port;\r",
 							"\r",
 							"if (protocol == \"http\")\r",
@@ -173,7 +173,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"hostName\": \"{{elasticsearch-hostname}}\",\r\n    \"sendAuditlogPackageManagementEvent\": \"true\",\r\n    \"sendAuditlogPlanManagementEvent\": \"true\",\r\n    \"sendPerformanceMetrics\": \"true\",\r\n    \"sendAuditlogApplicationManagementEvent\": \"true\",\r\n    \"keystoreName\": \"\",\r\n    \"protocol\": \"{{elasticsearch-protocol}}\",\r\n    \"password\": \"{{elasticsearch_password}}\",\r\n    \"sendAuditlogRuleManagementEvent\": \"true\",\r\n    \"truststoreName\": \"\",\r\n    \"sendAuditlogAliasManagementEvent\": \"true\",\r\n    \"sendAuditlogAccessControlListManagementEvent\": \"true\",\r\n    \"sendLifecycleEvent\": \"true\",\r\n    \"sendAuditlogRuntimeDataManagementEvent\": \"true\",\r\n    \"sendAuditlogPolicyManagementEvent\": \"true\",\r\n    \"sendAuditlogApprovalManagementEvent\": \"true\",\r\n    \"sendAuditlogUserManagementEvent\": \"true\",\r\n    \"indexName\": \"{{elasticsearch-indexname}}\",\r\n    \"sendAuditlogAdministrationEvent\": \"true\",\r\n    \"userName\": \"{{elasticsearch_user}}\",\r\n    \"sendPolicyViolationEvent\": \"true\",\r\n    \"sendErrorEvent\": \"true\",\r\n    \"port\": \"{{elasticsearch-port}}\",\r\n    \"sendAuditlogGroupManagementEvent\": \"true\",\r\n    \"keystoreAlias\": \"\",\r\n    \"metricsPublishInterval\": \"5\",\r\n    \"sendAuditlogAccessProfileManagementEvent\": \"true\",\r\n    \"sendAuditlogAPIManagementEvent\": \"true\",\r\n    \"sendAuditlogPromotionManagementEvent\": \"true\"\r\n}",
+					"raw": "{\r\n    \"hostName\": \"{{elasticsearch_hostname}}\",\r\n    \"sendAuditlogPackageManagementEvent\": \"true\",\r\n    \"sendAuditlogPlanManagementEvent\": \"true\",\r\n    \"sendPerformanceMetrics\": \"true\",\r\n    \"sendAuditlogApplicationManagementEvent\": \"true\",\r\n    \"keystoreName\": \"\",\r\n    \"protocol\": \"{{elasticsearch_protocol}}\",\r\n    \"password\": \"{{elasticsearch_password}}\",\r\n    \"sendAuditlogRuleManagementEvent\": \"true\",\r\n    \"truststoreName\": \"\",\r\n    \"sendAuditlogAliasManagementEvent\": \"true\",\r\n    \"sendAuditlogAccessControlListManagementEvent\": \"true\",\r\n    \"sendLifecycleEvent\": \"true\",\r\n    \"sendAuditlogRuntimeDataManagementEvent\": \"true\",\r\n    \"sendAuditlogPolicyManagementEvent\": \"true\",\r\n    \"sendAuditlogApprovalManagementEvent\": \"true\",\r\n    \"sendAuditlogUserManagementEvent\": \"true\",\r\n    \"indexName\": \"{{elasticsearch_indexname}}\",\r\n    \"sendAuditlogAdministrationEvent\": \"true\",\r\n    \"userName\": \"{{elasticsearch_user}}\",\r\n    \"sendPolicyViolationEvent\": \"true\",\r\n    \"sendErrorEvent\": \"true\",\r\n    \"port\": \"{{elasticsearch_port}}\",\r\n    \"sendAuditlogGroupManagementEvent\": \"true\",\r\n    \"keystoreAlias\": \"\",\r\n    \"metricsPublishInterval\": \"5\",\r\n    \"sendAuditlogAccessProfileManagementEvent\": \"true\",\r\n    \"sendAuditlogAPIManagementEvent\": \"true\",\r\n    \"sendAuditlogPromotionManagementEvent\": \"true\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

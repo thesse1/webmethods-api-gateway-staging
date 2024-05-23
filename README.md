@@ -1249,12 +1249,12 @@ Each API project must include one Postman test collection under the name APITest
 
 | Environment variable | README |
 | ------ | ------ |
-| api-protocol |  Protocol to be used for the test (http or https), must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| api-ip |  IP address of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| api-port |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| api-hostname | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{api-hostname}} |
+| api_protocol |  Protocol to be used for the test (http or https), must be used in the URL line of the test requests, e.g., {{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| api_ip |  IP address of the API Gateway, must be used in the URL line of the test requests, e.g., {{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| api_port |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., {{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| api_hostname | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{api_hostname}} |
 
-The distinction between {{api-ip}} and {{api-hostname}} enables supporting API Gateway environments which are not (yet) properly represented in DNS.
+The distinction between {{api_ip}} and {{api_hostname}} enables supporting API Gateway environments which are not (yet) properly represented in DNS.
 
 > Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement (but after replacement of placeholders). So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
 
@@ -2234,34 +2234,36 @@ The Postman environments used in the API Gateway Staging solution are configured
 | ip |  IP address of the API Gateway admin port |
 | port |  Port number of the API Gateway admin port |
 | insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the admin port, otherwise leave blank |
-| api-protocol |  Protocol of the API Gateway runtime port (http or https) |
-| api-hostname | Hostname of the API Gateway runtime port |
-| api-ip |  IP address of the API Gateway runtime port |
-| api-port |  Port number of the API Gateway runtime port |
-| api-insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the runtime port, otherwise leave blank |
-| elasticsearch-protocol | Protocol of the external Elasticsearch server (http or https) |
-| elasticsearch-hostname | Hostname or IP address of the external Elasticsearch server |
-| elasticsearch-port | Port of the external Elasticsearch server |
-| elasticsearch-indexname | Name of the index to be used in the external Elasticsearch server |
-| loadbalancer-protocol | Protocol of the loadbalancer URL (http or https) |
-| loadbalancer-hostname | Hostname or IP address of the loadbalancer URL |
-| loadbalancer-port | Port of the loadbalancer URL |
+| api_protocol |  Protocol of the API Gateway runtime port (http or https) |
+| api_hostname | Hostname of the API Gateway runtime port |
+| api_ip |  IP address of the API Gateway runtime port |
+| api_port |  Port number of the API Gateway runtime port |
+| api_insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the runtime port, otherwise leave blank |
+| elasticsearch_protocol | Protocol of the external Elasticsearch server (http or https) |
+| elasticsearch_hostname | Hostname or IP address of the external Elasticsearch server |
+| elasticsearch_port | Port of the external Elasticsearch server |
+| elasticsearch_indexname | Name of the index to be used in the external Elasticsearch server |
+| loadbalancer_protocol | Protocol of the loadbalancer URL (http or https) |
+| loadbalancer_hostname | Hostname or IP address of the loadbalancer URL |
+| loadbalancer_port | Port of the loadbalancer URL |
 | https_proxy_host |  Hostname or IP address of the proxy server to be configured for this environment |
 | https_proxy_port |  Port number of the proxy server to be configured for this environment |
 
-The elasticsearch-protocol, elasticsearch-hostname, elasticsearch-port and elasticsearch-indexname variables are optional. They must be provided only when an external Elasticsearch destination should be configured for the environment.
+The elasticsearch_protocol, elasticsearch_hostname, elasticsearch_port and elasticsearch_indexname variables are optional. They must be provided only when an external Elasticsearch destination should be configured for the environment.
 
-The loadbalancer-protocol, loadbalancer-hostname and loadbalancer-port variables are optional. They must be provided only when a loadbalancer URL should be configured for the environment.
+The loadbalancer_protocol, loadbalancer_hostname and loadbalancer_port variables are optional. They must be provided only when a loadbalancer URL should be configured for the environment.
 
 The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
-These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the APITest.json Postman test collections in the API projects.
+These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the APITest.json Postman test collections in under postman/collections/apitests.
 
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 
 The separate configuration of IP address and hostname is necessary in order to support cases in which the agent might not be able to find the API Gateway server by its hostname.
 
 ## Postman collections
+
+TODO
 
 The following Postman collections are executed automatically against the BUILD and the Target environment(s) (using Newman) in the deployment and configuration pipelines:
 
@@ -2274,6 +2276,8 @@ The PurgeData.json Postman collection is executed automatically against all envi
 The export pipelines are not using any Postman collections.
 
 ## API Gateway Service APIs
+
+TODO
 
 The API Gateway Staging solution is using the following API Gateway Service APIs:
 

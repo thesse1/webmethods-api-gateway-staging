@@ -33,55 +33,55 @@
 			"enabled": true
 		},
 		{
-			"key": "api-protocol",
+			"key": "api_protocol",
 			"value": "http",
 			"type": "text",
 			"enabled": true
 		},
 		{
-			"key": "api-hostname",
+			"key": "api_hostname",
 			"value": "azure-demo-01-build-06-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "api-ip",
+			"key": "api_ip",
 			"value": "azure-demo-01-build-06-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "api-port",
+			"key": "api_port",
 			"value": "80",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "api-insecureflag",
+			"key": "api_insecureflag",
 			"value": "--insecure",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "elasticsearch-protocol",
+			"key": "elasticsearch_protocol",
 			"value": "https",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "elasticsearch-hostname",
+			"key": "elasticsearch_hostname",
 			"value": "azure-demo-01-elasticsearch.es.westeurope.azure.elastic-cloud.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "elasticsearch-port",
+			"key": "elasticsearch_port",
 			"value": "443",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "elasticsearch-indexname",
+			"key": "elasticsearch_indexname",
 			"value": "apigw-build",
 			"type": "default",
 			"enabled": true

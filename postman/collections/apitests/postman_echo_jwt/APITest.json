@@ -46,7 +46,7 @@
 				"header": [
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					},
 					{
@@ -56,12 +56,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/rest/pub/apigateway/jwt/getJsonWebToken",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/rest/pub/apigateway/jwt/getJsonWebToken",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"rest",
 						"pub",
@@ -117,7 +117,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					}
 				],
@@ -131,12 +131,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/post",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/PostmanEcho_JWT/1.0/post",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_JWT",
@@ -191,17 +191,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/get?foo=bar",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/PostmanEcho_JWT/1.0/get?foo=bar",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_JWT",
@@ -258,17 +258,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_JWT/1.0/delete",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/PostmanEcho_JWT/1.0/delete",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho_JWT",

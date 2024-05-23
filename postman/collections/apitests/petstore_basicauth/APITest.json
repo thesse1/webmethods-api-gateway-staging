@@ -60,7 +60,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
@@ -74,12 +74,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -139,17 +139,17 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -206,17 +206,17 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -285,7 +285,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
@@ -299,12 +299,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -364,17 +364,17 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -431,17 +431,17 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -510,7 +510,7 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
@@ -524,12 +524,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -589,17 +589,17 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",
@@ -656,17 +656,17 @@
 							},
 							{
 								"key": "Host",
-								"value": "{{api-hostname}}",
+								"value": "{{api_hostname}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
-							"protocol": "{{api-protocol}}",
+							"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/Petstore_BasicAuth/1.0.8/pet/123",
+							"protocol": "{{api_protocol}}",
 							"host": [
-								"{{api-ip}}"
+								"{{api_ip}}"
 							],
-							"port": "{{api-port}}",
+							"port": "{{api_port}}",
 							"path": [
 								"gateway",
 								"Petstore_BasicAuth",

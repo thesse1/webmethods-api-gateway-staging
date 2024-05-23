@@ -61,7 +61,7 @@ steps:
    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
-   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api-insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
+   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api_insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.build_environment_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
 

@@ -40,7 +40,7 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					},
 					{
@@ -59,12 +59,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho/1.0/post",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/PostmanEcho/1.0/post",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
@@ -114,17 +114,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho/1.0/get?foo=bar",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/PostmanEcho/1.0/get?foo=bar",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
@@ -176,17 +176,17 @@
 					},
 					{
 						"key": "Host",
-						"value": "{{api-hostname}}",
+						"value": "{{api_hostname}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho/1.0/delete",
-					"protocol": "{{api-protocol}}",
+					"raw": "{{api_protocol}}://{{api_ip}}:{{api_port}}/gateway/PostmanEcho/1.0/delete",
+					"protocol": "{{api_protocol}}",
 					"host": [
-						"{{api-ip}}"
+						"{{api_ip}}"
 					],
-					"port": "{{api-port}}",
+					"port": "{{api_port}}",
 					"path": [
 						"gateway",
 						"PostmanEcho",
