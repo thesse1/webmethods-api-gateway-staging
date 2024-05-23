@@ -1,7 +1,5 @@
 # About API Gateway Staging
 
-> Note: This document is not 100% up-to-date. It describes an older version of the API Gateway Staging solution which you can find here: https://github.com/thesse1/webmethods-api-gateway-staging/tree/bbce669eebec59196359393a5a35bafb2fa38300. I will update the documentation as soon as I can.
-
 > Note: This version of the API Gateway Staging solution depends on Azure DevOps Service. An older version of the solution which supports Azure DevOps Server 2019 can be found in the azure_devops_server_2019 branch: https://github.com/thesse1/webmethods-api-gateway-staging/tree/azure_devops_server_2019.
 
 The webMethods API Gateway Staging solution allows to extract API Gateway assets from a DESIGN environment (local or shared/central), add them to a Git repository and automatically promote them to DEV, TEST and PROD environments, controlled by Azure DevOps build pipelines. During the promotion, the assets are first imported on a BUILD environment where they are automatically validated and tested (based on Postman collections) and specifically prepared for the intended target environment (also based on Postman collections). After this procedure, the modified assets are exported again from BUILD environment and imported on the target environment (DEV, TEST or PROD).
