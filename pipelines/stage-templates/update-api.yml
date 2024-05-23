@@ -32,48 +32,51 @@ parameters:
 stages:
 - stage: Update_API_on_${{parameters.design_stage.name}}
   jobs:
-  - deployment: Update_API_on_API_Gateway_${{parameters.design_stage.name}}
-    environment: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}
-    variables:
-    - group: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_users
-    pool:
-      name: ${{parameters.design_stage.pool_name}}
-      vmImage: ${{parameters.design_stage.pool_image}}
-    strategy:
-      runOnce:    #rolling, canary are the other strategies that are supported
-        deploy:
-          steps:
-          - checkout: self
-            submodules: "true"
-            persistCredentials: "true"
-            fetchDepth: 0
-          - download: none
-          # - download: trigger-pipeline-in-trigger-project
-          # - bash: printenv | grep RESOURCES_PIPELINE_ | sort
-          #   displayName: Print pipeline resource variables
-          # - bash: |
-          #     echo "Directories:"
-          #     ls -l $(Pipeline.Workspace)
-          #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project
-          #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job
-          #     echo
-          #     echo "Swagger:"
-          #     cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
-          #   displayName: Print asset downloaded from upstream pipeline
-          - template: /pipelines/step-templates/update-api.yml
-            parameters:
-              environment_set: ${{parameters.environment_set}}
-              environment_file: API_Gateway_${{parameters.design_stage.name}}_environment.json
-              stage_name: ${{parameters.design_stage.name}}
-              environment_name: ${{parameters.design_stage.name}}
-              api_id: ${{parameters.api_id}}
-              update_type: ${{parameters.update_type}}
-              update_url: ${{parameters.update_url}}
-              update_username: ${{parameters.update_username}}
-              update_password: ${{parameters.update_password}}
-              update_file: ${{parameters.update_file}}
-          - bash: |
-              echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
-              echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
-              echo "##vso[build.addbuildtag]${{parameters.api_id}}"
-            displayName: Add build tags
+  - ${{ each environment in design_stage.environments }}:
+    - deployment: Update_API_on_API_Gateway_${{environment.name}}
+      environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
+      variables:
+      - group: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_users
+      - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
+      pool:
+        name: ${{environment.pool_name}}
+        vmImage: ${{environment.pool_image}}
+      strategy:
+        runOnce:    #rolling, canary are the other strategies that are supported
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+              fetchDepth: 0
+            - download: none
+            # - download: trigger-pipeline-in-trigger-project
+            # - bash: printenv | grep RESOURCES_PIPELINE_ | sort
+            #   displayName: Print pipeline resource variables
+            # - bash: |
+            #     echo "Directories:"
+            #     ls -l $(Pipeline.Workspace)
+            #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project
+            #     ls -l $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job
+            #     echo
+            #     echo "Swagger:"
+            #     cat $(Pipeline.Workspace)/trigger-pipeline-in-trigger-project/Job/petstore_swagger_updated.json
+            #   displayName: Print asset downloaded from upstream pipeline
+            - template: /pipelines/step-templates/update-api.yml
+              parameters:
+                environment_set: ${{parameters.environment_set}}
+                environment_file: API_Gateway_${{environment.name}}_environment.json
+                stage_name: ${{parameters.design_stage.name}}
+                environment_name: ${{environment.name}}
+                api_id: ${{parameters.api_id}}
+                update_type: ${{parameters.update_type}}
+                update_url: ${{parameters.update_url}}
+                update_username: ${{parameters.update_username}}
+                update_password: ${{parameters.update_password}}
+                update_file: ${{parameters.update_file}}
+            - bash: |
+                echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
+                echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
+                echo "##vso[build.addbuildtag]${{environment.name}}"
+                echo "##vso[build.addbuildtag]${{parameters.api_id}}"
+              displayName: Add build tags
