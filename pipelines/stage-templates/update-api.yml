@@ -36,6 +36,7 @@ stages:
     - deployment: Update_API_on_API_Gateway_${{environment.name}}
       environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
       variables:
+      - group: API_Gateway_${{parameters.environment_set}}_users
       - group: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_users
       - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
       pool:

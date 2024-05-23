@@ -31,6 +31,7 @@ stages:
         - deployment: Export_config_from_API_Gateway_${{environment.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
           variables:
+          - group: API_Gateway_${{parameters.environment_set}}_users
           - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
           - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
           pool:

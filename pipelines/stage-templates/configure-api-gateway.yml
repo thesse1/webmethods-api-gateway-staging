@@ -25,6 +25,7 @@ stages:
       - deployment: Configure_API_Gateway_${{environment.name}}
         environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
         variables:
+        - group: API_Gateway_${{parameters.environment_set}}_users
         - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
         - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
         pool:
@@ -58,6 +59,8 @@ stages:
           dependsOn: Configure_API_Gateway_${{environment.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
           variables:
+          - group: API_Gateway_${{parameters.environment_set}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
           - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
           pool:
             name: ${{environment.pool_name}}
@@ -84,6 +87,8 @@ stages:
             - Configure_HAFT_listener_for_API_Gateway_${{otherenvironment.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
           variables:
+          - group: API_Gateway_${{parameters.environment_set}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
           - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
           - name: node_name_01
             value: $[dependencies.Configure_HAFT_listener_for_API_Gateway_${{ stage.environments[0].name }}.outputs['Configure_HAFT_listener_for_API_Gateway_${{ stage.environments[0].name }}.setoutputvar.node_name']]
@@ -123,6 +128,8 @@ stages:
           dependsOn: Wait_for_HAFT_ring_on_${{stage.name}}
           environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
           variables:
+          - group: API_Gateway_${{parameters.environment_set}}_users
+          - group: API_Gateway_${{parameters.environment_set}}_${{stage.name}}_users
           - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
           pool:
             name: ${{environment.pool_name}}
