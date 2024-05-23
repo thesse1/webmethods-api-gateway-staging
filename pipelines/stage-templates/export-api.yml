@@ -22,38 +22,42 @@ parameters:
   type: string
 
 stages:
-- stage: Export_${{parameters.api_project}}_from_${{parameters.design_stage.name}}
+- stage: Export_${{parameters.selected_api_project}}_from_${{parameters.design_stage.name}}
   jobs:
-  - deployment: Export_${{parameters.api_project}}_from_API_Gateway_${{parameters.design_stage.name}}
-    environment: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}
-    variables:
-    - group: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_users
-    pool:
-      name: ${{parameters.design_stage.pool_name}}
-      vmImage: ${{parameters.design_stage.pool_image}}
-    strategy:
-      runOnce:    #rolling, canary are the other strategies that are supported
-        deploy:
-          steps:
-          - checkout: self
-            submodules: "true"
-            persistCredentials: "true"
-            clean: "true"
-            fetchDepth: 0
-          - download: none
-          - template: /pipelines/step-templates/export-api.yml
-            parameters:
-              environment_set: ${{parameters.environment_set}}
-              api_project: ${{parameters.api_project}}
-              environment_file: API_Gateway_${{parameters.design_stage.name}}_environment.json
-              stage_name: ${{parameters.design_stage.name}}
-              environment_name: ${{parameters.design_stage.name}}
-          - template: /pipelines/step-templates/commit.yml
-            parameters:
-              commit_message: ${{parameters.commit_message}}
-          - bash: |
-              echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}"
-              echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
-              echo "##vso[build.addbuildtag]${{parameters.api_project}}_${{parameters.design_stage.name}}"
-            displayName: Add build tags
+  - ${{ each environment in parameters.design_stage.environments }}: # Iterate over all DESIGN environments -> probably not what you want if you have multiple DESIGN environments?
+    - deployment: Export_${{parameters.selected_api_project}}_from_API_Gateway_${{environment.name}}
+      environment: API_Gateway_${{parameters.environment_set}}_${{environment.name}}
+      variables:
+      - group: API_Gateway_${{parameters.environment_set}}_${{parameters.design_stage.name}}_users
+      - group: API_Gateway_${{parameters.environment_set}}_${{environment.name}}_users
+      pool:
+        name: ${{environment.pool_name}}
+        vmImage: ${{environment.pool_image}}
+      strategy:
+        runOnce:    #rolling, canary are the other strategies that are supported
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+              clean: "true"
+              fetchDepth: 0
+            - download: none
+            - template: /pipelines/step-templates/export-api.yml
+              parameters:
+                environment_set: ${{parameters.environment_set}}
+                api_project: ${{parameters.selected_api_project}}
+                environment_file: API_Gateway_${{environment.name}}_environment.json
+                stage_name: ${{parameters.design_stage.name}}
+                environment_name: ${{environment.name}}
+            - template: /pipelines/step-templates/commit.yml
+              parameters:
+                commit_message: ${{parameters.commit_message}}
+            - bash: |
+                echo "##vso[build.addbuildtag]${{parameters.environment_set}}"
+                echo "##vso[build.addbuildtag]${{parameters.selected_api_project}}"
+                echo "##vso[build.addbuildtag]${{parameters.design_stage.name}}"
+                echo "##vso[build.addbuildtag]${{environment.name}}"
+                echo "##vso[build.addbuildtag]${{parameters.selected_api_project}}_${{parameters.design_stage.name}}"
+                echo "##vso[build.addbuildtag]${{parameters.selected_api_project}}_${{environment.name}}"
+              displayName: Add build tags
