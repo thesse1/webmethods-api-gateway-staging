@@ -687,7 +687,7 @@ The JSON array can include multiple scope definitions.
 
 ### Global aliases.json file
 
-```json
+```
 {
   "postman-echo-routing-alias": {
     "id" : "97c5a4c8-e253-4fed-bd57-dd6dae1450fd",
