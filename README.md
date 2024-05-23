@@ -1886,7 +1886,7 @@ The stage-level pipeline templates used in these pipelines can be found in the /
 
 | Template | README |
 | ------ | ------ |
-| build-and-deploy-api.yml | Stage template implementing the stages for building and deploying the selected/specified API project(s) on the selected target stage(s) |
+| build-and-deploy-api.yml | Stage template implementing the stages for building and deploying (and publishing) the selected/specified API project(s) on the selected target stage(s) |
 | export-api.yml | Stage template implementing the stage for exporting the selected/specified API project from DESIGN stage and committing its content to Git |
 
 In addition to the parameters injected by the façade templates, the export-api.yml template has the following input parameters:
@@ -1917,7 +1917,7 @@ The step-level pipeline templates used in these pipelines can be found in the /p
 | build-api.yml | Includes all steps for preparing the deployable on the BUILD environment (including import, test execution, asset manipulation and export) |
 | store-build.yml | Stores the deployable in Azure DevOps |
 | retrieve-build.yml | Retrieves the deployable from Azure DevOps |
-| deploy-api.yml | Includes all steps for importing the deployable on the target stage (DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT) |
+| deploy-api.yml | Includes all steps for importing the deployable on one target environment and for re-publishing the included APIs from there to API Portal / Developer Portal |
 | export-api.yml | Exports the API project from the DESIGN environment |
 | commit.yml | Commits the results to the repository |
 
@@ -1999,8 +1999,8 @@ The stage-level pipeline templates used in these pipelines can be found in the /
 
 | Template | README |
 | ------ | ------ |
-| configure-api-gateway.yml | Stage template implementing the stages for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environments and for initializing the environments |
-| export-config.yml | Stage template implementing the stage for exporting the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environments |
+| configure-api-gateway.yml | Stage template implementing the stages for importing the deployable and for initializing the environments on the selected stage(s) |
+| export-config.yml | Stage template implementing the stage for exporting the API Gateway configuration from the selected environment and committing its content to Git |
 
 In addition to the parameters injected by the façade templates, the export-config.yml template has the following input parameters:
 
@@ -2017,7 +2017,7 @@ The step-level pipeline templates used in these pipelines can be found in the /p
 
 | Template | README |
 | ------ | ------ |
-| configure-api-gateway.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environments and for initializing the environments |
+| configure-api-gateway.yml | Includes all steps for importing the deployable on one environment and for initializing the environment |
 | configure-haft-listener.yml | Configures HAFT listener on one environment |
 | configure-haft-ring.yml | Configures HAFT ring on one environment |
 | configure-haft-ring-validation.yml | Validates HAFT ring configuration on one environment |
@@ -2073,32 +2073,39 @@ The status and logs for each step can be inspected on the build details page in 
 
 The Postman collections are executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 
-## Pipeline definition and pipeline template for log purging
+## Pipeline definition and pipeline templates for log purging
+
+### Pipeline definition
 
 The pipeline definition file (YAML) for the Azure DevOps pipeline for log purging can also be found in the /pipelines folder.
 
 | Pipeline | Pipeline definition |
 | ------ | ------ |
-| purge_data_from_stages | api-purge-data-from-stages.yml |
+| `Purge API Gateway Analytics Data` | purge-data.yml |
 
-The pipeline definition is using a pipeline template defined in api-purge-data.yml:
+### Stage template
+
+The stage-level pipeline template used in this pipeline can be found in the /pipelines/stage-templates folder:
 
 | Template | README |
 | ------ | ------ |
-| api-purge-data.yml | Purges the log data on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+| purge-data.yml | Stage template implementing the stages for purging the log data on the selected stage(s) |
 
-The pipeline invokes the template eight times in eight separate stages on separate agents - once for every environment.
+In addition to the parameters injected by the façade templates, the purge-data.yml template does not have any additional parameters.
 
-The pipeline template needs the following parameters to be set in the calling pipeline:
+### Step templates
 
-| Parameter | README |
+The step-level pipeline template used in this pipeline can be found in the /pipelines/step-templates folder:
+
+| Template | README |
 | ------ | ------ |
-| environment | Name of the environment definition file in /environments folder for the environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | Case-sensitive name of the environment type (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
+| purge-data.yml | Includes all steps for purging the log data on one environment |
 
-The pipeline template executes the following major steps:
+Each ADO stage in the purge-data.yml stage template invokes purge-data.yml for each environment in separate jobs on (potentially) different agents.
 
-### api-purge-data.yml
+The pipeline template executes the following major step:
+
+#### purge-data.yml
 
 | Step | README |
 | ------ | ------ |
