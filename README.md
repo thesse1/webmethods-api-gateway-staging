@@ -1249,10 +1249,10 @@ Each API project must include one Postman test collection under the name APITest
 
 | Environment variable | README |
 | ------ | ------ |
-| {{api-protocol}} |  Protocol to be used for the test (http or https), must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| {{api-ip}} |  IP address of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| {{api-port}} |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
-| {{api-hostname}} | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{api-hostname}} |
+| api-protocol |  Protocol to be used for the test (http or https), must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| api-ip |  IP address of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| api-port |  Port number of the API Gateway, must be used in the URL line of the test requests, e.g., {{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/SwaggerPetstore/1.0/pet/123 |
+| api-hostname | Hostname of the API Gateway, must be used in the Host header of the test requests, e.g., Host: {{api-hostname}} |
 
 The distinction between {{api-ip}} and {{api-hostname}} enables supporting API Gateway environments which are not (yet) properly represented in DNS.
 
@@ -2171,7 +2171,7 @@ The Postman collection is executed using the Postman command-line execution comp
 
 ### Variable groups for user credentials
 
-The API Gateway Staging solution is using variable groups for securely managing the credentials (username and password) for accessing the API Gateway environments and the external Elasticsearch instances.
+The API Gateway Staging solution is using variable groups for securely managing the credentials (username and password) for accessing the API Gateway environments and the external Elasticsearch servers.
 
 There is one variable group `API_Gateway_{{environment_set}}_users` for each of the two environment sets, and there is one variable group `API_Gateway_{{environment_set}}_{{stage}}_users` for each stage, and there is one variable group `API_Gateway_{{environment_set}}_{{environment}}_users` for each environment. For stages with only one environment, the stage name and the environment name are identical, and there is only one variable grou for this stage/environment.
 
@@ -2193,7 +2193,7 @@ Each variable group holds variable values specific for one API Gateway environme
 | purger_password | The API Gateway password for the purger user |
 | updater_user | User for updating APIs in API Gateway, e.g., Updater. The user must have the "Manage APIs" privilege |
 | updater_password | The API Gateway password for the updater user |
-| elasticsearch_user | The user of the external Elasticsearch instance for ingesting the API Gateway analytics data |
+| elasticsearch_user | The user of the external Elasticsearch server for ingesting the API Gateway analytics data |
 | elasticsearch_password | The Elasticsearch password for the Elasticsearch user |
 
 These variables can be defined in any of these variable groups (environment set, stage, environment), even on multiple levels. The variable groups are read in the following order:
@@ -2225,18 +2225,35 @@ When using dedicated build agents or resource pooling mechanism for assigning bu
 
 ## Environment configurations
 
-The Postman environments used in the API Gateway Staging solution are configured in the /environments/{{environment_set}} folders. For each environment, there is a Postman environment definition JSON file, for example.
-
-Each environment file must include values for the hostname, ip, port and insecureflag environment variables. The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
+The Postman environments used in the API Gateway Staging solution are configured in the /environments/{{environment_set}} folders. For each environment, there is a Postman environment definition JSON file including the following environment variables:
 
 | Environment variable | README |
 | ------ | ------ |
-| {{ip}} |  IP address of the API Gateway |
-| {{port}} |  Port number of the API Gateway |
-| {{hostname}} | Hostname of the API Gateway |
-| {{insecureflag}} | Set to --insecure if the API Gateway server does not provide valid SSL server certificate, otherwise leave blank |
-| {{https_proxy_host}} |  Hostname or IP address of the proxy server to be configured for this environment |
-| {{https_proxy_port}} |  Port number of the proxy server to be configured for this environment |
+| protocol |  Protocol of the API Gateway admin port (http or https) |
+| hostname | Hostname of the API Gateway admin port |
+| ip |  IP address of the API Gateway admin port |
+| port |  Port number of the API Gateway admin port |
+| insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the admin port, otherwise leave blank |
+| api-protocol |  Protocol of the API Gateway runtime port (http or https) |
+| api-hostname | Hostname of the API Gateway runtime port |
+| api-ip |  IP address of the API Gateway runtime port |
+| api-port |  Port number of the API Gateway runtime port |
+| api-insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the runtime port, otherwise leave blank |
+| elasticsearch-protocol | Protocol of the external Elasticsearch server (http or https) |
+| elasticsearch-hostname | Hostname or IP address of the external Elasticsearch server |
+| elasticsearch-port | Port of the external Elasticsearch server |
+| elasticsearch-indexname | Name of the index to be used in the external Elasticsearch server |
+| loadbalancer-protocol | Protocol of the loadbalancer URL (http or https) |
+| loadbalancer-hostname | Hostname or IP address of the loadbalancer URL |
+| loadbalancer-port | Port of the loadbalancer URL |
+| https_proxy_host |  Hostname or IP address of the proxy server to be configured for this environment |
+| https_proxy_port |  Port number of the proxy server to be configured for this environment |
+
+The elasticsearch-protocol, elasticsearch-hostname, elasticsearch-port and elasticsearch-indexname variables are optional. They must be provided only when an external Elasticsearch destination should be configured for the environment.
+
+The loadbalancer-protocol, loadbalancer-hostname and loadbalancer-port variables are optional. They must be provided only when a loadbalancer URL should be configured for the environment.
+
+The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
 These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the APITest.json Postman test collections in the API projects.
 
