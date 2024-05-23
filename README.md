@@ -1851,11 +1851,10 @@ These templates are setting the following parameter values for all stage templat
 
 Every parameter object representing an API Gateway stage contains the stage name and a list of sub-objects representing the API Gateway environments in this stage. Each of these environment objects contains the environment name and the pool_name and pool_image parameters defining the agent pool used for communicating with the API Gateway environment.
 
-Exception: For the BUILD stage, the pool_name and pool_image parameters are set on the stage level, not on the level of the individual environments. All BUILD envirionments of an environment set must be reachable from the same agent pool.
-
 Additional parameter values:
  - The DESIGN stage and the BUILD stage objects contain boolean marker parameters is_design_stage and is_build_stage, respectively
- - In addition to pool_name and pool_image, the BUILD stage object contains dedicated_pool_name and dedicated_pool_image parameters for the dedicated agent pool used in the dedicated_build_agents assignment mechanism for BUILD environments
+ - The BUILD stage object contains build_pool_name and build_pool_image parameters for the agent pool running build jobs (for fixed_build_environments and resource_pooling). All BUILD environments of an environment set must be reachable from the same agent pool for the build job
+ - In inject-parameters-for-azure_demo_01.yml, the BUILD stage object also contains dedicated_pool_name and dedicated_pool_image parameters for the pool of dedicated build agents used in the dedicated_build_agents assignment mechanism for BUILD environments
  - The PROD_INT and the PROD_EXT stage objects for the azure_demo_01 environment set contain boolean parameters configure_haft for indicating whether of not HAFT should be configured in this stage
 
 Each object representing a deployment set contains two values:
