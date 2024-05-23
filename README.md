@@ -1888,7 +1888,7 @@ In addition to the parameters injected by the façade templates, the export-api.
 | Parameter | README |
 | ------ | ------ |
 | selected_api_project | Case-sensitive name of the API project to be exported |
-| commit_message | The change will be committed with this commit message
+| commit_message | The change will be committed with this commit message |
 
 The build-and-deploy-api.yml template does not have any additional parameters.
 
@@ -1915,7 +1915,7 @@ The step-level pipeline templates used in these pipelines can be found in the /p
 | export-api.yml | Exports the API project from the DESIGN environment |
 | commit.yml | Commits the results to the repository |
 
-Each ADO stage in the build-and-deploy-api.yml stage template invokes build-api.yml and store-build.yml in one job on one agent, and then retrieve-build.yml and deploy-api.yml in another job (potentially) on another agent.
+Each ADO stage in the build-and-deploy-api.yml stage template invokes build-api.yml and store-build.yml in one job on one agent, and then retrieve-build.yml and deploy-api.yml for each target environment in separate jobs on (potentially) different agents.
 
 The storing of build artifacts in JFrog Artifactory is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
 
@@ -1993,41 +1993,38 @@ The stage-level pipeline templates used in these pipelines can be found in the /
 
 | Template | README |
 | ------ | ------ |
-| configure-api-gateway.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment and for initializing the environment |
-| export-config.yml | Exports the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environment |
+| configure-api-gateway.yml | Stage template implementing the stages for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environments and for initializing the environments |
+| export-config.yml | Stage template implementing the stage for exporting the API Gateway configuration from the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environments |
 
+In addition to the parameters injected by the façade templates, the export-config.yml template has the following input parameters:
 
+| Parameter | README |
+| ------ | ------ |
+| selected_source_environment | API Gateway environment from which to export the configuration |
+| commit_message | The change will be committed with this commit message |
 
+The configure-api-gateway.yml template does not have any additional parameters.
 
+### Step templates
+
+The step-level pipeline templates used in these pipelines can be found in the /pipelines/step-templates folder:
+
+| Template | README |
+| ------ | ------ |
+| configure-api-gateway.yml | Includes all steps for importing the deployable on the DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT environments and for initializing the environments |
+| configure-haft-listener.yml | Configures HAFT listener on one environment |
+| configure-haft-ring.yml | Configures HAFT ring on one environment |
+| configure-haft-ring-validation.yml | Validates HAFT ring configuration on one environment |
+| export-config.yml | Exports the API Gateway configuration from one API Gateway environment |
 | commit.yml | Commits the results to the repository |
 
-The import pipeline `Configure API Gateway(s)` contains eight stages for importing the configuration on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and/or PROD_EXT. Each stage invokes api-configure.yml in one single job.
+Each ADO stage in the configure-api-gateway.yml stage template invokes configure-api-gateway.yml for each environment in separate jobs on (potentially) different agents. For stages with configure_haft=true, the stage will then invoke configure-haft-listener.yml for each environment, then configure-haft-ring.yml for each environment and finally configure-haft-ring-validation.yml for each environment, all in separate jobs on (potentially) different agents.
 
-The export pipeline `Export API Gateway Configuration` contains one stage for exporting the configuration from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT. It is not possible to run multiple stages in this pipeline, because the Git commit would fail when selecting more than one stage. The single stage invokes api-export-config.yml and commit.yml sequentially in one job on one agent.
-
-The configuration pipeline template needs the following parameters to be set in the calling pipeline:
-
-| Parameter | README |
-| ------ | ------ |
-| environment | Name of the environment definition file in /environments folder for the target environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | Case-sensitive name of the environment type to be configured or updated (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT) |
-
-The export pipeline template needs the following parameters:
-
-| Parameter | README |
-| ------ | ------ |
-| environment | Name of the environment definition file in /environments folder for the source environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
-| type | DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT |
-
-The commit pipeline template needs the following parameter:
-
-| Parameter | README |
-| ------ | ------ |
-| commit_message | The change will be committed with this commit message |
+The export-config.yml stage template invokes export-config.yml and commit.yml sequentially in one stage in one job on one agent.
 
 The pipeline templates execute the following major steps:
 
-### api-configure.yml
+#### configure-api-gateway.yml
 
 | Step | README |
 | ------ | ------ |
@@ -2036,7 +2033,22 @@ The pipeline templates execute the following major steps:
 | Import the Deployable to API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
 | Initialize API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the Initialize_DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
 
-### api-export-config.yml
+#### configure-haft-listener.yml
+
+| Step | README |
+| ------ | ------ |
+
+#### re-haft-ring.yml
+
+| Step | README |
+| ------ | ------ |
+
+#### configure-haft-ring-validation.yml
+
+| Step | README |
+| ------ | ------ |
+
+#### export-config.yml
 
 | Step | README |
 | ------ | ------ |
@@ -2044,7 +2056,7 @@ The pipeline templates execute the following major steps:
 | Extract the flat representation from the API Deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
-### commit.yml
+#### commit.yml
 
 | Step | README |
 | ------ | ------ |

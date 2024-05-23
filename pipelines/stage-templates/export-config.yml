@@ -16,7 +16,7 @@ parameters:
 - name: deployment_sets
   type: object
 
-- name: source_environment
+- name: selected_source_environment
   type: string
 - name: commit_message
   type: string
@@ -24,7 +24,7 @@ parameters:
 stages:
 - ${{ each stage in parameters.all_stages }}:
   - ${{ each environment in stage.environments }}:
-    - ${{ if eq(environment.name, parameters.source_environment) }}:
+    - ${{ if eq(environment.name, parameters.selected_source_environment) }}:
       - stage: Export_from_${{stage.name}}
         dependsOn: []
         jobs:
