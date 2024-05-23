@@ -10,7 +10,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract insecureflag'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/haft/Configure_HAFT_listener_on_${{parameters.environment_name}}.json --reporters cli \
     --env-var haft_manager_user='$(haft_manager_user)' \
     --env-var haft_manager_password='$(haft_manager_password)' \
@@ -22,3 +22,8 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize High Availability and Fault Tolerance (HAFT) listener for API Gateway ${{parameters.environment_name}}'
   name: setoutputvar
+
+- bash: |
+    cat environments/${{parameters.environment_set}}/API_Gateway_${{parameters.stage_name}}_haft_globals.json
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Debug global variables file'

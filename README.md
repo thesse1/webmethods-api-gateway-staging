@@ -2217,7 +2217,11 @@ The API Gateway Staging solution uses the `API_Gateway_build_environments_availa
 
 ## Azure DevOps environments
 
-TODO
+The API Gateway Staging solution is using Azure DevOps environments `API_Gateway_{{environment_set}}_{{environment}}` in all jobs (technically, deployments) accessing API Gateway environments. This provides Azure DevOps users with a complete history of all pipeline executions affecting each API Gateway environment.
+
+When using fixed build environments mechanism for assigning build jobs to BUILD environments, the Azure DevOps environments for the BUILD stage (`API_Gateway_webm_io_BUILD` and `API_Gateway_azure_demo_01_BUILD_01`, ..., `API_Gateway_azure_demo_01_BUILD_07`) should have an exclusive lock enabled. This makes sure that only one (build) job is using each environment at one point in time.
+
+When using dedicated build agents or resource pooling mechanism for assigning build jobs to BUILD environments, the build job is using the `API_Gateway_azure_demo_01_BUILD_environments` environment. This environment should not have an exclusive lock enabled. Otherwise, the build jobs would block each other although there are assigned to different BUILD environment by the dedicated build agents or resource pooling mechanism.
 
 ## Environment configurations
 

@@ -24,7 +24,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/import/Import_API.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
@@ -42,7 +42,7 @@ steps:
 - bash: echo `echo -n [ && ls -mQ apis/${{parameters.api_project}}/assets/API && echo -n ]` | jq -c . > apis_to_be_published.txt
   displayName: 'Generate API list as JSON array'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/publish/Republish_APIs.json --reporters cli \
     --env-var publisher_user='$(publisher_user)' \
     --env-var publisher_password='$(publisher_password)' \

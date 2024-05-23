@@ -10,7 +10,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract insecureflag'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/haft/Validate_HAFT_on_${{parameters.environment_name}}.json --reporters cli \
     --env-var haft_manager_user='$(haft_manager_user)' \
     --env-var haft_manager_password='$(haft_manager_password)' \

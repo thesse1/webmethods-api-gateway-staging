@@ -65,7 +65,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.build_environment_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/prepare/Prepare_${{parameters.build_stage_name}}.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
@@ -81,7 +81,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/import/Import_API.json --reporters cli \
     --env-var importer_user='$(importer_user)' \
     --env-var importer_password='$(importer_password)' \
@@ -96,7 +96,7 @@ steps:
   env:
     no_proxy: $(build_environment_ip)
 
-- script: |
+- bash: |
     newman run postman/collections/apitests/${{parameters.api_project}}/APITest.json --reporters cli,junit --reporter-junit-export apis/${{parameters.api_project}}/junitReport.xml \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_api_insecureflag)
@@ -129,7 +129,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/prepare/Prepare_for_${{parameters.target_stage_name}}.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \

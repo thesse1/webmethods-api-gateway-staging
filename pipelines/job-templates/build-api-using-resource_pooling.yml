@@ -69,7 +69,7 @@ jobs:
               done
               echo "Selected Resource: $resource_name"
               echo "##vso[task.setvariable variable=claimed_resource]$resource_name"
-        # - script: |
+        # - bash: |
         #     echo "$(PAT)"
         #     export AZURE_DEVOPS_EXT_PAT=$(PAT)
         #     # echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
@@ -139,7 +139,7 @@ jobs:
               az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"
               echo "Released Claimed Resource: $(claimed_resource)"
           condition: always() # Release lock even if build was not successful
-        # - script: |
+        # - bash: |
         #     echo "$(PAT)" | az devops login --organization https://dev.azure.com/pswm-inno-api-management
         #     group_id=$(az pipelines variable-group list --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-name "API_Gateway_build_environments_availability" --query [0].id)
         #     az pipelines variable-group variable update --organization https://dev.azure.com/pswm-inno-api-management --project azure-demo --group-id $group_id --name "$(claimed_resource)" --value "Available"

@@ -12,7 +12,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecureflag'
 
-- script: |
+- bash: |
     newman run postman/collections/utilities/purge/Purge_Data.json --reporters cli \
     --env-var purger_user='$(purger_user)' \
     --env-var purger_password='$(purger_password)' \
