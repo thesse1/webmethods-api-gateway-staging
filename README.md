@@ -743,6 +743,8 @@ Note that the description and connectionTimeout attributes are set to different 
 
 Note that the readTimeout on all three target stages is represented by the placeholder `#{postman_echo_readTimeout}#`. It is replaced during build by the content of the postman_echo_readTimeout pipeline variable.
 
+> Note: Technically, an aliases.json file with placeholders in the values of numeric or boolean fields does not represent a valid JSON document, so your editor might complain when opening or saving this file. But the placeholders will be replaced by the correct numeric or boolean values before the files are interpreted as JSON documents, so this does not cause any problem at pipeline runtime.
+
 ### ping
 
 ```json
