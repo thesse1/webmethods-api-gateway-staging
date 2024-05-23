@@ -216,7 +216,7 @@ The /apis folder contains sample API projects with the following export_payload.
 
 ### petstore
 
-```
+```json
 {
   "types": [
     "api"
