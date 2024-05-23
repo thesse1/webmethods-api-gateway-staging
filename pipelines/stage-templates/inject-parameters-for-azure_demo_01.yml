@@ -30,19 +30,33 @@ parameters:
       pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: BUILD
-    pool_name: vmsspoolagents-04
-    pool_image: ubuntu-latest
+    build_pool_name: vmsspoolagents-04
+    build_pool_image: ubuntu-latest
     dedicated_pool_name: vmsspoolagents-build
     dedicated_pool_image: ubuntu-latest
     is_build_stage: true
     environments:
     - name: BUILD_01
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
     - name: BUILD_02
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
     - name: BUILD_03
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
     - name: BUILD_04
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
     - name: BUILD_05
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
     - name: BUILD_06
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
     - name: BUILD_07
+      pool_name: vmsspoolagents-04
+      pool_image: ubuntu-latest
   - name: DEV_INT
     environments:
     - name: DEV_INT
