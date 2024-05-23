@@ -1390,7 +1390,7 @@ Users can overwrite this behavior with the `Build on which BUILD environment?` p
 
 In addition to this mechanism (fixed build environments), the API Gateway Staging solution offers two alternative mechanisms for assigning build jobs to BUILD environments:
  - Dedicated build agents: This mechanism uses a separate Azure DevOps agent pool with seven build agents, each one assigned to one of the seven BUILD environments. Instead of assigning BUILD environments by target stage, this mechanism lets every build agent use its own, assigned BUILD environment when executing a build job. Azure DevOps will automatically assign the next build job to the next free build agent, leading to an optimal utilization of the seven BUILD environments.
- - Resource pooling (experimental): This mechanism tries to reach the same goal without using a separate agent pool for the build jobs. In this mechanism, each build job will try to pull a free BUILD environment from a pool of seven environments managed by an Azure DevOps variable group (API_Gateway_Build_environments_availability). If there is currently no free environment available, the job will wait until a new environment becomes available.
+ - Resource pooling (experimental): This mechanism tries to reach the same goal without using a separate agent pool for the build jobs. In this mechanism, each build job will try to pull a free BUILD environment from a pool of seven environments managed by an Azure DevOps variable group (API_Gateway_build_environments_availability). If there is currently no free environment available, the job will wait until a new environment becomes available.
 
 You can switch between the three mechanisms by setting the default value for the build_job_assignment_mechanism parameter in inject-parameters-for-azure_demo_01.yml to fixed_build_environments, dedicated_build_agents or resource_pooling.
 
@@ -1906,7 +1906,7 @@ The job-level pipeline templates used in these pipelines can be found in the /pi
 | ------ | ------ |
 | build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see above) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
 | build-api-using-dedicated_build_agents.yml | Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are executed on a separate ADO agent pool. This agent pool must have seven build agents named BUILD_01, ..., BUILD_07. Build jobs will be assigned to BUILD environments based on the name of the ADO build agent on which it is running, making sure that only one build agent is using a BUILD environment at one point in time. |
-| build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_Build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. |
+| build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. |
 
 ### Step templates
 
@@ -2115,76 +2115,113 @@ The status and logs for each step can be inspected on the build details page in 
 
 The Postman collection is executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 
-## Variable groups and variable templates
+## Pipeline definitions and pipeline templates for API updating
 
-All variable groups are referenced in the variable templates in /{tenant}/variables:
+### Pipeline definitions
 
-| Variable template | Referenced variable group for playground tenant | Referenced variable group for realworld tenant |
-| ------ | ------ | ------ |
-| /{tenant}/variables/BUILD/variables.yml | wm_test_apigw_staging_build | wm_environment_build |
-| /{tenant}/variables/DESIGN/variables.yml | wm_test_apigw_staging_config | wm_environment_config |
-| /{tenant}/variables/DEV_INT/variables.yml | wm_test_apigw_staging_dev_int | wm_environment_dev_intern |
-| /{tenant}/variables/DEV_EXT/variables.yml | wm_test_apigw_staging_dev_ext | wm_environment_dev_extern |
-| /{tenant}/variables/TEST_INT/variables.yml | wm_test_apigw_staging_stage_int | wm_environment_stage_intern |
-| /{tenant}/variables/TEST_EXT/variables.yml | wm_test_apigw_staging_stage_ext | wm_environment_stage_extern |
-| /{tenant}/variables/PROD_INT/variables.yml | wm_test_apigw_staging_prod_int | wm_environment_prod_intern |
-| /{tenant}/variables/PROD_EXT/variables.yml | wm_test_apigw_staging_prod_ext | wm_environment_prod_extern |
-| /{tenant}/variables/variables-aliases.yml | wm_test_apigw_staging_aliases | wm_apigw_staging_aliases |
-| /{tenant}/variables/variables-artifactory.yml | wm_test_apigw_staging_artifactory | wm_apigw_staging_artifactory |
+The pipeline definition files (YAML) for the Azure DevOps pipeline for API updating can also be found in the /pipelines folder.
 
-The reference of variables-artifactory.yml is commented out. It can be activated when a service connection to a JFrog Artifactory repository is configured in Azure DevOps.
+| Pipeline | Pipeline definition |
+| ------ | ------ |
+| `Update Petstore API by File` | update-petstore_File.yml |
+| `Update Petstore API by URL` | update-petstore_URL.yml |
 
-This allows you to use variable groups with different names (or add further variables directly in the variable templates). The correct names of the variable groups would only have to be provided in the respective pipeline templates.
+### Stage template
 
-### wm_test_apigw_staging_config, build, dev_int, dev_ext, stage_int, stage_ext, prod_int, prod_ext and wm_environment_config, build, dev_intern, dev_extern, stage_intern, stage_extern, prod_intern, prod_extern
+The stage-level pipeline template used in these pipelines can be found in the /pipelines/stage-templates folder:
 
-These variable groups are used by
- - the configuration and the export pipelines for API Gateway configurations
- - the deployment pipelines for API projects
- - the export pipeline for API projects
- - the log purging pipeline
+| Template | README |
+| ------ | ------ |
+| update-api.yml | Stage template implementing the stage for updating the SwaggerPetstore API on DESIGN |
 
-Each variable group holds variable values specific for one API Gateway environment (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT, PROD_EXT).
+In addition to the parameters injected by the façade templates, the update-api.yml template has the following input parameters:
+
+| Parameter | README |
+| ------ | ------ |
+| api_id | API Gateway asset ID of the API to be updated |
+| update_type | UpdateAPI_File or UpdateAPI_URL |
+| update_url | Only relevant for UpdateAPI_URL: URL of the Swagger file to be imported |
+| update_username | Only relevant for UpdateAPI_URL: Username for downloading the Swagger file |
+| update_password | Only relevant for UpdateAPI_URL: Password for downloading the Swagger file |
+| update_file | Only relevant for UpdateAPI_File: Name of the file to be imported (in folder /schemas) |
+
+### Step templates
+
+The step-level pipeline template used in this pipeline can be found in the /pipelines/step-templates folder:
+
+| Template | README |
+| ------ | ------ |
+| update-api.yml | Includes all steps for updating the API on DESIGN |
+
+Each ADO stage in the update-api.yml stage template invokes update-api.yml for each DESIGN environment in separate jobs on (potentially) different agents.
+
+The pipeline template executes the following major step:
+
+#### update-api.yml
+
+| Step | README |
+| ------ | ------ |
+| Update API on API Gateway DESIGN | Executing the Update_API.json Postman collection in /postman/collections/utilities/update |
+
+The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
+
+The Postman collection is executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
+
+## Variable groups
+
+### Variable groups for user credentials
+
+The API Gateway Staging solution is using variable groups for securely managing the credentials (username and password) for accessing the API Gateway environments and the external Elasticsearch instances.
+
+TODO: There is one variable group `API_Gateway_{{environment_set}}_users` for each of the two environment sets, and there is one variable group `API_Gateway_{{environment_set}}_{{stage}}_users` for each stage, and there is one variable group `API_Gateway_{{environment_set}}_{{environment}}_users` for each environment. For stages with only one environment, the stage name and the environment name are identical, and there is only one variable grou for this stage/environment.
+
+Each variable group holds variable values specific for one API Gateway environment set or stage or environment:
 
 | Variable | README |
 | ------ | ------ |
-| agent_pool | The Azure DevOps agent pool to be used for accessing the API Gateway environment. For Microsoft-hosted agents: "Azure Pipelines". Select the right pool for self-hosted agents |
-| agent_pool_vmImage | The VM image for Microsoft-hosted agents in the Azure Pipelines pool. For Microsoft-hosted agents: "$(pool_image)". Leave blank for self-hosted agents |
-| environment | Name of the JSON file in the /environments folder for the API Gateway environment, e.g., config_environment_demo.json, build_environment_demo.json, dev_int_environment_demo.json etc. |
 | exporter_user | User for exporting assets from API Gateway, e.g., Exporter. The user must have the "Export assets" privilege |
 | exporter_password | The API Gateway password for the exporter user |
 | importer_user | User for importing assets in API Gateway, e.g., Importer. The user must have the "Import assets" privilege |
 | importer_password | The API Gateway password for the importer user |
+| publisher_user | User for publishing assets in API Gateway to API Portal / Developer Portal, e.g., Publisher. The user must have the "Publish to API Portal" privilege |
+| publisher_password | The API Gateway password for the publisher user |
 | preparer_user | User for preparing assets on API Gateway BUILD, e.g., Preparer. The user must have the "Manage APIs", "Activate / Deactivate APIs", "Manage applications", "Manage aliases" and "Manage scope mapping" privileges |
 | preparer_password | The API Gateway password for the preparer user |
 | initializer_user | User for initializing the API Gateway, e.g., Initializer. The user must have the "Manage general administration configurations" and "Manage aliases" privileges |
 | initializer_password | The API Gateway password for the initializer user |
-| purger_user | User for initializing the API Gateway, e.g., Purger. The user must have the "Manage purge and restore runtime events" privilege |
+| purger_user | User for purging analytics data in API Gateway, e.g., Purger. The user must have the "Manage purge and restore runtime events" privilege |
 | purger_password | The API Gateway password for the purger user |
+| updater_user | User for updating APIs in API Gateway, e.g., Updater. The user must have the "Manage APIs" privilege |
+| updater_password | The API Gateway password for the updater user |
+| elasticsearch_user | The user of the external Elasticsearch instance for ingesting the API Gateway analytics data |
+| elasticsearch_password | The Elasticsearch password for the Elasticsearch user |
 
-### wm_test_apigw_staging_artifactory and wm_apigw_staging_artifactory (optional)
+These variables can be defined in any of these variable groups (environment set, stage, environment), even on multiple levels. The variable groups are read in the following order:
+ 1. environment set
+ 2. stage
+ 3. environment
 
-These variable groups are used by the deployment pipelines for API projects. The value of the useArtifactory variable decides whether they store build results in Artifactory - in addition to storing them in Azure DevOps.
+If a variable is defined on multiple levels, the pipeline will use the value from the last read (lower) level. That means you can conveniently define all user credentials in the `API_Gateway_{{environment_set}}_users` variable group for all environments in the environment set if they are all the same. Or you can define (or overwrite) them in the `API_Gateway_{{environment_set}}_{{stage}}_users` variable groups on stage level if you have different credentials for different stages. Or you can define (or overwrite) them in the `API_Gateway_{{environment_set}}_{{environment}}_users` variable groups on environment level if you have different credentials for different environment within one stage.
 
-| Variable | README |
-| ------ | ------ |
-| useArtifactory | true or false |
-| artifactoryService | Name of the Artifactory service connection in Azure |
-| artifactoryFolder | Name of the Artifactory base-folder (repository) |
+> Note: You can use the same API Gateway user (for example, Administrator) for all roles, but then you would still have to set all user and password variables for all roles of this user in the respective variable group(s).
 
-### wm_test_apigw_staging_aliases and wm_apigw_staging_aliases
+> Note: Even if you have all credentials defined on a higher or lower level, you still have to create all _users variable groups for all three levels, because the pipelines will always try to read all these variable groups. Azure DevOps does not allow empty variable groups, so each variable group must define at least one (dummy) variable.
 
-These variable groups are used by the deployment pipelines for API projects. They are containers for variables used in the replacement of alias values. Variable names must follow the naming convention described above in section [Overwrite alias values with pipeline variables](#overwrite-alias-values-with-pipeline-variables).
+### Variable groups for value substitutions
 
-| Variable | README |
-| ------ | ------ |
-| {top-level attribute with a symbolic name of the alias in aliases.json file}.{target environment}.{name of the alias value to be replaced} | Replacement value |
+The API Gateway Staging solution uses the `API_Gateway_{{target_stage}}_value_substitutions` variable groups for managing the values for the replacement of placeholders in the build process, see above.
 
-> Note: These variable groups must be defined with at least one (dummy) variable even if you are not planning to use variable-based replacement of alias values.
+### Variable group for resource pooling
+
+The API Gateway Staging solution uses the `API_Gateway_build_environments_availability` variable group for implementing the resource pooling mechanism for assigning build jobs to BUILD environments, see above.
+
+## Azure DevOps environments
+
+TODO
 
 ## Environment configurations
 
-The environments used in the API Gateway Staging solution are configured in the /environments folder. For each environment (DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT), there is a Postman environment definition JSON file, for example:
+The Postman environments used in the API Gateway Staging solution are configured in the /environments/{{environment_set}} folders. For each environment, there is a Postman environment definition JSON file, for example:
 
 ### build_environment_demo.json
 
