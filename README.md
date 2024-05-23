@@ -116,13 +116,13 @@ The gateway_import_export_utils.bat can be used for importing and exporting APIs
 
 Sample Usage for importing the Petstore API that is present as flat file representation under /apis/petstore/assets into API Gateway server at https://apigw-config.acme.com
 
-```sh
+```
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
 Sample Usage for exporting the Petstore API that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /apis/petstore/assets
 
-```sh
+```
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
@@ -138,13 +138,13 @@ The batch script can also be used for importing and exporting general API Gatewa
 
 Sample Usage for importing the configuration that is present as flat file representation under /configuration/DESIGN/assets into API Gateway server at https://apigw-config.acme.com
 
-```sh
+```
 bin>gateway_import_export_utils.bat --importconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
 Sample Usage for exporting the configuration that is present on the API Gateway server at https://apigw-config.acme.com as flat file under /configuration/DESIGN/assets
 
-```sh
+```
 bin>gateway_import_export_utils.bat --exportconfig --environment DESIGN --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
@@ -1615,7 +1615,7 @@ Let's consider this example: An API developer wants to make a change to the Pets
 
   - All of the APIs of the organization are available in Git in the /apis folder. This flat file representation of the APIs should be converted and imported into the developer's local development API Gateway environment or the central DESIGN environment for changes to be made. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import this API (and related assets like applications) to the local development environment or the central DESIGN environment.
 
-```sh 
+``` 
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
@@ -1627,7 +1627,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
-```sh 
+``` 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
@@ -1679,7 +1679,7 @@ Let's consider this example: An API developer wants to create a new API and add 
 
   - The developer would then have to update the API Gateway artifacts of the existing API project on the local development environment or the central DESIGN environment. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to do this and import the existing API project (and related assets like applications) to the local development environment or the central DESIGN environment.
 
-```sh 
+``` 
 bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
@@ -1693,7 +1693,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
-```sh 
+``` 
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
@@ -1755,7 +1755,7 @@ Let's consider this example: An API developer wants to create a new API and add 
 
   - Now the new API has to be committed to Git such that it propagates to the next stage. The developer uses the /bin/gateway_import_export_utils.bat Windows batch script to prepare this, export the configured API Gateway artifacts for the API project from the local development environment or the central DESIGN environment and store the asset definitions to the local repository /apis folder. This can be done by executing the following command.
 
-```sh 
+``` 
 bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
