@@ -75,6 +75,12 @@
 			"enabled": true
 		},
 		{
+			"key": "elasticsearch-port",
+			"value": "443",
+			"type": "default",
+			"enabled": true
+		},
+		{
 			"key": "elasticsearch-indexname",
 			"value": "apigw-dev_int",
 			"type": "default",

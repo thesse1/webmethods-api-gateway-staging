@@ -75,6 +75,12 @@
 			"enabled": true
 		},
 		{
+			"key": "elasticsearch-port",
+			"value": "443",
+			"type": "default",
+			"enabled": true
+		},
+		{
 			"key": "elasticsearch-indexname",
 			"value": "apigw-prod_ext",
 			"type": "default",
@@ -88,12 +94,6 @@
 		},
 		{
 			"key": "loadbalancer-hostname",
-			"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
-			"type": "default",
-			"enabled": true
-		},
-		{
-			"key": "loadbalancer-ip",
 			"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
