@@ -1462,6 +1462,8 @@ The following parameters can/must be provided for this pipeline:
 | Export API(s) from DESIGN API Gateway in which environment set? | webm_io (default) or azure_demo_01 |
 | Message for the commit in Git? | The change will be committed with this commit message |
 
+> Note: API Gateway export archives can only be imported on API Gateway environment on the same or higher fixlevel. As of 23.05.24, the environments on webm_io are on fixlevel 11.0 while the environment on azure_demo_01 are on fixlevel 10.15 fix 15. This means: When you export an API project from webm_io DESIGN environment, you will not be able to deploy this API project on any azure_demo_01 target environment.
+
 ### `Export arbitrary API project from DESIGN`
 
 This pipeline will export the APIs and other API Gateway assets in the specified API project from DESIGN, and it will automatically commit the changes to the HEAD of the selected branch of the Git repository.
@@ -1477,6 +1479,8 @@ The following parameters can/must be provided for this pipeline:
 | Message for the commit in Git? | The change will be committed with this commit message |
 
 This pipeline can be used for exporting new versions of the zzz_ negative test cases. It can also be used for new API projects which have not yet been accounted for in the definition of the `Export seletced API project from DESIGN` pipeline.
+
+> Note: API Gateway export archives can only be imported on API Gateway environment on the same or higher fixlevel. As of 23.05.24, the environments on webm_io are on fixlevel 11.0 while the environment on azure_demo_01 are on fixlevel 10.15 fix 15. This means: When you export an API project from webm_io DESIGN environment, you will not be able to deploy this API project on any azure_demo_01 target environment.
 
 ## Pipelines for API Gateway configurations
 
@@ -1539,6 +1543,8 @@ The following parameters can/must be provided for this pipeline:
 | Commit | Leave this blank |
 | Export API Gateway configuration from which API Gateway? | All webm_io and azure_demo_01 environments |
 | Message for the commit in Git? | The change will be committed with this commit message |
+
+> Note: API Gateway export archives can only be imported on API Gateway environment on the same or higher fixlevel. As of 23.05.24, the environments on webm_io are on fixlevel 11.0 while the environment on azure_demo_01 are on fixlevel 10.15 fix 15. This means: When you export an API Gateway configuration from a webm_io environment, you will not be able to deploy this configuration on any azure_demo_01 environment.
 
 ## Pipeline for log purging
 
@@ -2071,9 +2077,9 @@ The Postman collections are executed using the Postman command-line execution co
 
 The pipeline definition file (YAML) for the Azure DevOps pipeline for log purging can also be found in the /pipelines folder.
 
-| Pipeline | Pipeline definition | README |
-| ------ | ------ | ------ |
-| purge_data_from_stages | api-purge-data-from-stages.yml | |
+| Pipeline | Pipeline definition |
+| ------ | ------ |
+| purge_data_from_stages | api-purge-data-from-stages.yml |
 
 The pipeline definition is using a pipeline template defined in api-purge-data.yml:
 
