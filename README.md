@@ -2221,60 +2221,9 @@ TODO
 
 ## Environment configurations
 
-The Postman environments used in the API Gateway Staging solution are configured in the /environments/{{environment_set}} folders. For each environment, there is a Postman environment definition JSON file, for example:
+The Postman environments used in the API Gateway Staging solution are configured in the /environments/{{environment_set}} folders. For each environment, there is a Postman environment definition JSON file, for example.
 
-### build_environment_demo.json
-
-```
-{
-  "id": "f313be5f-2640-22f7-36b6-3e79bba3c9e2",
-  "name": "BuildEnvironment Demo",
-  "values": [
-    {
-      "enabled": true,
-      "key": "hostname",
-      "value": "apigw-build.acme.com",
-      "type": "text"
-    },
-    {
-      "enabled": true,
-      "key": "ip",
-      "value": "1.2.3.4",
-      "type": "text"
-    },
-    {
-      "enabled": true,
-      "key": "port",
-      "value": "443",
-      "type": "text"
-    },
-    {
-      "enabled": true,
-      "key": "insecureflag",
-      "value": "--insecure",
-      "type": "text"
-    },
-    {
-      "key": "https_proxy_host",
-      "value": "5.6.7.8",
-      "type": "text",
-      "enabled": true
-    },
-    {
-      "key": "https_proxy_port",
-      "value": "6789",
-      "type": "text",
-      "enabled": true
-    }
-  ],
-  "timestamp": 1587036498482,
-  "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2020-04-16T11:32:40.730Z",
-  "_postman_exported_using": "Postman/5.5.5"
-}
-```
-
-Each environment must include values for the hostname, ip, port and insecureflag environment variables. The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
+Each environment file must include values for the hostname, ip, port and insecureflag environment variables. The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
 | Environment variable | README |
 | ------ | ------ |
