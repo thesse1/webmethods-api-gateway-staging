@@ -2173,7 +2173,7 @@ The Postman collection is executed using the Postman command-line execution comp
 
 The API Gateway Staging solution is using variable groups for securely managing the credentials (username and password) for accessing the API Gateway environments and the external Elasticsearch instances.
 
-TODO: There is one variable group `API_Gateway_{{environment_set}}_users` for each of the two environment sets, and there is one variable group `API_Gateway_{{environment_set}}_{{stage}}_users` for each stage, and there is one variable group `API_Gateway_{{environment_set}}_{{environment}}_users` for each environment. For stages with only one environment, the stage name and the environment name are identical, and there is only one variable grou for this stage/environment.
+There is one variable group `API_Gateway_{{environment_set}}_users` for each of the two environment sets, and there is one variable group `API_Gateway_{{environment_set}}_{{stage}}_users` for each stage, and there is one variable group `API_Gateway_{{environment_set}}_{{environment}}_users` for each environment. For stages with only one environment, the stage name and the environment name are identical, and there is only one variable grou for this stage/environment.
 
 Each variable group holds variable values specific for one API Gateway environment set or stage or environment:
 
