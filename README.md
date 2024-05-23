@@ -228,7 +228,7 @@ The /apis folder contains sample API projects with the following export_payload.
     }
   ]
 }
-```json
+```
 
 This example will select the API with asset ID f3d2a3c1-0f83-43ab-a6ec-215b93e2ecf5 (the SwaggerPetstore demo API with API key authentication and consumer application identification). It will automatically also include all applications defined for this API, and it will include the PetStore_Routing_Alias simple alias configured for routing API requests to the native Petstore API at https://petstore.swagger.io/v2. This API and all other instances of the Petstore demo API are assigned to the Internal API group, so they can be deployed on DEV_INT, TEST_INT and PROD_INT.
 
@@ -252,7 +252,7 @@ In addition to that, the value of the PetStore_Routing_Alias contains the placeh
     }
   ]
 }
-```json
+```
 
 This example showcases HTTP Basic Authentication for the Petstore demo API. The following user, group and team are authorized to use the API: testuser_01, testgroup_02 (with testuser_02) and testteam_03 (assigned to testgroup_03 with testuser_03). API Gateway will not automatically include the authorized user, group and team in the export. Therefore, testuser_01, testgroup_02 and testteam_03 must be included in export_payload.json explicitly. The dependent assets (testuser_02, testgroup_03 and testuser_03) will be included automatically.
 
@@ -281,7 +281,7 @@ This API is also using the PetStore_Routing_Alias with the `#{stage_name}#` and 
   ],
   "condition" : "or"
 }
-```json
+```
 
 This API project includes two APIs, actually two versions of the same API. They must be configured separately in the export_payload.json of the API project. The two API versions are using two different (simple) aliases, PetStore_Routing_Alias_1_0_8 and PetStore_Routing_Alias_1_0_9, for routing API requests to the native Petstore API.
 
@@ -303,7 +303,7 @@ The aliases PetStore_Routing_Alias_1_0_8 and PetStore_Routing_Alias_1_0_9 also c
     }
   ]
 }
-```json
+```
 
 This example features the Postman Echo API (https://learning.postman.com/docs/developer/echo-api/) which is often used for demonstrating API Management features. For each request type (POST, GET, DELETE), it extracts the header, query and path parameters and the request body from the request and echoes them back in the response payload. The API is using the PostmanEcho_Routing_Alias endpoint alias configured for routing API requests to the native PostmanEcho API at https://postman-echo.com. This API and all other instances of the PostmanEcho API are assigned to the External API group, so they can be deployed on DEV_EXT, TEST_EXT and PROD_EXT.
 
@@ -323,7 +323,7 @@ The description of the API contains a placeholder `#{stage_name}#` which will be
     }
   ]
 }
-```json
+```
 
 This API project contains an instance of the Postman Echo API with API mocking enabled. API tests will be executed on the BUILD environment against the Mock API, and the API will be deployed on DEV with mocking enabled. For the deployment on TEST and PROD, mocking will be disabled.
 
@@ -341,7 +341,7 @@ This API project contains an instance of the Postman Echo API with API mocking e
     }
   ]
 }
-```json
+```
 
 This API project demonstrates two ways of implementing multi-tenancy in API Gateway. It contains two APIs which are specifically designed for one tenant each:
  - Tenant1_PostmanEcho
@@ -368,7 +368,7 @@ This API will automatically identify the tenant by the incoming API key, and the
     }
   ]
 }
-```json
+```
 
 This API is using OAuth2 for inbound authentication. Therefore, the developer must also include the scope mapping ("gateway_scope") in the export set.
 
@@ -388,7 +388,7 @@ This API is using OAuth2 for inbound authentication. Therefore, the developer mu
     }
   ]
 }
-```json
+```
 
 This API is using JSON Web Tokens (JWT) for inbound authentication. It is configured to authorize requests with JWTs issued to the user testuser_jwt. The user itself must be included explicitly in the export set.
 
@@ -406,7 +406,7 @@ This API is using JSON Web Tokens (JWT) for inbound authentication. It is config
     }
   ]
 }
-```json
+```
 
 In addition to the PostmanEcho_Routing_Alias, this API makes use of the PostmanEcho_Security_Alias defining username and password credentials used in an Outbound Auth - Transport policy.
 
@@ -424,7 +424,7 @@ In addition to the PostmanEcho_Routing_Alias, this API makes use of the PostmanE
     }
   ]
 }
-```json
+```
 
 The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local underlying Integration Server of the API Gateway using Ping_Routing_Alias (simple alias). The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
@@ -442,7 +442,7 @@ The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local u
     }
   ]
 }
-```json
+```
 
 This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
@@ -460,7 +460,7 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
     }
   ]
 }
-```json
+```
 
 This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
@@ -478,7 +478,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
     }
   ]
 }
-```json
+```
 
 This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
@@ -502,7 +502,7 @@ These API projects cannot be deployed on any (target) stages. They are included 
     }
   ]
 }
-```json
+```
 
 This API project includes an instance of the internal Petstore API and an instance of the external PostmanEcho API. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
@@ -520,7 +520,7 @@ This API project includes an instance of the internal Petstore API and an instan
     }
   ]
 }
-```json
+```
 
 This API project includes an instance of the PostmanEcho API with an application called "Invalid_App_Name_INVALID". Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
@@ -538,7 +538,7 @@ This API project includes an instance of the PostmanEcho API with an application
     }
   ]
 }
-```json
+```
 
 This API project includes an instance of the PostmanEcho API with an unwanted local, API-level Log Invocation policy. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
@@ -556,7 +556,7 @@ This API project includes an instance of the PostmanEcho API with an unwanted lo
     }
   ]
 }
-```json
+```
 
 This API project includes an instance of the PostmanEcho API which is not assigned to any API group. Therefore, this API project cannot be deployed on any DEV, TEST or PROD environment. The build pipeline will detect this and return with an error message.
 
@@ -574,7 +574,7 @@ This API project includes an instance of the PostmanEcho API which is not assign
     }
   ]
 }
-```json
+```
 
 This API project includes an invalid aliases.json file, see below.
 
@@ -592,7 +592,7 @@ This API project includes an invalid aliases.json file, see below.
     }
   ]
 }
-```json
+```
 
 This API project includes an invalid aliases.json file, see below.
 
@@ -610,7 +610,7 @@ This API project includes an invalid aliases.json file, see below.
     }
   ]
 }
-```json
+```
 
 This API project includes an invalid aliases.json file, see below.
 
@@ -628,7 +628,7 @@ This API project includes an invalid aliases.json file, see below.
     }
   ]
 }
-```json
+```
 
 This API project includes an invalid aliases.json file, see below.
 
@@ -646,7 +646,7 @@ This API project includes an invalid aliases.json file, see below.
     }
   ]
 }
-```json
+```
 
 This API project includes an invalid aliases.json file, see below.
 
@@ -664,7 +664,7 @@ This API project includes an invalid aliases.json file, see below.
     }
   ]
 }
-```json
+```
 
 This API project is companioned by an invalid test case, see below.
 
@@ -679,7 +679,7 @@ The postman-echo-oauth2 sample project includes the following scopes.json file c
         "description": "postman-echo scope definition"
     }
 ]
-```json
+```
 
 The JSON array can include multiple scope definitions.
 
@@ -735,7 +735,7 @@ The JSON array can include multiple scope definitions.
     }
   }
 }
-```json
+```
 
 The global aliases.json file in the /apis folder contains alias values for the DEV_EXT, TEST_EXT and PROD_EXT target stages for the PostmanEcho_Routing_Alias endpoint alias used in the PostmanEcho APIs.
 
@@ -835,7 +835,7 @@ Note that the readTimeout on all three target stages is represented by the place
     }
   }
 }
-```json
+```
 
 The local aliases.json file in the /apis/ping folder contains alias values for all six target stages for the Ping_Routing_Alias endpoint alias used in the Ping API.
 
@@ -885,7 +885,7 @@ Note that the description, connectionTimeout and readTimeout attributes are set 
     }
   }
 }
-```json
+```
 
 This file contains environment-specific values for the PostmanEcho_Security_Alias HTTP Transport security alias used only by the PostmanEcho_Security_Alias API in this API project.
 
@@ -948,7 +948,7 @@ Note that the userName and password attributes are represented by placeholders. 
     }
   }
 }
-```json
+```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases which are not included in this API project. The build pipeline will detect this and return with an error message.
 
@@ -1002,7 +1002,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
     }
   }
 }
-```json
+```
 
 This file contains environment-specific values for the PostmanEcho_Routing_Alias alias which is already overwritten by the global aliases.json file in the /apis root folder. The build pipeline will detect this and return with an error message.
 
@@ -1059,7 +1059,7 @@ This file contains environment-specific values for the PostmanEcho_Routing_Alias
     }
   }
 }
-```json
+```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases with incorrect names not matching with the names in the original alias definitions. The build pipeline will detect this and return with an error message.
 
@@ -1114,7 +1114,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
     }
   }
 }
-```json
+```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases, but the alias IDs are missing. The build pipeline will detect this and return with an error message.
 
@@ -1165,7 +1165,7 @@ This file contains environment-specific values for the PetStore_Routing_Alias_1_
     }
   }
 }
-```json
+```
 
 This file contains environment-specific values for the PetStore_Routing_Alias_1_0_8 and the PetStore_Routing_Alias_1_0_9 aliases, but the alias names are missing. The build pipeline will detect this and return with an error message.
 
@@ -1196,7 +1196,7 @@ The /configuration folder contains sample configurations for DESIGN, BUILD, DEV_
   ],
   "condition" : "or"
 }
-```json
+```
 
 This configuration includes the standard Transaction logging global policy configured (see below) and enabled, the proxy bypass addresses (only localhost), the API fault configured to the standard API Gateway error message template, the application logs configured as per the API Gateway standard (but with Kibana logger silent), the API Gateway destination (internal Elasticsearch database) events configuration as per the API Gateway standard (but with performance data publish interval of 5 minutes), the default outbound and inbound keystores and truststores, and the (extended) settings.
 
@@ -1235,7 +1235,7 @@ Each /configuration folder contains a scopes.json file for demonstrating this fe
         "description": "OAuth2 demo scope on DESIGN"
     }
 ]
-```json
+```
 
 The JSON array can include multiple scope definitions.
 
