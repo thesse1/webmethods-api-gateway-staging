@@ -2263,7 +2263,7 @@ They are loaded automatically when the Postman collections are executed in the A
 
 The separate configuration of IP address and hostname is necessary in order to support cases in which the agent might not be able to find the API Gateway server by its hostname.
 
-## Postman environment configurations
+## Postman global variables
 
 In addition to the Postman environments, the API Gateway Staging solution uses Postman global variables for the configuration of the gRPC ports used in the configuration of the HAFT ring. These values cannot be managed in Postman environments, because they are used across environments.
 
