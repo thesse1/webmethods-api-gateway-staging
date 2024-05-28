@@ -24,9 +24,9 @@ API Gateway asset binaries can be build using Asset Build Environment and promot
 
 The promotion APIs that are exposed by API Gateway can be used for the DevOps automation. More information on these APIs can be found at https://github.com/SoftwareAG/webmethods-api-gateway/blob/master/apigatewayservices/APIGatewayPromotionManagement.json.
 
-### Directly using the API Gateway Archive Service API for exporting and importing asset definitions
+### Directly using the API Gateway Archive API for exporting and importing asset definitions
 
-This approach is followed in this solution. Using the API Gateway Archive Service API, API Gateway assets and configuration items are exported from the source stage, stored and managed in Git, and then imported on the target stages.
+This approach is followed in this solution. Using the API Gateway Archive API, API Gateway assets and configuration items are exported from the source stage, stored and managed in Git, and then imported on the target stages.
 
 In addition to this, the solution includes an automatic validation and adjustment of API Gateway assets for the deployment on different stages. It implements the following "design-time policies":
  - Alias values are set to target stage-specific values
@@ -68,7 +68,7 @@ The following API Gateway assets and configurations can be moved across API Gate
 
 ## About this repository
 
-This repository provides assets and scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive Service API (and other API Gateway Service APIs) for automation of the DevOps flow.
+This repository provides assets and scripts for implementing the CI/CD solution for API Gateway assets and general configurations. The artifacts in this repository use the API Gateway Archive API (and other API Gateway APIs) for automation of the DevOps flow.
 
 The repository has the following top-level folders:
   - .postman: Created and managed directly by Postman when managing the Postman collections in a Postman workspace
@@ -100,7 +100,7 @@ The gateway_import_export_utils.bat under /bin can be used for this. Using this 
 
 Alternatively, the developer can also use the `Export selected/arbitrary API project from DESIGN` pipelines and the `Deploy selected/arbitrary API project(s)` pipelines to export/import APIs from/to the central DESIGN environment into/from Git. In addition to that, the `Export API Gateway Configuration` pipeline and the `Configure API Gateway(s)` pipeline can be used for exporting or importing the general configuration from/to DESIGN, BUILD, DEV, TEST or PROD.
 
-The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export selected/arbitrary API project from DESIGN` and `Export API Gateway Configuration` pipelines) is defined by the export_payload.json in the API project or the configuration root folder. It must be a JSON document applicable for the API Gateway Archive Service API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
+The set of assets exported by gateway_import_export_utils.bat --exportapi (and by the `Export selected/arbitrary API project from DESIGN` and `Export API Gateway Configuration` pipelines) is defined by the export_payload.json in the API project or the configuration root folder. It must be a JSON document applicable for the API Gateway Archive API POST /archive request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-exp_imp_archive.html. It will typically contain a list of asset types ("types") to be exported and a query ("scope") based on the IDs of the selected assets.
 
 ### gateway_import_export_utils.bat
 
@@ -178,7 +178,7 @@ Confidential values like passwords in outbound authentication policies can be se
 
 Each API project can include one aliases.json file in the API project root folder specifying aliases used by the API(s) in the API project which should be overwritten with environment-specific values. In addition to that, there can be one global aliases.json file in the /apis root folder for overwriting values of aliases used by APIs in multiple API projects.
 
-For each target environment, the aliases.json files must include JSON objects applicable for the API Gateway Alias Management Service API PUT /alias/{aliasId} request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-restapi_alias_mgmt.html.
+For each target environment, the aliases.json files must include JSON objects applicable for the API Gateway Alias Management API PUT /alias/{aliasId} request payload, cf. https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fco-restapi_alias_mgmt.html.
 
 In order to avoid conflicts, each alias may only be configured to be overwritten either in the global aliases.json file in the /apis root folder or in the aliases.json files in the API project root folders.
 
@@ -1944,7 +1944,7 @@ The pipeline templates execute the following major steps:
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
 | Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prepare_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
-| Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive Service API |
+| Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
 
 #### store-build.yml
 
@@ -1969,7 +1969,7 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive Service API |
+| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive API |
 | Extract the flat representation from the API Deployable for API project xxx | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
@@ -2060,7 +2060,7 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive Service API |
+| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive API |
 | Extract the flat representation from the API Deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
@@ -2269,36 +2269,44 @@ The following Postman collections and curl commands are executed automatically i
 
 ![GitHub Logo](/images/Postman_collections.png)
 
-## API Gateway Service APIs
+## API Gateway APIs
 
-TODO
-
-The API Gateway Staging solution is using the following API Gateway Service APIs:
+The API Gateway Staging solution is using the following API Gateway APIs:
 
 Direct invocation (curl) in the gateway_import_export_utils.bat script:
- - API Gateway Archive Service API for importing and exporting API Gateway assets
+ - API Gateway Archive API for importing and exporting API Gateway assets
 
-Direct invocation (curl) in the api-build.yml, api-export-api.yml and api-export-config.yml pipeline templates:
- - API Gateway Archive Service API for exporting API Gateway assets
+Direct invocation (curl) in the build-api.yml, export-api.yml and export-config.yml pipeline templates:
+ - API Gateway Archive API for exporting API Gateway assets
 
-In the ImportAPI.json and the ImportConfig.json Postman collections:
- - API Gateway Alias Management Service API for reading and updating the configuration of the local OAuth2 Authorization Server and JWT Provider alias
- - API Gateway Archive Service API for importing API Gateway assets
+In the Import_API.json and the Import_API_Gateway_config.json Postman collections:
+ - API Gateway Alias Management API for reading and updating the configuration of the local OAuth2 Authorization Server and JWT Provider alias
+ - API Gateway Archive API for importing API Gateway assets
 
-In the Initialize_{Target}.json Postman collections:
- - API Gateway Administration Service API for setting the loadbalancer configuration and for setting the HTTPS_Proxy outbound proxy configuration
- - API Gateway Alias Management Service API for reading and updating the configuration of the local OAuth2 Authorization Server and JWT Provider alias
+In the Initialize_XXX.json Postman collections:
+ - API Gateway Administration API for setting the loadbalancer configuration, the external Elasticsearch destination and the HTTPS_Proxy outbound proxy configuration
+ - API Gateway Alias Management API for reading and updating the configuration of the local OAuth2 Authorization Server and JWT Provider alias
 
 In the Prepare_BUILD.json Postman collection:
- - API Gateway Application Management Service API for deleting all applications
- - API Gateway Service Management Service API for deactivating and deleting all APIs
- - API Gateway Alias Management Service API for deleting all aliases
+ - API Gateway Application Management API for deleting all applications and all strategies
+ - API Gateway Service Management API for deactivating and deleting all APIs and all scopes
+ - API Gateway Alias Management API for deleting all aliases
 
 In the Prepare_for_{Target}.json Postman collections:
- - API Gateway Policy Management Service API for validating API policies
- - API Gateway Application Management Service API for validating applications and for removing unwanted applications and for activating (unsuspending) the remaining applications
- - API Gateway Alias Management Service API for updating alias values
- - API Gateway Service Management Service API for validating and updating APIs
+ - API Gateway Policy Management API for validating API policies
+ - API Gateway Application Management API for validating applications and for removing unwanted applications and for activating (unsuspending) the remaining applications and for validating and updating strategies
+ - API Gateway Alias Management API for updating alias values
+ - API Gateway Service Management API for validating and updating APIs
 
 In the PurgeData.json Postman collection:
- - API Gateway Administration Service API for purging log data
+ - API Gateway Administration API for purging log data
+
+In the Republish_APIs.json Postman collection:
+ - API Gateway Administration API for retrieving the portal ID and the portal communities
+ - API Gateway Service Management API for retrieving the publication status for all APIs and for republishing the APIs
+
+In Update_API.json Postman collection:
+ - API Gateway Service Management API for retrieving the API status, deactivating, updating and re-activating the API
+
+In Configure_HAFT_listener_on_XXX_nn, Configure_HAFT_ring_on_XXX_nn and Validate_HAFT_on_XXX_nn Postman collections:
+ - API Gateway Data Center Management API for configuring the HAFT listener and ring and for validating the ring formation
