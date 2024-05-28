@@ -444,7 +444,7 @@ The Ping API directly invokes the /invoke/wm.server:ping endpoint on the local u
 }
 ```
 
-This is an example for a SOAP API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
+This is an example for a SOAP API incl. test request in API_Test.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 ### odata_tutorial
 
@@ -462,7 +462,7 @@ This is an example for a SOAP API incl. test request in APITest.json. The API is
 }
 ```
 
-This is an example for an OData API incl. test requests in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
+This is an example for an OData API incl. test requests in API_Test.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 ### countries
 
@@ -480,7 +480,7 @@ This is an example for an OData API incl. test requests in APITest.json. The API
 }
 ```
 
-This is an example for a GraphQL API incl. test request in APITest.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
+This is an example for a GraphQL API incl. test request in API_Test.json. The API is assigned to the Internal and to the External API group, so it can be deployed on all DEV, TEST and PROD environments.
 
 > Note: This sample API cannot be deployed on any target environment in the webm_io environment set, because webMethods.io API does not seem to support GraphQL APIs (as of 16.05.2024), but it can be deployed in the azure_demo_01 target environments.
 
@@ -1241,11 +1241,11 @@ Each /configuration folder contains a scopes.json file for demonstrating this fe
 
 The JSON array can include multiple scope definitions.
 
-## APITest.json Postman test collections
+## API_Test.json Postman test collections
 
 The next common scenario for an API developer is to assert the changes made to the APIs do not break their customer scenarios. This is achieved using Postman test collections, cf. https://learning.postman.com/docs/getting-started/introduction/. In a Postman test collection, the developer can group test requests that should be executed against the API under test every time a change is to be propagated to DEV, TEST or PROD. The collection can be defined and executed in a local instance of the Postman REST client, cf. https://learning.postman.com/docs/sending-requests/intro-to-collections/. The requests in a test collection should include scripted test cases asserting that the API response is as expected (response status, payload elements, headers etc.), cf. https://learning.postman.com/docs/writing-scripts/test-scripts/. Test scripts can also extract values from the response and store them in Postman variable for later use, https://learning.postman.com/docs/sending-requests/variables/. For example, the first request might request and get an OAuth2 access token and store it in a Postman variable; later requests can use the token in the variable for authenticating against their API. Test collections can even define request workflows including branches and loops, cf. https://learning.postman.com/docs/running-collections/building-workflows/. The automatic execution of Postman collections can be tested in the Postman REST client itself, cf. https://learning.postman.com/docs/running-collections/intro-to-collection-runs/.
 
-Each API project must include one Postman test collection under the name APITest.json in its API tests folder under /postman/collections/apitests. The name of the API tests folder under /postman/collections/apitests must be identical to the name of the corresponding API folder under /apis. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's tests folder under the name APITest.json.
+Each API project must include one Postman test collection under the name API_Test.json in its API tests folder under /postman/collections/apitests. The name of the API tests folder under /postman/collections/apitests must be identical to the name of the corresponding API folder under /apis. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's tests folder under the name API_Test.json.
 
 > Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definitions in the Postman REST client from the /environments folder.
 
@@ -1258,15 +1258,15 @@ Each API project must include one Postman test collection under the name APITest
 
 The distinction between {{api_ip}} and {{api_hostname}} enables supporting API Gateway environments which are not (yet) properly represented in DNS.
 
-> Note: The APITest.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement (but after replacement of placeholders). So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
+> Note: The API_Test.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement (but after replacement of placeholders). So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
 
-The /postman/collections/apitests folder contains API tests folders with APITest.json test collections for the following sample API projects:
+The /postman/collections/apitests folder contains API tests folders with API_Test.json test collections for the following sample API projects:
 
 ### petstore
 
 The petstore test collection sends POST, GET and DELETE requests against the SwaggerPetstore API. It contains tests validating the response code and the petId returned in the response body.
 
-> Note: As of 15.06.2021, we have detected a malfunction in the native Petstore API breaking the GET and DELETE requests defined in the APITest.json Postman test collection for Petstore APIs: The GET and DELETE requests will intermittently (ca. 50% of the time) fail to address the pet by id. We have therefore manipulated all APITest.json Postman test collections for Petstore APIs skipping the GET and DELETE requests and only running the POST requests. The original versions of the test collections are retained as APITest_full_test.json.
+> Note: As of 15.06.2021, we have detected a malfunction in the native Petstore API breaking the GET and DELETE requests defined in the API_Test.json Postman test collection for Petstore APIs: The GET and DELETE requests will intermittently (ca. 50% of the time) fail to address the pet by id. We have therefore manipulated all API_Test.json Postman test collections for Petstore APIs skipping the GET and DELETE requests and only running the POST requests.
 
 ### petstore_basicauth
 
@@ -1328,7 +1328,7 @@ The key to proper DevOps is continuous integration and continuous deployment. Or
 
 The API Gateway Staging solution includes two Azure DevOps build pipelines for deploying API projects from a Git repository to DESIGN, DEV, TEST and PROD environments and two pipelines for exporting API projects from DESIGN into the Git repository.
 
-In each deployment pipeline, the API Gateway assets configured in the API project will be imported on a BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, TEST and PROD, it will then execute the API tests configured in the API project's APITest.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to DESIGN.)
+In each deployment pipeline, the API Gateway assets configured in the API project will be imported on a BUILD environment (after cleaning it from remnants of the last deployment). For a deployment to DEV, TEST and PROD, it will then execute the API tests configured in the API project's API_Test.json Postman test collection. If one of the tests fail, the deployment will be aborted. (No tests will be executed for deployments to DESIGN.)
 
 For a deployment to DEV, TEST and PROD, the pipeline will now validate and manipulate the assets on the BUILD environment (using API Gateway's own APIs) to prepare them for the target environment:
 - All policy actions will be scanned for unwanted API-level Log Invocation policies
@@ -1633,7 +1633,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API tests folder under /postman/collections/apitests.
+  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under API_Test.json in the API tests folder under /postman/collections/apitests.
   
   - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
@@ -1659,7 +1659,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under APITest.json in the API project root folder and commit the change.
+  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under API_Test.json in the API project root folder and commit the change.
 
   - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
@@ -1687,7 +1687,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The developer would then create the new API on the local development environment or the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group and does not include any API-level Log Invocation policy.
 
-  - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
+  - The developer would then import the API project's collection of function/regression tests from the API_Test.json file into his/her local Postman REST client and add requests and tests for the new API.
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
@@ -1699,7 +1699,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests.
 
   - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
@@ -1719,7 +1719,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - The developer would then create the new API on the central DESIGN environment making sure it is correctly assigned to the Internal API group and/or to the External API group and does not include any API-level Log Invocation policy.
 
-  - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
+  - The developer would then import the API project's collection of function/regression tests from the API_Test.json file into his/her local Postman REST client and add requests and tests for the new API.
 
   - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
@@ -1727,7 +1727,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests and commit the change.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests and commit the change.
 
   - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
@@ -1761,7 +1761,7 @@ Let's consider this example: An API developer wants to create a new API and add 
 bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests.
   
   - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
@@ -1791,7 +1791,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - Now the new API has to be committed to Git such that it propagates to the next stage. The developer executes the `Export arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under APITest.json in the API tests folder under /postman/collections/apitests and commit the change.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests and commit the change.
 
   - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy arbitrary API project` pipeline.
 
@@ -1942,7 +1942,7 @@ The pipeline templates execute the following major steps:
 | Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /postman/collections/utilities/prepare |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
 | Import the Deployable to API Gateway BUILD | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
-| Run tests on API Gateway BUILD | Executing the APITest.json Postman collection in the API project's api tests folder |
+| Run tests on API Gateway BUILD | Executing the API_Test.json Postman collection in the API project's api tests folder |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
 | Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
@@ -2264,7 +2264,7 @@ The loadbalancer_protocol, loadbalancer_hostname and loadbalancer_port variables
 
 The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
-These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the APITest.json Postman test collections in under postman/collections/apitests.
+These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the API_Test.json Postman test collections in under postman/collections/apitests.
 
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 

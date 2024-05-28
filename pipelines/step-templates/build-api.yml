@@ -97,7 +97,7 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - bash: |
-    newman run postman/collections/apitests/${{parameters.api_project}}/APITest.json --reporters cli,junit --reporter-junit-export apis/${{parameters.api_project}}/junitReport.xml \
+    newman run postman/collections/apitests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export apis/${{parameters.api_project}}/junitReport.xml \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_api_insecureflag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
