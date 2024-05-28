@@ -2169,7 +2169,7 @@ The status and logs for each step can be inspected on the build details page in 
 
 The Postman collection is executed using the Postman command-line execution component Newman, cf. https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/.
 
-## Variable groups
+## Azure DevOps Variable groups
 
 ### Variable groups for user credentials
 
@@ -2225,7 +2225,7 @@ When using fixed build environments mechanism for assigning build jobs to BUILD 
 
 When using dedicated build agents or resource pooling mechanism for assigning build jobs to BUILD environments, the build job is using the `API_Gateway_azure_demo_01_BUILD_environments` environment. This environment should not have an exclusive lock enabled. Otherwise, the build jobs would block each other although there are assigned to different BUILD environment by the dedicated build agents or resource pooling mechanism.
 
-## Environment configurations
+## Postman environment configurations
 
 The Postman environments used in the API Gateway Staging solution are configured in the /environments/{{environment_set}} folders. For each environment, there is a Postman environment definition JSON file including the following environment variables:
 
@@ -2262,6 +2262,23 @@ These environment variables are used in the postman/collections/utilities Postma
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 
 The separate configuration of IP address and hostname is necessary in order to support cases in which the agent might not be able to find the API Gateway server by its hostname.
+
+## Postman environment configurations
+
+In addition to the Postman environments, the API Gateway Staging solution uses Postman global variables for the configuration of the gRPC ports used in the configuration of the HAFT ring. These values cannot be managed in Postman environments, because they are used across environments.
+
+The Postman global variables are configured in the /environments/azure_demo_01 folder. For each stage for which HAFT should be configured, there is a Postman global variables definition JSON file (API_Gateway_PROD_INT_haft_globals.json and API_Gateway_PROD_EXT_haft_globals.json) including the following global variables:
+
+| Global variable | README |
+| ------ | ------ |
+| ip_grpc_01 |  Hostname or IP address of the API Gateway gRPC port on environment 01 |
+| port_grpc_01 |  Port number of the API Gateway gRPC port on environment 01 |
+| ip_grpc_02 |  Hostname or IP address of the API Gateway gRPC port on environment 02 |
+| port_grpc_02 |  Port number of the API Gateway gRPC port on environment 02 |
+
+These global variables are used in the postman/collections/utilities/haft Postman collections for the configuration of the HAFT listeners and the HAFT ring and for validating the HAFT ring.
+
+They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for locally testing the HAFT Postman collections.
 
 ## Postman collections and curl commands
 
