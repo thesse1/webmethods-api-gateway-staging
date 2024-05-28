@@ -1935,15 +1935,17 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
+| Replace tokens with variable values in assets | Using qetza.replacetokens.replacetokens-task.replacetokens@5 Azure DevOps task for variable value replacement |
+| Replace tokens with variable values in local aliases.json | Using qetza.replacetokens.replacetokens-task.replacetokens@5 Azure DevOps task for variable value replacement |
+| Replace tokens with variable values in global aliases.json | Using qetza.replacetokens.replacetokens-task.replacetokens@5 Azure DevOps task for variable value replacement |
 | Create the API Deployable from the flat representation for API project xxx | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /postman/collections/utilities/prepare |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
 | Import the Deployable to API Gateway BUILD | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
-| Run tests on API Gateway BUILD (if test_condition is ${{true}}) | Executing the APITest.json Postman collection in the API project's root folder |
-| Replace alias values using pipeline variables | Using FileTransform@1 Azure DevOps standard task for replacing the values in all aliases.json files |
+| Run tests on API Gateway BUILD | Executing the APITest.json Postman collection in the API project's api tests folder |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
-| Validate and prepare assets: Validate policy actions, application names and API groupings, update aliases, delete all non-DEV/TEST/PROD applications, unsuspend all remaining applications, fix incorrect clientId and clientSecret values in OAuth2 strategies, add build details as tags to APIs (if prepare_condition is ${{true}}) | Executing the Prepare_for_DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
 
 #### store-build.yml
@@ -1963,7 +1965,9 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportAPI.json Postman collection in /postman/collections/utilities/import |
+| Import the Deployable to API Gateway XXX | Executing the Import_API.json Postman collection in /postman/collections/utilities/import |
+| Generate API list as JSON array | Generate list of APIs in the API project using jq |
+| Republish all xxx APIs from API Gateway XXX | Executing the Republish_APIs.json Postman collection in /postman/collections/utilities/publish |
 
 #### export-api.yml
 
@@ -2036,31 +2040,34 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Create the API Deployable from the flat representation for DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
+| Create the API Deployable from the flat representation for XXX configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Prepare list of scopes to be imported | Parse scopes.json in API Gateway configuration root folder using jq |
-| Import the Deployable to API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the ImportConfig.json Postman collection in /postman/collections/utilities/import |
-| Initialize API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the Initialize_DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT.json Postman collection in /postman/collections/utilities/initialize |
+| Import the Deployable to API Gateway XXX | Executing the Import_API_Gateway_config.json Postman collection in /postman/collections/utilities/import |
+| Initialize API Gateway XXX | Executing the Initialize_XXX.json Postman collection in /postman/collections/utilities/initialize |
 
 #### configure-haft-listener.yml
 
 | Step | README |
 | ------ | ------ |
+| Initialize High Availability and Fault Tolerance (HAFT) listener for API Gateway XXX | Executing the Configure_HAFT_listener_on_XXX.json Postman collection in /postman/collections/utilities/haft |
 
-#### re-haft-ring.yml
+#### configure-haft-ring.yml
 
 | Step | README |
 | ------ | ------ |
+| Initialize High Availability and Fault Tolerance (HAFT) ring for API Gateway XXX | Executing the Configure_HAFT_ring_on_XXX.json Postman collection in /postman/collections/utilities/haft |
 
 #### configure-haft-ring-validation.yml
 
 | Step | README |
 | ------ | ------ |
+| Validate High Availability and Fault Tolerance for API Gateway XXX | Executing the Validate_HAFT_on_XXX.json Postman collection in /postman/collections/utilities/haft |
 
 #### export-config.yml
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive API |
+| Export the Deployable from API Gateway XXX | Using a bash script calling curl to invoke the API Gateway Archive API |
 | Extract the flat representation from the API Deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
 | Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
@@ -2111,7 +2118,7 @@ The pipeline template executes the following major step:
 
 | Step | README |
 | ------ | ------ |
-| Purge Data on API Gateway DESIGN/BUILD/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_EXT | Executing the PurgeData.json Postman collection in /postman/collections/utilities/purge |
+| Purge Data on API Gateway XXX | Executing the Purge_Data.json Postman collection in /postman/collections/utilities/purge |
 
 The status and logs for each step can be inspected on the build details page in Azure DevOps Server.
 
@@ -2147,7 +2154,7 @@ In addition to the parameters injected by the façade templates, the update-api.
 | update_password | Only relevant for UpdateAPI_URL: Password for downloading the Swagger file |
 | update_file | Only relevant for UpdateAPI_File: Name of the file to be imported (in folder /schemas) |
 
-### Step templates
+### Step template
 
 The step-level pipeline template used in this pipeline can be found in the /pipelines/step-templates folder:
 
