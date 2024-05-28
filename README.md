@@ -2292,7 +2292,7 @@ In the Prepare_BUILD.json Postman collection:
  - API Gateway Service Management API for deactivating and deleting all APIs and all scopes
  - API Gateway Alias Management API for deleting all aliases
 
-In the Prepare_for_{Target}.json Postman collections:
+In the Prepare_for_XXX.json Postman collections:
  - API Gateway Policy Management API for validating API policies
  - API Gateway Application Management API for validating applications and for removing unwanted applications and for activating (unsuspending) the remaining applications and for validating and updating strategies
  - API Gateway Alias Management API for updating alias values
