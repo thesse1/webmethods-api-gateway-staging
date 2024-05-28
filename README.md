@@ -12,13 +12,13 @@ This solution is based on https://github.com/thesse1/webmethods-api-gateway-devo
 
 ## Some background
 
-As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change, and those changes have to be propagated to other external products like API Portal / Developer Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is a key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
+As each organization builds APIs using API Gateway for easy consumption and monetization, the continuous integration and delivery are integral part of the API Gateway solutions to meet the consumer demands. We need to automate the management of APIs and policies to speed up the deployment, introduce continuous integration concepts and place API artifacts under source code management. As new apps are deployed, the API definitions can change, and those changes have to be propagated to other external products like API Portal / Developer Portal. This requires the API owner to update the associated documentation and in most cases this process is a tedious manual exercise. In order to address this issue, it is key to bring in DevOps style automation to the API life cycle management process in API Gateway. With this, enterprises can deliver continuous innovation with speed and agility, ensuring that new updates and capabilities are automatically, efficiently and securely delivered to their developers and partners in a timely fashion and without manual intervention. This enables a team of API Gateway policy developers to work in parallel developing APIs and policies to be deployed as a single API Gateway configuration.
 
 This CI/CD or DevOps approach can be achieved in multiple ways:
 
 ### Using webMethods Deployer and Asset Build Environment
 
-API Gateway asset binaries can be build using Asset Build Environment and promoted across stages using WmDeployer. More information on this way of CI/CD and DevOps automation can be found at https://tech.forums.softwareag.com/t/staging-promotion-and-devops-of-api-gateway-assets/237040.
+API Gateway asset binaries can be built using Asset Build Environment and promoted across stages using WmDeployer. More information on this way of CI/CD and DevOps automation can be found at https://tech.forums.softwareag.com/t/staging-promotion-and-devops-of-api-gateway-assets/237040.
 
 ### Using Promotion Management APIs
 
@@ -82,7 +82,7 @@ The repository has the following top-level folders:
   - images: Diagrams and screenshots used in this documentation
   - pipelines: Contains the Azure DevOps pipeline definitions and pipeline templates for deploying API Gateway assets on DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments, for initializing the environments, for exporting assets, for updating API definitions, for configuring HAFT, for publishing APIs to API Portal / Developer Portal and for log purging
   - postman/collections/utilities: Contains Postman collections for importing API Gateway assets, for preparing (cleaning) the BUILD environment, for preparing the API Gateway assets on BUILD for the target environment, for initializing API Gateway environments with environment-specific configurations, and for log purging
-  - postman/collections/apitests: Contains Postman collections with API tests for every API project which are executed automatically for every API deployment
+  - postman/collections/api_tests: Contains Postman collections with API tests for every API project which are executed automatically for every API deployment
   - schemas: Contains an updated version of the Petstore API Swagger API specification for demonstrating automatic API update
 
 The repository content can be committed to a Git repository (e.g., the Azure DevOps repository or a GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the repository can be imported back to a local development environment, to the central DESIGN environment or promoted to DEV, TEST or PROD.
@@ -90,7 +90,7 @@ The repository content can be committed to a Git repository (e.g., the Azure Dev
 Larger organizations implementing the API Gateway Staging solution tend to split the content of this repository into separate repos for different groups working on the content. For example, you can create separate repos with the following folders:
  - pipelines and postman/collections/utilities for the pipeline developers
  - configuration and environments for the API Gateway administrators
- - apis and postman/collections/apitests for the API providers
+ - apis and postman/collections/api_tests for the API providers
 
 ## Develop and test APIs using API Gateway
 
@@ -1245,7 +1245,7 @@ The JSON array can include multiple scope definitions.
 
 The next common scenario for an API developer is to assert the changes made to the APIs do not break their customer scenarios. This is achieved using Postman test collections, cf. https://learning.postman.com/docs/getting-started/introduction/. In a Postman test collection, the developer can group test requests that should be executed against the API under test every time a change is to be propagated to DEV, TEST or PROD. The collection can be defined and executed in a local instance of the Postman REST client, cf. https://learning.postman.com/docs/sending-requests/intro-to-collections/. The requests in a test collection should include scripted test cases asserting that the API response is as expected (response status, payload elements, headers etc.), cf. https://learning.postman.com/docs/writing-scripts/test-scripts/. Test scripts can also extract values from the response and store them in Postman variable for later use, https://learning.postman.com/docs/sending-requests/variables/. For example, the first request might request and get an OAuth2 access token and store it in a Postman variable; later requests can use the token in the variable for authenticating against their API. Test collections can even define request workflows including branches and loops, cf. https://learning.postman.com/docs/running-collections/building-workflows/. The automatic execution of Postman collections can be tested in the Postman REST client itself, cf. https://learning.postman.com/docs/running-collections/intro-to-collection-runs/.
 
-Each API project must include one Postman test collection under the name API_Test.json in its API tests folder under /postman/collections/apitests. The name of the API tests folder under /postman/collections/apitests must be identical to the name of the corresponding API folder under /apis. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's tests folder under the name API_Test.json.
+Each API project must include one Postman test collection under the name API_Test.json in its API tests folder under /postman/collections/api_tests. The name of the API tests folder under /postman/collections/api_tests must be identical to the name of the corresponding API folder under /apis. This test collection will be executed automatically on the BUILD environment for every deployment on DEV, TEST and PROD. It can be created by exporting a test collection in the Postman REST client and storing it directly in the API project's tests folder under the name API_Test.json.
 
 > Note: The test requests in the Postman collection must use the following environment variables for addressing the API Gateway. Otherwise, the requests will not work in the automatic execution on the BUILD environment. Developers can import and use the environment definitions in the Postman REST client from the /environments folder.
 
@@ -1260,7 +1260,7 @@ The distinction between {{api_ip}} and {{api_hostname}} enables supporting API G
 
 > Note: The API_Test.json Postman test collections will be executed automatically on the BUILD environment by the deployment pipelines before alias value replacement (but after replacement of placeholders). So, they will be executed with aliases holding values as they are imported from the repository, i.e., with the values defined on the central DESIGN environment or the local development environment. Make sure that these values are set appropriately for the tests to be executed on the BUILD environment.
 
-The /postman/collections/apitests folder contains API tests folders with API_Test.json test collections for the following sample API projects:
+The /postman/collections/api_tests folder contains API tests folders with API_Test.json test collections for the following sample API projects:
 
 ### petstore
 
@@ -1633,7 +1633,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under API_Test.json in the API tests folder under /postman/collections/apitests.
+  - If the developer made any changes to the Postman test collection in the Postman REST client, he/she would now have to export the collection and store it under API_Test.json in the API tests folder under /postman/collections/api_tests.
   
   - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
@@ -1699,7 +1699,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/api_tests.
 
   - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
@@ -1727,7 +1727,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name petstore --apigateway
 
   - Now this change made by the API developer has to be pushed back to Git such that it propagates to the next stage. The developer executes the `Export selected/arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests and commit the change.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/api_tests and commit the change.
 
   - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy selected/arbitrary API project(s)` pipeline.
 
@@ -1761,7 +1761,7 @@ Let's consider this example: An API developer wants to create a new API and add 
 bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_url https://apigw-config.acme.com --apigateway_username hesseth --apigateway_password ***
 ```
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/api_tests.
   
   - After this is done, the changes from the developer's local repository are pushed to the central Git repository.
 
@@ -1791,7 +1791,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - Now the new API has to be committed to Git such that it propagates to the next stage. The developer executes the `Export arbitrary API project from DESIGN` pipeline for the petstore API project.
 
-  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/apitests and commit the change.
+  - The developer would now export the Postman test collection in the Postman REST client and store it under API_Test.json in the API tests folder under /postman/collections/api_tests and commit the change.
 
   - Someone will now propagate the changes by publishing the API project from the feature branch (or the master branch if no feature branch was created) to DEV_INT or DEV_EXT using the `Deploy arbitrary API project` pipeline.
 
@@ -2264,7 +2264,7 @@ The loadbalancer_protocol, loadbalancer_hostname and loadbalancer_port variables
 
 The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
-These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the API_Test.json Postman test collections in under postman/collections/apitests.
+These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the API_Test.json Postman test collections in under postman/collections/api_tests.
 
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 
