@@ -2263,19 +2263,11 @@ They are loaded automatically when the Postman collections are executed in the A
 
 The separate configuration of IP address and hostname is necessary in order to support cases in which the agent might not be able to find the API Gateway server by its hostname.
 
-## Postman collections
+## Postman collections and curl commands
 
-TODO
+The following Postman collections and curl commands are executed automatically in the pipelines:
 
-The following Postman collections are executed automatically against the BUILD and the Target environment(s) (using Newman) in the deployment and configuration pipelines:
-
-![GitHub Logo](/images/Pipelines_Utilities.png)
-
-The PurgeData.json Postman collection is executed automatically against all environments (using Newman) in the log purging pipeline:
-
-![GitHub Logo](/images/Pipelines_Utilities_PurgeData.png)
-
-The export pipelines are not using any Postman collections.
+![GitHub Logo](/images/Postman_collections.png)
 
 ## API Gateway Service APIs
 
