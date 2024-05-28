@@ -2102,7 +2102,7 @@ The stage-level pipeline template used in this pipeline can be found in the /pip
 
 In addition to the parameters injected by the façade templates, the purge-data.yml template does not have any additional parameters.
 
-### Step templates
+### Step template
 
 The step-level pipeline template used in this pipeline can be found in the /pipelines/step-templates folder:
 
