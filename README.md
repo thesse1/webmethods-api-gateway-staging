@@ -196,7 +196,7 @@ This facilitates the setting of specific alias values for every target stage dir
 
 ### Value substitution using using Azure DevOps Replace Tokens extension for aliases.json files
 
-Both the global and the API-project-specific aliases.json files can also include placeholders in the format `#{placeholder_name}#`.
+Both the global and the API project-specific aliases.json files can also include placeholders in the format `#{placeholder_name}#`.
 
 This allows for a mix of the first and the second mechanism for injecting target stage-specific values. You can define alias definitions for all target stages with some fixed values in the aliases.json files including some placeholders for values which should be replaced based on Azure DevOps pipeline variables (maybe for a better separation of concern or for better hiding confidential values).
 
@@ -1689,7 +1689,7 @@ bin>gateway_import_export_utils.bat --importapi --api_name petstore --apigateway
 
   - The developer would then import the API project's collection of function/regression tests from the APITest.json file into his/her local Postman REST client and add requests and tests for the new API.
 
-  - Optional, but highly recommended: The developer creates a new feature branch for the change in the VCS.
+  - Optional, but highly recommended: The developer creates a new feature branch for the change in Git.
 
   - The developer will now have to add the ID of the new API to the export_payload.json file in the root folder of the existing API project. The API ID can be extracted from the URL of the API details page in the API Gateway UI.
 
