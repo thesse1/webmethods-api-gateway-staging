@@ -272,14 +272,9 @@ This API is also using the PetStore_Routing_Alias with the `#{stage_name}#` and 
   "scope": [
     {
       "attributeName": "id",
-      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899"
-    },
-    {
-      "attributeName": "id",
-      "keyword": "4bd552e3-064f-444a-bc77-7560059c9955"
+      "keyword": "4ea2dcf0-66c5-469b-b822-fe4707c6f899|4bd552e3-064f-444a-bc77-7560059c9955"
     }
-  ],
-  "condition": "or"
+  ]
 }
 ```
 
