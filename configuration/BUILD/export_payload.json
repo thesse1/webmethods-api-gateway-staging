@@ -16,5 +16,5 @@
       "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|keystore|settings|extended|HTTPListener@5556"
     }
   ],
-  "condition" : "or"
+  "condition": "or"
 }

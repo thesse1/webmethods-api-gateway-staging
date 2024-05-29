@@ -279,7 +279,7 @@ This API is also using the PetStore_Routing_Alias with the `#{stage_name}#` and 
       "keyword": "4bd552e3-064f-444a-bc77-7560059c9955"
     }
   ],
-  "condition" : "or"
+  "condition": "or"
 }
 ```
 
@@ -1196,7 +1196,7 @@ The /configuration folder contains sample configurations for DESIGN, BUILD, DEV_
       "keyword": "errorProcessing|logConfig|gatewayDestinationConfig|keystore|settings|extended|HTTPListener@5556"
     }
   ],
-  "condition" : "or"
+  "condition": "or"
 }
 ```
 
