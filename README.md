@@ -1903,7 +1903,7 @@ The job-level pipeline templates used in these pipelines can be found in the /pi
 | ------ | ------ |
 | build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see above) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
 | build-api-using-dedicated_build_agents.yml | Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are executed on a separate ADO agent pool. This agent pool must have seven build agents named BUILD_01, ..., BUILD_07. Build jobs will be assigned to BUILD environments based on the name of the ADO build agent on which it is running, making sure that only one build agent is using a BUILD environment at one point in time. |
-| build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. |
+| build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. The job template uses the AzureCLI@2 task for accessing the `API_Gateway_build_environments_availability` variable group. The name of the Azure subscription used in the AzureCLI@2 task is pulled from the azure_subscription variable in the `Azure_subscription_configuration` variable group. |
 
 ### Step templates
 
@@ -2211,13 +2211,22 @@ If a variable is defined on multiple levels, the pipeline will use the value fro
 
 > Note: Even if you have all credentials defined on a higher or lower level, you still have to create all _users variable groups for all three levels, because the pipelines will always try to read all these variable groups. Azure DevOps does not allow empty variable groups, so each variable group must define at least one (dummy) variable.
 
+### Variable group for API updates
+
+The `Update Petstore API by URL` pipeline uses the `Update_API_users` variable group for securely managing the credentials (username and password) for accessing the URL from which to download the OpenAPI (Swagger 2.0) specification (HTTP Basic Authentication):
+
+| Variable | README |
+| ------ | ------ |
+| update_username_petstore | User for accessing the OpenAPI (Swagger 2.0) specification URL |
+| update_password_petstore | Password for accessing the OpenAPI (Swagger 2.0) specification URL |
+
 ### Variable groups for value substitutions
 
 The API Gateway Staging solution uses the `API_Gateway_{{target_stage}}_value_substitutions` variable groups for managing the values for the replacement of placeholders in the build process, see above.
 
-### Variable group for resource pooling
+### Variable groups for resource pooling
 
-The API Gateway Staging solution uses the `API_Gateway_build_environments_availability` variable group for implementing the resource pooling mechanism for assigning build jobs to BUILD environments, see above.
+The API Gateway Staging solution uses the `Azure_subscription_configuration` variable group for configuring the name of the Azure subscription used for the resource pooling and the `API_Gateway_build_environments_availability` variable group for implementing the resource pooling mechanism for assigning build jobs to BUILD environments, see above.
 
 ## Azure DevOps environments
 

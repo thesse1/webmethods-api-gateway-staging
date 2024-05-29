@@ -43,7 +43,7 @@ parameters:
   - BUILD_07
 
 variables:
-- group: Project_configuration
+- group: Azure_subscription_configuration
 
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
