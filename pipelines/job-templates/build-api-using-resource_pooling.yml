@@ -37,7 +37,7 @@ jobs:
           env:
             AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
           inputs:
-            azureSubscription: $(azure_subscription)
+            azureSubscription: azure_service_connection
             scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
@@ -131,7 +131,7 @@ jobs:
           env:
             AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
           inputs:
-            azureSubscription: $(azure_subscription)
+            azureSubscription: azure_service_connection
             scriptType: bash
             scriptLocation: inlineScript
             inlineScript: |
