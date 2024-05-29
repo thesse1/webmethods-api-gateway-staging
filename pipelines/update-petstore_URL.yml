@@ -23,6 +23,9 @@ parameters:
   type: string
   default: https://petstore.swagger.io/v2/swagger.json
 
+variables:
+- group: Project_configuration
+
 stages:
 - template: /pipelines/stage-templates/inject-parameters-for-${{parameters.selected_environment_set}}.yml
   parameters:
