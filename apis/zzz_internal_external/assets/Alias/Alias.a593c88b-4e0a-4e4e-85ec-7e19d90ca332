@@ -4,5 +4,5 @@
   "description" : "Petstore alias on #{stage_name}#",
   "type" : "simple",
   "owner" : "Administrator",
-  "value" : "#{petstore_route}#"
+  "value" : "https://petstore.swagger.io/v2"
 }
