@@ -67,13 +67,13 @@
   "properties": {},
   "tags": [],
   "_links": "{}",
-  "comment": "Change YAML file to pipelines/api-build-and-deploy-single-api-to-DESIGN.yml",
+  "comment": "Change YAML file to pipelines/purge-data.yml",
   "jobAuthorizationScope": "projectCollection",
   "jobTimeoutInMinutes": 60,
   "jobCancelTimeoutInMinutes": 5,
   "badgeEnabled": true,
   "process": {
-    "yamlFilename": "pipelines/api-build-and-deploy-single-api-to-DESIGN.yml",
+    "yamlFilename": "pipelines/purge-data.yml",
     "type": 2
   },
   "repository": {
@@ -81,13 +81,13 @@
       "apiUrl": "https://api.github.com/repos/$username$/webmethods-api-gateway-staging",
       "branchesUrl": "https://api.github.com/repos/$username$/webmethods-api-gateway-staging/branches",
       "cloneUrl": "https://github.com/$username$/webmethods-api-gateway-staging.git",
-      "connectedServiceId": "$GitHub_52e0baec$",
+      "connectedServiceId": "$GitHub_a86128a1$",
       "defaultBranch": "main",
       "fullName": "repository",
       "hasAdminPermissions": "False",
       "isFork": "False",
       "isPrivate": "False",
-      "lastUpdated": "01/19/2023 11:13:04",
+      "lastUpdated": "05/07/2024 12:40:45",
       "manageUrl": "https://github.com/$username$/webmethods-api-gateway-staging",
       "nodeId": "MDEwOlJlcG9zaXRvcnkzNDg5NzQxMTY=",
       "ownerId": "20128287",
@@ -113,7 +113,7 @@
     "type": "GitHub",
     "name": "$username$/webmethods-api-gateway-staging",
     "url": "https://github.com/$username$/webmethods-api-gateway-staging.git",
-    "defaultBranch": "refs/heads/azure-demo",
+    "defaultBranch": "refs/heads/main",
     "clean": "true",
     "checkoutSubmodules": false
   },
@@ -136,13 +136,13 @@
     }
   },
   "id": "",
-  "name": "Deploy one API project on DESIGN",
+  "name": "Purge API Gateway Analytics Data",
   "url": "",
   "uri": "",
-  "path": "\\Deploy single APIs",
+  "path": "\\Other",
   "type": "build",
   "queueStatus": "enabled",
-  "revision": 9,
+  "revision": 24,
   "createdDate": "",
   "project": "{}"
 }

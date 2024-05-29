@@ -1,6 +1,229 @@
 {
-  "count": 29,
+  "count": 37,
   "value": [
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "publisher_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "publisher_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "purger_user": {
+          "value": "testuser"
+        },
+        "updater_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "updater_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "571",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "elasticsearch_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "elasticsearch_user": {
+          "value": "apigw"
+        },
+        "exporter_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "exporter_user": {
+          "value": "testuser"
+        },
+        "haft_manager_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "haft_manager_user": {
+          "value": "testuser"
+        },
+        "importer_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "importer_user": {
+          "value": "testuser"
+        },
+        "initializer_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "initializer_user": {
+          "value": "testuser"
+        },
+        "preparer_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "preparer_user": {
+          "value": "testuser"
+        },
+        "publisher_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "publisher_user": {
+          "value": "testuser"
+        },
+        "purger_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "purger_user": {
+          "value": "testuser"
+        },
+        "updater_password": {
+          "value": null,
+          "isSecret": true
+        },
+        "updater_user": {
+          "value": "testuser"
+        }
+      },
+      "id": "570",
+      "type": "Vsts",
+      "name": "API_Gateway_azure_demo_01_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "569",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_TEST_EXT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "568",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_PROD_INT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "567",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_PROD_EXT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "566",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_DEV_INT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "565",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_DEV_EXT_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "564",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_BUILD_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "563",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_DESIGN_users",
+      "isShared": false
+    },
+    {
+      "variables": {
+        "foo": {
+          "value": "bar"
+        }
+      },
+      "id": "562",
+      "type": "Vsts",
+      "name": "API_Gateway_webm_io_TEST_INT_users",
+      "isShared": false
+    },
     {
       "variables": {
         "petstore_route": {
@@ -18,7 +241,7 @@
       },
       "id": "106",
       "type": "Vsts",
-      "name": "PROD_INT_value_substitutions",
+      "name": "API_Gateway_PROD_INT_value_substitutions",
       "isShared": false
     },
     {
@@ -38,13 +261,13 @@
       },
       "id": "105",
       "type": "Vsts",
-      "name": "TEST_INT_value_substitutions",
+      "name": "API_Gateway_TEST_INT_value_substitutions",
       "isShared": false
     },
     {
       "variables": {
         "postman_echo_password_base64": {
-          "value": "Password_for_TEST_EXT",
+          "value": null,
           "isSecret": true
         },
         "postman_echo_readTimeout": {
@@ -62,13 +285,13 @@
       },
       "id": "104",
       "type": "Vsts",
-      "name": "TEST_EXT_value_substitutions",
+      "name": "API_Gateway_TEST_EXT_value_substitutions",
       "isShared": false
     },
     {
       "variables": {
         "postman_echo_password_base64": {
-          "value": "Password_for_PROD_EXT",
+          "value": null,
           "isSecret": true
         },
         "postman_echo_readTimeout": {
@@ -86,13 +309,13 @@
       },
       "id": "103",
       "type": "Vsts",
-      "name": "PROD_EXT_value_substitutions",
+      "name": "API_Gateway_PROD_EXT_value_substitutions",
       "isShared": false
     },
     {
       "variables": {
         "postman_echo_password_base64": {
-          "value": "Password_for_DEV_EXT",
+          "value": null,
           "isSecret": true
         },
         "postman_echo_readTimeout": {
@@ -110,7 +333,7 @@
       },
       "id": "102",
       "type": "Vsts",
-      "name": "DEV_EXT_value_substitutions",
+      "name": "API_Gateway_DEV_EXT_value_substitutions",
       "isShared": false
     },
     {
@@ -130,7 +353,7 @@
       },
       "id": "101",
       "type": "Vsts",
-      "name": "DEV_INT_value_substitutions",
+      "name": "API_Gateway_DEV_INT_value_substitutions",
       "isShared": false
     },
     {
@@ -159,1020 +382,231 @@
       },
       "id": "100",
       "type": "Vsts",
-      "name": "Build_instances_availability",
+      "name": "API_Gateway_build_environments_availability",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "99",
       "type": "Vsts",
-      "name": "BUILD_01_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_01_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "98",
       "type": "Vsts",
-      "name": "PROD_EXT_users",
+      "name": "API_Gateway_azure_demo_01_PROD_EXT_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "97",
       "type": "Vsts",
-      "name": "PROD_INT_users",
+      "name": "API_Gateway_azure_demo_01_PROD_INT_users",
       "isShared": false
     },
     {
       "variables": {
-        "haft_manager_01_password": {
-          "value": "Manage12345!"
-        },
-        "haft_manager_01_user": {
-          "value": "testuser"
-        },
-        "haft_manager_02_password": {
-          "value": "Manage12345!"
-        },
-        "haft_manager_02_user": {
-          "value": "testuser"
-        }
-      },
-      "id": "96",
-      "type": "Vsts",
-      "name": "PROD_EXT_HAFT_users",
-      "isShared": false
-    },
-    {
-      "variables": {
-        "haft_manager_01_password": {
-          "value": "Manage12345!"
-        },
-        "haft_manager_01_user": {
-          "value": "testuser"
-        },
-        "haft_manager_02_password": {
-          "value": "Manage12345!"
-        },
-        "haft_manager_02_user": {
-          "value": "testuser"
-        }
-      },
-      "id": "95",
-      "type": "Vsts",
-      "name": "PROD_INT_HAFT_users",
-      "isShared": false
-    },
-    {
-      "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "94",
       "type": "Vsts",
-      "name": "BUILD_07_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_07_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "93",
       "type": "Vsts",
-      "name": "BUILD_06_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_06_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "92",
       "type": "Vsts",
-      "name": "BUILD_05_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_05_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "91",
       "type": "Vsts",
-      "name": "BUILD_04_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_04_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "89",
       "type": "Vsts",
-      "name": "BUILD_03_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_03_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "88",
       "type": "Vsts",
-      "name": "BUILD_02_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_02_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "87",
       "type": "Vsts",
-      "name": "BUILD_users",
+      "name": "API_Gateway_azure_demo_01_BUILD_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "85",
       "type": "Vsts",
-      "name": "PROD_EXT_01_users",
+      "name": "API_Gateway_azure_demo_01_PROD_EXT_01_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "84",
       "type": "Vsts",
-      "name": "PROD_INT_02_users",
+      "name": "API_Gateway_azure_demo_01_PROD_INT_02_users",
       "isShared": false
     },
     {
       "variables": {
-        "build_pool_image": {
-          "value": "ubuntu-latest"
+        "update_username_petstore": {
+          "value": "testuser"
         },
-        "build_pool_name": {
-          "value": "buildagents"
-        },
-        "pool_image": {
-          "value": "ubuntu-latest"
-        },
-        "pool_name": {
-          "value": "Azure Pipelines"
-        },
-        "project_name": {
-          "value": "azure-demo-01"
+        "update_password_petstore": {
+          "value": null,
+          "isSecret": true
         }
       },
-      "id": "83",
+      "id": "1010",
       "type": "Vsts",
-      "name": "Project_configuration",
+      "name": "Update_API_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "78",
       "type": "Vsts",
-      "name": "PROD_EXT_02_users",
+      "name": "API_Gateway_azure_demo_01_PROD_EXT_02_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "77",
       "type": "Vsts",
-      "name": "PROD_INT_01_users",
+      "name": "API_Gateway_azure_demo_01_PROD_INT_01_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "76",
       "type": "Vsts",
-      "name": "TEST_INT_users",
+      "name": "API_Gateway_azure_demo_01_TEST_INT_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "75",
       "type": "Vsts",
-      "name": "TEST_EXT_users",
+      "name": "API_Gateway_azure_demo_01_TEST_EXT_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "74",
       "type": "Vsts",
-      "name": "DEV_INT_users",
+      "name": "API_Gateway_azure_demo_01_DEV_INT_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "73",
       "type": "Vsts",
-      "name": "DESIGN_users",
+      "name": "API_Gateway_azure_demo_01_DESIGN_users",
       "isShared": false
     },
     {
       "variables": {
-        "elasticsearch_password": {
-          "value": "manage",
-          "isSecret": true
-        },
-        "elasticsearch_user": {
-          "value": "apigw"
-        },
-        "exporter_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "exporter_user": {
-          "value": "testuser"
-        },
-        "importer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "importer_user": {
-          "value": "testuser"
-        },
-        "initializer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "initializer_user": {
-          "value": "testuser"
-        },
-        "preparer_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "preparer_user": {
-          "value": "testuser"
-        },
-        "purger_password": {
-          "value": "Manage12345!",
-          "isSecret": true
-        },
-        "purger_user": {
-          "value": "testuser"
+        "foo": {
+          "value": "bar"
         }
       },
       "id": "66",
       "type": "Vsts",
-      "name": "DEV_EXT_users",
+      "name": "API_Gateway_azure_demo_01_DEV_EXT_users",
       "isShared": false
     }
   ]

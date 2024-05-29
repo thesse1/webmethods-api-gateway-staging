@@ -1,34 +1,4 @@
 {
-  "options": [
-    {
-      "enabled": false,
-      "definition": {
-        "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
-      },
-      "inputs": {
-        "branchFilters": "[\"+refs/heads/*\"]",
-        "additionalFields": "{}"
-      }
-    },
-    {
-      "enabled": false,
-      "definition": {
-        "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
-      },
-      "inputs": {
-        "workItemType": "Issue",
-        "assignToRequestor": "true",
-        "additionalFields": "{}"
-      }
-    },
-    {
-      "enabled": false,
-      "definition": {
-        "id": "57578776-4c22-4526-aeb0-86b6da17ee9c"
-      },
-      "inputs": {}
-    }
-  ],
   "triggers": [
     {
       "branchFilters": [],
@@ -41,7 +11,7 @@
     {
       "settingsSourceType": 2,
       "branchFilters": [
-        "+azure-demo"
+        "+main"
       ],
       "forks": {
         "enabled": true,
@@ -67,12 +37,13 @@
   "properties": {},
   "tags": [],
   "_links": "{}",
+  "comment": "Change YAML file to pipelines/build-and-deploy-selected-apis.yml",
   "jobAuthorizationScope": "projectCollection",
   "jobTimeoutInMinutes": 60,
   "jobCancelTimeoutInMinutes": 5,
   "badgeEnabled": true,
   "process": {
-    "yamlFilename": "pipelines/api-build-and-deploy-multiple-apis-to-DESIGN.yml",
+    "yamlFilename": "pipelines/build-and-deploy-selected-apis.yml",
     "type": 2
   },
   "repository": {
@@ -80,13 +51,13 @@
       "apiUrl": "https://api.github.com/repos/$username$/webmethods-api-gateway-staging",
       "branchesUrl": "https://api.github.com/repos/$username$/webmethods-api-gateway-staging/branches",
       "cloneUrl": "https://github.com/$username$/webmethods-api-gateway-staging.git",
-      "connectedServiceId": "$GitHub_4b57d790$",
+      "connectedServiceId": "$GitHub_f1a28fe3$",
       "defaultBranch": "main",
       "fullName": "repository",
       "hasAdminPermissions": "False",
       "isFork": "False",
       "isPrivate": "False",
-      "lastUpdated": "01/19/2023 11:13:04",
+      "lastUpdated": "11/13/2023 04:17:53",
       "manageUrl": "https://github.com/$username$/webmethods-api-gateway-staging",
       "nodeId": "MDEwOlJlcG9zaXRvcnkzNDg5NzQxMTY=",
       "ownerId": "20128287",
@@ -98,22 +69,15 @@
       "archived": "False",
       "externalId": "348974116",
       "ownerIsAUser": "True",
-      "checkoutNestedSubmodules": "false",
-      "cleanOptions": "0",
-      "fetchDepth": "1",
-      "gitLfsSupport": "false",
       "reportBuildStatus": "true",
-      "skipSyncSource": "false",
-      "fetchTags": "true",
-      "labelSourcesFormat": "$(build.buildNumber)",
-      "labelSources": "0"
+      "fetchDepth": "1"
     },
     "id": "$username$/webmethods-api-gateway-staging",
     "type": "GitHub",
     "name": "$username$/webmethods-api-gateway-staging",
     "url": "https://github.com/$username$/webmethods-api-gateway-staging.git",
-    "defaultBranch": "refs/heads/azure-demo",
-    "clean": "true",
+    "defaultBranch": "refs/heads/main",
+    "clean": null,
     "checkoutSubmodules": false
   },
   "quality": "definition",
@@ -135,13 +99,13 @@
     }
   },
   "id": "",
-  "name": "Deploy APIs on DESIGN",
+  "name": "Deploy selected API project(s)",
   "url": "",
   "uri": "",
-  "path": "\\Deploy multiple APIs",
+  "path": "\\Deploy",
   "type": "build",
   "queueStatus": "enabled",
-  "revision": 16,
+  "revision": 5,
   "createdDate": "",
   "project": "{}"
 }
