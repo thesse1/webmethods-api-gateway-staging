@@ -17,7 +17,7 @@ schedules:
 parameters:
 - name: selected_environment_set
   displayName: Purge data from API Gateway(s) in which environment set?
-  default: webm_io
+  default: azure_demo_01
   values:
   - webm_io
   - azure_demo_01
