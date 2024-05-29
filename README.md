@@ -1341,7 +1341,7 @@ For a deployment to DESIGN, the pipeline will execute only one step to prepare O
 
 More manipulations or tests (e.g., enforcement of API standards) can be added later.
 
-After this, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple environments, the assets will automatically be imported on each environment of the target stage.
+After this, the (validated and manipulated) API Gateway assets will be exported from the BUILD environment and imported on the target stage (DESIGN, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT or PROD_EXT). If any target stage spans multiple environments, the assets will automatically be imported on each environment of the target stage. Optionally, the exported assets can automatically be pushed to an artifact repository like JFrog Artifactory.
 
 The azure_demo_01 environment set includes two PROD_INT environments PROD_INT_01 and PROD_INT_02 and it includes two PROD_EXT environments PROD_EXT_01 and PROD_EXT_02. For every deployment on PROD_INT or PROD_EXT, the assets will be imported on PROD_INT_01 and PROD_INT_02, or PROD_EXT_01 and PROD_EXT_02, respectively.
 
