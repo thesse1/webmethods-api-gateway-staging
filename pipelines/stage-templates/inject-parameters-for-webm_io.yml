@@ -27,45 +27,45 @@ parameters:
     is_design_stage: true
     environments:
     - name: DESIGN
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: BUILD
-    build_pool_name: Azure Pipelines
+    build_pool_name: vmsspoolagents-04
     build_pool_image: ubuntu-latest
     is_build_stage: true
     environments:
     - name: BUILD
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: DEV_INT
     environments:
     - name: DEV_INT
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: DEV_EXT
     environments:
     - name: DEV_EXT
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: TEST_INT
     environments:
     - name: TEST_INT
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: TEST_EXT
     environments:
     - name: TEST_EXT
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_INT
     environments:
     - name: PROD_INT
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
   - name: PROD_EXT
     environments:
     - name: PROD_EXT
-      pool_name: Azure Pipelines
+      pool_name: vmsspoolagents-04
       pool_image: ubuntu-latest
 - name: build_environments_mapping
   type: object
