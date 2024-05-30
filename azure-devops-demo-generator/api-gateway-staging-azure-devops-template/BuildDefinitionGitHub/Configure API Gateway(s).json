@@ -139,7 +139,7 @@
   "name": "Configure API Gateway(s)",
   "url": "",
   "uri": "",
-  "path": "\\Deploy API Gateway configuration",
+  "path": "\\Deploy",
   "type": "build",
   "queueStatus": "enabled",
   "revision": 70,
