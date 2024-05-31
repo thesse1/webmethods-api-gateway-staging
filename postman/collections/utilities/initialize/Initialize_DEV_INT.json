@@ -73,7 +73,7 @@
 							"}\r",
 							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
 							"\r",
-							"var websocketUrlsString = pm.variables.get(\"http_loadbalancer_urls\");\r",
+							"var websocketUrlsString = pm.variables.get(\"websocket_loadbalancer_urls\");\r",
 							"if (websocketUrlsString == null || websocketUrlsString == undefined) {\r",
 							"    var websocketUrls = [];\r",
 							"} else {\r",
