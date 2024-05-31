@@ -11,6 +11,9 @@
   }, {
     "templateKey" : "soapVersion",
     "values" : [ "soap" ]
+  }, {
+    "templateKey" : "isSoapVersionValidationEnabled",
+    "values" : [ "false" ]
   } ],
   "active" : false
 }
