@@ -6,9 +6,9 @@ parameters:
 
 steps:
 - bash: |
-    echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
+    echo "##vso[task.setvariable variable=environment_insecure_flag]`jq -r '.values[] | select(.key == "insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract insecure_flag'
 
 - bash: |
     newman run postman/collections/utilities/haft/Configure_HAFT_listener_on_${{parameters.environment_name}}.json --reporters cli \
@@ -17,7 +17,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.environment_file}} \
     -g environments/${{parameters.environment_set}}/API_Gateway_${{parameters.stage_name}}_haft_globals.json \
     --export-globals environments/${{parameters.environment_set}}/API_Gateway_${{parameters.stage_name}}_haft_globals.json \
-    $(environment_insecureflag)
+    $(environment_insecure_flag)
     echo "##vso[task.setvariable variable=node_name;isOutput=true]`jq -r '.values[] | select(.key == "nodeName") | .value' environments/${{parameters.environment_set}}/API_Gateway_${{parameters.stage_name}}_haft_globals.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize High Availability and Fault Tolerance (HAFT) listener for API Gateway ${{parameters.environment_name}}'

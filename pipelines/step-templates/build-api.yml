@@ -60,17 +60,17 @@ steps:
    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
-   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
-   echo "##vso[task.setvariable variable=build_environment_api_insecureflag]`jq -r '.values[] | select(.key == "api_insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
+   echo "##vso[task.setvariable variable=build_environment_insecure_flag]`jq -r '.values[] | select(.key == "insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
+   echo "##vso[task.setvariable variable=build_environment_api_insecure_flag]`jq -r '.values[] | select(.key == "api_insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.build_environment_name}} configuration, extract protocol, ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.build_environment_name}} configuration, extract protocol, ip, hostname, port and insecure_flag'
 
 - bash: |
     newman run postman/collections/utilities/prepare/Prepare_${{parameters.build_stage_name}}.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
-    $(build_environment_insecureflag)
+    $(build_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway ${{parameters.build_environment_name}}'
   env:
@@ -90,7 +90,7 @@ steps:
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
-    $(build_environment_insecureflag)
+    $(build_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.build_environment_name}}'
   env:
@@ -99,7 +99,7 @@ steps:
 - bash: |
     newman run postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export apis/${{parameters.api_project}}/junitReport.xml \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
-    $(build_environment_api_insecureflag)
+    $(build_environment_api_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway ${{parameters.build_environment_name}}'
   env:
@@ -144,7 +144,7 @@ steps:
     --env-var aliases='$(aliases)' \
     --env-var globalAliases='$(globalAliases)' \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
-    $(build_environment_insecureflag)
+    $(build_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Validate and prepare assets for ${{parameters.target_stage_name}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
   env:
@@ -152,7 +152,7 @@ steps:
   condition: and(succeeded(), ${{parameters.prepare_condition}})
 
 - bash: |
-   curl $(build_environment_insecureflag) \
+   curl $(build_environment_insecure_flag) \
           -d @"apis/${{parameters.api_project}}/export_payload.json" \
           --output $(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \

@@ -27,7 +27,7 @@
 		"enabled": true
 	},
 	{
-		"key": "insecureflag",
+		"key": "insecure_flag",
 		"value": "",
 		"type": "text",
 		"enabled": true
@@ -57,7 +57,7 @@
 		"enabled": true
 	},
 	{
-		"key": "api_insecureflag",
+		"key": "api_insecure_flag",
 		"value": "",
 		"type": "default",
 		"enabled": true
