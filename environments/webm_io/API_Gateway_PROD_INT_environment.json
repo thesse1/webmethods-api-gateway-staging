@@ -61,6 +61,24 @@
 		"value": "",
 		"type": "default",
 		"enabled": true
+	},
+	{
+		"key": "http_loadbalancer_urls",
+		"value": "http://playprodint.apigw-aw-eu.webmethods.io",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "https_loadbalancer_urls",
+		"value": "https://playprodint.apigw-aw-eu.webmethods.io",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "websocket_loadbalancer_urls",
+		"value": "ws://playprodint.apigw-aw-eu.webmethods.io",
+		"type": "default",
+		"enabled": true
 	}
 ],
 "timestamp": 1587036498482,

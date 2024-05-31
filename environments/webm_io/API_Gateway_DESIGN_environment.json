@@ -61,6 +61,24 @@
 			"value": "",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "http_loadbalancer_urls",
+			"value": "http://playconfig.apigw-aw-eu.webmethods.io",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "https_loadbalancer_urls",
+			"value": "https://playconfig.apigw-aw-eu.webmethods.io",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "websocket_loadbalancer_urls",
+			"value": "ws://playconfig.apigw-aw-eu.webmethods.io",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
