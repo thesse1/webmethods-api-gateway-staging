@@ -59,7 +59,7 @@ The following API Gateway assets and configurations can be moved across API Gate
  - Packages
  - Subscriptions
  - Users/Groups/ACLs/Teams
- - General Configurations like Load balancer, Extended settings
+ - General Configurations like loadbalancer, extended settings
  - Security configurations
  - Destination configurations
  - External accounts configurations
@@ -2252,15 +2252,15 @@ The Postman environments used in the API Gateway Staging solution are configured
 | elasticsearch_hostname | Hostname or IP address of the external Elasticsearch server |
 | elasticsearch_port | Port of the external Elasticsearch server |
 | elasticsearch_indexname | Name of the index to be used in the external Elasticsearch server |
-| loadbalancer_protocol | Protocol of the loadbalancer URL (http or https) |
-| loadbalancer_hostname | Hostname or IP address of the loadbalancer URL |
-| loadbalancer_port | Port of the loadbalancer URL |
+| http_loadbalancer_urls | Comma-separated list of loadbalancer URLs for HTTP requests |
+| https_loadbalancer_urls | Comma-separated list of loadbalancer URLs for HTTPS requests |
+| websocket_loadbalancer_urls | Comma-separated list of loadbalancer URLs for WebSocket connections |
 | https_proxy_host | Hostname or IP address of the proxy server to be configured for this environment |
 | https_proxy_port | Port number of the proxy server to be configured for this environment |
 
 The elasticsearch_protocol, elasticsearch_hostname, elasticsearch_port and elasticsearch_indexname variables are optional. They must be provided only when an external Elasticsearch destination should be configured for the environment.
 
-The loadbalancer_protocol, loadbalancer_hostname and loadbalancer_port variables are optional. They must be provided only when a loadbalancer URL should be configured for the environment.
+The http_loadbalancer_urls, https_loadbalancer_urls and websocket_loadbalancer_urls variables are optional. They must be provided only when an HTTP/HTTPS/WebSocket loadbalancer URL should be configured for the environment. If you set one of them to "", the pipeline will remove any configured loadbalancer URL of that type. If you leave it out completely (or set "enabled": false), the pipeline will keep the existing value configured for this loadbalancer URL type on the API Gateway.
 
 The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
