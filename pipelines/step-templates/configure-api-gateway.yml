@@ -25,9 +25,9 @@ steps:
    echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
    echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
    echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
-   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
+   echo "##vso[task.setvariable variable=environment_insecure_flag]`jq -r '.values[] | select(.key == "insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecure_flag'
 
 - bash: |
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/configuration/${{parameters.stage_name}}/scopes.json`"
@@ -43,7 +43,7 @@ steps:
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.stage_name}}_configuration.zip \
     -e $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{parameters.environment_file}} \
-    $(environment_insecureflag)
+    $(environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.environment_name}}'
   env:
@@ -56,7 +56,7 @@ steps:
     --env-var elasticsearch_user='$(apigw_analytics_user)' \
     --env-var elasticsearch_password='$(apigw_analytics_password)' \
     -e $(System.DefaultWorkingDirectory)/environments/${{parameters.environment_set}}/${{parameters.environment_file}} \
-    $(environment_insecureflag)
+    $(environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Initialize API Gateway ${{parameters.environment_name}}'
   env:

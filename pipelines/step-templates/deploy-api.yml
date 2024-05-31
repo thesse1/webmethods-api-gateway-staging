@@ -9,9 +9,9 @@ steps:
    echo "##vso[task.setvariable variable=target_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
    echo "##vso[task.setvariable variable=target_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
    echo "##vso[task.setvariable variable=target_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
-   echo "##vso[task.setvariable variable=target_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
+   echo "##vso[task.setvariable variable=target_environment_insecure_flag]`jq -r '.values[] | select(.key == "insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.target_environment_file}}`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.target_stage_name}} configuration, extract ip, hostname, port and insecureflag'
+  displayName: 'Read and parse API Gateway ${{parameters.target_stage_name}} configuration, extract ip, hostname, port and insecure_flag'
 
 # - task: PublishBuildArtifacts@1
 #   inputs:
@@ -33,7 +33,7 @@ steps:
     --env-var scopes='$(scopes)' \
     --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment_file}} \
-    $(target_environment_insecureflag)
+    $(target_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway ${{parameters.target_stage_name}}'
   env:
@@ -48,7 +48,7 @@ steps:
     --env-var publisher_password='$(publisher_password)' \
     --env-var apis_to_be_published=`cat apis_to_be_published.txt` \
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment_file}} \
-    $(target_environment_insecureflag)
+    $(target_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Republish all ${{parameters.api_project}} APIs from API Gateway ${{parameters.target_stage_name}}'
   env:

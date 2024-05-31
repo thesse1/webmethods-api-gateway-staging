@@ -27,7 +27,7 @@
 		"enabled": true
 	},
 	{
-		"key": "insecureflag",
+		"key": "insecure_flag",
 		"value": "",
 		"type": "text",
 		"enabled": true
@@ -57,8 +57,26 @@
 		"enabled": true
 	},
 	{
-		"key": "api_insecureflag",
+		"key": "api_insecure_flag",
 		"value": "",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "http_loadbalancer_urls",
+		"value": "http://playstageext.apigw-aw-eu.webmethods.io",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "https_loadbalancer_urls",
+		"value": "https://playstageext.apigw-aw-eu.webmethods.io",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "websocket_loadbalancer_urls",
+		"value": "ws://playstageext.apigw-aw-eu.webmethods.io",
 		"type": "default",
 		"enabled": true
 	}

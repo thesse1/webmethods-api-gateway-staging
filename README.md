@@ -2242,12 +2242,12 @@ The Postman environments used in the API Gateway Staging solution are configured
 | hostname | Hostname of the API Gateway admin port |
 | ip | IP address of the API Gateway admin port |
 | port | Port number of the API Gateway admin port |
-| insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the admin port, otherwise leave blank |
+| insecure_flag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the admin port, otherwise leave blank |
 | api_protocol | Protocol of the API Gateway runtime port (http or https) |
 | api_hostname | Hostname of the API Gateway runtime port |
 | api_ip | IP address of the API Gateway runtime port |
 | api_port | Port number of the API Gateway runtime port |
-| api_insecureflag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the runtime port, otherwise leave blank |
+| api_insecure_flag | Set to --insecure if the API Gateway server does not provide valid SSL server certificate for the runtime port, otherwise leave blank |
 | elasticsearch_protocol | Protocol of the external Elasticsearch server (http or https) |
 | elasticsearch_hostname | Hostname or IP address of the external Elasticsearch server |
 | elasticsearch_port | Port of the external Elasticsearch server |
