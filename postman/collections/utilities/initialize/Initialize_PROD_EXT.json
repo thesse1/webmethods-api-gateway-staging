@@ -7,6 +7,151 @@
 	},
 	"item": [
 		{
+			"name": "Get loadbalancer configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f4d5eec-14e8-41b0-8785-717e8becd1c7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response contains httpsUrls\", function () {\r",
+							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains httpUrls\", function () {\r",
+							"    pm.expect(jsonData.httpUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains websocketUrls\", function () {\r",
+							"    pm.expect(jsonData.websocketUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"HTTP Loadbalancer URL initial value: \" + pm.response.json().httpUrls);\r",
+							"console.log(\"HTTPS Loadbalancer URL initial value: \" + pm.response.json().httpsUrls);\r",
+							"console.log(\"WebSocket Loadbalancer URL initial value: \" + pm.response.json().websocketUrls);\r",
+							"\r",
+							"var requestList = [ null ];\r",
+							"\r",
+							"var setLoadbalancerUrls = false;\r",
+							"\r",
+							"var httpUrlsString = pm.variables.get(\"http_loadbalancer_urls\");\r",
+							"if (httpUrlsString == null || httpUrlsString == undefined) {\r",
+							"    var httpUrls = jsonData.httpUrls;\r",
+							"} else if (httpUrlsString == \"\") {\r",
+							"    var httpUrls = [];\r",
+							"    setLoadbalancerUrls = true;\r",
+							"} else {\r",
+							"    var httpUrls = httpUrlsString.split(\",\");\r",
+							"    setLoadbalancerUrls = true;\r",
+							"}\r",
+							"pm.variables.set(\"httpUrls\", JSON.stringify(httpUrls));\r",
+							"\r",
+							"var httpsUrlsString = pm.variables.get(\"https_loadbalancer_urls\");\r",
+							"if (httpsUrlsString == null || httpsUrlsString == undefined) {\r",
+							"    var httpsUrls = jsonData.httpsUrls;\r",
+							"} else if (httpsUrlsString == \"\") {\r",
+							"    var httpsUrls = [];\r",
+							"    setLoadbalancerUrls = true;\r",
+							"} else {\r",
+							"    var httpsUrls = httpsUrlsString.split(\",\");\r",
+							"    setLoadbalancerUrls = true;\r",
+							"}\r",
+							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
+							"\r",
+							"var websocketUrlsString = pm.variables.get(\"websocket_loadbalancer_urls\");\r",
+							"if (websocketUrlsString == null || websocketUrlsString == undefined) {\r",
+							"    var websocketUrls = jsonData.websocketUrls;\r",
+							"} else if (websocketUrlsString == \"\") {\r",
+							"    var websocketUrls = [];\r",
+							"    setLoadbalancerUrls = true;\r",
+							"} else {\r",
+							"    var websocketUrls = websocketUrlsString.split(\",\");\r",
+							"    setLoadbalancerUrls = true;\r",
+							"}\r",
+							"pm.variables.set(\"websocketUrls\", JSON.stringify(websocketUrls));\r",
+							"\r",
+							"if (setLoadbalancerUrls) {\r",
+							"    requestList.push(\"Put loadbalancer configuration\")\r",
+							"}\r",
+							"\r",
+							"let elasticsearchHostname = pm.variables.get(\"elasticsearch_hostname\");\r",
+							"if (!(elasticsearchHostname == null || elasticsearchHostname == undefined)) {\r",
+							"    requestList.push(\"Put Elasticsearch destination configuration\");\r",
+							"}\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"if (!(httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined)) {\r",
+							"    requestList.push(\"Update HTTPS_Proxy\");\r",
+							"}\r",
+							"\r",
+							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bbeeb139-9688-4f4b-8e86-1571624e2e1a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "9c7fd8fc-11f9-4733-9996-8af680784345",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"websocketUrls\": {{websocketUrls}},\r\n    \"httpsUrls\": {{httpsUrls}},\r\n    \"httpUrls\": {{httpUrls}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"loadBalancer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get local OAuth2 Authorization Server alias",
 			"event": [
 				{
@@ -51,53 +196,7 @@
 					"script": {
 						"id": "7c29ea14-da1e-4f2c-b58b-3c367722bcb3",
 						"exec": [
-							"var requestList = [ null ];\r",
-							"\r",
-							"var setLoadbalancerUrls = false;\r",
-							"\r",
-							"var httpUrlsString = pm.variables.get(\"http_loadbalancer_urls\");\r",
-							"if (httpUrlsString == null || httpUrlsString == undefined || httpUrlsString == \"\") {\r",
-							"    var httpUrls = [];\r",
-							"} else {\r",
-							"    var httpUrls = httpUrlsString.split(\",\");\r",
-							"    setLoadbalancerUrls = true;\r",
-							"}\r",
-							"pm.variables.set(\"httpUrls\", JSON.stringify(httpUrls));\r",
-							"\r",
-							"var httpsUrlsString = pm.variables.get(\"https_loadbalancer_urls\");\r",
-							"if (httpsUrlsString == null || httpsUrlsString == undefined || httpsUrlsString == \"\") {\r",
-							"    var httpsUrls = [];\r",
-							"} else {\r",
-							"    var httpsUrls = httpsUrlsString.split(\",\");\r",
-							"    setLoadbalancerUrls = true;\r",
-							"}\r",
-							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
-							"\r",
-							"var websocketUrlsString = pm.variables.get(\"websocket_loadbalancer_urls\");\r",
-							"if (websocketUrlsString == null || websocketUrlsString == undefined || websocketUrlsString == \"\") {\r",
-							"    var websocketUrls = [];\r",
-							"} else {\r",
-							"    var websocketUrls = websocketUrlsString.split(\",\");\r",
-							"    setLoadbalancerUrls = true;\r",
-							"}\r",
-							"pm.variables.set(\"websocketUrls\", JSON.stringify(websocketUrls));\r",
-							"\r",
-							"if (setLoadbalancerUrls) {\r",
-							"    requestList.push(\"Put loadbalancer configuration\")\r",
-							"}\r",
-							"\r",
-							"let elasticsearchHostname = pm.variables.get(\"elasticsearch_hostname\");\r",
-							"if (!(elasticsearchHostname == null || elasticsearchHostname == undefined)) {\r",
-							"    requestList.push(\"Put Elasticsearch destination configuration\");\r",
-							"}\r",
-							"\r",
-							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
-							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
-							"if (!(httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined)) {\r",
-							"    requestList.push(\"Update HTTPS_Proxy\");\r",
-							"}\r",
-							"\r",
-							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
