@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7f58c953-6d27-4644-9a14-ea5520a6884d",
-		"name": "Initialize_DEV_INT",
+		"_postman_id": "2c100308-932c-4ae3-b5b2-8f25d4cfa54d",
+		"name": "Initialize_TEST_EXT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3558839-7f58c953-6d27-4644-9a14-ea5520a6884d"
+		"_uid": "3558839-2c100308-932c-4ae3-b5b2-8f25d4cfa54d"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "729a6bf6-ff41-4855-abe0-d4303edacd66",
+						"id": "76b7564a-3f31-4b99-8b6f-a7ef136e7634",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -49,14 +49,14 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "03cd3cc2-e163-4148-b103-604632eea32f",
+						"id": "d0c542fd-cd3f-4096-8bc1-7acb5f6a450d",
 						"exec": [
 							"var requestList = [ null ];\r",
 							"\r",
 							"var setLoadbalancerUrls = false;\r",
 							"\r",
 							"var httpUrlsString = pm.variables.get(\"http_loadbalancer_urls\");\r",
-							"if (httpUrlsString == null || httpUrlsString == undefined) {\r",
+							"if (httpUrlsString == null || httpUrlsString == undefined || httpUrlsString == \"\") {\r",
 							"    var httpUrls = [];\r",
 							"} else {\r",
 							"    var httpUrls = httpUrlsString.split(\",\");\r",
@@ -65,7 +65,7 @@
 							"pm.variables.set(\"httpUrls\", JSON.stringify(httpUrls));\r",
 							"\r",
 							"var httpsUrlsString = pm.variables.get(\"https_loadbalancer_urls\");\r",
-							"if (httpsUrlsString == null || httpsUrlsString == undefined) {\r",
+							"if (httpsUrlsString == null || httpsUrlsString == undefined || httpsUrlsString == \"\") {\r",
 							"    var httpsUrls = [];\r",
 							"} else {\r",
 							"    var httpsUrls = httpsUrlsString.split(\",\");\r",
@@ -74,7 +74,7 @@
 							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
 							"\r",
 							"var websocketUrlsString = pm.variables.get(\"websocket_loadbalancer_urls\");\r",
-							"if (websocketUrlsString == null || websocketUrlsString == undefined) {\r",
+							"if (websocketUrlsString == null || websocketUrlsString == undefined || websocketUrlsString == \"\") {\r",
 							"    var websocketUrls = [];\r",
 							"} else {\r",
 							"    var websocketUrls = websocketUrlsString.split(\",\");\r",
@@ -104,7 +104,7 @@
 					}
 				}
 			],
-			"id": "f285d761-c263-450c-a81a-dee3b1681122",
+			"id": "7d9b444a-3c6b-44f4-b393-7a08bad8a2bc",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -152,7 +152,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "5fafa908-7774-4d87-aa91-c035167b6c51",
+						"id": "a4a61c78-6a83-4385-aff2-d60978885ae3",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -196,7 +196,7 @@
 					}
 				}
 			],
-			"id": "cb3132d3-43eb-44b4-aa48-e1d8fb89b12c",
+			"id": "4973a72c-e2d9-4009-b214-5b1c0e628c0a",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -244,7 +244,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8f4d5eec-14e8-41b0-8785-717e8becd1c7",
+						"id": "eeb5e021-ec38-455d-954f-2500d3ee3b6a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -280,7 +280,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "bbeeb139-9688-4f4b-8e86-1571624e2e1a",
+						"id": "8e31965d-eed4-48c4-bd8a-09e8a13a22ee",
 						"exec": [
 							""
 						],
@@ -289,7 +289,7 @@
 					}
 				}
 			],
-			"id": "fa9f96f3-dfd3-4e78-92a2-bf5bb143b782",
+			"id": "7a3853ad-dd05-4ace-89b0-4555101e6e45",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -337,7 +337,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ec71470e-5131-4eb0-8684-9852c27d209a",
+						"id": "427d0e6a-4087-4d76-ace5-14a916ccc2d1",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -359,7 +359,7 @@
 					}
 				}
 			],
-			"id": "073823a5-9774-4d99-9d19-1aafa5e663ec",
+			"id": "3ce02af2-4d18-424d-8998-8900936b5c4c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -407,7 +407,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8de79e08-efd4-49a1-8679-791614d105aa",
+						"id": "0e07e345-1bf3-45eb-b939-a1f33430a01b",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -422,7 +422,7 @@
 					}
 				}
 			],
-			"id": "cfa08b7c-d1f8-4b07-926a-f9fe6240941b",
+			"id": "6b650405-8704-466b-90dd-9b75c3439e29",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -489,7 +489,7 @@
 				"exec": [
 					""
 				],
-				"id": "3568a625-7b10-4f55-87f5-9a866696c1b7"
+				"id": "4a92e565-5c08-40a1-a3ff-5abfd3d0256a"
 			}
 		},
 		{
@@ -499,7 +499,7 @@
 				"exec": [
 					""
 				],
-				"id": "7a3649d1-9212-43bd-90b2-d7487d03d57e"
+				"id": "94ef7d85-bf87-4f69-970f-374367797f97"
 			}
 		}
 	]
