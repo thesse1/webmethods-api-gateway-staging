@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "5abe883e-da0e-4a32-9f7f-f56ba5e25f0c",
+		"name": "Initialize_PROD_EXT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-5abe883e-da0e-4a32-9f7f-f56ba5e25f0c"
+	},
+	"item": [
+		{
+			"name": "Get local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "142ab304-ba9d-42e4-b233-1e623d9fd978",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let alias = JSON.parse(responseBody).alias;\r",
+							"if (alias === undefined || alias === null) {\r",
+							"    var requestList = JSON.parse(pm.variables.get(\"requestList\"));\r",
+							"    pm.execution.setNextRequest(requestList.pop());\r",
+							"    pm.variables.set(\"requestList\", JSON.stringify(requestList));    \r",
+							"} else {\r",
+							"    alias.localIntrospectionConfig = alias.localIntrospectionConfig || {};\r",
+							"    alias.localIntrospectionConfig.issuer = \"https://\" + pm.variables.get(\"hostname\");\r",
+							"\r",
+							"    alias.tokenGeneratorConfig = alias.tokenGeneratorConfig || {};\r",
+							"    alias.tokenGeneratorConfig.accessTokenExpInterval = 3600;\r",
+							"    alias.tokenGeneratorConfig.authCodeExpInterval = 60;\r",
+							"    alias.tokenGeneratorConfig.expiry = 60;\r",
+							"    alias.tokenGeneratorConfig.algorithm = \"RS512\";\r",
+							"\r",
+							"    alias.sslConfig = alias.sslConfig || {};\r",
+							"    alias.sslConfig.keyStoreAlias = \"DEFAULT_IS_KEYSTORE\";\r",
+							"    alias.sslConfig.keyAlias = \"ssos\";\r",
+							"\r",
+							"    let aliasString = JSON.stringify(alias);\r",
+							"    pm.globals.set(\"alias\", aliasString);\r",
+							"    pm.execution.setNextRequest(\"Update local OAuth2 Authorization Server alias\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7c29ea14-da1e-4f2c-b58b-3c367722bcb3",
+						"exec": [
+							"var requestList = [ null ];\r",
+							"\r",
+							"var setLoadbalancerUrls = false;\r",
+							"\r",
+							"var httpUrlsString = pm.variables.get(\"http_loadbalancer_urls\");\r",
+							"if (httpUrlsString == null || httpUrlsString == undefined || httpUrlsString == \"\") {\r",
+							"    var httpUrls = [];\r",
+							"} else {\r",
+							"    var httpUrls = httpUrlsString.split(\",\");\r",
+							"    setLoadbalancerUrls = true;\r",
+							"}\r",
+							"pm.variables.set(\"httpUrls\", JSON.stringify(httpUrls));\r",
+							"\r",
+							"var httpsUrlsString = pm.variables.get(\"https_loadbalancer_urls\");\r",
+							"if (httpsUrlsString == null || httpsUrlsString == undefined || httpsUrlsString == \"\") {\r",
+							"    var httpsUrls = [];\r",
+							"} else {\r",
+							"    var httpsUrls = httpsUrlsString.split(\",\");\r",
+							"    setLoadbalancerUrls = true;\r",
+							"}\r",
+							"pm.variables.set(\"httpsUrls\", JSON.stringify(httpsUrls));\r",
+							"\r",
+							"var websocketUrlsString = pm.variables.get(\"websocket_loadbalancer_urls\");\r",
+							"if (websocketUrlsString == null || websocketUrlsString == undefined || websocketUrlsString == \"\") {\r",
+							"    var websocketUrls = [];\r",
+							"} else {\r",
+							"    var websocketUrls = websocketUrlsString.split(\",\");\r",
+							"    setLoadbalancerUrls = true;\r",
+							"}\r",
+							"pm.variables.set(\"websocketUrls\", JSON.stringify(websocketUrls));\r",
+							"\r",
+							"if (setLoadbalancerUrls) {\r",
+							"    requestList.push(\"Put loadbalancer configuration\")\r",
+							"}\r",
+							"\r",
+							"let elasticsearchHostname = pm.variables.get(\"elasticsearch_hostname\");\r",
+							"if (!(elasticsearchHostname == null || elasticsearchHostname == undefined)) {\r",
+							"    requestList.push(\"Put Elasticsearch destination configuration\");\r",
+							"}\r",
+							"\r",
+							"let httpsProxyHost = pm.variables.get(\"https_proxy_host\");\r",
+							"let httpsProxyPort = pm.variables.get(\"https_proxy_port\");\r",
+							"if (!(httpsProxyHost == null || httpsProxyHost == undefined || httpsProxyPort == null || httpsProxyPort == undefined)) {\r",
+							"    requestList.push(\"Update HTTPS_Proxy\");\r",
+							"}\r",
+							"\r",
+							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e47d9fbd-4b7f-4a8d-ad8c-18bee48c15ef",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update local OAuth2 Authorization Server alias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae09a111-f7a8-4ad6-9fb5-945c992c8cac",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains alias\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains localIntrospectionConfig\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.localIntrospectionConfig).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains tokenGeneratorConfig\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.tokenGeneratorConfig).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains sslConfig\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.alias.sslConfig).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"JWT issuer set to: \" + pm.response.json().alias.localIntrospectionConfig.issuer);\r",
+							"console.log(\"JWT access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.expiry);\r",
+							"console.log(\"JWT signing algorithm set to: \" + pm.response.json().alias.tokenGeneratorConfig.algorithm);\r",
+							"console.log(\"JWT keystore alias set to: \" + pm.response.json().alias.sslConfig.keyStoreAlias);\r",
+							"console.log(\"JWT key alias set to: \" + pm.response.json().alias.sslConfig.keyAlias);\r",
+							"\r",
+							"console.log(\"OAuth2 access token expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.accessTokenExpInterval);\r",
+							"console.log(\"Auth code expiry interval set to: \" + pm.response.json().alias.tokenGeneratorConfig.authCodeExpInterval);\r",
+							"\r",
+							"var requestList = JSON.parse(pm.variables.get(\"requestList\"));\r",
+							"pm.execution.setNextRequest(requestList.pop());\r",
+							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "30214d8c-0dc9-4bc6-ad31-25e57a17cfe4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{alias}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/alias/local",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"alias",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put loadbalancer configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "30146f9f-b351-45fc-8d46-c038efe3aa4f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains httpsUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.httpsUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains httpUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.httpUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains websocketUrls\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.websocketUrls).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"HTTP Loadbalancer URL set to: \" + pm.response.json().httpUrls);\r",
+							"console.log(\"HTTPS Loadbalancer URL set to: \" + pm.response.json().httpsUrls);\r",
+							"console.log(\"WebSocket Loadbalancer URL set to: \" + pm.response.json().websocketUrls);\r",
+							"\r",
+							"var requestList = JSON.parse(pm.variables.get(\"requestList\"));\r",
+							"pm.execution.setNextRequest(requestList.pop());\r",
+							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "52444490-8e3d-4007-93ad-2bf2374a8985",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "064a20c1-1e04-4365-8e08-903802750121",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"websocketUrls\": {{websocketUrls}},\r\n    \"httpsUrls\": {{httpsUrls}},\r\n    \"httpUrls\": {{httpUrls}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/loadBalancer",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"loadBalancer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Elasticsearch destination configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b4ab8eb0-a481-40c9-9831-2512e0e2c387",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains hostname\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.hostName).to.exist;\r",
+							"});\r",
+							"\r",
+							"console.log(\"Elasticsearch hostname set to: \" + pm.response.json().hostName);\r",
+							"\r",
+							"var requestList = JSON.parse(pm.variables.get(\"requestList\"));\r",
+							"pm.execution.setNextRequest(requestList.pop());\r",
+							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "71d0eca7-450a-48d6-ab8c-30daa245ec8e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hostName\": \"{{elasticsearch_hostname}}\",\r\n    \"sendAuditlogPackageManagementEvent\": \"true\",\r\n    \"sendAuditlogPlanManagementEvent\": \"true\",\r\n    \"sendPerformanceMetrics\": \"true\",\r\n    \"sendAuditlogApplicationManagementEvent\": \"true\",\r\n    \"keystoreName\": \"\",\r\n    \"protocol\": \"{{elasticsearch_protocol}}\",\r\n    \"password\": \"{{elasticsearch_password}}\",\r\n    \"sendAuditlogRuleManagementEvent\": \"true\",\r\n    \"truststoreName\": \"\",\r\n    \"sendAuditlogAliasManagementEvent\": \"true\",\r\n    \"sendAuditlogAccessControlListManagementEvent\": \"true\",\r\n    \"sendLifecycleEvent\": \"true\",\r\n    \"sendAuditlogRuntimeDataManagementEvent\": \"true\",\r\n    \"sendAuditlogPolicyManagementEvent\": \"true\",\r\n    \"sendAuditlogApprovalManagementEvent\": \"true\",\r\n    \"sendAuditlogUserManagementEvent\": \"true\",\r\n    \"indexName\": \"{{elasticsearch_indexname}}\",\r\n    \"sendAuditlogAdministrationEvent\": \"true\",\r\n    \"userName\": \"{{elasticsearch_user}}\",\r\n    \"sendPolicyViolationEvent\": \"true\",\r\n    \"sendErrorEvent\": \"true\",\r\n    \"port\": \"{{elasticsearch_port}}\",\r\n    \"sendAuditlogGroupManagementEvent\": \"true\",\r\n    \"keystoreAlias\": \"\",\r\n    \"metricsPublishInterval\": \"5\",\r\n    \"sendAuditlogAccessProfileManagementEvent\": \"true\",\r\n    \"sendAuditlogAPIManagementEvent\": \"true\",\r\n    \"sendAuditlogPromotionManagementEvent\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/configurations/elasticsearchDestinationConfig",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"configurations",
+						"elasticsearchDestinationConfig"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update HTTPS_Proxy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a12a7c1c-f6a9-42b3-864c-f30f0209ec76",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var requestList = JSON.parse(pm.variables.get(\"requestList\"));\r",
+							"pm.execution.setNextRequest(requestList.pop());\r",
+							"pm.variables.set(\"requestList\", JSON.stringify(requestList));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "3c220218-75a7-4681-9673-9dfbfa716ff9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"proxyAlias\": \"HTTPS_Proxy\",\r\n    \"host\": \"{{https_proxy_host}}\",\r\n    \"port\": \"{{https_proxy_port}}\",\r\n    \"username\": null,\r\n    \"password\": null,\r\n    \"protocol\": \"HTTPS\",\r\n    \"isDefault\": \"Y\",\r\n    \"status\": \"Enabled\",\r\n    \"ftpType\": \"0\",\r\n    \"socksVersion\": \"5\",\r\n    \"passwordHandle\": null,\r\n    \"caller\": \"Administrator\",\r\n    \"entityId\": \"HTTPS_Proxy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/is/outboundproxy/HTTPS_Proxy",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"is",
+						"outboundproxy",
+						"HTTPS_Proxy"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{initializer_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{initializer_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "d4ca348f-f7df-47dd-9936-71441861d280"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "ff5063b5-1905-43b3-afcd-de20772af137"
+			}
+		}
+	]
+}
