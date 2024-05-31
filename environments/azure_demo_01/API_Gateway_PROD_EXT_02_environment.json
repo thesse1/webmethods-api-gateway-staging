@@ -88,7 +88,7 @@
 	},
 	{
 		"key": "http_loadbalancer_urls",
-		"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com,azure-demo-01-prod-ext-02-apigateway.azuredemo-softwareag.com",
+		"value": "http://azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com,http://azure-demo-01-prod-ext-02-apigateway.azuredemo-softwareag.com",
 		"type": "default",
 		"enabled": true
 	},
