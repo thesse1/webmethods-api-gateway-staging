@@ -87,20 +87,20 @@
 			"enabled": true
 		},
 		{
-			"key": "loadbalancer_protocol",
-			"value": "http",
+			"key": "http_loadbalancer_urls",
+			"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com,azure-demo-01-prod-ext-01-apigateway.azuredemo-softwareag.com",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "loadbalancer_hostname",
-			"value": "azure-demo-01-prod-ext-apigateway.azuredemo-softwareag.com",
+			"key": "https_loadbalancer_urls",
+			"value": "",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "loadbalancer_port",
-			"value": "80",
+			"key": "websocket_loadbalancer_urls",
+			"value": "",
 			"type": "default",
 			"enabled": true
 		}
