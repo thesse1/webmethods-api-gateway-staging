@@ -85,6 +85,24 @@
 		"value": "apigw-test_int",
 		"type": "default",
 		"enabled": true
+	},
+	{
+		"key": "http_loadbalancer_urls",
+		"value": "http://azure-demo-01-test-int-apigateway.azuredemo-softwareag.com",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "https_loadbalancer_urls",
+		"value": "",
+		"type": "default",
+		"enabled": true
+	},
+	{
+		"key": "websocket_loadbalancer_urls",
+		"value": "",
+		"type": "default",
+		"enabled": true
 	}
 ],
 "timestamp": 1587036498482,

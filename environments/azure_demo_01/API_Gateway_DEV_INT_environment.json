@@ -85,6 +85,24 @@
 			"value": "apigw-dev_int",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "http_loadbalancer_urls",
+			"value": "http://azure-demo-01-dev-int-apigateway.azuredemo-softwareag.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "https_loadbalancer_urls",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "websocket_loadbalancer_urls",
+			"value": "",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
