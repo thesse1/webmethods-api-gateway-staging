@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "50aaea1f-5f5b-4148-b3c0-88665eeb16a0",
+		"name": "API Test for postman-mocking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-50aaea1f-5f5b-4148-b3c0-88665eeb16a0"
+	},
+	"item": [
+		{
+			"name": "PostEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"source is MOCKING\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.source).to.eql(\"MOCKING\");\r",
+							"});\r",
+							"pm.test(\"foo in payload is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "8a1b91a2-b56b-46f2-8a8c-e7ca22ce38fb"
+					}
+				}
+			],
+			"id": "a17326cc-7e54-4270-80ee-c4b92c2eff35",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "ee18ef83-f209-4dd0-9cdb-e20710f91458",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Mocking/1.0/post",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Mocking",
+						"1.0",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"source is MOCKING\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.source).to.eql(\"MOCKING\");\r",
+							"});\r",
+							"pm.test(\"foo query parameter is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "50ee67cb-fa40-42f8-b190-d9ca676edfd0"
+					}
+				}
+			],
+			"id": "9ab6fdc6-8463-4662-8be2-1b1ca41dc283",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "ee18ef83-f209-4dd0-9cdb-e20710f91458",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Mocking/1.0/get?foo=bar",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Mocking",
+						"1.0",
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"source is MOCKING\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.source).to.eql(\"MOCKING\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "b3a6b2e6-9429-4770-bb92-024d205d9cfa"
+					}
+				}
+			],
+			"id": "c8f69511-f8d3-4eac-bd25-a5134e635afc",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "ee18ef83-f209-4dd0-9cdb-e20710f91458",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Mocking/1.0/delete",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Mocking",
+						"1.0",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

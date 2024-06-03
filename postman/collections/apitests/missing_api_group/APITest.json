@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "b669ad4c-e3fe-4f41-bd5e-79ce069bf121",
+		"name": "API Test for missing-api-group",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-b669ad4c-e3fe-4f41-bd5e-79ce069bf121"
+	},
+	"item": [
+		{
+			"name": "PostEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo in payload is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "d26267d2-e97f-4476-8f09-68608cc61fb9"
+					}
+				}
+			],
+			"id": "52b04131-aced-466a-9b48-995159ee2a7e",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Missing_ApiGroup/1.0/post",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Missing_ApiGroup",
+						"1.0",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"foo query parameter is bar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.args.foo).to.eql(\"bar\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "8d2d975f-d7a1-4b03-a447-730d13dd7cf7"
+					}
+				}
+			],
+			"id": "05b37e5d-a3dc-4730-abab-71fb07e192c4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Missing_ApiGroup/1.0/get?foo=bar",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Missing_ApiGroup",
+						"1.0",
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "d13e8d92-633a-42d3-84c8-9b21643ea550"
+					}
+				}
+			],
+			"id": "85af7a72-67a3-4f84-8443-a0056d795228",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "x-gateway-apikey",
+						"value": "875a013e-ac66-4781-a994-a273b039c22a",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{api-hostname}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/PostmanEcho_Missing_ApiGroup/1.0/delete",
+					"protocol": "{{api-protocol}}",
+					"host": [
+						"{{api-ip}}"
+					],
+					"port": "{{api-port}}",
+					"path": [
+						"gateway",
+						"PostmanEcho_Missing_ApiGroup",
+						"1.0",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

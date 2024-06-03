@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "9b69dd53-13ba-4f94-807d-a0af1692337e",
+		"name": "API Test for multiple-tenants",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-9b69dd53-13ba-4f94-807d-a0af1692337e"
+	},
+	"item": [
+		{
+			"name": "Separate APIs per tenant",
+			"item": [
+				{
+					"name": "PostEcho tenant 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant1\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "e1040b8f-45dc-4829-b0ad-88acb8fb75b0"
+							}
+						}
+					],
+					"id": "858b7c70-cb16-4af6-a682-857a0024e966",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "f0d32f9d-e22e-4c43-9b23-49cd29b8aa46",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Tenant1_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Tenant1_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostEcho tenant 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant2\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "0abec296-f074-4593-99cc-5d53cc32dd92"
+							}
+						}
+					],
+					"id": "5f58ee54-fb2e-458e-8506-fbdb824ee427",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "d8da2f5b-504b-405d-a66b-6129117e4b3f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Tenant2_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Tenant2_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ed456180-4dab-47bf-9022-8e8622e66ee7"
+		},
+		{
+			"name": "One API for multiple tenants",
+			"item": [
+				{
+					"name": "PostEcho tenant 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant1\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "1407102f-d26e-4c39-92cd-585b2709c786"
+							}
+						}
+					],
+					"id": "6175799f-6a4f-4456-ac1d-02f106aa806a",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "f0d32f9d-e22e-4c43-9b23-49cd29b8aa46",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Common_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostEcho tenant 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"foo in payload is bar\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.foo).to.eql(\"bar\");\r",
+									"});\r",
+									"pm.test(\"correct tenant\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.args.tenant).to.eql(\"Tenant2\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "143c4371-b4e3-4a89-b40e-c101335db4ee"
+							}
+						}
+					],
+					"id": "a557060f-2199-4b33-bef4-06a852535398",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Host",
+								"value": "{{api-hostname}}",
+								"type": "text"
+							},
+							{
+								"key": "x-gateway-apikey",
+								"value": "d8da2f5b-504b-405d-a66b-6129117e4b3f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foo\": \"bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-protocol}}://{{api-ip}}:{{api-port}}/gateway/Common_PostmanEcho/1.0/post",
+							"protocol": "{{api-protocol}}",
+							"host": [
+								"{{api-ip}}"
+							],
+							"port": "{{api-port}}",
+							"path": [
+								"gateway",
+								"Common_PostmanEcho",
+								"1.0",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "63f29a45-da06-4830-8b23-bfed76633e75"
+		}
+	]
+}
