@@ -19,4 +19,4 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- script: echo $(System.TeamProject)
+- script: echo $(System.CollectionUri)/$(System.TeamProject)
