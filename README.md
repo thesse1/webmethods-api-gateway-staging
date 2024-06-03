@@ -172,7 +172,7 @@ Confidential values like passwords in outbound authentication policies can be se
 
 > Note: Placing placeholders into asset definitions on the DESIGN environment might result in the API not working on the DESIGN stage anymore. For example, placing a placeholder into the API description does not cause any problem, but placing a placeholder into the endpoint URI in a routing policy will break the policy. The API will not be testable anymore on DESIGN, but it will work fine on the target stages and also on BUILD for the automatic test cases. (Replacing the placeholders takes place before running the automatic test scenario.)
 
-> Note: You can find a sample for this mechanism in the sample SwaggerPetstore API, see below.
+> Note: You can find a sample for this mechanism in the sample SwaggerPetstore API, see [below](#petstore).
 
 ### aliases.json configuration of target stage-specific alias values
 
@@ -192,7 +192,7 @@ This facilitates the setting of specific alias values for every target stage dir
 
 > Note: Confidential values should not be managed using this mechanism as they would be included in clear text in the aliases.json files in Git.
 
-> Note: You can find a sample for this mechanism in the sample Ping API, see below.
+> Note: You can find a sample for this mechanism in the sample Ping API, see [below](#ping-1).
 
 ### Value substitution using Azure DevOps Replace Tokens extension for aliases.json files
 
@@ -206,7 +206,7 @@ This allows for a mix of the first and the second mechanism for injecting target
 
 > Note: Technically, an aliases.json file with placeholders in the values of numeric or boolean fields does not represent a valid JSON document, so your editor might complain when opening or saving such a file. But the placeholders will be replaced by the correct numeric or boolean values before the files are interpreted as JSON documents, so this does not cause any problem at pipeline runtime.
 
-> Note: You can find a sample for this mechanism in the sample PostmanEcho API, see below.
+> Note: You can find a sample for this mechanism in the sample PostmanEcho API, see [below](#global-aliasesjson-file).
 
 # Sample content included in this repository
 
@@ -571,7 +571,7 @@ This API project includes an instance of the PostmanEcho API which is not assign
 }
 ```
 
-This API project includes an invalid aliases.json file, see below.
+This API project includes an invalid aliases.json file, see [below](#zzz_alias_not_found-1).
 
 ### zzz_duplicate_alias
 
@@ -589,7 +589,7 @@ This API project includes an invalid aliases.json file, see below.
 }
 ```
 
-This API project includes an invalid aliases.json file, see below.
+This API project includes an invalid aliases.json file, see [below](#zzz_duplicate_alias-1).
 
 ### zzz_incorrect_alias_name
 
@@ -607,7 +607,7 @@ This API project includes an invalid aliases.json file, see below.
 }
 ```
 
-This API project includes an invalid aliases.json file, see below.
+This API project includes an invalid aliases.json file, see [below](#zzz_incorrect_alias_name-1).
 
 ### zzz_missing_alias_id
 
@@ -625,9 +625,9 @@ This API project includes an invalid aliases.json file, see below.
 }
 ```
 
-This API project includes an invalid aliases.json file, see below.
+This API project includes an invalid aliases.json file, see [below](#zzz_missing_alias_id-1).
 
-### zzz_incorrect_alias_name
+### zzz_missing_alias_name
 
 ```json
 {
@@ -643,7 +643,7 @@ This API project includes an invalid aliases.json file, see below.
 }
 ```
 
-This API project includes an invalid aliases.json file, see below.
+This API project includes an invalid aliases.json file, see [below](#zzz_missing_alias_name-1).
 
 ### zzz_test_failure
 
@@ -661,7 +661,7 @@ This API project includes an invalid aliases.json file, see below.
 }
 ```
 
-This API project is companioned by an invalid test case, see below.
+This API project is companioned by an invalid test case, see [below](#zzz_test_failure-1).
 
 ## scopes.json configuration of OAuth2 scopes for API projects
 

@@ -140,6 +140,7 @@ steps:
     --env-var definitionVersion='$(Build.DefinitionVersion)' \
     --env-var repoName='$(Build.Repository.Name)' \
     --env-var repoUrl='$(Build.Repository.Uri)' \
+    --env-var projectUrl='$(System.CollectionUri)$(System.TeamProject)'
     --env-var commitId='$(Build.SourceVersion)' \
     --env-var aliases='$(aliases)' \
     --env-var globalAliases='$(globalAliases)' \

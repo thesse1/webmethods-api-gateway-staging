@@ -50,13 +50,11 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
+						"value": "{{hostname}}"
 					}
 				],
 				"url": {
@@ -124,7 +122,6 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
@@ -410,7 +407,6 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
@@ -493,7 +489,6 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
@@ -590,8 +585,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -645,8 +639,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -701,8 +694,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -788,13 +780,11 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
+						"value": "{{hostname}}"
 					}
 				],
 				"url": {
@@ -864,13 +854,11 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
 						"value": "application/json"
 					},
 					{
 						"key": "Host",
-						"value": "{{hostname}}",
-						"type": "text"
+						"value": "{{hostname}}"
 					}
 				],
 				"body": {
@@ -938,8 +926,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -1022,7 +1009,9 @@
 							"        api.apiDefinition.apiTags.push(\"Build: {{buildId}}\");\r",
 							"        api.apiDefinition.apiTags.push(\"Commit: \" + commitId_short);\r",
 							"\r",
-							"        api.apiDescription = \"[Pipeline: {{definitionId}}](https://dev.azure.com/pswm-inno-api-management/azure-demo/_build?definitionId={{definitionId}}) [Build: {{buildId}}](https://dev.azure.com/pswm-inno-api-management/azure-demo/_build/results?buildId={{buildId}}) [Commit: \" + commitId_short + \"]({{repoUrl}}/commit/{{commitId}})\\n\\n\" + api.apiDescription\r",
+							"        api.apiDescription = api.apiDescription ? api.apiDescription : \"\";\r",
+							"\r",
+							"        api.apiDescription = \"[Pipeline: {{definitionId}}]({{projectUrl}}/_build?definitionId={{definitionId}}) [Build: {{buildId}}]({{projectUrl}}/_build/results?buildId={{buildId}}) [Commit: \" + commitId_short + \"]({{repoUrl}}/commit/{{commitId}})\\n\\n\" + api.apiDescription\r",
 							"\r",
 							"        let apiString = JSON.stringify(api);\r",
 							"        pm.globals.set(\"api\", apiString);\r",
@@ -1036,7 +1025,8 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -1049,8 +1039,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
@@ -1140,8 +1129,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					},
 					{
 						"key": "Host",
