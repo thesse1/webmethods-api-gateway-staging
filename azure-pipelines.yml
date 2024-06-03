@@ -7,6 +7,7 @@ trigger:
 - main
 
 pool:
+  name: vmsspoolagents-04
   vmImage: ubuntu-latest
 
 steps:
