@@ -172,7 +172,7 @@ Confidential values like passwords in outbound authentication policies can be se
 
 > Note: Placing placeholders into asset definitions on the DESIGN environment might result in the API not working on the DESIGN stage anymore. For example, placing a placeholder into the API description does not cause any problem, but placing a placeholder into the endpoint URI in a routing policy will break the policy. The API will not be testable anymore on DESIGN, but it will work fine on the target stages and also on BUILD for the automatic test cases. (Replacing the placeholders takes place before running the automatic test scenario.)
 
-> Note: You can find a sample for this mechanism in the sample SwaggerPetstore API, see below.
+> Note: You can find a sample for this mechanism in the sample SwaggerPetstore API, see [below](#petstore).
 
 ### aliases.json configuration of target stage-specific alias values
 
