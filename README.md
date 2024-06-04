@@ -1934,15 +1934,15 @@ The pipeline templates execute the following major steps:
 | Replace tokens with variable values in assets | Using qetza.replacetokens.replacetokens-task.replacetokens@5 Azure DevOps task for variable value replacement |
 | Replace tokens with variable values in local aliases.json | Using qetza.replacetokens.replacetokens-task.replacetokens@5 Azure DevOps task for variable value replacement |
 | Replace tokens with variable values in global aliases.json | Using qetza.replacetokens.replacetokens-task.replacetokens@5 Azure DevOps task for variable value replacement |
-| Create the API Deployable from the flat representation for API project xxx | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
+| Create the API deployable from the flat representation for API project xxx | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD (except for the system aliases "ServiceConsulDefault", "EurekaDefault", "OKTA", "PingFederate" and "local") | Executing the Prepare_BUILD.json Postman collection in /postman/collections/utilities/prepare |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway BUILD | Executing the Import_API.json Postman collection in /postman/collections/utilities/import |
+| Import the deployable to API Gateway BUILD | Executing the Import_API.json Postman collection in /postman/collections/utilities/import |
 | Run tests on API Gateway BUILD | Executing the API_Test.json Postman collection in the API project's api tests folder |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
 | Validate and prepare assets for XXX: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags and markdown links to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
-| Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
+| Export the deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
 
 #### store-build.yml
 
@@ -1961,7 +1961,7 @@ The pipeline templates execute the following major steps:
 | Step | README |
 | ------ | ------ |
 | Prepare list of scopes to be imported | Parse scopes.json in API project root folder using jq |
-| Import the Deployable to API Gateway XXX | Executing the Import_API.json Postman collection in /postman/collections/utilities/import |
+| Import the deployable to API Gateway XXX | Executing the Import_API.json Postman collection in /postman/collections/utilities/import |
 | Generate API list as JSON array | Generate list of APIs in the API project using jq |
 | Republish all xxx APIs from API Gateway XXX | Executing the Republish_APIs.json Postman collection in /postman/collections/utilities/publish |
 
@@ -1969,9 +1969,9 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive API |
-| Extract the flat representation from the API Deployable for API project xxx | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
-| Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
+| Export the deployable from API Gateway DESIGN | Using a bash script calling curl to invoke the API Gateway Archive API |
+| Extract the flat representation from the API deployable for API project xxx | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
+| Remove the API deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
 #### commit.yml
 
@@ -2036,9 +2036,9 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Create the API Deployable from the flat representation for XXX configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
+| Create the API deployable from the flat representation for XXX configuration | Using ArchiveFiles@2 Azure DevOps standard task for creating ZIP archives |
 | Prepare list of scopes to be imported | Parse scopes.json in API Gateway configuration root folder using jq |
-| Import the Deployable to API Gateway XXX | Executing the Import_API_Gateway_config.json Postman collection in /postman/collections/utilities/import |
+| Import the deployable to API Gateway XXX | Executing the Import_API_Gateway_config.json Postman collection in /postman/collections/utilities/import |
 | Initialize API Gateway XXX | Executing the Initialize_XXX.json Postman collection in /postman/collections/utilities/initialize |
 
 #### configure-haft-listener.yml
@@ -2063,9 +2063,9 @@ The pipeline templates execute the following major steps:
 
 | Step | README |
 | ------ | ------ |
-| Export the Deployable from API Gateway XXX | Using a bash script calling curl to invoke the API Gateway Archive API |
-| Extract the flat representation from the API Deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
-| Remove the API Deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
+| Export the deployable from API Gateway XXX | Using a bash script calling curl to invoke the API Gateway Archive API |
+| Extract the flat representation from the API deployable | Using ExtractFiles@1 Azure DevOps standard task for extracting ZIP archives |
+| Remove the API deployable again | Using DeleteFiles@1 Azure DevOps standard task for deleting the ZIP archive |
 
 #### commit.yml
 
@@ -2265,7 +2265,7 @@ The http_loadbalancer_urls, https_loadbalancer_urls and websocket_loadbalancer_u
 
 The https_proxy_host and https_proxy_port environment variables are optional. They must be provided only when a proxy server should be configured for the environment.
 
-These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the Deployable" steps (bash scripts with curl command), and they must also be used in the API_Test.json Postman test collections in under postman/collections/api_tests.
+These environment variables are used in the postman/collections/utilities Postman collections and in the "Export the deployable" steps (bash scripts with curl command), and they must also be used in the API_Test.json Postman test collections in under postman/collections/api_tests.
 
 They are loaded automatically when the Postman collections are executed in the Azure DevOps pipelines, and they can (and should) also be used in the Postman REST client for local API testing and test developments.
 

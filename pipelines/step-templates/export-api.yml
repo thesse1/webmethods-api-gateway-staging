@@ -23,7 +23,7 @@ steps:
           --user '$(exporter_user)':'$(exporter_password)' \
           $(environment_protocol)://$(environment_hostname):$(environment_port)/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Export the Deployable from API Gateway ${{parameters.environment_name}}'
+  displayName: 'Export the deployable from API Gateway ${{parameters.environment_name}}'
   env:
     no_proxy: $(environment_hostname)
 
@@ -40,11 +40,11 @@ steps:
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
-  displayName: 'Extract the flat representation from the API Deployable for API project ${{parameters.api_project}}'
+  displayName: 'Extract the flat representation from the API deployable for API project ${{parameters.api_project}}'
 
 - task: DeleteFiles@1
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
     Contents: '$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip' 
     #RemoveSourceFolder: # Optional
-  displayName: 'Remove the API Deployable again'
+  displayName: 'Remove the API deployable again'
