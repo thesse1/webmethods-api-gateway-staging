@@ -1521,7 +1521,7 @@ The following parameters can/must be provided for this pipeline:
 | Parameter | README |
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
+| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see [above](#selecting-a-specific-commit-to-be-deployed). By default, the pipeline will import the HEAD of the selected branch |
 | Configure API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Configure which API Gateway stage(s)? | By default ("All"), this parameter selects all eight stages for configuration. Alternatively, the user can select one single stage |
 
@@ -1902,7 +1902,7 @@ The job-level pipeline templates used in these pipelines can be found in the /pi
 
 | Template | README |
 | ------ | ------ |
-| build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see above) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
+| build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see [above](#pipelines-for-api-projects)) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
 | build-api-using-dedicated_build_agents.yml | Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are executed on a separate ADO agent pool. This agent pool must have seven build agents named BUILD_01, ..., BUILD_07. Build jobs will be assigned to BUILD environments based on the name of the ADO build agent on which it is running, making sure that only one build agent is using a BUILD environment at one point in time. |
 | build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. The job template uses the AzureCLI@2 task for accessing the `API_Gateway_build_environments_availability` variable group. The tasks needs an ADO service connection named azure_service_connection to an Azure subscription for accessing the `API_Gateway_build_environments_availability` variable group.
 
@@ -2223,7 +2223,7 @@ The `Update Petstore API by URL` pipeline uses the `Update_API_users` variable g
 
 ### Variable groups for value substitutions
 
-The API Gateway Staging solution uses the `API_Gateway_{{target_stage}}_value_substitutions` variable groups for managing the values for the replacement of placeholders in the build process, see above.
+The API Gateway Staging solution uses the `API_Gateway_{{target_stage}}_value_substitutions` variable groups for managing the values for the replacement of placeholders in the build process, see [above](#target-stage-specific-value-substitutions).
 
 ## Azure DevOps environments
 
