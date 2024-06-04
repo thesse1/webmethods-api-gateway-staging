@@ -34,11 +34,12 @@ In addition to this, the solution includes an automatic validation and adjustmen
  - APIs should have separate sets of applications (with different identifiers) on different stages. The correct deployment of these applications should be enforced automatically. All applications are created on a local development environment or the central DESIGN environment with names ending with "_DEV", "_TEST" or "_PROD" indicating their intended usage. All applications should be exported and managed in Git, but only the intended applications should be imported on the respective DEV, TEST and PROD environments.
  - APIs must not contain any local, API-level Log Invocation policies in order to prevent any privacy issues caused by too detailed transaction logging
  - API mocking is turned off for deployments on TEST and PROD environments
- - API tags are added to all APIs indicating the build ID, the build name and the pipeline name (for auditability)
+ - API tags are added to all APIs indicating the pipeline name, the build ID and the commit SHA (for auditability)
+ - Markdown links are added to the description of all APIs linking the pipeline definition, the build results and the commit
 
 ![GitHub Logo](/images/Overview.png)
 
-This is implemented by validating and manipulating the assets on dedicated BUILD environments: Initially, all assets (including all applications) are imported on the BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values and test values in other assets are overwritten, API tags are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and, if applicable, API mocking turned off) and imported on the target environment.
+This is implemented by validating and manipulating the assets on dedicated BUILD environments: Initially, all assets (including all applications) are imported on a BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values and test values in other assets are overwritten, API tags and markdown links are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and markdown links and, if applicable, API mocking turned off) and imported on the target environment.
 
 More of these design-time policies could easily be developed by extending the underlying Postman collections.
 
@@ -1332,7 +1333,7 @@ For a deployment to DEV, TEST and PROD, the pipeline will now validate and manip
 - Aliases will be overwritten with the values retrieved from the global aliases.json file or the local API project's aliases.json file (perhaps after value replacement via pipeline variables)
 - It will be assured that all APIs are assigned to the Internal API group or the External API group, respectively
 - Incorrect clientId and clientSecret values in OAuth2 strategies will be fixed as a workaround for a defect identified in API Gateway 10.7 Fix 5 and 6
-- Three API tags will be added to every API indicating the pipeline ID, the build ID and the shortened commit SHA. These tags can later be used in the API Gateway UI on the target environments to understand when and how (and by whom) every API was promoted to the environment
+- Three API tags will be added to every API indicating the pipeline name, the build ID and the shortened commit SHA. These tags can later be used in the API Gateway UI on the target environments to understand when and how (and by whom) every API was promoted to the environment
 - The API description will be augmented (at its start) with markdown links to the pipeline definition page, the build results page and the GitHub commit page for the change. Unfortunately, the API Gateway UI does not interpret the markdown, but when you publish the API to API Portal / Developer Portal, it will interpret the markdown and present the respective links to the portal users in their browser.
 - For a deployment to TEST or PROD, API mocking will be disabled
 
@@ -1395,7 +1396,7 @@ You can switch between the three mechanisms by setting the default value for the
 
 Each deployment pipeline consists of two jobs for build and deployment which can be executed on different agents, possibly from different agent pools. Each job only contains steps connecting the agent with one API Gateway environment (either BUILD/BUILD_01/.../BUILD_07 or DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_INT_01/PROD_INT_02/PROD_EXT/PROD_EXT_01/PROD_EXT_02). This way, the pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
-Please check the implementation notes section below on how to configure which agent pool is used for each API Gateway environment.
+Please check the implementation notes section [below](#shared-pipeline-templates) on how to configure which agent pool is used for each API Gateway environment.
 
 ### `Deploy selected API project(s)`
 
@@ -1406,7 +1407,7 @@ The following parameters can/must be provided for this pipeline:
 | Parameter | README |
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
+| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see [below](#selecting-a-specific-commit-to-be-deployed). By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project(s)? | By default ("All"), this parameter selects all 13 demo APIs for deployment. Alternatively, the user can select one single API project for deployment |
 | Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
@@ -1429,7 +1430,7 @@ The following parameters can/must be provided for this pipeline:
 | Parameter | README |
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
+| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see [below](#selecting-a-specific-commit-to-be-deployed). By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project? | Case-sensitive name of the API project to be deployed |
 | Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
@@ -1520,7 +1521,7 @@ The following parameters can/must be provided for this pipeline:
 | Parameter | README |
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see above. By default, the pipeline will import the HEAD of the selected branch |
+| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see [above](#selecting-a-specific-commit-to-be-deployed). By default, the pipeline will import the HEAD of the selected branch |
 | Configure API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Configure which API Gateway stage(s)? | By default ("All"), this parameter selects all eight stages for configuration. Alternatively, the user can select one single stage |
 
@@ -1770,7 +1771,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
-> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section below on how to include the new API project in the pipeline definitions.
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section [below](#add-new-api-project-to-deployment-and-export-pipelines) on how to include the new API project in the pipeline definitions.
 
 ### Option B: Using the export/import pipelines
 
@@ -1798,7 +1799,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
-> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section below on how to include the new API project in the pipeline definitions.
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section [below](#add-new-api-project-to-deployment-and-export-pipelines) on how to include the new API project in the pipeline definitions.
 
 ### Add new API project to deployment and export pipelines
 
@@ -1901,7 +1902,7 @@ The job-level pipeline templates used in these pipelines can be found in the /pi
 
 | Template | README |
 | ------ | ------ |
-| build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see above) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
+| build-api-using-fixed_build_environments.yml | Default job template for API project build job. For the azure_demo_01 environment set, build jobs will be assigned to BUILD environments based on the default mapping (see [above](#pipelines-for-api-projects)) or to the BUILD environment specifically selected by the user. For the webm_io environment set, build jobs will always be assigned to the single BUILD environment. The build job (technically, it is a deployment) will use the API_Gateway_{{environment_set}}_{{build_environment}} ADO environment. All of these ADO environments are configured with an "exclusive lock" making sure that only one build job is using the environment at one point in time. |
 | build-api-using-dedicated_build_agents.yml | Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are executed on a separate ADO agent pool. This agent pool must have seven build agents named BUILD_01, ..., BUILD_07. Build jobs will be assigned to BUILD environments based on the name of the ADO build agent on which it is running, making sure that only one build agent is using a BUILD environment at one point in time. |
 | build-api-using-resource_pooling.yml | Experimental: Alternative job template for API project build job, only applicable for the azure_demo_01 environment set. Build jobs are assigned to BUILD environments based on key-value pairs in the `API_Gateway_build_environments_availability` ADO variable group. The group must have seven variables BUILD_01, ..., BUILD_07, initially all with the value "Available". Before executing the actual build steps, the job will try to reserve an available BUILD environment by finding a variable with value "Available" and then setting its value to a string indicating the pipeline build and its target stage and API project. After the build, the job will set the value back to "Available", making the environment available for the next build job. The job template uses the AzureCLI@2 task for accessing the `API_Gateway_build_environments_availability` variable group. The tasks needs an ADO service connection named azure_service_connection to an Azure subscription for accessing the `API_Gateway_build_environments_availability` variable group.
 
@@ -1940,7 +1941,7 @@ The pipeline templates execute the following major steps:
 | Run tests on API Gateway BUILD | Executing the API_Test.json Postman collection in the API project's api tests folder |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
-| Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags and markdown links to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
 
 #### store-build.yml
@@ -2222,7 +2223,7 @@ The `Update Petstore API by URL` pipeline uses the `Update_API_users` variable g
 
 ### Variable groups for value substitutions
 
-The API Gateway Staging solution uses the `API_Gateway_{{target_stage}}_value_substitutions` variable groups for managing the values for the replacement of placeholders in the build process, see above.
+The API Gateway Staging solution uses the `API_Gateway_{{target_stage}}_value_substitutions` variable groups for managing the values for the replacement of placeholders in the build process, see [above](#target-stage-specific-value-substitutions).
 
 ## Azure DevOps environments
 
