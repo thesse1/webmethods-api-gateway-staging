@@ -21,7 +21,7 @@
 							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"PostPet 1.0.9\"); // workaround because Petstore API is not working correctly"
+							"pm.execution.setNextRequest(\"PostPet 1.0.9\"); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
 						"id": "29b80f09-9b22-41c4-b0e9-8baed6f8e2c5"
@@ -210,7 +210,7 @@
 							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(null); // workaround because Petstore API is not working correctly"
+							"pm.execution.setNextRequest(null); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
 						"id": "901ca478-1ad7-4e50-a398-f510971d459b"

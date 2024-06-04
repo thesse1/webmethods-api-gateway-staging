@@ -21,7 +21,7 @@
 							"    pm.expect(jsonData.id).to.eql(123);\r",
 							"});\r",
 							"\r",
-							"postman.setNextRequest(\"PostEcho\"); // workaround because Petstore API is not working correctly"
+							"pm.execution.setNextRequest(\"PostEcho\"); // workaround because Petstore API is not working correctly"
 						],
 						"type": "text/javascript",
 						"id": "367a3f5d-ea59-4eeb-9688-db6fe43b4f29"
