@@ -34,11 +34,12 @@ In addition to this, the solution includes an automatic validation and adjustmen
  - APIs should have separate sets of applications (with different identifiers) on different stages. The correct deployment of these applications should be enforced automatically. All applications are created on a local development environment or the central DESIGN environment with names ending with "_DEV", "_TEST" or "_PROD" indicating their intended usage. All applications should be exported and managed in Git, but only the intended applications should be imported on the respective DEV, TEST and PROD environments.
  - APIs must not contain any local, API-level Log Invocation policies in order to prevent any privacy issues caused by too detailed transaction logging
  - API mocking is turned off for deployments on TEST and PROD environments
- - API tags are added to all APIs indicating the build ID, the build name and the pipeline name (for auditability)
+ - API tags are added to all APIs indicating the pipeline name, the build ID and the commit SHA (for auditability)
+ - Markdown links are added to the description of all APIs linking the pipeline definition, the build results and the commit
 
 ![GitHub Logo](/images/Overview.png)
 
-This is implemented by validating and manipulating the assets on dedicated BUILD environments: Initially, all assets (including all applications) are imported on the BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values and test values in other assets are overwritten, API tags are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and, if applicable, API mocking turned off) and imported on the target environment.
+This is implemented by validating and manipulating the assets on dedicated BUILD environments: Initially, all assets (including all applications) are imported on a BUILD environment. Then the local, API-level policy actions are scanned for any unwanted Log Invocation policies, all applications except for _DEV, _TEST or _PROD, respectively, are automatically deleted from the BUILD environment, alias values and test values in other assets are overwritten, API tags and markdown links are inserted, and API mocking is disabled (for TEST and PROD target environments). Finally, the API project is exported again from the BUILD environment (now only including the right applications for the target environment and aliases with the right values and APIs with the right API tags and markdown links and, if applicable, API mocking turned off) and imported on the target environment.
 
 More of these design-time policies could easily be developed by extending the underlying Postman collections.
 
@@ -1332,7 +1333,7 @@ For a deployment to DEV, TEST and PROD, the pipeline will now validate and manip
 - Aliases will be overwritten with the values retrieved from the global aliases.json file or the local API project's aliases.json file (perhaps after value replacement via pipeline variables)
 - It will be assured that all APIs are assigned to the Internal API group or the External API group, respectively
 - Incorrect clientId and clientSecret values in OAuth2 strategies will be fixed as a workaround for a defect identified in API Gateway 10.7 Fix 5 and 6
-- Three API tags will be added to every API indicating the pipeline ID, the build ID and the shortened commit SHA. These tags can later be used in the API Gateway UI on the target environments to understand when and how (and by whom) every API was promoted to the environment
+- Three API tags will be added to every API indicating the pipeline name, the build ID and the shortened commit SHA. These tags can later be used in the API Gateway UI on the target environments to understand when and how (and by whom) every API was promoted to the environment
 - The API description will be augmented (at its start) with markdown links to the pipeline definition page, the build results page and the GitHub commit page for the change. Unfortunately, the API Gateway UI does not interpret the markdown, but when you publish the API to API Portal / Developer Portal, it will interpret the markdown and present the respective links to the portal users in their browser.
 - For a deployment to TEST or PROD, API mocking will be disabled
 
@@ -1940,7 +1941,7 @@ The pipeline templates execute the following major steps:
 | Run tests on API Gateway BUILD | Executing the API_Test.json Postman collection in the API project's api tests folder |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
-| Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags and markdown links to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
 
 #### store-build.yml
