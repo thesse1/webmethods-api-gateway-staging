@@ -89,9 +89,9 @@ The repository has the following top-level folders:
 The repository content can be committed to a Git repository (e.g., the Azure DevOps repository or a GitHub repository), it can be branched, merged, rolled-back like any other code repository. Every commit to any branch in the repository can be imported back to a local development environment, to the central DESIGN environment or promoted to DEV, TEST or PROD.
 
 Larger organizations implementing the API Gateway Staging solution tend to split the content of this repository into separate repos for different groups working on the content. For example, you can create separate repos with the following folders:
- - pipelines and postman/collections/utilities for the pipeline developers
- - configuration and environments for the API Gateway administrators
- - apis and postman/collections/api_tests for the API providers
+ - /pipelines and /postman/collections/utilities for the pipeline developers
+ - /configuration and /environments for the API Gateway administrators
+ - /apis and /postman/collections/api_tests for the API providers
 
 ## Develop and test APIs using API Gateway
 
