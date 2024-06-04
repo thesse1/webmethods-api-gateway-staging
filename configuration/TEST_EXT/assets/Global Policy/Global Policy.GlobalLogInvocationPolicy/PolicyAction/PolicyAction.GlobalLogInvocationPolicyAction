@@ -7,10 +7,10 @@
   "templateKey" : "logInvocation",
   "parameters" : [ {
     "templateKey" : "storeRequestPayload",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "storeResponsePayload",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "storeAsZip",
     "values" : [ "false" ]
@@ -19,10 +19,10 @@
     "values" : [ "Always" ]
   }, {
     "templateKey" : "storeRequestHeaders",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "storeResponseHeaders",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "destination",
     "parameters" : [ {
