@@ -37,7 +37,7 @@ stages:
 
             - ${{ each deploy_environment in target_stage.environments }}:
               - deployment: 'Deploy_${{api_project}}_to_API_Gateway_${{deploy_environment.name}}'
-                dependsOn: 'Build_${{api_project}}_for_${{deployment_target}}'
+                dependsOn: 'Build_${{api_project}}_for_API_Gateway_${{deployment_target}}'
                 environment: API_Gateway_${{parameters.environment_set}}_${{deploy_environment.name}}
                 variables:
                 - group: API_Gateway_${{parameters.environment_set}}_users

@@ -35,7 +35,7 @@ steps:
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment_file}} \
     $(target_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Import the Deployable To API Gateway ${{parameters.target_stage_name}}'
+  displayName: 'Import the deployable to API Gateway ${{parameters.target_stage_name}}'
   env:
     no_proxy: $(target_environment_ip)
 

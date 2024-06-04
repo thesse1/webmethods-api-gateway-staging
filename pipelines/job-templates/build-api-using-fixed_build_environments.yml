@@ -12,7 +12,7 @@ parameters:
 - name: environment_set
 
 jobs:
-- deployment: 'Build_${{parameters.api_project}}_for_${{parameters.deployment_target}}'
+- deployment: Build_${{parameters.api_project}}_for_API_Gateway_${{parameters.deployment_target}}
   environment: API_Gateway_${{parameters.environment_set}}_${{parameters.build_environments_mapping[parameters.deployment_target]}}
   variables:
   - group: API_Gateway_${{parameters.environment_set}}_users
