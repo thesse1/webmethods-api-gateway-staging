@@ -1941,7 +1941,7 @@ The pipeline templates execute the following major steps:
 | Run tests on API Gateway BUILD | Executing the API_Test.json Postman collection in the API project's api tests folder |
 | Prepare list of project-specific aliases to be updated | Parse aliases.json in API project root folder using jq |
 | Prepare list of global aliases to be updated | Parse aliases.json in /apis root folder using jq |
-| Validate and prepare assets for xxx: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags and markdown links to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
+| Validate and prepare assets for XXX: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags and markdown links to APIs | Executing the Prepare_for_XXX.json Postman collection in /postman/collections/utilities/prepare will run all the steps described. Executing the Prepare_for_DESIGN.json Postman collection in postman/collections/utilities/prepare only runs the fix step for OAuth2 strategies |
 | Export the Deployable from API Gateway BUILD | Using a bash script calling curl to invoke the API Gateway Archive API |
 
 #### store-build.yml
