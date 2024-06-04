@@ -36,7 +36,7 @@
 							"let updateType = pm.variables.get(\"updateType\");\r",
 							"\r",
 							"if (!isActive) {\r",
-							"    postman.setNextRequest(updateType);\r",
+							"    pm.execution.setNextRequest(updateType);\r",
 							"}"
 						],
 						"type": "text/javascript",
@@ -92,7 +92,7 @@
 							"\r",
 							"let updateType = pm.variables.get(\"updateType\");\r",
 							"\r",
-							"postman.setNextRequest(updateType);"
+							"pm.execution.setNextRequest(updateType);"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -160,9 +160,9 @@
 							"let isActive = pm.globals.get(\"isActive\");\r",
 							"\r",
 							"if (isActive === false) {\r",
-							"    postman.setNextRequest(null);\r",
+							"    pm.execution.setNextRequest(null);\r",
 							"} else {\r",
-							"    postman.setNextRequest(\"ActivateAPI\");\r",
+							"    pm.execution.setNextRequest(\"ActivateAPI\");\r",
 							"}"
 						],
 						"type": "text/javascript",
@@ -236,7 +236,7 @@
 							"let isActive = pm.globals.get(\"isActive\");\r",
 							"\r",
 							"if (isActive === false) {\r",
-							"    postman.setNextRequest(null);\r",
+							"    pm.execution.setNextRequest(null);\r",
 							"}"
 						],
 						"type": "text/javascript",
