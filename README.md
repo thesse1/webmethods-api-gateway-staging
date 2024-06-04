@@ -1396,7 +1396,7 @@ You can switch between the three mechanisms by setting the default value for the
 
 Each deployment pipeline consists of two jobs for build and deployment which can be executed on different agents, possibly from different agent pools. Each job only contains steps connecting the agent with one API Gateway environment (either BUILD/BUILD_01/.../BUILD_07 or DESIGN/DEV_INT/DEV_EXT/TEST_INT/TEST_EXT/PROD_INT/PROD_INT_01/PROD_INT_02/PROD_EXT/PROD_EXT_01/PROD_EXT_02). This way, the pipeline can be executed in distributed deployments in which different agents must be used for accessing the different API Gateway environments.
 
-Please check the implementation notes section below on how to configure which agent pool is used for each API Gateway environment.
+Please check the implementation notes section [below](#shared-pipeline-templates) on how to configure which agent pool is used for each API Gateway environment.
 
 ### `Deploy selected API project(s)`
 
@@ -1407,7 +1407,7 @@ The following parameters can/must be provided for this pipeline:
 | Parameter | README |
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
+| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see [below](#selecting-a-specific-commit-to-be-deployed). By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project(s)? | By default ("All"), this parameter selects all 13 demo APIs for deployment. Alternatively, the user can select one single API project for deployment |
 | Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
@@ -1430,7 +1430,7 @@ The following parameters can/must be provided for this pipeline:
 | Parameter | README |
 | ------ | ------ |
 | Branch/tag | Select the Git branch or tag from which the assets should be imported |
-| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see below. By default, the pipeline will import the HEAD of the selected branch |
+| Commit | Optional: Select the commit from which the assets should be imported. You must provide the commit's full SHA, see [below](#selecting-a-specific-commit-to-be-deployed). By default, the pipeline will import the HEAD of the selected branch |
 | Deploy which API project? | Case-sensitive name of the API project to be deployed |
 | Deploy API(s) on API Gateway(s) in which environment set? | webm_io (default) or azure_demo_01 |
 | Deploy on which target(s)? | By default ("All (except DESIGN)"), this parameter selects all six target stages for deployment. Alternatively, the user can select one single target stage or "All (including DESIGN)" for deployment. The default is set to "All (except DESIGN)" because you would normally not want to overwrite your APIs on the DESIGN environment |
@@ -1771,7 +1771,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
-> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section below on how to include the new API project in the pipeline definitions.
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section [below](#add-new-api-project-to-deployment-and-export-pipelines) on how to include the new API project in the pipeline definitions.
 
 ### Option B: Using the export/import pipelines
 
@@ -1799,7 +1799,7 @@ bin>gateway_import_export_utils.bat --exportapi --api_name new_api --apigateway_
 
   - After successful testing, someone can now merge the feature branch into the master branch and propagate the changes by publishing the API project from the master branch to PROD_INT or PROD_EXT using the `Deploy arbitrary API project` pipeline.
 
-> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section below on how to include the new API project in the pipeline definitions.
+> Note: You cannot directly use the `Export selected API project from DESIGN` or the `Deploy selected API project(s)` pipelines for a new API project, because the new API project is not yet reflected properly in the pipeline definitions for these pipelines, but you can directly use the `Export arbitrary API project from DESIGN` and the `Deploy arbitrary API project` pipelines. Please check the section [below](#add-new-api-project-to-deployment-and-export-pipelines) on how to include the new API project in the pipeline definitions.
 
 ### Add new API project to deployment and export pipelines
 
