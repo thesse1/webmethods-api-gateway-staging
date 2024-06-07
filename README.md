@@ -77,6 +77,7 @@ The repository has the following top-level folders:
   - azure-devops-demo-generator: Template definition and supporting files for creating demo/seed ADO projects using the [Azure DevOps Demo Generator](https://azuredevopsdemogenerator.azurewebsites.net/)
   - bin: Windows batch script that exports/imports a defined set of API Gateway assets from/to DESIGN environment and stores the asset definition in file system (local clone of the Git repository)
   - configuration: Contains folders with the API Gateway configuration assets exported from DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT environments along with the definition of the exported asset sets
+  - docs: Two documents with an overview of the API Gateway Staging solution and a detailed walkthrough of how to set it up and demonstrate it to interested parties
   - environments: Contains folders with Postman environment definition files for API Gateway environments in the DESIGN, BUILD, DEV_INT, DEV_EXT, TEST_INT, TEST_EXT, PROD_INT and PROD_EXT stages. Each folder includes the definitions for one set of environments. The solution comes with two sample sets:
     - webm_io: Set of webMethods.io API Gateways hosted on the Software AG cloud
     - azure_demo_01: Set of API Gateways deployed to Azure Kubernetes Service clusters
