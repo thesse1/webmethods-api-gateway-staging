@@ -19,6 +19,7 @@ parameters:
   - number_conversion
   - odata_tutorial
   - countries
+  - cross_stage_app
 - name: selected_environment_set
   displayName: Deploy API(s) on API Gateway(s) in which environment set?
   default: webm_io

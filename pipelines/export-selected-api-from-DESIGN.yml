@@ -18,6 +18,7 @@ parameters:
   - number_conversion
   - odata_tutorial
   - countries
+  - cross_stage_app
 - name: selected_environment_set
   displayName: Export API(s) from DESIGN API Gateway in which environment set?
   default: webm_io

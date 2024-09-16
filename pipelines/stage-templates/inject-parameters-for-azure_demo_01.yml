@@ -156,6 +156,7 @@ parameters:
     - odata_tutorial
     - ping
     - countries
+    - cross_stage_app
     - petstore
     - petstore_basicauth
     - petstore_versioning
