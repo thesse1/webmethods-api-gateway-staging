@@ -1,11 +1,11 @@
 {
   "types": [
-    "application"
+    "api"
   ],
   "scope": [
     {
       "attributeName": "id",
-      "keyword": "bb2fecbd-8bde-4397-a37b-fb4293d310e3"
+      "keyword": "5cb94f20-0509-44f9-8901-8e1a053c9c14|bb3065ce-27a4-44d1-948e-bcfa4b60f628"
     }
   ]
 }
