@@ -1106,8 +1106,12 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"packages": {},
-						"type": "text/javascript"
+						"id": "21038733-4ed6-4c5a-87b9-0e25627319b2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -1129,7 +1133,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}",
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}?forceDelete=true",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{ip}}"
@@ -1140,6 +1144,13 @@
 						"apigateway",
 						"apis",
 						"{{apiId}}"
+					],
+					"query": [
+						{
+							"key": "forceDelete",
+							"value": "true",
+							"type": "text"
+						}
 					]
 				}
 			},
