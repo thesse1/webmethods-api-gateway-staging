@@ -4,10 +4,6 @@
     "value" : "Enable HTTP / HTTPS",
     "locale" : "en"
   } ],
-  "descriptions" : [ {
-    "value" : "",
-    "locale" : "English"
-  } ],
   "templateKey" : "entryProtocolPolicy",
   "parameters" : [ {
     "templateKey" : "protocol",

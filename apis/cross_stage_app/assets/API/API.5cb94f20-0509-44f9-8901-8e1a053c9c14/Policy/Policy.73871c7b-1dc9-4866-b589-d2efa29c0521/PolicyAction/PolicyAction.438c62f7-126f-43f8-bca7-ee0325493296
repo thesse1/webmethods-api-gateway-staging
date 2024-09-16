@@ -4,14 +4,13 @@
     "value" : "Straight Through Routing",
     "locale" : "en"
   } ],
-  "descriptions" : [ {
-    "value" : "",
-    "locale" : "English"
-  } ],
   "templateKey" : "straightThroughRouting",
   "parameters" : [ {
     "templateKey" : "endpointUri",
     "values" : [ "http://test.com/${sys:resource_path}" ]
+  }, {
+    "templateKey" : "method",
+    "values" : [ "CUSTOM" ]
   } ],
   "active" : false
 }
