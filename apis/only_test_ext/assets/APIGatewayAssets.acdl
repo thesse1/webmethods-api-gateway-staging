@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2024-09-16T10:01:25"/>
+    <buildInfo name="BuildTimestamp" value="2024-09-16T10:18:31"/>
     <asset name="API.bb3065ce-27a4-44d1-948e-bcfa4b60f628" displayName="only_test_ext[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
@@ -18,7 +18,7 @@
     <asset name="PolicyAction.742d6ba3-612b-40e0-ab59-4b1d83f22348" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API only_test_ext[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="test_app_test_int_ext" isDeployable="true">
+    <asset name="Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="demo_app_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.5cb94f20-0509-44f9-8901-8e1a053c9c14</dependsOn>
         <dependsOn>APIGateway:API.bb3065ce-27a4-44d1-948e-bcfa4b60f628</dependsOn>
@@ -45,7 +45,7 @@
     <asset name="PolicyAction.aa15669e-1ae0-4c0d-8070-7e6ff7690427" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API only_test_int[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="RegisteredApplication [ test_app_test_int_ext ]" isDeployable="true">
+    <asset name="RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="RegisteredApplication [ demo_app_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
 </asset_composite>
