@@ -124,6 +124,7 @@ parameters:
     - ping
     - odata_tutorial
     - countries
+    - cross_stage_app
     targets:
     - DEV_INT
     - DEV_EXT
