@@ -95,6 +95,8 @@ parameters:
     - odata_tutorial
     # - countries
     - cross_stage_app
+    - only_test_int
+    - only_test_ext
     targets:
     - DEV_INT
     - DEV_EXT
@@ -127,6 +129,8 @@ parameters:
     - ping
     - countries
     - cross_stage_app
+    - only_test_int
+    - only_test_ext
     - petstore
     - petstore_basicauth
     - petstore_versioning

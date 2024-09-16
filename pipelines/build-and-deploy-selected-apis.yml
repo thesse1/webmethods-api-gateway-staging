@@ -20,6 +20,8 @@ parameters:
   - odata_tutorial
   - countries
   - cross_stage_app
+  - only_test_int
+  - only_test_ext
 - name: selected_environment_set
   displayName: Deploy API(s) on API Gateway(s) in which environment set?
   default: webm_io
