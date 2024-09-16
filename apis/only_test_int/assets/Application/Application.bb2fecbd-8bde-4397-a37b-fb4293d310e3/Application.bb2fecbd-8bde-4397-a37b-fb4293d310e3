@@ -1,6 +1,6 @@
 {
   "applicationID" : "bb2fecbd-8bde-4397-a37b-fb4293d310e3",
-  "name" : "test_app_test_int_ext",
+  "name" : "demo_app_TEST",
   "owner" : "testuser",
   "ownerType" : "user",
   "identifiers" : [ ],
@@ -11,7 +11,8 @@
     }
   },
   "creationDate" : "2024-09-16 08:41:37 GMT",
-  "lastUpdated" : 1726476097952,
+  "lastModified" : "2024-09-16 10:15:54 GMT",
+  "lastUpdated" : 1726481754586,
   "siteURLs" : [ ],
   "jsOrigins" : [ ],
   "version" : "1.0",
