@@ -124,8 +124,8 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
 					},
 					{
 						"key": "Host",
@@ -410,8 +410,8 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
 					},
 					{
 						"key": "Host",
@@ -493,8 +493,8 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
 					},
 					{
 						"key": "Host",
@@ -864,8 +864,8 @@
 				"header": [
 					{
 						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
 					},
 					{
 						"key": "Host",
@@ -998,12 +998,9 @@
 							"        console.log(\"Name: \" + api.apiName);\r",
 							"        console.log(\"Version: \" + api.apiVersion);\r",
 							"        console.log(\"Description: \" + api.apiDescription);\r",
+							"        console.log(\"API will be deleted\");\r",
 							"\r",
-							"        pm.test(\"API assigned to API group External\", function () {\r",
-							"            pm.expect.fail(\"API not assigned to API group External\");\r",
-							"        });\r",
-							"\r",
-							"        pm.execution.setNextRequest(null);\r",
+							"        pm.execution.setNextRequest(\"Delete one API\");\r",
 							"    } else { // API valid\r",
 							"        let commitId_short = pm.variables.get(\"commitId\").substring(0,7);\r",
 							"        api.apiDefinition.tags = api.apiDefinition.tags || [];\r",
@@ -1038,7 +1035,8 @@
 							"    }\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -1071,6 +1069,88 @@
 						"apigateway",
 						"apis",
 						"{{apiId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "710f606d-849e-4b80-b93c-d8de6373cd29",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.execution.setNextRequest(null);\r",
+							"\r",
+							"let apiIds = JSON.parse(pm.globals.get(\"apiIds\"));\r",
+							"if (apiIds === undefined || apiIds === null || apiIds.length === 0) {\r",
+							"    pm.execution.setNextRequest(null);\r",
+							"} else {\r",
+							"    let apiId = apiIds.pop();\r",
+							"    let apiIdsString = JSON.stringify(apiIds);\r",
+							"    pm.globals.set(\"apiIds\", apiIdsString);\r",
+							"    pm.globals.set(\"apiId\", apiId);\r",
+							"    pm.execution.setNextRequest(\"Get and Validate one API\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "21038733-4ed6-4c5a-87b9-0e25627319b2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "9eab3666-9e47-4705-9089-fbeda9300834",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "{{hostname}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{ip}}:{{port}}/rest/apigateway/apis/{{apiId}}?forceDelete=true",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"apigateway",
+						"apis",
+						"{{apiId}}"
+					],
+					"query": [
+						{
+							"key": "forceDelete",
+							"value": "true",
+							"type": "text"
+						}
 					]
 				}
 			},
