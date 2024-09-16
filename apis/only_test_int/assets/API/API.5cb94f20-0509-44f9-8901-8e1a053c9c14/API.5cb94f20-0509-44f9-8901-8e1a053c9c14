@@ -39,7 +39,7 @@
   "apiName" : "only_test_int",
   "apiVersion" : "1.0",
   "maturityState" : "Beta",
-  "apiGroups" : [ "Internal", "External" ],
+  "apiGroups" : [ "Internal" ],
   "isActive" : false,
   "type" : "REST",
   "owner" : "testuser",
@@ -48,7 +48,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2024-09-16 08:40:38 GMT",
-  "lastModified" : "2024-09-16 09:46:50 GMT",
+  "lastModified" : "2024-09-16 09:57:50 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "5cb94f20-0509-44f9-8901-8e1a053c9c14"
