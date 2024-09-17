@@ -59,7 +59,7 @@
   "apiVersion" : "1.0",
   "maturityState" : "Beta",
   "apiGroups" : [ "External" ],
-  "isActive" : false,
+  "isActive" : true,
   "type" : "REST",
   "owner" : "testuser",
   "policies" : [ "16516c78-72ca-4eef-8569-14a4ae753aa9" ],
@@ -70,6 +70,6 @@
   "lastModified" : "2024-09-17 08:20:59 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
-  "deployments" : [ "APIGateway" ],
+  "deployments" : [ ],
   "id" : "bb3065ce-27a4-44d1-948e-bcfa4b60f628"
 }

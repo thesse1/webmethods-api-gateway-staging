@@ -1,0 +1,39 @@
+{
+  "applicationID" : "c57db769-db9f-46e8-888c-5a834cc06b64",
+  "name" : "Portal_App_created_on_DESIGN_for_TEST",
+  "description" : "",
+  "owner" : "playbuild:5428951a-fda9-3434-94e5-b548f9c3fb45",
+  "ownerType" : "user",
+  "identifiers" : [ {
+    "id" : "3f46da7a-e4ac-4b12-ae59-b30f5f3efe05",
+    "key" : "jwtClaims",
+    "swaggerName" : "",
+    "swaggerValue" : [ ],
+    "namedValues" : [ {
+      "name" : "JWT default claims set",
+      "values" : [ "{\"app_id\":\"c57db769-db9f-46e8-888c-5a834cc06b64\"}" ]
+    } ]
+  } ],
+  "accessTokens" : {
+    "apiAccessKey" : {
+      "apiAccessKey" : "********************************"
+    }
+  },
+  "creationDate" : "2024-09-17 09:45:37 GMT",
+  "lastUpdated" : 1726566337767,
+  "siteURLs" : [ ],
+  "jsOrigins" : [ ],
+  "version" : "1.0",
+  "provider" : "APIPORTAL",
+  "isSuspended" : false,
+  "customFields" : {
+    "API_PORTAL_USERNAME" : "playbuild:sagcloud-9f0dde99-3e59-4b51-9ee0-5e8d79fee805"
+  },
+  "authStrategyIds" : [ "92367c35-24dd-48a8-98a2-07964080ddfb" ],
+  "primaryNode" : {
+    "hostId" : "331d243b-ca98-4114-acaf-1d23767fbbbe",
+    "replica" : 0
+  },
+  "subscription" : false,
+  "shell" : false
+}

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2024-09-17T08:32:02"/>
+    <buildInfo name="BuildTimestamp" value="2024-09-17T09:47:47"/>
     <asset name="API.bb3065ce-27a4-44d1-948e-bcfa4b60f628" displayName="only_test_ext[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+        <dependsOn>APIGateway:Application.c57db769-db9f-46e8-888c-5a834cc06b64</dependsOn>
         <dependsOn>APIGateway:Policy.16516c78-72ca-4eef-8569-14a4ae753aa9</dependsOn>
         <dependsOn>APIGateway:RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.c57db769-db9f-46e8-888c-5a834cc06b64</dependsOn>
     </asset>
     <asset name="Policy.16516c78-72ca-4eef-8569-14a4ae753aa9" displayName="Policy For API only_test_ext[1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
@@ -18,21 +20,24 @@
     <asset name="PolicyAction.742d6ba3-612b-40e0-ab59-4b1d83f22348" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API only_test_ext[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="demo_app_TEST" isDeployable="true">
+    <asset name="Application.c57db769-db9f-46e8-888c-5a834cc06b64" displayName="Portal_App_created_on_DESIGN_for_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.5cb94f20-0509-44f9-8901-8e1a053c9c14</dependsOn>
         <dependsOn>APIGateway:API.bb3065ce-27a4-44d1-948e-bcfa4b60f628</dependsOn>
-        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYbb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
-        <dependsOn>APIGateway:RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYc57db769-db9f-46e8-888c-5a834cc06b64</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.c57db769-db9f-46e8-888c-5a834cc06b64</dependsOn>
+        <dependsOn>APIGateway:Strategy.92367c35-24dd-48a8-98a2-07964080ddfb</dependsOn>
     </asset>
-    <asset name="PassmanData.API_ACCESS_KEYbb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="API_ACCESS_KEYbb2fecbd-8bde-4397-a37b-fb4293d310e3" isDeployable="true">
+    <asset name="PassmanData.API_ACCESS_KEYc57db769-db9f-46e8-888c-5a834cc06b64" displayName="API_ACCESS_KEYc57db769-db9f-46e8-888c-5a834cc06b64" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
     <asset name="API.5cb94f20-0509-44f9-8901-8e1a053c9c14" displayName="only_test_int[1.0]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+        <dependsOn>APIGateway:Application.c57db769-db9f-46e8-888c-5a834cc06b64</dependsOn>
         <dependsOn>APIGateway:Policy.73871c7b-1dc9-4866-b589-d2efa29c0521</dependsOn>
         <dependsOn>APIGateway:RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.c57db769-db9f-46e8-888c-5a834cc06b64</dependsOn>
     </asset>
     <asset name="Policy.73871c7b-1dc9-4866-b589-d2efa29c0521" displayName="Policy For API only_test_int[1.0]" isDeployable="true">
         <implementation.generic type="Policy"/>
@@ -45,7 +50,27 @@
     <asset name="PolicyAction.aa15669e-1ae0-4c0d-8070-7e6ff7690427" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API only_test_int[1.0]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
+    <asset name="RegisteredApplication.c57db769-db9f-46e8-888c-5a834cc06b64" displayName="RegisteredApplication [ Portal_App_created_on_DESIGN_for_TEST ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="Application.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="demo_app_TEST" isDeployable="true">
+        <implementation.generic type="Application"/>
+        <dependsOn>APIGateway:API.5cb94f20-0509-44f9-8901-8e1a053c9c14</dependsOn>
+        <dependsOn>APIGateway:API.bb3065ce-27a4-44d1-948e-bcfa4b60f628</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEYbb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3</dependsOn>
+    </asset>
+    <asset name="PassmanData.API_ACCESS_KEYbb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="API_ACCESS_KEYbb2fecbd-8bde-4397-a37b-fb4293d310e3" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
     <asset name="RegisteredApplication.bb2fecbd-8bde-4397-a37b-fb4293d310e3" displayName="RegisteredApplication [ demo_app_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
+    </asset>
+    <asset name="Strategy.92367c35-24dd-48a8-98a2-07964080ddfb" displayName="Portal_App_created_on_DESIGN_for_TEST5adb45a8-2591-4592-84b7-cbfe6171fa3d-$sys-default-oauth" isDeployable="true">
+        <implementation.generic type="Strategy"/>
+        <dependsOn>APIGateway:PassmanData.f565c1c9-6957-4ee9-853d-90aa2a4fdf6d-clientSecret</dependsOn>
+    </asset>
+    <asset name="PassmanData.f565c1c9-6957-4ee9-853d-90aa2a4fdf6d-clientSecret" displayName="f565c1c9-6957-4ee9-853d-90aa2a4fdf6d-clientSecret" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
     </asset>
 </asset_composite>
