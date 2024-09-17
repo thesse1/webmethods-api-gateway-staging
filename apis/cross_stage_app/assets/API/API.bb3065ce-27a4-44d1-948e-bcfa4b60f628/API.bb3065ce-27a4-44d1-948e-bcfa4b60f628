@@ -8,7 +8,26 @@
     "serviceRegistryDisplayName" : "only_test_ext_1.0",
     "schemes" : [ ],
     "security" : [ ],
-    "paths" : { },
+    "paths" : {
+      "/test" : {
+        "get" : {
+          "parameters" : [ ],
+          "responses" : { },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "requestBody"
+          }
+        },
+        "parameters" : [ ],
+        "scopes" : [ ],
+        "displayName" : "test",
+        "enabled" : true
+      }
+    },
     "securityDefinitions" : { },
     "definitions" : { },
     "parameters" : { },
@@ -40,7 +59,7 @@
   "apiVersion" : "1.0",
   "maturityState" : "Beta",
   "apiGroups" : [ "External" ],
-  "isActive" : false,
+  "isActive" : true,
   "type" : "REST",
   "owner" : "testuser",
   "policies" : [ "16516c78-72ca-4eef-8569-14a4ae753aa9" ],
@@ -48,8 +67,9 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2024-09-16 08:41:09 GMT",
-  "lastModified" : "2024-09-16 09:58:07 GMT",
+  "lastModified" : "2024-09-17 08:20:59 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
+  "deployments" : [ "APIGateway" ],
   "id" : "bb3065ce-27a4-44d1-948e-bcfa4b60f628"
 }
