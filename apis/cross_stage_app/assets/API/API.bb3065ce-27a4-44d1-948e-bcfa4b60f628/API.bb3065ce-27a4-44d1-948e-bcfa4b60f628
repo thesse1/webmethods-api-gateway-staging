@@ -59,7 +59,7 @@
   "apiVersion" : "1.0",
   "maturityState" : "Beta",
   "apiGroups" : [ "External" ],
-  "isActive" : true,
+  "isActive" : false,
   "type" : "REST",
   "owner" : "testuser",
   "policies" : [ "16516c78-72ca-4eef-8569-14a4ae753aa9" ],
