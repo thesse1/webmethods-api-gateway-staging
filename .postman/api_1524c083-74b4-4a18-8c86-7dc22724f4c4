@@ -10,11 +10,11 @@ id = 1524c083-74b4-4a18-8c86-7dc22724f4c4
 [config.relations.collections]
 rootDirectory = postman/collections
 files[] = {"id":"3558839-2efe3f36-4b60-4a0d-9779-edfa70aa6dd3","path":"api_tests/countries/API_Test.json","metaData":{}}
-files[] = {"id":"3558839-41c6832f-50b7-4af5-84f5-a16ad766e874","path":"api_tests/cross_stage_app/API_Test.json","metaData":{}}
+files[] = {"id":"3558839-a17c2f1e-ee59-491d-a661-64fdf841d9c3","path":"api_tests/cross_stage_app/API_Test.json","metaData":{}}
 files[] = {"id":"3558839-103b2b7c-8861-4516-add4-9bd695b36429","path":"api_tests/number_conversion/API_Test.json","metaData":{}}
 files[] = {"id":"3558839-09261dcc-ad25-4138-8bf7-b2156f9591b9","path":"api_tests/odata_tutorial/API_Test.json","metaData":{}}
 files[] = {"id":"3558839-1563c7b6-36ec-4b60-9483-10fe5f664f88","path":"api_tests/only_test_ext/API_Test.json","metaData":{}}
-files[] = {"id":"3558839-3f2def21-d611-4972-880d-0d4c7743313d","path":"api_tests/only_test_int/API_Test.json","metaData":{}}
+files[] = {"id":"3558839-8ab55375-ee66-4139-a233-de08f2ce4530","path":"api_tests/only_test_int/API_Test.json","metaData":{}}
 files[] = {"id":"3558839-c1de69b9-81f1-4300-8bd5-8ecb832db92b","path":"api_tests/petstore/API_Test.json","metaData":{}}
 files[] = {"id":"3558839-42172810-894f-48f8-9571-d9ea871e5371","path":"api_tests/petstore_basicauth/API_Test.json","metaData":{}}
 files[] = {"id":"3558839-b99dc53f-3f09-4f58-92f2-658bfbcee909","path":"api_tests/petstore_versioning/API_Test.json","metaData":{}}
