@@ -70,6 +70,6 @@
   "lastModified" : "2024-09-17 08:20:59 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
-  "deployments" : [ ],
+  "deployments" : [ "APIGateway" ],
   "id" : "bb3065ce-27a4-44d1-948e-bcfa4b60f628"
 }
