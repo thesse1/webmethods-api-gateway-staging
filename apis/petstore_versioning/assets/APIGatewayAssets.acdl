@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2023-10-11T12:14:41"/>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="11.1" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2024-11-20T07:23:52"/>
     <asset name="API.4bd552e3-064f-444a-bc77-7560059c9955" displayName="Petstore_Versioning[1.0.9]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Application.429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
@@ -33,14 +33,14 @@
     <asset name="PolicyAction.9076d0ba-5262-4fd7-949a-197926deae2c" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Petstore_Versioning[1.0.9]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="Application.429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="Petstore_Versioning_App_TEST" isDeployable="true">
+    <asset name="Application.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="Petstore_Versioning_App_PROD" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.4bd552e3-064f-444a-bc77-7560059c9955</dependsOn>
         <dependsOn>APIGateway:API.4ea2dcf0-66c5-469b-b822-fe4707c6f899</dependsOn>
-        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
-        <dependsOn>APIGateway:RegisteredApplication.429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d</dependsOn>
     </asset>
-    <asset name="PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" isDeployable="true">
+    <asset name="PassmanData.API_ACCESS_KEY88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="API_ACCESS_KEY88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
     <asset name="API.4ea2dcf0-66c5-469b-b822-fe4707c6f899" displayName="Petstore_Versioning[1.0.8]" isDeployable="true">
@@ -75,7 +75,7 @@
     <asset name="PolicyAction.f99da7fd-d6ca-47fe-8f6b-706e3bac0b2a" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API Petstore_Versioning[1.0.8]" isDeployable="true">
         <implementation.generic type="PolicyAction"/>
     </asset>
-    <asset name="RegisteredApplication.429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="RegisteredApplication [ Petstore_Versioning_App_TEST ]" isDeployable="true">
+    <asset name="RegisteredApplication.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="RegisteredApplication [ Petstore_Versioning_App_PROD ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
     <asset name="Application.e517e0bc-a1d1-431f-8bd7-cd50ee5975a9" displayName="Petstore_Versioning_App_DEV" isDeployable="true">
@@ -91,17 +91,17 @@
     <asset name="RegisteredApplication.e517e0bc-a1d1-431f-8bd7-cd50ee5975a9" displayName="RegisteredApplication [ Petstore_Versioning_App_DEV ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
-    <asset name="Application.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="Petstore_Versioning_App_PROD" isDeployable="true">
+    <asset name="Application.429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="Petstore_Versioning_App_TEST" isDeployable="true">
         <implementation.generic type="Application"/>
         <dependsOn>APIGateway:API.4bd552e3-064f-444a-bc77-7560059c9955</dependsOn>
         <dependsOn>APIGateway:API.4ea2dcf0-66c5-469b-b822-fe4707c6f899</dependsOn>
-        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d</dependsOn>
-        <dependsOn>APIGateway:RegisteredApplication.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d</dependsOn>
+        <dependsOn>APIGateway:PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.429c121e-e72d-45e8-abbf-1542cf31d42a</dependsOn>
     </asset>
-    <asset name="PassmanData.API_ACCESS_KEY88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="API_ACCESS_KEY88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" isDeployable="true">
+    <asset name="PassmanData.API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="API_ACCESS_KEY429c121e-e72d-45e8-abbf-1542cf31d42a" isDeployable="true">
         <implementation.generic type="PassmanData"/>
     </asset>
-    <asset name="RegisteredApplication.88870e6f-1dc0-4fa7-91bb-6aa2c1acdb0d" displayName="RegisteredApplication [ Petstore_Versioning_App_PROD ]" isDeployable="true">
+    <asset name="RegisteredApplication.429c121e-e72d-45e8-abbf-1542cf31d42a" displayName="RegisteredApplication [ Petstore_Versioning_App_TEST ]" isDeployable="true">
         <implementation.generic type="RegisteredApplication"/>
     </asset>
 </asset_composite>

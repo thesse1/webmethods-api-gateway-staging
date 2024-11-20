@@ -48,6 +48,7 @@
           "responses" : {
             "400" : {
               "description" : "Invalid ID supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -56,6 +57,7 @@
             },
             "404" : {
               "description" : "Pet not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -64,6 +66,7 @@
             },
             "405" : {
               "description" : "Validation exception",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -126,6 +129,7 @@
           "responses" : {
             "405" : {
               "description" : "Invalid input",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -190,6 +194,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -211,6 +216,7 @@
             },
             "400" : {
               "description" : "Invalid username supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -219,6 +225,7 @@
             },
             "404" : {
               "description" : "User not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -274,6 +281,7 @@
           "responses" : {
             "400" : {
               "description" : "Invalid user supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -282,6 +290,7 @@
             },
             "404" : {
               "description" : "User not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -337,6 +346,7 @@
           "responses" : {
             "400" : {
               "description" : "Invalid username supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -345,6 +355,7 @@
             },
             "404" : {
               "description" : "User not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -403,6 +414,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -426,6 +438,7 @@
             },
             "400" : {
               "description" : "Invalid status value",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -475,6 +488,7 @@
           "responses" : {
             "default" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -534,6 +548,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -590,6 +605,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -657,6 +673,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -680,6 +697,7 @@
             },
             "400" : {
               "description" : "Invalid username/password supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -726,6 +744,7 @@
           "responses" : {
             "default" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -773,6 +792,7 @@
           "responses" : {
             "default" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -833,6 +853,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -856,6 +877,7 @@
             },
             "400" : {
               "description" : "Invalid tag value",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -906,6 +928,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -927,6 +950,7 @@
             },
             "400" : {
               "description" : "Invalid Order",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -979,6 +1003,7 @@
           "responses" : {
             "default" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1029,6 +1054,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -1050,6 +1076,7 @@
             },
             "400" : {
               "description" : "Invalid ID supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1058,6 +1085,7 @@
             },
             "404" : {
               "description" : "Pet not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1118,6 +1146,7 @@
           "responses" : {
             "405" : {
               "description" : "Invalid input",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1181,6 +1210,7 @@
           "responses" : {
             "400" : {
               "description" : "Invalid ID supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1189,6 +1219,7 @@
             },
             "404" : {
               "description" : "Pet not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1248,6 +1279,7 @@
           "responses" : {
             "200" : {
               "description" : "successful operation",
+              "headersV3" : { },
               "content" : {
                 "application/json" : {
                   "schema" : {
@@ -1269,6 +1301,7 @@
             },
             "400" : {
               "description" : "Invalid ID supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1277,6 +1310,7 @@
             },
             "404" : {
               "description" : "Order not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1333,6 +1367,7 @@
           "responses" : {
             "400" : {
               "description" : "Invalid ID supplied",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1341,6 +1376,7 @@
             },
             "404" : {
               "description" : "Order not found",
+              "headersV3" : { },
               "content" : { },
               "links" : { },
               "schema" : { },
@@ -1448,7 +1484,7 @@
   } ],
   "apiName" : "Petstore_Versioning",
   "apiVersion" : "1.0.8",
-  "apiDescription" : "This is a sample server Petstore server, version 1.0.8.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+  "apiDescription" : "This is a sample server Petstore server, version 1.0.8 on #{stage_name}#.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
   "maturityState" : "Beta",
   "apiGroups" : [ "Internal" ],
   "isActive" : true,
@@ -1462,7 +1498,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2020-04-08 16:06:04 GMT",
-  "lastModified" : "2021-05-20 13:12:25 GMT",
+  "lastModified" : "2024-11-20 07:22:33 GMT",
   "nextVersion" : "4bd552e3-064f-444a-bc77-7560059c9955",
   "systemVersion" : 1,
   "mockService" : {
@@ -1470,5 +1506,6 @@
   },
   "gatewayEndpoints" : { },
   "deployments" : [ "APIGateway" ],
-  "id" : "4ea2dcf0-66c5-469b-b822-fe4707c6f899"
+  "id" : "4ea2dcf0-66c5-469b-b822-fe4707c6f899",
+  "_docType" : "apis"
 }

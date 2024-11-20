@@ -3,6 +3,7 @@
   "name" : "PetStore_Routing_Alias_1_0_9",
   "description" : "Petstore alias for API version 1.0.9 on #{stage_name}#",
   "type" : "simple",
-  "owner" : "Administrator",
-  "value" : "#{petstore_route}#"
+  "owner" : "testuser",
+  "value" : "#{petstore_route}#",
+  "_docType" : "aliases"
 }
